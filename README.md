@@ -33,3 +33,5 @@ This software allows users to:
 - **Use Markdown**: Markdown allows you to format text easily, making the README more readable and appealing.
 
 I hope this sample is helpful! If you need any further information or adjustments, just let me know.   
+
+Use camelCase
