@@ -1,0 +1,459 @@
+.body-fish{ 
+    background: url(https://static.wikia.nocookie.net/0dfbc1cb-6311-45e0-8b74-fc965ca9afc7);
+    background-color: #e3e3e3;
+}
+.container-growth,
+.container_fish {
+    margin-top: 12.4rem;
+    padding-bottom: 4rem;
+}
+.row-infor-fist-detail{
+    margin-right: 0;
+}
+.tilte-fish{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem; 
+    background-color: #fff;
+    padding: 1rem 2rem;
+}
+.tilte-fish h1 {
+    text-align: center;
+    /* margin-bottom: 20px; */
+    font-size: var(--font-title-main);
+    color: #333;
+    margin-bottom: 0;
+} 
+.fish-list { 
+}
+.link-delete-fish{
+    font-size: 1.6rem;
+    background-color: var(--bs-orange);
+    color: #000;
+    padding: 0.4rem 1.2rem;
+    display: inline-block;
+    border: 2px solid var(--bs-orange);
+    transition: background-color 0.3s ease ;
+    color: var(--white-color);
+    font-weight: 500;
+    border-radius: 8px;
+}
+.link-delete-fish:hover{
+    border: 2px solid var(--bs-orange);
+    text-decoration: none;
+    background-color: transparent;
+    color: var(--black-color); 
+
+}
+.fish-item {
+    overflow: hidden;
+    margin-bottom: 30px;
+    /* display: block; */
+}
+
+.fish-item:hover {
+    text-decoration: none;
+}
+
+.fish-item-detail {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #d88200;
+    overflow: hidden;
+}
+
+.fish-img-detail {
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.fish-img-detail img {
+    width: 100%;
+    height: 200px;
+    /* object-fit: cover; */
+    transition: transform 0.4s ease;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.fish-item:hover .fish-img-detail img {
+    transform: scale(0.9);
+}
+
+.fish-info {
+    padding: 15px;
+}
+
+.link__to-fish-detail{
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--black-color);
+    font-weight: 600;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis; 
+}
+.link__to-fish-detail:hover{
+    color: #000;
+}
+.fish-info p {
+    margin: 0 0 10px 0; 
+    color: #575757;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--black-color);
+    font-weight: 600;
+    line-height: 1.4rem;
+    height: 3rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis; 
+}
+
+.fish-info .location {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.img-edit-submit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 1rem 2rem;
+    height: 100%;
+
+}
+
+.fish-img-info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.fish-img-info-edit {
+    height: 80%;
+}
+
+.fish-img-info-edit img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pond-edit-img-detail {
+    height: 20%;
+}
+
+.form-edit-img-fish {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.fish-edit-img-detail {
+    height: 20%;
+}
+
+.fish-edit-img-detail input {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+
+}
+
+.fish-edit-img-detail button {
+    font-size: 1.6rem;
+    border: none;
+    background-color: var(--bs-orange);
+
+}
+
+.info {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.8rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: bold;
+    color: #555;
+}
+
+.value {
+    color: #007bff;
+}
+
+.back-btn { 
+    background-color: var( --color-back); 
+    text-decoration: none;
+    border: 1px solid var( --color-back);
+    display: inline-block;  
+}
+.delete-btn-fish{
+    background-color: #bd2525; 
+    text-decoration: none;
+    border: 1px solid #bd2525;
+    display: inline-block; 
+    margin: 0 1rem;
+}
+.delete-btn-fish:hover{
+    background-color: transparent;
+    color: #bd2525;
+    border: 1px solid #bd2525;
+    text-decoration: none;
+    color: #000;
+}
+
+.back-btn:hover {
+    background-color: transparent;
+    color: var( --color-back);
+    border: 1px solid var( --color-back);
+    text-decoration: none;
+    color: #000;
+}
+
+.edit-btn-out {   
+    background-color: var(--bs-orange);
+    color: var(--white-color);
+    border: none;
+    border: 1px solid var(--bs-orange);
+  
+
+}
+.edit-btn-out:hover {
+    background-color: transparent;
+    color: var(--black-color);
+    border: 1px solid var(--bs-orange);
+}
+
+.back-btn ,
+.delete-btn-fish,
+.edit-btn-out {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 0.7rem 1.2rem;
+    transition: background-color 0.4s ease;
+    color: #fff;
+    border-radius: 8px;
+} 
+
+.container__infor__fish {
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(30px);
+}
+
+.infor__fish-detail {
+    width: 80%;
+    animation: smoothTable 0.4s ease-in;
+    background-color: #fff;
+}
+
+.row-fish-detail {
+    margin: 0;
+}
+
+.edit-info {
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.edit-info h2 {
+    text-align: center;
+}
+
+.row-edit-info-detail {
+    margin: 0;
+    padding: 0;
+}
+
+.row-edit-info-detail input {
+    width: 100%;
+    padding: 0.4rem;
+    border: 2px solid #adadad;
+    border-radius: 4px;
+}
+
+.edit-item-detail {
+    padding: 1rem;
+}
+
+.open {
+    display: flex;
+}
+
+@keyframes smoothTable {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+.growth-container .row{
+    background-color: #fff;
+    margin: 0;
+    border-radius: 8px;
+}
+.tilte-fish-growth{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+.tilte-fish-growth h1{
+    margin-bottom: 0;
+    margin-left: 2rem;
+}
+.back-btn.grow__detail-btn{
+    margin-right: 2rem;
+}
+.item_grow_fish{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+ 
+.container-pond-fish {
+    padding: 4rem 0;
+
+} 
+
+ .container-pond-fish h1{ 
+    font-size: var(--font-title-main);
+    color: #333; 
+ }
+
+.pond-item {
+    display: block;
+    width: 100%;
+    padding: 0 1.5rem;
+} 
+.pond-item-img { 
+    width: 100%;  
+    display: flex;
+}
+
+.pond-item-img img {
+    /* width: 300px; */
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+}
+
+ 
+.pond-item-desc {
+    padding: 2rem;
+    background-color: #fff;
+}
+.pond-item-desc p {
+    font-size: 1.8rem;
+    color: #000;
+    font-weight: bold;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: #fff;
+}
+
+.button-container button{
+     font-size: 1.8rem;
+     font-weight: 600;
+     background-color: var(--bs-orange);
+     padding: 0.4rem 4rem;
+     color: var(--white-color);
+     border-radius: 99999px;
+}
+
+.btn-lg {
+    padding: 9px 8px;
+    font-size: 1.3rem;
+}
+
+.growth-record {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.record-date,
+.record-weight,
+.record-length {
+    flex: 1;
+    font-size: 2rem;
+    text-align: center;
+}
+.row-growth_fish{
+    background-color: #fff;
+    margin: 0;
+    margin-bottom: 3rem;
+}
+.item_grow_fish-detail{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.item_grow_fish-detail h2{
+    font-size: 3rem;
+    margin-bottom: 1.4rem;
+
+}
+.form-date-input-growth{
+    margin-bottom: 1rem;
+}
+.lable_form-date{
+    display: block;
+    font-size: 2rem;
+}
+.input_form-date{
+    width: 100%;
+    padding: 0.4rem 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+.btn-submit-search-date{
+    font-size: 1.6rem;
+    padding: 0.4rem 1.6rem;
+    border: none;
+    background-color: var(--bs-orange);
+    color: var(--white-color);
+    margin-top: 0.4rem;
+}

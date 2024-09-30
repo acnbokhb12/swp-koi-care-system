@@ -1,0 +1,76 @@
+<%-- 
+    Document   : profilePage
+    Created on : Sep 30, 2024, 10:35:47 AM
+    Author     : DELL
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" /> 
+    <!-- Font gg family -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet"> 
+    <!-- Font icon --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
+    <link rel="stylesheet" href="./assets/css/profilePerson.css">
+</head>
+<body class="body-profile-page-big" >
+    <div class="container">
+        <div class="content">
+            <!-- Header -->
+            <script src="./assets/js/headernav.js"></script>
+            <!-- User Info Section -->
+            <div class="inside__img_per">
+                <div class="profile-container">
+                    <!-- User Profile Image and Name -->
+                    <div class="custom-container">
+                        <div class="img_profile">
+                            <img src="https://i.pinimg.com/550x/dd/25/df/dd25df36b75a4765cd4ddef557e9aafe.jpg" class="profile-img" alt="User Profile Image">
+                        </div>
+                        <h1 class="user_name">HELLO, HUY CHE</h1>
+                        <a href="editProfile.jsp" class="infor">EDIT INFORMATION</a>
+                        <a href="#" class="infor">SIGN OUT</a>
+                    </div>
+            
+                    <!-- Profile Details Section -->
+                    <div class="profile-details">
+                        <h1>Profile Details</h1>
+                        <div class="row">
+                            <div class="profile-item col-6 top">
+                                <h3>Name</h3>
+                                <p>HuyGiangHo</p>
+                            </div>
+                            <div class="profile-item col-6 top">
+                                <h3>Email</h3>
+                                <p>huycgse183043@fpt.edu.vn</p>
+                            </div>
+                            <div class="profile-item col-6 under">
+                                <h3>Phone Number</h3>
+                                <p>0989020***</p>
+                            </div>
+                            <div class="profile-item col-6 under">
+                                <h3>Address</h3>
+                                <p>phường BHH B, quận BT, TP.HCM</p>
+                            </div>
+                            <!-- Add more profile details as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <script src="./assets/js/footer.js"></script>
+        </div>
+    </div>
+</body>
+
+</html>
