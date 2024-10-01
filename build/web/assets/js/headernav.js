@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             </a>
                                         </li>
                                         <li class="contain__item-nav">
-                                            <a href="#" class="contain__item-nav-link">
+                                            <a href="about.jsp" class="contain__item-nav-link">
                                                 <span>About</span>
                                             </a>
                                         </li>
@@ -144,12 +144,12 @@ document.addEventListener("DOMContentLoaded", function () {
                                                      <div class="welcome__acc-body">
                                                         <ul class="body__link-acount-list-item"> 
                                                             <li class="body__link-acount-detail-item">
-                                                                <a href="fish.html">
+                                                                <a href="fish.jsp">
                                                                    <i class="fa-solid fa-fish"></i> My Koi
                                                                 </a>
                                                             </li>
                                                             <li class="body__link-acount-detail-item">
-                                                                <a href="pond.html">
+                                                                <a href="pond.jsp">
                                                                    <i class="fa-regular fa-circle"></i> My Pond
                                                                 </a>
                                                             </li>
@@ -157,13 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                                                 <a href="#">
                                                                    <i class="fa-solid fa-droplet"></i> Water Parameters
                                                                 </a>
-                                                            </li>
-                                                            <li class="body__link-acount-detail-item">
-                                                                <a href="orderHistoryCustomer.jsp">
-                                                                    <i class="fa-solid fa-receipt"></i> Purchase History
-                                                                </a>
-                                                            </li>
-                                                            
+                                                            </li> 
                                                         </ul>
                                                      </div>
                                                      <div class="welcome__acc-footer">

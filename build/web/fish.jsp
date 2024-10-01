@@ -42,7 +42,7 @@
                             <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
                         </div>
                         <div class="fish-info">
-                            <a href="fishinfor.html" class="link__to-fish-detail">Peaceful Fish sddsds sdafsd </a>
+                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish sddsds sdafsd </a>
                             <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
                             <a href="" class="link-delete-fish">Delete</a> 
                         </div>
@@ -56,7 +56,7 @@
                             <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
                         </div>
                         <div class="fish-info">
-                            <a href="fishinfor.html" class="link__to-fish-detail">Peaceful Fish</a>
+                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
                             <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
                             <a href="" class="link-delete-fish">Delete</a> 
                         </div>
@@ -70,7 +70,7 @@
                             <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
                         </div>
                         <div class="fish-info">
-                            <a href="fishinfor.html" class="link__to-fish-detail">Peaceful Fish</a>
+                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
                             <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
                             <a href="" class="link-delete-fish">Delete</a> 
                         </div>
@@ -84,7 +84,7 @@
                             <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
                         </div>
                         <div class="fish-info">
-                            <a href="fishinfor.html" class="link__to-fish-detail">Peaceful Fish</a>
+                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
                             <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
                             <a href="" class="link-delete-fish">Delete</a> 
                         </div>
@@ -98,7 +98,7 @@
                             <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
                         </div>
                         <div class="fish-info">
-                            <a href="fishinfor.html" class="link__to-fish-detail">Peaceful Fish</a>
+                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
                             <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
                             <a href="" class="link-delete-fish">Delete</a> 
                         </div>
@@ -112,7 +112,7 @@
                             <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
                         </div>
                         <div class="fish-info">
-                            <a href="fishinfor.html" class="link__to-fish-detail">Peaceful Fish</a>
+                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
                             <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
                             <a href="" class="link-delete-fish">Delete</a> 
                         </div>

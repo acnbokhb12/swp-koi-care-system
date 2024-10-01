@@ -37,7 +37,7 @@
     <div class="tilte-fish">
       <h1>Fish Information</h1>
       <div class="text-right">
-        <a href="Fish.html" class="back-btn">Back to List</a>
+          <a href="fish.jsp" class="back-btn">Back to List</a>
         <a href="#" class="delete-btn-fish">Delete</a>
         <button class="edit-btn-out">Edit Information</button>
       </div>
@@ -86,7 +86,7 @@
     <div class="tilte-fish-growth"> 
       <h1>Fish Growth</h1>
       <div class="text-right">
-        <a href="fishgrowth.html" class="back-btn grow__detail-btn">View Growth Detail</a> 
+          <a href="fishGrowth.jsp" class="back-btn grow__detail-btn">View Growth Detail</a> 
       </div>
     </div>
     <div class="row mt-4">
