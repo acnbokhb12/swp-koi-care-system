@@ -152,7 +152,12 @@ document.addEventListener("DOMContentLoaded", function () {
                                                                 <a href="#">
                                                                    <i class="fa-solid fa-droplet"></i> Water Parameters
                                                                 </a>
-                                                            </li> 
+                                                            </li>
+                                                            <li class="body__link-acount-detail-item">
+                                                                <a href="purchaseHistory.jsp">
+                                                                    <i class="fa-solid fa-receipt"></i> Purchase History
+                                                                </a>
+                                                            </li>
                                                         </ul>
                                                      </div>
                                                      <div class="welcome__acc-footer">
