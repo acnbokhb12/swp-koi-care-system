@@ -112,13 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                                 <!-- task user -->
                                 <div class="contain__task-user">
-                                    <div class="header__task-right">
-                                        <a href="#" class="header__link-task d-flex align-end">
-                                            <span class="header__link-task-icon"><i
-                                                    class="fa-regular fa-bell"></i></span>
-                                            <span class="text-label text-uppercase">Alerts</span>
-                                        </a>
-                                        <a href="#" class="header__link-task d-flex align-end">
+                                    <div class="header__task-right"> 
+                                        <a href="cart.jsp" class="header__link-task d-flex align-end">
                                             <span class="header__link-task-icon"><i
                                                     class="fa-solid fa-bag-shopping"></i></span>
                                             <span class="text-label text-uppercase ">Cart</span>
