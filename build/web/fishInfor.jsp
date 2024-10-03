@@ -24,6 +24,7 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- echart js -->
   <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- css -->
   <link rel="stylesheet" href="./assets/css/base.css">
   <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
@@ -31,8 +32,9 @@
 </head>
 
 <body class=" body-fish">
-  <!-- header -->
-  <script src="./assets/js/headernav.js"></script>
+    <!-- start header -->
+         <div id="header"></div>
+        <!-- end header -->
   <section class="container container_fish">
     <div class="tilte-fish">
       <h1>Fish Information</h1>
@@ -191,8 +193,17 @@
       </div>
     </div>
   </div>
-  <script src="./assets/js/footer.js"></script>
+   <!-- footer -->
+        <div id="footer"></div>
 </body>
+  <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+</script>
 <script>
   const btnClose = document.querySelector(".btn-close-fish");
   const tableEdit = document.querySelector(".container__infor__fish");

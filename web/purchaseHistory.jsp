@@ -22,15 +22,18 @@
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous"
   />
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/navHeader-Footer.css" />
   <link rel="stylesheet" href="assets/css/history.css" />
 </head>
 <body class="body_history-order">
+     <!-- start header -->
+         <div id="header"></div>
+        <!-- end header -->
   <div class="container">
     <div class="content">
-      <!-- Header -->
-      <script src="./assets/js/headernav.js"></script>
+      
       <div class="main-order">
         <div class="container">
           <div class="row row-title-order" >
@@ -205,9 +208,23 @@
             </div>
           </div>
         </div>
-        <script src="./assets/js/footer.js"></script>
+      </div>
       </div>
     </div>
+      <!-- footer -->
+        <div id="footer"></div>
+  </body>
+  
+  
+  
+    <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    </script>
     <script>
       const priceElements = document.querySelectorAll(".price-detail-product");
       priceElements.forEach(function (element) {
@@ -219,5 +236,5 @@
         element.innerText = formattedAmount;
       });
     </script>
-  </body>
+  
 </html>

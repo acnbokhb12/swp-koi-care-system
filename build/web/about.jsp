@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- <link rel="stylesheet" href="./assets/css/bootstrap.min.css"> -->
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="./assets/css/base.css"> 
 
     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
@@ -30,7 +31,9 @@
 	<title>About us</title>
 </head>
 <body>
-    <script src="./assets/js/headernav.js"></script>
+          <!-- start header -->
+         <div id="header"></div>
+        <!-- end header -->
 	 <!-- slider -->
 	<div class="img-aboutus" >
 		 
@@ -237,7 +240,8 @@
 		</div>
 	</div>
      
-	<script src="./assets/js/footer.js"></script>
+	<!-- footer -->
+        <div id="footer"></div>
 	<style>
 	button {
 		position: relative;
@@ -664,5 +668,13 @@
 	  </style>
     
   </body>
+  <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+</script>
   </html>
 

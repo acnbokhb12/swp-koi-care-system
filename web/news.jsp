@@ -21,13 +21,15 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
     <link rel="stylesheet" href="./assets/css/news_blogs.css">
 </head>
 <body style="background-color: #EDEFF4;">
-    <!-- header -->
-    <script src="./assets/js/headernav.js"></script>
+      <!-- start header -->
+         <div id="header"></div>
+        <!-- end header -->
     <div id="content-news" >
         <header class="swiper shop__intro-container " >
             <div class="swiper-wrapper shop__intro-list">
@@ -605,8 +607,18 @@
     </div>
     
     <!-- footer -->
-     <script src="./assets/js/footer.js"></script>
+        <div id="footer"></div>
+     
 </body>
+  <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 
 <script>

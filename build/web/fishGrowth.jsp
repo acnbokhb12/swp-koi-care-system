@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="./assets/css/fishE.css">
 </head>
 <body class="body-fish"> 
-    <script src="./assets/js/headernav.js"></script>
+    <!-- start header -->
+        <div id="header"></div>
+    <!-- end header -->
     <div id="main-growth">
         <section class="growth_deatiail-main">
             <div class="container container-growth">

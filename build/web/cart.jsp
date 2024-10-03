@@ -20,7 +20,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- <link rel="stylesheet" href="./assets/css/bootstrap.min.css"> -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./assets/css/base.css"> 
     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
     <link rel="stylesheet" href="./assets/css/cart.css"> 
@@ -28,8 +28,10 @@
 </head>
 
 <body class="body-cart">
-    <!-- nhung header -->
-    <script src="./assets/js/headernav.js"></script> 
+     <!-- start header -->
+         <div id="header"></div>
+        <!-- end header -->
+    
     <!-- view cart -->
     <div class="cart__main container">
         <div class="cart__container__title"  >
@@ -277,9 +279,18 @@
 
  
 </div>
-<!-- nhung footer -->
-<script src="./assets/js/footer.js"></script>
+<!-- footer -->
+        <div id="footer"></div>
+ 
 </body>
+ <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+</script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const minusBtn = document.querySelector('.minus-btn-quantity');
@@ -327,7 +338,7 @@
                     for (const openeditPr of openEditProducts) {
                         openeditPr.addEventListener('click', function () {
                             modalProduct.classList.add('modal__cart__product-open');
-                        })
+                        });
                     }
             
                     closeUpadte.addEventListener('click',function(){
@@ -339,35 +350,35 @@
         modalProduct.addEventListener('click',function(){
             modalProduct.classList.remove('modal__cart__product-open');
 
-        })
+        });
         modalContainer.addEventListener('click',function(event){
             event.stopPropagation();
-        })
+        });
         
 
         const btnDelete = document.querySelectorAll('.cart__property-delete');
         const modalConfirmDelete = document.querySelector('.modal-confirm-delete');
-        const btnCloseConfirm = document.querySelector('.close-confirm-delete')
+        const btnCloseConfirm = document.querySelector('.close-confirm-delete');
         const btnCancelDelete = document.querySelector('.btn-cancel-delete');
         const modalStopPropafation = document.querySelector('.modal-confirm');
 
         for (const openConfirm of btnDelete) {
             openConfirm.addEventListener('click', function () {
                 modalConfirmDelete.classList.add('modal-confirm-delete-open');
-                        })
+                        });
         }
         btnCloseConfirm.addEventListener('click',function(){
             modalConfirmDelete.classList.remove('modal-confirm-delete-open');
-        })
+        });
         btnCancelDelete.addEventListener('click',function(){
             modalConfirmDelete.classList.remove('modal-confirm-delete-open');
-        })
+        });
         modalConfirmDelete.addEventListener('click',function(){
             modalConfirmDelete.classList.remove('modal-confirm-delete-open');
-        })
+        });
         modalStopPropafation.addEventListener('click',function(event){
             event.stopPropagation();
-        })
+        });
     </script>
 
 </html>

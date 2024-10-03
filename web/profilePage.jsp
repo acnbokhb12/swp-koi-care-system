@@ -20,15 +20,19 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
     <link rel="stylesheet" href="./assets/css/profilePerson.css">
 </head>
 <body class="body-profile-page-big" >
+    <!-- start header -->
+         <div id="header"></div>
+        <!-- end header -->
     <div class="container">
         <div class="content">
             <!-- Header -->
-            <script src="./assets/js/headernav.js"></script>
+             
             <!-- User Info Section -->
             <div class="inside__img_per">
                 <div class="profile-container">
@@ -67,10 +71,19 @@
                     </div>
                 </div>
             </div>
-            <!-- Footer -->
-            <script src="./assets/js/footer.js"></script>
+            
         </div>
     </div>
+        <!-- footer -->
+        <div id="footer"></div>
 </body>
+  <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+</script>
 
 </html>
