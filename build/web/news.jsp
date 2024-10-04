@@ -91,7 +91,7 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="trending-top">
-                                <a href="" class="trending-top-img">
+                                <a href="newsDetail.jsp" class="trending-top-img">
                                     <img src="https://i.pinimg.com/736x/fa/67/1e/fa671efeb462ef0af2d732f453da9226--koi-carp-four-year-old.jpg" alt="">
                                     <div class="trending-top-cap">
                                         <span>bait the hook </span>
@@ -102,7 +102,7 @@
                             <div class="trending-bottom">
                                 <div class="row">
                                     <div class="col-sm-6 col-lg-4">
-                                        <a href="#" class="trending-bottom-single">
+                                        <a href="newsDetail.jsp" class="trending-bottom-single">
                                             <div class="trending-bottom-img">
                                                 <img src="https://th.bing.com/th/id/OIP.xuQulqsI34rFF6ZF5py5ygHaHa?w=500&h=500&rs=1&pid=ImgDetMain" alt="">
                                             </div>
@@ -114,7 +114,7 @@
                                         </a>
                                     </div>
                                     <div class="col-sm-6 col-lg-4">
-                                        <a href="#" class="trending-bottom-single">
+                                        <a href="newsDetail.jsp" class="trending-bottom-single">
                                             <div class="trending-bottom-img">
                                                 <img src="https://kodamakoishow.com/wp-content/uploads/2020/10/718l-H-tEhL.jpg" alt="">
                                             </div>
@@ -126,7 +126,7 @@
                                         </a>
                                     </div>
                                     <div class="col-sm-6 col-lg-4">
-                                        <a href="#" class="trending-bottom-single">
+                                        <a href="newsDetail.jsp" class="trending-bottom-single">
                                             <div class="trending-bottom-img">
                                                 <img src="https://th.bing.com/th/id/OIP.xuQulqsI34rFF6ZF5py5ygHaHa?w=500&h=500&rs=1&pid=ImgDetMain" alt="">
                                             </div>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="col-lg-4">
                             <!-- nhung the a nay tuong duong voi 1 bai bao -->
-                            <a href="" class="trend-right-single d-flex">
+                            <a href="newsDetail.jsp" class="trend-right-single d-flex">
                                 <div class="tren-right-img">
                                     <img src="https://th.bing.com/th/id/OIP.dWp9EeuCr9hj184AeTpDewAAAA?rs=1&pid=ImgDetMain" alt="">
                                 </div>
