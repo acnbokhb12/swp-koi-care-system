@@ -93,7 +93,32 @@
         
     </div>
     <!-- End Admin -->
-
+    
+     <!-- Sidebar admin -->
+    <div id="sidebar_manager"> 
+        <div class="left-navbar-admin-manage  vh-100 simplebar-scrollable-y "> 
+            <div class="sidebar">
+                <div class="img-header">
+            <div class="contain__img-desc">
+            <a href="#" class="img-page-admin_link">
+                <img src="./assets/img/logo/logoSignin-removebg-preview.png" alt="picture page"> 
+            </a>
+            <div class="desc-img-admin">
+                <p>Koi Care System</p> 
+            </div>
+            </div> 
+                </div>
+                <ul class="menu">
+                    <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
+                    <li><a href="userList.html"><i class="fas fa-users"></i> Product Manager</a></li> 
+                    <li><a href="#"><i class="fa-solid fa-newspaper"></i>Fist Management</a></li>   
+                    <li><a href="#"><i class="fa-solid fa-newspaper"></i>Water Management</a></li>   
+                    <li><a href="manageNews.html"><i class="fa-solid fa-newspaper"></i>News Manager</a></li>   
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <!-- Start Customer -->
     <header id="header__nav">
         <!-- section-1 sub_header -->
