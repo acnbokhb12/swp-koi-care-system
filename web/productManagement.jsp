@@ -18,7 +18,6 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/product.css" />
     <title>Manager Page</title>
   </head>
   <body>
