@@ -489,149 +489,7 @@
 .open__boardAcc-detail{
     display: block;
 }
-
-@media screen and (max-width: 1000px) {
-    .right__content-icon-list{
-        padding-left: 0;
-    }
-    .link_logo-home{
-        width: 13.3rem;
-        /* width: 50%; */
-    }
-    .hamburger__icon-btn{
-        display: block;
-    }
-    .nav-bar-menu{
-        background-color: rgba(0, 0, 0, 1);
-        /* height: calc(100vh - 36px); */
-        /* height: 100%; */
-        width: 30%;
-        min-width: 300px;
-        position: fixed;
-        right: 0;
-        top: 0;
-        padding-left: 0;
-        margin-top: 36px; 
-        display: flex;
-        flex-direction: column;
-        overflow: auto;
-        display: none;
-        -ms-overflow-style: none;  /* Ẩn thanh cuộn trong IE và Edge */
-  scrollbar-width: none;     /* Ẩn thanh cuộn trong Firefox */
-        animation: NavBarEffectOpen ease-out 0.5s;
-         
-    }
-    .nav-bar-menu::-webkit-scrollbar{
-        display: none;
-    }
-    .close__navbar-header{
-        display: block; 
-        color: var(--white-color); 
-    }
-    .close__navbar-header i {
-        padding: 1rem 1.4rem;
-        font-size: 3rem;
-        cursor: pointer;
-    }
-    .close-navbar-icon-btn:hover{
-        background-color: var(--bs-orange);
-    }
-    .contain__list-nav{
-        /* overflow: auto;
-        -ms-overflow-style: none;  
-        scrollbar-width: none;   */
-    }
-    .contain__list-nav-detail{
-        padding-left: 0;
-        margin-right: 0;
-        flex-direction: column;
-    }
-    .contain__item-nav{
-        text-align: center;
-        line-height: 6.4rem;
-        font-weight: 600;
-    }
-    /* subnav */
-    .contain__sub-item_nav-link{
-        display: none; 
-        position: initial;
-        background-color: #ccc;
-        animation:NavBacSubItem ease 0.5s ;
-    }
-    .contain__sub-item_nav-items a{
-        
-        color: #000000;
-    }
-    .contain__item-nav-open:hover .contain__sub-item_nav-link{
-        display: none;
-    }
-    .contain__sub-item_nav-list{
-      
-    }
-    .contain__task-user{
-        /* margin-top: 0; */
-        padding-bottom: 1rem;
-         
-    }
-    .header__task-right{
-        flex-direction: column;
-    }
-    .header__link-task{
-        flex-direction: row;
-        /* padding-left: 0; */
-        justify-content: center;
-
-    }
-    .header__link-task span:first-child{
-        margin-right: 1rem;
-    }
-    .header__task-right a{
-        line-height: 6.4rem;
-    }
-    .header__task-right a span{
-        font-size: 1.6rem;
-        font-weight: 600;
-
-    }
-    .text-label::after {
-        bottom: 1.4rem;
-    }
-    .open_navbar{
-        display: flex;       
-        /* animation: NavBarEffetOpen ease 0.5s; */
-    }
-    .close-btn-hambuger{
-        display: none;
-    }
-    /* .navbar_closing {
-        animation: NavBarEffetClose ease 0.5s forwards;
-    }    */
-    .header__link-account{
-        text-align: center;
-    }    
-    .header__link-task-img-acc{
-        margin: auto;
-    }
-    .header__link-task-img-acc img{
-        width: 50%;
-        height: 50%;
-    }
-    .header__link-task-description{
-        right: 50%;
-        transform: translateX(50%);
-        display: block;
-    }
-    .header__link-task-container::before{
-        right: 50%;
-        transform: translateX(50%);
-        margin-top: -2.4rem;
-    }
-    .view__detail_acc,
-    .footer__link-acount-detail-item a,
-    .body__link-acount-detail-item a{
-        line-height: 3.4rem;
-    }
-    /* ----------------------------------------------nav ben admin */
+/* ----------------------------------------------nav ben admin */
 #db-wrapper {
     /* display: flex; */
     overflow: hidden;
@@ -750,7 +608,7 @@
     background-color: #fff;
     color: white; 
     border-right:1px solid var(--color-border-bt) ;
-    /* background-color: #12181a; */
+     
 }
 .contain__img-desc{
     display: flex;
@@ -916,6 +774,147 @@
     flex: 1;
     padding: 20px;
 }
+@media screen and (max-width: 1000px) {
+    .right__content-icon-list{
+        padding-left: 0;
+    }
+    .link_logo-home{
+        width: 13.3rem;
+        /* width: 50%; */
+    }
+    .hamburger__icon-btn{
+        display: block;
+    }
+    .nav-bar-menu{
+        background-color: rgba(0, 0, 0, 1);
+        /* height: calc(100vh - 36px); */
+        /* height: 100%; */
+        width: 30%;
+        min-width: 300px;
+        position: fixed;
+        right: 0;
+        top: 0;
+        padding-left: 0;
+        margin-top: 36px; 
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        display: none;
+        -ms-overflow-style: none;  /* Ẩn thanh cuộn trong IE và Edge */
+  scrollbar-width: none;     /* Ẩn thanh cuộn trong Firefox */
+        animation: NavBarEffectOpen ease-out 0.5s;
+         
+    }
+    .nav-bar-menu::-webkit-scrollbar{
+        display: none;
+    }
+    .close__navbar-header{
+        display: block; 
+        color: var(--white-color); 
+    }
+    .close__navbar-header i {
+        padding: 1rem 1.4rem;
+        font-size: 3rem;
+        cursor: pointer;
+    }
+    .close-navbar-icon-btn:hover{
+        background-color: var(--bs-orange);
+    }
+    .contain__list-nav{
+        /* overflow: auto;
+        -ms-overflow-style: none;  
+        scrollbar-width: none;   */
+    }
+    .contain__list-nav-detail{
+        padding-left: 0;
+        margin-right: 0;
+        flex-direction: column;
+    }
+    .contain__item-nav{
+        text-align: center;
+        line-height: 6.4rem;
+        font-weight: 600;
+    }
+    /* subnav */
+    .contain__sub-item_nav-link{
+        display: none; 
+        position: initial;
+        background-color: #ccc;
+        animation:NavBacSubItem ease 0.5s ;
+    }
+    .contain__sub-item_nav-items a{
+        
+        color: #000000;
+    }
+    .contain__item-nav-open:hover .contain__sub-item_nav-link{
+        display: none;
+    }
+    .contain__sub-item_nav-list{
+      
+    }
+    .contain__task-user{
+        /* margin-top: 0; */
+        padding-bottom: 1rem;
+         
+    }
+    .header__task-right{
+        flex-direction: column;
+    }
+    .header__link-task{
+        flex-direction: row;
+        /* padding-left: 0; */
+        justify-content: center;
+
+    }
+    .header__link-task span:first-child{
+        margin-right: 1rem;
+    }
+    .header__task-right a{
+        line-height: 6.4rem;
+    }
+    .header__task-right a span{
+        font-size: 1.6rem;
+        font-weight: 600;
+
+    }
+    .text-label::after {
+        bottom: 1.4rem;
+    }
+    .open_navbar{
+        display: flex;       
+        /* animation: NavBarEffetOpen ease 0.5s; */
+    }
+    .close-btn-hambuger{
+        display: none;
+    }
+    /* .navbar_closing {
+        animation: NavBarEffetClose ease 0.5s forwards;
+    }    */
+    .header__link-account{
+        text-align: center;
+    }    
+    .header__link-task-img-acc{
+        margin: auto;
+    }
+    .header__link-task-img-acc img{
+        width: 50%;
+        height: 50%;
+    }
+    .header__link-task-description{
+        right: 50%;
+        transform: translateX(50%);
+        display: block;
+    }
+    .header__link-task-container::before{
+        right: 50%;
+        transform: translateX(50%);
+        margin-top: -2.4rem;
+    }
+    .view__detail_acc,
+    .footer__link-acount-detail-item a,
+    .body__link-acount-detail-item a{
+        line-height: 3.4rem;
+    }
     
     @keyframes NavBarEffectOpen {
         0%{
@@ -935,9 +934,9 @@
             opacity: 1;
         }
     }
-     
-
 }
+/* ----------------------------------------------nav ben admin */
+ 
 @media screen and (max-width:991px) {
     .container__footer-desc-area{
         /* justify-content: center; */

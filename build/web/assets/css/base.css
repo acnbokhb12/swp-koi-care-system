@@ -1,5 +1,5 @@
 :root{
-    --primary-color:#ee4d2d;
+     --primary-color:#ee4d2d;
     --white-color: #fff;
     --black-color:#000;
     --text-color:#333;
@@ -37,6 +37,7 @@
     --color-ngau-hung:#d29763;
     --color-border-bt:#e1e2ef;
     --color-back: #007bff;
+    --color-sidebar-admin: #000;
 }
 *{
     box-sizing: inherit;
