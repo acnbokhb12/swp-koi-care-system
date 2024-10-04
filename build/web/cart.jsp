@@ -163,7 +163,7 @@
                         <h3 id="subtotal-quantity-price-item">2000000 </h3>
                     </div>
                     <div class="cart__about__checkout-btn col-md-4">
-                        <a class="checkout-btn" href="checkout.html">Check Out </a>
+                        <a class="checkout-btn" href="checkout.jsp">Check Out </a>
                     </div>
 
                 </div>
@@ -255,7 +255,7 @@
                 <!-- info -->
                 <p class="mb-0">I think the below button is important. Hit this button and you will find a lot of interesting products on our "Shop" page</p>
                 <!-- Button -->
-                 <a class="link__go_shop-cartempty" href="shop.html">                     
+                 <a class="link__go_shop-cartempty" href="shop.jsp">                     
                     <button class="cssbuttons-io-button" type="submit">
                     Back to Menu
                      
