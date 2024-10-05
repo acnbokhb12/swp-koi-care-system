@@ -27,7 +27,7 @@
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
      <link rel="stylesheet" href="./assets/css/base.css">
      <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
-    <link rel="stylesheet" href="./assets/css/tranAccount.css"> 
+     <link rel="stylesheet" href="./assets/css/manageAccoutVTwo.css"> 
 </head>
 <body>
     <div class="container_admin">

@@ -30,7 +30,7 @@
                 </div>
                 <ul class="menu">
                     <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
-                    <li><a href="manageUser.jsp"><i class="fas fa-users"></i> Account Management</a></li> 
+                    <li><a href="manageAccount.jsp"><i class="fas fa-users"></i> Account Management</a></li> 
                     <li><a href="manageNews.jsp"><i class="fas fa-user-friends"></i> News Manager</a></li>   
                 </ul>
             </div>

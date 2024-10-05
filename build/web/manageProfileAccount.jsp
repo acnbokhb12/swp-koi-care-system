@@ -29,7 +29,7 @@
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
      <link rel="stylesheet" href="./assets/css/base.css">
      <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
-    <link rel="stylesheet" href="./assets/css/tranAccount.css">
+     <link rel="stylesheet" href="./assets/css/manageAccoutVTwo.css">
   </head>
   <body>
      
@@ -45,7 +45,7 @@
                     <div class="header_ac-detail d-flex ">
                         <h1>Account Detail</h1>  
                         <div>
-                            <a href="" class="link_update-account" >Update Account</a>
+                            <a href="manageUpdateAccount.jsp" class="link_update-account" >Update Account</a>
                             <a href="" class="link_delete-account" >Delete Account</a>
                         </div>
                     </div>
