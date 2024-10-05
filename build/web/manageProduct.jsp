@@ -180,10 +180,10 @@
     </div>
 </body>
 <script>
-    $('#header').load('utils.html #header_admin', ()=>{
+    $('#header').load('utils.jsp #header_admin', ()=>{
        $.getScript('./assets/js/utilsAdmin.js');
    });
-   $('#sidebar_admin').load('utils.html  #sidebar_manager');
+   $('#sidebar_admin').load('utils.jsp  #sidebar_manager');
 
    const imageInput = document.getElementById('imageInput');
     const imagePreview = document.getElementById('imagePreview');

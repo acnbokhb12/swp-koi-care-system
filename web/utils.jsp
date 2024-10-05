@@ -110,10 +110,11 @@
                 </div>
                 <ul class="menu">
                     <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
-                    <li><a href="userList.html"><i class="fas fa-users"></i> Product Manager</a></li> 
-                    <li><a href="#"><i class="fa-solid fa-newspaper"></i>Fist Management</a></li>   
-                    <li><a href="#"><i class="fa-solid fa-newspaper"></i>Water Management</a></li>   
-                    <li><a href="manageNews.html"><i class="fa-solid fa-newspaper"></i>News Manager</a></li>   
+                    <li><a href="manageProduct.jsp"><i class="fa-solid fa-warehouse"></i> Producy Manager</a></li> 
+                    <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
+                    <li><a href="#"><i class="fa-solid fa-fish"></i>Fist Management</a></li>   
+                    <li><a href="#"><i class="fa-solid fa-water"></i>Water Management</a></li>   
+                    <li><a href="manageNews.jsp"><i class="fa-solid fa-newspaper"></i>News Manager</a></li>      
                 </ul>
             </div>
         </div>
