@@ -47,10 +47,14 @@
                         <!-- Profile picture help block-->
                         <div class="desc-img">
                             <p>
-                                JPG or PNG no larger than 5 MB</div> 
-                            </p>    
+                                JPG or PNG no larger than 5 MB 
+                            </p>  
+                        </div> 
                         <!-- Profile picture upload button-->
-                        <button class="btn btn-edit-img-profile" type="button">Upload new image</button>
+                       <form action=""> 
+                            <input id="imageInput" class="choose-edit-img-profile" type="file" accept="image/*">
+                             <button class="btn btn-edit-img-profile" type="button">Upload new image</button>
+                         </form>
                     </div>
                 </div>
             </div>
@@ -151,6 +155,29 @@
             Validator.minLength('#password_new', 6),
             Validator.isPhoneNumber('#phoneNumber','Phone number at least 10 number')
         ]
+    });
+     const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block'; // Hiện ảnh khi file được chọn
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none'; // Ẩn ảnh nếu không có file nào được chọn
+        }
+    });
+    const formEditProfile = document.getElementById('form-1');
+    formEditProfile.addEventListener('submit',(e)=>{
+        const isConfirmed = confirm('Are you sure you want to submit this news?');
+        if(!isConfirmed){
+            event.preventDefault();
+        }
     });
 </script>
 </html>

@@ -127,42 +127,39 @@
         </div>
     </div>
     <!-- TABLE NEW -->
-    <div class="container__infor__fish">
+     <div class="container__infor__fish">
         <div class="infor__fish-detail">
-          <div class="row row-fish-detail">
-            <div class="col-4  " style="padding: 0">
+            <form action="" id="fomr_fill-news">  
+            <div class="row row-fish-detail">
+                <div class="col-4  " style="padding: 0">
                 <div class="img-edit-submit">
-                    <div class="fish-img-info-edit">
-                        <img src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+                    <div class="fish-img-info-edit mb-4">
+                        <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
                     </div>
-                    <div class="fish-edit-img-detail">
-                        <form action="" class="form-edit-img-fish">
-                            <input type="file">
-                            <button type="submit">Submit</button>
-                        </form>
+                    <div class="fish-edit-img-detail"> 
+                            <input id="imageInput" type="file" accept="image/*" required>  
                     </div>
                 </div>
-            </div>
-            <div class="col-8 edit-info">
+                </div>
+                <div class="col-8 edit-info">
               <div class="text-right">
                 <button class="btn-close-fish">
                   <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
                 </button>
               </div>
-              <h2>New Information</h2>
-              <form>
+              <h2>New Information</h2> 
                 <div class="row row-edit-info-detail">
                   <div class="col-md-6 edit-item-detail">
                     <span>Fish Name </span>
-                    <input type="text" value="" placeholder="Enter fish name" />
+                    <input type="text" value="" placeholder="Enter fish name" required/>
                   </div>
                   <div class="col-md-6 edit-item-detail">
                     <span>Body Shape </span>
-                    <input type="text" value="" placeholder="Enter body shape" />
+                    <input type="text" value="" placeholder="Enter body shape" required />
                   </div>
                   <div class="col-md-6 edit-item-detail">
                     <span>Age </span>
-                    <input type="number" value="" placeholder="Enter age" />
+                    <input type="number" value="" placeholder="Enter age" required />
                   </div>
                   <div class="col-md-6 edit-item-detail">
                     <span>Length (cm) </span>
@@ -171,6 +168,7 @@
                       step="0.1"
                       value=""
                       placeholder="Enter length in cm"
+                      required
                     />
                   </div>
                   <div class="col-md-6 edit-item-detail">
@@ -180,28 +178,29 @@
                       step="0.1"
                       value=""
                       placeholder="Enter weight in kg"
+                      required
                     />
                   </div>
                   <div class="col-md-6 edit-item-detail">
                     <span>Gender </span>
-                    <select> 
+                    <select style="width: 100%; padding: 4px; border: 1px solid #000;"> 
                       <option selected value="M">Male</option>
                       <option value="F">Female</option>
                     </select>
                   </div>
                   <div class="col-md-6 edit-item-detail">
                     <span>Origin </span>
-                    <input type="text" value="" placeholder="Enter origin" />
+                    <input type="text" value="" placeholder="Enter origin"  required/>
                   </div>
                 </div>
                 <div class="text-center">
-                    <button class="edit-btn blue-btn" style="margin-top: 10px">
+                    <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
                         Confirm
                     </button>                    
+                </div> 
                 </div>
-              </form>
             </div>
-          </div>
+        </form>
         </div>
       </div>
     <!-- footer -->
@@ -215,6 +214,7 @@
         $.getScript('./assets/js/utilsCustomer.js');
     });
 </script>
+<script src="./assets/js/utils.js"></script> 
 <script>
     const btnClose = document.querySelector(".btn-close-fish");
     const tableEdit = document.querySelector(".container__infor__fish");
@@ -237,5 +237,7 @@
     document.addEventListener("click", () => {
         tableEdit.classList.remove("open");
     });
+    
+   
 </script>
 </html>
