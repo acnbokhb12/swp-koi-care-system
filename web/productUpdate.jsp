@@ -42,43 +42,52 @@
                         <div class="update-product-section">
                             <div class="product-container">
                                 <div class="product-details">
-                                    <div class="product-image-upload">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTvpksqwVza-WmPCNDXK-T00gAIh3cSUIYg&s" alt="Product Image" class="product-image-update" />
-                                        <div class="img-detail-field">
-                                            <h1>Upload New Image</h1>
-                                            <input type="file" id="fishImage" name="fishImage" accept="image/*" />
-                                        </div>
+                                    <div class="form-container">
+                                        <div class="form-wrapper">
+                                            <form action="uploadProductImageServlet" method="POST" enctype="multipart/form-data" class="form-image-upload">
+                                                <div class="product-image-upload">
+                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTvpksqwVza-WmPCNDXK-T00gAIh3cSUIYg&s" 
+                                                         alt="Product Image" 
+                                                         class="product-image-update"/> 
+                                                    <div class="img-detail-field">
+                                                        <h3>Upload New Image</h3>
+                                                        <div class="file-upload-container">
+                                                            <input type="file" id="fishImage" name="fishImage" accept="image/*" required style="width: 100%;" />
+                                                            <button type="submit" class="btn btn-upload">Submit</button>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form action="updateProductServlet" method="POST" class="form-update-details">
+                                                <div class="details-wrapper">
+                                                    <div class="detail-field">
+                                                        <h1>Product ID</h1>
+                                                        <input type="text" id="productID" name="productID" value="12345" readonly style="width: 100%;" />
+                                                    </div>
+                                                    <div class="detail-field">
+                                                        <h1>Product Name:</h1>
+                                                        <input type="text" id="productName" name="productName" value="Koi Food" required style="width: 100%;" />
+                                                    </div>
+                                                    <div class="detail-field">
+                                                        <h1>Description:</h1>
+                                                        <textarea id="productDescription" name="productDescription" class="description-text" required style="width: 100%; height: 100px;"></textarea>
+                                                    </div>
+                                                    <div class="detail-field">
+                                                        <h1>Category:</h1>
+                                                        <input type="text" id="productCategory" name="productCategory" value="Food" required style="width: 100%;" />
+                                                    </div>
+                                                    <div class="detail-field">
+                                                        <h1>Product Price:</h1>
+                                                        <input type="text" id="productPrice" name="productPrice" value="$20.00" required style="width: 100%;" />
+                                                    </div>
+                                                </div>
+                                                <div class="action-buttons">
+                                                    <button type="submit" class="btn btn-save">Submit</button>
+                                                    <a href="manageProductDetails.jsp" class="btn btn-cancel">Cancel</a>
+                                                </div>
+                                            </form>
+                                        </div> 
                                     </div>
-                                    <div class="details-wrapper">
-                                        <div class="detail-field">
-                                            <h1>Product ID</h1>
-                                            <input type="text" id="productID" name="productID" value="12345" readonly />
-                                        </div>
-                                        <div class="detail-field">
-                                            <h1>Product Name:</h1>
-                                            <input type="text" id="productName" name="productName" value="Koi Food" required />
-                                        </div>
-                                        <div class="detail-field">
-                                            <h1>Description:</h1>
-                                            <textarea id="productDescription" name="productDescription" class="description-text" required>High-quality food for Koi fish, packed with essential nutrients.</textarea>
-                                        </div>
-                                        <div class="detail-field">
-                                            <h1>Category:</h1>
-                                            <input type="text" id="productCategory" name="productCategory" value="Food" required />
-                                        </div>
-                                        <div class="detail-field">
-                                            <h1>Quantity:</h1>
-                                            <input type="number" id="productQuantity" name="productQuantity" value="50" required />
-                                        </div>
-                                        <div class="detail-field">
-                                            <h1>Product Price:</h1>
-                                            <input type="text" id="productPrice" name="productPrice" value="$20.00" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="action-buttons">
-                                    <button type="submit" class="btn btn-save">Save Changes</button>
-                                    <a href="manageProductDetails.jsp" class="btn btn-cancel">Cancel</a>
                                 </div>
                             </div>
                         </div>

@@ -159,74 +159,50 @@
     font-size: 28px;
     color: #333;
 }
-
-.product-image-update {
-    width: 300px;
-    height: auto;
-    margin-right: 20px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-}
-
-.detail-field h1 {
-    font-size: 1.5em;
-    margin-bottom: 5px;
-}
-.product-update-content {
-    flex-grow: 1;
-    padding: 40px;
-}
-
-.header-section {
+.form-wrapper {
     display: flex;
-    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.form-image-upload {
+    flex: 1;
+    max-width: 300px;
+}
+
+.form-update-details {
+    flex: 2;
+}
+
+.file-upload-container {
+    display: flex;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.header-section h2 {
-    margin: 0;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
+    gap: 10px;
     margin: 20px 0;
 }
 
-.product-details {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    border-radius: 10px;
-}
-.product-image-upload {
-    display: flex;
-    flex-direction: column;
-}
-.product-image-update {
-    width: 400px;
-    height: 300px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.img-detail-field{
-    display: flex;
-}
-.img-detail-field h1 {
-    font-size: 16px;
-    margin-top: 20px;
-    color: #16acca;
+input[type="file"] {
+    font-size: 15px;
 }
 
-.img-detail-field input[type="file"] {
-    padding: 5px;
-    margin-top: 19px;
-    font-size: 16px;
-    font-weight: 400;
+.btn-upload {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
     cursor: pointer;
+    font-size: 16px;
 }
+.product-image-update {
+    max-width: 100%;
+    height: 250px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
 .details-wrapper {
     display: flex;
     flex-direction: column;
@@ -234,30 +210,64 @@
 }
 
 .detail-field {
-    margin-bottom: 15px
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .detail-field h1 {
-    font-size: 1.2em;
+    font-size: 14px;
     margin-bottom: 5px;
-    color: #16acca;
-    font-weight: bold;
 }
 
-.detail-field input[type="text"],
-.detail-field input[type="number"],
-.detail-field textarea{
+input[type="text"], textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 17px;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.detail-field textarea {
-    height: 100px;
-    resize: vertical;
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
 }
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-save {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #218838;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+.detail-field input, 
+.detail-field textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+}
+
 .action-buttons {
     display: flex; 
     justify-content: center; 
@@ -323,7 +333,7 @@
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     box-sizing: border-box;
 }
 
@@ -470,6 +480,15 @@ input, textarea {
 }
 .add-img-detail{
     font-size: 1.6rem;
+}
+.btn-upload {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 .btn-close-add{
     font-size: 2rem;
