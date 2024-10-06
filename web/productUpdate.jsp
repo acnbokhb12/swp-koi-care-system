@@ -74,7 +74,12 @@
                                                     </div>
                                                     <div class="detail-field">
                                                         <h1>Category:</h1>
-                                                        <input type="text" id="productCategory" name="productCategory" value="Food" required style="width: 100%;" />
+                                                        <select id="productCategory" name="productCategory" required style="width: 100%;">
+                                                            <option value="Food" selected>Food</option>
+                                                            <option value="Accessories">Accessories</option>
+                                                            <option value="Equipment">Equipment</option>
+                                                            <option value="Maintenance">Maintenance</option>
+                                                        </select>
                                                     </div>
                                                     <div class="detail-field">
                                                         <h1>Product Price:</h1>

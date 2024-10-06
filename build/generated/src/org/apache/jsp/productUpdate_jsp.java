@@ -113,7 +113,12 @@ public final class productUpdate_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                                                    </div>\n");
       out.write("                                                    <div class=\"detail-field\">\n");
       out.write("                                                        <h1>Category:</h1>\n");
-      out.write("                                                        <input type=\"text\" id=\"productCategory\" name=\"productCategory\" value=\"Food\" required style=\"width: 100%;\" />\n");
+      out.write("                                                        <select id=\"productCategory\" name=\"productCategory\" required style=\"width: 100%;\">\n");
+      out.write("                                                            <option value=\"Food\" selected>Food</option>\n");
+      out.write("                                                            <option value=\"Accessories\">Accessories</option>\n");
+      out.write("                                                            <option value=\"Equipment\">Equipment</option>\n");
+      out.write("                                                            <option value=\"Maintenance\">Maintenance</option>\n");
+      out.write("                                                        </select>\n");
       out.write("                                                    </div>\n");
       out.write("                                                    <div class=\"detail-field\">\n");
       out.write("                                                        <h1>Product Price:</h1>\n");
