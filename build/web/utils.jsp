@@ -36,6 +36,7 @@
             </div>
         </div>
     </div>
+    
     <div id="header_admin">
         <div class="topbar d-flex align-items-center">
             <nav class="navbar navbar-expand gap-3">
@@ -204,7 +205,7 @@
                                         </a>
                                     </li>
                                     <li class="contain__item-nav">
-                                        <a href="shop.jsp" class="contain__item-nav-link">
+                                        <a href="MainController?action=shop" class="contain__item-nav-link">
                                             <span>Shop</span>
                                         </a>
                                     </li>
@@ -218,7 +219,7 @@
                                                     <a href="blogs.jap">Blogs</a>
                                                 </li>
                                                 <li class="contain__sub-item_nav-items">
-                                                    <a href="news.jsp">News</a>
+                                                    <a href="MainController?action=news">News</a>
                                                 </li>
                                                 
                                             </ul>

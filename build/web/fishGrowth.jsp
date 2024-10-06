@@ -24,6 +24,7 @@
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- echart js -->
         <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- css -->
         <link rel="stylesheet" href="./assets/css/base.css">
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
@@ -144,6 +145,37 @@
         </div>
         <script src="./assets/js/footer.js"></script>
     </body>
+     <script>
+    $('#header').load('utils.jsp #header__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
+        $.getScript('./assets/js/utilsCustomer.js');
+    });
+</script>
+    <script>
+        const btnClose = document.querySelector(".btn-close-fish");
+        const tableEdit = document.querySelector(".container__infor__fish");
+        const btnAddNew = document.querySelector(".edit-btn-out");
+        const subTable = document.querySelector(".infor__fish-detail");
+
+        btnAddNew.addEventListener("click", function (e) {
+            tableEdit.classList.add("open");
+            e.stopPropagation();
+        });
+
+        btnClose.addEventListener("click", () => {
+            tableEdit.classList.remove("open");
+        });
+
+        subTable.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener("click", () => {
+            tableEdit.classList.remove("open");
+        });
+    </script>
     <style>
         .infor__fish-detail{
             width: 50%;
@@ -341,27 +373,7 @@
                 e.target.submit();
             }
         });
-        const btnClose = document.querySelector(".btn-close-fish");
-        const tableEdit = document.querySelector(".container__infor__fish");
-        const btnAddNew = document.querySelector(".edit-btn-out");
-        const subTable = document.querySelector(".infor__fish-detail");
-
-        btnAddNew.addEventListener("click", function (e) {
-            tableEdit.classList.toggle("open");
-            e.stopPropagation();
-        });
-
-        btnClose.addEventListener("click", () => {
-            tableEdit.classList.remove("open");
-        });
-
-        subTable.addEventListener("click", (e) => {
-            e.stopPropagation();
-        });
-
-        document.addEventListener("click", () => {
-            tableEdit.classList.remove("open");
-        });
+         
     </script>
 
 </html>

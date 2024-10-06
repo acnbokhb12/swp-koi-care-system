@@ -6,9 +6,11 @@
 
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class MainController extends HttpServlet {
+public class ManageShopController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,31 +32,16 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            String url = "";
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String ac = request.getParameter("action");
-            if (ac == null || ac.isEmpty()) {
-                ac = IConstant.HOME;
-            }
-            switch (ac) {
-                case IConstant.HOME :
-                    url = "home.jsp";
-                    break;
-                case IConstant.SHOP :
-                    url = "ManageShopController";
-                    break;
-                case IConstant.NEWS :
-                    url = "NewsController"; 
-                    break;
-                default:
-                    url = "home.jsp";
-                    break; 
-            }
-        }catch (Exception e){
-                log("Error at MainController: "+ e.toString());  
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
+           
+            ProductService ps = new ProductService();
+            ArrayList<Product> listProduct = ps.GetAllProductS();
+            
+            request.setAttribute("ListP", ps);
+            request.getRequestDispatcher("shop.jsp").forward(request, response);
+            
+            
         }
     } 
 

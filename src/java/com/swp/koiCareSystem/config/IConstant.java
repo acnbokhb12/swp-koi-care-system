@@ -11,5 +11,8 @@ package com.swp.koiCareSystem.config;
  */
 public interface IConstant {
     public final String HOME = "home";
+    public final String SHOP = "shop";
+    public final String SHOPJSP = "shopJsp";
     
+    public final String NEWS = "news";
 }

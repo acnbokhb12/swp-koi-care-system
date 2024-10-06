@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +28,7 @@
   <link rel="stylesheet" href="./assets/css/shopPage.css">
 </head>
 
-<body>
+<body> 
        <!-- start header -->
          <div id="header"></div>
         <!-- end header -->
