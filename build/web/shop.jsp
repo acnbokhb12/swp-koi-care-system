@@ -4,6 +4,8 @@
     Author     : DELL
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.swp.koiCareSystem.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -145,29 +147,29 @@
           <div class="col-sm-9 ">
             <div class="shop__product__lists">
               <!-- row chua element  -->
-              <div class=" row "> 
-                <div class="col-lg-3 col-md-4   col-6 product-item">
-                    <a href="productDetail.jsp" class="home-product-item__link">
+              <div class=" row ">
+                  <c:forEach var="product" items="${products}">
+                    <div class="col-lg-3 col-md-4   col-6 product-item">
+                    <a href="productDetail.jsp?productID=${product.productID}" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
                       <!-- product item -->
                       <div class="shop__product__img">
-                        <img src="https://m.media-amazon.com/images/I/61+mqiLia0L._AC_UF1000,1000_QL80_.jpg" alt="">
+                        <img src="${product.imgProduct}" alt="${product.productName}">
                       </div>
                       <div class="shop__product__des-detail">
                         <!-- title -->
-                        <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
+                        <h4 class="shop__product-name">${product.productName}</h4>
                         <!-- descript -->
                         <p class="shop__product-description">
-                          Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
-                          division
+                          ${product.price}
                         </p>
                         <!-- price- category -->
                         <div class="contain-cat-price ">
                           <h5 class="shop__product-price ">100000</h5>
                           <h5 class="shop__product-category-list ">
                             <p class="shop__product-category-item">
-                              Food
+                              ${product.categoryName}
                             </p>
                           </h5>
                         </div>
@@ -178,25 +180,27 @@
 
                   </a>
                 </div>
-                <div class="col-lg-3 col-md-4   col-6 product-item">
+                </c:forEach>
+                
+<!--                <div class="col-lg-3 col-md-4   col-6 product-item">
                     <a href="productDetail.jsp" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
-                      <!-- product item -->
+                       product item 
                       <div class="shop__product__img">
                         <img
                           src="https://koithienduong.com/wp-content/uploads/2023/11/thuc-an-ca-koi-hikari-color-enhancer.jpg"
                           alt="">
                       </div>
                       <div class="shop__product__des-detail">
-                        <!-- title -->
+                         title 
                         <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
-                        <!-- descript -->
+                         descript 
                         <p class="shop__product-description">
                           Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
                           division
                         </p>
-                        <!-- price- category -->
+                         price- category 
                         <div class="contain-cat-price  ">
                           <h5 class="shop__product-price ">100000</h5>
                           <h5 class="shop__product-category-list ">
@@ -205,30 +209,27 @@
                             </p>
                           </h5>
                         </div>
-
                       </div>
-
                     </div>
-
                   </a>
                 </div>              
                 <div class="col-lg-3 col-md-4   col-6 product-item">
                     <a href="productDetail.jsp" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
-                      <!-- product item -->
+                       product item 
                       <div class="shop__product__img">
                         <img src="https://tincay.com/wp-content/uploads/2017/12/em-aqua-ca-koi-09-scaled.jpg" alt="">
                       </div>
                       <div class="shop__product__des-detail">
-                        <!-- title -->
+                         title 
                         <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
-                        <!-- descript -->
+                         descript 
                         <p class="shop__product-description">
                           Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
                           division
                         </p>
-                        <!-- price- category -->
+                         price- category 
                         <div class="contain-cat-price  ">
                           <h5 class="shop__product-price  ">100000</h5>
                           <h5 class="shop__product-category-list ">
@@ -248,19 +249,19 @@
                     <a href="productDetail.jsp" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
-                      <!-- product item -->
+                       product item 
                       <div class="shop__product__img">
                         <img src="https://i.ebayimg.com/images/g/PNwAAOSwKytlmg-y/s-l1200.png" alt="">
                       </div>
                       <div class="shop__product__des-detail">
-                        <!-- title -->
+                         title 
                         <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
-                        <!-- descript -->
+                         descript 
                         <p class="shop__product-description">
                           Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
                           division
                         </p>
-                        <!-- price- category -->
+                         price- category 
                         <div class="contain-cat-price">
                           <h5 class="shop__product-price">100000</h5>
                           <h5 class="shop__product-category-list">
@@ -280,19 +281,19 @@
                     <a href="productDetail.jsp" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
-                      <!-- product item -->
+                       product item 
                       <div class="shop__product__img">
                         <img src="https://www.completeponds.com/wp-content/uploads/2015/12/Mela-Fix-500x500.jpg" alt="">
                       </div>
                       <div class="shop__product__des-detail">
-                        <!-- title -->
+                         title 
                         <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
-                        <!-- descript -->
+                         descript 
                         <p class="shop__product-description">
                           Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
                           division
                         </p>
-                        <!-- price- category -->
+                         price- category 
                         <div class="contain-cat-price">
                           <h5 class="shop__product-price">100000</h5>
                           <h5 class="shop__product-category-list">
@@ -312,19 +313,19 @@
                     <a href="productDetail.jsp" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
-                      <!-- product item -->
+                       product item 
                       <div class="shop__product__img">
                         <img src="https://ultimateaquasg.com/cdn/shop/files/1_1829d3bc-c0f1-41b2-bd7e-044f93053123.jpg?v=1690961809&width=1946" alt="">
                       </div>
                       <div class="shop__product__des-detail">
-                        <!-- title -->
+                         title 
                         <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
-                        <!-- descript -->
+                         descript 
                         <p class="shop__product-description">
                           Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
                           division
                         </p>
-                        <!-- price- category -->
+                         price- category 
                         <div class="contain-cat-price">
                           <h5 class="shop__product-price">100000</h5>
                           <h5 class="shop__product-category-list">
@@ -344,19 +345,19 @@
                     <a href="productDetail.jsp" class="home-product-item__link">
                     <div class="shop__product_item-desc">
                       <div class="create__blank"></div>
-                      <!-- product item -->
+                       product item 
                       <div class="shop__product__img">
                         <img src="https://koithienduong.com/wp-content/uploads/2023/11/thuc-an-ca-koi-jpd-fujizakura.jpg" alt="">
                       </div>
                       <div class="shop__product__des-detail">
-                        <!-- title -->
+                         title 
                         <h4 class="shop__product-name">Taiyo Koi Staple Fish Food sdjh jhsdjh dsjh</h4>
-                        <!-- descript -->
+                         descript 
                         <p class="shop__product-description">
                           Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental
                           division
                         </p>
-                        <!-- price- category -->
+                         price- category 
                         <div class="contain-cat-price">
                           <h5 class="shop__product-price">100000</h5>
                           <h5 class="shop__product-category-list">
@@ -371,7 +372,7 @@
                     </div>
 
                   </a>
-                </div>
+                </div>-->
 
 
               </div>

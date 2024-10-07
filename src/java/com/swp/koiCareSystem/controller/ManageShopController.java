@@ -37,11 +37,10 @@ public class ManageShopController extends HttpServlet {
            
             ProductService ps = new ProductService();
             ArrayList<Product> listProduct = ps.GetAllProductS();
-            
-            request.setAttribute("ListP", ps);
+        
+            request.setAttribute("products", listProduct);
+        
             request.getRequestDispatcher("shop.jsp").forward(request, response);
-            
-            
         }
     } 
 
