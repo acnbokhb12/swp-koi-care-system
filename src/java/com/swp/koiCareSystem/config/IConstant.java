@@ -10,6 +10,10 @@ package com.swp.koiCareSystem.config;
  * @author DELL
  */
 public interface IConstant {
+
     public final String HOME = "home";
-    
+    public final String POND = "pond";
+    public final String FISH = "fish";
+    public final String FISHDEVE = "fishdeve";
+
 }

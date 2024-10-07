@@ -10,34 +10,55 @@ package com.swp.koiCareSystem.model;
  * @author DELL
  */
 public class Pond {
-    private int pondId;
-    private int userId;
-    private String name;
-    private String imagePond;
-    private String descriptionPond;
-    private float size;
-    private float depth;
-    private float volume;
-    private int drainCount;
-    private float pumpPower;
+    private int pondID;          
+    private int accID;           
+    private String image;        
+    private String name;         
+    private int numberOfFish;   
+    private double volume;       
+    private double depth;        
+    private double pumpPower;    
+    private int drainCount;      
+    private int skimmer;         
 
-    public Pond() {
+    public Pond() {}
+
+    public Pond(int pondID, int accID, String image, String name, int numberOfFish, double volume, 
+                double depth, double pumpPower, int drainCount, int skimmer) {
+        this.pondID = pondID;
+        this.accID = accID;
+        this.image = image;
+        this.name = name;
+        this.numberOfFish = numberOfFish;
+        this.volume = volume;
+        this.depth = depth;
+        this.pumpPower = pumpPower;
+        this.drainCount = drainCount;
+        this.skimmer = skimmer;
     }
 
-    public int getPondId() {
-        return pondId;
+    public int getPondID() {
+        return pondID;
     }
 
-    public void setPondId(int pondId) {
-        this.pondId = pondId;
+    public void setPondID(int pondID) {
+        this.pondID = pondID;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getAccID() {
+        return accID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setAccID(int accID) {
+        this.accID = accID;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -48,44 +69,36 @@ public class Pond {
         this.name = name;
     }
 
-    public String getImagePond() {
-        return imagePond;
+    public int getNumberOfFish() {
+        return numberOfFish;
     }
 
-    public void setImagePond(String imagePond) {
-        this.imagePond = imagePond;
+    public void setNumberOfFish(int numberOfFish) {
+        this.numberOfFish = numberOfFish;
     }
 
-    public String getDescriptionPond() {
-        return descriptionPond;
-    }
-
-    public void setDescriptionPond(String descriptionPond) {
-        this.descriptionPond = descriptionPond;
-    }
-
-    public float getSize() {
-        return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
-    }
-
-    public float getDepth() {
-        return depth;
-    }
-
-    public void setDepth(float depth) {
-        this.depth = depth;
-    }
-
-    public float getVolume() {
+    public double getVolume() {
         return volume;
     }
 
-    public void setVolume(float volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
+    }
+
+    public double getDepth() {
+        return depth;
+    }
+
+    public void setDepth(double depth) {
+        this.depth = depth;
+    }
+
+    public double getPumpPower() {
+        return pumpPower;
+    }
+
+    public void setPumpPower(double pumpPower) {
+        this.pumpPower = pumpPower;
     }
 
     public int getDrainCount() {
@@ -96,31 +109,17 @@ public class Pond {
         this.drainCount = drainCount;
     }
 
-    public float getPumpPower() {
-        return pumpPower;
+    public int getSkimmer() {
+        return skimmer;
     }
 
-    public void setPumpPower(float pumpPower) {
-        this.pumpPower = pumpPower;
-    }
-
-    public Pond(int pondId, int userId, String name, String imagePond, String descriptionPond, float size, float depth, float volume, int drainCount, float pumpPower) {
-        this.pondId = pondId;
-        this.userId = userId;
-        this.name = name;
-        this.imagePond = imagePond;
-        this.descriptionPond = descriptionPond;
-        this.size = size;
-        this.depth = depth;
-        this.volume = volume;
-        this.drainCount = drainCount;
-        this.pumpPower = pumpPower;
+    public void setSkimmer(int skimmer) {
+        this.skimmer = skimmer;
     }
 
     @Override
     public String toString() {
-        return "pondId=" + pondId + ", userId=" + userId + ", name=" + name + ", imagePond=" + imagePond + ", descriptionPond=" + descriptionPond + ", size=" + size + ", depth=" + depth + ", volume=" + volume + ", drainCount=" + drainCount + ", pumpPower=" + pumpPower ;
+        return "Pond{" + "pondID=" + pondID + ", accID=" + accID + ", image=" + image + ", name=" + name + ", numberOfFish=" + numberOfFish + ", volume=" + volume + ", depth=" + depth + ", pumpPower=" + pumpPower + ", drainCount=" + drainCount + ", skimmer=" + skimmer + '}';
     }
-    
     
 }

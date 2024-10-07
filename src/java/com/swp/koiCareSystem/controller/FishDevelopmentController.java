@@ -1,14 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.model.FishDevelopment;
+import com.swp.koiCareSystem.service.FishDevelopmentService;
+import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,54 +20,38 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DELL
+ * @author PC
  */
-public class MainController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+public class FishDevelopmentController extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-            String url = "";
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String ac = request.getParameter("action");
-            if (ac == null || ac.isEmpty()) {
-                ac = IConstant.HOME;
-            }
-            switch (ac) {
-                case IConstant.HOME :
-                    url = "home.jsp";
-                    break;
-                      case IConstant.POND :
-                    url = "PondController";
-                    break;
-                      case IConstant.FISH :
-                    url = "FishController";
-                    break;
-                        case IConstant.FISHDEVE :
-                    url = "FishDevelopmentController";
-                    break;
-                default:
-                    url = "home.jsp";
-                    break; 
-            }
-        }catch (Exception e){
-                log("Error at MainController: "+ e.toString());  
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
+                 
+            FishDevelopmentService fdeves = new FishDevelopmentService();
+            ArrayList<FishDevelopment> listFishDeve = fdeves.GetAllFishDevelopmentS();
+            
+            request.setAttribute("ListFD", fdeves);
+            request.getRequestDispatcher("fishGrownth.jsp").forward(request, response);
+            
         }
-    } 
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -71,12 +59,17 @@ public class MainController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(FishDevelopmentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -84,12 +77,17 @@ public class MainController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(FishDevelopmentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
