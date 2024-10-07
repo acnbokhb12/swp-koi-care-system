@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,13 +47,16 @@
                             </div>
                         </div>
                         <div class="details-section">
-                            <div class="product-wrapper">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTvpksqwVza-WmPCNDXK-T00gAIh3cSUIYg&s"
+                            <div class="product-wrapper row">
+                                <div class="col-lg-6 pt-4">
+                                    <img
+                                    src="https://mazuri.com/cdn/shop/files/727613004804-center-1.jpg?v=1714180786"
                                     alt="Product Image"
-                                    class="product-img"
+                                    class="product-img  "
                                     />
-                                <div class="product-info-block">
+                                </div>
+                               
+                                <div class="product-info-block col-lg-6 pt-4">
                                     <div class="info-field">
                                         <label for="productID">Product ID:</label>
                                         <span id="productID">12345</span>
@@ -75,7 +79,7 @@
                                     </div>
                                     <div class="info-field">
                                         <label for="productPrice">Product Price:</label>
-                                        <span id="productPrice">$20.00</span>
+                                        <span id="product__detail-price-id">20000</span>
                                     </div>
                                 </div>
                             </div>
@@ -89,6 +93,10 @@
                 $.getScript('./assets/js/utilsAdmin.js');
             });
             $('#sidebar_admin').load('utils.jsp  #sidebar_manager');
+
+            let amount = parseInt(document.getElementById('product__detail-price-id').innerText);
+      let formattedAmount = amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
+      document.getElementById('product__detail-price-id').innerText = formattedAmount;
         </script>
     </body>
 </html>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,20 +45,20 @@
                                 <div class="product-details">
                                     <div class="form-container">
                                         <div class="form-wrapper">
-                                            <form action="uploadProductImageServlet" method="POST" enctype="multipart/form-data" class="form-image-upload">
-                                                <div class="product-image-upload">
-                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTvpksqwVza-WmPCNDXK-T00gAIh3cSUIYg&s" 
-                                                         alt="Product Image" 
-                                                         class="product-image-update"/> 
-                                                    <div class="img-detail-field">
-                                                        <h3>Upload New Image</h3>
-                                                        <div class="file-upload-container">
+                                            <div class="product-image-upload">
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTvpksqwVza-WmPCNDXK-T00gAIh3cSUIYg&s" 
+                                                alt="Product Image" 
+                                                class="product-image-update"/> 
+                                                <div class="img-detail-field">
+                                                    <h3>Upload New Image</h3>
+                                                    <div class="file-upload-container">
+                                                        <form action="uploadProductImageServlet" method="POST" enctype="multipart/form-data" class="form-image-upload">
                                                             <input type="file" id="fishImage" name="fishImage" accept="image/*" required style="width: 100%;" />
                                                             <button type="submit" class="btn btn-upload">Submit</button>  
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                             <form action="updateProductServlet" method="POST" class="form-update-details">
                                                 <div class="details-wrapper">
                                                     <div class="detail-field">
@@ -107,3 +108,4 @@
             </script>
     </body>
 </html>
+
