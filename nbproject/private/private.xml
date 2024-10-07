@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -15,6 +16,10 @@
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/utils.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/pondInfor.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/fishGrowth.jsp</file>
+        
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/manageProductDetails.jsp</file> 
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/productUpdate.jsp</file>
         </group>
     </open-files>
 </project-private>
+>>>>>>> ViewUpdateProduct

@@ -31,12 +31,11 @@
                 <ul class="menu">
                     <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                     <li><a href="manageAccount.jsp"><i class="fas fa-users"></i> Account Management</a></li> 
-                    <li><a href="manageNews.jsp"><i class="fas fa-user-friends"></i> News Manager</a></li>   
+                    <li><a href="manageNews.jsp"><i class="fa-solid fa-newspaper"></i>News Management</a></li>   
                 </ul>
             </div>
         </div>
     </div>
-    
     <div id="header_admin">
         <div class="topbar d-flex align-items-center">
             <nav class="navbar navbar-expand gap-3">
@@ -94,8 +93,8 @@
         
     </div>
     <!-- End Admin -->
-    
-     <!-- Sidebar admin -->
+
+    <!-- Sidebar manager -->
     <div id="sidebar_manager"> 
         <div class="left-navbar-admin-manage  vh-100 simplebar-scrollable-y "> 
             <div class="sidebar">
@@ -113,14 +112,13 @@
                     <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                     <li><a href="manageProduct.jsp"><i class="fa-solid fa-warehouse"></i> Producy Manager</a></li> 
                     <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
-                    <li><a href="#"><i class="fa-solid fa-fish"></i>Fist Management</a></li>   
-                    <li><a href="#"><i class="fa-solid fa-water"></i>Water Management</a></li>   
-                    <li><a href="manageNews.jsp"><i class="fa-solid fa-newspaper"></i>News Manager</a></li>      
+                    <li><a href="#"><i class="fa-solid fa-fish"></i>Fist of Customer Management</a></li>   
+                    <li><a href="#"><i class="fa-solid fa-water"></i>Water Management</a></li>       
                 </ul>
             </div>
         </div>
     </div>
-    
+
     <!-- Start Customer -->
     <header id="header__nav">
         <!-- section-1 sub_header -->
@@ -205,7 +203,7 @@
                                         </a>
                                     </li>
                                     <li class="contain__item-nav">
-                                        <a href="MainController?action=shop" class="contain__item-nav-link">
+                                        <a href="shop.jsp" class="contain__item-nav-link">
                                             <span>Shop</span>
                                         </a>
                                     </li>
@@ -216,10 +214,10 @@
                                         <div class="contain__sub-item_nav-link">
                                             <ul class="contain__sub-item_nav-list">
                                                 <li class="contain__sub-item_nav-items">
-                                                    <a href="blogs.jap">Blogs</a>
+                                                    <a href="#">Blogs</a>
                                                 </li>
                                                 <li class="contain__sub-item_nav-items">
-                                                    <a href="MainController?action=news">News</a>
+                                                    <a href="news.jsp">News</a>
                                                 </li>
                                                 
                                             </ul>
@@ -235,12 +233,7 @@
                             </div>
                             <!-- task user -->
                             <div class="contain__task-user">
-                                <div class="header__task-right">
-                                    <a href="#" class="header__link-task d-flex align-end">
-                                        <span class="header__link-task-icon"><i
-                                                class="fa-regular fa-bell"></i></span>
-                                        <span class="text-label text-uppercase">Alerts</span> 
-                                    </a>
+                                <div class="header__task-right"> 
                                     <a href="cart.jsp" class="header__link-task d-flex align-end">
                                         <span class="header__link-task-icon"><i
                                                 class="fa-solid fa-bag-shopping"></i></span>
@@ -260,7 +253,7 @@
                                                  <div class="welcome__acc-header">
                                                     <p class="dddssd">Khanh Huynh</p>
                                                      <!-- <h2>Khanh</h2> -->
-                                                    <a href="profilePage.jsp" class="view__detail_acc">
+                                                    <a href="profilepage.html" class="view__detail_acc">
                                                         <i class="fa-solid fa-file-invoice"></i> My Account
                                                     </a>
                                                  </div>
@@ -403,5 +396,6 @@
         </div>
     </footer>
     <!-- End Customer -->
+
 </body>     
 </html>
