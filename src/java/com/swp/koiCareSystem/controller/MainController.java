@@ -47,6 +47,9 @@ public class MainController extends HttpServlet {
                       case IConstant.FISH :
                     url = "FishController";
                     break;
+                       case IConstant.LOGIN :
+                    url = "LoginController";
+                    break;
                 default:
                     url = "home.jsp";
                     break; 

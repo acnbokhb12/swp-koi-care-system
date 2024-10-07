@@ -15,13 +15,16 @@ import java.util.ArrayList;
  */
 public class FishService {
 
-    private FishDAO fdao = new FishDAO();
+    private FishDAO fdao;
 
-    public ArrayList<Fish> GetAllFishS() throws SQLException {
-        ArrayList<Fish> listf = fdao.getAllFish();
+    public FishService() {
+        fdao = new FishDAO();
+    }
+
+    public ArrayList<Fish> GetAllFishS()  {
+//        ArrayList<Fish> listf = fdao.getAllFish();
 
         return listf;
     }
 
-  
 }

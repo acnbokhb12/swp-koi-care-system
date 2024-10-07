@@ -6,7 +6,6 @@ package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.PondDAO;
 import com.swp.koiCareSystem.model.Pond;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +14,13 @@ import java.util.ArrayList;
  */
 public class PondService {
 
-    private PondDAO ponddao = new PondDAO();
+    private PondDAO ponddao;
 
-    public ArrayList<Pond> GetAllPondS() throws SQLException {
+    public PondService() {
+        ponddao = new PondDAO();
+    }
+
+    public ArrayList<Pond> GetAllPondS()  {
         ArrayList<Pond> listPond = ponddao.getAllPond();
 
         return listPond;

@@ -5,14 +5,6 @@
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FishController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.FishController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>PondController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.PondController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>FishDevelopmentController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishDevelopmentController</servlet-class>
     </servlet>
@@ -20,17 +12,21 @@
         <servlet-name>AccountController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.PondController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FishController</servlet-name>
-        <url-pattern>/FishController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PondController</servlet-name>
-        <url-pattern>/PondController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FishDevelopmentController</servlet-name>
@@ -39,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
         <url-pattern>/AccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PondController</servlet-name>
+        <url-pattern>/PondController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishController</servlet-name>
+        <url-pattern>/FishController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

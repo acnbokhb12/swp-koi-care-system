@@ -244,7 +244,7 @@
                                                 class="fa-solid fa-bag-shopping"></i></span>
                                         <span class="text-label text-uppercase ">Cart</span>
                                     </a>
-                                    <a href="login.jsp" class="header__link-task d-flex align-end">
+                                    <a href="MainController?action=login" class="header__link-task d-flex align-end">
                                         <span class="header__link-task-icon"><i
                                                 class="fa-regular fa-user"></i></span>
                                         <span class="text-label text-uppercase">Sign in</span>

@@ -14,5 +14,6 @@ public interface IConstant {
     public final String HOME = "home";
     public final String POND = "pond";
     public final String FISH = "fish";
+    public final String LOGIN = "login";
 
 }
