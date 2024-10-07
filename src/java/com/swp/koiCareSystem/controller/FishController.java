@@ -39,9 +39,9 @@ public class FishController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             FishService fs = new FishService();
-            ArrayList<Fish> listFish = fs.GetAllFishS();
+            ArrayList<Fish> listF = fs.GetAllFishS();
             
-            request.setAttribute("ListF", fs);
+            request.setAttribute("ListFish", fs);
             request.getRequestDispatcher("fish.jsp").forward(request, response);
             
         }

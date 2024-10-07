@@ -23,8 +23,7 @@ public class Fish {
 
     public Fish() {}
 
-    public Fish(int fishID, int accID, int pondID, String fishImage, String fishName, String descriptionKoi,
-                String bodyShape, double age, double length, double weight, String gender) {
+    public Fish(int fishID, int accID, int pondID, String fishImage, String fishName, String descriptionKoi, String bodyShape, double age, double length, double weight, String gender) {
         this.fishID = fishID;
         this.accID = accID;
         this.pondID = pondID;
