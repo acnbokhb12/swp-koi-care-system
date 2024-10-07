@@ -16,6 +16,10 @@
         <servlet-name>FishDevelopmentController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishDevelopmentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>FishDevelopmentController</servlet-name>
         <url-pattern>/FishDevelopmentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/AccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

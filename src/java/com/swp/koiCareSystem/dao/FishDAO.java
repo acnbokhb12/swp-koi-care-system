@@ -27,7 +27,7 @@ public class FishDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Fish";
+        String sql = "SELECT * FROM Fish Where AccID LIKE ?";
 
         try {
             conn = DatabaseConnectionManager.getConnection();

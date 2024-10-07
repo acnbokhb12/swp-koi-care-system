@@ -1,48 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.swp.koiCareSystem.model;
 
-/**
- *
- * @author DELL
- */
+
 public class Account {
-    private int userID;
-    private String email;
-    private String profileImage;
-    private String password;
-    private String fullName;
-    private String phoneNumber;
-    private String userRole;
-    private String address;
-    private String gender;
-    private String accountStatus;
+
+    private int accID;             
+    private String email;          
+    private String userImage;      
+    private String password;       
+    private String fullName;       
+    private String phoneNumber;    
+    private String userRole;       
+    private String address;        
+    private String gender;       
+    private int idStatus;          
 
     public Account() {
     }
 
-    public Account(int userID, String email, String profileImage, String password, String fullName, String phoneNumber, String userRole, String address, String gender, String accountStatus) {
-        this.userID = userID;
+    public Account(int accID, String email, String userImage, String password, String fullName,
+            String phoneNumber, String userRole, String address, String gender, int idStatus) {
+        this.accID = accID;
         this.email = email;
-        this.profileImage = profileImage;
+        this.userImage = userImage;
         this.password = password;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.userRole = userRole;
         this.address = address;
         this.gender = gender;
-        this.accountStatus = accountStatus;
+        this.idStatus = idStatus;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getAccID() {
+        return accID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setAccID(int accID) {
+        this.accID = accID;
     }
 
     public String getEmail() {
@@ -53,12 +47,12 @@ public class Account {
         this.email = email;
     }
 
-    public String getProfileImage() {
-        return profileImage;
+    public String getUserImage() {
+        return userImage;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     public String getPassword() {
@@ -109,19 +103,18 @@ public class Account {
         this.gender = gender;
     }
 
-    public String getAccountStatus() {
-        return accountStatus;
+    public int getIdStatus() {
+        return idStatus;
     }
 
-    public void setAccountStatus(String accountStatus) {
-        this.accountStatus = accountStatus;
+    public void setIdStatus(int idStatus) {
+        this.idStatus = idStatus;
+
     }
 
     @Override
     public String toString() {
-        return  "userID=" + userID + ", email=" + email + ", profileImage=" + profileImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", accountStatus=" + accountStatus ;
+        return "AccountDTO{" + "accID=" + accID + ", email=" + email + ", userImage=" + userImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", idStatus=" + idStatus + '}';
     }
-    
-    
-    
+
 }

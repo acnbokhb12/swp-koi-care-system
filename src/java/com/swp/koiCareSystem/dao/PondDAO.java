@@ -19,10 +19,10 @@ public class PondDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Ponds"; // Assuming the table name is Ponds
+        String sql = "SELECT *  Where AccID LIKE ?";
 
         try {
-            conn = DatabaseConnectionManager.getConnection(); // Your method to get DB connection
+            conn = DatabaseConnectionManager.getConnection(); 
             if (conn != null) {
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
