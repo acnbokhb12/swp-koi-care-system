@@ -11,5 +11,6 @@ package com.swp.koiCareSystem.config;
  */
 public interface IConstant {
     public final String HOME = "home";
-    
+    public final String LOGIN = "login";
+    public final String REGISTER = "register";
 }

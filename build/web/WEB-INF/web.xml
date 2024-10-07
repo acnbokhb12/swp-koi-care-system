@@ -4,9 +4,25 @@
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.RegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -16,4 +32,9 @@
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>
     </welcome-file-list>
+    <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk15on</artifactId>
+        <version>1.70</version>
+    </dependency>
 </web-app>

@@ -48,7 +48,7 @@
                         <p class="header-desc">Sign In to manage your Koi Care System</p>
                     </header>
                     <div class="body__input-container">
-                        <form action="#" class="form" id="form1" method="post">
+                        <form action="MainController?action=login" class="form" id="form1" method="post">
                             <!-- username --> 
                             <div class="form-group" style="margin-bottom: 0;">  
                                 <input type="email" id="email-log" name="txtemail" class="input__form"
