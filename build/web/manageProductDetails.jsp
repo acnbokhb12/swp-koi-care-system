@@ -42,7 +42,7 @@
                         <div class="header-information">
                             <h2>Product Information</h2>
                             <div class="button-group">
-                                <a href="productUpdate.jsp" class="btn btn-primary" id="updateButton">Update Product</a>
+                                <a href="manageProductUpdate.jsp" class="btn btn-primary" id="updateButton">Update Product</a>
                                 <a href="#" class="btn btn-danger" id="deleteButton">Delete</a>
                             </div>
                         </div>

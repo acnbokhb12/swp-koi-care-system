@@ -1,8 +1,9 @@
 <%-- 
-    Document   : manageFish
-    Created on : Oct 6, 2024, 11:10:53 PM
-    Author     : ASUS
+    Document   : manageFishUser
+    Created on : Oct 7, 2024, 12:57:36 PM
+    Author     : DELL
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@
                     <!-- Main Content Section -->
                     <div class="content">
                         <div class="header">
-                            <h2>Fish List</h2>
+                            <h2>User List</h2>
                             <div class="actions"> 
                             </div>
                         </div>
@@ -42,27 +43,21 @@
                             <table id="productTable">
                                 <thead>
                                     <tr>
-                                        <th>Fish ID</th> 
-                                        <th>Image</th>
-                                        <th>Age</th>
-                                        <th>Length</th>
-                                        <th>Weight</th>
-                                        <th>Gender</th>
-                                        <th>Action</th>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
+                                        <th>Image</th>  
+                                        <th>View</th>  
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>#PD12387</td> 
+                                        <td>#PD12387</td>
+                                        <td>Acum</td>
                                         <td>
-                                            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTNGC9HP0kvPVjRmDosz7w_OwVSLdTEhI0ISVS4U8jsc8BDkahQ" alt="Image of Tranquil Waters" />
-                                        </td>
-                                        <td>5 years</td> 
-                                        <td>75 cm</td>
-                                        <td>10 kg</td>
-                                        <td>M</td>
+                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Image of Tranquil Waters" />
+                                        </td> 
                                         <td>
-                                            <button class="edit-btn" onclick="window.location.href = 'manageFishDetail.jsp'">
+                                            <button class="edit-btn" onclick="window.location.href = 'manageFish.jsp'">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </td>
@@ -89,4 +84,3 @@
         </script>
     </body>
 </html>
-

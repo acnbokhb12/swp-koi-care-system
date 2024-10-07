@@ -1,7 +1,7 @@
 <%-- 
-    Document   : productUpdate
-    Created on : Oct 5, 2024, 12:21:29 PM
-    Author     : ASUS
+    Document   : manageProductUpdate
+    Created on : Oct 7, 2024, 12:55:06 PM
+    Author     : DELL
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -108,4 +108,3 @@
             </script>
     </body>
 </html>
-

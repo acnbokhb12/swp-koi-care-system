@@ -111,8 +111,8 @@
                 <ul class="menu">
                     <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                     <li><a href="manageProduct.jsp"><i class="fa-solid fa-warehouse"></i> Producy Manager</a></li> 
-                    <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
-                    <li><a href="#"><i class="fa-solid fa-fish"></i>Fist of Customer Management</a></li>   
+                    <li><a href="manageOrder.jsp"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
+                    <li><a href="manageFishUser.jsp"><i class="fa-solid fa-fish"></i>Fist of Customer Management</a></li>   
                     <li><a href="#"><i class="fa-solid fa-water"></i>Water Management</a></li>       
                 </ul>
             </div>

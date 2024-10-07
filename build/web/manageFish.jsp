@@ -4,9 +4,9 @@
     Author     : ASUS
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
 
+<!DOCTYPE html>
+<html lang="en"> 
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,8 +42,7 @@
                             <table id="productTable">
                                 <thead>
                                     <tr>
-                                        <th>Fish ID</th>
-                                        <th>Customer Name</th>
+                                        <th>Fish ID</th> 
                                         <th>Image</th>
                                         <th>Age</th>
                                         <th>Length</th>
@@ -54,17 +53,16 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>#PD12387</td>
-                                        <td>Adam</td>
+                                        <td>#PD12387</td> 
                                         <td>
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Image of Tranquil Waters" />
+                                            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTNGC9HP0kvPVjRmDosz7w_OwVSLdTEhI0ISVS4U8jsc8BDkahQ" alt="Image of Tranquil Waters" />
                                         </td>
                                         <td>5 years</td> 
                                         <td>75 cm</td>
                                         <td>10 kg</td>
                                         <td>M</td>
                                         <td>
-                                            <button class="edit-btn" onclick="window.location.href = 'manageFishDetails.jsp'">
+                                            <button class="edit-btn" onclick="window.location.href = 'manageFishDetail.jsp'">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </td>
@@ -91,3 +89,4 @@
         </script>
     </body>
 </html>
+
