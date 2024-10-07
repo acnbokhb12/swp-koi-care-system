@@ -17,7 +17,7 @@ public class PondService {
 
     private PondDAO ponddao = new PondDAO();
 
-    public ArrayList<Pond> GetAllProductS() throws SQLException {
+    public ArrayList<Pond> GetAllPondS() throws SQLException {
         ArrayList<Pond> listPond = ponddao.getAllPond();
 
         return listPond;

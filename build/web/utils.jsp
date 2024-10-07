@@ -265,12 +265,12 @@
                                                  <div class="welcome__acc-body">
                                                     <ul class="body__link-acount-list-item"> 
                                                         <li class="body__link-acount-detail-item">
-                                                            <a href="fish.jsp">
+                                                            <a href="MainController?action=fish">
                                                                <i class="fa-solid fa-fish"></i> My Koi
                                                             </a>
                                                         </li>
                                                         <li class="body__link-acount-detail-item">
-                                                            <a href="pond.jsp">
+                                                            <a href="MainController?action=pond">
                                                                <i class="fa-regular fa-circle"></i> My Pond
                                                             </a>
                                                         </li>

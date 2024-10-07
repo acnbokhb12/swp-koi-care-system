@@ -6,7 +6,6 @@ package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.FishDAO;
 import com.swp.koiCareSystem.model.Fish;
-import com.swp.koiCareSystem.model.FishDevelopment;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

@@ -39,7 +39,7 @@ public class PondController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
                
            PondService ponds = new PondService();
-            ArrayList<Pond> listFish = ponds.GetAllProductS();
+            ArrayList<Pond> listFish = ponds.GetAllPondS();
             
             request.setAttribute("ListF", ponds);
             request.getRequestDispatcher("pond.jsp").forward(request, response);

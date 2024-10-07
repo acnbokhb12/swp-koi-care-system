@@ -6,18 +6,11 @@ package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Pond;
-import java.util.ArrayList;
-
-/**
- *
- * @author PC
- */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PondDAO {
 
