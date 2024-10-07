@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
  * @author PC
@@ -21,18 +22,15 @@ public class FishDAO {
 //        ArrayList<Fish> listF = new ArrayList<>();
 //        return listF;
 //    }
-
-
-
     public ArrayList<Fish> getAllFish() throws SQLException {
         ArrayList<Fish> listFish = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Fish"; 
+        String sql = "SELECT * FROM Fish";
 
         try {
-            conn = DatabaseConnectionManager.getConnection(); 
+            conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
@@ -44,14 +42,14 @@ public class FishDAO {
                     String fishName = rs.getString("FishName");
                     String descriptionKoi = rs.getString("DescriptionKoi");
                     String bodyShape = rs.getString("BodyShape");
-                    double age = rs.getDouble("Age");
-                    double length = rs.getDouble("Length");
-                    double weight = rs.getDouble("Weight");
+                    float age = rs.getFloat("Age");
+                    float length = rs.getFloat("Length");
+                    float weight = rs.getFloat("Weight");
                     String gender = rs.getString("Gender");
 
                     // Add the fish object to the list
-                    listFish.add(new Fish(fishID, accID, pondID, fishImage, fishName, 
-                                              descriptionKoi, bodyShape, age, length, weight, gender));
+                    listFish.add(new Fish(fishID, accID, pondID, fishImage, fishName,
+                            descriptionKoi, bodyShape, age, length, weight, gender));
                 }
             }
         } catch (Exception e) {
@@ -72,5 +70,3 @@ public class FishDAO {
 
 //     
 }
-
-   

@@ -32,9 +32,9 @@ public class PondDAO {
                     String image = rs.getString("Image");
                     String name = rs.getString("Name");
                     int numberOfFish = rs.getInt("NumberOfFish");
-                    double volume = rs.getDouble("Volume");
-                    double depth = rs.getDouble("Depth");
-                    double pumpPower = rs.getDouble("PumpPower");
+                   float volume = rs.getFloat("Volume");
+                    float depth = rs.getFloat("Depth");
+                   float pumpPower = rs.getFloat("PumpPower");
                     int drainCount = rs.getInt("DrainCount");
                     int skimmer = rs.getInt("Skimmer");
 
