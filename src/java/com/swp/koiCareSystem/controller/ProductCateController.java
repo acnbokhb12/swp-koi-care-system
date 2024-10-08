@@ -51,7 +51,7 @@ public class ProductCateController extends HttpServlet {
             if(count % 32 != 0){
                 endPage++;
             }
-            ArrayList<Product> listProduct = pds.GetProductByCatePaging(cid, index);
+            ArrayList<Product> listProduct = pds.GetProductByCateId(cid, index);
             ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
             request.setAttribute("ListC", listCate);
             request.setAttribute("ListP", listProduct);

@@ -48,7 +48,7 @@ public class ManageShopController extends HttpServlet {
             if(count % 32 != 0){
                 endPage++;
             }
-            ArrayList<Product> listProduct = pds.GetProductByPaging(index);
+            ArrayList<Product> listProduct = pds.GetAllProducts(index);
             ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
             
             request.setAttribute("ListC", listCate);

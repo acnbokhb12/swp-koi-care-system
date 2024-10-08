@@ -11,6 +11,7 @@ package com.swp.koiCareSystem.model;
  */
 public class Product {
     private int productID; 
+    private String cateId;
     private String nameProduct;
     private String imgProduct;
     private String description;
@@ -19,14 +20,31 @@ public class Product {
 
     public Product() {
     }
- 
 
+    public Product(int productID,String cateId, String nameProduct, String imgProduct, String description, float price) {
+        this.productID = productID;
+        this.cateId = cateId;
+        this.nameProduct = nameProduct;
+        this.imgProduct = imgProduct;
+        this.description = description;
+        this.price = price; 
+    }
+    
+    
     public int getProductID() {
         return productID;
     }
 
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+
+    public String getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(String cateId) {
+        this.cateId = cateId;
     }
 
      

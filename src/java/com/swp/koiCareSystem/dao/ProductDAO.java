@@ -139,22 +139,21 @@ public class ProductDAO {
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "select p.ProductID , p.Description, p.Image,p.Name ,p.Price, ctp.CategoryID ,ctp.CategoryName\n"
-                        + "from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID\n"
-                        + "order by ProductID \n"
-                        + "offset ? rows fetch next 32 rows only;";
+                String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "                        order by ProductID  \n"
+                        + "                     offset ? rows fetch next 32 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, distance);
                 rs = pst.executeQuery();
                 if (rs != null) {
                     while (rs.next()) {
                         Product pd = new Product();
-                        ProductCategory pdct = new ProductCategory(rs.getInt("CategoryID"), rs.getString("CategoryName"));
-                        pd.setProductID(rs.getInt("ProductID"));
-                        pd.setDescription(rs.getString("Description"));
-                        pd.setImgProduct(rs.getString("Image"));
-                        pd.setNameProduct(rs.getString("Name"));
-                        pd.setPrice(rs.getFloat("Price"));
+                        ProductCategory pdct = new ProductCategory(rs.getInt(7), rs.getString(8));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
                         pd.setCategoryP(pdct);
                         listP.add(pd);
                     }
@@ -219,7 +218,7 @@ public class ProductDAO {
         return listPC;
     }
 
-    public ArrayList<Product> PagingGetProductByCateId(int cateId, int index) {
+    public ArrayList<Product> GetProductByCateId(int cateId, int index) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -228,11 +227,10 @@ public class ProductDAO {
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "select p.ProductID , p.Description, p.Image,p.Name ,p.Price, ctp.CategoryID ,ctp.CategoryName \n"
-                        + "from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
-                        + "where  ctp.CategoryID = ?\n"
-                        + "order by ProductID   \n"
-                        + "offset ? rows fetch next 32 rows only;";
+                String sql = "select *  from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "                      where  ctp.CategoryID = ?\n"
+                        + "                       order by ProductID   \n"
+                        + "                        offset ? rows fetch next 32 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, cateId);
                 pst.setInt(2, distance);
@@ -240,14 +238,14 @@ public class ProductDAO {
                 if (rs != null) {
                     while (rs.next()) {
                         Product pd = new Product();
-                        ProductCategory pdct = new ProductCategory(rs.getInt("CategoryID"), rs.getString("CategoryName"));
-                        pd.setProductID(rs.getInt("ProductID"));
-                        pd.setDescription(rs.getString("Description"));
-                        pd.setImgProduct(rs.getString("Image"));
-                        pd.setNameProduct(rs.getString("Name"));
-                        pd.setPrice(rs.getFloat("Price"));
+                        ProductCategory pdct = new ProductCategory(rs.getInt(7), rs.getString(8));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
                         pd.setCategoryP(pdct);
-                        listP.add(pd);
+                        listP.add(pd);  
                     }
                 }
             }
@@ -280,11 +278,10 @@ public class ProductDAO {
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "select p.ProductID , p.Description, p.Image,p.Name ,p.Price, ctp.CategoryID ,ctp.CategoryName  \n"
-                        + "                      from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
-                        + "                      where  p.Name like ?\n"
-                        + "                       order by ProductID   \n"
-                        + "                     offset ? rows fetch next 32 rows only;";
+                String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "where  p.Name like ? \n"
+                        + "order by ProductID \n"
+                        + "offset ? rows fetch next 32 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, "%" + name + "%");
                 pst.setInt(2, distance);
@@ -292,12 +289,12 @@ public class ProductDAO {
                 if (rs != null) {
                     while (rs.next()) {
                         Product pd = new Product();
-                        ProductCategory pdct = new ProductCategory(rs.getInt("CategoryID"), rs.getString("CategoryName"));
-                        pd.setProductID(rs.getInt("ProductID"));
-                        pd.setDescription(rs.getString("Description"));
-                        pd.setImgProduct(rs.getString("Image"));
-                        pd.setNameProduct(rs.getString("Name"));
-                        pd.setPrice(rs.getFloat("Price"));
+                        ProductCategory pdct = new ProductCategory(rs.getInt(7), rs.getString(8));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
                         pd.setCategoryP(pdct);
                         listP.add(pd);
                     }

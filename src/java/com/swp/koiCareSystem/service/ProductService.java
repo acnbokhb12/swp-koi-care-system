@@ -35,9 +35,8 @@ public class ProductService {
         return productDAO.CountProductsByName(name);
     }
     
-    public ArrayList<Product> GetProductByPaging(int index){
-        ArrayList<Product> list = productDAO.GetAllProducts(index);
-        Collections.shuffle(list);
+    public ArrayList<Product> GetAllProducts(int index){
+        ArrayList<Product> list = productDAO.GetAllProducts(index);  
         return list;
     }
     
@@ -45,8 +44,8 @@ public class ProductService {
         return  productDAO.GetAllCategory();
     } 
     
-    public ArrayList<Product> GetProductByCatePaging(int cateId, int index){ 
-        return productDAO.PagingGetProductByCateId(cateId, index);
+    public ArrayList<Product> GetProductByCateId(int cateId, int index){ 
+        return productDAO.GetProductByCateId(cateId, index);
     } 
     
     public ArrayList<Product> SearchProductsByName(String name, int index){ 
