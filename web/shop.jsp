@@ -26,9 +26,8 @@
         <link rel="stylesheet" href="./assets/css/base.css">
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
         <link rel="stylesheet" href="./assets/css/shopPage.css">
-    </head>
-
-    <body> 
+    </head> 
+    <body>  
         <!-- start header -->
         <div id="header"></div>
         <!-- end header -->
@@ -100,14 +99,14 @@
                     <div class="row row__shop">
                         <!-- row categories -->
                         <div class="col-sm-3 col-cate">  
-                            <div class="shop__ultiliites-search">
+                            <div class="shop__ultiliites-search"> 
                                 <form action="SearchProductController" method="post" class="shop__product_form">
-                                    <input type="text" class="shop__product_search-input" name="productName" value="${OldSearch}" placeholder="Search">
+                                    <input type="text" class="shop__product_search-input" name="productName" value="${OldSearch}" placeholder="Search">  
                                     <button type="submit" class="shop__product_search-submit"><i class="fas fa-search"></i> </button>
                                 </form>
                             </div> 
                             <nav class="category__shop">
-                                <h3 class="category__shop-heading">
+                                <h3 class="category__shop-heading"> 
                                     <a href="ManageShopController?action=shop">
                                         <i class="category__shop-heading-icon fa-solid fa-list"></i> Categories
                                     </a>
@@ -187,9 +186,8 @@
                                     </ul>
                                 </nav>
                             </div>
-                        </div>
-                    </div>
-
+                        </div> 
+                    </div> 
                 </div>
             </div>
         </div>

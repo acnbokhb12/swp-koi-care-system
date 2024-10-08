@@ -14,6 +14,7 @@ import java.sql.SQLException;
  * @author DELL
  */
 public class DatabaseConnectionManager {
+
     private static final String DB_NAME = "Koi_Care_System_At_Home";
     private static final String DB_USER_NAME = "sa";
     private static final String DB_PASSWORD = "12345";

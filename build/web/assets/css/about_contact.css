@@ -127,7 +127,7 @@
     justify-content: center;
 }
 .title-heading {
-   background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     text-align: center;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -151,11 +151,11 @@
 }
 
 .main-contact{
-     
-    
+    background-color: rgba(40, 43, 46, .9);
+    padding-top: 114px; 
 }
 .container-infor-contact{
-    
+
     position: relative;
 
 }
@@ -180,10 +180,10 @@
     color: var(--white-color);
     text-align: center;
     position: relative;
-    
+
 }
 .contain-form-contact{
-  
+
 }
 .fill-description-map{
     padding-top: 36px;
@@ -239,7 +239,7 @@
     padding: 6px 20px;
     border: none;
     outline: none;
-    
+
 }
 
 /* orderhistory */
@@ -364,50 +364,50 @@
     border-bottom-left-radius: 20px;
     display: flex;
     flex-direction: column;
-  }
-  
-  .card-info span {
+}
+
+.card-info span {
     font-weight: bold;
     color: white;
     text-align: center;
     display: block;
     font-size: 1em;
-  }
-  
-  .card-info .info {
+}
+
+.card-info .info {
     font-weight: 400;
     color: white;
     display: block;
     text-align: center;
     font-size: 0.72em;
     margin: 1em;
-  }
-  
-  .card-info .img {
+}
+
+.card-info .img {
     width: 4.8em;
     height: 4.8em;
     background: white;
     border-radius: 15px;
     margin: auto;
-  }
-  
-  .card-info .share {
+}
+
+.card-info .share {
     margin-top: 1em;
     display: flex;
     justify-content: center;
     gap: 1em;
-  }
-  
-  .card-info a {
+}
+
+.card-info a {
     color: white;
     transition: .4s ease-in-out;
-  }
-  
-  .card-info a:hover {
+}
+
+.card-info a:hover {
     color: red;
-  }
-  
-  .card-info button {
+}
+
+.card-info button {
     padding: 0.8em 1.7em;
     display: block;
     margin: auto;
@@ -417,13 +417,13 @@
     background: #ffffff;
     color: rgb(0, 0, 0);
     transition: .4s ease-in-out;
-  }
-  
-  .card-info button:hover {
+}
+
+.card-info button:hover {
     background: red;
     color: white;
     cursor: pointer;
-  }
+}
 @media screen and (max-width:768px) {
     .post-entry-aboutus h1{
         font-size: 5rem;

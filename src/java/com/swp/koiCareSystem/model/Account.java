@@ -10,6 +10,7 @@ package com.swp.koiCareSystem.model;
  * @author DELL
  */
 public class Account {
+
     private int userID;
     private String email;
     private String profileImage;
@@ -19,12 +20,12 @@ public class Account {
     private String userRole;
     private String address;
     private String gender;
-    private String accountStatus;
+    private int accountStatus;
 
     public Account() {
     }
 
-    public Account(int userID, String email, String profileImage, String password, String fullName, String phoneNumber, String userRole, String address, String gender, String accountStatus) {
+    public Account(int userID, String email, String profileImage, String password, String fullName, String phoneNumber, String userRole, String address, String gender, int accountStatus) {
         this.userID = userID;
         this.email = email;
         this.profileImage = profileImage;
@@ -33,6 +34,16 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.userRole = userRole;
         this.address = address;
+        this.gender = gender;
+        this.accountStatus = accountStatus;
+    }
+
+    public Account(String email, String username, String password, String phone, String userRole, String gender, int accountStatus) {
+        this.email = email;
+        this.fullName = username;
+        this.password = password;
+        this.phoneNumber = phone;
+        this.userRole = userRole;
         this.gender = gender;
         this.accountStatus = accountStatus;
     }
@@ -109,19 +120,17 @@ public class Account {
         this.gender = gender;
     }
 
-    public String getAccountStatus() {
+    public int getAccountStatus() {
         return accountStatus;
     }
 
-    public void setAccountStatus(String accountStatus) {
+    public void setAccountStatus(int accountStatus) {
         this.accountStatus = accountStatus;
     }
 
     @Override
     public String toString() {
-        return  "userID=" + userID + ", email=" + email + ", profileImage=" + profileImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", accountStatus=" + accountStatus ;
+        return "userID=" + userID + ", email=" + email + ", profileImage=" + profileImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", accountStatus=" + accountStatus;
     }
-    
-    
-    
+
 }
