@@ -9,6 +9,8 @@ import com.swp.koiCareSystem.dao.ProductDAO;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.model.ProductCategory;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -21,38 +23,33 @@ public class ProductService {
         productDAO = new ProductDAO();
     }
     
-    public int CountAllProduct(){
-        int sumCount = productDAO.CountProducts();
-        return sumCount;
+    public int CountAllProduct(){ 
+        return productDAO.CountProducts();
     } 
     
-    public int CountProductsByCate(int cateId){
-        int sumCount = productDAO.CountProductsByCate(cateId);
-        return sumCount;
+    public int CountProductsByCate(int cateId){ 
+        return productDAO.CountProductsByCate(cateId);
     }
     
-    public int CountProductsByName(String name){
-        int sumCount = productDAO.CountProductsByName(name);
-        return sumCount;
+    public int CountProductsByName(String name){ 
+        return productDAO.CountProductsByName(name);
     }
     
     public ArrayList<Product> GetProductByPaging(int index){
-        ArrayList<Product> list = productDAO.Pagingproduct(index);
-        return  list;
+        ArrayList<Product> list = productDAO.GetAllProducts(index);
+        Collections.shuffle(list);
+        return list;
     }
     
-    public ArrayList<ProductCategory> GetAllProductCate(){
-        ArrayList<ProductCategory> list = productDAO.GetAllCategory();
-        return list;
+    public ArrayList<ProductCategory> GetAllProductCate(){ 
+        return  productDAO.GetAllCategory();
     } 
     
-    public ArrayList<Product> GetProductByCatePaging(int cateId, int index){
-        ArrayList<Product> list = productDAO.PagingGetProductByCateId(cateId, index);
-        return list;
+    public ArrayList<Product> GetProductByCatePaging(int cateId, int index){ 
+        return productDAO.PagingGetProductByCateId(cateId, index);
     } 
     
-    public ArrayList<Product> SearchProductsByName(String name, int index){
-        ArrayList<Product> list = productDAO.SearchProductsByName(name, index);
-        return list;
+    public ArrayList<Product> SearchProductsByName(String name, int index){ 
+        return productDAO.SearchProductsByName(name, index);
     }
 }

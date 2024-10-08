@@ -130,7 +130,7 @@ public class ProductDAO {
         return 0;
     }
 
-    public ArrayList<Product> Pagingproduct(int index) {
+    public ArrayList<Product> GetAllProducts(int index) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -325,7 +325,8 @@ public class ProductDAO {
 
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
-        ArrayList<Product> list = pd.SearchProductsByName("koi", 1);
+        ArrayList<Product> list = pd.GetAllProducts(1);
+//        ArrayList<Product> list = pd.SearchProductsByName("koi", 1);
 
 //        ArrayList<ProductCategory> lp = pd.GetAllCategory();
 //        ArrayList<Product> list = pd.PagingGetProductByCateId(1, 1);

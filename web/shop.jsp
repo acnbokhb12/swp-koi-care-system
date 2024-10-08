@@ -101,7 +101,7 @@
                         <!-- row categories -->
                         <div class="col-sm-3 col-cate">  
                             <div class="shop__ultiliites-search">
-                                <form action="SearchProductController" method="get" class="shop__product_form">
+                                <form action="SearchProductController" method="post" class="shop__product_form">
                                     <input type="text" class="shop__product_search-input" name="productName" value="${OldSearch}" placeholder="Search">
                                     <button type="submit" class="shop__product_search-submit"><i class="fas fa-search"></i> </button>
                                 </form>
