@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,8 +63,7 @@ public class RegisterController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AccountDAO accountDAO = new AccountDAO(); // Tùy chọn, không cần thiết
-        AccountService acs = new AccountService(); // Chỉ khởi tạo một lần
+        AccountService acs = new AccountService();
 
         String email = request.getParameter("txtemail");
         String fullName = request.getParameter("txtusername");
@@ -73,16 +73,14 @@ public class RegisterController extends HttpServlet {
         String gender = request.getParameter("choice-gender");
 
         try {
-            // Check if email exists
             if (acs.isEmailExist(email)) {
-                request.setAttribute("emailExists", "Email is exist");
+                request.setAttribute("emailExists", "Email already exists");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
-            // Check if phone number exists
             if (acs.isPhoneNumberExist(phoneNumber)) {
-                request.setAttribute("phoneExists", "Phone Number is exist");
+                request.setAttribute("phoneExists", "Phone Number already exists");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
@@ -90,15 +88,18 @@ public class RegisterController extends HttpServlet {
             // Create a new account
             Account account = new Account();
             account.setEmail(email);
+            account.setProfileImage("https://i.pinimg.com/564x/bc/43/98/bc439871417621836a0eeea768d60944.jpg");
             account.setFullName(fullName);
-            account.setPassword(password); // Sẽ được băm trong service
+            account.setPassword(password);
             account.setPhoneNumber(phoneNumber);
             account.setUserRole("customer");
             account.setGender(gender);
             account.setAccountStatus(1);
 
             if (acs.registerUser(account)) {
-                response.sendRedirect("login.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("customer", account);
+                response.sendRedirect("home.jsp");
             } else {
                 request.setAttribute("registrationError", true);
                 request.getRequestDispatcher("register.jsp").forward(request, response);
