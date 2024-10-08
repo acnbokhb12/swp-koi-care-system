@@ -5,10 +5,9 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.dao.AccountDAO;
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.service.AccountService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -66,12 +65,14 @@ public class LoginController extends HttpServlet {
         try {
             String email = request.getParameter("txtemail");
             String password = request.getParameter("txtpassword");
-            AccountDAO dao = new AccountDAO();
-            Account account = dao.checkLogin(email, password);
+
+            AccountService accountService = new AccountService();
+            Account account = accountService.checkLogin(email, password);
+
             if (account != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", account);
-                // Chuyển hướng dựa trên vai trò của tài khoản
+                // Redirect based on account role
                 String role = account.getUserRole();
                 switch (role) {
                     case "admin":

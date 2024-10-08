@@ -62,8 +62,8 @@ public class RegisterController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AccountDAO acd = new AccountDAO();
-        AccountService acs = new AccountService();
+        AccountDAO accountDAO = new AccountDAO(); // Tùy chọn, không cần thiết
+        AccountService acs = new AccountService(); // Chỉ khởi tạo một lần
 
         String email = request.getParameter("txtemail");
         String fullName = request.getParameter("txtusername");
@@ -74,14 +74,14 @@ public class RegisterController extends HttpServlet {
 
         try {
             // Check if email exists
-            if (acd.isEmailExist(email)) {
+            if (acs.isEmailExist(email)) {
                 request.setAttribute("emailExists", "Email is exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
             // Check if phone number exists
-            if (acd.isPhoneNumberExist(phoneNumber)) {
+            if (acs.isPhoneNumberExist(phoneNumber)) {
                 request.setAttribute("phoneExists", "Phone Number is exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
@@ -91,13 +91,13 @@ public class RegisterController extends HttpServlet {
             Account account = new Account();
             account.setEmail(email);
             account.setFullName(fullName);
-            account.setPassword(acs.hashPassword(password));
+            account.setPassword(password); // Sẽ được băm trong service
             account.setPhoneNumber(phoneNumber);
             account.setUserRole("user");
             account.setGender(gender);
             account.setAccountStatus(1);
 
-            if (acd.registerUser(account)) {
+            if (acs.registerUser(account)) {
                 response.sendRedirect("login.jsp");
             } else {
                 request.setAttribute("registrationError", true);
@@ -109,6 +109,7 @@ public class RegisterController extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
+
     /**
      * Returns a short description of the servlet.
      *

@@ -225,7 +225,7 @@
                                             </div>
                                         </li>
                                         <li class="contain__item-nav">
-                                            <a href="#" class="contain__item-nav-link">
+                                            <a href="contact.jsp" class="contain__item-nav-link">
                                                 <span>Contact</span>
                                             </a>
                                         </li> 

@@ -21,8 +21,6 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
-    private final AccountService acs = new AccountService();
-
     public boolean isEmailExist(String email) throws SQLException, ClassNotFoundException {
         String query = "SELECT Email FROM Account WHERE Email = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -62,23 +60,18 @@ public class AccountDAO {
         }
     }
 
-    public Account checkLogin(String email, String password) throws ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM Account WHERE Email = ?";
+    public Account checkLogin(String email, String hashedPassword) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM Account WHERE Email = ? AND Password = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
+            pstmt.setString(2, hashedPassword);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                String encryptedPasswordFromDB = rs.getString("Password");
-                String hashedInputPassword = AccountService.hashPassword(password);
-
-                if (encryptedPasswordFromDB.equals(hashedInputPassword)) {
-                    Account account = new Account();
-                    account.setEmail(email);
-                    account.setPassword(encryptedPasswordFromDB);
-                    account.setUserRole(rs.getString("UserRole"));
-                    return account;
-                }
+                Account account = new Account();
+                account.setEmail(rs.getString("Email"));
+                account.setUserRole(rs.getString("UserRole"));
+                return account;
             }
         }
         return null;
