@@ -44,9 +44,7 @@ public class MainController extends HttpServlet {
                     break; 
                 case IConstant.SHOP :
                     url = "ManageShopController";
-                    break;
-                case IConstant.NEWS :
-                    url = "NewsController";  
+                    break; 
                 case IConstant.LOGIN:
                     url = "LoginController";
                     break;
