@@ -203,7 +203,7 @@
                                         </a>
                                     </li>
                                     <li class="contain__item-nav">
-                                        <a href="shop.jsp" class="contain__item-nav-link">
+                                        <a href="ManageShopController?action=shop" class="contain__item-nav-link">
                                             <span>Shop</span>
                                         </a>
                                     </li>

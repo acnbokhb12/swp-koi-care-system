@@ -7,6 +7,7 @@ package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.ProductDAO;
 import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.model.ProductCategory;
 import java.util.ArrayList;
 
 /**
@@ -14,13 +15,36 @@ import java.util.ArrayList;
  * @author DELL
  */
 public class ProductService {
-    private ProductDAO pd = new ProductDAO();
+    private ProductDAO productDAO ;
     
-    public ArrayList<Product> GetAllProductS(){
-        ArrayList<Product> listPd = pd.GetAllProduct();
-        
-         
-        return listPd;
+    public ProductService(){
+        productDAO = new ProductDAO();
     }
+    
+    public int CountAllProduct(){
+        int sumCount = productDAO.CountProducts();
+        return sumCount;
+    }
+    
+    public int CountProductsByCate(int cateId){
+        int sumCount = productDAO.CountProductsByCate(cateId);
+        return sumCount;
+    }
+    
+    public ArrayList<Product> GetProductByPaging(int index){
+        ArrayList<Product> list = productDAO.Pagingproduct(index);
+        return  list;
+    }
+    
+    public ArrayList<ProductCategory> GetAllProductCate(){
+        ArrayList<ProductCategory> list = productDAO.GetAllCategory();
+        return list;
+    } 
+    
+    public ArrayList<Product> GetProductByCatePaging(int cateId, int index){
+        ArrayList<Product> list = productDAO.PagingGetProductByCateId(cateId, index);
+        return list;
+    }
+    
     
 }

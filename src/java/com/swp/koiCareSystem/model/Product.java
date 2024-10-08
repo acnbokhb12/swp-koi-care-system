@@ -10,24 +10,16 @@ package com.swp.koiCareSystem.model;
  * @author DELL
  */
 public class Product {
-    private int productID;
-    private int categoryID;
+    private int productID; 
     private String nameProduct;
     private String imgProduct;
     private String description;
     private float price;
+    private ProductCategory categoryP;
 
     public Product() {
     }
-
-    public Product(int productID, int categoryID, String nameProduct, String imgProduct, String description, float price) {
-        this.productID = productID;
-        this.categoryID = categoryID;
-        this.nameProduct = nameProduct;
-        this.imgProduct = imgProduct;
-        this.description = description;
-        this.price = price;
-    }
+ 
 
     public int getProductID() {
         return productID;
@@ -37,13 +29,7 @@ public class Product {
         this.productID = productID;
     }
 
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
+     
 
     public String getNameProduct() {
         return nameProduct;
@@ -77,10 +63,22 @@ public class Product {
         this.price = price;
     }
 
+    public ProductCategory getCategoryP() {
+        return categoryP;
+    }
+
+    public void setCategoryP(ProductCategory categoryP) {
+        this.categoryP = categoryP;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "productID=" + productID + ", categoryID=" + categoryID + ", nameProduct=" + nameProduct + ", imgProduct=" + imgProduct + ", description=" + description + ", price=" + price + '}';
+        return "Product{" + "productID=" + productID + ", nameProduct=" + nameProduct + ", imgProduct=" + imgProduct + ", description=" + description + ", price=" + price + ", categoryP=" + categoryP + '}';
     }
+    
+    
+
+    
     
     
 }
