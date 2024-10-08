@@ -51,4 +51,8 @@ public class ProductService {
     public ArrayList<Product> SearchProductsByName(String name, int index){ 
         return productDAO.SearchProductsByName(name, index);
     }
+    
+    public Product GetProductById(int id){
+       return productDAO.GetProductById(id);
+    }
 }

@@ -245,7 +245,7 @@ public class ProductDAO {
                         pd.setDescription(rs.getString(5));
                         pd.setPrice(rs.getFloat(6));
                         pd.setCategoryP(pdct);
-                        listP.add(pd);  
+                        listP.add(pd);
                     }
                 }
             }
@@ -320,15 +320,61 @@ public class ProductDAO {
         return listP;
     }
 
+    public Product GetProductById(int id) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Product pd = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select * \n"
+                        + "from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "where p.ProductID = ?";
+                pst = cn.prepareStatement(sql); 
+                pst.setInt(1, id);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) { 
+                        pd = new Product();
+                        ProductCategory pdct = new ProductCategory(rs.getInt(7), rs.getString(8));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
+                        pd.setCategoryP(pdct); 
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return pd;
+    }
+
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         ArrayList<Product> list = pd.GetAllProducts(1);
 //        ArrayList<Product> list = pd.SearchProductsByName("koi", 1);
-
+        Product p = pd.GetProductById(1);
+        System.out.println(p);
 //        ArrayList<ProductCategory> lp = pd.GetAllCategory();
 //        ArrayList<Product> list = pd.PagingGetProductByCateId(1, 1);
-        for (Product i : list) {
-            System.out.println(i);
-        }
+//        for (Product i : list) {
+//            System.out.println(i);
+//        }
     }
 }

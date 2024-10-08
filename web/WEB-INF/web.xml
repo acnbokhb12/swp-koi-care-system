@@ -16,6 +16,10 @@
         <servlet-name>SearchProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ProductDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>SearchProductController</servlet-name>
         <url-pattern>/SearchProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/ProductDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

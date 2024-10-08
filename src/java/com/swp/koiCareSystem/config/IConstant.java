@@ -13,6 +13,7 @@ public interface IConstant {
     public final String HOME = "home";
     public final String SHOP = "shop";
     public final String SHOPJSP = "shopJsp";
+    public final String PRODUCTDETAIL = "productDetail";
     
     public final String NEWS = "news";
 }
