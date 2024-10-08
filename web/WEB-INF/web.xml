@@ -5,10 +5,6 @@
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FishDevelopmentController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.FishDevelopmentController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AccountController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AccountController</servlet-class>
     </servlet>
@@ -24,13 +20,17 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FishInforController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishInforController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PondInforController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.PondInforController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FishDevelopmentController</servlet-name>
-        <url-pattern>/FishDevelopmentController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
@@ -47,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishInforController</servlet-name>
+        <url-pattern>/FishInforController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PondInforController</servlet-name>
+        <url-pattern>/PondInforController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

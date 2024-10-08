@@ -20,10 +20,8 @@ public class PondService {
         ponddao = new PondDAO();
     }
 
-    public ArrayList<Pond> GetAllPondS()  {
-        ArrayList<Pond> listPond = ponddao.getAllPond();
-
-        return listPond;
+    public ArrayList<Pond> GetAllPondS(int accountID)  {
+        return ponddao.getAllPond(accountID);
     }
 
 }

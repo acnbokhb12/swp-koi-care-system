@@ -15,16 +15,15 @@ import java.util.ArrayList;
  */
 public class FishService {
 
-    private FishDAO fdao;
+    private FishDAO fishDAO;
 
     public FishService() {
-        fdao = new FishDAO();
+        fishDAO = new FishDAO();
     }
 
-    public ArrayList<Fish> GetAllFishS()  {
-//        ArrayList<Fish> listf = fdao.getAllFish();
+    // Get all fish for the specific account ID
+    public ArrayList<Fish> GetAllFishS(int accountID) {
+        return fishDAO.getAllFish(accountID); 
 
-        return listf;
-    }
-
+}
 }
