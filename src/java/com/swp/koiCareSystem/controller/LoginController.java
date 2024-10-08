@@ -63,47 +63,35 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-        if ("login".equals(action)) {
-            try {
-                String email = request.getParameter("txtemail");
-                String password = request.getParameter("txtpassword");
-
-                // Tạo instance AccountDAO mà không cần khóa mã hóa
-                AccountDAO dao = new AccountDAO();
-
-                // Kiểm tra đăng nhập và băm mật khẩu trong DAO
-                Account account = dao.checkLogin(email, password);
-
-                if (account != null) {
-                    // Tạo session cho người dùng
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", account);
-
-                    // Chuyển hướng dựa trên vai trò của tài khoản
-                    String role = account.getUserRole();
-                    switch (role) {
-                        case "admin":
-                            response.sendRedirect("manageUser.jsp"); // Quản lý người dùng
-                            break;
-                        case "manager":
-                            response.sendRedirect("manageProduct.jsp"); // Quản lý sản phẩm
-                            break;
-                        default:
-                            response.sendRedirect("home.jsp"); // Trang chính cho người dùng thông thường
-                            break;
-                    }
-                } else {
-                    // Nếu thông tin đăng nhập không chính xác
-                    request.setAttribute("error", "Wrong Email or Password!");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+        try {
+            String email = request.getParameter("txtemail");
+            String password = request.getParameter("txtpassword");
+            AccountDAO dao = new AccountDAO();
+            Account account = dao.checkLogin(email, password);
+            if (account != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", account);
+                // Chuyển hướng dựa trên vai trò của tài khoản
+                String role = account.getUserRole();
+                switch (role) {
+                    case "admin":
+                        response.sendRedirect("manageUser.jsp");
+                        break;
+                    case "manager":
+                        response.sendRedirect("manageProduct.jsp");
+                        break;
+                    default:
+                        response.sendRedirect("profilePage.jsp");
+                        break;
                 }
-            } catch (Exception e) {
-                // Xử lý ngoại lệ
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, "An unexpected error occurred", e);
-                request.setAttribute("error", "An unexpected error occurred. Please try again later.");
+            } else {
+                request.setAttribute("error", "Wrong Email or Password!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
+        } catch (Exception e) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, "An unexpected error occurred", e);
+            request.setAttribute("error", "An unexpected error occurred. Please try again later.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

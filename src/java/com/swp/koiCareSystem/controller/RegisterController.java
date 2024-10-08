@@ -65,7 +65,6 @@ public class RegisterController extends HttpServlet {
         AccountDAO acd = new AccountDAO();
         AccountService acs = new AccountService();
 
-        // Get form parameters
         String email = request.getParameter("txtemail");
         String fullName = request.getParameter("txtusername");
         String password = request.getParameter("txtpassword");
@@ -73,25 +72,17 @@ public class RegisterController extends HttpServlet {
         String phoneNumber = request.getParameter("txtphone");
         String gender = request.getParameter("choice-gender");
 
-        // Validation checks
         try {
             // Check if email exists
             if (acd.isEmailExist(email)) {
-                request.setAttribute("emailExists", true);
+                request.setAttribute("emailExists", "Email is exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
             // Check if phone number exists
             if (acd.isPhoneNumberExist(phoneNumber)) {
-                request.setAttribute("phoneExists", true);
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-                return;
-            }
-
-            // Check if passwords match
-            if (!password.equals(confirmPassword)) {
-                request.setAttribute("passwordMismatch", true);
+                request.setAttribute("phoneExists", "Phone Number is exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
@@ -100,16 +91,12 @@ public class RegisterController extends HttpServlet {
             Account account = new Account();
             account.setEmail(email);
             account.setFullName(fullName);
-
-            // Hash the password before setting it
-            account.setPassword(AccountService.hashPassword(password));
-
+            account.setPassword(acs.hashPassword(password));
             account.setPhoneNumber(phoneNumber);
             account.setUserRole("user");
             account.setGender(gender);
             account.setAccountStatus(1);
 
-            // Register the user
             if (acd.registerUser(account)) {
                 response.sendRedirect("login.jsp");
             } else {
@@ -122,7 +109,6 @@ public class RegisterController extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
-
     /**
      * Returns a short description of the servlet.
      *

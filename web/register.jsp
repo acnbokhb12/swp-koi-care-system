@@ -3,8 +3,8 @@
     Created on : Sep 30, 2024, 10:07:48 AM
     Author     : DELL
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +65,9 @@
                                         <input type="email" id="email" name="txtemail" class="input__form"
                                                placeholder="email@domain.com">
                                         <span class="form-message"></span>
-                                        <span class="form-message-error-bk">Email is exist</span>
+                                        <c:if test="${emailExists != null}">
+                                            <span class="form-message-error-bk">${emailExists}</span>
+                                        </c:if>
                                     </div> 
                                     <!-- UserName -->
                                     <div class="form-group col-md-6 ">
@@ -99,7 +101,9 @@
                                         <input type="text" id="phoneNumber" name="txtphone" class="input__form"
                                                placeholder="Phone number" />
                                         <span class="form-message"> </span>
-                                        <span class="form-message-error-bk">Phone is exist</span>
+                                        <c:if test="${phoneExists != null}">
+                                            <span class="form-message-error-bk">${phoneExists}</span>
+                                        </c:if>
                                     </div>
                                     <!-- Gender -->
                                     <div class="form-group col-md-6">

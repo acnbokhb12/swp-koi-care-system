@@ -21,7 +21,6 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
-    private static final Logger logger = Logger.getLogger(AccountDAO.class.getName());
     private final AccountService acs = new AccountService();
 
     public boolean isEmailExist(String email) throws SQLException, ClassNotFoundException {
@@ -42,7 +41,7 @@ public class AccountDAO {
             ResultSet rs = ps.executeQuery();
             return rs.next();
         } catch (ClassNotFoundException ex) {
-            logger.log(Level.SEVERE, "Error checking phone number existence", ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -51,31 +50,24 @@ public class AccountDAO {
         String sql = "INSERT INTO Account (Email, Password, FullName, PhoneNumber, UserRole, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             pstmt.setString(1, account.getEmail());
-            // Sử dụng phương thức hashPassword cho việc băm mật khẩu
             pstmt.setString(2, account.getPassword());
             pstmt.setString(3, account.getFullName());
             pstmt.setString(4, account.getPhoneNumber());
             pstmt.setString(5, account.getUserRole());
             pstmt.setString(6, account.getGender());
             pstmt.setInt(7, account.getAccountStatus());
-
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error registering user: " + e.getMessage(), e);
-            throw e;
         }
     }
 
-    public Account checkLogin(String email, String password) {
+    public Account checkLogin(String email, String password) throws ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM Account WHERE Email = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
-
             if (rs.next()) {
                 String encryptedPasswordFromDB = rs.getString("Password");
                 String hashedInputPassword = AccountService.hashPassword(password);
@@ -83,13 +75,11 @@ public class AccountDAO {
                 if (encryptedPasswordFromDB.equals(hashedInputPassword)) {
                     Account account = new Account();
                     account.setEmail(email);
-                    account.setPassword(encryptedPasswordFromDB); // Lưu trữ mật khẩu đã băm
+                    account.setPassword(encryptedPasswordFromDB);
                     account.setUserRole(rs.getString("UserRole"));
                     return account;
                 }
             }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error during login check", e);
         }
         return null;
     }
