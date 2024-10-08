@@ -93,7 +93,7 @@ public class RegisterController extends HttpServlet {
             account.setFullName(fullName);
             account.setPassword(password); // Sẽ được băm trong service
             account.setPhoneNumber(phoneNumber);
-            account.setUserRole("user");
+            account.setUserRole("customer");
             account.setGender(gender);
             account.setAccountStatus(1);
 

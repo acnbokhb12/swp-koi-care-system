@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
 
             if (account != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", account);
+                session.setAttribute("customer", account);
                 // Redirect based on account role
                 String role = account.getUserRole();
                 switch (role) {
@@ -82,7 +82,7 @@ public class LoginController extends HttpServlet {
                         response.sendRedirect("manageProduct.jsp");
                         break;
                     default:
-                        response.sendRedirect("profilePage.jsp");
+                        response.sendRedirect("home.jsp");
                         break;
                 }
             } else {

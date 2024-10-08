@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -209,7 +210,7 @@
                                             </a>
                                         </li>
                                         <li class="contain__item-nav contain__item-nav-open">
-                                            <a href="#" class="contain__item-nav-link">
+                                            <a href="news.jsp" class="contain__item-nav-link">
                                                 <span>News <i class="fa-solid fa-chevron-down ml-1"></i></span>
                                             </a>
                                             <div class="contain__sub-item_nav-link">
@@ -245,67 +246,69 @@
                                                     class="fa-solid fa-bag-shopping"></i></span>
                                             <span class="text-label text-uppercase ">Cart</span>
                                         </a>
-                                        <a href="login.jsp" class="header__link-task d-flex align-end">
-                                            <span class="header__link-task-icon"><i
-                                                    class="fa-regular fa-user"></i></span>
-                                            <span class="text-label text-uppercase">Sign in</span>
-                                        </a>
-                                        <div class="header__link-account d-flex align-end">
-                                            <div class="header__link-task-img-acc">
-                                                <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/120846118_1393138717744114_5343318628172679837_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=s00All9Oy78Q7kNvgGgjhgI&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=AncTZXupFrf-o0ojlYJ35Do&oh=00_AYDL1aMB6bRtX3F00r62cVpdpmDynHn-A5Zx_F1i3Jtl6g&oe=670DF320" alt="">
-                                            </div>
-                                            <div class="header__link-task-description">
-                                                <div class="header__link-task-container">
-                                                    <div class="welcome__acc-header">
-                                                        <p class="dddssd">Khanh Huynh</p>
-                                                        <!-- <h2>Khanh</h2> -->
-                                                        <a href="profilePage.jsp" class="view__detail_acc">
-                                                            <i class="fa-solid fa-file-invoice"></i> My Account
-                                                        </a>
-                                                    </div>
-                                                    <div class="welcome__acc-body">
-                                                        <ul class="body__link-acount-list-item"> 
-                                                            <li class="body__link-acount-detail-item">
-                                                                <a href="fish.jsp">
-                                                                    <i class="fa-solid fa-fish"></i> My Koi
-                                                                </a>
-                                                            </li>
-                                                            <li class="body__link-acount-detail-item">
-                                                                <a href="pond.jsp">
-                                                                    <i class="fa-regular fa-circle"></i> My Pond
-                                                                </a>
-                                                            </li>
-                                                            <li class="body__link-acount-detail-item">
-                                                                <a href="#">
-                                                                    <i class="fa-solid fa-droplet"></i> Water Parameters
-                                                                </a>
-                                                            </li>
-                                                            <li class="body__link-acount-detail-item">
-                                                                <a href="purchaseHistory.jsp">
-                                                                    <i class="fa-solid fa-receipt"></i> Purchase History
-                                                                </a>
-                                                            </li>
-
-                                                        </ul>
-                                                    </div>
-                                                    <div class="welcome__acc-footer">
-                                                        <ul class="footer__link-acount-list-item">
-                                                            <li class="footer__link-acount-detail-item">
-                                                                <a href="#">
-                                                                    <i class="fas fa-sign-out"></i> Log out
-                                                                </a>
-                                                            </li>
-
-                                                            <li class="footer__link-acount-detail-item">
-                                                                <a href="#">
-                                                                    <i class="fa-regular fa-circle-question"></i> Support
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                        <c:if test="${empty sessionScope.customer}">
+                                            <a href="login.jsp" class="header__link-task d-flex align-end">
+                                                <span class="header__link-task-icon"><i class="fa-regular fa-user"></i></span>
+                                                <span class="text-label text-uppercase">Sign in</span>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${not empty sessionScope.customer}">
+                                            <div class="header__link-account d-flex align-end">
+                                                <div class="header__link-task-img-acc">
+                                                    <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/120846118_1393138717744114_5343318628172679837_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=s00All9Oy78Q7kNvgGgjhgI&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=AncTZXupFrf-o0ojlYJ35Do&oh=00_AYDL1aMB6bRtX3F00r62cVpdpmDynHn-A5Zx_F1i3Jtl6g&oe=670DF320" alt="">
                                                 </div>
-                                            </div>
+                                                <div class="header__link-task-description">
+                                                    <div class="header__link-task-container">
+                                                        <div class="welcome__acc-header">
+                                                            <p class="dddssd">Khanh Huynh</p>
+                                                            <!-- <h2>Khanh</h2> -->
+                                                            <a href="profilePage.jsp" class="view__detail_acc">
+                                                                <i class="fa-solid fa-file-invoice"></i> My Account
+                                                            </a>
+                                                        </div>
+                                                        <div class="welcome__acc-body">
+                                                            <ul class="body__link-acount-list-item"> 
+                                                                <li class="body__link-acount-detail-item">
+                                                                    <a href="fish.jsp">
+                                                                        <i class="fa-solid fa-fish"></i> My Koi
+                                                                    </a>
+                                                                </li>
+                                                                <li class="body__link-acount-detail-item">
+                                                                    <a href="pond.jsp">
+                                                                        <i class="fa-regular fa-circle"></i> My Pond
+                                                                    </a>
+                                                                </li>
+                                                                <li class="body__link-acount-detail-item">
+                                                                    <a href="#">
+                                                                        <i class="fa-solid fa-droplet"></i> Water Parameters
+                                                                    </a>
+                                                                </li>
+                                                                <li class="body__link-acount-detail-item">
+                                                                    <a href="purchaseHistory.jsp">
+                                                                        <i class="fa-solid fa-receipt"></i> Purchase History
+                                                                    </a>
+                                                                </li>
 
+                                                            </ul>
+                                                        </div>
+                                                        <div class="welcome__acc-footer">
+                                                            <ul class="footer__link-acount-list-item">
+                                                                <li class="footer__link-acount-detail-item">
+                                                                    <a href="#">
+                                                                        <i class="fas fa-sign-out"></i> Log out
+                                                                    </a>
+                                                                </li>
+
+                                                                <li class="footer__link-acount-detail-item">
+                                                                    <a href="#">
+                                                                        <i class="fa-regular fa-circle-question"></i> Support
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
