@@ -45,16 +45,18 @@ public class AccountDAO {
     }
 
     public boolean registerUser(Account account) throws SQLException, Exception {
-        String sql = "INSERT INTO Account (Email, Password, FullName, PhoneNumber, UserRole, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Account (Email, UserImage, Password, FullName, PhoneNumber, UserRole, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, account.getEmail());
-            pstmt.setString(2, account.getPassword());
-            pstmt.setString(3, account.getFullName());
-            pstmt.setString(4, account.getPhoneNumber());
-            pstmt.setString(5, account.getUserRole());
-            pstmt.setString(6, account.getGender());
-            pstmt.setInt(7, account.getAccountStatus());
+            pstmt.setString(2, account.getProfileImage());
+            pstmt.setString(3, account.getPassword());
+            pstmt.setString(4, account.getFullName());
+            pstmt.setString(5, account.getPhoneNumber());
+            pstmt.setString(6, account.getUserRole());
+            pstmt.setString(7, account.getGender());
+            pstmt.setInt(8, account.getAccountStatus());
+
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
         }
