@@ -658,4 +658,9 @@ input[type=number]:focus {
     color: #000000;
     filter: brightness(0.9);
 }
- 
+.category-item--active{
+    background-color: var(--bs-orange);
+} 
+.category-item--active .category-item__link{
+    color: #fff;
+} 

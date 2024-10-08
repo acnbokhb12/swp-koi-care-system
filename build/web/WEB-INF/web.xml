@@ -8,6 +8,14 @@
         <servlet-name>ManageShopController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageShopController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductCateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ProductCateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>ManageShopController</servlet-name>
         <url-pattern>/ManageShopController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductCateController</servlet-name>
+        <url-pattern>/ProductCateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
