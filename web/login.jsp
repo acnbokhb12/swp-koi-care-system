@@ -53,7 +53,7 @@
                                 <!-- username --> 
                                 <div class="form-group" style="margin-bottom: 0;">  
                                     <input type="email" id="email-log" name="txtemail" class="input__form"
-                                           placeholder="E-mail address or koicare ID" required><br>
+                                           placeholder="E-mail address or koicare ID" value="${oldEmail!=null ? oldEmail : ''}" required><br>
                                 </div>
                                 <!-- password -->
                                 <div class="form-group">

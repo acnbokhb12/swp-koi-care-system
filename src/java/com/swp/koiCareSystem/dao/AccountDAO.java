@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class AccountDAO {
 
     public boolean isEmailExist(String email) throws SQLException, ClassNotFoundException {
-        String query = "SELECT Email FROM Account WHERE Email = ?";
+        String query = "SELECT Email FROM Accounts WHERE Email = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, email);
@@ -32,7 +32,7 @@ public class AccountDAO {
     }
 
     public boolean isPhoneNumberExist(String phoneNumber) throws SQLException {
-        String query = "SELECT PhoneNumber FROM Account WHERE PhoneNumber = ?";
+        String query = "SELECT PhoneNumber FROM Accounts WHERE PhoneNumber = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, phoneNumber);
@@ -45,7 +45,7 @@ public class AccountDAO {
     }
 
     public boolean registerUser(Account account) throws SQLException, Exception {
-        String sql = "INSERT INTO Account (Email, UserImage, Password, FullName, PhoneNumber, UserRole, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Accounts (Email, UserImage, Password, FullName, PhoneNumber, UserRole, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, account.getEmail());
@@ -63,7 +63,7 @@ public class AccountDAO {
     }
 
     public Account checkLogin(String email, String hashedPassword) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT AccID, Email, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus FROM Account WHERE Email = ? AND Password = ?";
+        String sql = "SELECT AccID, Email, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus FROM Accounts WHERE Email = ? AND Password = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);

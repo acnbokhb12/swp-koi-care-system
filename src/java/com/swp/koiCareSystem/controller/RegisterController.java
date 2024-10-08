@@ -75,12 +75,15 @@ public class RegisterController extends HttpServlet {
         try {
             if (acs.isEmailExist(email)) {
                 request.setAttribute("emailExists", "Email already exists");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-                return;
+            } else if (acs.isPhoneNumberExist(phoneNumber)) {
+                request.setAttribute("phoneExists", "Phone Number already exists");
             }
 
-            if (acs.isPhoneNumberExist(phoneNumber)) {
-                request.setAttribute("phoneExists", "Phone Number already exists");
+            if (request.getAttribute("emailExists") != null || request.getAttribute("phoneExists") != null) {
+                request.setAttribute("oldEmail", email); 
+                request.setAttribute("oldName", fullName); 
+                request.setAttribute("oldPhone", phoneNumber);
+                request.setAttribute("oldGender", gender);
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }

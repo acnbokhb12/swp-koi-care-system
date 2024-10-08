@@ -63,7 +63,7 @@
                                         <label for="email" class="form-label"> <i class="fa-solid fa-envelope  icon-signup"></i>
                                             Email</label> 
                                         <input type="email" id="email" name="txtemail" class="input__form"
-                                               placeholder="email@domain.com">
+                                               placeholder="email@domain.com" value="${oldEmail!= null ? oldEmail : ''}">
                                         <span class="form-message"></span>
                                         <c:if test="${emailExists != null}">
                                             <span class="form-message-error-bk">${emailExists}</span>
@@ -75,7 +75,7 @@
                                             Name</label>
 
                                         <input type="text" id="fullname" name="txtusername" class="input__form"
-                                               placeholder="UserName" />
+                                               placeholder="UserName" value="${oldName!=null ? oldName : ''}"/>
                                         <span class="form-message"></span>
                                     </div> 
                                     <!-- password -->
@@ -99,7 +99,7 @@
                                         <label for="phoneNumber" class="form-label"> <i class="fa-solid fa-phone icon-signup"></i> Phone
                                             number</label>
                                         <input type="text" id="phoneNumber" name="txtphone" class="input__form"
-                                               placeholder="Phone number" />
+                                               placeholder="Phone number" value="${oldPhone!=null ? oldPhone : ''}"/>
                                         <span class="form-message"> </span>
                                         <c:if test="${phoneExists != null}">
                                             <span class="form-message-error-bk">${phoneExists}</span>
@@ -108,10 +108,10 @@
                                     <!-- Gender -->
                                     <div class="form-group col-md-6">
                                         <label for="" class="form-label">Choose Gender:</label>
-                                        <select name="choice-gender" id="" class="input__form ">
-                                            <option value="Man">Man</option>
-                                            <option value="Woman">Woman</option>
-                                            <option value="Orther">Other</option>
+                                        <select spellcheck="Woman" name="choice-gender" id="" class="input__form ">
+                                            <option value="Man" ${oldGender.equals("Man") ? "selected" : ""} >Man</option>
+                                            <option value="Woman"  ${oldGender.equals("Woman") ? "selected" : ""}>Woman</option>
+                                            <option value="Orther"  ${oldGender.equals("Orther") ? "selected" : ""}>Other</option>
                                         </select>
                                     </div>
 

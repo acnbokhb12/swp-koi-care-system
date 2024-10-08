@@ -70,6 +70,7 @@ public class LoginController extends HttpServlet {
             Account account = accountService.checkLogin(email, password);
 
             if (account != null) {
+                account.setPassword(null); 
                 HttpSession session = request.getSession();
                 String role = account.getUserRole();
                 switch (role) {
@@ -80,13 +81,14 @@ public class LoginController extends HttpServlet {
                     case "manager":
                         session.setAttribute("manager", account);
                         response.sendRedirect("manageProduct.jsp");
-                        break;
+                       break;
                     default:
                         session.setAttribute("customer", account);
                         response.sendRedirect("home.jsp");
                         break;
                 }
             } else {
+                request.setAttribute("oldEmail", email);
                 request.setAttribute("error", "Wrong Email or Password!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
