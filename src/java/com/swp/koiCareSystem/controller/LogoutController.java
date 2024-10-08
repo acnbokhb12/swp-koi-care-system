@@ -5,11 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.AccountService;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +16,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ASUS
  */
-public class LoginController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,6 +29,11 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        response.sendRedirect("home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,40 +62,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        try {
-            String email = request.getParameter("txtemail");
-            String password = request.getParameter("txtpassword");
-
-            AccountService accountService = new AccountService();
-            Account account = accountService.checkLogin(email, password);
-
-            if (account != null) {
-                HttpSession session = request.getSession();
-                String role = account.getUserRole();
-                switch (role) {
-                    case "admin":
-                        session.setAttribute("admin", account);
-                        response.sendRedirect("manageUser.jsp");
-                        break;
-                    case "manager":
-                        session.setAttribute("manager", account);
-                        response.sendRedirect("manageProduct.jsp");
-                        break;
-                    default:
-                        session.setAttribute("customer", account);
-                        response.sendRedirect("home.jsp");
-                        break;
-                }
-            } else {
-                request.setAttribute("error", "Wrong Email or Password!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, "An unexpected error occurred", e);
-            request.setAttribute("error", "An unexpected error occurred. Please try again later.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

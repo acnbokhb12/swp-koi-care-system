@@ -61,19 +61,32 @@ public class AccountDAO {
     }
 
     public Account checkLogin(String email, String hashedPassword) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM Account WHERE Email = ? AND Password = ?";
+        String sql = "SELECT AccID, Email, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus FROM Account WHERE Email = ? AND Password = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, hashedPassword);
             ResultSet rs = pstmt.executeQuery();
+
             if (rs.next()) {
-                Account account = new Account();
-                account.setEmail(rs.getString("Email"));
-                account.setUserRole(rs.getString("UserRole"));
+                Account account = new Account(
+                        rs.getInt("AccID"),
+                        rs.getString("Email"),
+                        rs.getString("UserImage"),
+                        rs.getString("Password"),
+                        rs.getString("FullName"),
+                        rs.getString("PhoneNumber"),
+                        rs.getString("UserRole"),
+                        rs.getString("Address"),
+                        rs.getString("Gender"),
+                        rs.getInt("idStatus")
+                );
                 return account;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
+
 }

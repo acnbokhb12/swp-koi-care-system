@@ -13,4 +13,5 @@ public interface IConstant {
     public final String HOME = "home";
     public final String LOGIN = "login";
     public final String REGISTER = "register";
+    public final String LOGOUT = "logout";
 }

@@ -73,7 +73,7 @@
                         <div class="col-auto app-box-admin">
                             <div class="box-admin">
                                 <!-- <div class="welcome-admin" style="display: none;">
-                                    <i class="fa-solid fa-user"></i> Khanhhn
+                                <i class="fa-solid fa-user"></i> Khanhhn
                                 </div> -->
                                 <div class="modal-more-info">
                                     <ul class="modal-more-info-list">
@@ -255,59 +255,58 @@
                                         <c:if test="${not empty sessionScope.customer}">
                                             <div class="header__link-account d-flex align-end">
                                                 <div class="header__link-task-img-acc">
-                                                    <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/120846118_1393138717744114_5343318628172679837_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=s00All9Oy78Q7kNvgGgjhgI&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=AncTZXupFrf-o0ojlYJ35Do&oh=00_AYDL1aMB6bRtX3F00r62cVpdpmDynHn-A5Zx_F1i3Jtl6g&oe=670DF320" alt="">
+                                                    <img src="${sessionScope.customer.profileImage}" alt="User Profile Image">
+                                                    <div class="header__link-task-description">
+                                                        <div class="header__link-task-container">
+                                                            <div class="welcome__acc-header">
+                                                                <p class="dddssd">${sessionScope.customer.fullName}</p>
+                                                                <a href="profilePage.jsp" class="view__detail_acc">
+                                                                    <i class="fa-solid fa-file-invoice"></i> My Account
+                                                                </a>
+                                                            </div>
+                                                            <div class="welcome__acc-body">
+                                                                <ul class="body__link-acount-list-item"> 
+                                                                    <li class="body__link-acount-detail-item">
+                                                                        <a href="fish.jsp">
+                                                                            <i class="fa-solid fa-fish"></i> My Koi
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="body__link-acount-detail-item">
+                                                                        <a href="pond.jsp">
+                                                                            <i class="fa-regular fa-circle"></i> My Pond
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="body__link-acount-detail-item">
+                                                                        <a href="#">
+                                                                            <i class="fa-solid fa-droplet"></i> Water Parameters
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="body__link-acount-detail-item">
+                                                                        <a href="purchaseHistory.jsp">
+                                                                            <i class="fa-solid fa-receipt"></i> Purchase History
+                                                                        </a>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+                                                            <div class="welcome__acc-footer">
+                                                                <ul class="footer__link-acount-list-item">
+                                                                    <li class="footer__link-acount-detail-item">
+                                                                        <a href="MainController?action=logout">
+                                                                            <i class="fas fa-sign-out"></i> Log out
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <li class="footer__link-acount-detail-item">
+                                                                        <a href="#">
+                                                                            <i class="fa-regular fa-circle-question"></i> Support
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
                                                 </div>
-                                                <div class="header__link-task-description">
-                                                    <div class="header__link-task-container">
-                                                        <div class="welcome__acc-header">
-                                                            <p class="dddssd">Khanh Huynh</p>
-                                                            <!-- <h2>Khanh</h2> -->
-                                                            <a href="profilePage.jsp" class="view__detail_acc">
-                                                                <i class="fa-solid fa-file-invoice"></i> My Account
-                                                            </a>
-                                                        </div>
-                                                        <div class="welcome__acc-body">
-                                                            <ul class="body__link-acount-list-item"> 
-                                                                <li class="body__link-acount-detail-item">
-                                                                    <a href="fish.jsp">
-                                                                        <i class="fa-solid fa-fish"></i> My Koi
-                                                                    </a>
-                                                                </li>
-                                                                <li class="body__link-acount-detail-item">
-                                                                    <a href="pond.jsp">
-                                                                        <i class="fa-regular fa-circle"></i> My Pond
-                                                                    </a>
-                                                                </li>
-                                                                <li class="body__link-acount-detail-item">
-                                                                    <a href="#">
-                                                                        <i class="fa-solid fa-droplet"></i> Water Parameters
-                                                                    </a>
-                                                                </li>
-                                                                <li class="body__link-acount-detail-item">
-                                                                    <a href="purchaseHistory.jsp">
-                                                                        <i class="fa-solid fa-receipt"></i> Purchase History
-                                                                    </a>
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
-                                                        <div class="welcome__acc-footer">
-                                                            <ul class="footer__link-acount-list-item">
-                                                                <li class="footer__link-acount-detail-item">
-                                                                    <a href="#">
-                                                                        <i class="fas fa-sign-out"></i> Log out
-                                                                    </a>
-                                                                </li>
-
-                                                                <li class="footer__link-acount-detail-item">
-                                                                    <a href="#">
-                                                                        <i class="fa-regular fa-circle-question"></i> Support
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -315,7 +314,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
         </header>
 

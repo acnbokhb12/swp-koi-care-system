@@ -48,6 +48,9 @@ public class MainController extends HttpServlet {
                 case IConstant.REGISTER:
                     url = "RegisterController";
                     break;
+                case IConstant.LOGOUT:
+                    url = "LogoutController";
+                    break;
                 default:
                     url = "home.jsp";
                     break;
