@@ -6,8 +6,12 @@
 
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.model.ProductCategory;
+import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +35,29 @@ public class SearchProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             
+            request.setCharacterEncoding("UTF-8");
+            String name = request.getParameter("productName");
+            String indexPage = request.getParameter("index");
+            if(indexPage==null){
+                indexPage= "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            ProductService pds = new ProductService(); 
+            int count = pds.CountProductsByName(name);
+            
+            int endPage = count/32; 
+            if(count % 32 != 0){
+                endPage++;
+            } 
+            ArrayList<Product> listProduct = pds.SearchProductsByName(name, index);
+            ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
+
+            request.setAttribute("ListC", listCate);
+            request.setAttribute("ListP", listProduct);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("OldSearch", name);
+            request.getRequestDispatcher("shop.jsp").forward(request, response);
         }
     } 
 

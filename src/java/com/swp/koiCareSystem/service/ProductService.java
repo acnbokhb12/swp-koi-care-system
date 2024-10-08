@@ -24,10 +24,15 @@ public class ProductService {
     public int CountAllProduct(){
         int sumCount = productDAO.CountProducts();
         return sumCount;
-    }
+    } 
     
     public int CountProductsByCate(int cateId){
         int sumCount = productDAO.CountProductsByCate(cateId);
+        return sumCount;
+    }
+    
+    public int CountProductsByName(String name){
+        int sumCount = productDAO.CountProductsByName(name);
         return sumCount;
     }
     
@@ -44,7 +49,10 @@ public class ProductService {
     public ArrayList<Product> GetProductByCatePaging(int cateId, int index){
         ArrayList<Product> list = productDAO.PagingGetProductByCateId(cateId, index);
         return list;
+    } 
+    
+    public ArrayList<Product> SearchProductsByName(String name, int index){
+        ArrayList<Product> list = productDAO.SearchProductsByName(name, index);
+        return list;
     }
-    
-    
 }

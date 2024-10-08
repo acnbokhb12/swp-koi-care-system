@@ -101,8 +101,8 @@
                         <!-- row categories -->
                         <div class="col-sm-3 col-cate">  
                             <div class="shop__ultiliites-search">
-                                <form action="" method="post" class="shop__product_form">
-                                    <input type="text" class="shop__product_search-input" placeholder="Search">
+                                <form action="SearchProductController" method="get" class="shop__product_form">
+                                    <input type="text" class="shop__product_search-input" name="productName" value="${OldSearch}" placeholder="Search">
                                     <button type="submit" class="shop__product_search-submit"><i class="fas fa-search"></i> </button>
                                 </form>
                             </div> 
@@ -112,35 +112,12 @@
                                         <i class="category__shop-heading-icon fa-solid fa-list"></i> Categories
                                     </a>
                                 </h3>
-                                <ul class="category-list row">
-                                    <!--                <li class="category-item col-lg-12 col-custom-cate category-item--active">
-                                                      <a href="#" class="category-item__link">
-                                                        Food
-                                                      </a>
-                                                    </li>-->
+                                <ul class="category-list row"> 
                                     <c:forEach items="${ListC}" var="ct"> 
                                         <li class="category-item col-lg-12 col-custom-cate ${TagsCate == ct.categoryID ? 'category-item--active' : ''} ">
                                             <a href="ProductCateController?cateID=${ct.categoryID}" class="category-item__link">${ct.categoryName} </a>
                                         </li>
-                                    </c:forEach>
-                                    <!--                <li class="category-item col-lg-12 col-custom-cate ">
-                                                      <a href="#" class="category-item__link">Pond Accessories</a>
-                                                    </li>
-                                                    <li class="category-item col-lg-12 col-custom-cate ">
-                                                      <a href="#" class="category-item__link">Water Treatment </a>
-                                                    </li>
-                                                    <li class="category-item col-lg-12 col-custom-cate ">
-                                                      <a href="#" class="category-item__link">Decoration </a>
-                                                    </li>
-                                                    <li class="category-item col-lg-12 col-custom-cate ">
-                                                      <a href="#" class="category-item__link">Specialized Services </a>
-                                                    </li>
-                                                    <li class="category-item col-lg-12 col-custom-cate ">
-                                                      <a href="#" class="category-item__link">Books and Educational Material
-                                                      </a>
-                                                    </li>-->
-
-
+                                    </c:forEach> 
                                 </ul>
                             </nav>
                         </div>
@@ -172,12 +149,9 @@
                                                                     ${p.categoryP.categoryName}
                                                                 </p>
                                                             </h5>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
+                                                        </div> 
+                                                    </div> 
+                                                </div> 
                                             </a>
                                         </div>
                                     </c:forEach>
