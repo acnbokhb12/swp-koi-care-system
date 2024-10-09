@@ -49,8 +49,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.NEWS :
                     url = "NewsController"; 
-                    break;
-                    
+                    break; 
                 default:
                     url = "home.jsp";
                     break; 
