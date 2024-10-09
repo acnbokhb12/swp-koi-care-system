@@ -22,7 +22,7 @@
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.RegisterController</servlet-class>
-    </servlet>
+    </servlet> 
     
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -32,8 +32,11 @@
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.LogoutController</servlet-class> 
-    </servlet>
-    
+    </servlet> 
+    <servlet>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ProductDetailController</servlet-class>
+    </servlet> 
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -58,7 +61,7 @@
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <servlet-mapping> 
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
@@ -66,8 +69,11 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern> 
-    </servlet-mapping>
-    
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/ProductDetailController</url-pattern>
+    </servlet-mapping> 
     <session-config>
         <session-timeout>
             30

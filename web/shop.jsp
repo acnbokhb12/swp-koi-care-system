@@ -126,7 +126,7 @@
                                 <div class=" row "> 
                                     <c:forEach items="${ListP}" var="p">  
                                         <div class="col-lg-3 col-md-4   col-6 product-item">
-                                            <a href="productDetail.jsp" class="home-product-item__link">
+                                            <a href="MainController?action=productDetail&pid=${p.productID}" class="home-product-item__link">
                                                 <div class="shop__product_item-desc">
                                                     <div class="create__blank"></div>
                                                     <!-- product item -->

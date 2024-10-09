@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,16 +37,15 @@
             <div class="row">
               <!-- info img -->
               <div class="product__content__detail-info-img col-md-6">
-                <div class="product__detail-img">
-
+                <div class="product__detail-img"> 
                     <img
-                    src="https://koithienduong.com/wp-content/uploads/2023/11/thuc-an-ca-koi-jpd-fujiyama.jpg"
+                    src="${Product.imgProduct}"
                     alt="">
                 </div>
               </div>
               <!-- info product detail  -->
               <div class="product__content__detail-sumary col-md-6">
-                <h1 class="product__content__detail-title">JPD Fujiyama Koi Fish Food (10Kg)</h1>
+                <h1 class="product__content__detail-title">${Product.nameProduct}</h1>
                 <div class="product__content__detail-rating">
                    
     
@@ -59,11 +59,11 @@
                 </div>
                 <div class="product__content__detail-desc">
                   <p>
-                    Iced coffee is a type of coffee beverage served chilled, brewed variously with the fundamental division
+                     ${Product.description}
                   </p>
                 </div>
                 <p class="product__content__detail-price">
-                  <span id="product__detail-price-id" class="product__detail-price">100000</span>
+                  <span id="product__detail-price-id" class="product__detail-price">${Product.price}</span>
                 </p>
                 <!-- quantity buy product -->
                 <div class="product__content__detail-form">
