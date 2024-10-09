@@ -78,16 +78,12 @@
                 <div class="shop_product-title ">
                     <h1>Shop</h1> 
                     <div class="shop__ultities-sort">
-                        <div class="shop__ultities-sort-dertail">
-                            <form action="">
-                                <select name="" id="" class="shop__ultities-sort-select-list">
-                                    <option value="" selected>Default Sorting</option>
-                                    <option value="">Sort by popularity</option>
-                                    <option value="">Sort by latest</option>
-                                    <option value="">Sort by price: low to high</option>
-                                    <option value="">Sort by price: high to low</option>
-                                </select>
-                            </form>
+                        <div class="shop__ultities-sort-dertail" style="width: 250px"> 
+                                <select name="" id="sortPrice" class="shop__ultities-sort-select-list" onchange="sortProductsByPrice()">
+                                    <option value="" selected>Default Sorting</option> 
+                                    <option value="asc">Sort by price: low to high</option>
+                                    <option value="desc">Sort by price: high to low</option>
+                                </select> 
                             <p><i class="fa-solid fa-chevron-down"></i></p>
                         </div>
                     </div>
@@ -123,7 +119,7 @@
                         <div class="col-sm-9 ">
                             <div class="shop__product__lists">
                                 <!-- row chua element  -->
-                                <div class=" row "> 
+                                <div class=" row row_product_list "> 
                                     <c:forEach items="${ListP}" var="p">  
                                         <div class="col-lg-3 col-md-4   col-6 product-item">
                                             <a href="MainController?action=productDetail&pid=${p.productID}" class="home-product-item__link">
@@ -231,8 +227,42 @@
         });
 
     </script>
-    <script>
+ <script>
+  // Lưu trữ thứ tự ban đầu của các sản phẩm
+let originalOrder = []; 
+  let productsContainer = document.querySelector(".row_product_list");
+  let products = Array.from(productsContainer.querySelectorAll(".product-item"));
 
-    </script>
+  // First Array
+  originalOrder = products.map(product => product);
+ 
+
+function sortProductsByPrice() {
+  const sortOrder = document.getElementById("sortPrice").value;
+
+  let productsContainer = document.querySelector(".row_product_list");
+  let products = Array.from(productsContainer.querySelectorAll(".product-item"));
+
+  if (sortOrder === "") {
+    // Sắp xếp theo thứ tự ban đầu (default)
+    originalOrder.forEach(product => productsContainer.appendChild(product));
+  } else {
+    // Sắp xếp theo giá
+    products.sort((a, b) => {
+      let priceA = parseInt(a.querySelector(".shop__product-price").innerText.replace(/[₫,.]/g, ''));
+      let priceB = parseInt(b.querySelector(".shop__product-price").innerText.replace(/[₫,.]/g, ''));
+
+      if (sortOrder === "asc") {
+        return priceA - priceB;
+      } else {
+        return priceB - priceA;
+      }
+    });
+    products.forEach(product => productsContainer.appendChild(product));
+  }
+}
+
+
+</script>
 
 </html>

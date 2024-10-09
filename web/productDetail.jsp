@@ -50,11 +50,9 @@
                    
     
                   <div class="product__content__detail-rating-customer">
-                    <p>
-                      <a href="#"> 
-                        (100 Customer Reviews)
-                      </a>
-                    </p>
+                     <h2 class="title_cate_pd">
+                        ${Product.categoryP.categoryName}
+                    </h2>
                   </div>
                 </div>
                 <div class="product__content__detail-desc">
@@ -139,4 +137,12 @@
       let formattedAmount = amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
       document.getElementById('product__detail-price-id').innerText = formattedAmount;
 </script>
+<style>
+    .title_cate_pd{
+    background-color: var(--bs-orange);
+    padding: 0.4rem 1.2rem;
+    color: var(--white-color);
+    border-radius: 8px;
+ }
+</style>
 </html>
