@@ -1,23 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author DELL
+ * @author PC
  */
-public class MainController extends HttpServlet {
+public class FishController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,52 +34,19 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String ac = request.getParameter("action");
-            if (ac == null || ac.isEmpty()) {
-                ac = IConstant.HOME;
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
+            if(acc == null){
+                response.sendRedirect("home.jsp");
             }
-            switch (ac) {
-                case IConstant.HOME:
-                    url = "home.jsp";
-                    break;
-                case IConstant.SHOP:
-                    url = "ManageShopController";
-                    break;
-                case IConstant.PRODUCTDETAIL:
-                    url = "ProductDetailController";
-                    break;
-                case IConstant.LOGIN:
-                    url = "LoginController";
-                    break;
-                case IConstant.REGISTER:
-                    url = "RegisterController";
-                    break;
-                case IConstant.LOGOUT:
-                    url = "LogoutController";
-                    break;
-                case IConstant.POND:
-                    url = "PondController";
-                    break;
-                case IConstant.FISH:
-                    url = "FishController";
-                    break;
-                case IConstant.FISHINFOR:
-                    url = "FishInforController";
-                    break;
-                case IConstant.PONDINFOR:
-                    url = "PondInforController";
-                    break;
-                default:
-                    url = "home.jsp";
-                    break;
-            }
-        } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            FishService fs = new FishService();
+            ArrayList<Fish> listF = fs.GetAllFishS(acc.getUserID());
+
+            request.setAttribute("listFish", listF);
+            request.getRequestDispatcher("fish.jsp").forward(request, response);
+
         }
     }
 

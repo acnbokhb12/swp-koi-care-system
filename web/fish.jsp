@@ -4,130 +4,62 @@
     Author     : DELL
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en"> 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koi Fish</title>
-     <!-- link logo img page -->
-     <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
-     <!-- Font gg family -->
-     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-         rel="stylesheet">
-     <!-- Font icon --> 
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-     <!-- bootstrap -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
-     <link rel="stylesheet" href="./assets/css/base.css">
-     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
-    <link rel="stylesheet" href="./assets/css/fishE.css">
-</head>
-<body class="body-fish">
-    <!-- start header -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Koi Fish</title>
+        <!-- link logo img page -->
+        <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
+        <!-- Font gg family -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+              rel="stylesheet">
+        <!-- Font icon --> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+        <link rel="stylesheet" href="./assets/css/base.css">
+        <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
+        <link rel="stylesheet" href="./assets/css/fishE.css">
+    </head>
+    <body class="body-fish">
+        <!-- start header -->
         <div id="header"></div>
-    <!-- end header -->
-    <div class="container container_fish">
-        <div class="tilte-fish"> 
-            <h1>Koi Fish</h1>
-            <div class="button-container"> 
-                <button class="btn">Add New Fish</button>
-            </div>
-        </div>
-        <div class="fish-list row mt-4">
-            <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
-                <div class="fish-item ">
-                    <div class="fish-item-detail">
-                        <div class="fish-img-detail">
-                            <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
-                        </div>
-                        <div class="fish-info">
-                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish sddsds sdafsd </a>
-                            <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
-                            <a href="" class="link-delete-fish">Delete</a> 
-                        </div>
-                    </div>
+        <!-- end header -->
+        <div class="container container_fish">
+            <div class="tilte-fish"> 
+                <h1>Koi Fish</h1>
+                <div class="button-container"> 
+                    <button class="btn">Add New Fish</button>
                 </div>
             </div>
-            <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
-                <div class="fish-item ">
-                    <div class="fish-item-detail">
-                        <div class="fish-img-detail">
-                            <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
-                        </div>
-                        <div class="fish-info">
-                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
-                            <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
-                            <a href="" class="link-delete-fish">Delete</a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
-                <div class="fish-item ">
-                    <div class="fish-item-detail">
-                        <div class="fish-img-detail">
-                            <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
-                        </div>
-                        <div class="fish-info">
-                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
-                            <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
-                            <a href="" class="link-delete-fish">Delete</a> 
+            <div class="fish-list row mt-4">
+                <c:forEach items="${listFish}" var="f">
+                    <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
+                        <div class="fish-item">
+                            <div class="fish-item-detail">
+                                <div class="fish-img-detail">
+                                    <img src="${f.fishImage}" alt="${f.fishName}">
+                                </div>
+                                <div class="fish-info">
+                                    <a href="FishInforController?fid=${f.fishID}" class="link__to-fish-detail">${f.fishName}</a>
+                                    <p>${f.descriptionKoi}</p>
+                                    <a href="deleteFish?fishID=${f.fishID}" class="link-delete-fish">Delete</a> 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
-            <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
-                <div class="fish-item ">
-                    <div class="fish-item-detail">
-                        <div class="fish-img-detail">
-                            <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
-                        </div>
-                        <div class="fish-info">
-                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
-                            <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
-                            <a href="" class="link-delete-fish">Delete</a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
-                <div class="fish-item ">
-                    <div class="fish-item-detail">
-                        <div class="fish-img-detail">
-                            <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
-                        </div>
-                        <div class="fish-info">
-                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
-                            <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
-                            <a href="" class="link-delete-fish">Delete</a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fish-item-d col-lg-3 col-md-4 col-sm-6">    
-                <div class="fish-item ">
-                    <div class="fish-item-detail">
-                        <div class="fish-img-detail">
-                            <img src="https://d2e07cbkdk0gwy.cloudfront.net/wp-content/uploads/2013/07/page/Yamatonishiki_03.18.2024-scaled.jpg" alt="A beautiful fish with colorful koi fish swimming peacefully among water lilies and aquatic plants">
-                        </div>
-                        <div class="fish-info">
-                            <a href="fishInfor.jsp" class="link__to-fish-detail">Peaceful Fish</a>
-                            <p>A tranquil fish surrounded by lush greenery and vibrant koi, perfect for relaxation and meditation.</p>
-                            <a href="" class="link-delete-fish">Delete</a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
- 
-        </div>
-    </div>
+        </div> 
     <!-- TABLE NEW -->
-     <div class="container__infor__fish">
+    <div class="container__infor__fish">
         <div class="infor__fish-detail">
             <form action="" id="fomr_fill-news">  
             <div class="row row-fish-detail">
@@ -200,11 +132,12 @@
                 </div> 
                 </div>
             </div>
-        </form>
-        </div>
-      </div>
-    <!-- footer -->
-        <div id="footer"></div>
+        </form>      
+       </div>
+    </div> 
+       
+        <!-- footer -->
+        <div id="footer"></div> 
 </body>
   <script>
     $('#header').load('utils.jsp #header__nav', ()=>{
@@ -213,8 +146,9 @@
     $('#footer').load('utils.jsp #footer__nav', ()=>{
         $.getScript('./assets/js/utilsCustomer.js');
     });
-</script>
+    </script>
 <script src="./assets/js/utils.js"></script> 
+ 
 <script>
     const btnClose = document.querySelector(".btn-close-fish");
     const tableEdit = document.querySelector(".container__infor__fish");
@@ -236,8 +170,6 @@
 
     document.addEventListener("click", () => {
         tableEdit.classList.remove("open");
-    });
-    
-   
+    }); 
 </script>
 </html>

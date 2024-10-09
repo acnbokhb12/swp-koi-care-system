@@ -5,7 +5,9 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.dao.FishDAO;
+import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.service.FishInforService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DELL
+ * @author PC
  */
-public class MainController extends HttpServlet {
+public class FishInforController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,52 +33,15 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String ac = request.getParameter("action");
-            if (ac == null || ac.isEmpty()) {
-                ac = IConstant.HOME;
-            }
-            switch (ac) {
-                case IConstant.HOME:
-                    url = "home.jsp";
-                    break;
-                case IConstant.SHOP:
-                    url = "ManageShopController";
-                    break;
-                case IConstant.PRODUCTDETAIL:
-                    url = "ProductDetailController";
-                    break;
-                case IConstant.LOGIN:
-                    url = "LoginController";
-                    break;
-                case IConstant.REGISTER:
-                    url = "RegisterController";
-                    break;
-                case IConstant.LOGOUT:
-                    url = "LogoutController";
-                    break;
-                case IConstant.POND:
-                    url = "PondController";
-                    break;
-                case IConstant.FISH:
-                    url = "FishController";
-                    break;
-                case IConstant.FISHINFOR:
-                    url = "FishInforController";
-                    break;
-                case IConstant.PONDINFOR:
-                    url = "PondInforController";
-                    break;
-                default:
-                    url = "home.jsp";
-                    break;
-            }
-        } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            String id = request.getParameter("fid"); 
+            FishInforService fins = new FishInforService();
+
+            Fish fin = fins.GetFishInforByIDS(id);
+            request.setAttribute("fish", fin);
+            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
+
         }
     }
 

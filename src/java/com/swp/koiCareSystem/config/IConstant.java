@@ -9,7 +9,7 @@ package com.swp.koiCareSystem.config;
  *
  * @author DELL
  */
-public interface IConstant {
+public interface IConstant { 
     public final String HOME = "home"; 
     public final String SHOP = "shop";
     public final String SHOPJSP = "shopJsp";
@@ -19,5 +19,10 @@ public interface IConstant {
 
     public final String LOGIN = "login";
     public final String REGISTER = "register";
-    public final String LOGOUT = "logout"; 
+    public final String LOGOUT = "logout";  
+    
+    public final String POND = "pond";
+    public final String FISH = "fish"; 
+    public final String FISHINFOR = "fishinfor";
+    public final String PONDINFOR = "pondinfor"; 
 }

@@ -101,7 +101,7 @@ public class RegisterController extends HttpServlet {
 
             if (acs.registerUser(account)) {
                 HttpSession session = request.getSession();
-                session.setAttribute("customer", account);
+                session.setAttribute("userAccount", account);
                 response.sendRedirect("home.jsp");
             } else {
                 request.setAttribute("registrationError", true);

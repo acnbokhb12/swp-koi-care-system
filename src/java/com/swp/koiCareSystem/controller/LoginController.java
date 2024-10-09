@@ -75,15 +75,15 @@ public class LoginController extends HttpServlet {
                 String role = account.getUserRole();
                 switch (role) {
                     case "admin":
-                        session.setAttribute("admin", account);
+                        session.setAttribute("userAccount", account);
                         response.sendRedirect("manageUser.jsp");
                         break;
                     case "manager":
-                        session.setAttribute("manager", account);
+                        session.setAttribute("userAccount", account);
                         response.sendRedirect("manageProduct.jsp");
                        break;
                     default:
-                        session.setAttribute("customer", account);
+                        session.setAttribute("userAccount", account);
                         response.sendRedirect("home.jsp");
                         break;
                 }

@@ -3,7 +3,8 @@
     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
-    </servlet>
+    </servlet> 
+    
     <servlet> 
         <servlet-name>ManageShopController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageShopController</servlet-class>
@@ -36,11 +37,30 @@
     <servlet>
         <servlet-name>ProductDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ProductDetailController</servlet-class>
+    </servlet>  
+    <servlet>
+        <servlet-name>PondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.PondController</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>FishController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishController</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>FishInforController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishInforController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PondInforController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.PondInforController</servlet-class>
     </servlet> 
+    
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> 
     
     <servlet-mapping> 
         <servlet-name>ManageShopController</servlet-name>
@@ -73,6 +93,24 @@
     <servlet-mapping>
         <servlet-name>ProductDetailController</servlet-name>
         <url-pattern>/ProductDetailController</url-pattern>
+    </servlet-mapping>  
+    
+    
+    <servlet-mapping>
+        <servlet-name>PondController</servlet-name>
+        <url-pattern>/PondController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishController</servlet-name>
+        <url-pattern>/FishController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishInforController</servlet-name>
+        <url-pattern>/FishInforController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PondInforController</servlet-name>
+        <url-pattern>/PondInforController</url-pattern>
     </servlet-mapping> 
     <session-config>
         <session-timeout>
