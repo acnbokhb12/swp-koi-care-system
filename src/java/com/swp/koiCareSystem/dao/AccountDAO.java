@@ -1,13 +1,8 @@
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.AccountService;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,10 +10,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author DELL
- */
 public class AccountDAO {
 
     public boolean isEmailExist(String email) throws SQLException, ClassNotFoundException {
@@ -89,6 +80,50 @@ public class AccountDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Account getUserById(int userId) throws SQLException, ClassNotFoundException {
+        Account account = null;
+        Connection conn = DatabaseConnectionManager.getConnection();
+        String sql = "SELECT FullName, Email, PhoneNumber, Address, Gender, Password FROM Accounts WHERE AccID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, userId);
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            account = new Account();
+            account.setFullName(rs.getString("FullName"));
+            account.setEmail(rs.getString("Email"));
+            account.setPhoneNumber(rs.getString("PhoneNumber"));
+            account.setAddress(rs.getString("Address"));
+            account.setGender(rs.getString("Gender"));
+            account.setPassword(rs.getString("Password"));
+        }
+        return account;
+    }
+
+    public static boolean updateAccount(Account account) throws ClassNotFoundException {
+        boolean isUpdated = false;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            String sql = "UPDATE Accounts SET FullName = ?, Email = ?, PhoneNumber = ?, Address = ?, Password = ?, Gender = ? WHERE AccID = ?";
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, account.getFullName());
+            stmt.setString(2, account.getEmail());
+            stmt.setString(3, account.getPhoneNumber());
+            stmt.setString(4, account.getAddress());
+            stmt.setString(5, account.getPassword());
+            stmt.setString(6, account.getGender());
+            stmt.setInt(7, account.getUserID());
+
+            isUpdated = stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isUpdated;
     }
 
 }

@@ -64,7 +64,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountService acs = new AccountService();
-
+        
         String email = request.getParameter("txtemail");
         String fullName = request.getParameter("txtusername");
         String password = request.getParameter("txtpassword");
@@ -101,7 +101,7 @@ public class RegisterController extends HttpServlet {
 
             if (acs.registerUser(account)) {
                 HttpSession session = request.getSession();
-                session.setAttribute("customer", account);
+                session.setAttribute("UserAccount", account);
                 response.sendRedirect("home.jsp");
             } else {
                 request.setAttribute("registrationError", true);

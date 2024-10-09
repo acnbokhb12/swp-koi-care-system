@@ -36,7 +36,7 @@ public class AccountService {
         }
         return result;
     }
-    
+
     public boolean isEmailExist(String email) throws Exception {
         return acd.isEmailExist(email);
     }
@@ -49,8 +49,30 @@ public class AccountService {
         account.setPassword(hashPassword(account.getPassword()));
         return acd.registerUser(account);
     }
-        public Account checkLogin(String email, String password) throws Exception {
+
+    public Account checkLogin(String email, String password) throws Exception {
         String hashedPassword = hashPassword(password);
         return acd.checkLogin(email, hashedPassword);
+    }
+
+    public boolean updateAccount(int userId, String email, String fullName, String phoneNumber, String address, String gender, String oldPassword, String newPassword) throws Exception {
+        Account accountFromDb = acd.getUserById(userId);
+        if (accountFromDb == null) {
+            throw new Exception("Account not found");
+        }
+        Account updatedAccount = new Account();
+        updatedAccount.setUserID(userId);
+        updatedAccount.setEmail(email);
+        updatedAccount.setFullName(fullName);
+        updatedAccount.setPhoneNumber(phoneNumber);
+        updatedAccount.setAddress(address);
+        updatedAccount.setGender(gender);
+
+        if (newPassword != null && !newPassword.isEmpty()) {
+            updatedAccount.setPassword(hashPassword(newPassword));
+        } else {
+            updatedAccount.setPassword(accountFromDb.getPassword());
+        }
+        return acd.updateAccount(updatedAccount);
     }
 }

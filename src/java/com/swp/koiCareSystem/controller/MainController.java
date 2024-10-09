@@ -41,25 +41,28 @@ public class MainController extends HttpServlet {
             switch (ac) {
                 case IConstant.HOME:
                     url = "home.jsp";
-                    break; 
-                case IConstant.SHOP :
+                    break;
+                case IConstant.SHOP:
                     url = "ManageShopController";
-                    break; 
+                    break;
                 case IConstant.LOGIN:
                     url = "LoginController";
-                    break; 
+                    break;
                 case IConstant.REGISTER:
                     url = "RegisterController";
                     break;
                 case IConstant.LOGOUT:
-                    url = "LogoutController"; 
-                    break; 
-                case IConstant.PRODUCTDETAIL :
+                    url = "LogoutController";
+                    break;
+                case IConstant.PRODUCTDETAIL:
                     url = "ProductDetailController";
                     break;
-                case IConstant.NEWS :
-                    url = "NewsController"; 
-                    break;  
+                case IConstant.NEWS:
+                    url = "NewsController";
+                    break;
+                case IConstant.EDITPROFILE:
+                    url = "EditProfileController";
+                    break;
                 default:
                     url = "home.jsp";
                     break;

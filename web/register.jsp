@@ -111,7 +111,7 @@
                                         <select spellcheck="Woman" name="choice-gender" id="" class="input__form ">
                                             <option value="Man" ${oldGender.equals("Man") ? "selected" : ""} >Man</option>
                                             <option value="Woman"  ${oldGender.equals("Woman") ? "selected" : ""}>Woman</option>
-                                            <option value="Orther"  ${oldGender.equals("Orther") ? "selected" : ""}>Other</option>
+                                            <option value="Other"  ${oldGender.equals("Orther") ? "selected" : ""}>Other</option>
                                         </select>
                                     </div>
 

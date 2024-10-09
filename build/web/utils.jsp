@@ -273,20 +273,20 @@
                                                     class="fa-solid fa-bag-shopping"></i></span>
                                             <span class="text-label text-uppercase ">Cart</span>
                                         </a>
-                                        <c:if test="${empty sessionScope.customer}">
+                                        <c:if test="${empty sessionScope.UserAccount}">
                                             <a href="login.jsp" class="header__link-task d-flex align-end">
                                                 <span class="header__link-task-icon"><i class="fa-regular fa-user"></i></span>
                                                 <span class="text-label text-uppercase">Sign in</span>
                                             </a>
                                         </c:if>
-                                        <c:if test="${not empty sessionScope.customer}">
+                                        <c:if test="${not empty sessionScope.UserAccount}">
                                             <div class="header__link-account d-flex align-end">
                                                 <div class="header__link-task-img-acc">
-                                                    <img src="${sessionScope.customer.profileImage}" alt="User Profile Image">
+                                                    <img src="${sessionScope.UserAccount.profileImage}" alt="User Profile Image">
                                                     <div class="header__link-task-description">
                                                         <div class="header__link-task-container">
                                                             <div class="welcome__acc-header">
-                                                                <p class="dddssd">${sessionScope.customer.fullName}</p>
+                                                                <p class="dddssd">${sessionScope.UserAccount.fullName}</p>
                                                                 <a href="profilePage.jsp" class="view__detail_acc">
                                                                     <i class="fa-solid fa-file-invoice"></i> My Account
                                                                 </a>
