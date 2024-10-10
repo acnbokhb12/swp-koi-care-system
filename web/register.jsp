@@ -7,7 +7,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +41,11 @@
                     <img class="img-detail-item_signup"
                          src="https://www.shutterstock.com/image-vector/asian-background-oriental-japanese-style-260nw-1978654823.jpg"
                          alt="">
+
+
                 </div>
+
+
             </div>
             <!-- Sign up -->
             <div class="info__user-container-up  ">
@@ -50,7 +53,7 @@
                     <div class="user-re-container">
                         <header class="header__screen-log">
                             <!-- <h1 class="signin-header-title">Welcome back!</h1> -->
-                            <a href="home.jsp" class="header__img-log">
+                            <a href="home.html" class="header__img-log">
                                 <img src="./assets/img/logo/logoSignin.jpg" alt="">
                             </a>
                             <p class="header-desc" style="font-size: 2.6rem; text-align: center;">Create an account</p>
@@ -58,24 +61,24 @@
                         <div class="signup-user-body">
                             <form action="MainController?action=register" class="form" id="form-1" method="post">
                                 <div class="row row__form"> 
-                                    <!-- Email -->
+                                    <!-- KoiCareId -->
                                     <div class="form-group col-md-6 ">
-                                        <label for="email" class="form-label"> <i class="fa-solid fa-envelope  icon-signup"></i>
-                                            Email</label> 
-                                        <input type="email" id="email" name="txtemail" class="input__form"
-                                               placeholder="email@domain.com" value="${oldEmail!= null ? oldEmail : ''}">
+                                        <label for="kcid" class="form-label"> <i class="fa-solid fa-envelope  icon-signup"></i>
+                                            KoiCareId</label> 
+                                        <input type="kcid" id="txt" name="txtid" class="input__form"
+                                               placeholder="KoiCareId">
                                         <span class="form-message"></span>
-                                        <c:if test="${emailExists != null}">
-                                            <span class="form-message-error-bk">${emailExists}</span>
+                                        <c:if test="${idExists != null}">
+                                            <span class="form-message-error-bk">${idExists}</span>
                                         </c:if>
                                     </div> 
                                     <!-- UserName -->
                                     <div class="form-group col-md-6 ">
                                         <label for="fullname" class="form-label"><i class="fa-solid fa-user icon-signup"></i>
-                                            Name</label>
+                                            Full Name</label>
 
                                         <input type="text" id="fullname" name="txtusername" class="input__form"
-                                               placeholder="UserName" value="${oldName!=null ? oldName : ''}"/>
+                                               placeholder="UserName" />
                                         <span class="form-message"></span>
                                     </div> 
                                     <!-- password -->
@@ -93,58 +96,85 @@
                                         <input type="password" id="password_confirmation" name="txtconfirmpassword" class="input__form"
                                                placeholder="Confirm password" />
                                         <span class="form-message"></span>
-                                    </div>
-                                    <!-- Phone -->
-                                    <div class="form-group col-md-6">
-                                        <label for="phoneNumber" class="form-label"> <i class="fa-solid fa-phone icon-signup"></i> Phone
-                                            number</label>
-                                        <input type="text" id="phoneNumber" name="txtphone" class="input__form"
-                                               placeholder="Phone number" value="${oldPhone!=null ? oldPhone : ''}"/>
-                                        <span class="form-message"> </span>
-                                        <c:if test="${phoneExists != null}">
-                                            <span class="form-message-error-bk">${phoneExists}</span>
-                                        </c:if>
-                                    </div>
-                                    <!-- Gender -->
-                                    <div class="form-group col-md-6">
-                                        <label for="" class="form-label">Choose Gender:</label>
-                                        <select spellcheck="Woman" name="choice-gender" id="" class="input__form ">
-                                            <option value="Man" ${oldGender.equals("Man") ? "selected" : ""} >Man</option>
-                                            <option value="Woman"  ${oldGender.equals("Woman") ? "selected" : ""}>Woman</option>
-                                            <option value="Orther"  ${oldGender.equals("Orther") ? "selected" : ""}>Other</option>
-                                        </select>
-                                    </div>
-
+                                    </div> 
                                     <button class="btn btn-info btn-signin-acc" type="submit">Sign Up</button><br>
                                 </div>
                                 <!-- Submit -->
+
                             </form>
                             <p class="footer__screen__acc_according">
                                 Already have an account?<a href="login.jsp" class="signup-btn-link" id="come-signup">Sign
                                     In</a>
                             </p>
+                            <p class="text-center" style="font-size: 16px;">Or With</p>
+                            <div class="flex-row">
+                                <a href="" class="btn google btn-google">
+                                    <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                    <path style="fill:#FBBB00;" d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256
+                                          c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456
+                                          C103.821,274.792,107.225,292.797,113.47,309.408z"></path>
+                                    <path style="fill:#518EF8;" d="M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451
+                                          c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535
+                                          c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z"></path>
+                                    <path style="fill:#28B446;" d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512
+                                          c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771
+                                          c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z"></path>
+                                    <path style="fill:#F14336;" d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012
+                                          c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
+                                          C318.115,0,375.068,22.126,419.404,58.936z"></path> 
+                                    </svg> 
+                                    Google  
+                                </a> 
+                            </div>
                         </div>
+
                         <footer class="user-signup-footer">
+
                         </footer>
+
                     </div>
                 </div>
             </div>
+
+
         </div>
+
     </body>
+    <style>
+        .btn-google {
+            margin-top: 10px;
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            gap: 10px;
+            border: 1px solid #cecece;
+            background-color: white;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+
+        .btn-google:hover {
+            border: 1px solid #2d79f3;
+            ;
+        }
+    </style>
     <script src="./assets/js/validator.js"></script>
     <script>
         Validator({
             form: '#form-1',
             errorSelector: '.form-message',
             rules: [
-                Validator.isEmail('#email', 'Please fill true email'),
-                Validator.isRequired('#fullname', 'Please fill your full name'),
                 Validator.minLength('#password', 6),
                 Validator.isRequired('#password_confirmation'),
                 Validator.isConfirmed('#password_confirmation', () => {
                     return document.querySelector('#form-1 #password').value;
-                }, 'Password confirm not exactly'),
-                Validator.isPhoneNumber('#phoneNumber', 'Phone number at least 10 number'),
+                }, 'Password confirm not exactly')
             ],
             // onSubmit: (data)=>{
             //     console.log(data)

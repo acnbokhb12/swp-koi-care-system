@@ -3,51 +3,43 @@
     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
-    </servlet> 
-    
-    <servlet> 
+    </servlet>
+    <servlet>
         <servlet-name>ManageShopController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageShopController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>ProductCateController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ProductCateController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>SearchProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
-    </servlet>    
- 
+    </servlet>
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.RegisterController</servlet-class>
-    </servlet> 
-    
+    </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.LoginController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.LogoutController</servlet-class> 
-    </servlet> 
+        <servlet-class>com.swp.koiCareSystem.controller.LogoutController</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>ProductDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ProductDetailController</servlet-class>
-    </servlet>  
+    </servlet>
     <servlet>
         <servlet-name>PondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.PondController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>FishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>FishInforController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishInforController</servlet-class>
@@ -55,47 +47,47 @@
     <servlet>
         <servlet-name>PondInforController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.PondInforController</servlet-class>
-    </servlet> 
-    
+    </servlet>
+    <servlet>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.LoginGoogleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateAccountWithGoogleController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.CreateAccountWithGoogleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
-    </servlet-mapping> 
-    
-    <servlet-mapping> 
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ManageShopController</servlet-name>
         <url-pattern>/ManageShopController</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ProductCateController</servlet-name>
         <url-pattern>/ProductCateController</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>SearchProductController</servlet-name>
         <url-pattern>/SearchProductController</url-pattern>
-    </servlet-mapping> 
-    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping> 
+    <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
-        <url-pattern>/LogoutController</url-pattern> 
-    </servlet-mapping> 
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductDetailController</servlet-name>
         <url-pattern>/ProductDetailController</url-pattern>
-    </servlet-mapping>  
-    
-    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PondController</servlet-name>
         <url-pattern>/PondController</url-pattern>
@@ -111,7 +103,15 @@
     <servlet-mapping>
         <servlet-name>PondInforController</servlet-name>
         <url-pattern>/PondInforController</url-pattern>
-    </servlet-mapping> 
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <url-pattern>/LoginGoogleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAccountWithGoogleController</servlet-name>
+        <url-pattern>/CreateAccountWithGoogleController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -120,5 +120,4 @@
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>
     </welcome-file-list>
-   
 </web-app>

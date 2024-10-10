@@ -62,55 +62,34 @@ public class RegisterController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        AccountDAO acd = new AccountDAO();
         AccountService acs = new AccountService();
 
-        String email = request.getParameter("txtemail");
+        String koiCareId = request.getParameter("txtid");
         String fullName = request.getParameter("txtusername");
         String password = request.getParameter("txtpassword");
         String confirmPassword = request.getParameter("txtconfirmpassword");
-        String phoneNumber = request.getParameter("txtphone");
-        String gender = request.getParameter("choice-gender");
 
-        try {
-            if (acs.isEmailExist(email)) {
-                request.setAttribute("emailExists", "Email already exists");
-            } else if (acs.isPhoneNumberExist(phoneNumber)) {
-                request.setAttribute("phoneExists", "Phone Number already exists");
-            }
-
-            if (request.getAttribute("emailExists") != null || request.getAttribute("phoneExists") != null) {
-                request.setAttribute("oldEmail", email); 
-                request.setAttribute("oldName", fullName); 
-                request.setAttribute("oldPhone", phoneNumber);
-                request.setAttribute("oldGender", gender);
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-                return;
-            }
-
-            // Create a new account
-            Account account = new Account();
-            account.setEmail(email);
-            account.setProfileImage("https://i.pinimg.com/564x/bc/43/98/bc439871417621836a0eeea768d60944.jpg");
-            account.setFullName(fullName);
-            account.setPassword(password);
-            account.setPhoneNumber(phoneNumber);
-            account.setUserRole("customer");
-            account.setGender(gender);
-            account.setAccountStatus(1);
-
-            if (acs.registerUser(account)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("userAccount", account);
-                response.sendRedirect("home.jsp");
-            } else {
-                request.setAttribute("registrationError", true);
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("registrationError", true);
+        if (acd.isKoiCareIDExist(koiCareId)) {
+            request.setAttribute("idExists", "KoiCareID already exists");
             request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        Account account = new Account();
+        account.setKoiCareID(koiCareId);
+        account.setProfileImage("https://i.pinimg.com/564x/bc/43/98/bc439871417621836a0eeea768d60944.jpg");
+        account.setFullName(fullName);
+        account.setPassword(password);
+        account.setUserRole("customer");
+        account.setAccountStatus(1);
+
+        if (acs.registerUser(account)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("userAccount", account);
+            response.sendRedirect("home.jsp");
+        } else {
+            response.sendRedirect("register.jsp");
         }
     }
 

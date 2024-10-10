@@ -5,6 +5,8 @@
  */
 package com.swp.koiCareSystem.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author DELL
@@ -12,9 +14,13 @@ package com.swp.koiCareSystem.model;
 public class Account {
 
     private int userID;
+    @SerializedName("email")
     private String email;
+    private String koiCareID;
+    @SerializedName("picture")
     private String profileImage;
     private String password;
+    @SerializedName("name")
     private String fullName;
     private String phoneNumber;
     private String userRole;
@@ -64,6 +70,16 @@ public class Account {
         this.email = email;
     }
 
+    public String getKoiCareID() {
+        return koiCareID;
+    }
+
+    public void setKoiCareID(String koiCareID) {
+        this.koiCareID = koiCareID;
+    }
+    
+    
+    
     public String getProfileImage() {
         return profileImage;
     }
@@ -130,7 +146,8 @@ public class Account {
 
     @Override
     public String toString() {
-        return "userID=" + userID + ", email=" + email + ", profileImage=" + profileImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", accountStatus=" + accountStatus;
+        return "Account{" + "userID=" + userID + ", email=" + email + ", koiCareID=" + koiCareID + ", profileImage=" + profileImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", accountStatus=" + accountStatus + '}';
     }
 
+    
 }

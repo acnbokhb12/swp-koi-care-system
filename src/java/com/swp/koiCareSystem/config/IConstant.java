@@ -25,4 +25,17 @@ public interface IConstant {
     public final String FISH = "fish"; 
     public final String FISHINFOR = "fishinfor";
     public final String PONDINFOR = "pondinfor"; 
+    
+    
+    public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";
+
+    public static final String GOOGLE_CLIENT_SECRET = "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";
+
+    public static final String GOOGLE_REDIRECT_URI = "http://localhost:8082/com.swp.koiCareSystem/LoginGoogleController";
+
+    public static final String GOOGLE_GRANT_TYPE = "authorization_code";
+
+    public static final String GOOGLE_LINK_GET_TOKEN = "https://accounts.google.com/o/oauth2/token";
+
+    public static final String GOOGLE_LINK_GET_USER_INFO = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
 }
