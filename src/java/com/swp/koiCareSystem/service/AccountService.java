@@ -10,7 +10,7 @@ package com.swp.koiCareSystem.service;
  * @author ASUS
  */
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonObject; 
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.dao.AccountDAO;
 import com.swp.koiCareSystem.model.Account;
@@ -71,7 +71,9 @@ public class AccountService {
          
         return googlePojo;
 
-    }
+    }  
+    
+    
     
     
     public boolean checkEmailExist(String email){
@@ -102,4 +104,9 @@ public class AccountService {
         return acd.getAccountByEmail(email);
     }
     
+    public static void main(String[] args) throws Exception {
+        AccountService acs = new AccountService();
+        Account acc = acs.checkLogin("rikawa", "123456");
+        System.out.println(acc);
+    }
 }

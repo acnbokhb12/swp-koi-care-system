@@ -52,7 +52,7 @@
                             <form action="MainController?action=login" class="form" id="form1" method="post">
                                 <!-- username --> 
                                 <div class="form-group" style="margin-bottom: 0;">  
-                                    <input type="email" id="email-log" name="txtemail" class="input__form"
+                                    <input type="text" id="email-log" name="loginIdentifier" class="input__form"
                                            placeholder="E-mail address or koicare ID" value="${oldEmail!=null ? oldEmail : ''}" required><br>
                                 </div>
                                 <!-- password -->

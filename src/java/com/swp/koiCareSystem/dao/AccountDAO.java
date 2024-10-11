@@ -1,5 +1,4 @@
- 
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -20,10 +19,9 @@ import java.util.logging.Logger;
  *
  * @author DELL
  */
- 
 public class AccountDAO {
-    
-     public boolean isKoiCareIDExist(String kcid) {
+
+    public boolean isKoiCareIDExist(String kcid) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -58,22 +56,20 @@ public class AccountDAO {
         }
         return false;
     }
-      
-    
-    
-    public boolean checkEmail(String email){ 
+
+    public boolean checkEmail(String email) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "SELECT count(*) FROM Accounts WHERE  [Email]  = ?"; 
+                String sql = "SELECT count(*) FROM Accounts WHERE  [Email]  = ?";
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, email); 
-                rs = pst.executeQuery(); 
+                pst.setString(1, email);
+                rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
-                    return rs.getInt(1) > 0; 
+                    return rs.getInt(1) > 0;
                 }
             }
         } catch (Exception e) {
@@ -95,6 +91,7 @@ public class AccountDAO {
         }
         return false;
     }
+
     public boolean registerUser(Account account) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -133,6 +130,7 @@ public class AccountDAO {
         }
         return false;
     }
+
     public boolean isPhoneNumberExist(String phoneNumber) throws SQLException {
         String query = "SELECT PhoneNumber FROM Accounts WHERE PhoneNumber = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -145,37 +143,39 @@ public class AccountDAO {
         }
         return false;
     }
-    
+
     public Account checkLogin(String email, String hashedPassword) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT AccID, Email, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus FROM Accounts WHERE Email = ? AND Password = ?";
+        String sql = "select [AccID] ,[Email] ,[KoiCareID], UserImage, FullName, PhoneNumber, UserRole, Address, Gender, idStatus\n"
+                + "from Accounts\n"
+                + "where ([Email] = ? or [KoiCareID] = ?) and [Password] = ?";
+        Account acc = null;
         try (Connection conn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
-            pstmt.setString(2, hashedPassword);
+            pstmt.setString(2, email);
+            pstmt.setString(3, hashedPassword);
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                Account account = new Account(
-                        rs.getInt("AccID"),
-                        rs.getString("Email"),
-                        rs.getString("UserImage"),
-                        rs.getString("Password"),
-                        rs.getString("FullName"),
-                        rs.getString("PhoneNumber"),
-                        rs.getString("UserRole"),
-                        rs.getString("Address"),
-                        rs.getString("Gender"),
-                        rs.getInt("idStatus")
-                );
-                return account;
+            if (rs!= null && rs.next()) {
+                acc = new Account();
+                acc.setUserID(rs.getInt("AccID"));
+                acc.setEmail(rs.getString("Email"));
+                acc.setKoiCareID(rs.getString("KoiCareID"));
+                acc.setProfileImage(rs.getString("UserImage"));
+                acc.setFullName(rs.getString("FullName"));
+                acc.setPhoneNumber(rs.getString("PhoneNumber"));
+                acc.setUserRole(rs.getString("UserRole"));
+                acc.setAddress(rs.getString("Address"));
+                acc.setGender(rs.getString("Gender"));
+                acc.setAccountStatus(rs.getInt("idStatus")); 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return acc;
     }
-    
-    public Account getUserById (int userId){
+
+    public Account getUserById(int userId) {
         Account account = null;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -219,7 +219,7 @@ public class AccountDAO {
         }
         return account;
     }
-    
+
     public static boolean updateAccount(Account account) throws ClassNotFoundException {
         boolean isUpdated = false;
         Connection conn = null;
@@ -243,6 +243,7 @@ public class AccountDAO {
         }
         return isUpdated;
     }
+
     public boolean registerWithGoogleAcc(Account account) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -281,8 +282,8 @@ public class AccountDAO {
         }
         return false;
     }
-    
-    public Account getAccountByEmail(String email){ 
+
+    public Account getAccountByEmail(String email) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -290,10 +291,10 @@ public class AccountDAO {
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "SELECT * FROM Accounts WHERE  [Email]  = ?"; 
+                String sql = "SELECT * FROM Accounts WHERE  [Email]  = ?";
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, email); 
-                rs = pst.executeQuery(); 
+                pst.setString(1, email);
+                rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
                     acc = new Account();
                     acc.setEmail(rs.getString(2));
@@ -326,11 +327,11 @@ public class AccountDAO {
         }
         return acc;
     }
-    
+
     public static void main(String[] args) {
         AccountDAO acd = new AccountDAO();
 //        boolean c = acd.isKoiCareIDExist("rikawa1");
-Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
+        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
         System.out.println(c);
     }
 

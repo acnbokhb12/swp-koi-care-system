@@ -63,11 +63,11 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String email = request.getParameter("txtemail");
+            String loginIdentifier = request.getParameter("loginIdentifier");
             String password = request.getParameter("txtpassword");
-
+            
             AccountService accountService = new AccountService();
-            Account account = accountService.checkLogin(email, password);
+            Account account = accountService.checkLogin(loginIdentifier, password);
 
             if (account != null) {
                 account.setPassword(null); 
@@ -88,7 +88,7 @@ public class LoginController extends HttpServlet {
                         break;
                 }
             } else {
-                request.setAttribute("oldEmail", email);
+                request.setAttribute("oldEmail", loginIdentifier);
                 request.setAttribute("error", "Wrong Email or Password!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }

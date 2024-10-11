@@ -108,7 +108,7 @@
                             </p>
                             <p class="text-center" style="font-size: 16px;">Or With</p>
                             <div class="flex-row">
-                                <a href="" class="btn google btn-google">
+                                <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8082/com.swp.koiCareSystem/LoginGoogleController&response_type=code&client_id=826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com&approval_prompt=force" class="btn google btn-google">
                                     <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                     <path style="fill:#FBBB00;" d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256
                                           c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456

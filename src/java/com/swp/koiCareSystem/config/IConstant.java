@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.config;
-   
-import io.github.cdimascio.dotenv.Dotenv; 
+    
+import io.github.cdimascio.dotenv.Dotenv;
+
+
 
 
 
@@ -31,16 +33,25 @@ public interface IConstant {
     public final String FISHINFOR = "fishinfor";
     public final String PONDINFOR = "pondinfor"; 
     
-    
-    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
      
-    public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
-    public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
-    public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
-    public static final String GOOGLE_GRANT_TYPE = dotenv.get("GOOGLE_GRANT_TYPE");
-    public static final String GOOGLE_LINK_GET_TOKEN = dotenv.get("GOOGLE_LINK_GET_TOKEN");
-    public static final String GOOGLE_LINK_GET_USER_INFO = dotenv.get("GOOGLE_LINK_GET_USER_INFO");
     
-    
+        public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";
+
+    public static final String GOOGLE_CLIENT_SECRET = "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";
+
+    public static final String GOOGLE_REDIRECT_URI = "http://localhost:8082/com.swp.koiCareSystem/LoginGoogleController";
+
+    public static final String GOOGLE_GRANT_TYPE = "authorization_code";
+
+    public static final String GOOGLE_LINK_GET_TOKEN = "https://accounts.google.com/o/oauth2/token";
+
+    public static final String GOOGLE_LINK_GET_USER_INFO = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
+//    String getGoogleClientId();
+//    String getGoogleClientSecret();
+//    String getGoogleRedirectUri();
+//    String getGoogleGrantType();
+//    String getGoogleLinkGetToken();
+//    String getGoogleLinkGetUserInfo();
+     
      
 }
