@@ -46,7 +46,8 @@ public class AccountService {
     }
     public String getToken(String code) throws ClientProtocolException, IOException { 
         String response = Request.Post(IConstant.GOOGLE_LINK_GET_TOKEN) 
-                .bodyForm(  Form.form().add("client_id", IConstant.GOOGLE_CLIENT_ID).add("client_secret", IConstant.GOOGLE_CLIENT_SECRET) 
+                .bodyForm(  Form.form().add("client_id", IConstant.GOOGLE_CLIENT_ID)
+                        .add("client_secret", IConstant.GOOGLE_CLIENT_SECRET) 
                         .add("redirect_uri", IConstant.GOOGLE_REDIRECT_URI) 
                         .add("code", code) 
                         .add("grant_type", IConstant.GOOGLE_GRANT_TYPE) 
