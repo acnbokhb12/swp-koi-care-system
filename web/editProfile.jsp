@@ -22,42 +22,20 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
     <link rel="stylesheet" href="./assets/css/profilePerson.css">
 </head>
 <body>
-      <!-- start header -->
+    <!-- start header -->
          <div id="header"></div>
         <!-- end header -->
-	 <!-- slider -->
     <div class="container container-edit-profile">
  
         <hr class="mt-0 mb-4">
-        <div class="row row-edit-profile">
-            <div class="col-xl-4">
-                <!-- Profile picture card-->
-                <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">Profile Picture</div>
-                    <div class="card-body text-center">
-                        <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle " src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/120846118_1393138717744114_5343318628172679837_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=s00All9Oy78Q7kNvgGgjhgI&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=AncTZXupFrf-o0ojlYJ35Do&oh=00_AYDL1aMB6bRtX3F00r62cVpdpmDynHn-A5Zx_F1i3Jtl6g&oe=670DF320" alt="">
-                        <!-- Profile picture help block-->
-                        <div class="desc-img">
-                            <p>
-                                JPG or PNG no larger than 5 MB 
-                            </p>  
-                        </div> 
-                        <!-- Profile picture upload button-->
-                       <form action=""> 
-                            <input id="imageInput" class="choose-edit-img-profile" type="file" accept="image/*">
-                             <button class="btn btn-edit-img-profile" type="button">Upload new image</button>
-                         </form>
-                    </div>
-                </div>
-            </div>
+        <div class="row row-edit-profile"> 
             <div class="col-xl-8">
                 <!-- Account details card-->
                 <div class="card mb-4">
@@ -69,55 +47,42 @@
                                 <!-- Form Group (email address)-->
                                 <div class="col-md-6">
                                     <label class="label-profile-edit" for="email">Email address</label>
-                                    <input class="form-control" id="email" type="email" placeholder="Enter your email address" value="name@example.com">
+                                    <input class="form-control" id="email" type="email" value="name@example.com" readonly>
                                    <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                 
-                                    <span class="form-message"></span>
-                                     <span class="error__bk">Email is exist</span>   
-
+                                    <span class="form-message"></span>   
                                 </div>
                                 <!-- Form Group (username)-->
                                 <div class="col-md-6 ">
-                                    <label class="label-profile-edit" for="inputUsername">Name</label>
-                                    <input class="form-control" id="fullname" type="text" placeholder="Enter your username" value="username">
+                                    <label class="label-profile-edit" for="inputUsername">KoiCareId</label>
+                                    <input class="form-control" id="KoiCareId" type="text" placeholder="Enter your username" value="${sessionScope.userAccount.koiCareID}">
                                    <!-- dung co ma cham vo form-message , cai nay do js lam roi -->
-                                 
-                                    <span class="form-message"></span>
+                                   <span class="form-message"></span>
+                                    <!-- <span class="error__bk">KoiCareId is exist</span>   -->
                                     
                                 </div>
                             </div>
-                            <!-- Form Row-->
                             <div class="row  row-form-edit ">
-                                <!-- Form Group (old pw)-->
-                                <div class="col-md-6">
-                                    <label class="label-profile-edit" for="inputFirstName">Old Password</label>
-                                    <input class="form-control" id="password_old" type="password" placeholder="Enter your first name" value="123456">
-                                   <!-- dung co ma cham vo form-message , cai nay do js lam roi -->
-                                    <span class="form-message"></span>
-                                    <span class="error__bk">Password is not correct</span>   
-
-                                    
-                                </div>
-                                <!-- Form Group (new pw)-->
-                                <div class="col-md-6">
-                                    <label class="label-profile-edit" for="inputLastName">New Password</label>
-                                    <input class="form-control" id="password_new" type="password" placeholder="Enter your last name" value="123456">
-                                   <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                    
-                                    <span class="form-message"></span>
-                                </div>
-                            </div>    
-                            <!-- Form Row-->
-                            <div class="row  ">
-                                <!-- Form Group (phone number)-->
-                                <div class="col-md-6">
+                                <!-- Form Group (username)-->
+                                <div class="col-md-6 ">
+                                    <label class="label-profile-edit" for="inputUsername">Name</label>
+                                    <input class="form-control" id="fullname" type="text" placeholder="Enter your username" value="${sessionScope.userAccount.fullName}" required>
+                                   <!-- dung co ma cham vo form-message , cai nay do js lam roi --> 
+                                    <span class="form-message"></span> 
+                                </div> 
+                                 <!-- Form Group (phone number)-->
+                                 <div class="col-md-6">
                                     <label class="label-profile-edit" for="inputPhone">Phone number</label>
-                                    <input class="form-control" id="phoneNumber" type="tel" placeholder="Enter your phone number" value="555-123-4567">
+                                    <input class="form-control" id="phoneNumber" type="tel" placeholder="Enter your phone number" value="${sessionScope.userAccount.phoneNumber}" required>
                                    <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                   
                                     <span class="form-message"></span> <!-- dont touch --> 
                                     
                                 </div>
+                            </div> 
+                            <!-- Form Row-->
+                            <div class="row  "> 
                                 <!-- Form Group (birthday)-->
                                 <div class="col-md-6">
-                                    <label class="label-profile-edit" for="inputBirthday">Birthday</label>
+                                    <label class="label-profile-edit" for="inputBirthday">Gender</label>
                                     <select name="choice-gender" id="" class="input__form ">
                                         <option value="Man">Man</option>
                                         <option value="Woman">Woman</option>
@@ -131,9 +96,66 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <!-- Profile picture image-->
+                         <div class="text-center d-flex justify-content-center">
+                             
+                             <img id="imagePreview" class="img-account-profile rounded-circle " src="${sessionScope.userAccount.profileImage}" alt="">
+                            </div>
+                        <!-- Profile picture help block-->
+                        <div class="desc-img">
+                            <p>
+                                JPG or PNG no larger than 5 MB 
+                            </p>    
+                        </div>
+                        <!-- Profile picture upload button-->
+                         <form action=""> 
+                            <input id="imageInput" class="choose-edit-img-profile" type="file" accept="image/*">
+                             <button class="btn btn-edit-img-profile" type="button">Upload new image</button>
+                         </form>
+                    </div>
+                </div>
+            </div>
+                <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="card-header">Edit Password</div>
+                    <div class="card-body">
+                        <form action="#" class="form" id="form-2" method="post"> 
+                            <!-- Form Row-->
+                            <div class="row  row-form-edit ">
+                                <!-- Form Group (old pw)-->
+                                <div class="col-md-6">
+                                    <label class="label-profile-edit" for="inputFirstName">Old Password</label>
+                                    <input class="form-control" id="password_old" type="password" placeholder="Enter your first name" >
+                                   <!-- dung co ma cham vo form-message , cai nay do js lam roi -->
+                                    <span class="form-message"></span>
+                                    <span class="error__bk">Password is not correct</span>   
+
+                                    
+                                </div>
+                                <!-- Form Group (new pw)-->
+                                <div class="col-md-6">
+                                    <label class="label-profile-edit" for="inputLastName">New Password</label>
+                                    <input class="form-control" id="password_new" type="password" placeholder="Enter your last name" >
+                                   <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                    
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>     
+                            <!-- Save changes button-->
+                            <button class="btn btn-edit-img-profile" type="submit">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
         </div>
     </div>
-    <div id="footer"></div>
+      <!-- footer -->
+        <div id="footer"></div>
 </body>
   <script>
     $('#header').load('utils.jsp #header__nav', ()=>{
@@ -148,15 +170,18 @@
     Validator({
         form: '#form-1',
         errorSelector:'.form-message',
-        rules: [
-            Validator.isEmail('#email', 'Please fill true email'),
-            Validator.isRequired('#fullname', 'Please fill your full name'),
-            Validator.isRequired('#password_old', 'Please fill your old password'),
-            Validator.minLength('#password_new', 6),
-            Validator.isPhoneNumber('#phoneNumber','Phone number at least 10 number')
+        rules: [ 
+            Validator.isPhoneNumber('#phoneNumber','Phone number at least 10 number'), 
         ]
-    });
-     const imageInput = document.getElementById('imageInput');
+    })
+    Validator({
+        form: '#form-2',
+        errorSelector:'.form-message',
+        rules: [ 
+            Validator.minLength('#password_new',6), 
+        ]
+    })
+    const imageInput = document.getElementById('imageInput');
     const imagePreview = document.getElementById('imagePreview');
 
     imageInput.addEventListener('change', function() {
@@ -178,6 +203,6 @@
         if(!isConfirmed){
             event.preventDefault();
         }
-    });
+    })
 </script>
 </html>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,19 +53,19 @@
                         <div class="row">
                             <div class="profile-item col-6 top">
                                 <h3>Name</h3>
-                                <p>HuyGiangHo</p>
+                                <p>${sessionScope.userAccount.fullName}</p>
                             </div>
                             <div class="profile-item col-6 top">
                                 <h3>Email</h3>
-                                <p>huycgse183043@fpt.edu.vn</p>
+                                <p>${sessionScope.userAccount.email}</p>
                             </div>
                             <div class="profile-item col-6 under">
                                 <h3>Phone Number</h3>
-                                <p>0989020***</p>
+                                <p>${sessionScope.userAccount.phoneNumber}</p>
                             </div>
                             <div class="profile-item col-6 under">
                                 <h3>Address</h3>
-                                <p>phường BHH B, quận BT, TP.HCM</p>
+                                <p>${sessionScope.userAccount.address}</p>
                             </div>
                             <!-- Add more profile details as needed -->
                         </div>
