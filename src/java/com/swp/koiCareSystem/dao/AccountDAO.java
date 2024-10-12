@@ -91,7 +91,7 @@ public class AccountDAO {
         }
         return false;
     }
-
+    
     public boolean registerUser(Account account) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -156,7 +156,7 @@ public class AccountDAO {
             pstmt.setString(3, hashedPassword);
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs!= null && rs.next()) {
+            if (rs != null && rs.next()) {
                 acc = new Account();
                 acc.setUserID(rs.getInt("AccID"));
                 acc.setEmail(rs.getString("Email"));
@@ -167,7 +167,7 @@ public class AccountDAO {
                 acc.setUserRole(rs.getString("UserRole"));
                 acc.setAddress(rs.getString("Address"));
                 acc.setGender(rs.getString("Gender"));
-                acc.setAccountStatus(rs.getInt("idStatus")); 
+                acc.setAccountStatus(rs.getInt("idStatus"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -297,6 +297,7 @@ public class AccountDAO {
                 rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
                     acc = new Account();
+                    acc.setUserID(rs.getInt(1));
                     acc.setEmail(rs.getString(2));
                     acc.setKoiCareID(rs.getString(3));
                     acc.setProfileImage(rs.getString(4));
@@ -328,11 +329,52 @@ public class AccountDAO {
         return acc;
     }
 
+    public boolean updateImgByAccountID(int acid, String img) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "update Accounts\n"
+                        + "set [UserImage] = ?\n"
+                        + "where [AccID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, img);
+                pst.setInt(2, acid);
+                
+                int rowAffect = pst.executeUpdate();
+                if(rowAffect > 0)
+                    return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         AccountDAO acd = new AccountDAO();
 //        boolean c = acd.isKoiCareIDExist("rikawa1");
         Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
+//        boolean c = acd.updateImgByAccountID(1, "link moi");
         System.out.println(c);
+        
+        
     }
 
 }

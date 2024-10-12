@@ -103,10 +103,14 @@ public class AccountService {
     public Account getAccountByEmail(String email){
         return acd.getAccountByEmail(email);
     }
+    public boolean upDateImgAccountById(int acid, String imgLink){
+        return acd.updateImgByAccountID(acid, imgLink);
+    }
     
     public static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");
         System.out.println(acc);
     }
+    
 }

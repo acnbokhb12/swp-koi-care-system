@@ -8,19 +8,23 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.service.AccountService;
+import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author DELL
  */
-public class LoginGoogleController extends HttpServlet {
+@MultipartConfig
+public class ImageUploadSingleController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,21 +38,32 @@ public class LoginGoogleController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String code = request.getParameter("code");
-            AccountService acs = new AccountService();
-            String accessToken = acs.getToken(code); 
-            Account acc = acs.getUserInfo(accessToken);
-            String email = acc.getEmail();
-            Account account = acs.getAccountByEmail(email);
-            if(account!=null){ 
-                HttpSession session = request.getSession();
-                session.setAttribute("userAccount", account);
-                response.sendRedirect("home.jsp"); 
-            }else{
-                HttpSession session = request.getSession();
-                session.setAttribute("VirturalAcc", acc);
-                request.getRequestDispatcher("createPassword.jsp").forward(request, response);
-            }
+               Part filePart = request.getPart("fileimg");
+               String tempDir = getServletContext().getRealPath("/") + "uploads";
+               ImageUploadService imgs = new ImageUploadService();
+               String imageUrl = "";
+               try {
+                    imageUrl =  imgs.uploadImage(filePart, tempDir); 
+                    System.out.println(imageUrl);
+
+               } catch (Exception e) {
+                   e.printStackTrace();
+                   
+               }
+               AccountService acs = new AccountService();
+               HttpSession session = request.getSession();
+               Account acc = (Account) session.getAttribute("userAccount");
+               int acid = acc.getUserID();
+               boolean isUpdateImgSuccess = acs.upDateImgAccountById(acc.getUserID(), imageUrl);
+               String url = "";
+               if(isUpdateImgSuccess){
+                    acc.setProfileImage(imageUrl);
+                    session.setAttribute("userAccount", acc);
+                    url = "profilePage.jsp";
+               }else{
+                   url = "editProfile.jsp";
+               }
+               request.getRequestDispatcher(url).forward(request, response);
         }
     } 
 

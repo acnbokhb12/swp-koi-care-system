@@ -9,6 +9,7 @@ import com.swp.koiCareSystem.config.IConstant;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
+@MultipartConfig
 public class MainController extends HttpServlet {
 
     /**
@@ -68,6 +70,9 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PONDINFOR:
                     url = "PondInforController";
+                    break;
+                case IConstant.UPIMGSINGLE:
+                    url = "ImageUploadSingleController";
                     break;
                 default:
                     url = "home.jsp";
