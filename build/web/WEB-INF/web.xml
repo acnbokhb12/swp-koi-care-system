@@ -56,6 +56,14 @@
         <servlet-name>CreateAccountWithGoogleController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.CreateAccountWithGoogleController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PasswordProfileController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.PasswordProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileInformationController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ProfileInformationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>CreateAccountWithGoogleController</servlet-name>
         <url-pattern>/CreateAccountWithGoogleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordProfileController</servlet-name>
+        <url-pattern>/PasswordProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileInformationController</servlet-name>
+        <url-pattern>/ProfileInformationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

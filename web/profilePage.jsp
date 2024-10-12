@@ -40,10 +40,10 @@
                     <!-- User Profile Image and Name -->
                     <div class="custom-container">
                         <div class="img_profile">
-                            <img src="https://i.pinimg.com/550x/dd/25/df/dd25df36b75a4765cd4ddef557e9aafe.jpg" class="profile-img" alt="User Profile Image">
+                            <img src="${sessionScope.userAccount.profileImage}" class="profile-img" alt="User Profile Image">
                         </div>
-                        <h1 class="user_name">HELLO, HUY CHE</h1>
-                        <a href="editProfile.jsp" class="infor">EDIT INFORMATION</a>
+                        <h1 class="user_name">Welcome ${sessionScope.userAccount.fullName}</h1>
+                        <a href="MainController?action=editprofileJsp" class="infor">EDIT INFORMATION</a>
                         <a href="#" class="infor">SIGN OUT</a>
                     </div>
             

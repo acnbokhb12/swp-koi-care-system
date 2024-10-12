@@ -156,7 +156,7 @@ public class AccountDAO {
             pstmt.setString(3, hashedPassword);
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs!= null && rs.next()) {
+            if (rs != null && rs.next()) {
                 acc = new Account();
                 acc.setUserID(rs.getInt("AccID"));
                 acc.setEmail(rs.getString("Email"));
@@ -167,7 +167,7 @@ public class AccountDAO {
                 acc.setUserRole(rs.getString("UserRole"));
                 acc.setAddress(rs.getString("Address"));
                 acc.setGender(rs.getString("Gender"));
-                acc.setAccountStatus(rs.getInt("idStatus")); 
+                acc.setAccountStatus(rs.getInt("idStatus"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -224,6 +224,7 @@ public class AccountDAO {
         boolean isUpdated = false;
         Connection conn = null;
         PreparedStatement stmt = null;
+        ResultSet rs = null;
         try {
             conn = DatabaseConnectionManager.getConnection();
             String sql = "UPDATE Accounts SET FullName = ?, Email = ?, PhoneNumber = ?, Address = ?, Password = ?, Gender = ? WHERE AccID = ?";
@@ -242,6 +243,79 @@ public class AccountDAO {
             e.printStackTrace();
         }
         return isUpdated;
+    }
+
+    public String getPasswordByAccID(int accID) {
+        String sql = "SELECT Password FROM Accounts WHERE AccID = ?";
+        String password = null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, accID);
+                rs = pstmt.executeQuery();
+                if (rs != null && rs.next()) {
+                    password = rs.getString("Password");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return password;
+    }
+
+    public boolean updatePassword(int accID, String newPassword) {
+        String sql = "UPDATE Accounts SET Password = ? WHERE AccID = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,newPassword);
+                pstmt.setInt(2, accID);
+
+                int rowsAffected = pstmt.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     public boolean registerWithGoogleAcc(Account account) {

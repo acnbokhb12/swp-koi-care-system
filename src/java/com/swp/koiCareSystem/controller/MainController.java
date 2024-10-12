@@ -45,6 +45,12 @@ public class MainController extends HttpServlet {
                 case IConstant.SHOP:
                     url = "ManageShopController";
                     break;
+                case IConstant.PROFILEJSP:
+                    url = "profilePage.jsp";
+                    break;
+                case IConstant.EDITPROFILEJSP:
+                    url = "editProfile.jsp";
+                    break;
                 case IConstant.PRODUCTDETAIL:
                     url = "ProductDetailController";
                     break;
@@ -68,6 +74,9 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PONDINFOR:
                     url = "PondInforController";
+                    break;
+                case IConstant.PASSWORDPROFILE:
+                    url = "PasswordProfileController";
                     break;
                 default:
                     url = "home.jsp";
