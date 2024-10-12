@@ -33,13 +33,15 @@ public interface IConstant {
     public final String FISHINFOR = "fishinfor";
     public final String PONDINFOR = "pondinfor"; 
     
+    public static String BLOG = "blog";
+    
      
     
     public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";
 
     public static final String GOOGLE_CLIENT_SECRET = "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";
 
-    public static final String GOOGLE_REDIRECT_URI = "http://localhost:8082/com.swp.koiCareSystem/LoginGoogleController";
+    public static final String GOOGLE_REDIRECT_URI = "http://localhost:8084/com.swp.koiCareSystem/LoginGoogleController";
 
     public static final String GOOGLE_GRANT_TYPE = "authorization_code";
 

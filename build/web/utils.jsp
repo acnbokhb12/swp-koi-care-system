@@ -243,7 +243,7 @@
                                             <div class="contain__sub-item_nav-link">
                                                 <ul class="contain__sub-item_nav-list">
                                                     <li class="contain__sub-item_nav-items">
-                                                        <a href="blogs.jap">Blogs</a>
+                                                        <a href="blogs.jsp">Blogs</a>
                                                     </li>
                                                     <li class="contain__sub-item_nav-items">
                                                         <a href="news.jsp">News</a>
