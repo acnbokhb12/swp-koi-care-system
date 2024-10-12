@@ -7,7 +7,6 @@ package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.AccountService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -131,19 +130,6 @@ public class AccountDAO {
         return false;
     }
 
-    public boolean isPhoneNumberExist(String phoneNumber) throws SQLException {
-        String query = "SELECT PhoneNumber FROM Accounts WHERE PhoneNumber = ?";
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, phoneNumber);
-            ResultSet rs = ps.executeQuery();
-            return rs.next();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
     public Account checkLogin(String email, String hashedPassword) throws SQLException, ClassNotFoundException {
         String sql = "select [AccID] ,[Email] ,[KoiCareID], UserImage, FullName, PhoneNumber, UserRole, Address, Gender, idStatus\n"
                 + "from Accounts\n"
@@ -175,31 +161,21 @@ public class AccountDAO {
         return acc;
     }
 
-    public Account getUserById(int userId) {
-        Account account = null;
-        Connection conn = null;
-        PreparedStatement stmt = null;
+    public boolean isPhoneNumberExist(String phoneNumber) {
+        Connection cn = null;
+        PreparedStatement pst = null;
         ResultSet rs = null;
-        String sql = "SELECT FullName, Email, PhoneNumber, Address, Gender FROM Accounts WHERE AccID = ?";
-
         try {
-            conn = DatabaseConnectionManager.getConnection();
-            if (conn != null) {
-                stmt = conn.prepareStatement(sql);
-                stmt.setInt(1, userId);
-                rs = stmt.executeQuery();
-
-                if (rs.next()) {
-                    account = new Account();
-                    account.setFullName(rs.getString("FullName"));
-                    account.setEmail(rs.getString("Email"));
-                    account.setPhoneNumber(rs.getString("PhoneNumber"));
-                    account.setAddress(rs.getString("Address"));
-                    account.setGender(rs.getString("Gender"));
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT count(*) FROM Accounts WHERE PhoneNumber = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, phoneNumber);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1) > 0;
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -207,8 +183,50 @@ public class AccountDAO {
                 if (rs != null) {
                     rs.close();
                 }
-                if (stmt != null) {
-                    stmt.close();
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateAccount(Account account) {
+        String sql = "UPDATE Accounts SET "
+                + "FullName = ?, PhoneNumber = ?, Address = ?, Gender = ?, KoiCareID = ? "
+                + "WHERE AccID = ?";
+
+        boolean updateSuccess = false;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, account.getFullName());
+            pstmt.setString(2, account.getPhoneNumber());
+            pstmt.setString(3, account.getAddress());
+            pstmt.setString(4, account.getGender());
+            pstmt.setString(5, account.getKoiCareID());
+            pstmt.setInt(6, account.getUserID());
+
+            int rowsUpdated = pstmt.executeUpdate();
+            updateSuccess = rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
                 }
                 if (conn != null) {
                     conn.close();
@@ -217,32 +235,7 @@ public class AccountDAO {
                 e.printStackTrace();
             }
         }
-        return account;
-    }
-
-    public static boolean updateAccount(Account account) throws ClassNotFoundException {
-        boolean isUpdated = false;
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = DatabaseConnectionManager.getConnection();
-            String sql = "UPDATE Accounts SET FullName = ?, Email = ?, PhoneNumber = ?, Address = ?, Password = ?, Gender = ? WHERE AccID = ?";
-            stmt = conn.prepareStatement(sql);
-
-            stmt.setString(1, account.getFullName());
-            stmt.setString(2, account.getEmail());
-            stmt.setString(3, account.getPhoneNumber());
-            stmt.setString(4, account.getAddress());
-            stmt.setString(5, account.getPassword());
-            stmt.setString(6, account.getGender());
-            stmt.setInt(7, account.getUserID());
-
-            isUpdated = stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return isUpdated;
+        return updateSuccess;
     }
 
     public String getPasswordByAccID(int accID) {
@@ -293,7 +286,7 @@ public class AccountDAO {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1,newPassword);
+                pstmt.setString(1, newPassword);
                 pstmt.setInt(2, accID);
 
                 int rowsAffected = pstmt.executeUpdate();
@@ -371,6 +364,7 @@ public class AccountDAO {
                 rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
                     acc = new Account();
+                    acc.setUserID(rs.getInt(1));
                     acc.setEmail(rs.getString(2));
                     acc.setKoiCareID(rs.getString(3));
                     acc.setProfileImage(rs.getString(4));

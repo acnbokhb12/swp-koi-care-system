@@ -52,15 +52,15 @@ public class PasswordProfileController extends HttpServlet {
             AccountService acs = new AccountService();
 
             String currentPassword = acd.getPasswordByAccID(accID);
-            if (currentPassword != null && currentPassword.equals(acs.hashPassword(password_old))) {
+            if (currentPassword != null && acs.checkPassword(password_old, currentPassword)) {
                 if (acs.updatePassword(accID, password_new)) {
-                    response.sendRedirect("profilePage.jsp");
+                    request.getRequestDispatcher("MainController?action=profileJsp").forward(request, response);
                 } else {
-                    response.sendRedirect("editProfile.jsp");
+                    request.getRequestDispatcher("MainController?action=editprofileJsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("WrongPassword", "Old password is incorrect.");
-                request.getRequestDispatcher("editProfile.jsp").forward(request, response);
+                request.getRequestDispatcher("MainController?action=editprofileJsp").forward(request, response);
             }
         }
     }

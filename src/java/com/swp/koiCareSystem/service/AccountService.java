@@ -75,14 +75,6 @@ public class AccountService {
 
     }
 
-    public boolean checkEmailExist(String email) {
-        return acd.checkEmail(email);
-    }
-
-    public boolean isPhoneNumberExist(String phoneNumber) throws Exception {
-        return acd.isPhoneNumberExist(phoneNumber);
-    }
-
     public boolean registerUser(Account account) {
         account.setPassword(hashPassword(account.getPassword()));
         return acd.registerUser(account);
@@ -103,6 +95,16 @@ public class AccountService {
 
     public Account getAccountByEmail(String email) {
         return acd.getAccountByEmail(email);
+    }
+
+    public boolean checkPassword(String password_old, String currentPassword) {
+        String hashedOldPassword = hashPassword(password_old);
+
+        if (hashedOldPassword.equals(currentPassword)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean updatePassword(int accID, String newPassword) {

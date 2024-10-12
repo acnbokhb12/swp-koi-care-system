@@ -78,6 +78,9 @@ public class MainController extends HttpServlet {
                 case IConstant.PASSWORDPROFILE:
                     url = "PasswordProfileController";
                     break;
+                case IConstant.INFORMATIONPROFILE:
+                    url = "ProfileInformationController";
+                    break;
                 default:
                     url = "home.jsp";
                     break;

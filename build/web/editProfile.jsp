@@ -4,7 +4,7 @@
     Author     : DELL
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,75 +42,87 @@
                     <div class="card mb-4">
                         <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            <form action="#" class="form" id="form-1" method="post">
+                            <form action="MainController?action=informationprofile" class="form" id="form-1" method="post">
+                                <input type="hidden" name="accID" id="accID" value="${sessionScope.userAccount.userID}">
                                 <div class="row row-form-edit">
-
-                                    <!-- Form Group (email address)-->
+                                    <!-- Form Group (email address) -->
                                     <div class="col-md-6">
                                         <label class="label-profile-edit" for="email">Email address</label>
-                                        <input class="form-control" id="email" type="email" value="name@example.com" readonly>
-                                        <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                 
+                                        <input class="form-control" id="email" name="email" type="email" value="${sessionScope.userAccount.email}" readonly>
+                                        <!-- Dung co ma cham vo form-message , cai nay do js lam roi -->                                 
                                         <span class="form-message"></span>   
                                     </div>
-                                    <!-- Form Group (username)-->
-                                    <div class="col-md-6 ">
-                                        <label class="label-profile-edit" for="inputUsername">KoiCareId</label>
-                                        <input class="form-control" id="KoiCareId" type="text" placeholder="Enter your username" value="${sessionScope.userAccount.koiCareID}">
-                                        <!-- dung co ma cham vo form-message , cai nay do js lam roi -->
-                                        <span class="form-message"></span>
-                                        <!-- <span class="error__bk">KoiCareId is exist</span>   -->
-
-                                    </div>
+                                    <!-- Conditional rendering for KoiCareId -->
+                                    <c:if test="${sessionScope.userAccount.koiCareID == null}">
+                                        <div class="col-md-6">
+                                            <label class="label-profile-edit" for="KoiCareId">KoiCareId</label>
+                                            <input class="form-control" name="KoiCareId" id="KoiCareId" type="text" placeholder="Enter your KoiCareId" value="">
+                                            <span class="form-message"></span>
+                                            <c:if test="${KoiIdExist != null}">
+                                                <span class="error__bk">${KoiIdExist}</span>
+                                            </c:if>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${sessionScope.userAccount.koiCareID != null}">
+                                        <div class="col-md-6">
+                                            <label class="label-profile-edit" for="KoiCareId">KoiCareId</label>
+                                            <input class="form-control" id="KoiCareId" type="text" placeholder="Enter your KoiCareId" 
+                                                   value="${sessionScope.userAccount.koiCareID}" readonly>
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </c:if>
                                 </div>
                                 <div class="row  row-form-edit ">
                                     <!-- Form Group (username)-->
                                     <div class="col-md-6 ">
                                         <label class="label-profile-edit" for="inputUsername">Name</label>
-                                        <input class="form-control" id="fullname" type="text" placeholder="Enter your username" value="${sessionScope.userAccount.fullName}" required>
+                                        <input class="form-control" id="fullname" name="fullname" type="text" placeholder="Enter your username" value="${sessionScope.userAccount.fullName}" required>
                                         <!-- dung co ma cham vo form-message , cai nay do js lam roi --> 
                                         <span class="form-message"></span> 
                                     </div> 
                                     <!-- Form Group (phone number)-->
                                     <div class="col-md-6">
                                         <label class="label-profile-edit" for="inputPhone">Phone number</label>
-                                        <input class="form-control" id="phoneNumber" type="tel" placeholder="Enter your phone number" value="${sessionScope.userAccount.phoneNumber}" required>
+                                        <input class="form-control" id="phoneNumber" name="phoneNumber" type="tel" placeholder="Enter your phone number" value="${sessionScope.userAccount.phoneNumber}" required>
                                         <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                   
                                         <span class="form-message"></span> <!-- dont touch --> 
-
+                                        <c:if test="${PhoneNumberExist != null}">
+                                            <span class="error__bk">${PhoneNumberExist}</span>
+                                        </c:if>
                                     </div>
                                 </div> 
                                 <!-- Form Row-->
                                 <div class="row  ">
                                     <div class="col-md-6 ">
                                         <label class="label-profile-edit" for="address">Address</label>
-                                        <input class="form-control" id="address" name="address" type="text" placeholder="Enter your address" value="${sessionScope.userAccount.address}" required>
+                                        <input class="form-control" id="address" name="address" type="text" placeholder="Enter your address" value="${sessionScope.userAccount.address}" required accept-charset >
                                         <span class="form-message"></span>
                                     </div> 
                                     <!-- Form Group (birthday)-->
                                     <div class="col-md-6">
                                         <label class="label-profile-edit" for="inputBirthday">Gender</label>
                                         <select name="choice-gender" id="" class="input__form ">
-                                            <option value="Man">Man</option>
-                                            <option value="Woman">Woman</option>
-                                            <option value="Orther">Orther</option>
-                                        </select>
+                                            <option value="Man" <c:if test="${sessionScope.userAccount.gender == 'Man'}">selected</c:if>>Man</option>
+                                            <option value="Woman" <c:if test="${sessionScope.userAccount.gender == 'Woman'}">selected</c:if>>Woman</option>
+                                            <option value="Other" <c:if test="${sessionScope.userAccount.gender == 'Other'}">selected</c:if>>Other</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Save changes button-->
-                                <button class="btn btn-edit-img-profile" type="submit">Save changes</button>
-                            </form>
+                                    <!-- Save changes button-->
+                                    <button class="btn btn-edit-img-profile" type="submit">Save changes</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4">
-                    <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Profile Picture</div>
-                        <div class="card-body text-center">
-                            <!-- Profile picture image-->
-                            <div class="text-center d-flex justify-content-center">
+                    <div class="col-xl-4">
+                        <!-- Profile picture card-->
+                        <div class="card mb-4 mb-xl-0">
+                            <div class="card-header">Profile Picture</div>
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                <div class="text-center d-flex justify-content-center">
 
-                                <img id="imagePreview" class="img-account-profile rounded-circle " src="${sessionScope.userAccount.profileImage}" alt="">
+                                    <img id="imagePreview" class="img-account-profile rounded-circle " src="${sessionScope.userAccount.profileImage}" alt="">
                             </div>
                             <!-- Profile picture help block-->
                             <div class="desc-img">

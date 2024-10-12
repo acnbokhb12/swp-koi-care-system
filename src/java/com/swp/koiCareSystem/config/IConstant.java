@@ -33,6 +33,7 @@ public interface IConstant {
     public final String PONDINFOR = "pondinfor";
 
     public final String PASSWORDPROFILE = "passwordprofile";
+    public final String INFORMATIONPROFILE = "informationprofile";
 
     public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";
 
