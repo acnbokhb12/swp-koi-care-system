@@ -12,86 +12,102 @@ import java.sql.Date;
  * @author Khanh
  */
 public class Blog {
-    private int BlogID;
-    private int AccID;
-    private int IDBlogCate;
-    private String Title; 
-    private String Content;
-    private String BlogsImage;
-    private Date BlogsDate;
+
+    private int blogID;
+    private int userID;
+    private int blogCateId;
+    private String title;
+    private String content;
+    private String blogImage;
+    private Date blogDate;
+    private boolean isDeleted;
+    private BlogCategory blogCategory;
 
     public Blog() {
     }
 
-    public Blog(int BlogID, int AccID, int IDBlogCate, String Title, String Content, String BlogsImage, Date BlogsDate) {
-        this.BlogID = BlogID;
-        this.AccID = AccID;
-        this.IDBlogCate = IDBlogCate;
-        this.Title = Title;
-        this.Content = Content;
-        this.BlogsImage = BlogsImage;
-        this.BlogsDate = BlogsDate;
+    public Blog(int blogID, int userID, int blogCateId, String title, String content, String blogImage, Date blogDate, boolean isDeleted, BlogCategory blogCategory) {
+        this.blogID = blogID;
+        this.userID = userID;
+        this.blogCateId = blogCateId;
+        this.title = title;
+        this.content = content;
+        this.blogImage = blogImage;
+        this.blogDate = blogDate;
+        this.isDeleted = isDeleted;
+        this.blogCategory = blogCategory;
     }
 
     public int getBlogID() {
-        return BlogID;
+        return blogID;
     }
 
-    public void setBlogID(int BlogID) {
-        this.BlogID = BlogID;
+    public void setBlogID(int blogID) {
+        this.blogID = blogID;
     }
 
-    public int getAccID() {
-        return AccID;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setAccID(int AccID) {
-        this.AccID = AccID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
-    public int getIDBlogCate() {
-        return IDBlogCate;
+    public int getBlogCateId() {
+        return blogCateId;
     }
 
-    public void setIDBlogCate(int IDBlogCate) {
-        this.IDBlogCate = IDBlogCate;
+    public void setBlogCateId(int blogCateId) {
+        this.blogCateId = blogCateId;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
-    public void setContent(String Content) {
-        this.Content = Content;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getBlogsImage() {
-        return BlogsImage;
+    public String getBlogImage() {
+        return blogImage;
     }
 
-    public void setBlogsImage(String BlogsImage) {
-        this.BlogsImage = BlogsImage;
+    public void setBlogImage(String blogImage) {
+        this.blogImage = blogImage;
     }
 
-    public Date getBlogsDate() {
-        return BlogsDate;
+    public Date getBlogDate() {
+        return blogDate;
     }
 
-    public void setBlogsDate(Date BlogsDate) {
-        this.BlogsDate = BlogsDate;
+    public void setBlogDate(Date blogDate) {
+        this.blogDate = blogDate;
     }
 
-    @Override
-    public String toString() {
-        return "Blog{" + "BlogID=" + BlogID + ", AccID=" + AccID + ", IDBlogCate=" + IDBlogCate + ", Title=" + Title + ", Content=" + Content + ", BlogsImage=" + BlogsImage + ", BlogsDate=" + BlogsDate + '}';
+    public boolean isIsDeleted() {
+        return isDeleted;
     }
 
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public BlogCategory getBlogCategory() {
+        return blogCategory;
+    }
+
+    public void setBlogCategory(BlogCategory blogCategory) {
+        this.blogCategory = blogCategory;
+    }
+    
 }

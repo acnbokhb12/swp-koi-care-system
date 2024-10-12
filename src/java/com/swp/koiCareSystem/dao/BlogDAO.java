@@ -87,11 +87,11 @@ public class BlogDAO {
         return 0;
     }
     
-    public ArrayList<Blog> GetAllBlogs(int index){
-        Connection c = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        ArrayList
-    }
+//    public ArrayList<Blog> GetAllBlogs(int index){
+//        Connection c = null;
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        
+////        ArrayList
+//    }
 }

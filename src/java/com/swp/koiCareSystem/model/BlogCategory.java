@@ -10,37 +10,38 @@ package com.swp.koiCareSystem.model;
  * @author Khanh
  */
 public class BlogCategory {
-    private int IDBlogCate;
-    private String NameBlogCate;
+    private int id;
+    private String nameCategory;
 
     public BlogCategory() {
     }
 
-    public BlogCategory(int IDBlogCate, String NameBlogCate) {
-        this.IDBlogCate = IDBlogCate;
-        this.NameBlogCate = NameBlogCate;
+    public BlogCategory(int id, String nameCategory) {
+        this.id = id;
+        this.nameCategory = nameCategory;
     }
 
-    public int getIDBlogCate() {
-        return IDBlogCate;
+    public int getId() {
+        return id;
     }
 
-    public void setIDBlogCate(int IDBlogCate) {
-        this.IDBlogCate = IDBlogCate;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNameBlogCate() {
-        return NameBlogCate;
+    public String getNameCategory() {
+        return nameCategory;
     }
 
-    public void setNameBlogCate(String NameBlogCate) {
-        this.NameBlogCate = NameBlogCate;
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 
     @Override
     public String toString() {
-        return "BlogCategory{" + "IDBlogCate=" + IDBlogCate + "NameBlogCate=" + NameBlogCate + "}"; 
+        return "BlogCategory{" + "id=" + id + ", nameCategory=" + nameCategory + '}';
     }
+    
     
     
 }
