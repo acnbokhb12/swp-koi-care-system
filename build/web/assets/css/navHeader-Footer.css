@@ -787,7 +787,7 @@
     }
     .nav-bar-menu{
         background-color: rgba(0, 0, 0, 1);
-        /* height: calc(100vh - 36px); */
+         height: calc(100vh - 36px); 
         /* height: 100%; */
         width: 30%;
         min-width: 300px;

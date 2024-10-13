@@ -131,9 +131,9 @@
                                 </p>    
                             </div>
                             <!-- Profile picture upload button-->
-                            <form action=""> 
-                                <input id="imageInput" class="choose-edit-img-profile" type="file" accept="image/*">
-                                <button class="btn btn-edit-img-profile" type="button">Upload new image</button>
+                             <form action="MainController?action=upImgSingle" method="post" enctype="multipart/form-data"> 
+                                <input id="imageInput" name="fileimg" class="choose-edit-img-profile" type="file" accept="image/*" >
+                                <button class="btn btn-edit-img-profile" type="submit">Upload new image</button>
                             </form>
                         </div>
                     </div>

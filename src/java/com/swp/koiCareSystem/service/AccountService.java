@@ -111,7 +111,10 @@ public class AccountService {
         String hashedPassword = hashPassword(newPassword);
         return acd.updatePassword(accID, hashedPassword);
     }
-
+    
+    public boolean upDateImgAccountById(int acid, String imgLink){
+        return acd.updateImgByAccountID(acid, imgLink);
+    }
     public static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");

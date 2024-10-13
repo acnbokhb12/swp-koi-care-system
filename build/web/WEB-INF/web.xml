@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
+     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
     </servlet>
@@ -63,6 +63,10 @@
     <servlet>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.EditProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImageUploadSingleController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ImageUploadSingleController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -128,7 +132,10 @@
         <servlet-name>EditProfileController</servlet-name>
         <url-pattern>/EditProfileController</url-pattern>
     </servlet-mapping>
-    
+     <servlet-mapping>
+        <servlet-name>ImageUploadSingleController</servlet-name>
+        <url-pattern>/ImageUploadSingleController</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>

@@ -44,7 +44,7 @@
                         </div>
                         <h1 class="user_name">Welcome ${sessionScope.userAccount.fullName}</h1>
                         <a href="MainController?action=editProfileJsp" class="infor">EDIT INFORMATION</a>
-                        <a href="#" class="infor">SIGN OUT</a>
+                        <a href="MainController?action=logout" class="infor">SIGN OUT</a>
                     </div>
             
                     <!-- Profile Details Section -->

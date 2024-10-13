@@ -395,7 +395,45 @@ public class AccountDAO {
         }
         return acc;
     }
+    
+    public boolean updateImgByAccountID(int acid, String img) {
+        Connection cn = null;
+        PreparedStatement pst = null;
 
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "update Accounts\n"
+                        + "set [UserImage] = ?\n"
+                        + "where [AccID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, img);
+                pst.setInt(2, acid);
+                
+                int rowAffect = pst.executeUpdate();
+                if(rowAffect > 0)
+                    return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
     public static void main(String[] args) {
         AccountDAO acd = new AccountDAO();
 //        boolean c = acd.isKoiCareIDExist("rikawa1");
