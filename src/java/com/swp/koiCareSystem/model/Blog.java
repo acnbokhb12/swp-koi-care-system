@@ -20,13 +20,13 @@ public class Blog {
     private String content;
     private String blogImage;
     private Date blogDate;
-    private boolean isDeleted;
+    private boolean isActive;
     private BlogCategory blogCategory;
 
     public Blog() {
     }
 
-    public Blog(int blogID, int userID, int blogCateId, String title, String content, String blogImage, Date blogDate, boolean isDeleted, BlogCategory blogCategory) {
+    public Blog(int blogID, int userID, int blogCateId, String title, String content, String blogImage, Date blogDate, boolean isActive, BlogCategory blogCategory) {
         this.blogID = blogID;
         this.userID = userID;
         this.blogCateId = blogCateId;
@@ -34,7 +34,7 @@ public class Blog {
         this.content = content;
         this.blogImage = blogImage;
         this.blogDate = blogDate;
-        this.isDeleted = isDeleted;
+        this.isActive = isActive;
         this.blogCategory = blogCategory;
     }
 
@@ -94,12 +94,12 @@ public class Blog {
         this.blogDate = blogDate;
     }
 
-    public boolean isIsDeleted() {
-        return isDeleted;
+    public boolean isIsActive() {
+        return isActive;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public BlogCategory getBlogCategory() {
@@ -108,6 +108,11 @@ public class Blog {
 
     public void setBlogCategory(BlogCategory blogCategory) {
         this.blogCategory = blogCategory;
+    }
+
+    @Override
+    public String toString() {
+        return "Blog{" + "blogID=" + blogID + ", userID=" + userID + ", blogCateId=" + blogCateId + ", title=" + title + ", content=" + content + ", blogImage=" + blogImage + ", blogDate=" + blogDate + ", isActive=" + isActive + ", blogCategory=" + blogCategory + '}';
     }
     
 }

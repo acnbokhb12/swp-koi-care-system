@@ -1,3 +1,5 @@
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,16 +19,16 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
-    <link rel="stylesheet" href="./assets/css/blog.css">
+    <link rel="stylesheet" href="./assets/css/navHeader-Footer.css"> 
+    <link rel="stylesheet" href="./assets/css/news_blogs.css">
 </head>
-<body>
+<body style="background-color: #EDEFF4;">
     <div id="header"></div>
   
     <div class="container container-blog">
         <div class="row">
             <div class="main-content col-md-8">
-                <h2>Forum Posts</h2>
+                <h2 class="text-dark">Forum Posts</h2>
                 <div class="post">
                     <div class="post-header">
                         <img src="https://www.vietnamworks.com/hrinsider/wp-content/uploads/2023/12/anh-den-ngau.jpeg" alt="">
@@ -90,13 +92,13 @@
             <div class="sidebar col-md-4">
                 <div class="create-sidebar">
                     <div class="create-post">
-                        <form action="" enctype="multipart/form-data"> 
-                        <h2>Create New Post</h2>
+                        <form action=""  enctype="multipart/form-data"> 
+                        <h2 class="text-dark">Create New Post</h2>
                         <input type="text" placeholder="Title">
                         <textarea placeholder="Content"></textarea>
                         <!-- <div class="upload-image">Upload Image<br>PNG, JPG, GIF up to 10MB</div> -->
-                        <img class="img_to_upload" src="https://cdn.shopify.com/s/files/1/1083/2612/files/koi2_480x480.jpg?v=1719301650" alt="">
-                        <input type="file" accept="img/*" >
+                        <img id="imagePreview" class="img_to_upload" src="https://t4.ftcdn.net/jpg/05/75/48/57/360_F_575485756_WSQ6ZzqMhD0JnPcEupxyKikKKCE5p5jo.jpg" alt="">
+                        <input id="imageInput" type="file" accept="img/*" >
                         <label for="">Select a category</label>
                         <select> 
                             <option selected>Technology</option>
@@ -104,13 +106,13 @@
                             <option>Lifestyle</option>
                             <option>Health</option>
                         </select>
-                        <button type="submit">
+                        <button  type="submit">
                             <h4>Create Post</h4>
                         </button>
                         </form>
                     </div>
                     <div class="categories">
-                        <h2>Categories</h2>
+                        <h1 class="text-dark">Categories</h1>
                         <ul>
                             <li>
                                 <a href="#">
@@ -147,11 +149,28 @@
 </body>
 
 <script>
-    $('#header').load('utils.html #header__nav', ()=>{
+    $('#header').load('utils.jsp #header__nav', ()=>{
         $.getScript('./assets/js/utilsCustomer.js');
     });
-    $('#footer').load('utils.html #footer__nav', ()=>{
+    $('#footer').load('utils.jsp #footer__nav', ()=>{
         $.getScript('./assets/js/utilsCustomer.js');
+    });
+
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block'; // Hiện ảnh khi file được chọn
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none'; // Ẩn ảnh nếu không có file nào được chọn
+        }
     });
 </script>
 </html>
