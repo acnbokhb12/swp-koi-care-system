@@ -287,7 +287,7 @@
                                                         <div class="header__link-task-container">
                                                             <div class="welcome__acc-header">
                                                                 <p class="dddssd">${sessionScope.userAccount.fullName}</p>
-                                                                <a href="profilePage.jsp" class="view__detail_acc">
+                                                                <a href="MainController?action=profileJsp" class="view__detail_acc">
                                                                     <i class="fa-solid fa-file-invoice"></i> My Account
                                                                 </a>
                                                             </div>

@@ -31,6 +31,7 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String url = "";
         try {
             /* TODO output your page here. You may use following sample code. */
@@ -68,6 +69,18 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PONDINFOR:
                     url = "PondInforController";
+                    break;
+                case IConstant.PROFILEJSP:
+                    url = "profilePage.jsp";
+                    break; 
+                case IConstant.EDIT_PROFILE_JSP:
+                    url = "editProfile.jsp";
+                    break;
+                case IConstant.PASSWORDPROFILE:
+                    url = "PasswordProfileController";
+                    break;
+                case IConstant.EDITPROFILE:
+                    url = "EditProfileController";
                     break;
                 default:
                     url = "home.jsp";
