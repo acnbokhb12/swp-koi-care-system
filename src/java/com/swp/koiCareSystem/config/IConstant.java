@@ -13,7 +13,7 @@ import io.github.cdimascio.dotenv.Dotenv;
  */
 public interface IConstant {
 
-     public final String HOME = "home";
+    public final String HOME = "home";
     public final String SHOP = "shop";
     public final String SHOPJSP = "shopJsp";
     
@@ -37,6 +37,8 @@ public interface IConstant {
 
     public final String PASSWORDPROFILE = "passwordprofile";
     public final String INFORMATIONPROFILE = "informationprofile";
+    
+     public static String BLOG = "blog";
     
 //    IMG UPLOAD
     public final String UPIMGSINGLE = "upImgSingle";

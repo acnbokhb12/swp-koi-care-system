@@ -6,12 +6,15 @@
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/AccountDAO.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/assets/css/navHeader-Footer.css</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/Account.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/BlogDAO.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/utils.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/BlogCategory.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/ImageUploadSingleController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/ImageUploadService.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/ProductService.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/editProfile.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/blog.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/profilePage.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/LoginGoogleController.java</file>
