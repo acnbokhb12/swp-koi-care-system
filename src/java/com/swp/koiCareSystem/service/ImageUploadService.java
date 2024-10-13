@@ -33,13 +33,16 @@ public class ImageUploadService {
             uploadDir.mkdirs();
         }
         String fileName = filePart.getSubmittedFileName();
+//        Dat ten cho anh
         String uniqueFileName = System.currentTimeMillis() + "_" + fileName;
         File fileToUpload = new File(uploadDir + File.separator + uniqueFileName);
         filePart.write(fileToUpload.getAbsolutePath());
-
         // Upload file lên Cloudinary
         Map uploadResult = cloudinary.uploader().upload(fileToUpload, ObjectUtils.emptyMap());
-//       Take link of img
-        return (String) uploadResult.get("secure_url");
+        String imageUrl = (String) uploadResult.get("secure_url");
+        if (fileToUpload.exists()) {
+        fileToUpload.delete(); // Xóa file tạm
+        }
+        return imageUrl;
     }
 }
