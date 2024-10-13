@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,63 +30,53 @@
         <div class="row">
             <div class="main-content col-md-8">
                 <h2 class="text-dark">Forum Posts</h2>
-                <div class="post">
+                <c:forEach items="${ListB}" var="b">
+                    <div class="post">
+                        <a href="MainController?action=blog&bid=${b.blogID}">
                     <div class="post-header">
-                        <img src="https://www.vietnamworks.com/hrinsider/wp-content/uploads/2023/12/anh-den-ngau.jpeg" alt="">
+                        <img src="${b.profileImage}" alt="">
                         <div>
-                            <span style="color: #ee4d2d; font-weight: bold;">John Doe</span>
-                            <span>Posted on March 15, 2025</span>
+                            <span style="color: #ee4d2d; font-weight: bold;">${b.koiCareID}</span>
+                            <span>${b.blogDate}</span>
+                            <span>${b.nameCategory}</span>
                         </div>
                         <form action="deleteBlog" method="POST" style="display:inline;">
                             <input type="hidden" name="postId" value="1"> 
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>
-                    <div class="post-title">Exciting New Technology Trends</div>
+                    <div class="post-title">${b.title}</div>
                     <div class="post-image">
-                        <img src="https://blog.feedspot.com/wp-content/uploads/2019/08/koi_fish_blogs.jpg" alt="">
+                        <img src="${b.blogImage}" alt="">
                     </div>
                     <div class="post-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>${b.content}</p>
                     </div>
                     <div class="post-footer">
                         <div><i class="fas fa-fire"></i> 24 Likes</div>
                         <div><i class="fas fa-comment"></i> 12 Comments</div>
                     </div>
+                    </a>
                 </div>
-                <div class="post">
-                    <div class="post-header">
-                        <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/avatar-cute-vui-nhon.jpg" alt="">
-                        <div>
-                            <span style="color: #ee4d2d; font-weight: bold;">John Doe</span>
-                            <span>Posted on March 15, 2025</span>
-                        </div>
-                        <form action="deleteBlog" method="POST" style="display:inline;">
-                            <input type="hidden" name="postId" value="1"> 
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </div>
-                    <div class="post-title">Exciting New Technology Trends</div>
-                    <div class="post-image">
-                        <img src="https://blog.feedspot.com/wp-content/uploads/2019/08/koi_fish_blogs.jpg" alt="">
-                    </div>
-                    <div class="post-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="post-footer">
-                        <div><i class="fas fa-fire"></i> 24 Likes</div>
-                        <div><i class="fas fa-comment"></i> 12 Comments</div>
-                    </div>
-                </div>
+                </c:forEach>
                 <div class="pagination">
                     <ul class="pagination-list">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#" class="active">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
+                        <c:if test="${tag > 1}">
+                            <li><a href="?index=${tag - 1}">&laquo;</a></li>
+                        </c:if>
+                        <c:forEach begin="1" end="${endPage}" var="i">
+                            <li>
+                                <c:if test="${i == tag}">
+                                    <a href="#" class="active">1</a>
+                                </c:if>
+                                <c:if test="${i != tag}">
+                                    <a href="?index=${i}">${i}</a>
+                                </c:if>
+                            </li>
+                        </c:forEach>
+                        <c:if test="${tag < endPage}">
+                            <li><a href="#">&raquo;</a></li>
+                        </c:if>
                     </ul>
                 </div>
             </div>

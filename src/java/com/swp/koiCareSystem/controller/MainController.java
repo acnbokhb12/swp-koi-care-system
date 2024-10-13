@@ -87,6 +87,9 @@ public class MainController extends HttpServlet {
                 case IConstant.UPIMGSINGLE:
                     url = "ImageUploadSingleController";
                     break;
+                case IConstant.BLOG:
+                    url = "ManageBlogController";
+                    break;
                 default:
                     url = "home.jsp";
                     break;
