@@ -237,7 +237,7 @@
                                             </a>
                                         </li>
                                         <li class="contain__item-nav contain__item-nav-open">
-                                            <a href="news.jsp" class="contain__item-nav-link">
+                                            <a href="#" class="contain__item-nav-link">
                                                 <span>News <i class="fa-solid fa-chevron-down ml-1"></i></span>
                                             </a>
                                             <div class="contain__sub-item_nav-link">
