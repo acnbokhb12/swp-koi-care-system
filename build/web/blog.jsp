@@ -32,20 +32,20 @@
                 <h2 class="text-dark">Forum Posts</h2>
                 <c:forEach items="${ListB}" var="b">
                     <div class="post">
-                        <a href="MainController?action=blog&bid=${b.blogID}">
+                        <div href="MainController?action=blog&bid=${b.blogID}">
                     <div class="post-header">
-                        <img src="${b.profileImage}" alt="">
+                        <img src="${b.account.profileImage}" alt="">
                         <div>
-                            <span style="color: #ee4d2d; font-weight: bold;">${b.koiCareID}</span>
+                            <span style="color: #ee4d2d; font-weight: bold;">${b.account.fullName}</span>
                             <span>${b.blogDate}</span>
-                            <span>${b.nameCategory}</span>
+                            <span>${b.blogCategory.nameCategory}</span>
                         </div>
                         <form action="deleteBlog" method="POST" style="display:inline;">
                             <input type="hidden" name="postId" value="1"> 
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>
-                    <div class="post-title">${b.title}</div>
+                            <a href="MainController?action=blog&bid=${b.blogID}" class="post-title mb-4 text-danger" style="font-size: 28px; display: block; ">${b.title}</a>
                     <div class="post-image">
                         <img src="${b.blogImage}" alt="">
                     </div>
@@ -56,7 +56,7 @@
                         <div><i class="fas fa-fire"></i> 24 Likes</div>
                         <div><i class="fas fa-comment"></i> 12 Comments</div>
                     </div>
-                    </a>
+                    </div>
                 </div>
                 </c:forEach>
                 <div class="pagination">

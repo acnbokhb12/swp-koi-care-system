@@ -25,9 +25,8 @@ public class BlogService {
         return blogDAO.CountBlog();
     }
     
-    public ArrayList<Blog> GetAllBlog(int index){
-        ArrayList<Blog> list = blogDAO.getAllBlogs(index);
-        return list;
+    public ArrayList<Blog> GetAllBlog(int index){ 
+        return blogDAO.getAllBlogs(index);
     }
     
     public ArrayList<BlogCategory> GetAllBlogCate(){
