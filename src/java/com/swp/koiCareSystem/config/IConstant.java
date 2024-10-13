@@ -16,8 +16,11 @@ public interface IConstant {
     public final String HOME = "home";
     public final String SHOP = "shop";
     public final String SHOPJSP = "shopJsp";
+    
     public final String PROFILEJSP = "profileJsp";
-    public final String EDITPROFILEJSP = "editprofileJsp";
+    public final String EDIT_PROFILE_JSP = "editProfileJsp";
+    
+    public final String EDITPROFILE = "editProfile";
 
     public final String PRODUCTDETAIL = "productDetail";
 

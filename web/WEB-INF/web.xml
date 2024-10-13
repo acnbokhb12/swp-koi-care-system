@@ -61,8 +61,8 @@
         <servlet-class>com.swp.koiCareSystem.controller.PasswordProfileController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProfileInformationController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ProfileInformationController</servlet-class>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.EditProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -125,9 +125,11 @@
         <url-pattern>/PasswordProfileController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfileInformationController</servlet-name>
-        <url-pattern>/ProfileInformationController</url-pattern>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/EditProfileController</url-pattern>
     </servlet-mapping>
+    
+    
     <session-config>
         <session-timeout>
             30
@@ -136,4 +138,5 @@
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>
     </welcome-file-list>
+   
 </web-app>

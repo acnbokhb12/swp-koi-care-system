@@ -399,7 +399,15 @@ public class AccountDAO {
     public static void main(String[] args) {
         AccountDAO acd = new AccountDAO();
 //        boolean c = acd.isKoiCareIDExist("rikawa1");
-        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
+//        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
+        Account acc = new Account();
+               acc.setFullName("Khánh");
+                acc.setPhoneNumber("0908765567");
+                acc.setAddress("12 đường cây keo");
+                acc.setGender("Men");
+//                acc.setKoiCareID("21212");
+                acc.setUserID(9);
+        boolean c= acd.updateAccount(acc);
         System.out.println(c);
     }
 

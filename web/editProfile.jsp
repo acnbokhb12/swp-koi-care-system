@@ -42,8 +42,8 @@
                     <div class="card mb-4">
                         <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            <form action="MainController?action=informationprofile" class="form" id="form-1" method="post">
-                                <input type="hidden" name="accID" id="accID" value="${sessionScope.userAccount.userID}">
+                            <form action="MainController?action=editProfile" class="form" id="form-1" method="post">
+                                <input type="hidden" name="accID"   value="${sessionScope.userAccount.userID}">
                                 <div class="row row-form-edit">
                                     <!-- Form Group (email address) -->
                                     <div class="col-md-6">
@@ -157,6 +157,7 @@
                                             <span class="error__bk">${WrongPassword}</span>   
                                         </c:if>
                                     </div>
+                                    <div class="col-md-6">   </div>
                                     <!-- Form Group (new pw)-->
                                     <div class="col-md-6">
                                         <label class="label-profile-edit" for="inputLastName">New Password</label>
@@ -164,6 +165,13 @@
                                         <!-- dung co ma cham vo form-message , cai nay do js lam roi -->                                    
                                         <span class="form-message"></span>
                                     </div>
+                                                                         
+                                    <div class="form-group col-md-6 ">
+                                        <label class="label-profile-edit" for="password_confirmation">Confirm New Password</label>
+                                        <input type="password" id="password_confirmation" name="txtconfirmpassword" class="form-control"
+                                        placeholder="Confirm password" />
+                                        <span class="form-message"></span>
+                                    </div> 
                                 </div>     
                                 <!-- Save changes button-->
                                 <button class="btn btn-edit-img-profile" type="submit">Save changes</button>
@@ -191,6 +199,7 @@
             errorSelector: '.form-message',
             rules: [
                 Validator.isPhoneNumber('#phoneNumber', 'Phone number at least 10 number'),
+                
             ]
         })
         Validator({
@@ -198,6 +207,10 @@
             errorSelector: '.form-message',
             rules: [
                 Validator.minLength('#password_new', 6),
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirmed('#password_confirmation',()=>{
+                return document.querySelector('#form-2 #password_new').value;
+            },'Password confirm not exactly')
             ]
         })
         const imageInput = document.getElementById('imageInput');
