@@ -19,7 +19,7 @@ public class PondInforService {
         pondDAO = new PondDAO();
     }
 
-    public Pond GetPondInforByIDS(String id) { // Change the parameter type to String
+    public Pond GetPondInforByIDS(String id) {
         return pondDAO.getPondInforByID(id);
     }
 }

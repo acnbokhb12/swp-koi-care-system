@@ -72,6 +72,10 @@
         <servlet-name>ContactController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ContactController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>ContactController</servlet-name>
         <url-pattern>/ContactController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePondController</servlet-name>
+        <url-pattern>/DeletePondController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
