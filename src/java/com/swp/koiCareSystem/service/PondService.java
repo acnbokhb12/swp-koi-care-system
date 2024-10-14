@@ -24,7 +24,7 @@ public class PondService {
         return ponddao.getAllPond(accountID);
     }
 
-    public Pond GetPondInforByIDS(String id) {
+    public Pond GetPondInforByIDS(int id) {
         return ponddao.getPondInforByID(id);
     }
 }

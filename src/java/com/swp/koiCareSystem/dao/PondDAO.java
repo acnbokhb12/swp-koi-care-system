@@ -71,7 +71,7 @@ public class PondDAO {
 //        ArrayList<Pond> listP = new ArrayList<>();
 //        return listP;
 //    }
-    public Pond getPondInforByID(String id) {
+    public Pond getPondInforByID(int id) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -80,7 +80,7 @@ public class PondDAO {
         try {
             conn = DatabaseConnectionManager.getConnection(); // Open connection to the database
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
 
             // Check if a record was found
@@ -188,16 +188,41 @@ public class PondDAO {
         }
     }
 
-    public static void main(String[] args) {
-        PondDAO pondDAO = new PondDAO();
+    public boolean updatePondInformationByID(Pond pond) {
+        Connection conn = null;
+        PreparedStatement ps = null;
 
-        String testPondID = "1"; // Adjust the ID based on available data in your database
-        Pond pond = pondDAO.getPondInforByID(testPondID);
+        String sql = "UPDATE Ponds SET PondName=?, Description=?, NumberOfFish=?, Volume=?, Depth=?, PumpPower=?, DrainCount=?, Skimmer=? WHERE PondID=?";
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            ps = conn.prepareStatement(sql);
 
-        ArrayList<Pond> pd = pondDAO.getAllPond(5);
-        for (Pond p : pd) {
-            System.out.println(p);
+            ps.setString(1, pond.getName());
+            ps.setString(2, pond.getDescriptionPond());
+            ps.setInt(3, pond.getNumberOfFish());
+            ps.setFloat(4, (float) pond.getVolume());
+            ps.setFloat(5, (float) pond.getDepth());
+            ps.setFloat(6, (float) pond.getPumpPower());
+            ps.setInt(7, pond.getDrainCount());
+            ps.setInt(8, pond.getSkimmer());
+            ps.setInt(9, pond.getPondID());
+
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-
 }

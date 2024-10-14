@@ -84,7 +84,7 @@ public class AddNewPondController extends HttpServlet {
             int acid = acc.getUserID();;
             newPond.setAccID(acid);
 
-            boolean isPondCreated = pd.createNewPond(newPond);
+            boolean isCreated = pd.createNewPond(newPond);
 
             PondService ponds = new PondService();
             ArrayList<Pond> listP = ponds.GetAllPondS(acc.getUserID());

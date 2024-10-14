@@ -38,8 +38,8 @@
             <div class="tilte-ponds"> 
                 <h1>Koi Fish Pond Information</h1>
                 <div class="text-right">
-                    <a href="MainController?action=pond" class="back-btn">Back to List</a>
-                    <a href="DeletePondController?pondID=${pond.pondID}" class="delete-btn-fish">Delete</a>                    
+                    <a href="MainController?action=pond" class="back-btn">Back to List</a> 
+                    <a href="DeletePondController?pondID=${pond.pondID}" class="delete-btn-fish">Delete</a>
                     <button class="edit-btn-out">
                         Edit Information
                     </button>
@@ -86,7 +86,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="container container-fish">
@@ -139,31 +138,41 @@
 
                         </div>
                         <h2>Edit card</h2>
-                        <form>
-                            <div class="row row-edit-info-detail">
+                        <form action="MainController?action=pondinformationupdate" method="POST">
+                            <div class="row row-edit-info-detail"> 
+                                <input type="hidden" name="pondID" value="${pond.pondID}">
+                                
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="pondName">Pond Name</label>
+                                    <input type="text" id="pondName" name="pondName" value="${pond.name}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="depth">Depth (meters)</label>
+                                    <input type="number" step="0.1" id="depth" name="depth" value="${pond.depth}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="volume">Volume (liters)</label>
+                                    <input type="number" step="0.1" id="volume" name="volume" value="${pond.volume}" required>
+                                </div>                               
+                                <div class="col-md-6 edit-item-detail">
+                                    <label for="drainCount">Number of Drains</label>
+                                    <input type="number" id="drainCount" name="drainCount" value="${pond.drainCount}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="pumpPower">Pump Power (l/h)</label>
+                                    <input type="number" id="pumpPower" name="pumpPower" value="${pond.pumpPower}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="numberOfFish">Number of Fish</label>
+                                    <input type="number" id="numberOfFish" name="numberOfFish" value="${pond.numberOfFish}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="descriptionPond">Description</label>
+                                    <input type="text" id="descriptionPond" name="descriptionPond" value="${pond.descriptionPond}" required>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <label for="skimmer">Skimmer</label>
+                                    <input type="number" id="skimmer" name="skimmer" value="${pond.skimmer}" required>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -172,7 +181,6 @@
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

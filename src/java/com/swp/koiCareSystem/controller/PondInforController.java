@@ -34,9 +34,9 @@ public class PondInforController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           String id = request.getParameter("pid");
+            int id = Integer.parseInt(request.getParameter("pid"));
             PondService ponds = new PondService();
-           
+
             Pond pin = ponds.GetPondInforByIDS(id);
             request.setAttribute("pond", pin);
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);

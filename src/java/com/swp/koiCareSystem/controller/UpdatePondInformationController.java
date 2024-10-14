@@ -5,6 +5,9 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.dao.PondDAO;
+import com.swp.koiCareSystem.model.Pond;
+import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class UpdatePondController extends HttpServlet {
+public class UpdatePondInformationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +34,36 @@ public class UpdatePondController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            int pondID = Integer.parseInt(request.getParameter("pondID"));
+            String name = request.getParameter("pondName");
+            String description = request.getParameter("descriptionPond");
+            float depth = Float.parseFloat(request.getParameter("depth"));
+            float volume = Float.parseFloat(request.getParameter("volume"));
+            int drainCount = Integer.parseInt(request.getParameter("drainCount"));
+            float pumpPower = Float.parseFloat(request.getParameter("pumpPower"));
+            int numberOfFish = Integer.parseInt(request.getParameter("numberOfFish"));
+            int skimmer = Integer.parseInt(request.getParameter("skimmer"));
+
+            Pond pond = new Pond();
+            pond.setPondID(pondID);
+            pond.setName(name);
+            pond.setDescriptionPond(description);
+            pond.setDepth(depth);
+            pond.setVolume(volume);
+            pond.setDrainCount(drainCount);
+            pond.setPumpPower(pumpPower);
+            pond.setNumberOfFish(numberOfFish);
+            pond.setSkimmer(skimmer);
+
+            PondDAO pondDAO = new PondDAO();
+            boolean success = pondDAO.updatePondInformationByID(pond);
             
+            PondService ponds = new PondService();
+
+            Pond pin = ponds.GetPondInforByIDS(pondID);
+            request.setAttribute("pond", pin);
+            request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
         }
     }
 
