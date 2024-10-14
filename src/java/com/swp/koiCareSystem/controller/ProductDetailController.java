@@ -6,6 +6,7 @@
 
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
@@ -40,9 +41,15 @@ public class ProductDetailController extends HttpServlet {
             
             ProductService pds = new ProductService();
             Product pd = pds.GetProductById(id);
+            String url="";
+            if(pd != null){
+                request.setAttribute("Product", pd);    
+                url = "productDetail.jsp";
+            }else{
+                url = "MainController?action="+ IConstant.SHOP;
+            }
             
-            request.setAttribute("Product", pd);
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
             
         }
     } 

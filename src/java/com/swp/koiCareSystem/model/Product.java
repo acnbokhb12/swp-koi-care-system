@@ -16,21 +16,23 @@ public class Product {
     private String imgProduct;
     private String description;
     private float price;
+    private boolean isActive;
     private ProductCategory categoryP;
 
     public Product() {
     }
 
-    public Product(int productID,String cateId, String nameProduct, String imgProduct, String description, float price) {
+    public Product(int productID, String cateId, String nameProduct, String imgProduct, String description, float price, boolean isActive, ProductCategory categoryP) {
         this.productID = productID;
         this.cateId = cateId;
         this.nameProduct = nameProduct;
         this.imgProduct = imgProduct;
         this.description = description;
-        this.price = price; 
+        this.price = price;
+        this.isActive = isActive;
+        this.categoryP = categoryP;
     }
-    
-    
+
     public int getProductID() {
         return productID;
     }
@@ -46,8 +48,6 @@ public class Product {
     public void setCateId(String cateId) {
         this.cateId = cateId;
     }
-
-     
 
     public String getNameProduct() {
         return nameProduct;
@@ -81,6 +81,14 @@ public class Product {
         this.price = price;
     }
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public ProductCategory getCategoryP() {
         return categoryP;
     }
@@ -91,9 +99,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productID=" + productID + ", nameProduct=" + nameProduct + ", imgProduct=" + imgProduct + ", description=" + description + ", price=" + price + ", categoryP=" + categoryP + '}';
+        return "Product{" + "productID=" + productID + ", cateId=" + cateId + ", nameProduct=" + nameProduct + ", imgProduct=" + imgProduct + ", description=" + description + ", price=" + price + ", isActive=" + isActive + ", categoryP=" + categoryP + '}';
     }
+
     
+     
     
 
     

@@ -44,8 +44,8 @@ public class ProductService {
         return  productDAO.GetAllCategory();
     } 
     
-    public ArrayList<Product> GetProductByCateId(int cateId, int index){ 
-        return productDAO.GetProductByCateId(cateId, index);
+    public ArrayList<Product> GetProductsByCateId(int cateId, int index){ 
+        return productDAO.GetProductsByCateId(cateId, index);
     } 
     
     public ArrayList<Product> SearchProductsByName(String name, int index){ 

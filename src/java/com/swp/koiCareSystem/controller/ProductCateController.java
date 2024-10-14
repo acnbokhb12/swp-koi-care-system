@@ -6,6 +6,7 @@
 
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.model.ProductCategory;
 import com.swp.koiCareSystem.service.ProductService;
@@ -51,15 +52,21 @@ public class ProductCateController extends HttpServlet {
             if(count % 32 != 0){
                 endPage++;
             }
-            ArrayList<Product> listProduct = pds.GetProductByCateId(cid, index);
-            ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
-            request.setAttribute("ListC", listCate);
-            request.setAttribute("ListP", listProduct);
-            request.setAttribute("tag", index);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("cateID", cateId); 
-            request.setAttribute("TagsCate", cid);
-            request.getRequestDispatcher("shop.jsp").forward(request, response);
+            ArrayList<Product> listProduct = pds.GetProductsByCateId(cid, index);
+            String url = "";
+            if(listProduct != null ){
+                ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
+                request.setAttribute("ListC", listCate);
+                request.setAttribute("ListP", listProduct);
+                request.setAttribute("tag", index);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("cateID", cateId); 
+                request.setAttribute("TagsCate", cid); 
+                url = "shop.jsp";
+            }else{
+                url = "MainController?action=" + IConstant.SHOP;
+            }
+            request.getRequestDispatcher(url).forward(request, response);
 
 
         }

@@ -37,6 +37,10 @@ public class SearchProductController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
             String name = request.getParameter("productName");
+            if( name!=null){
+                name = name.trim();
+                name = name.replaceAll(" +", " ");
+            }
             String indexPage = request.getParameter("index");
             if(indexPage==null){
                 indexPage= "1";
