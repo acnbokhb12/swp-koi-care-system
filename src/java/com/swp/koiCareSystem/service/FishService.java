@@ -23,7 +23,11 @@ public class FishService {
 
     // Get all fish for the specific account ID
     public ArrayList<Fish> GetAllFishS(int accountID) {
-        return fishDAO.getAllFish(accountID); 
+        return fishDAO.getAllFish(accountID);
 
-}
+    }
+
+    public Fish GetFishInforByIDS(String id) { // Change the parameter type to String
+        return fishDAO.getFishInforByID(id);
+    }
 }

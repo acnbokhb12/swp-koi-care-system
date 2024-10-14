@@ -120,7 +120,7 @@ public class PondDAO {
         return null; // Return null if no pond found
     }
 
-    public boolean deactivatePond(String pondID) {
+    public boolean deletePondByID(String pondID) {
         Connection conn = null;
         PreparedStatement ps = null;
 

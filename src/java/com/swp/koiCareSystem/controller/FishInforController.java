@@ -7,7 +7,7 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.dao.FishDAO;
 import com.swp.koiCareSystem.model.Fish;
-import com.swp.koiCareSystem.service.FishInforService;
+import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,9 +36,9 @@ public class FishInforController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String id = request.getParameter("fid"); 
-            FishInforService fins = new FishInforService();
+            FishService fs = new FishService();
 
-            Fish fin = fins.GetFishInforByIDS(id);
+            Fish fin = fs.GetFishInforByIDS(id);
             request.setAttribute("fish", fin);
             request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
 

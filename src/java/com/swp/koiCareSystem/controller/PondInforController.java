@@ -6,7 +6,7 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.service.PondInforService;
+import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,13 +35,11 @@ public class PondInforController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
            String id = request.getParameter("pid");
-           PondInforService pins = new PondInforService();
+            PondService ponds = new PondService();
            
-            Pond pin = pins.GetPondInforByIDS(id);
+            Pond pin = ponds.GetPondInforByIDS(id);
             request.setAttribute("pond", pin);
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
-            
-
         }
     }
 

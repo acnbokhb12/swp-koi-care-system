@@ -42,13 +42,14 @@ public class DeletePondController extends HttpServlet {
             Account acc = (Account) session.getAttribute("userAccount");
             if (acc == null) {
                 response.sendRedirect("home.jsp");
+                return;
             }
 
             String pondID = request.getParameter("pondID");
 
             PondDAO pd = new PondDAO();
 
-            boolean isDeactivated = pd.deactivatePond(pondID);
+            boolean isDelete = pd.deletePondByID(pondID);
 
             PondService ponds = new PondService();
             ArrayList<Pond> listP = ponds.GetAllPondS(acc.getUserID());
