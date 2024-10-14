@@ -76,6 +76,10 @@
         <servlet-name>AddNewPondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AddNewPondController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.UpdatePondController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>AddNewPondController</servlet-name>
         <url-pattern>/AddNewPondController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePondController</servlet-name>
+        <url-pattern>/UpdatePondController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

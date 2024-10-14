@@ -129,7 +129,7 @@
             </div>
         </div>
         <!-- Modal Delete -->
-        <div id="myModal" class="modal-confirm-delete">
+        <div id="myModal" class="modal-confirm-delete" dísplay="none">
             <div class="modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header flex-column">

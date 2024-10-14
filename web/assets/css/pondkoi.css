@@ -150,7 +150,7 @@
 }
 .pond-img-info img{
     width: 100%;
-    height: 350px;
+    height: 421px; /* do thêm skimmer */
     object-fit: cover;
     /* padding: 1rem; */
 }

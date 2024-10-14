@@ -39,7 +39,8 @@
                 <h1>Koi Fish Pond Information</h1>
                 <div class="text-right">
                     <a href="MainController?action=pond" class="back-btn">Back to List</a>
-                    <a href="DeletePondController?pondID=${pond.pondID}" class="delete-btn-fish">Delete</a>                    <button class="edit-btn-out">
+                    <a href="DeletePondController?pondID=${pond.pondID}" class="delete-btn-fish">Delete</a>                    
+                    <button class="edit-btn-out">
                         Edit Information
                     </button>
                 </div>
@@ -78,6 +79,10 @@
                     <div class="info-item">
                         <span class="label label-witdh">Description:</span> 
                         <span class="value span-witdh">${pond.descriptionPond}  </span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label label-witdh">Skimmer:</span> 
+                        <span class="value span-witdh">${pond.skimmer}  </span>
                     </div>
                 </div>
             </div>
