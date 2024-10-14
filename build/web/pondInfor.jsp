@@ -120,11 +120,12 @@
                     <div class="col-4" style="padding: 0;">
                         <div class="img-edit-submit">
                             <div class="pond-img-info-edit">
-                                <img src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+                                <img src="${pond.image}" alt="${pond.name}" > 
                             </div>
                             <div class="pond-edit-img-detail">
-                                <form action="" class="form-edit-img-pond">
-                                    <input type="file">
+                                <form action="MainController?action=pondimageupdate" class="form-edit-img-pond" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="pondID" value="${pond.pondID}">
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" >
                                     <button type="submit">Submit</button>
                                 </form>
                             </div>
@@ -141,7 +142,7 @@
                         <form action="MainController?action=pondinformationupdate" method="POST">
                             <div class="row row-edit-info-detail"> 
                                 <input type="hidden" name="pondID" value="${pond.pondID}">
-                                
+
                                 <div class="col-md-6 edit-item-detail">
                                     <label for="pondName">Pond Name</label>
                                     <input type="text" id="pondName" name="pondName" value="${pond.name}" required>

@@ -80,6 +80,10 @@
         <servlet-name>UpdatePondInformationController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.UpdatePondInformationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePondImageController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.UpdatePondImageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>UpdatePondInformationController</servlet-name>
         <url-pattern>/UpdatePondInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePondImageController</servlet-name>
+        <url-pattern>/UpdatePondImageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

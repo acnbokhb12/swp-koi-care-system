@@ -5,8 +5,6 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.dao.PondDAO;
-import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.ImageUploadService;
 import com.swp.koiCareSystem.service.PondService;
@@ -14,19 +12,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
  *
  * @author ASUS
  */
-@MultipartConfig
-public class AddNewPondController extends HttpServlet {
+public class UpdatePondImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,14 +36,11 @@ public class AddNewPondController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+            /* TODO output your page here. You may use following sample code. */
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
             ImageUploadService imgs = new ImageUploadService();
             String imageUrl = "";
-
-            Pond newPond = new Pond();
-
             try {
                 imageUrl = imgs.uploadImage(filePart, tempDir);
                 System.out.println(imageUrl);
@@ -57,45 +49,19 @@ public class AddNewPondController extends HttpServlet {
                 e.printStackTrace();
 
             }
-
-            String name = request.getParameter("pondName");
-            float depth = Float.parseFloat(request.getParameter("depth"));
-            float volume = Float.parseFloat(request.getParameter("volume"));
-            int drainCount = Integer.parseInt(request.getParameter("drainCount"));
-            float pumpPower = Float.parseFloat(request.getParameter("pumpPower"));
-            String descriptionPond = request.getParameter("descriptionPond");
-            int numberOfFish = Integer.parseInt(request.getParameter("numberOfFish"));
-            int skimmerQuantity = Integer.parseInt(request.getParameter("skimmer"));
-
-            
-            PondDAO pd = new PondDAO();
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            int acid = acc.getUserID();;
-            
-            newPond.setAccID(acid);
-            newPond.setImage(imageUrl);
-            newPond.setName(name);
-            newPond.setDepth(depth);
-            newPond.setVolume(volume);
-            newPond.setDrainCount(drainCount);
-            newPond.setPumpPower(pumpPower);
-            newPond.setDescriptionPond(descriptionPond);
-            newPond.setNumberOfFish(numberOfFish);
-            newPond.setSkimmer(skimmerQuantity);
-            newPond.setIsActive(true);
-            
-            boolean isCreated = pd.createNewPond(newPond);
+            int pondID = Integer.parseInt(request.getParameter("pondID"));
 
             PondService ponds = new PondService();
-            ArrayList<Pond> listP = ponds.GetAllPondS(acc.getUserID());
+            boolean isUpdated = ponds.updatePondImageByPondID(pondID, imageUrl);
 
-            request.setAttribute("listPonds", listP);
-            request.getRequestDispatcher("pond.jsp").forward(request, response);
+            Pond updatedPond = ponds.GetPondInforByIDS(pondID);
+            request.setAttribute("pond", updatedPond);
+
+            request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

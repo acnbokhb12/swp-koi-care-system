@@ -9,6 +9,7 @@ import com.swp.koiCareSystem.model.Pond;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PondDAO {
@@ -225,4 +226,44 @@ public class PondDAO {
             }
         }
     }
+
+    public boolean updatePondImageByPondID(int pondID, String pondImage) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Ponds\n"
+                        + "SET PondImage = ?\n"
+                        + "WHERE PondID = ?";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, pondImage);  
+                pst.setInt(2, pondID);        
+
+                int rowAffect = pst.executeUpdate();
+                if (rowAffect > 0) {
+                    return true; 
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
 }

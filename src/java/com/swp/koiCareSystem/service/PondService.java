@@ -27,4 +27,8 @@ public class PondService {
     public Pond GetPondInforByIDS(int id) {
         return ponddao.getPondInforByID(id);
     }
+
+    public boolean updatePondImageByPondID(int pid, String imgLink) {
+        return ponddao.updatePondImageByPondID(pid, imgLink);
+    }
 }
