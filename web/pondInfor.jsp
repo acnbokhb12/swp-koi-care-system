@@ -33,14 +33,13 @@
         <!-- start header -->
         <div id="header"></div>
         <!-- end header -->
-        
-         <div class="container container_pond">
+
+        <div class="container container_pond">
             <div class="tilte-ponds"> 
                 <h1>Koi Fish Pond Information</h1>
                 <div class="text-right">
-                    <a href="Fish.html" class="back-btn">Back to List</a>
-                    <a href="#" class="delete-btn-fish">Delete</a>
-                    <button class="edit-btn-out">
+                    <a href="MainController?action=pond" class="back-btn">Back to List</a>
+                    <a href="DeletePondController?pondID=${pond.pondID}" class="delete-btn-fish">Delete</a>                    <button class="edit-btn-out">
                         Edit Information
                     </button>
                 </div>
@@ -173,7 +172,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- footer -->
         <div id="footer"></div>
     </body>
@@ -203,63 +202,60 @@
     <script src="./assets/js/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     <script>
-    const btnClose = document.querySelector('.btn-close-pond'); 
-    const tableEdit = document.querySelector('.container__infor__pond');
-    const btnOutOpen = document.querySelector('.edit-btn-out');
-    const subTable = document.querySelector('.infor__pond-detail');
+        const btnClose = document.querySelector('.btn-close-pond');
+        const tableEdit = document.querySelector('.container__infor__pond');
+        const btnOutOpen = document.querySelector('.edit-btn-out');
+        const subTable = document.querySelector('.infor__pond-detail');
 
-    btnOutOpen.addEventListener('click',function(e){
-        tableEdit.classList.add('open');
-        e.stopPropagation();
-    });
-    btnClose.addEventListener('click',()=>{
-        tableEdit.classList.remove('open');
-    });
-    subTable.addEventListener('click',(e)=>{
-        e.stopPropagation();
-    });
-    document.addEventListener('click',()=>{
-       
-            tableEdit.classList.remove('open'); 
-    });
+        btnOutOpen.addEventListener('click', function (e) {
+            tableEdit.classList.add('open');
+            e.stopPropagation();
+        });
+        btnClose.addEventListener('click', () => {
+            tableEdit.classList.remove('open');
+        });
+        subTable.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        document.addEventListener('click', () => {
 
-    const btnDelete = document.querySelector('.delete-btn-fish');
-    btnDelete.addEventListener('click',(e)=>{
-        var isConfirm = confirm('Are you sure you want delete this pond ?');
-        if(!isConfirm){
-            e.preventDefault();
-        }
-    });
+            tableEdit.classList.remove('open');
+        });
 
-    var swiper = new Swiper(".container-list-fish", {
-        spaceBetween: 20,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-            delay: 5500,
-            disableOnineraction: false
-        },
-        navigation: {
-            nextEl: ".next-btn",
-            prevEl: ".prev-btn"
-        },
-        breakpoints: {
-            0: {
-                slidesPerView: 1
+        const btnDelete = document.querySelector('.delete-btn-fish');
+        btnDelete.addEventListener('click', (e) => {
+            var isConfirm = confirm('Are you sure you want delete this pond ?');
+            if (!isConfirm) {
+                e.preventDefault();
+            }
+        });
+
+        var swiper = new Swiper(".container-list-fish", {
+            spaceBetween: 20,
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 5500,
+                disableOnineraction: false
             },
-            450: {
-                slidesPerView: 2
+            navigation: {
+                nextEl: ".next-btn",
+                prevEl: ".prev-btn"
             },
-            768: {
-                slidesPerView: 3
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                450: {
+                    slidesPerView: 2
+                },
+                768: {
+                    slidesPerView: 3
+                },
+                1024: {
+                    slidesPerView: 4
+                },
             },
-            1024: {
-                slidesPerView: 4
-            },
-        },
-    });
-</script>
-    
-    
- 
+        });
+    </script>
 </html>

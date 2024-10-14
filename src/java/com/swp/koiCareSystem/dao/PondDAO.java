@@ -22,7 +22,7 @@ public class PondDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "SELECT * FROM Ponds  Where AccID LIKE ?";
+                String sql = "SELECT * FROM Ponds  Where AccID LIKE ? AND isActive = 1";
                 ptm = conn.prepareStatement(sql);
                 ptm.setInt(1, accountID);
                 rs = ptm.executeQuery();
@@ -71,51 +71,83 @@ public class PondDAO {
 //        ArrayList<Pond> listP = new ArrayList<>();
 //        return listP;
 //    }
-    
-    
     public Pond getPondInforByID(String id) {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-    String sql = "SELECT * FROM Ponds WHERE PondID = ?";
-    try {
-        conn = DatabaseConnectionManager.getConnection(); // Open connection to the database
-        ps = conn.prepareStatement(sql);
-        ps.setString(1, id);
-        rs = ps.executeQuery();
-
-        // Check if a record was found
-        if (rs.next()) {
-            // Create a new Pond object with the retrieved data
-            return new Pond(
-                    rs.getInt("PondID"),
-                    rs.getInt("AccID"),
-                    rs.getString("PondImage"),
-                    rs.getString("PondName"),
-                    rs.getString("Description"),
-                    rs.getInt("NumberOfFish"),
-                    rs.getFloat("Volume"),
-                    rs.getFloat("Depth"),
-                    rs.getFloat("PumpPower"),
-                    rs.getInt("DrainCount"),
-                    rs.getInt("Skimmer")
-            );
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
+        String sql = "SELECT * FROM Ponds WHERE PondID = ?";
         try {
-            if (rs != null) rs.close();
-            if (ps != null) ps.close();
-            if (conn != null) conn.close();
+            conn = DatabaseConnectionManager.getConnection(); // Open connection to the database
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+
+            // Check if a record was found
+            if (rs.next()) {
+                // Create a new Pond object with the retrieved data
+                return new Pond(
+                        rs.getInt("PondID"),
+                        rs.getInt("AccID"),
+                        rs.getString("PondImage"),
+                        rs.getString("PondName"),
+                        rs.getString("Description"),
+                        rs.getInt("NumberOfFish"),
+                        rs.getFloat("Volume"),
+                        rs.getFloat("Depth"),
+                        rs.getFloat("PumpPower"),
+                        rs.getInt("DrainCount"),
+                        rs.getInt("Skimmer")
+                );
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null; // Return null if no pond found
+    }
+
+    public boolean deactivatePond(String pondID) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "UPDATE Ponds SET isActive = 0 WHERE PondID = ?";
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, pondID);
+
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-    return null; // Return null if no pond found
-}
-
 
     public static void main(String[] args) {
         PondDAO pondDAO = new PondDAO();
@@ -124,9 +156,9 @@ public class PondDAO {
         Pond pond = pondDAO.getPondInforByID(testPondID);
 
         ArrayList<Pond> pd = pondDAO.getAllPond(5);
-        for(Pond p : pd){
+        for (Pond p : pd) {
             System.out.println(p);
         }
     }
- 
+
 }

@@ -10,19 +10,22 @@ package com.swp.koiCareSystem.model;
  * @author DELL
  */
 public class Pond {
-    private int pondID;          
-    private int accID;           
-    private String image;        
-    private String name; 
-    private String descriptionPond;
-    private int numberOfFish;   
-    private float volume;       
-    private float depth;        
-    private float pumpPower;    
-    private int drainCount;      
-    private int skimmer;         
 
-    public Pond() {}
+    private int pondID;
+    private int accID;
+    private String image;
+    private String name;
+    private String descriptionPond;
+    private int numberOfFish;
+    private float volume;
+    private float depth;
+    private float pumpPower;
+    private int drainCount;
+    private int skimmer;
+    private boolean isActive;
+
+    public Pond() {
+    }
 
     public Pond(int pondID, int accID, String image, String name, String descriptionPond, int numberOfFish, float volume, float depth, float pumpPower, int drainCount, int skimmer) {
         this.pondID = pondID;
@@ -37,8 +40,6 @@ public class Pond {
         this.drainCount = drainCount;
         this.skimmer = skimmer;
     }
-
-    
 
     public int getPondID() {
         return pondID;
@@ -80,8 +81,6 @@ public class Pond {
         this.descriptionPond = descriptionPond;
     }
 
-    
-    
     public int getNumberOfFish() {
         return numberOfFish;
     }
@@ -130,9 +129,16 @@ public class Pond {
         this.skimmer = skimmer;
     }
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     @Override
     public String toString() {
-        return "Pond{" + "pondID=" + pondID + ", accID=" + accID + ", image=" + image + ", name=" + name + ", numberOfFish=" + numberOfFish + ", volume=" + volume + ", depth=" + depth + ", pumpPower=" + pumpPower + ", drainCount=" + drainCount + ", skimmer=" + skimmer + '}';
+        return "Pond{" + "pondID=" + pondID + ", accID=" + accID + ", image=" + image + ", name=" + name + ", numberOfFish=" + numberOfFish + ", volume=" + volume + ", depth=" + depth + ", pumpPower=" + pumpPower + ", drainCount=" + drainCount + ", skimmer=" + skimmer + ", isActive=" + isActive + '}';
     }
-    
 }
