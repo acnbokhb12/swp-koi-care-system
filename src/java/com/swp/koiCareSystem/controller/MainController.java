@@ -75,6 +75,9 @@ public class MainController extends HttpServlet {
                 case IConstant.PONDDELETE:
                     url = "DeletePondController";
                     break;
+                case IConstant.NEWPOND:
+                    url = "AddNewPondController";
+                    break;
                 case IConstant.PROFILEJSP:
                     url = "profilePage.jsp";
                     break;

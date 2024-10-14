@@ -149,6 +149,45 @@ public class PondDAO {
         }
     }
 
+    public boolean createNewPond(Pond pond) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO Ponds (AccID, PondImage, PondName, Description, NumberOfFish, Volume, Depth, PumpPower, DrainCount, Skimmer, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, pond.getAccID());
+            ps.setString(2, pond.getImage());
+            ps.setString(3, pond.getName());
+            ps.setString(4, pond.getDescriptionPond());
+            ps.setInt(5, pond.getNumberOfFish());
+            ps.setFloat(6, (float) pond.getVolume());
+            ps.setFloat(7, (float) pond.getDepth());
+            ps.setFloat(8, (float) pond.getPumpPower());
+            ps.setInt(9, pond.getDrainCount());
+            ps.setInt(10, pond.getSkimmer());
+            ps.setBoolean(11, pond.isIsActive());
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         PondDAO pondDAO = new PondDAO();
 

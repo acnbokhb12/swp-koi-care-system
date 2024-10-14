@@ -16,10 +16,10 @@ public interface IConstant {
     public final String HOME = "home";
     public final String SHOP = "shop";
     public final String SHOPJSP = "shopJsp";
-    
+
     public final String PROFILEJSP = "profileJsp";
     public final String EDIT_PROFILE_JSP = "editProfileJsp";
-    
+
     public final String EDITPROFILE = "editProfile";
 
     public final String PRODUCTDETAIL = "productDetail";
@@ -34,13 +34,14 @@ public interface IConstant {
     public final String FISH = "fish";
     public final String FISHINFOR = "fishinfor";
     public final String PONDINFOR = "pondinfor";
+    public final String NEWPOND = "newpond";
     public final String PONDDELETE = "ponddelete";
 
     public final String PASSWORDPROFILE = "passwordprofile";
     public final String INFORMATIONPROFILE = "informationprofile";
-    
-     public static String BLOG = "blog";
-    
+
+    public static String BLOG = "blog";
+
 //    IMG UPLOAD
     public final String UPIMGSINGLE = "upImgSingle";
 
@@ -55,7 +56,7 @@ public interface IConstant {
     public static final String GOOGLE_LINK_GET_TOKEN = "https://accounts.google.com/o/oauth2/token";
 
     public static final String GOOGLE_LINK_GET_USER_INFO = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
-    
+
     public final String CLOUDINARY_NAME = "dkn16ntvy";
     public final String CLOUDINARY_API_KEY = "953513337114448";
     public final String CLOUDINARY_API_SECRET = "GDsBV9a9z9bhLx7_6SFVT40rZ8M";
