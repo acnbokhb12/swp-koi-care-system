@@ -1,10 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%-- 
     Document   : contact
     Created on : Oct 8, 2024, 1:07:30 PM
     Author     : ASUS
 --%>
-
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<meta charset="UTF-8">
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,10 +45,10 @@
                                 <h2>Get In Touch</h2>
                                 <p>We are here to assist you with the care and management of your Koi pond. If you have any questions regarding our products and advice on Koi care techniques, please fill out the form below. Our team of experts will get back to you as soon as possible.</p>
                                 <div class="contain-form-contact">
-                                    <form action="" method="post">
+                                    <form action="MainController?action=contact" method="post">
                                         <div class="item-contact">
-                                            <label>First Name</label><br>
-                                            <input type="text" name="firstName" required>
+                                            <label for="firstName">First Name</label><br>
+                                            <input type="text" id="firstName" name="firstName" required>
                                         </div>
                                         <div class="item-contact">
                                             <label>E-Mail</label><br>
@@ -54,9 +56,11 @@
                                         </div>
                                         <div class="item-contact">
                                             <label>Message</label><br>
-                                            <textarea name="message" class="" required></textarea>
+                                            <textarea name="message" required maxlength="500"></textarea>
+                                            <c:if test="${message != null}">
+                                                <span class="text-danger" style="font-size: 1.2rem;">${message}</span>
+                                            </c:if>
                                         </div>
-
                                         <span>
                                             <button type="submit" class="btn-sub-contact">SEND NOW</button>
                                         </span>
