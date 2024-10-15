@@ -59,6 +59,11 @@
     text-decoration: none;
 }
 
+.a active-page {
+    color: black;
+    background-color: orange;
+}
+
 /* Newsssss -------------------------------- */
 .trending__area{
     padding: 1rem 0;

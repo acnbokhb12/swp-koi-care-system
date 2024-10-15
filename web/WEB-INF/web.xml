@@ -72,6 +72,14 @@
         <servlet-name>ManageBlogController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageBlogController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogCateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.BlogCateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetBlogsByCateIdController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.GetBlogsByCateIdController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/ManageBlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogCateController</servlet-name>
+        <url-pattern>/BlogCateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetBlogsByCateIdController</servlet-name>
+        <url-pattern>/GetBlogsByCateIdController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

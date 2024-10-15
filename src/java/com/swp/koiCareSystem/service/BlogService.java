@@ -21,8 +21,8 @@ public class BlogService {
         blogDAO = new BlogDAO();
     }
     
-    public int CountAllBlog(){
-        return blogDAO.CountBlog();
+    public int countAllBlog(){
+        return blogDAO.countBlog();
     }
     
     public ArrayList<Blog> GetAllBlog(int index){ 
@@ -31,5 +31,17 @@ public class BlogService {
     
     public ArrayList<BlogCategory> GetAllBlogCate(){
         return blogDAO.getAllBlogCategory();
+    }
+    
+    public ArrayList<Blog> getBlogsCateById(String cid, int index){
+        return  blogDAO.getBlogsByCateId(cid, index);
+    }
+    
+    public int countBlogByCateId(String cid){
+        return blogDAO.countBlogByCateId(cid);
+    }
+    
+    public ArrayList<Blog> pagingCount(int index){
+        return blogDAO.pagingCount(index);
     }
 }

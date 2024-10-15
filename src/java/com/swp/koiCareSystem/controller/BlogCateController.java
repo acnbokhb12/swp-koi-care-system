@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Khanh
  */
-public class ManageBlogController extends HttpServlet {
+public class BlogCateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,12 +34,16 @@ public class ManageBlogController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try(PrintWriter out = response.getWriter()){
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
+        try (PrintWriter out = response.getWriter()) {
+            String blogCateId = request.getParameter("blogCateId");
+            String indexP = request.getParameter("index");
+            if (blogCateId == null) {
+                blogCateId = "1";
+            }else if (indexP == null) {
+                indexP = "1";
             }
-            int index = Integer.parseInt(indexPage);
+            int bcId = Integer.parseInt(blogCateId);
+            int index = Integer.parseInt(indexP);
             
             BlogService bs = new BlogService();
             int count = bs.countAllBlog();
@@ -53,9 +57,11 @@ public class ManageBlogController extends HttpServlet {
             ArrayList<BlogCategory> listBlogCate = bs.GetAllBlogCate();
             
             request.setAttribute("ListBC", listBlogCate);
-            request.setAttribute("ListB", listBlog);
+            request.setAttribute("listP", listBlog);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
+            request.setAttribute("blogCateId", blogCateId);
+            request.setAttribute("TagBlogCate", bcId);
             request.getRequestDispatcher("blog.jsp").forward(request, response);
         }
     }

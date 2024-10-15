@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Khanh
  */
-public class ManageBlogController extends HttpServlet {
+public class GetBlogsByCateIdController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,22 +34,23 @@ public class ManageBlogController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try(PrintWriter out = response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
+            String cid = request.getParameter("cid");
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            
             BlogService bs = new BlogService();
-            int count = bs.countAllBlog();
+            int count = bs.countBlogByCateId(cid);
             
             int endPage = count/8;
             if (count % 8 != 0) {
                 endPage++;
             }
             
-            ArrayList<Blog> listBlog = bs.GetAllBlog(index);
+            ArrayList<Blog> listBlog = bs.getBlogsCateById(cid, index);
             ArrayList<BlogCategory> listBlogCate = bs.GetAllBlogCate();
             
             request.setAttribute("ListBC", listBlogCate);
