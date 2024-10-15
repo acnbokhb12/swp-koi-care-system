@@ -9,19 +9,21 @@ package com.swp.koiCareSystem.model;
  * @author PC
  */
 public class Fish {
-    private int fishID;          
-    private int accID;           
-    private int pondID;        
-    private String fishImage;   
-    private String fishName;     
-    private String descriptionKoi; 
-    private String bodyShape;    
-    private float age;          
-    private float length;      
-    private float weight;       
-    private String gender;       
 
-    public Fish() {}
+    private int fishID;
+    private int accID;
+    private int pondID;
+    private String fishImage;
+    private String fishName;
+    private String descriptionKoi;
+    private String bodyShape;
+    private float age;
+    private float length;
+    private float weight;
+    private String gender;
+
+    public Fish() {
+    }
 
     public Fish(int fishID, int accID, int pondID, String fishImage, String fishName, String descriptionKoi, String bodyShape, float age, float length, float weight, String gender) {
         this.fishID = fishID;
@@ -35,6 +37,12 @@ public class Fish {
         this.length = length;
         this.weight = weight;
         this.gender = gender;
+    }
+
+    public Fish(int fishID, String fishImage, String fishName) {
+        this.fishID = fishID;
+        this.fishImage = fishImage;
+        this.fishName = fishName;
     }
 
     // Getters and Setters
@@ -130,6 +138,5 @@ public class Fish {
     public String toString() {
         return "Fish{" + "fishID=" + fishID + ", accID=" + accID + ", pondID=" + pondID + ", fishImage=" + fishImage + ", fishName=" + fishName + ", descriptionKoi=" + descriptionKoi + ", bodyShape=" + bodyShape + ", age=" + age + ", length=" + length + ", weight=" + weight + ", gender=" + gender + '}';
     }
-    
-}
 
+}

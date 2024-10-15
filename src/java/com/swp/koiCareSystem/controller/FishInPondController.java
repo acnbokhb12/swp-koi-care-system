@@ -5,8 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.service.ImageUploadService;
+import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,13 +14,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author ASUS
  */
-public class UpdatePondImageController extends HttpServlet {
+public class FishInPondController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,37 +34,17 @@ public class UpdatePondImageController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Part filePart = request.getPart("fileimg");
-            String tempDir = getServletContext().getRealPath("/") + "uploads";
-            ImageUploadService imgs = new ImageUploadService();
-            String imageUrl = "";
-            try {
-                imageUrl = imgs.uploadImage(filePart, tempDir);
-                System.out.println(imageUrl);
+            int pid = Integer.parseInt(request.getParameter("pondId"));
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            PondService ps = new PondService();
+            ArrayList<Fish> listFishInPond = ps.GetAllFishInPondByPondID(pid);
 
-            }
-            int pondID = Integer.parseInt(request.getParameter("pondID"));
-
-            PondService ponds = new PondService();
-            boolean upImage = ponds.updatePondImageByPondID(pondID, imageUrl);
-
-            if (upImage) {
-                request.setAttribute("message", "New Pond has been created");
-            } else {
-                request.setAttribute("message", "An error occurred while creating the pond.");
-            }
-            Pond updatedPond = ponds.GetPondInforByIDS(pondID);
-            request.setAttribute("pond", updatedPond);
-
+            request.setAttribute("listFishInPond", listFishInPond);
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

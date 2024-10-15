@@ -69,6 +69,9 @@ public class MainController extends HttpServlet {
                 case IConstant.FISHINFOR:
                     url = "FishInforController";
                     break;
+                case IConstant.FISHINPOND:
+                    url = "FishInPondController";
+                    break;
                 case IConstant.PONDINFOR:
                     url = "PondInforController";
                     break;

@@ -57,7 +57,13 @@ public class UpdatePondInformationController extends HttpServlet {
             pond.setSkimmer(skimmer);
 
             PondDAO pondDAO = new PondDAO();
-            boolean success = pondDAO.updatePondInformationByID(pond);
+            boolean upinfo = pondDAO.updatePondInformationByID(pond);
+            
+            if (upinfo) {
+                request.setAttribute("message", "New Pond has been created");
+            } else {
+                request.setAttribute("message", "An error occurred while creating the pond.");
+            }
             
             PondService ponds = new PondService();
 

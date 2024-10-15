@@ -5,6 +5,7 @@
 package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
+import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,7 +65,6 @@ public class PondDAO {
                 e.printStackTrace();
             }
         }
-
         return listPonds;
     }
 
@@ -239,12 +239,12 @@ public class PondDAO {
                         + "WHERE PondID = ?";
 
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, pondImage);  
-                pst.setInt(2, pondID);        
+                pst.setString(1, pondImage);
+                pst.setInt(2, pondID);
 
                 int rowAffect = pst.executeUpdate();
                 if (rowAffect > 0) {
-                    return true; 
+                    return true;
                 }
             }
         } catch (SQLException e) {
@@ -266,4 +266,46 @@ public class PondDAO {
         return false;
     }
 
+    public ArrayList<Fish> getAllFishInPondByID(int pondId) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ArrayList<Fish> listFish = new ArrayList<>();
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Fish  Where PondID = ? AND isActive = 1";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, pondId);
+                rs = ptm.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int fishID = rs.getInt("FishID");
+                        String fishImage = rs.getString("FishImage");
+                        String fishName = rs.getString("FishName");
+
+                        listFish.add(new Fish(fishID, fishImage, fishName));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listFish;
+    }
 }

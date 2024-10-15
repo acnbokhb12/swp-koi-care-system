@@ -54,6 +54,12 @@ public class DeletePondController extends HttpServlet {
             PondService ponds = new PondService();
             ArrayList<Pond> listP = ponds.GetAllPondS(acc.getUserID());
 
+            if (isDelete) {
+                request.setAttribute("message", "Your Pond has been delete");
+            } else {
+                request.setAttribute("message", "An error occurred while deleting the pond.");
+            }
+
             request.setAttribute("listPonds", listP);
             request.getRequestDispatcher("pond.jsp").forward(request, response);
         }

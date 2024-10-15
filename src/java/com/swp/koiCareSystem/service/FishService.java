@@ -21,13 +21,12 @@ public class FishService {
         fishDAO = new FishDAO();
     }
 
-    // Get all fish for the specific account ID
     public ArrayList<Fish> GetAllFishS(int accountID) {
         return fishDAO.getAllFish(accountID);
 
     }
 
-    public Fish GetFishInforByIDS(String id) { // Change the parameter type to String
+    public Fish GetFishInforByIDS(String id) {
         return fishDAO.getFishInforByID(id);
     }
 }

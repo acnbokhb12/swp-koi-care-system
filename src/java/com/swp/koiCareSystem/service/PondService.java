@@ -5,6 +5,7 @@
 package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.PondDAO;
+import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
 import java.util.ArrayList;
 
@@ -30,5 +31,9 @@ public class PondService {
 
     public boolean updatePondImageByPondID(int pid, String imgLink) {
         return ponddao.updatePondImageByPondID(pid, imgLink);
+    }
+
+    public ArrayList<Fish> GetAllFishInPondByPondID(int pid) {
+        return ponddao.getAllFishInPondByID(pid);
     }
 }

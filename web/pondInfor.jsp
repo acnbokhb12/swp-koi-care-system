@@ -92,19 +92,18 @@
             <h1>List Of Koi Fishes</h1>
             <div class="container-list-arrow">
                 <div class="swiper container-list-fish">         
-                    <div class="swiper-wrapper row-list-fish">
-                        <!-- Use JSTL to iterate over the list of fish -->
-                        <c:forEach var="fish" items="${listFish}">
-                            <a href="FishInforController?fid=${fish.fishID}" class="fish-item swiper-slide">
+                    <div class="swiper-wrapper row-list-fish"> <!--Lỗi swipper-->
+                        <c:forEach var="fishinpond" items="${listFishInPond}">
+                            <a href="FishInPondController?pondId=${pond.pondID}" class="fish-item swiper-slide">
                                 <div class="fish-item-img">
-                                    <img src="${fish.image}" alt="${fish.name}"> <!-- Use fish image -->
+                                    <img src="${fishinpond.fishImage}" alt="${fishinpond.fishName}">
                                     <div class="fish-item-desc">
-                                        <p>${fish.description}</p> <!-- Use fish description -->
+                                        <p>${fishinpond.fishName}</p>
                                     </div>
                                 </div>
                             </a>
                         </c:forEach>
-                    </div>
+                    </div>         <!--Lỗi swipper-->
                     <div class="contain__btn-arrow">
                         <button class="prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
                         <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
@@ -250,7 +249,7 @@
             centeredSlides: true,
             autoplay: {
                 delay: 5500,
-                disableOnineraction: false
+                disableOnInteraction: false
             },
             navigation: {
                 nextEl: ".next-btn",
