@@ -39,6 +39,7 @@ public interface IConstant {
     public final String INFORMATIONPROFILE = "informationprofile";
     
      public static String BLOG = "blog";
+     public static String GET_BLOG_CID = "getBlogCid";
     
 //    IMG UPLOAD
     public final String UPIMGSINGLE = "upImgSingle";

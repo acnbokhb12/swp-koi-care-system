@@ -22,11 +22,12 @@ public class Blog {
     private Date blogDate;
     private boolean isActive;
     private BlogCategory blogCategory;
+    private Account account;
 
     public Blog() {
     }
 
-    public Blog(int blogID, int userID, int blogCateId, String title, String content, String blogImage, Date blogDate, boolean isActive, BlogCategory blogCategory) {
+    public Blog(int blogID, int userID, int blogCateId, String title, String content, String blogImage, Date blogDate, boolean isActive, BlogCategory blogCategory, Account account) {
         this.blogID = blogID;
         this.userID = userID;
         this.blogCateId = blogCateId;
@@ -36,6 +37,7 @@ public class Blog {
         this.blogDate = blogDate;
         this.isActive = isActive;
         this.blogCategory = blogCategory;
+        this.account = account;
     }
 
     public int getBlogID() {
@@ -110,9 +112,18 @@ public class Blog {
         this.blogCategory = blogCategory;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @Override
     public String toString() {
-        return "Blog{" + "blogID=" + blogID + ", userID=" + userID + ", blogCateId=" + blogCateId + ", title=" + title + ", content=" + content + ", blogImage=" + blogImage + ", blogDate=" + blogDate + ", isActive=" + isActive + ", blogCategory=" + blogCategory + '}';
+        return "Blog{" + "blogID=" + blogID + ", userID=" + userID + ", blogCateId=" + blogCateId + ", title=" + title + ", content=" + content + ", blogImage=" + blogImage + ", blogDate=" + blogDate + ", isActive=" + isActive + ", blogCategory=" + blogCategory + ", account=" + account + '}';
     }
+    
     
 }
