@@ -69,10 +69,6 @@
         <servlet-class>com.swp.koiCareSystem.controller.ImageUploadSingleController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeletePondController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>FishDeleteController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishDeleteController</servlet-class>
     </servlet>
@@ -143,10 +139,6 @@
     <servlet-mapping>
         <servlet-name>ImageUploadSingleController</servlet-name>
         <url-pattern>/ImageUploadSingleController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeletePondController</servlet-name>
-        <url-pattern>/DeletePondController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FishDeleteController</servlet-name>
