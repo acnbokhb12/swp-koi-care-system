@@ -5,6 +5,7 @@ import com.swp.koiCareSystem.model.Fish;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,7 @@ public class FishDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "SELECT * FROM Fish WHERE AccID = ?";
+                String sql = "SELECT * FROM Fish WHERE AccID = ? AND isActive = 1";
                 ptm = conn.prepareStatement(sql);
                 ptm.setInt(1, accountID);
                 rs = ptm.executeQuery();
@@ -65,23 +66,22 @@ public class FishDAO {
         return listFish;
     }
 
-    // Retrieve fish information by ID
-    public Fish getFishInforByID(String id) {
+ // SHOW INFORMATION BY ID
+    public Fish getFishInforByID(String  fishID) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Fish fish = null;
 
         String sql = "SELECT * FROM Fish WHERE FishID = ?";
         try {
-            conn = DatabaseConnectionManager.getConnection(); // Open connection to the database
+            conn = DatabaseConnectionManager.getConnection(); 
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, fishID);
             rs = ps.executeQuery();
 
-            // Check if a record was found
-            while (rs.next()) {
-                // Create a new Fish fishInforobject with the retrieved data
-                return new Fish(
+            if (rs.next()) {
+                fish = new Fish(
                         rs.getInt("FishID"),
                         rs.getInt("AccID"),
                         rs.getInt("PondID"),
@@ -96,11 +96,99 @@ public class FishDAO {
                 );
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return null; // Return the fish object, or null if not found
-
+        return fish;
     }
+    
+    //DELETE
+
+     
+ public boolean DeleteFishByID(String fishID) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "UPDATE Fish SET isActive = 0 WHERE FishID = ?";
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, fishID);
+
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+ 
+ //EDIT
+public void updateFish(Fish fish) {
+    Connection conn = null;
+    PreparedStatement ptm = null;
+
+    try {
+        conn = DatabaseConnectionManager.getConnection(); 
+        if (conn != null) { 
+            String sql = "UPDATE Fish SET FishName = ?, DescriptionKoi = ?, BodyShape = ?, " +
+                         "Age = ?, Length = ?, Weight = ?, Gender = ?, isActive = ? WHERE FishID = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, fish.getFishName());          
+            ptm.setString(2, fish.getDescriptionKoi());    
+            ptm.setString(3, fish.getBodyShape());          
+            ptm.setFloat(4, fish.getAge());               
+            ptm.setFloat(5, fish.getLength());             
+            ptm.setFloat(6, fish.getWeight());           
+            ptm.setString(7, fish.getGender());             
+            ptm.setBoolean(8, fish.isIsActive());             
+            ptm.setInt(9, fish.getFishID());               
+
+            ptm.executeUpdate();
+        }
+    } catch (SQLException e) {
+        System.out.println("Error updating fish: " + e.getMessage()); 
+    } catch (Exception e) {
+        System.out.println("An unexpected error occurred: " + e.getMessage());
+    } finally {
+        try {
+            if (ptm != null) {
+                ptm.close(); 
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+    }
+}
+
 
 //    // TEST DAO
 //    public static void main(String[] args) {

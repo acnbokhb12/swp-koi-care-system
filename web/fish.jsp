@@ -50,7 +50,8 @@
                                 <div class="fish-info">
                                     <a href="FishInforController?fid=${f.fishID}" class="link__to-fish-detail">${f.fishName}</a>
                                     <p>${f.descriptionKoi}</p>
-                                    <a href="deleteFish?fishID=${f.fishID}" class="link-delete-fish">Delete</a> 
+                                    <a href="#" class="link-delete-fish" data-fishid="${f.fishID}" data-toggle="modal" data-target="#myModal">Delete</a>
+
                                 </div>
                             </div>
                         </div>
@@ -58,118 +59,162 @@
                 </c:forEach>
             </div>
         </div> 
-    <!-- TABLE NEW -->
-    <div class="container__infor__fish">
-        <div class="infor__fish-detail">
-            <form action="" id="fomr_fill-news">  
-            <div class="row row-fish-detail">
-                <div class="col-4  " style="padding: 0">
-                <div class="img-edit-submit">
-                    <div class="fish-img-info-edit mb-4">
-                        <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+        <!-- TABLE NEW -->
+        <div class="container__infor__fish">
+            <div class="infor__fish-detail">
+                <form action="" id="fomr_fill-news">  
+                    <div class="row row-fish-detail">
+                        <div class="col-4  " style="padding: 0">
+                            <div class="img-edit-submit">
+                                <div class="fish-img-info-edit mb-4">
+                                    <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+                                </div>
+                                <div class="fish-edit-img-detail"> 
+                                    <input id="imageInput" type="file" accept="image/*" required>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8 edit-info">
+                            <div class="text-right">
+                                <button class="btn-close-fish">
+                                    <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
+                                </button>
+                            </div>
+                            <h2>New Information</h2> 
+                            <div class="row row-edit-info-detail">
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Fish Name </span>
+                                    <input type="text" value="" placeholder="Enter fish name" required/>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Body Shape </span>
+                                    <input type="text" value="" placeholder="Enter body shape" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Age </span>
+                                    <input type="number" value="" placeholder="Enter age" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Length (cm) </span>
+                                    <input
+                                        type="number"
+                                        step="0.1"
+                                        value=""
+                                        placeholder="Enter length in cm"
+                                        required
+                                        />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Weight (kg) </span>
+                                    <input
+                                        type="number"
+                                        step="0.1"
+                                        value=""
+                                        placeholder="Enter weight in kg"
+                                        required
+                                        />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Gender </span>
+                                    <select style="width: 100%; padding: 4px; border: 1px solid #000;"> 
+                                        <option selected value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Origin </span>
+                                    <input type="text" value="" placeholder="Enter origin"  required/>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
+                                    Confirm
+                                </button>                    
+                            </div> 
+                        </div>
                     </div>
-                    <div class="fish-edit-img-detail"> 
-                            <input id="imageInput" type="file" accept="image/*" required>  
+                </form>      
+            </div>
+        </div> 
+
+            <!-- Modal Delete -->
+        <div id="myModal" class="modal-confirm-delete">
+            <div class="modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header flex-column">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title w-100">Are you sure?</h4>
+                        <button type="button" class="close-confirm-delete close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                </div>
-                </div>
-                <div class="col-8 edit-info">
-              <div class="text-right">
-                <button class="btn-close-fish">
-                  <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
-                </button>
-              </div>
-              <h2>New Information</h2> 
-                <div class="row row-edit-info-detail">
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Fish Name </span>
-                    <input type="text" value="" placeholder="Enter fish name" required/>
-                  </div>
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Body Shape </span>
-                    <input type="text" value="" placeholder="Enter body shape" required />
-                  </div>
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Age </span>
-                    <input type="number" value="" placeholder="Enter age" required />
-                  </div>
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Length (cm) </span>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value=""
-                      placeholder="Enter length in cm"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Weight (kg) </span>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value=""
-                      placeholder="Enter weight in kg"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Gender </span>
-                    <select style="width: 100%; padding: 4px; border: 1px solid #000;"> 
-                      <option selected value="M">Male</option>
-                      <option value="F">Female</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 edit-item-detail">
-                    <span>Origin </span>
-                    <input type="text" value="" placeholder="Enter origin"  required/>
-                  </div>
-                </div>
-                <div class="text-center">
-                    <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
-                        Confirm
-                    </button>                    
-                </div> 
+                    <div class="modal-body">
+                        <p>Do you really want to delete this fish? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn-cancel-delete btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <form id="deleteForm" action="MainController?action=fishdelete" method="post">
+                            <input type="hidden" name="fishID" id="fishIDToDelete">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </form>      
-       </div>
-    </div> 
-       
+        </div>
+        
+        
         <!-- footer -->
         <div id="footer"></div> 
-</body>
-  <script>
-    $('#header').load('utils.jsp #header__nav', ()=>{
-        $.getScript('./assets/js/utilsCustomer.js');
-    });
-    $('#footer').load('utils.jsp #footer__nav', ()=>{
-        $.getScript('./assets/js/utilsCustomer.js');
-    });
+    </body>
+    <script>
+        $('#header').load('utils.jsp #header__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#footer').load('utils.jsp #footer__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
     </script>
-<script src="./assets/js/utils.js"></script> 
- 
-<script>
-    const btnClose = document.querySelector(".btn-close-fish");
-    const tableEdit = document.querySelector(".container__infor__fish");
-    const btnAddNew = document.querySelector(".button-container button");
-    const subTable = document.querySelector(".infor__fish-detail");
+    <script src="./assets/js/utils.js"></script> 
 
-    btnAddNew.addEventListener("click", function (e) {
-        tableEdit.classList.toggle("open");
-        e.stopPropagation();
-    });
+    <script>
+        const btnClose = document.querySelector(".btn-close-fish");
+        const tableEdit = document.querySelector(".container__infor__fish");
+        const btnAddNew = document.querySelector(".button-container button");
+        const subTable = document.querySelector(".infor__fish-detail");
 
-    btnClose.addEventListener("click", () => {
-        tableEdit.classList.remove("open");
-    });
+        btnAddNew.addEventListener("click", function (e) {
+            tableEdit.classList.toggle("open");
+            e.stopPropagation();
+        });
 
-    subTable.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
+        btnClose.addEventListener("click", () => {
+            tableEdit.classList.remove("open");
+        });
 
-    document.addEventListener("click", () => {
-        tableEdit.classList.remove("open");
-    }); 
-</script>
+        subTable.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener("click", () => {
+            tableEdit.classList.remove("open");
+        });
+    </script>
+        <script>
+        $(document).ready(function () {
+            $('#myModal').hide();
+            $('.link-delete-fish').on('click', function () {
+                const fishID = $(this).data('fishid');
+                $('#fishIDToDelete').val(fishID);
+                $('#myModal').show();
+            });
+            $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {
+                $('#myModal').hide();
+            });
+            $(window).on('click', function (event) {
+                if (event.target.id === 'myModal') {
+                    $('#myModal').hide();
+                }
+            });
+        });
+    </script>
 </html>

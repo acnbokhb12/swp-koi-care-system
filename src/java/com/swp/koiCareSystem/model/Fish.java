@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.swp.koiCareSystem.model;
 
-/**
- *
- * @author PC
- */
 public class Fish {
     private int fishID;          
     private int accID;           
@@ -19,7 +11,8 @@ public class Fish {
     private float age;          
     private float length;      
     private float weight;       
-    private String gender;       
+    private String gender;     
+    private boolean isActive;
 
     public Fish() {}
 
@@ -37,7 +30,6 @@ public class Fish {
         this.gender = gender;
     }
 
-    // Getters and Setters
     public int getFishID() {
         return fishID;
     }
@@ -94,7 +86,7 @@ public class Fish {
         this.bodyShape = bodyShape;
     }
 
-    public double getAge() {
+    public float getAge() {
         return age;
     }
 
@@ -102,7 +94,7 @@ public class Fish {
         this.age = age;
     }
 
-    public double getLength() {
+    public float getLength() {
         return length;
     }
 
@@ -110,7 +102,7 @@ public class Fish {
         this.length = length;
     }
 
-    public double getWeight() {
+    public float getWeight() {
         return weight;
     }
 
@@ -126,10 +118,18 @@ public class Fish {
         this.gender = gender;
     }
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+
+
     @Override
     public String toString() {
-        return "Fish{" + "fishID=" + fishID + ", accID=" + accID + ", pondID=" + pondID + ", fishImage=" + fishImage + ", fishName=" + fishName + ", descriptionKoi=" + descriptionKoi + ", bodyShape=" + bodyShape + ", age=" + age + ", length=" + length + ", weight=" + weight + ", gender=" + gender + '}';
+        return "Fish{" + "fishID=" + fishID + ", accID=" + accID + ", pondID=" + pondID + ", fishImage=" + fishImage + ", fishName=" + fishName + ", descriptionKoi=" + descriptionKoi + ", bodyShape=" + bodyShape + ", age=" + age + ", length=" + length + ", weight=" + weight + ", gender=" + gender + ", isActive=" + isActive + '}';
     }
-    
 }
-
