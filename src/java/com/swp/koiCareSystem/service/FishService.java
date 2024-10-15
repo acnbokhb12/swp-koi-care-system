@@ -5,8 +5,7 @@
 package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.FishDAO;
-import com.swp.koiCareSystem.model.Fish;
-import java.sql.SQLException;
+import com.swp.koiCareSystem.model.Fish; 
 import java.util.ArrayList;
 
 /**
@@ -24,6 +23,5 @@ public class FishService {
     // Get all fish for the specific account ID
     public ArrayList<Fish> GetAllFishS(int accountID) {
         return fishDAO.getAllFish(accountID); 
-
-}
+    }
 }

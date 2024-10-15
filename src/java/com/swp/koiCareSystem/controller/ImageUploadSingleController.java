@@ -40,15 +40,19 @@ public class ImageUploadSingleController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
                Part filePart = request.getPart("fileimg");
                String tempDir = getServletContext().getRealPath("/") + "uploads";
+               
+               
+               
                ImageUploadService imgs = new ImageUploadService();
+               
+               
                String imageUrl = "";
                try {
                     imageUrl =  imgs.uploadImage(filePart, tempDir); 
                     System.out.println(imageUrl);
 
                } catch (Exception e) {
-                   e.printStackTrace();
-                   
+                   e.printStackTrace(); 
                }
                AccountService acs = new AccountService();
                HttpSession session = request.getSession();

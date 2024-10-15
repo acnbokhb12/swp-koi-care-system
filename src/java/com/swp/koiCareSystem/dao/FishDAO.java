@@ -115,8 +115,11 @@ public class FishDAO {
         FishDAO fishDAO = new FishDAO();
         String testFishID = "5"; // Replace with a valid FishID to test
 
-        Fish fish = fishDAO.getFishInforByID(testFishID);
-        System.out.println(fish);
+//        Fish fish = fishDAO.getFishInforByID(testFishID);
+    ArrayList<Fish> fishs = fishDAO.getAllFish(5);
+       for(Fish f : fishs){
+           System.out.println(f);
+       }
     }
 }
       
