@@ -49,6 +49,7 @@ public class AddNewPondController extends HttpServlet {
                 response.sendRedirect("home.jsp");
                 return;
             }
+
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
             ImageUploadService imgs = new ImageUploadService();
@@ -56,13 +57,14 @@ public class AddNewPondController extends HttpServlet {
 
             Pond newPond = new Pond();
 
-            try {
-                imageUrl = imgs.uploadImage(filePart, tempDir);
-                System.out.println(imageUrl);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
+            if (filePart != null) {
+                try {
+                    imageUrl = imgs.uploadImage(filePart, tempDir);
+                    System.out.println(imageUrl);
+                    newPond.setImage(imageUrl);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             int acid = acc.getUserID();;
@@ -75,10 +77,9 @@ public class AddNewPondController extends HttpServlet {
             int numberOfFish = Integer.parseInt(request.getParameter("numberOfFish"));
             int skimmerQuantity = Integer.parseInt(request.getParameter("skimmer"));
 
-            PondDAO pd = new PondDAO();
+            PondService ps = new PondService();
 
             newPond.setAccID(acid);
-            newPond.setImage(imageUrl);
             newPond.setName(name);
             newPond.setDepth(depth);
             newPond.setVolume(volume);
@@ -89,17 +90,15 @@ public class AddNewPondController extends HttpServlet {
             newPond.setSkimmer(skimmerQuantity);
             newPond.setIsActive(true);
 
-            boolean isCreated = pd.createNewPond(newPond);
-
-            PondService ponds = new PondService();
-            ArrayList<Pond> listP = ponds.GetAllPondS(acc.getUserID());
+            boolean isCreated = ps.createNewPond(newPond);
 
             if (isCreated) {
                 request.setAttribute("message", "New Pond has been created");
             } else {
                 request.setAttribute("message", "An error occurred while creating the pond.");
             }
-            
+
+            ArrayList<Pond> listP = ps.GetAllPondS(acc.getUserID());
             request.setAttribute("listPonds", listP);
             request.getRequestDispatcher("pond.jsp").forward(request, response);
         }

@@ -71,7 +71,7 @@
                                     <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
                                 </div>
                                 <div class="pond-edit-img-detail" > 
-                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" required> 
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*"> 
                                 </div>
                             </div>
                         </div>
@@ -81,39 +81,39 @@
                                     class="btn-close-pond"><i class="fa-solid fa-xmark close-navbar-icon-btn-pond"></i>
                                 </button>
                             </div>
-                            <h2>Add new pond</h2> 
+                            <h2>Add New Pond</h2> 
                             <div class="row row-edit-info-detail">
                                 <div class="row row-edit-info-detail">
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Pond Name: </span>
+                                        <span>Pond Name</span>
                                         <input type="text" class="pond-name" name="pondName" placeholder="Enter your pond name" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Depth (m): </span>
+                                        <span>Depth (m)</span>
                                         <input type="number" class="pond-depth" name="depth" step="0.1" placeholder="Enter depth in meters" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Volume (l): </span>
+                                        <span>Volume (l)</span>
                                         <input type="number" class="pond-volume" name="volume" min="0" placeholder="Enter volume in liters" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Drain Count: </span>
+                                        <span>Drain Count</span>
                                         <input type="number" class="drain-count" name="drainCount" min="1" placeholder="Enter number of drains" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Pump Power (l/h): </span>
+                                        <span>Pump Power (l/h)</span>
                                         <input type="number" class="pump-power" name="pumpPower" min="1" placeholder="Enter pump power in liters per hour" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Quantity of Fish: </span>
+                                        <span>Quantity of Fish</span>
                                         <input type="number" class="quantity-fish" name="numberOfFish" min="0" placeholder="Enter number of fish" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Description: </span>
+                                        <span>Description</span>
                                         <input type="text" class="pond-description" name="descriptionPond" placeholder="Enter pond description" required>
                                     </div>
                                     <div class="col-md-6 edit-item-detail">
-                                        <span>Skimmer: </span>
+                                        <span>Skimmer</span>
                                         <input type="number" class="skimmer" name="skimmer" min="0" placeholder="Enter skimmer quantity" required>
                                     </div>
                                 </div>

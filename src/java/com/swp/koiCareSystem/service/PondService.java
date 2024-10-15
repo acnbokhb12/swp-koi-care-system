@@ -14,26 +14,31 @@ import java.util.ArrayList;
  * @author PC
  */
 public class PondService {
-
+    
     private PondDAO ponddao;
-
+    
     public PondService() {
         ponddao = new PondDAO();
     }
-
+    
     public ArrayList<Pond> GetAllPondS(int accountID) {
         return ponddao.getAllPond(accountID);
     }
-
+    
     public Pond GetPondInforByIDS(int id) {
         return ponddao.getPondInforByID(id);
     }
-
+    
     public boolean updatePondImageByPondID(int pid, String imgLink) {
         return ponddao.updatePondImageByPondID(pid, imgLink);
     }
-
+    
     public ArrayList<Fish> GetAllFishInPondByPondID(int pid) {
         return ponddao.getAllFishInPondByID(pid);
+    }
+
+    public boolean createNewPond(Pond pond) {
+        pond.setImage("https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg");
+        return ponddao.createNewPond(pond);
     }
 }
