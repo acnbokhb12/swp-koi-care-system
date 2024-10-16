@@ -245,11 +245,10 @@ public class FishDAO {
         ps.setString(9, fish.getGender());
         ps.setBoolean(10, fish.isIsActive());
 
-        // Execute the update and check if rows were affected
         int rowsAffected = ps.executeUpdate();
         return rowsAffected > 0;
     } catch (Exception e) {
-        e.printStackTrace(); // Print the stack trace for debugging
+        e.printStackTrace(); 
         return false;
     } finally {
         try {
