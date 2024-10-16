@@ -36,7 +36,9 @@ public interface IConstant {
     public final String PONDINFOR = "pondinfor";
     public final String PONDDELETE = "ponddelete";
     public final String FISHDELETE = "fishdelete";
-    public final String FISHUPDATE = "fishupdate";
+    public final String FISHIMAGEUPDATE = "fishimageupdate";
+    public final String FISHINFORMATIONUPDATE = "fishinformationupdate";
+    public final String FISHCREATE = "fishcreate";
 
     public final String PASSWORDPROFILE = "passwordprofile";
     public final String INFORMATIONPROFILE = "informationprofile";

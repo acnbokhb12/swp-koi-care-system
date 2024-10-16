@@ -62,7 +62,7 @@
         <!-- TABLE NEW -->
         <div class="container__infor__fish">
             <div class="infor__fish-detail">
-                <form action="" id="fomr_fill-news">  
+                <form action="MainController?action=fishcreate" method="post" enctype="multipart/form-data"  id="fomr_fill-news">  
                     <div class="row row-fish-detail">
                         <div class="col-4  " style="padding: 0">
                             <div class="img-edit-submit">
@@ -70,7 +70,8 @@
                                     <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
                                 </div>
                                 <div class="fish-edit-img-detail"> 
-                                    <input id="imageInput" type="file" accept="image/*" required>  
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" required> 
+
                                 </div>
                             </div>
                         </div>
@@ -80,7 +81,7 @@
                                     <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
                                 </button>
                             </div>
-                            <h2>New Information</h2> 
+                            <h2>Add New Fish</h2> 
                             <div class="row row-edit-info-detail">
                                 <div class="col-md-6 edit-item-detail">
                                     <span>Fish Name </span>
@@ -122,8 +123,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Origin </span>
-                                    <input type="text" value="" placeholder="Enter origin"  required/>
+                                    <span>Description </span>
+                                    <input type="text" value="" placeholder="Enter description"  required/>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -137,7 +138,7 @@
             </div>
         </div> 
 
-            <!-- Modal Delete -->
+        <!-- Modal Delete -->
         <div id="myModal" class="modal-confirm-delete">
             <div class="modal-confirm">
                 <div class="modal-content">
@@ -161,8 +162,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <!-- footer -->
         <div id="footer"></div> 
     </body>
@@ -199,7 +200,7 @@
             tableEdit.classList.remove("open");
         });
     </script>
-        <script>
+    <script>
         $(document).ready(function () {
             $('#myModal').hide();
             $('.link-delete-fish').on('click', function () {

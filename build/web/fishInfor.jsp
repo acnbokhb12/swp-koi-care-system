@@ -41,9 +41,9 @@
             <div class="tilte-fish">
                 <h1>Fish Information</h1>
                 <div class="text-right">
-                    <a href="fish.jsp" class="back-btn">Back to List</a>
+                    <a href="MainController?action=fish" class="back-btn">Back to List</a>
                     <a href="FishDeleteController?fishID=${fish.fishID}" class="delete-btn-fish">Delete</a>                
-                        <button class="edit-btn-out">Edit Information</button>
+                    <button class="edit-btn-out">Edit Information</button>
                 </div>
             </div>
             <div class="row mt-4 row-infor-fish-detail">
@@ -136,14 +136,20 @@
                 <div class="row row-fish-detail">
                     <div class="col-4  " style="padding: 0">
                         <div class="img-edit-submit">
+
+
                             <div class="fish-img-info-edit">
                                 <img
-                                    src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg"
-                                    alt="Koi Pond">
+                                    src="${fish.fishImage}" 
+                                    alt="${fish.fishName}" />
+
                             </div>
+
+
                             <div class="fish-edit-img-detail">
-                                <form action="" class="form-edit-img-fish">
-                                    <input type="file">
+                                <form action="MainController?action=fishimageupdate" class="form-edit-img-fish">
+                                    <input type="hidden" name="fishID" value="${fish.fishID}">
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" >
                                     <button type="submit">Submit</button>
                                 </form>
                             </div>
@@ -156,51 +162,73 @@
                             </button>
                         </div>
                         <h2>New Information</h2>
-                        <form>
+                        <form action="MainController?action=fishinformationupdate" method="POST">
                             <div class="row row-edit-info-detail">
-                                <div class="col-md-6 edit-item-detail">
+                                <input type="hidden" name="fishID" value="${fish.fishID}" />
+
+
+                                <div class="col-md-10 edit-item-detail">
                                     <span>Fish Name </span>
-                                    <input type="text" value="" placeholder="Enter fish name" />
+                                    <input type="text" name="fishName" value="${fish.fishName}" placeholder="Enter fish name" required />
                                 </div>
-                                <div class="col-md-6 edit-item-detail">
+
+
+                                <div class="col-md-10 edit-item-detail">
                                     <span>Body Shape </span>
-                                    <input type="text" value="" placeholder="Enter body shape" />
+                                    <input type="text" name="bodyShape" value="${fish.bodyShape}" placeholder="Enter body shape" required />
                                 </div>
-                                <div class="col-md-6 edit-item-detail">
+
+
+                                <div class="col-md-10 edit-item-detail">
                                     <span>Age </span>
-                                    <input type="number" value="" placeholder="Enter age" />
+                                    <input type="number" name="age" value="${fish.age}" placeholder="Enter age" required min="0" />
                                 </div>
-                                <div class="col-md-6 edit-item-detail">
+
+
+                                <div class="col-md-10 edit-item-detail">
                                     <span>Length (cm) </span>
-                                    <input type="number" step="0.1" value="" placeholder="Enter length in cm" />
+                                    <input type="number" name="length" value="${fish.length}" step="0.1" placeholder="Enter length in cm" required min="0" />
                                 </div>
-                                <div class="col-md-6 edit-item-detail">
+
+
+                                <div class="col-md-10 edit-item-detail">
                                     <span>Weight (kg) </span>
-                                    <input type="number" step="0.1" value="" placeholder="Enter weight in kg" />
+                                    <input type="number" name="weight" value="${fish.weight}" step="0.1" placeholder="Enter weight in kg" required min="0" />
                                 </div>
-                                <div class="col-md-6 edit-item-detail">
+
+
+                                <div class="col-md-10 edit-item-detail">
                                     <span>Gender </span>
-                                    <select>
-                                        <option selected value="M">Male</option>
-                                        <option value="F">Female</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Origin </span>
-                                    <input type="text" value="" placeholder="Enter origin" />
+                                    <select name="gender" required>
+                                        <option value="M" <c:if test="${fish.gender == 'M'}">selected</c:if>>Male</option>
+                                        <option value="F" <c:if test="${fish.gender == 'F'}">selected</c:if>>Female</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-md-10 edit-item-detail">
+                                        <span>Description </span>
+                                        <input type="text" name="description" value="${fish.descriptionKoi}" placeholder="Enter description" required />
                                 </div>
                             </div>
+
                             <div class="text-center">
-                                <button class="edit-btn blue-btn" style="margin-top: 10px">
+                                <button type="submit" class="edit-btn blue-btn" style="margin-top: 10px">
                                     Confirm
                                 </button>
+
+
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
         <!-- footer -->
+
         <div id="footer"></div>
     </body>
     <style>

@@ -81,8 +81,14 @@ public class MainController extends HttpServlet {
                 case IConstant.FISHDELETE:
                     url = "FishDeleteController";
                     break;
-                case IConstant.FISHUPDATE:
-                    url = "FishUpdateController";
+                case IConstant.FISHINFORMATIONUPDATE:
+                    url = "FishInformationUpdateController";
+                    break;
+                case IConstant.FISHIMAGEUPDATE:
+                    url = "FishImageUpdateController";
+                    break;
+                      case IConstant.FISHCREATE:
+                    url = "FishCreateNewController";
                     break;
                 case IConstant.EDIT_PROFILE_JSP:
                     url = "editProfile.jsp";

@@ -72,6 +72,22 @@
         <servlet-name>FishDeleteController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishDeleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FishInformationController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishInformationUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishInformationUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishCreateNewController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishCreateNewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishImageUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishImageUpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -143,6 +159,22 @@
     <servlet-mapping>
         <servlet-name>FishDeleteController</servlet-name>
         <url-pattern>/FishDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishInformationController</servlet-name>
+        <url-pattern>/FishInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishInformationUpdateController</servlet-name>
+        <url-pattern>/FishInformationUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishCreateNewController</servlet-name>
+        <url-pattern>/FishCreateNewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishImageUpdateController</servlet-name>
+        <url-pattern>/FishImageUpdateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

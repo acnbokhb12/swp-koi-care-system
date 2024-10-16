@@ -5,21 +5,22 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.dao.FishDAO;
 import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.service.FishService;
+import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author PC
  */
-public class FishInforController extends HttpServlet {
+public class FishImageUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,16 +34,33 @@ public class FishInforController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-                int id = Integer.parseInt(request.getParameter("fid"));
+        try (PrintWriter out = response.getWriter()) {   /* TODO output your page here. You may use following sample code. */
+            Part filePart = request.getPart("fileimg");
+            String tempDir = getServletContext().getRealPath("/") + "uploads";
+            ImageUploadService imgs = new ImageUploadService();
+            String imageUrl = "";
+            try {
+                imageUrl = imgs.uploadImage(filePart, tempDir);
+                System.out.println(imageUrl);
 
-            FishService fins = new FishService();
+            } catch (Exception e) {
+                e.printStackTrace();
 
-            Fish fin = fins.GetFishInforByIDS(id);
-            request.setAttribute("fish", fin);
+            }
+            int fishID = Integer.parseInt(request.getParameter("fishID"));
+
+            FishService fs = new FishService();
+            boolean upImage = fs.updateFishImageByPondIDS(fishID, imageUrl);
+
+            if (upImage) {
+                request.setAttribute("message", "New Pond has been created");
+            } else {
+                request.setAttribute("message", "An error occurred while creating the pond.");
+            }
+            Fish updatedPond = fs.GetFishInforByIDS(fishID);
+            request.setAttribute("fish", updatedPond);
+
             request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-
         }
     }
 

@@ -287,9 +287,10 @@
 }
 
 .edit-info {
-    padding: 1rem;
+    padding: 2rem;
     width: 100%;
     font-size: 1.5rem;
+    justify-content: center;    
 }
 
 .edit-info h2 {

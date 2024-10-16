@@ -26,4 +26,11 @@ public class FishService {
         return fishDAO.getAllFish(accountID); 
 
 }
+    public Fish GetFishInforByIDS (int id) { // Change the parameter type to String
+        return fishDAO.getFishInforByID(id);
+    }
+    public boolean updateFishImageByPondIDS(int pid, String imgLink) {
+        return fishDAO.updateFishImageByFishID(pid, imgLink);
+    }
+
 }
