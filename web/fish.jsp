@@ -60,83 +60,70 @@
             </div>
         </div> 
         <!-- TABLE NEW -->
-        <div class="container__infor__fish">
-            <div class="infor__fish-detail">
-                <form action="MainController?action=fishcreatenew" method="post" enctype="multipart/form-data"  id="fomr_fill-news">  
-                    <div class="row row-fish-detail">
-                        <div class="col-4  " style="padding: 0">
-                            <div class="img-edit-submit">
-                                <div class="fish-img-info-edit mb-4">
-                                    <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
-                                </div>
-                                <div class="fish-edit-img-detail"> 
-                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" required> 
-
-                                </div>
-                            </div>
+      <div class="container__infor__fish">
+    <div class="infor__fish-detail">
+        <form action="FishCreateNewController" method="post" enctype="multipart/form-data" id="form_fill-news">  
+            <div class="row row-fish-detail">
+                <div class="col-4" style="padding: 0">
+                    <div class="img-edit-submit">
+                        <div class="fish-img-info-edit mb-4">
+                            <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond"> 
                         </div>
-                        <div class="col-8 edit-info">
-                            <div class="text-right">
-                                <button class="btn-close-fish">
-                                    <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
-                                </button>
-                            </div>
-                            <h2>Add New Fish</h2> 
-                            <div class="row row-edit-info-detail">
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Fish Name </span>
-                                    <input type="text" value="" placeholder="Enter fish name" required/>
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Body Shape </span>
-                                    <input type="text" value="" placeholder="Enter body shape" required />
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Age </span>
-                                    <input type="number" value="" placeholder="Enter age" required />
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Length (cm) </span>
-                                    <input
-                                        type="number"
-                                        step="0.1"
-                                        value=""
-                                        placeholder="Enter length in cm"
-                                        required
-                                        />
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Weight (kg) </span>
-                                    <input
-                                        type="number"
-                                        step="0.1"
-                                        value=""
-                                        placeholder="Enter weight in kg"
-                                        required
-                                        />
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Gender </span>
-                                    <select style="width: 100%; padding: 4px; border: 1px solid #000;"> 
-                                        <option selected value="M">Male</option>
-                                        <option value="F">Female</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Description </span>
-                                    <input type="text" value="" placeholder="Enter description"  required/>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
-                                    Confirm
-                                </button>                    
-                            </div> 
+                        <div class="fish-edit-img-detail"> 
+                            <input id="imageInput" name="fileimg" type="file" accept="image/*" required> 
                         </div>
                     </div>
-                </form>      
+                </div>
+                <div class="col-8 edit-info">
+                    <div class="text-right">
+                        <button class="btn-close-fish">
+                            <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
+                        </button>
+                    </div>
+                    <h2>Add New Fish</h2> 
+                    <div class="row row-edit-info-detail">
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Fish Name</span>
+                            <input type="text" name="fishName" placeholder="Enter fish name" required/>
+                        </div>
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Body Shape</span>
+                            <input type="text" name="bodyShape" placeholder="Enter body shape" required />
+                        </div>
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Age</span>
+                            <input type="number" name="age" placeholder="Enter age" required />
+                        </div>
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Length (cm)</span>
+                            <input type="number" name="length" step="0.1" placeholder="Enter length in cm" required />
+                        </div>
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Weight (kg)</span>
+                            <input type="number" name="weight" step="0.1" placeholder="Enter weight in kg" required />
+                        </div>
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Gender</span>
+                            <select name="gender" style="width: 100%; padding: 4px; border: 1px solid #000;"> 
+                                <option selected value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 edit-item-detail">
+                            <span>Description</span>
+                            <input type="text" name="descriptionKoi" placeholder="Enter description" required/>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
+                            Confirm
+                        </button>                    
+                    </div> 
+                </div>
             </div>
-        </div> 
+        </form>      
+    </div>
+</div>
 
         <!-- Modal Delete -->
         <div id="myModal" class="modal-confirm-delete">

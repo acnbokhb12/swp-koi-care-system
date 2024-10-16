@@ -208,7 +208,7 @@
 
                                     <div class="col-md-10 edit-item-detail">
                                         <span>Description </span>
-                                        <input type="text" name="description" value="${fish.descriptionKoi}" placeholder="Enter description" required />
+                                        <input type="text" name="descriptionKoi" value="${fish.descriptionKoi}" placeholder="Enter description" required />
                                 </div>
                             </div>
 
