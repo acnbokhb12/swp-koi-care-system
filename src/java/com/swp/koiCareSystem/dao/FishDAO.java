@@ -271,24 +271,26 @@ public class FishDAO {
     
     
     
+ /*
 
 //    // TEST DAO
-//    public static void main(String[] args) {
-//        FishDAO fdao = new FishDAO();
-//
-//        // Test retrieving all fish for a specific account ID
-//        ArrayList<Fish> list = fdao.getAllFish(5);
-//        for (Fish i : list) {
-//            System.out.println(i);
-//        }
-//    public static void main(String[] args) {
-//        FishDAO fishDAO = new FishDAO();
-//        String testFishID = "5"; // Replace with a valid FishID to test
-//
-//        Fish fish = fishDAO.getFishInforByI;
-//        System.out.println(fish);
-//}
+    public static void main(String[] args) {
+        FishDAO fdao = new FishDAO();
+
+        // Test retrieving all fish for a specific account ID
+        ArrayList<Fish> list = fdao.getAllFish(5);
+        for (Fish i : list) {
+            System.out.println(i);
+        }
+    public static void main(String[] args) {
+        FishDAO fishDAO = new FishDAO();
+        String testFishID = "5"; // Replace with a valid FishID to test
+
+        Fish fish = fishDAO.getFishInforByI;
+        System.out.println(fish);
+}
  
+ //TEST UPDATE  -- pass
  
   public static void main(String[] args) {
         // Tạo một đối tượng Fish với thông tin cần thiết
@@ -314,5 +316,31 @@ public class FishDAO {
         }
     }
  
+  //TEST CREATE -- pass
+  public static void main(String[] args) {
+    Fish newFish = new Fish();
+    newFish.setAccID(1);
+    newFish.setFishImage("image_url_or_path"); 
+    newFish.setFishName("Koi Gold");
+    newFish.setBodyShape("Oval");
+    newFish.setAge(2.0f);
+    newFish.setLength(30.0f);
+    newFish.setWeight(3.5f);
+    newFish.setGender("Male");
+    newFish.setDescriptionKoi("Beautiful gold koi fish.");
+    newFish.setIsActive(true); 
+
+  
+    FishDAO fishDAO = new FishDAO();
+    boolean isCreated = fishDAO.createNewFish(newFish);
+
+  
+    if (isCreated) {
+        System.out.println("New fish created successfully.");
+    } else {
+        System.out.println("Failed to create new fish.");
+    }
+}*/
+
 }
 

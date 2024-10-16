@@ -47,7 +47,7 @@ public class FishCreateNewController extends HttpServlet {
                 return;
             }
 
-            Part filePart = request.getPart("fileimg"); // Assuming this part handles the fish image upload
+            Part filePart = request.getPart("fileimg"); 
             String tempDir = getServletContext().getRealPath("/") + "uploads";
             ImageUploadService imgs = new ImageUploadService();
             String imageUrl = "";
@@ -55,11 +55,10 @@ public class FishCreateNewController extends HttpServlet {
             Fish newFish = new Fish();
 
             try {
-                imageUrl = imgs.uploadImage(filePart, tempDir); // Upload the image and get the URL
+                imageUrl = imgs.uploadImage(filePart, tempDir); 
                 System.out.println(imageUrl);
             } catch (Exception e) {
                 e.printStackTrace();
-                // You may want to handle the error case, e.g., by returning or notifying the user
             }
 
             int accID = acc.getUserID();
@@ -84,10 +83,10 @@ public class FishCreateNewController extends HttpServlet {
             newFish.setGender(gender);
             newFish.setIsActive(true);
 
-            boolean isCreated = fishDAO.createNewFish(newFish); // Call method to create new fish
+            boolean isCreated = fishDAO.createNewFish(newFish);
 
             FishService fishService = new FishService();
-            ArrayList<Fish> fishList = fishService.GetAllFishS(acc.getUserID()); // Assuming this gets all fish for the user
+            ArrayList<Fish> fishList = fishService.GetAllFishS(acc.getUserID()); 
 
             if (isCreated) {
                 request.setAttribute("message", "New Fish has been created");
@@ -95,8 +94,8 @@ public class FishCreateNewController extends HttpServlet {
                 request.setAttribute("message", "An error occurred while creating the fish.");
             }
 
-            request.setAttribute("listFish", fishList); // Store the fish list in the request
-            request.getRequestDispatcher("fish.jsp").forward(request, response); // Forward to the fish.jsp page
+            request.setAttribute("listFish", fishList); 
+            request.getRequestDispatcher("fish.jsp").forward(request, response); 
 
         }
     }

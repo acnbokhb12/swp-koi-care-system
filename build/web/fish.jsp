@@ -62,7 +62,7 @@
         <!-- TABLE NEW -->
         <div class="container__infor__fish">
             <div class="infor__fish-detail">
-                <form action="MainController?action=fishcreate" method="post" enctype="multipart/form-data"  id="fomr_fill-news">  
+                <form action="MainController?action=fishcreatenew" method="post" enctype="multipart/form-data"  id="fomr_fill-news">  
                     <div class="row row-fish-detail">
                         <div class="col-4  " style="padding: 0">
                             <div class="img-edit-submit">
