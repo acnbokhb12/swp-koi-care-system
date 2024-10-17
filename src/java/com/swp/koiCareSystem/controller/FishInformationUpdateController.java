@@ -45,6 +45,8 @@ public class FishInformationUpdateController extends HttpServlet {
             float weight = Float.parseFloat(request.getParameter("weight"));
             String gender = request.getParameter("gender");
             String descriptionKoi = request.getParameter("descriptionKoi");
+            String pondId = request.getParameter("pondkoi");
+            int pid = Integer.parseInt(pondId);
 
             // Tạo đối tượng Fish
             Fish fish = new Fish();
@@ -56,6 +58,9 @@ public class FishInformationUpdateController extends HttpServlet {
             fish.setWeight(weight);
             fish.setGender(gender);
             fish.setDescriptionKoi(descriptionKoi);
+            if (pid != 0) {
+               fish.setPondID(pid);
+            }
 
             // Cập nhật thông tin cá
 //            FishDAO fishDAO = new FishDAO();

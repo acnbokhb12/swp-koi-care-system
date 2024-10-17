@@ -153,7 +153,7 @@ public class FishDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Fish SET FishName = ?, BodyShape = ?, Age = ?, Length = ?, Weight = ?, Gender = ?, DescriptionKoi = ? WHERE FishID = ?";
+                String sql = "UPDATE Fish SET FishName = ?, BodyShape = ?, Age = ?, Length = ?, Weight = ?, Gender = ?, DescriptionKoi = ?, PondID = ? WHERE FishID = ?";
                 ptm = conn.prepareStatement(sql);
 
                 ptm.setString(1, fish.getFishName());
@@ -163,7 +163,12 @@ public class FishDAO {
                 ptm.setFloat(5, (float) fish.getWeight());
                 ptm.setString(6, fish.getGender());
                 ptm.setString(7, fish.getDescriptionKoi());
-                ptm.setInt(8, fish.getFishID());
+                if (fish.getPondID() != 0) {
+                    ptm.setInt(8, fish.getPondID());
+                } else {
+                    ptm.setNull(8, java.sql.Types.INTEGER);
+                }
+                ptm.setInt(9, fish.getFishID());
 
                 int affectedRows = ptm.executeUpdate();
                 return affectedRows > 0;

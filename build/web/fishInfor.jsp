@@ -198,7 +198,7 @@
                                         <option value="Male" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Male</option>
                                         <option value="Female" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Female</option>
                                         </select>
-                                    </div>
+                                </div>
 
 
                                     <div class="col-md-6 edit-item-detail">

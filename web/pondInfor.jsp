@@ -34,6 +34,7 @@
     </head>
 
     <body class="pond-background">
+        <fmt:setLocale value="en_US" />
         <!-- start header -->
         <div id="header"></div>
         <!-- end header -->
@@ -62,11 +63,13 @@
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Depth:</span> 
-                        <p class=" span-witdh"> ${pond.depth}<span class="sub_span-highlight">(m)</span></p>
+                        <fmt:formatNumber value=" ${pond.depth}" pattern="0.0" var="formattedDepth"  /> 
+                        <p class=" span-witdh"> ${formattedDepth} <span class="sub_span-highlight">(m)</span></p>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Volume:</span> 
-                        <span class=" span-witdh">${pond.volume}  <span class="sub_span-highlight"> (l)</span></span>
+                        <fmt:formatNumber value=" ${pond.volume}" pattern="0.0" var="formatVolume"/>
+                        <span class=" span-witdh">${formatVolume} <span class="sub_span-highlight"> (l)</span></span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Drain Count:</span> 
@@ -74,7 +77,8 @@
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Pump Power:</span> 
-                        <span class=" span-witdh">${pond.pumpPower}<span class="sub_span-highlight">(l/h)</span></span>
+                        <fmt:formatNumber value=" ${pond.pumpPower}" pattern="0.0" var="formatPumpPower" />
+                        <span class=" span-witdh">${formatPumpPower} <span class="sub_span-highlight">(l/h)</span></span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Quantity fish   :</span> 
@@ -153,12 +157,13 @@
                                     <input type="text" id="pondName" name="pondName" value="${pond.name}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <label for="depth">Depth (meters)</label>
-                                    <input type="number" step="0.1" id="depth" name="depth" value="${pond.depth}" required>
+                                    <label for="depth">Depth (meters)</label> 
+                                    <fmt:formatNumber value=" ${pond.depth}" minFractionDigits="1" maxFractionDigits="1" var="formattedDepthV2"  /> 
+                                    <input type="number" step="0.1" id="depth" name="depth" value="${formattedDepthV2}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
                                     <label for="volume">Volume (liters)</label>
-                                    <input type="number" step="0.1" id="volume" name="volume" value="${pond.volume}" required>
+                                    <input type="number" step="0.1" id="volume" name="volume" value="${formatVolume}" required>
                                 </div>                               
                                 <div class="col-md-6 edit-item-detail">
                                     <label for="drainCount">Number of Drains</label>
@@ -166,7 +171,7 @@
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
                                     <label for="pumpPower">Pump Power (l/h)</label>
-                                    <input type="number" id="pumpPower" name="pumpPower" value="${pond.pumpPower}" required>
+                                    <input type="number" id="pumpPower" name="pumpPower" value="${formatPumpPower}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
                                     <label for="numberOfFish">Number of Fish</label>

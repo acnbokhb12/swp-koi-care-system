@@ -104,10 +104,7 @@ public class MainController extends HttpServlet {
                 case IConstant.FISH_IMAGE_UPDATE:
                     url = "FishImageUpdateController";
                     break; 
-        // START PLACE POND -------------------------------------------------------------            
-                case IConstant.FISHINPOND:
-                    url = "FishInPondController";
-                    break;
+        // START PLACE POND -------------------------------------------------------------     
                 case IConstant.POND:
                     url = "PondController";
                     break;
@@ -126,6 +123,7 @@ public class MainController extends HttpServlet {
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
                     break;
+        // DEFAULT IF ERROR ACTION --------------------------------------------------------            
                 default:
                     url = "home.jsp";
                     break;
