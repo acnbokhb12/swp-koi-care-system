@@ -13,14 +13,17 @@ import io.github.cdimascio.dotenv.Dotenv;
  */
 public interface IConstant {
 
-    public final String HOME = "home";
+     public final String HOME = "home";
     public final String SHOP = "shop";
     public final String SHOPJSP = "shopJsp";
 
-    public final String PROFILEJSP = "profileJsp";
+    public final String PROFILE_JSP = "profileJsp";
     public final String EDIT_PROFILE_JSP = "editProfileJsp";
+    public final String PASSWORD_PROFILE = "passwordprofile";
+    public final String INFORMATIONPROFILE = "informationprofile";
+    public final String UP_IMG_SINGLE = "upImgSingle";
 
-    public final String EDITPROFILE = "editProfile";
+    public final String EDIT_PROFILE = "editProfile";
 
     public final String PRODUCTDETAIL = "productDetail";
 
@@ -31,26 +34,28 @@ public interface IConstant {
     public final String LOGOUT = "logout";
 
     public final String FISH = "fish";
-    public final String FISHINFOR = "fishinfor";
+    public final String FISH_INFOR = "fishinfor";
+     public final String FISH_CREATE_NEW = "fishcreatenew";
+    public final String FISH_DELETE = "fishdelete";
+    public final String FISH_INFOR_UPDATE = "fishinformationupdate";
+    public final String FISH_IMAGE_UPDATE = "fishimageupdate";
+    
+//    nham nhi - KO CAN THIET
     public final String FISHINPOND = "fishinpond";
     
     
     public final String POND = "pond";
-    public final String PONDINFOR = "pondinfor";
-    public final String NEWPOND = "newpond";
-    public final String PONDDELETE = "ponddelete";
-    public final String PONDINFORMATIONDUPDATE = "pondinformationupdate";
-    public final String PONDIMAGENDUPDATE = "pondimageupdate";
-
-    public final String PASSWORDPROFILE = "passwordprofile";
-    public final String INFORMATIONPROFILE = "informationprofile"; 
+    public final String POND_INFOR = "pondinfor";
+    public final String ADD_NEW_POND = "newpond";
+    public final String POND_DELETE = "ponddelete";
+    public final String POND_INFOR_UPDATE = "pondinformationupdate";
+    public final String POND_IMAGE_UPDATE = "pondimageupdate";
+ 
     
      public static String BLOG = "blog";
      public static String GET_BLOG_CID = "getBlogCid";  
   
-//    IMG UPLOAD
-    public final String UPIMGSINGLE = "upImgSingle";
-
+  
     public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";
 
     public static final String GOOGLE_CLIENT_SECRET = "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";

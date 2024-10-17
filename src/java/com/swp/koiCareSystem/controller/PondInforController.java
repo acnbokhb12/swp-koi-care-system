@@ -36,15 +36,13 @@ public class PondInforController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("pid"));
-            PondService ponds = new PondService(); 
-            
-            ArrayList<Fish> listFishInPond = ponds.GetAllFishInPondByPondID(id);
-            
-            Pond pin = ponds.GetPondInforByIDS(id);
-            request.setAttribute("pond", pin); 
-            request.setAttribute("listFishInPond", listFishInPond);
-
+            String pondid = request.getParameter("pid");
+            int id = Integer.parseInt(pondid);
+            PondService psv = new PondService();  
+            Pond p = psv.getPondInforByID(id);
+            ArrayList<Fish> listFishInPond = psv.GetAllFishInPondByPondID(id); 
+            request.setAttribute("pond", p); 
+            request.setAttribute("listFishInPond", listFishInPond); 
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
         }
     }

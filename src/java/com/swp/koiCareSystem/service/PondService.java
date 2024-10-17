@@ -21,11 +21,11 @@ public class PondService {
         ponddao = new PondDAO();
     }
     
-    public ArrayList<Pond> GetAllPondS(int accountID) {
+    public ArrayList<Pond> getAllPondS(int accountID) {
         return ponddao.getAllPond(accountID);
     }
     
-    public Pond GetPondInforByIDS(int id) {
+    public Pond getPondInforByID(int id) {
         return ponddao.getPondInforByID(id);
     }
     

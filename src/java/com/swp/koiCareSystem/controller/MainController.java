@@ -45,12 +45,14 @@ public class MainController extends HttpServlet {
                 case IConstant.HOME:
                     url = "home.jsp";
                     break;
+        // START PLACE SHOP -------------------------------------------------------------                                     
                 case IConstant.SHOP:
                     url = "ManageShopController";
                     break;
                 case IConstant.PRODUCTDETAIL:
                     url = "ProductDetailController";
                     break;
+        // START PLACE LOGIN-REGISTER-LOGOUT -------------------------------------------------------------                        
                 case IConstant.LOGIN:
                     url = "LoginController";
                     break;
@@ -60,53 +62,69 @@ public class MainController extends HttpServlet {
                 case IConstant.LOGOUT:
                     url = "LogoutController";
                     break;
-                case IConstant.POND:
-                    url = "PondController";
-                    break;
-                case IConstant.FISH:
-                    url = "FishController";
-                    break;
-                case IConstant.FISHINFOR:
-                    url = "FishInforController";
-                    break;
-                case IConstant.FISHINPOND:
-                    url = "FishInPondController";
-                    break;
-                case IConstant.PONDINFOR:
-                    url = "PondInforController";
-                    break;
-                case IConstant.PONDDELETE:
-                    url = "DeletePondController";
-                    break;
-                case IConstant.NEWPOND:
-                    url = "AddNewPondController";
-                    break;
-                case IConstant.PONDINFORMATIONDUPDATE:
-                    url = "UpdatePondInformationController";
-                    break;
-                case IConstant.PONDIMAGENDUPDATE:
-                    url = "UpdatePondImageController";
-                    break;
-                case IConstant.PROFILEJSP:
+        // START PLACE PROFILE -------------------------------------------------------------                                         
+                case IConstant.PROFILE_JSP:
                     url = "profilePage.jsp";
                     break;
                 case IConstant.EDIT_PROFILE_JSP:
                     url = "editProfile.jsp";
                     break;
-                case IConstant.PASSWORDPROFILE:
+                case IConstant.PASSWORD_PROFILE:
                     url = "PasswordProfileController";
                     break;
-                case IConstant.EDITPROFILE:
+                case IConstant.EDIT_PROFILE:
                     url = "EditProfileController";
                     break;
-                case IConstant.UPIMGSINGLE:
+                case IConstant.UP_IMG_SINGLE:
                     url = "ImageUploadSingleController";
                     break;
+        // START PLACE BLOG -------------------------------------------------------------                                                     
                 case IConstant.BLOG:
                     url = "ManageBlogController";
                     break;
                 case IConstant.GET_BLOG_CID:
                     url = "GetBlogsByCateIdController";
+                    break;
+        // START PLACE FISH -------------------------------------------------------------    
+                case IConstant.FISH:
+                    url = "FishController";
+                    break;
+                case IConstant.FISH_INFOR:
+                    url = "FishInforController";
+                    break;
+                case IConstant.FISH_CREATE_NEW:
+                    url = "FishCreateNewController";
+                    break;
+                case IConstant.FISH_DELETE:
+                    url = "FishDeleteController";
+                    break;
+                case IConstant.FISH_INFOR_UPDATE:
+                    url = "FishInformationUpdateController";
+                    break;
+                case IConstant.FISH_IMAGE_UPDATE:
+                    url = "FishImageUpdateController";
+                    break; 
+        // START PLACE POND -------------------------------------------------------------            
+                case IConstant.FISHINPOND:
+                    url = "FishInPondController";
+                    break;
+                case IConstant.POND:
+                    url = "PondController";
+                    break;
+                case IConstant.POND_INFOR:
+                    url = "PondInforController";
+                    break;
+                case IConstant.ADD_NEW_POND:
+                    url = "AddNewPondController";
+                    break;
+                case IConstant.POND_DELETE:
+                    url = "DeletePondController";
+                    break;
+                case IConstant.POND_INFOR_UPDATE:
+                    url = "UpdatePondInformationController";
+                    break;
+                case IConstant.POND_IMAGE_UPDATE:
+                    url = "UpdatePondImageController";
                     break;
                 default:
                     url = "home.jsp";

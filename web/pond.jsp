@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,7 +52,7 @@
                                 <div class="pond-info">
                                     <a href="PondInforController?pid=${po.pondID}" class="link__to-pond-detail">${po.name}</a>
                                     <p>${po.descriptionPond}</p>
-                                    <a href="#" class="link-delete-pond" data-pondid="${po.pondID}" data-pondname="${po.name}" data-toggle="modal" data-target="#myModal">Delete</a>
+                                    <a class="link-delete-pond" data-pondid="${po.pondID}" data-pondname="${po.name}" data-toggle="modal" data-target="#myModal">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +155,12 @@
         </div>
         
         <div id="footer"></div>
-        
+        <style>
+            .link-delete-pond{
+                cursor: pointer;
+            }
+            
+        </style>
     </body>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {

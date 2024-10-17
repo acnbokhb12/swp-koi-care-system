@@ -37,21 +37,19 @@
         <!-- start header -->
         <div id="header"></div>
         <!-- end header -->
-         <section class="container container_fish">
+        <section class="container container_fish">
             <div class="tilte-fish">
                 <h1>Fish Information</h1>
                 <div class="text-right">
                     <a href="MainController?action=fish" class="back-btn">Back to List</a>
-                    <a href="#" class="delete-btn-fish">Delete</a>
+                    <a href="MainController?action=fishdelete&fishID=${fish.fishID}" class="delete-btn-fish">Delete</a>                
                     <button class="edit-btn-out">Edit Information</button>
                 </div>
             </div>
             <div class="row mt-4 row-infor-fish-detail">
                 <div class="col-4 fish-img-info">
                     <!-- Assuming you have an image URL in the fish object -->
-                    <img
-                        src="${fish.fishImage}" 
-                        alt="${fish.fishName}" />
+                    <img src="${fish.fishImage}"  alt="${fish.fishName}" style="object-fit: unset;" />
                 </div>
 
                 <div class="col-8 info"> 
@@ -83,125 +81,157 @@
                         <span class="label label-witdh">Description:</span> 
                         <span class="value span-witdh">${fish.descriptionKoi}</span>
                     </div>
- 
-            </div>
-        </div>
-    </section>
 
-    <!-- growth -->
-    <section class="growth-container container">
-        <div class="tilte-fish-growth"> 
-            <h1>Fish Growth</h1>
-            <div class="text-right">
-                <a href="fishGrowth.jsp" class="back-btn grow__detail-btn">View Growth Detail</a> 
+                </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-6 item_grow_fish">
-                <div id="koiGrowthChart_length" style="width: 100%; height: 400px;"></div>
-            </div>
-            <div class="col-md-6 item_grow_fish">
-                <div id="koiGrowthChart_weight" style="width: 100%; height: 400px;"></div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-
-    <!-- Go to pond -->
-    <section class="container container-pond-fish "> 
-        <div class="pond-item  ">
-            <div class="tilte-fish-growth  "> 
-                <h1>The pond of this fish</h1>
+        <!-- growth -->
+        <section class="growth-container container">
+            <div class="tilte-fish-growth"> 
+                <h1>Fish Growth</h1>
                 <div class="text-right">
-                    <a href="pondinfor.html" class="back-btn grow__detail-btn">View Pond Detail</a> 
+                    <a href="fishGrowth.jsp" class="back-btn grow__detail-btn">View Growth Detail</a> 
                 </div>
             </div>
-            <div class="pond-item-img mt-4">
-                <div href="#">
-                    <img src="https://animals.sandiegozoo.org/sites/default/files/2016-11/Koi.jpg" alt="Pond" />
+            <div class="row mt-4">
+                <div class="col-md-6 item_grow_fish">
+                    <div id="koiGrowthChart_length" style="width: 100%; height: 400px;"></div>
                 </div>
-                <div class="pond-item-desc">
-                    <p>
-                        Tranquil Waters Pond Tranquil Waters Pond Tranquil Waters Pond
-                    </p>
+                <div class="col-md-6 item_grow_fish">
+                    <div id="koiGrowthChart_weight" style="width: 100%; height: 400px;"></div>
                 </div>
             </div>
+        </section>
 
-        </div>
 
-    </section>
-    <!-- TABLE EDIT --> 
-    <div class="container__infor__fish">
-        <div class="infor__fish-detail">
-            <div class="row row-fish-detail">
-                <div class="col-4  " style="padding: 0">
-                    <div class="img-edit-submit">
-                        <div class="fish-img-info-edit">
-                            <img
-                                src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg"
-                                alt="Koi Pond">
-                        </div>
-                        <div class="fish-edit-img-detail">
-                            <form action="" class="form-edit-img-fish">
-                                <input type="file">
-                                <button type="submit">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-8 edit-info">
+        <!-- Go to pond -->
+        <section class="container container-pond-fish "> 
+            <div class="pond-item  ">
+                <div class="tilte-fish-growth  "> 
+                    <h1>The pond of this fish</h1>
                     <div class="text-right">
-                        <button class="btn-close-fish">
-                            <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
-                        </button>
+                        <a href="pondinfor.html" class="back-btn grow__detail-btn">View Pond Detail</a> 
                     </div>
-                    <h2>New Information</h2>
-                    <form>
-                        <div class="row row-edit-info-detail">
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Fish Name </span>
-                                <input type="text" value="" placeholder="Enter fish name" />
+                </div>
+                <div class="pond-item-img mt-4">
+                    <div href="#">
+                        <img src="https://animals.sandiegozoo.org/sites/default/files/2016-11/Koi.jpg" alt="Pond" />
+                    </div>
+                    <div class="pond-item-desc">
+                        <p>
+                            Tranquil Waters Pond Tranquil Waters Pond Tranquil Waters Pond
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- TABLE EDIT --> 
+        <!-- Fish Information Edit Page -->
+        <div class="container__infor__fish">
+            <div class="infor__fish-detail">
+                <div class="row row-fish-detail">
+                    <div class="col-4" style="padding: 0">
+                        <div class="img-edit-submit">
+                            <div class="fish-img-info-edit">
+                                <img id="imagePreview" src="${fish.fishImage}" alt="${fish.fishName}" style="max-height: 350px; object-fit: unset;" />
                             </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Body Shape </span>
-                                <input type="text" value="" placeholder="Enter body shape" />
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Age </span>
-                                <input type="number" value="" placeholder="Enter age" />
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Length (cm) </span>
-                                <input type="number" step="0.1" value="" placeholder="Enter length in cm" />
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Weight (kg) </span>
-                                <input type="number" step="0.1" value="" placeholder="Enter weight in kg" />
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Gender </span>
-                                <select>
-                                    <option selected value="M">Male</option>
-                                    <option value="F">Female</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Origin </span>
-                                <input type="text" value="" placeholder="Enter origin" />
+                            <div class="fish-edit-img-detail">
+                                <form action="MainController?action=fishimageupdate" class="form-edit-img-fish" enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="fishID" value="${fish.fishID}">
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" required>
+                                    <button type="submit">Submit</button>
+                                </form>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button class="edit-btn blue-btn" style="margin-top: 10px">
-                                Confirm
+                    </div>
+
+                    <div class="col-8 edit-info">
+                        <div class="text-right">
+                            <button class="btn-close-fish">
+                                <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
                             </button>
                         </div>
-                    </form>
+                        <h2>New Information</h2>
+
+                        <form action="MainController?action=fishinformationupdate" method="POST">
+                            <div class="row row-edit-info-detail">
+                                <input type="hidden" name="fishID" value="${fish.fishID}" />
+
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Fish Name </span>
+                                    <input type="text" name="fishName" value="${fish.fishName}" placeholder="Enter fish name" required />
+                                </div>
+
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Body Shape</span>
+                                    <select name="bodyShape" style="width: 100%; padding: 4px; border: 1px solid #000;">  
+                                        <option value="Slim" ${fish.bodyShape.equals("Slim") ? 'selected' : ''}>Slim</option>
+                                        <option value="Fat" ${fish.bodyShape.equals("Fat") ? 'selected' : ''}>Fat</option>
+                                        <option value="Long" ${fish.bodyShape.equals("Long") ? 'selected' : ''}>Long</option>
+                                        <option value="Short" ${fish.bodyShape.equals("Short") ? 'selected' : ''}>Short</option>
+                                        <option value="Large" ${fish.bodyShape.equals("Large") ? 'selected' : ''}>Large</option>
+                                        <option value="Small" ${fish.bodyShape.equals("Small") ? 'selected' : ''}>Small</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Age </span>
+                                    <input type="number" name="age"  value="${fish.age}" step="0.1" placeholder="Enter age" required min="0.1" />
+                                </div>
+
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Length (cm) </span>
+                                    <input type="number" name="length" value="${fish.length}" step="0.1" placeholder="Enter length in cm" required min="0" />
+                                </div>
+
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Weight (kg) </span>
+                                    <input type="number" name="weight" value="${fish.weight}" step="0.1" placeholder="Enter weight in kg" required min="0" />
+                                </div>
+
+                                <div class="col-md-6 edit-item-detail">
+                                    <span style="display: block;">Gender </span>
+                                    <select name="gender" style="width: 100%; padding:0.4rem; border:1px solid #ccc" required>
+                                        <option value="Male" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Male</option>
+                                        <option value="Female" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Female</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Description </span>
+                                        <input type="text" name="descriptionKoi" value="${fish.descriptionKoi}" placeholder="Enter description" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Pond</span>
+                                    <select name="pondkoi" style="width: 100%; padding: 4px; border: 1px solid #000;">
+                                        <option value="0">Unassigned</option>
+                                        <c:if test="${ListPond != null}">                                    
+                                            <c:forEach items="${ListPond}" var="pd">
+                                                <option value="${pd.pondID}" ${fish.pondID == pd.pondID ? 'selected' : ''}>${pd.name}</option>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="edit-btn blue-btn" style="margin-top: 10px">Confirm</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
         <!-- footer -->
+
         <div id="footer"></div>
+        <script src="./assets/js/utils.js"></script> 
     </body>
     <style>
         .label-witdh{
@@ -219,158 +249,152 @@
         }
     </style>
     <script>
-    $('#header').load('utils.jsp #header__nav', () => {
-        $.getScript('./assets/js/utilsCustomer.js');
-    });
-    $('#footer').load('utils.jsp #footer__nav', () => {
-        $.getScript('./assets/js/utilsCustomer.js');
-    });
-</script>
-<script>
-    const btnClose = document.querySelector(".btn-close-fish");
-    const tableEdit = document.querySelector(".container__infor__fish");
-    const btnOutOpen = document.querySelector(".edit-btn-out");
-    const subTable = document.querySelector(".infor__fish-detail");
-    const confirmBtn = document.querySelector(".edit-btn");
+        $('#header').load('utils.jsp #header__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#footer').load('utils.jsp #footer__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+    </script>
+    <script>
+        const btnClose = document.querySelector(".btn-close-fish");
+        const tableEdit = document.querySelector(".container__infor__fish");
+        const btnOutOpen = document.querySelector(".edit-btn-out");
+        const subTable = document.querySelector(".infor__fish-detail");
+        const confirmBtn = document.querySelector(".edit-btn");
 
-    btnOutOpen.addEventListener("click", function (e) {
-        tableEdit.classList.add("open");
-        e.stopPropagation();
-    });
+        btnOutOpen.addEventListener("click", function (e) {
+            tableEdit.classList.add("open");
+            e.stopPropagation();
+        });
 
-    btnClose.addEventListener("click", () => {
-        tableEdit.classList.remove("open");
-    });
+        btnClose.addEventListener("click", () => {
+            tableEdit.classList.remove("open");
+        }); 
+        subTable.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
 
-    confirmBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        tableEdit.classList.remove("open");
-    });
+        document.addEventListener("click", () => {
+            tableEdit.classList.remove("open");
+        });
+    </script>
+    <script>
+        var chart = echarts.init(document.getElementById('koiGrowthChart_length'));
 
-    subTable.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
+        option = {
+            title: {
+                text: 'Length of fish 2024',
 
-    document.addEventListener("click", () => {
-        tableEdit.classList.remove("open");
-    });
-</script>
-<script>
-    var chart = echarts.init(document.getElementById('koiGrowthChart_length'));
-
-    option = {
-        title: {
-            text: 'Length of fish 2024',
-
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        legend: {
-            itemWidth: 50,
-            itemHeight: 12,
-            textStyle: {
-                fontSize: 16, // Tăng kích thước chữ
-                fontWeight: 'bold' // Làm đậm chữ nếu muốn
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
-                axisTick: {
-                    alignWithLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
                 }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                axisLabel: {
-                    formatter: '{value} Cm'
+            },
+            legend: {
+                itemWidth: 50,
+                itemHeight: 12,
+                textStyle: {
+                    fontSize: 16, // Tăng kích thước chữ
+                    fontWeight: 'bold' // Làm đậm chữ nếu muốn
                 }
-            }
-        ],
-        series: [
-            {
-                name: 'Cm',
-                type: 'bar',
-                barWidth: '60%',
-                data: [10, 52, 200, 334, 390, 330, 320]
-                        // ,
-                        // itemStyle:{
-                        //   color : function(param){
-                        //     return '#000';
-                        //   }
-                        // }
-            }
-        ]
-    };
-
-    chart.setOption(option);
-</script>
-<script>
-    var chart = echarts.init(document.getElementById('koiGrowthChart_weight'));
-
-    option = {
-        title: {
-            text: 'Weight of fish 2024',
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
-                axisTick: {
-                    alignWithLabel: true
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                axisLabel: {
-                    formatter: '{value} Gram'
-                }
-            }
-        ],
-        series: [
-            {
-                name: 'Gram',
-                type: 'bar',
-                barWidth: '60%',
-                data: [10, 52, 200, 334, 390, 330, 320]
-                ,
-                itemStyle: {
-                    color: function (param) {
-                        return '#d29763';
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
+                    axisTick: {
+                        alignWithLabel: true
                     }
                 }
-            }
-        ]
-    };
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} Cm'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: 'Cm',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [10, 52, 200, 334, 390, 330, 320]
+                            // ,
+                            // itemStyle:{
+                            //   color : function(param){
+                            //     return '#000';
+                            //   }
+                            // }
+                }
+            ]
+        };
 
-    chart.setOption(option);
-</script>
+        chart.setOption(option);
+    </script>
+    <script>
+        var chart = echarts.init(document.getElementById('koiGrowthChart_weight'));
+
+        option = {
+            title: {
+                text: 'Weight of fish 2024',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} Gram'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: 'Gram',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [10, 52, 200, 334, 390, 330, 320]
+                    ,
+                    itemStyle: {
+                        color: function (param) {
+                            return '#d29763';
+                        }
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
 
 </html>

@@ -59,7 +59,7 @@ public class UpdatePondImageController extends HttpServlet {
             } else {
                 request.setAttribute("message", "An error occurred while creating the pond.");
             }
-            Pond updatedPond = ponds.GetPondInforByIDS(pondID);
+            Pond updatedPond = ponds.getPondInforByID(pondID);
             request.setAttribute("pond", updatedPond);
 
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);

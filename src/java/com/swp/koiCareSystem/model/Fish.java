@@ -1,30 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.swp.koiCareSystem.model;
 
-/**
- *
- * @author PC
- */
 public class Fish {
+    private int fishID;          
+    private int accID;           
+    private int pondID;        
+    private String fishImage;   
+    private String fishName;     
+    private String descriptionKoi; 
+    private String bodyShape;    
+    private float age;          
+    private float length;      
+    private float weight;       
+    private String gender;     
+    private boolean isActive;
 
-    private int fishID;
-    private int accID;
-    private int pondID;
-    private String fishImage;
-    private String fishName;
-    private String descriptionKoi;
-    private String bodyShape;
-    private float age;
-    private float length;
-    private float weight;
-    private String gender;
-
-    public Fish() {
+    public Fish() {}
+    
+    public Fish(int fishID, String fishImage, String fishName) {
+        this.fishID = fishID;
+        this.fishImage = fishImage;
+        this.fishName = fishName;
     }
-
     public Fish(int fishID, int accID, int pondID, String fishImage, String fishName, String descriptionKoi, String bodyShape, float age, float length, float weight, String gender) {
         this.fishID = fishID;
         this.accID = accID;
@@ -39,13 +35,6 @@ public class Fish {
         this.gender = gender;
     }
 
-    public Fish(int fishID, String fishImage, String fishName) {
-        this.fishID = fishID;
-        this.fishImage = fishImage;
-        this.fishName = fishName;
-    }
-
-    // Getters and Setters
     public int getFishID() {
         return fishID;
     }
@@ -102,7 +91,7 @@ public class Fish {
         this.bodyShape = bodyShape;
     }
 
-    public double getAge() {
+    public float getAge() {
         return age;
     }
 
@@ -110,7 +99,7 @@ public class Fish {
         this.age = age;
     }
 
-    public double getLength() {
+    public float getLength() {
         return length;
     }
 
@@ -118,7 +107,7 @@ public class Fish {
         this.length = length;
     }
 
-    public double getWeight() {
+    public float getWeight() {
         return weight;
     }
 
@@ -134,9 +123,18 @@ public class Fish {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Fish{" + "fishID=" + fishID + ", accID=" + accID + ", pondID=" + pondID + ", fishImage=" + fishImage + ", fishName=" + fishName + ", descriptionKoi=" + descriptionKoi + ", bodyShape=" + bodyShape + ", age=" + age + ", length=" + length + ", weight=" + weight + ", gender=" + gender + '}';
+    public boolean isIsActive() {
+        return isActive;
     }
 
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Fish{" + "fishID=" + fishID + ", accID=" + accID + ", pondID=" + pondID + ", fishImage=" + fishImage + ", fishName=" + fishName + ", descriptionKoi=" + descriptionKoi + ", bodyShape=" + bodyShape + ", age=" + age + ", length=" + length + ", weight=" + weight + ", gender=" + gender + ", isActive=" + isActive + '}';
+    }
 }

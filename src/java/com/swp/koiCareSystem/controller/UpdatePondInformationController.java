@@ -67,7 +67,7 @@ public class UpdatePondInformationController extends HttpServlet {
             
             PondService ponds = new PondService();
 
-            Pond pin = ponds.GetPondInforByIDS(pondID);
+            Pond pin = ponds.getPondInforByID(pondID);
             request.setAttribute("pond", pin);
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
         }

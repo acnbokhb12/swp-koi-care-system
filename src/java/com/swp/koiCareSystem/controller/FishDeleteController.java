@@ -1,26 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
-
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.service.PondService;
+ 
+import com.swp.koiCareSystem.model.Account; 
+import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.PrintWriter; 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /**
  *
  * @author PC
  */
-public class PondController extends HttpServlet {
+public class FishDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,27 +31,32 @@ public class PondController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
+
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
-            if(acc == null){
+            if (acc == null) {
                 response.sendRedirect("home.jsp");
             }
-            PondService ponds = new PondService();
-            ArrayList<Pond> listP = ponds.getAllPondS(acc.getUserID());
 
-            request.setAttribute("listPonds", listP);
-            request.getRequestDispatcher("pond.jsp").forward(request, response);
-
+            String fishID = request.getParameter("fishID");
+ 
+            FishService fsv = new FishService();
+            boolean isDelete = fsv.deletFishByID(fishID);
+ 
+            if (isDelete) { 
+                request.setAttribute("message", "Fish deleted successfully");
+            } else { 
+                request.setAttribute("message", "An error occurred while deleting the fish");
+            } 
+            request.getRequestDispatcher("FishController").forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -91,3 +96,4 @@ public class PondController extends HttpServlet {
     }// </editor-fold>
 
 }
+    

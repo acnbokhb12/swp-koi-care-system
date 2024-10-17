@@ -98,7 +98,7 @@ public class AddNewPondController extends HttpServlet {
                 request.setAttribute("message", "An error occurred while creating the pond.");
             }
 
-            ArrayList<Pond> listP = ps.GetAllPondS(acc.getUserID());
+            ArrayList<Pond> listP = ps.getAllPondS(acc.getUserID());
             request.setAttribute("listPonds", listP);
             request.getRequestDispatcher("pond.jsp").forward(request, response);
         }

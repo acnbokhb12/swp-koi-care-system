@@ -5,7 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en"> 
@@ -56,35 +58,35 @@
                 <div class="col-8 info">
                     <div class="info-item">
                         <span class="label label-witdh">Pond Name:</span> 
-                        <span class="value span-witdh">${pond.name}</span>
+                        <span class=" span-witdh">${pond.name}</span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Depth:</span> 
-                        <span class="value span-witdh">${pond.depth}  <span class="sub_span-highlight">(m)</span></span>
+                        <p class=" span-witdh"> ${pond.depth}<span class="sub_span-highlight">(m)</span></p>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Volume:</span> 
-                        <span class="value span-witdh">${pond.volume}  <span class="sub_span-highlight"> (l)</span></span>
+                        <span class=" span-witdh">${pond.volume}  <span class="sub_span-highlight"> (l)</span></span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Drain Count:</span> 
-                        <span class="value span-witdh">${pond.drainCount}</span>
+                        <span class=" span-witdh">${pond.drainCount}</span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Pump Power:</span> 
-                        <span class="value span-witdh">${pond.pumpPower}<span class="sub_span-highlight">(l/h)</span></span>
+                        <span class=" span-witdh">${pond.pumpPower}<span class="sub_span-highlight">(l/h)</span></span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Quantity fish   :</span> 
-                        <span class="value span-witdh">${pond.numberOfFish}  </span>
+                        <span class=" span-witdh">${pond.numberOfFish}  </span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Description:</span> 
-                        <span class="value span-witdh">${pond.descriptionPond}  </span>
+                        <span class=" span-witdh">${pond.descriptionPond}  </span>
                     </div>
                     <div class="info-item">
                         <span class="label label-witdh">Skimmer:</span> 
-                        <span class="value span-witdh">${pond.skimmer}  </span>
+                        <span class=" span-witdh">${pond.skimmer}  </span>
                     </div>
                 </div>
             </div>

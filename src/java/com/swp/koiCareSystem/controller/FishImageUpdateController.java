@@ -1,26 +1,28 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.service.PondService;
+import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.service.FishService;
+import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author PC
  */
-public class PondController extends HttpServlet {
+@MultipartConfig
+public class FishImageUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,24 +36,40 @@ public class PondController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        try (PrintWriter out = response.getWriter()) {   /* TODO output your page here. You may use following sample code. */
             
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if(acc == null){
-                response.sendRedirect("home.jsp");
+            Part filePart = request.getPart("fileimg");
+            String tempDir = getServletContext().getRealPath("/") + "uploads";
+            ImageUploadService imgs = new ImageUploadService();
+            String imageUrl = "";
+            try {
+                imageUrl = imgs.uploadImage(filePart, tempDir);
+                System.out.println(imageUrl);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
             }
-            PondService ponds = new PondService();
-            ArrayList<Pond> listP = ponds.getAllPondS(acc.getUserID());
+            String fishid = request.getParameter("fishID");
+            int fishID = Integer.parseInt(fishid); 
 
-            request.setAttribute("listPonds", listP);
-            request.getRequestDispatcher("pond.jsp").forward(request, response);
+            FishService fsv = new FishService();
+            boolean upImage = fsv.updateFishImageByPondId(fishID, imageUrl);
 
+            if (upImage) {
+                request.setAttribute("message", "Image of fish updated successfully");
+            } else {
+                request.setAttribute("message", "Error occurred while updating image of fish");
+            }
+//            Fish updatedPond = fs.GetFishInforByIDS(fishID);
+//            request.setAttribute("fish", updatedPond);
+           
+
+            request.getRequestDispatcher("FishInforController?fid="+fishID).forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

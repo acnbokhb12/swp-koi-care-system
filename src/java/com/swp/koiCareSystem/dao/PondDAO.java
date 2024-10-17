@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -76,8 +76,8 @@ public class PondDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
-        String sql = "SELECT * FROM Ponds WHERE PondID = ?";
+        Pond p = null;
+        String sql = "SELECT * FROM Ponds WHERE PondID = ? and isActive =1";
         try {
             conn = DatabaseConnectionManager.getConnection(); // Open connection to the database
             ps = conn.prepareStatement(sql);
@@ -85,21 +85,20 @@ public class PondDAO {
             rs = ps.executeQuery();
 
             // Check if a record was found
-            if (rs.next()) {
-                // Create a new Pond object with the retrieved data
-                return new Pond(
-                        rs.getInt("PondID"),
-                        rs.getInt("AccID"),
-                        rs.getString("PondImage"),
-                        rs.getString("PondName"),
-                        rs.getString("Description"),
-                        rs.getInt("NumberOfFish"),
-                        rs.getFloat("Volume"),
-                        rs.getFloat("Depth"),
-                        rs.getFloat("PumpPower"),
-                        rs.getInt("DrainCount"),
-                        rs.getInt("Skimmer")
-                );
+            if (rs!=null && rs.next()) { 
+                p = new Pond();
+                p.setPondID(rs.getInt(1));
+                p.setAccID( rs.getInt(2));
+                p.setImage(rs.getString(3));
+                p.setName(rs.getString(4));
+                p.setDescriptionPond( rs.getString(5));
+                p.setNumberOfFish(rs.getInt(6));
+                p.setVolume(rs.getFloat(7));
+                p.setDepth(rs.getFloat(8));
+                p.setPumpPower(rs.getFloat(9));
+                p.setDrainCount(rs.getInt(10));
+                p.setSkimmer(rs.getInt(11) );
+                p.setIsActive(rs.getBoolean(12));  
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +117,7 @@ public class PondDAO {
                 e.printStackTrace();
             }
         }
-        return null; // Return null if no pond found
+        return p; // Return null if no pond found
     }
 
     public boolean deletePondByID(String pondID) {
@@ -307,5 +306,10 @@ public class PondDAO {
             }
         }
         return listFish;
+    }
+    public static void main(String[] args) {
+        PondDAO pd = new PondDAO();
+        Pond p = pd.getPondInforByID(3);
+        System.out.println(p);
     }
 }
