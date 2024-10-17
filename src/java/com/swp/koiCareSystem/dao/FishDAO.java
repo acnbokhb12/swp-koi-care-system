@@ -116,7 +116,7 @@ public class FishDAO {
     }
 
     //DELETE
-    public boolean DeleteFishByID(String fishID) {
+    public boolean deleteFishByID(String fishID) {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -152,38 +152,38 @@ public class FishDAO {
 
         try {
             conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Fish SET FishName = ?, BodyShape = ?, Age = ?, Length = ?, Weight = ?, Gender = ?, DescriptionKoi = ? WHERE FishID = ?";
+                ptm = conn.prepareStatement(sql);
+
+                ptm.setString(1, fish.getFishName());
+                ptm.setString(2, fish.getBodyShape());
+                ptm.setFloat(3, (float) fish.getAge());
+                ptm.setFloat(4, (float) fish.getLength());
+                ptm.setFloat(5, (float) fish.getWeight());
+                ptm.setString(6, fish.getGender());
+                ptm.setString(7, fish.getDescriptionKoi());
+                ptm.setInt(8, fish.getFishID());
+
+                int affectedRows = ptm.executeUpdate();
+                return affectedRows > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (ptm != null) {
+                    ptm.close();
+                }
                 if (conn != null) {
-                    String sql = "UPDATE Fish SET FishName = ?, BodyShape = ?, Age = ?, Length = ?, Weight = ?, Gender = ?, DescriptionKoi = ? WHERE FishID = ?";
-                    ptm = conn.prepareStatement(sql);
-
-                    ptm.setString(1, fish.getFishName());         
-                    ptm.setString(2, fish.getBodyShape());        
-                    ptm.setFloat(3, (float)fish.getAge());                
-                    ptm.setFloat(4, (float)fish.getLength());           
-                    ptm.setFloat(5, (float)fish.getWeight());             
-                    ptm.setString(6, fish.getGender());           
-                    ptm.setString(7, fish.getDescriptionKoi());   
-                    ptm.setInt(8, fish.getFishID());             
-
-                    int affectedRows = ptm.executeUpdate();
-                    return affectedRows > 0;
+                    conn.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-
-            } finally {
-                try {
-                    if (ptm != null) {
-                        ptm.close();
-                    }
-                    if (conn != null) {
-                        conn.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
-            return false;
+        }
+        return false;
     }
 
     public boolean updateFishImageByFishID(int fishID, String fishImage) {
@@ -193,9 +193,9 @@ public class FishDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Fish"
-                        + "SET FishImage = ?"
-                        + "WHERE FishID = ?";
+                String sql = "UPDATE Fish\n"
+                        + "SET [FishImage] = ?\n"
+                        + "WHERE [FishID] = ?";
 
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, fishImage);
@@ -224,53 +224,56 @@ public class FishDAO {
         }
         return false;
     }
- public boolean createNewFish(Fish fish) {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    String sql = "INSERT INTO Fish (AccID, FishImage, FishName, DescriptionKoi, BodyShape, Age, Length, Weight, Gender, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    try {
-        conn = DatabaseConnectionManager.getConnection();
-        ps = conn.prepareStatement(sql);
 
-        // Set parameters for the prepared statement
-        ps.setInt(1, fish.getAccID());
-        ps.setString(2, fish.getFishImage());
-        ps.setString(3, fish.getFishName());
-        ps.setString(4, fish.getDescriptionKoi());
-        ps.setString(5, fish.getBodyShape());
-        ps.setFloat(6, fish.getAge());
-        ps.setFloat(7, fish.getLength());
-        ps.setFloat(8, fish.getWeight());
-        ps.setString(9, fish.getGender());
-        ps.setBoolean(10, fish.isIsActive());
+    public boolean addNewFish(Fish fish) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO Fish (AccID,PondID ,FishImage, FishName, DescriptionKoi, BodyShape, Age, Length, Weight, Gender, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected > 0;
-    } catch (Exception e) {
-        e.printStackTrace(); 
-        return false;
-    } finally {
         try {
-            // Close resources
-            if (ps != null) {
-                ps.close();
+            conn = DatabaseConnectionManager.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            // Set parameters for the prepared statement
+            ps.setInt(1, fish.getAccID());
+
+            if (fish.getPondID() != 0) {
+                ps.setInt(2, fish.getPondID());
+            } else {
+                ps.setNull(2, java.sql.Types.INTEGER);
             }
-            if (conn != null) {
-                conn.close();
-            }
+
+            ps.setString(3, fish.getFishImage());
+            ps.setString(4, fish.getFishName());
+            ps.setString(5, fish.getDescriptionKoi());
+            ps.setString(6, fish.getBodyShape());
+            ps.setFloat(7, fish.getAge());
+            ps.setFloat(8, fish.getLength());
+            ps.setFloat(9, fish.getWeight());
+            ps.setString(10, fish.getGender());
+            ps.setBoolean(11, fish.isIsActive());
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
-            e.printStackTrace(); // Print any errors that occur during closing
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                // Close resources
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // Print any errors that occur during closing
+            }
         }
     }
-}
 
-    
-    
-    
-    
-    
- /*
+    /*
 
 //    // TEST DAO
     public static void main(String[] args) {
@@ -340,6 +343,4 @@ public class FishDAO {
         System.out.println("Failed to create new fish.");
     }
 }*/
-
 }
-

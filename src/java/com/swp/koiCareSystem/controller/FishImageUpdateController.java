@@ -11,6 +11,7 @@ import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import javax.servlet.http.Part;
  *
  * @author PC
  */
+@MultipartConfig
 public class FishImageUpdateController extends HttpServlet {
 
     /**
@@ -35,6 +37,7 @@ public class FishImageUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {   /* TODO output your page here. You may use following sample code. */
+            
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
             ImageUploadService imgs = new ImageUploadService();
@@ -47,20 +50,22 @@ public class FishImageUpdateController extends HttpServlet {
                 e.printStackTrace();
 
             }
-            int fishID = Integer.parseInt(request.getParameter("fishID"));
+            String fishid = request.getParameter("fishID");
+            int fishID = Integer.parseInt(fishid); 
 
-            FishService fs = new FishService();
-            boolean upImage = fs.updateFishImageByPondIDS(fishID, imageUrl);
+            FishService fsv = new FishService();
+            boolean upImage = fsv.updateFishImageByPondId(fishID, imageUrl);
 
             if (upImage) {
-                request.setAttribute("message", "New Pond has been created");
+                request.setAttribute("message", "Image of fish updated successfully");
             } else {
-                request.setAttribute("message", "An error occurred while creating the pond.");
+                request.setAttribute("message", "Error occurred while updating image of fish");
             }
-            Fish updatedPond = fs.GetFishInforByIDS(fishID);
-            request.setAttribute("fish", updatedPond);
+//            Fish updatedPond = fs.GetFishInforByIDS(fishID);
+//            request.setAttribute("fish", updatedPond);
+           
 
-            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
+            request.getRequestDispatcher("FishInforController?fid="+fishID).forward(request, response);
         }
     }
 

@@ -29,15 +29,16 @@ public interface IConstant {
     public final String LOGIN = "login";
     public final String REGISTER = "register";
     public final String LOGOUT = "logout";
-
-    public final String POND = "pond";
+    
     public final String FISH = "fish";
     public final String FISHINFOR = "fishinfor";
-    public final String PONDINFOR = "pondinfor";
-    public final String PONDDELETE = "ponddelete";
     public final String FISHDELETE = "fishdelete";
     public final String FISHIMAGEUPDATE = "fishimageupdate";
     public final String FISHINFORMATIONUPDATE = "fishinformationupdate";
+
+    public final String POND = "pond";
+    public final String PONDINFOR = "pondinfor";
+    public final String PONDDELETE = "ponddelete";
     public final String FISHCREATENEW = "fishcreatenew";
 
     public final String PASSWORDPROFILE = "passwordprofile";

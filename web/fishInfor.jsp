@@ -42,16 +42,14 @@
                 <h1>Fish Information</h1>
                 <div class="text-right">
                     <a href="MainController?action=fish" class="back-btn">Back to List</a>
-                    <a href="FishDeleteController?fishID=${fish.fishID}" class="delete-btn-fish">Delete</a>                
+                    <a href="MainController?action=fishdelete&fishID=${fish.fishID}" class="delete-btn-fish">Delete</a>                
                     <button class="edit-btn-out">Edit Information</button>
                 </div>
             </div>
             <div class="row mt-4 row-infor-fish-detail">
                 <div class="col-4 fish-img-info">
                     <!-- Assuming you have an image URL in the fish object -->
-                    <img
-                        src="${fish.fishImage}" 
-                        alt="${fish.fishName}" />
+                    <img src="${fish.fishImage}"  alt="${fish.fishName}" style="object-fit: unset;" />
                 </div>
 
                 <div class="col-8 info"> 
@@ -138,12 +136,12 @@
                     <div class="col-4" style="padding: 0">
                         <div class="img-edit-submit">
                             <div class="fish-img-info-edit">
-                                <img src="${fish.fishImage}" alt="${fish.fishName}" />
+                                <img id="imagePreview" src="${fish.fishImage}" alt="${fish.fishName}" style="max-height: 350px; object-fit: unset;" />
                             </div>
                             <div class="fish-edit-img-detail">
-                                <form action="MainController?action=fishimageupdate" class="form-edit-img-fish" enctype="multipart/form-data" method="POST">
+                                <form action="MainController?action=fishimageupdate" class="form-edit-img-fish" enctype="multipart/form-data" method="post">
                                     <input type="hidden" name="fishID" value="${fish.fishID}">
-                                    <input id="imageInput" name="fileimg" type="file" accept="image/*">
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" required>
                                     <button type="submit">Submit</button>
                                 </form>
                             </div>
@@ -162,42 +160,61 @@
                             <div class="row row-edit-info-detail">
                                 <input type="hidden" name="fishID" value="${fish.fishID}" />
 
-                                <div class="col-md-8 edit-item-detail">
+                                <div class="col-md-6 edit-item-detail">
                                     <span>Fish Name </span>
                                     <input type="text" name="fishName" value="${fish.fishName}" placeholder="Enter fish name" required />
                                 </div>
 
-                                <div class="col-md-8 edit-item-detail">
-                                    <span>Body Shape </span>
-                                    <input type="text" name="bodyShape" value="${fish.bodyShape}" placeholder="Enter body shape" required />
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Body Shape</span>
+                                    <select name="bodyShape" style="width: 100%; padding: 4px; border: 1px solid #000;">  
+                                        <option value="Slim" ${fish.bodyShape.equals("Slim") ? 'selected' : ''}>Slim</option>
+                                        <option value="Fat" ${fish.bodyShape.equals("Fat") ? 'selected' : ''}>Fat</option>
+                                        <option value="Long" ${fish.bodyShape.equals("Long") ? 'selected' : ''}>Long</option>
+                                        <option value="Short" ${fish.bodyShape.equals("Short") ? 'selected' : ''}>Short</option>
+                                        <option value="Large" ${fish.bodyShape.equals("Large") ? 'selected' : ''}>Large</option>
+                                        <option value="Small" ${fish.bodyShape.equals("Small") ? 'selected' : ''}>Small</option>
+                                    </select>
                                 </div>
 
-                                <div class="col-md-8 edit-item-detail">
+                                <div class="col-md-6 edit-item-detail">
                                     <span>Age </span>
                                     <input type="number" name="age" value="${fish.age}" placeholder="Enter age" required min="0" />
                                 </div>
 
-                                <div class="col-md-8 edit-item-detail">
+                                <div class="col-md-6 edit-item-detail">
                                     <span>Length (cm) </span>
                                     <input type="number" name="length" value="${fish.length}" step="0.1" placeholder="Enter length in cm" required min="0" />
                                 </div>
 
-                                <div class="col-md-8 edit-item-detail">
+                                <div class="col-md-6 edit-item-detail">
                                     <span>Weight (kg) </span>
                                     <input type="number" name="weight" value="${fish.weight}" step="0.1" placeholder="Enter weight in kg" required min="0" />
                                 </div>
 
-                                <div class="col-md-8 edit-item-detail">
-                                    <span>Gender </span>
-                                    <select name="gender" required>
-                                        <option value="M" <c:if test="${fish.gender == 'M'}">selected</c:if>>Male</option>
-                                        <option value="F" <c:if test="${fish.gender == 'F'}">selected</c:if>>Female</option>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span style="display: block;">Gender </span>
+                                    <select name="gender" style="width: 100%; padding:0.4rem; border:1px solid #ccc" required>
+                                        <option value="Male" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Male</option>
+                                        <option value="Female" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Female</option>
                                         </select>
                                     </div>
 
-                                    <div class="col-md-8 edit-item-detail">
+
+                                    <div class="col-md-6 edit-item-detail">
                                         <span>Description </span>
                                         <input type="text" name="descriptionKoi" value="${fish.descriptionKoi}" placeholder="Enter description" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Pond</span>
+                                    <select name="pondkoi" style="width: 100%; padding: 4px; border: 1px solid #000;">
+                                        <option value="0">Unassigned</option>
+                                        <c:if test="${ListPond != null}">                                    
+                                            <c:forEach items="${ListPond}" var="pd">
+                                                <option value="${pd.pondID}" ${fish.pondID == pd.pondID ? 'selected' : ''}>${pd.name}</option>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
                                 </div>
                             </div>
 
@@ -214,6 +231,7 @@
         <!-- footer -->
 
         <div id="footer"></div>
+        <script src="./assets/js/utils.js"></script> 
     </body>
     <style>
         .label-witdh{
@@ -252,13 +270,7 @@
 
         btnClose.addEventListener("click", () => {
             tableEdit.classList.remove("open");
-        });
-
-        confirmBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            tableEdit.classList.remove("open");
-        });
-
+        }); 
         subTable.addEventListener("click", (e) => {
             e.stopPropagation();
         });

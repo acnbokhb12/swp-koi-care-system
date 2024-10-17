@@ -6,7 +6,9 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.FishService;
+import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,11 +42,15 @@ public class FishController extends HttpServlet {
             Account acc = (Account) session.getAttribute("userAccount");
             if(acc == null){
                 response.sendRedirect("home.jsp");
+            }else{
+                FishService fs = new FishService();
+                ArrayList<Fish> listF = fs.GetAllFishS(acc.getUserID());
+                PondService psv = new  PondService();
+                ArrayList<Pond> listP = psv.GetAllPondS(acc.getUserID());
+                
+                request.setAttribute("listFish", listF);
+                request.setAttribute("ListPond", listP);                
             }
-            FishService fs = new FishService();
-            ArrayList<Fish> listF = fs.GetAllFishS(acc.getUserID());
-
-            request.setAttribute("listFish", listF);
             request.getRequestDispatcher("fish.jsp").forward(request, response);
 
         }

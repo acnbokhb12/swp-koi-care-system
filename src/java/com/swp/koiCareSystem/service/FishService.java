@@ -5,8 +5,7 @@
 package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.FishDAO;
-import com.swp.koiCareSystem.model.Fish;
-import java.sql.SQLException;
+import com.swp.koiCareSystem.model.Fish; 
 import java.util.ArrayList;
 
 /**
@@ -29,8 +28,20 @@ public class FishService {
     public Fish GetFishInforByIDS (int id) { // Change the parameter type to String
         return fishDAO.getFishInforByID(id);
     }
-    public boolean updateFishImageByPondIDS(int pid, String imgLink) {
+    public boolean updateFishImageByPondId(int pid, String imgLink) {
         return fishDAO.updateFishImageByFishID(pid, imgLink);
     }
-
+    public boolean addNewFish(Fish f){
+        if(f.getFishImage() == null || f.getFishImage().isEmpty() ){
+            f.setFishImage("https://plus.unsplash.com/premium_photo-1723672584731-52b5f1a67543?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a29pJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D");
+        }
+        return  fishDAO.addNewFish(f);
+    }
+    public boolean deletFishByID(String fishId){
+        return  fishDAO.deleteFishByID(fishId);
+    }
+    public boolean updateFishInformationByID(Fish f){
+        return fishDAO.updateFishInformationByID(f);
+    }
+    
 }

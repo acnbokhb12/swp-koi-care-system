@@ -58,30 +58,21 @@ public class FishInformationUpdateController extends HttpServlet {
             fish.setDescriptionKoi(descriptionKoi);
 
             // Cập nhật thông tin cá
-            FishDAO fishDAO = new FishDAO();
-            boolean isUpdated = fishDAO.updateFishInformationByID(fish);
+//            FishDAO fishDAO = new FishDAO();
+//            boolean isUpdated = fishDAO.updateFishInformationByID(fish);
+            FishService fsv = new FishService();
+            boolean isUpdated = fsv.updateFishInformationByID(fish);
 
             // Thông báo kết quả
             if (isUpdated) {
-                request.setAttribute("message", "Cập nhật thông tin cá thành công.");
+                request.setAttribute("message", "Fish information updated successfully");
             } else {
-                request.setAttribute("message", "Lỗi khi cập nhật thông tin cá.");
-            }
+                 request.setAttribute("message", "Error occurred while updating fish information");
+            }  
+            
+            request.getRequestDispatcher("FishInforController?fid="+fishID).forward(request, response);
 
-            // Lấy thông tin cá đã cập nhật
-            FishService fishService = new FishService();
-            Fish updatedFish = fishService.GetFishInforByIDS(fishID);
-            request.setAttribute("fish", updatedFish);
-            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-
-        } catch (NumberFormatException e) {
-            request.setAttribute("message", "Dữ liệu nhập không hợp lệ. Vui lòng kiểm tra lại.");
-            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("message", "Đã xảy ra lỗi không mong muốn.");
-            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-        }
+        }  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

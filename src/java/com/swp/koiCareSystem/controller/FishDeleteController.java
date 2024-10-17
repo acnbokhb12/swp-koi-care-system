@@ -47,15 +47,18 @@ public class FishDeleteController extends HttpServlet {
 
             String fishID = request.getParameter("fishID");
 
-            FishDAO fd = new FishDAO();
+//            FishDAO fd = new FishDAO();
+            FishService fsv = new FishService();
+            boolean isDelete = fsv.deletFishByID(fishID);
 
-            boolean isDeactivated = fd.DeleteFishByID(fishID);
-
-            FishService fish = new FishService();
-            ArrayList<Fish> listF = fish.GetAllFishS(acc.getUserID());
-
-            request.setAttribute("listFish", listF);
-            request.getRequestDispatcher("fish.jsp").forward(request, response);
+//            FishService fish = new FishService();
+//            ArrayList<Fish> listF = fish.GetAllFishS(acc.getUserID());
+            if (isDelete) { 
+                request.setAttribute("message", "Fish deleted successfully");
+            } else { 
+                request.setAttribute("message", "An error occurred while deleting the fish");
+            } 
+            request.getRequestDispatcher("FishController").forward(request, response);
         }
     }
 

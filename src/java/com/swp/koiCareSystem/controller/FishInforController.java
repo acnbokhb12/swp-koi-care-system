@@ -6,14 +6,19 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.dao.FishDAO;
+import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.FishService;
+import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,13 +40,21 @@ public class FishInforController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
+            if(acc == null){
+                response.sendRedirect("home.jsp"); 
+            }else{ 
                 int id = Integer.parseInt(request.getParameter("fid"));
-
-            FishService fins = new FishService();
-
-            Fish fin = fins.GetFishInforByIDS(id);
-            request.setAttribute("fish", fin);
-            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
+                FishService fins = new FishService();
+                Fish fin = fins.GetFishInforByIDS(id);
+                PondService psv = new  PondService(); 
+                ArrayList<Pond> listP = psv.GetAllPondS(acc.getUserID());
+                
+                request.setAttribute("fish", fin);
+                request.setAttribute("ListPond", listP);
+                request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
+            }
 
         }
     }
