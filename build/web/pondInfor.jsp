@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="row mt-4">
+            <div class="row mt-4 " >
                 <div class="col-4 pond-img-info">
                     <img src="${pond.image}" alt="${pond.name}">
                 </div>

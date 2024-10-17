@@ -41,7 +41,7 @@ public class AddNewPondController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+            request.setCharacterEncoding("UTF-8");
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
@@ -94,8 +94,10 @@ public class AddNewPondController extends HttpServlet {
 
             if (isCreated) {
                 request.setAttribute("message", "New Pond has been created");
+                request.setAttribute("toastMessage", "success");
             } else {
                 request.setAttribute("message", "An error occurred while creating the pond.");
+                request.setAttribute("toastMessage", "error");
             }
 
             ArrayList<Pond> listP = ps.getAllPondS(acc.getUserID());

@@ -38,7 +38,7 @@
         <div id="header"></div>
         <!-- end header -->
         <section class="container container_fish">
-            <div class="tilte-fish">
+            <div class="tilte-fish container">
                 <h1>Fish Information</h1>
                 <div class="text-right">
                     <a href="MainController?action=fish" class="back-btn">Back to List</a>
@@ -46,13 +46,13 @@
                     <button class="edit-btn-out">Edit Information</button>
                 </div>
             </div>
-            <div class="row mt-4 row-infor-fish-detail">
-                <div class="col-4 fish-img-info">
+            <div class="row mt-4 row-infor-fish-detail mr-0">
+                <div class="col-lg-4 fish-img-info mb-2">
                     <!-- Assuming you have an image URL in the fish object -->
-                    <img src="${fish.fishImage}"  alt="${fish.fishName}" style="object-fit: unset;" />
+                    <img src="${fish.fishImage}"  alt="${fish.fishName}" style="object-fit: unset; max-height: 350px;" />
                 </div>
 
-                <div class="col-8 info"> 
+                <div class="col-lg-8 info mb-2"> 
                     <div class="info-item">
                         <span class="label label-witdh">Fish Name:</span>
                         <span class="value span-witdh">${fish.fishName}  </span> 
@@ -292,15 +292,7 @@
                 axisPointer: {
                     type: 'shadow'
                 }
-            },
-            legend: {
-                itemWidth: 50,
-                itemHeight: 12,
-                textStyle: {
-                    fontSize: 16, // Tăng kích thước chữ
-                    fontWeight: 'bold' // Làm đậm chữ nếu muốn
-                }
-            },
+            }, 
             grid: {
                 left: '3%',
                 right: '4%',

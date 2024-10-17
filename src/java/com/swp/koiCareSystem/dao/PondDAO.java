@@ -1,4 +1,4 @@
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -85,20 +85,20 @@ public class PondDAO {
             rs = ps.executeQuery();
 
             // Check if a record was found
-            if (rs!=null && rs.next()) { 
+            if (rs != null && rs.next()) {
                 p = new Pond();
                 p.setPondID(rs.getInt(1));
-                p.setAccID( rs.getInt(2));
+                p.setAccID(rs.getInt(2));
                 p.setImage(rs.getString(3));
                 p.setName(rs.getString(4));
-                p.setDescriptionPond( rs.getString(5));
+                p.setDescriptionPond(rs.getString(5));
                 p.setNumberOfFish(rs.getInt(6));
                 p.setVolume(rs.getFloat(7));
                 p.setDepth(rs.getFloat(8));
                 p.setPumpPower(rs.getFloat(9));
                 p.setDrainCount(rs.getInt(10));
-                p.setSkimmer(rs.getInt(11) );
-                p.setIsActive(rs.getBoolean(12));  
+                p.setSkimmer(rs.getInt(11));
+                p.setIsActive(rs.getBoolean(12));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,31 +122,36 @@ public class PondDAO {
 
     public boolean deletePondByID(String pondID) {
         Connection conn = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
 
-        String sql = "UPDATE Ponds SET isActive = 0 WHERE PondID = ?";
         try {
             conn = DatabaseConnectionManager.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, pondID);
-
-            int affectedRows = ps.executeUpdate();
-            return affectedRows > 0;
+            String sql1 = "UPDATE [dbo].[Fish] \n"
+                    + "SET [PondID] = NULL \n"
+                    + "WHERE [PondID] = ?";
+            ps1 = conn.prepareStatement(sql1);
+            ps1.setString(1, pondID);
+             int affectedRows1 = ps1.executeUpdate();
+             
+            String sql2 = "UPDATE Ponds SET isActive = 0  WHERE [PondID] = ?";
+            ps2 = conn.prepareStatement(sql2);
+            ps2.setString(1, pondID);
+            int affectedRows2 = ps2.executeUpdate();
+            
+            return affectedRows1 > 0 && affectedRows2 > 0;
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            e.printStackTrace(); 
         } finally {
             try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+                if (ps1 != null) ps1.close(); 
+                if(ps2!=null) ps2.close();
+                if (conn != null) conn.close(); 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
     public boolean createNewPond(Pond pond) {
@@ -307,6 +312,7 @@ public class PondDAO {
         }
         return listFish;
     }
+
     public static void main(String[] args) {
         PondDAO pd = new PondDAO();
         Pond p = pd.getPondInforByID(3);

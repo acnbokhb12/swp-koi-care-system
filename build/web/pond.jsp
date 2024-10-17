@@ -65,7 +65,7 @@
         <div class="container__infor__pond">
             <div class="infor__pond-detail">
                 <form action="MainController?action=newpond" method="post" enctype="multipart/form-data" id="fomr_fill-news" > 
-                    <div class="row row-pond-detail">
+                    <div class="row row-pond-detail" >
                         <div class="col-4" style="padding: 0;">
                             <div class="img-edit-submit">
                                 <div class="pond-img-info-edit">
@@ -153,13 +153,112 @@
                 </div>
             </div>
         </div>
-        
+        <!-- Toast -->
+        <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        </c:if>
         <div id="footer"></div>
         <style>
             .link-delete-pond{
                 cursor: pointer;
             }
-            
+            #toast{
+                position: fixed;
+                top: 12.2rem;
+                right: 3.2rem;
+            }
+
+            .toast_main{
+                display: flex;
+                align-items: center;
+                background-color: #fff;
+                border-radius: 2px;
+                min-width: 40rem;
+                max-width: 45rem;
+                padding: 1.4rem 0;
+                border-left: 4px solid;
+                box-shadow: 0 5px  8px rgba(0, 0, 0, 0.08);
+                /* justify-content: space-between; */
+                animation: slideInfeltToast ease 0.3s, fadeOut linear 1s 3s forwards ;
+            }
+
+            @keyframes slideInfeltToast {
+                from{
+                    opacity: 0;
+                    transform: translateX(calc(100% + 32px ));
+                }
+                to{
+                    opacity: 1; 
+                    transform: translateX( 0); 
+                }
+            }
+            @keyframes fadeOut {
+                to{
+                    opacity: 0;
+                }
+            }
+            .toast_main+ .toast_main{
+                margin-top: 2.4rem;
+            }
+            .toast--success {
+                border-color: #47d864;
+            } 
+            .toast--success .toast__icon{
+                color: #47d864;
+            }
+            .toast--error{
+                border-color:#ff623d ;
+            }
+            .toast--error .toast__icon{
+                color:#ff623d ;
+            }
+
+            .toast__icon{
+                font-size: 2.4rem;
+            }
+
+            .toast__icon,
+            .toast__close{
+                padding: 0 1.6rem ;
+                /* margin: 0 1rem; */
+            }
+            .toast_body{
+                flex-grow: 1;
+            }
+            .toast__title{
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: #333;
+            }
+            .toast__msg{
+                font-size: 1.4rem;
+                font-weight: 600;
+                color: #888;
+                margin-top: 6px;
+                line-height: 1.5;
+            }
+            .toast__close{
+                font-size: 2.4rem;
+                color: rgba(0, 0, 0, 0.7);
+                cursor: pointer;
+                /* margin-left: auto; */
+            }
+            .close_toast{
+                display: none;
+            }
         </style>
     </body>
     <script>
@@ -196,9 +295,9 @@
             $('#myModal').hide();
             $('.link-delete-pond').on('click', function () {
                 const pondID = $(this).data('pondid');
-                const pondName = $(this).data('pondname'); 
+                const pondName = $(this).data('pondname');
                 $('#pondIDToDelete').val(pondID);
-                $('#pondNameDisplay').text(pondName); 
+                $('#pondNameDisplay').text(pondName);
                 $('#myModal').show();
             });
             $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {
