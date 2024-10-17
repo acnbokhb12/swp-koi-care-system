@@ -51,7 +51,7 @@
                                 <div class="pond-info">
                                     <a href="PondInforController?pid=${po.pondID}" class="link__to-pond-detail">${po.name}</a>
                                     <p>${po.descriptionPond}</p>
-                                    <a href="#" class="link-delete-pond" data-pondid="${po.pondID}" data-toggle="modal" data-target="#myModal">Delete</a>
+                                    <a href="#" class="link-delete-pond" data-pondid="${po.pondID}" data-pondname="${po.name}" data-toggle="modal" data-target="#myModal">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -133,14 +133,14 @@
             <div class="modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header flex-column">
-                        <div class="icon-box">
+                        <div class="icon-box"  >
                             <i class="material-icons">&#xE5CD;</i>
                         </div>
                         <h4 class="modal-title w-100">Are you sure?</h4>
-                        <button type="button" class="close-confirm-delete close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close-confirm-delete close" data-dismiss="modal" aria-hidden="true" style="font-size: 30px; color: #000">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you really want to delete this pond? This process cannot be undone.</p>
+                        <p style="font-size: 16px; color: #000;">Do you really want to delete <span style="color: #000; font-weight: 600; background-color: #ff5656; padding: 4px 10px; border-radius: 4px;" id="pondNameDisplay"></span> ? This process cannot be undone.</p>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn-cancel-delete btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -154,7 +154,7 @@
         </div>
         
         <div id="footer"></div>
-
+        
     </body>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {
@@ -190,7 +190,9 @@
             $('#myModal').hide();
             $('.link-delete-pond').on('click', function () {
                 const pondID = $(this).data('pondid');
+                const pondName = $(this).data('pondname'); 
                 $('#pondIDToDelete').val(pondID);
+                $('#pondNameDisplay').text(pondName); 
                 $('#myModal').show();
             });
             $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {

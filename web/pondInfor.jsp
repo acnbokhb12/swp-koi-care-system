@@ -26,6 +26,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="./assets/css/base.css">
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
+            <link rel="stylesheet" href="./assets/css/news_blogs.css">
+
         <link rel="stylesheet" href="./assets/css/pondkoi.css">
     </head>
 
@@ -91,24 +93,26 @@
         <div class="container container-fish">
             <h1>List Of Koi Fishes</h1>
             <div class="container-list-arrow">
-                <div class="swiper container-list-fish">         
-                    <div class="swiper-wrapper row-list-fish"> <!--Lỗi swipper-->
-                        <c:forEach var="fishinpond" items="${listFishInPond}">
-                            <a href="FishInPondController?pondId=${pond.pondID}" class="fish-item swiper-slide">
-                                <div class="fish-item-img">
-                                    <img src="${fishinpond.fishImage}" alt="${fishinpond.fishName}">
-                                    <div class="fish-item-desc">
-                                        <p>${fishinpond.fishName}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </c:forEach>
-                    </div>         <!--Lỗi swipper-->
-                    <div class="contain__btn-arrow">
-                        <button class="prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
-                        <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
+                    <div class="swiper container__news">
+                <div class="swiper-wrapper container__news-list">
+                <c:forEach items="${listFishInPond}" var="f">
+                    <div class="container__news-item swiper-slide">
+                        <a href="" class="container__news-item-desc">
+                            <img src="${f.fishImage}" alt="">
+                            <div class="container__news-item-cap">
+                                <div class="news-item-cap-detail">
+                                    <span>${f.fishName}</span> 
+                                </div> 
+                            </div>
+                        </a>
+                    </div> 
+                </c:forEach>
                 </div>
+                <div class="news-title-btn">
+                    <button class="f_owl-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="f_owl-next"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -203,6 +207,21 @@
             color: red;
             font-weight: 500;
         }
+        .container__news-item-cap{
+            background: none;
+            padding: 10px;
+        }
+        
+        .container__news-item:hover img{
+            transform: none;
+        }
+        .container__news-item-desc img{
+            height: 150px;
+            object-fit: unset;
+        }
+        .news-title-btn button{
+            background-color: #fff;
+        }
     </style>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {
@@ -243,32 +262,33 @@
             }
         });
 
-        var swiper = new Swiper(".container-list-fish", {
-            spaceBetween: 20,
-            loop: true,
-            centeredSlides: true,
-            autoplay: {
-                delay: 5500,
-                disableOnInteraction: false
+         var swiperNews = new Swiper(".container__news", {
+        spaceBetween: 30,
+        loop: true,
+        centeredSlides: true,
+        autoplay: {
+            delay: 5500,
+            disableOnineraction: false,
+        },
+        navigation: {
+            nextEl: ".f_owl-next",
+            prevEl: ".f_owl-prev",
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
             },
-            navigation: {
-                nextEl: ".next-btn",
-                prevEl: ".prev-btn"
+            450: {
+                slidesPerView: 2,
             },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1
-                },
-                450: {
-                    slidesPerView: 2
-                },
-                768: {
-                    slidesPerView: 3
-                },
-                1024: {
-                    slidesPerView: 4
-                },
+            768: {
+                slidesPerView: 3,
             },
-        });
+            1024:{
+                 slidesPerView: 5,
+            }
+            
+        },
+    });
     </script>
 </html>

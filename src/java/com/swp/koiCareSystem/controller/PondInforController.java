@@ -5,10 +5,12 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,10 +37,14 @@ public class PondInforController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             int id = Integer.parseInt(request.getParameter("pid"));
-            PondService ponds = new PondService();
-
+            PondService ponds = new PondService(); 
+            
+            ArrayList<Fish> listFishInPond = ponds.GetAllFishInPondByPondID(id);
+            
             Pond pin = ponds.GetPondInforByIDS(id);
-            request.setAttribute("pond", pin);
+            request.setAttribute("pond", pin); 
+            request.setAttribute("listFishInPond", listFishInPond);
+
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);
         }
     }
