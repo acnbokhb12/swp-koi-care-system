@@ -14,14 +14,19 @@ import java.util.ArrayList;
  */
 public class FishService {
 
-    private FishDAO fishDAO;
+     private FishDAO fishDAO;
 
     public FishService() {
         fishDAO = new FishDAO();
     }
 
-    // Get all fish for the specific account ID
     public ArrayList<Fish> GetAllFishS(int accountID) {
-        return fishDAO.getAllFish(accountID); 
+        return fishDAO.getAllFish(accountID);
+
+    }
+
+    public Fish GetFishInforByIDS(String id) {
+        return fishDAO.getFishInforByID(id);
     }
 }
+

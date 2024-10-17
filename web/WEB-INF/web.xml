@@ -68,7 +68,7 @@
         <servlet-name>ImageUploadSingleController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ImageUploadSingleController</servlet-class>
     </servlet>
-    <servlet>
+    <servlet> 
         <servlet-name>ManageBlogController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageBlogController</servlet-class>
     </servlet>
@@ -78,7 +78,27 @@
     </servlet>
     <servlet>
         <servlet-name>GetBlogsByCateIdController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.GetBlogsByCateIdController</servlet-class>
+        <servlet-class>com.swp.koiCareSystem.controller.GetBlogsByCateIdController</servlet-class> 
+    </servlet>
+    <servlet>    
+        <servlet-name>DeletePondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewPondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AddNewPondController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePondInformationController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.UpdatePondInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePondImageController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.UpdatePondImageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishInPondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishInPondController</servlet-class> 
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -148,7 +168,7 @@
         <servlet-name>ImageUploadSingleController</servlet-name>
         <url-pattern>/ImageUploadSingleController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <servlet-mapping> 
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/ManageBlogController</url-pattern>
     </servlet-mapping>
@@ -158,8 +178,29 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetBlogsByCateIdController</servlet-name>
-        <url-pattern>/GetBlogsByCateIdController</url-pattern>
+        <url-pattern>/GetBlogsByCateIdController</url-pattern> 
+    </servlet-mapping>    
+    <servlet-mapping> 
+        <servlet-name>DeletePondController</servlet-name>
+        <url-pattern>/DeletePondController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewPondController</servlet-name>
+        <url-pattern>/AddNewPondController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePondInformationController</servlet-name>
+        <url-pattern>/UpdatePondInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePondImageController</servlet-name>
+        <url-pattern>/UpdatePondImageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishInPondController</servlet-name>
+        <url-pattern>/FishInPondController</url-pattern> 
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

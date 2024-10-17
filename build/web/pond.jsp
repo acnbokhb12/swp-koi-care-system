@@ -18,6 +18,7 @@
         <!-- Font gg family -->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
               rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Font icon --> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
         <!-- bootstrap -->
@@ -32,11 +33,10 @@
         <!-- start header -->
         <div id="header"></div>
         <!-- end header -->
-          <div class="container container_pond">
+        <div class="container container_pond">
             <div class="tilte-ponds"> 
                 <h1>Koi Fish Ponds</h1>
                 <div class="button-container"> 
-
                     <button class="btn edit-btn-out">Add New Pond</button>
                 </div>
             </div> 
@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="pond-info">
                                     <a href="PondInforController?pid=${po.pondID}" class="link__to-pond-detail">${po.name}</a>
-                                    <p>A serene pond featuring lush greenery and vibrant koi fish, perfect for relaxation and meditation.</p>
-                                    <a href="deletePond?pondID=${po.pondID}" class="link-delete-pond">Delete</a>  
+                                    <p>${po.descriptionPond}</p>
+                                    <a href="#" class="link-delete-pond" data-pondid="${po.pondID}" data-pondname="${po.name}" data-toggle="modal" data-target="#myModal">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -61,68 +61,100 @@
 
         </div>
         <!-- TABLE EDIT -->
-         <div class="container__infor__pond">
-        <div class="infor__pond-detail">
-            <form action="" id="fomr_fill-news"> 
-            <div class="row row-pond-detail">
-                <div class="col-4" style="padding: 0;">
-                    <div class="img-edit-submit">
-                        <div class="pond-img-info-edit">
-                            <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+        <div class="container__infor__pond">
+            <div class="infor__pond-detail">
+                <form action="MainController?action=newpond" method="post" enctype="multipart/form-data" id="fomr_fill-news" > 
+                    <div class="row row-pond-detail">
+                        <div class="col-4" style="padding: 0;">
+                            <div class="img-edit-submit">
+                                <div class="pond-img-info-edit">
+                                    <img id="imagePreview" src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+                                </div>
+                                <div class="pond-edit-img-detail" > 
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*"> 
+                                </div>
+                            </div>
                         </div>
-                        <div class="pond-edit-img-detail" > 
-                                <input id="imageInput" type="file" accept="image/*" required> 
+                        <div class="col-8 edit-info">
+                            <div class="text-right">
+                                <button
+                                    class="btn-close-pond"><i class="fa-solid fa-xmark close-navbar-icon-btn-pond"></i>
+                                </button>
+                            </div>
+                            <h2>Add New Pond</h2> 
+                            <div class="row row-edit-info-detail">
+                                <div class="row row-edit-info-detail">
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Pond Name</span>
+                                        <input type="text" class="pond-name" name="pondName" placeholder="Enter your pond name" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Depth (m)</span>
+                                        <input type="number" class="pond-depth" name="depth" step="0.1" placeholder="Enter depth in meters" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Volume (l)</span>
+                                        <input type="number" class="pond-volume" name="volume" step="0.1" min="0.1" placeholder="Enter volume in liters" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Drain Count</span>
+                                        <input type="number" class="drain-count" name="drainCount" min="1" placeholder="Enter number of drains" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Pump Power (l/h)</span>
+                                        <input type="number" step="0.1" class="pump-power" name="pumpPower" min="1" placeholder="Enter pump power in liters per hour" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Quantity of Fish</span>
+                                        <input type="number" class="quantity-fish" name="numberOfFish" min="0" placeholder="Enter number of fish" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Description</span>
+                                        <input type="text" class="pond-description" name="descriptionPond" placeholder="Enter pond description" required>
+                                    </div>
+                                    <div class="col-md-6 edit-item-detail">
+                                        <span>Skimmer</span>
+                                        <input type="number" class="skimmer" name="skimmer" min="0" placeholder="Enter skimmer quantity" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="edit-btn" type="submit" style="margin-top: 10px; ">
+                                    Confirm
+                                </button>
+                            </div> 
                         </div>
                     </div>
-                </div>
-
-                <div class="col-8 edit-info">
-                    <div class="text-right">
-                        <button
-                        class="btn-close-pond"><i class="fa-solid fa-xmark close-navbar-icon-btn-pond"></i>
-                    </button>
-                        
-                    </div>
-                    <h2>Add new pond</h2> 
-                        <div class="row row-edit-info-detail">
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Pond Name: </span>
-                                <input type="text" required>
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Volume: </span>
-                                <input type="number" min="0" required>
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Drain Count: </span>
-                                <input type="number" min="1" required>
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Pump Power: </span>
-                                <input type="number" min="1" required>
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Pond Name: </span>
-                                <input type="text" required>
-                            </div>
-                            <div class="col-md-6 edit-item-detail">
-                                <span>Pond Name: </span>
-                                <input type="text" required>
-                            </div>
+                </form>
+            </div>
+        </div>
+        <!-- Modal Delete -->
+        <div id="myModal" class="modal-confirm-delete" dísplay="none">
+            <div class="modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header flex-column">
+                        <div class="icon-box"  >
+                            <i class="material-icons">&#xE5CD;</i>
                         </div>
-                        <div class="text-center">
-                            <button class="edit-btn" type="submit" style="margin-top: 10px; ">
-                                Confirm
-                            </button>
-                        </div> 
+                        <h4 class="modal-title w-100">Are you sure?</h4>
+                        <button type="button" class="close-confirm-delete close" data-dismiss="modal" aria-hidden="true" style="font-size: 30px; color: #000">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="font-size: 16px; color: #000;">Do you really want to delete <span style="color: #000; font-weight: 600; background-color: #ff5656; padding: 4px 10px; border-radius: 4px;" id="pondNameDisplay"></span> ? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn-cancel-delete btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <form id="deleteForm" action="MainController?action=ponddelete" method="post">
+                            <input type="hidden" name="pondID" id="pondIDToDelete">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-            </form>
         </div>
-    </div>
-        <!-- TABLE EDIT --> 
+        
         <div id="footer"></div>
-
+        
     </body>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {
@@ -133,27 +165,45 @@
         });
     </script>
     <script>
-        const btnClose = document.querySelector('.btn-close-pond'); 
-    const tableEdit = document.querySelector('.container__infor__pond');
-    const btnOutOpen = document.querySelector('.edit-btn-out');
-    const subTable = document.querySelector('.infor__pond-detail');
+        const btnClose = document.querySelector('.btn-close-pond');
+        const tableEdit = document.querySelector('.container__infor__pond');
+        const btnOutOpen = document.querySelector('.edit-btn-out');
+        const subTable = document.querySelector('.infor__pond-detail');
 
-    btnOutOpen.addEventListener('click',function(e){
-        tableEdit.classList.add('open');
-        e.stopPropagation();
-    });
-    btnClose.addEventListener('click',()=>{
-        tableEdit.classList.remove('open');
-    });
-    subTable.addEventListener('click',(e)=>{
-        e.stopPropagation();
-    });
-    document.addEventListener('click',()=>{
-       
-            tableEdit.classList.remove('open'); 
-    }) ;
-</script>
-<script src="./assets/js/utils.js"></script>
- 
-    </script> 
+        btnOutOpen.addEventListener('click', function (e) {
+            tableEdit.classList.add('open');
+            e.stopPropagation();
+        });
+        btnClose.addEventListener('click', () => {
+            tableEdit.classList.remove('open');
+        });
+        subTable.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        document.addEventListener('click', () => {
+
+            tableEdit.classList.remove('open');
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#myModal').hide();
+            $('.link-delete-pond').on('click', function () {
+                const pondID = $(this).data('pondid');
+                const pondName = $(this).data('pondname'); 
+                $('#pondIDToDelete').val(pondID);
+                $('#pondNameDisplay').text(pondName); 
+                $('#myModal').show();
+            });
+            $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {
+                $('#myModal').hide();
+            });
+            $(window).on('click', function (event) {
+                if (event.target.id === 'myModal') {
+                    $('#myModal').hide();
+                }
+            });
+        });
+    </script>
+    <script src="./assets/js/utils.js"></script>
 </html>

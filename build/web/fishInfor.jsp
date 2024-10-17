@@ -41,7 +41,7 @@
             <div class="tilte-fish">
                 <h1>Fish Information</h1>
                 <div class="text-right">
-                    <a href="fish.jsp" class="back-btn">Back to List</a>
+                    <a href="MainController?action=fish" class="back-btn">Back to List</a>
                     <a href="#" class="delete-btn-fish">Delete</a>
                     <button class="edit-btn-out">Edit Information</button>
                 </div>

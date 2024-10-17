@@ -26,6 +26,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="./assets/css/base.css">
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
+            <link rel="stylesheet" href="./assets/css/news_blogs.css">
+
         <link rel="stylesheet" href="./assets/css/pondkoi.css">
     </head>
 
@@ -33,13 +35,13 @@
         <!-- start header -->
         <div id="header"></div>
         <!-- end header -->
-        
-         <div class="container container_pond">
+
+        <div class="container container_pond">
             <div class="tilte-ponds"> 
                 <h1>Koi Fish Pond Information</h1>
                 <div class="text-right">
-                    <a href="Fish.html" class="back-btn">Back to List</a>
-                    <a href="#" class="delete-btn-fish">Delete</a>
+                    <a href="MainController?action=pond" class="back-btn">Back to List</a> 
+                    <a href="DeletePondController?pondID=${pond.pondID}" class="delete-btn-fish">Delete</a>
                     <button class="edit-btn-out">
                         Edit Information
                     </button>
@@ -80,33 +82,37 @@
                         <span class="label label-witdh">Description:</span> 
                         <span class="value span-witdh">${pond.descriptionPond}  </span>
                     </div>
+                    <div class="info-item">
+                        <span class="label label-witdh">Skimmer:</span> 
+                        <span class="value span-witdh">${pond.skimmer}  </span>
+                    </div>
                 </div>
             </div>
-
         </div>
 
         <div class="container container-fish">
             <h1>List Of Koi Fishes</h1>
             <div class="container-list-arrow">
-                <div class="swiper container-list-fish">         
-                    <div class="swiper-wrapper row-list-fish">
-                        <!-- Use JSTL to iterate over the list of fish -->
-                        <c:forEach var="fish" items="${listFish}">
-                            <a href="FishInforController?fid=${fish.fishID}" class="fish-item swiper-slide">
-                                <div class="fish-item-img">
-                                    <img src="${fish.image}" alt="${fish.name}"> <!-- Use fish image -->
-                                    <div class="fish-item-desc">
-                                        <p>${fish.description}</p> <!-- Use fish description -->
-                                    </div>
-                                </div>
-                            </a>
-                        </c:forEach>
-                    </div>
-                    <div class="contain__btn-arrow">
-                        <button class="prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
-                        <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
+                    <div class="swiper container__news">
+                <div class="swiper-wrapper container__news-list">
+                <c:forEach items="${listFishInPond}" var="f">
+                    <div class="container__news-item swiper-slide">
+                        <a href="" class="container__news-item-desc">
+                            <img src="${f.fishImage}" alt="">
+                            <div class="container__news-item-cap">
+                                <div class="news-item-cap-detail">
+                                    <span>${f.fishName}</span> 
+                                </div> 
+                            </div>
+                        </a>
+                    </div> 
+                </c:forEach>
                 </div>
+                <div class="news-title-btn">
+                    <button class="f_owl-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="f_owl-next"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -117,11 +123,12 @@
                     <div class="col-4" style="padding: 0;">
                         <div class="img-edit-submit">
                             <div class="pond-img-info-edit">
-                                <img src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+                                <img src="${pond.image}" alt="${pond.name}" > 
                             </div>
                             <div class="pond-edit-img-detail">
-                                <form action="" class="form-edit-img-pond">
-                                    <input type="file">
+                                <form action="MainController?action=pondimageupdate" class="form-edit-img-pond" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="pondID" value="${pond.pondID}">
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" >
                                     <button type="submit">Submit</button>
                                 </form>
                             </div>
@@ -135,31 +142,41 @@
 
                         </div>
                         <h2>Edit card</h2>
-                        <form>
-                            <div class="row row-edit-info-detail">
+                        <form action="MainController?action=pondinformationupdate" method="POST">
+                            <div class="row row-edit-info-detail"> 
+                                <input type="hidden" name="pondID" value="${pond.pondID}">
+
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="pondName">Pond Name</label>
+                                    <input type="text" id="pondName" name="pondName" value="${pond.name}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="depth">Depth (meters)</label>
+                                    <input type="number" step="0.1" id="depth" name="depth" value="${pond.depth}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="volume">Volume (liters)</label>
+                                    <input type="number" step="0.1" id="volume" name="volume" value="${pond.volume}" required>
+                                </div>                               
+                                <div class="col-md-6 edit-item-detail">
+                                    <label for="drainCount">Number of Drains</label>
+                                    <input type="number" id="drainCount" name="drainCount" value="${pond.drainCount}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="pumpPower">Pump Power (l/h)</label>
+                                    <input type="number" id="pumpPower" name="pumpPower" value="${pond.pumpPower}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="numberOfFish">Number of Fish</label>
+                                    <input type="number" id="numberOfFish" name="numberOfFish" value="${pond.numberOfFish}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <span>Pond Name: </span>
-                                    <input type="text">
+                                    <label for="descriptionPond">Description</label>
+                                    <input type="text" id="descriptionPond" name="descriptionPond" value="${pond.descriptionPond}" required>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <label for="skimmer">Skimmer</label>
+                                    <input type="number" id="skimmer" name="skimmer" value="${pond.skimmer}" required>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -168,12 +185,11 @@
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- footer -->
         <div id="footer"></div>
     </body>
@@ -191,6 +207,21 @@
             color: red;
             font-weight: 500;
         }
+        .container__news-item-cap{
+            background: none;
+            padding: 10px;
+        }
+        
+        .container__news-item:hover img{
+            transform: none;
+        }
+        .container__news-item-desc img{
+            height: 150px;
+            object-fit: unset;
+        }
+        .news-title-btn button{
+            background-color: #fff;
+        }
     </style>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {
@@ -203,63 +234,61 @@
     <script src="./assets/js/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     <script>
-    const btnClose = document.querySelector('.btn-close-pond'); 
-    const tableEdit = document.querySelector('.container__infor__pond');
-    const btnOutOpen = document.querySelector('.edit-btn-out');
-    const subTable = document.querySelector('.infor__pond-detail');
+        const btnClose = document.querySelector('.btn-close-pond');
+        const tableEdit = document.querySelector('.container__infor__pond');
+        const btnOutOpen = document.querySelector('.edit-btn-out');
+        const subTable = document.querySelector('.infor__pond-detail');
 
-    btnOutOpen.addEventListener('click',function(e){
-        tableEdit.classList.add('open');
-        e.stopPropagation();
-    });
-    btnClose.addEventListener('click',()=>{
-        tableEdit.classList.remove('open');
-    });
-    subTable.addEventListener('click',(e)=>{
-        e.stopPropagation();
-    });
-    document.addEventListener('click',()=>{
-       
-            tableEdit.classList.remove('open'); 
-    });
+        btnOutOpen.addEventListener('click', function (e) {
+            tableEdit.classList.add('open');
+            e.stopPropagation();
+        });
+        btnClose.addEventListener('click', () => {
+            tableEdit.classList.remove('open');
+        });
+        subTable.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        document.addEventListener('click', () => {
 
-    const btnDelete = document.querySelector('.delete-btn-fish');
-    btnDelete.addEventListener('click',(e)=>{
-        var isConfirm = confirm('Are you sure you want delete this pond ?');
-        if(!isConfirm){
-            e.preventDefault();
-        }
-    });
+            tableEdit.classList.remove('open');
+        });
 
-    var swiper = new Swiper(".container-list-fish", {
-        spaceBetween: 20,
+        const btnDelete = document.querySelector('.delete-btn-fish');
+        btnDelete.addEventListener('click', (e) => {
+            var isConfirm = confirm('Are you sure you want delete this pond ?');
+            if (!isConfirm) {
+                e.preventDefault();
+            }
+        });
+
+         var swiperNews = new Swiper(".container__news", {
+        spaceBetween: 30,
         loop: true,
         centeredSlides: true,
         autoplay: {
             delay: 5500,
-            disableOnineraction: false
+            disableOnineraction: false,
         },
         navigation: {
-            nextEl: ".next-btn",
-            prevEl: ".prev-btn"
+            nextEl: ".f_owl-next",
+            prevEl: ".f_owl-prev",
         },
         breakpoints: {
             0: {
-                slidesPerView: 1
+                slidesPerView: 1,
             },
             450: {
-                slidesPerView: 2
+                slidesPerView: 2,
             },
             768: {
-                slidesPerView: 3
+                slidesPerView: 3,
             },
-            1024: {
-                slidesPerView: 4
-            },
+            1024:{
+                 slidesPerView: 5,
+            }
+            
         },
     });
-</script>
-    
-    
- 
+    </script>
 </html>

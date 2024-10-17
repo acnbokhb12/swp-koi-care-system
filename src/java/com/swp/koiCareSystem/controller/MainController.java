@@ -69,8 +69,23 @@ public class MainController extends HttpServlet {
                 case IConstant.FISHINFOR:
                     url = "FishInforController";
                     break;
+                case IConstant.FISHINPOND:
+                    url = "FishInPondController";
+                    break;
                 case IConstant.PONDINFOR:
                     url = "PondInforController";
+                    break;
+                case IConstant.PONDDELETE:
+                    url = "DeletePondController";
+                    break;
+                case IConstant.NEWPOND:
+                    url = "AddNewPondController";
+                    break;
+                case IConstant.PONDINFORMATIONDUPDATE:
+                    url = "UpdatePondInformationController";
+                    break;
+                case IConstant.PONDIMAGENDUPDATE:
+                    url = "UpdatePondImageController";
                     break;
                 case IConstant.PROFILEJSP:
                     url = "profilePage.jsp";
