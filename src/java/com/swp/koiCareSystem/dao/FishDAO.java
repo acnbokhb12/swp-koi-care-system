@@ -23,7 +23,7 @@ public class FishDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "SELECT * FROM Fish WHERE AccID = ? AND isActive = 1";
+                String sql = "SELECT * FROM Fish WHERE AccID = ? AND isActive = 1 order by FishID desc";
                 ptm = conn.prepareStatement(sql);
                 ptm.setInt(1, accountID);
                 rs = ptm.executeQuery();
@@ -276,6 +276,41 @@ public class FishDAO {
                 e.printStackTrace(); // Print any errors that occur during closing
             }
         }
+    }
+     public int countFishInPondByPondId(int pondID) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select count(*) from Fish where PondID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, pondID);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 
     /*

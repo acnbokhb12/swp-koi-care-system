@@ -49,9 +49,9 @@
                                     <img src="${f.fishImage}" alt="${f.fishName}">
                                 </div>
                                 <div class="fish-info">
-                                    <a href="FishInforController?fid=${f.fishID}" class="link__to-fish-detail">${f.fishName}</a>
+                                    <a href="MainController?action=fishinfor&fid=${f.fishID}" class="link__to-fish-detail">${f.fishName}</a>
                                     <p>${f.descriptionKoi}</p>
-                                    <a class="link-delete-fish" data-fishid="${f.fishID}" data-fishname="${f.fishName}" data-toggle="modal" data-target="#myModal">Delete</a>
+                                    <a class="link-delete-fish" data-fishid="${f.fishID}" data-fishname="${f.fishName}" data-pondid="${f.pondID}" data-toggle="modal" data-target="#myModal">Delete</a>
 
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
 </div>
 
         <!-- Modal Delete -->
-        <div id="myModal" class="modal-confirm-delete">
+        <div id="myModal" class="modal-confirm-delete" style="display: none;">
             <div class="modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header flex-column">
@@ -162,13 +162,30 @@
                         <button type="button" class="btn-cancel-delete btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <form id="deleteForm" action="MainController?action=fishdelete" method="post">
                             <input type="hidden" name="fishID" id="fishIDToDelete">
+                            <input type="hidden" name="pondID" id="pondIDToCaculate">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
+        <!-- Toast -->
+        <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        </c:if>
 
         <!-- footer -->
         <div id="footer"></div> 
@@ -191,7 +208,7 @@
         });
     </script>
     <script src="./assets/js/utils.js"></script> 
-
+    <script src="assets/js/notification.js"></script>
     <script>
         const btnClose = document.querySelector(".btn-close-fish");
         const tableEdit = document.querySelector(".container__infor__fish");
@@ -220,8 +237,10 @@
             $('#myModal').hide();
             $('.link-delete-fish').on('click', function () {
                 const fishID = $(this).data('fishid');
+                const pondID = $(this).data('pondid');
                 const fishName = $(this).data('fishname');
                 $('#fishIDToDelete').val(fishID);
+                $('#pondIDToCaculate').val(pondID); 
                 $('#fishNameDisplay').text(fishName); 
                 $('#myModal').show();
             });

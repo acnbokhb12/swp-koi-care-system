@@ -31,7 +31,7 @@
          <div id="header"></div>
         <!-- end header -->
     <div class="container">
-        <div class="content">
+        <div class="content p-0">
             <!-- Header -->
              
             <!-- User Info Section -->
@@ -42,7 +42,8 @@
                         <div class="img_profile">
                             <img src="${sessionScope.userAccount.profileImage}" class="profile-img" alt="User Profile Image">
                         </div>
-                        <h1 class="user_name">Welcome ${sessionScope.userAccount.fullName}</h1>
+                        <h1 class="user_name">Welcome  </h1>
+                        <h1 style="font-size: 3rem; color: #ffab66;">${sessionScope.userAccount.fullName}</h1>
                         <a href="MainController?action=editProfileJsp" class="infor">EDIT INFORMATION</a>
                         <a href="MainController?action=logout" class="infor">SIGN OUT</a>
                     </div>
@@ -75,8 +76,26 @@
             
         </div>
     </div>
+        <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        </c:if>                    
         <!-- footer -->
         <div id="footer"></div>
+      <script src="assets/js/notification.js"></script>
+
 </body>
   <script>
     $('#header').load('utils.jsp #header__nav', ()=>{

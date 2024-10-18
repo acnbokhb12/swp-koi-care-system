@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
-
-import com.swp.koiCareSystem.dao.AccountDAO;
+ 
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.service.AccountService;
 import java.io.IOException;
@@ -47,17 +46,20 @@ public class PasswordProfileController extends HttpServlet {
             int accID = Integer.parseInt(request.getParameter("accID"));
             String password_old = request.getParameter("password_old");
             String password_new = request.getParameter("password_new");
-
-            AccountDAO acd = new AccountDAO();
-            AccountService acs = new AccountService();
-
-            String currentPassword = acd.getPasswordByAccID(accID);
+ 
+            AccountService acs = new AccountService(); 
+            String currentPassword = acs.getPasswordByAccID(accID);
             if (currentPassword != null && acs.checkPassword(password_old, currentPassword)) {
                 if (acs.updatePassword(accID, password_new)) {
-                    request.getRequestDispatcher("profilePage.jsp").forward(request, response);
+                    request.setAttribute("message", "Your Password updated successfully");
+                    request.setAttribute("toastMessage", "success");
                 } else {
-                    request.getRequestDispatcher("editProfile.jsp").forward(request, response);
+                    request.setAttribute("message", "An error occurred while updating password");
+                    request.setAttribute("toastMessage", "error"); 
                 }
+                    request.getRequestDispatcher("profilePage.jsp").forward(request, response);
+                
+                
             } else {
                 request.setAttribute("WrongPassword", "Old password is incorrect.");
                 request.getRequestDispatcher("editProfile.jsp").forward(request, response);

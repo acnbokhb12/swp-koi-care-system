@@ -40,12 +40,8 @@ public class ImageUploadSingleController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
                Part filePart = request.getPart("fileimg");
                String tempDir = getServletContext().getRealPath("/") + "uploads";
-               
-               
-               
-               ImageUploadService imgs = new ImageUploadService();
-               
-               
+                
+               ImageUploadService imgs = new ImageUploadService(); 
                String imageUrl = "";
                try {
                     imageUrl =  imgs.uploadImage(filePart, tempDir); 
@@ -63,11 +59,13 @@ public class ImageUploadSingleController extends HttpServlet {
                if(isUpdateImgSuccess){
                     acc.setProfileImage(imageUrl);
                     session.setAttribute("userAccount", acc);
-                    url = "profilePage.jsp";
+                    request.setAttribute("message", "Your image was updated successfully");
+                    request.setAttribute("toastMessage", "success"); 
                }else{
-                   url = "editProfile.jsp";
+                   request.setAttribute("message", "An error occurred while deleting the pond.");
+                    request.setAttribute("toastMessage", "error"); 
                }
-               request.getRequestDispatcher(url).forward(request, response);
+               request.getRequestDispatcher("profilePage.jsp").forward(request, response);
         }
     } 
 

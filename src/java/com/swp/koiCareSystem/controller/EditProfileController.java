@@ -82,10 +82,14 @@ public class EditProfileController extends HttpServlet {
             boolean updateSuccess = acd.updateAccount(acc);
 
             if (updateSuccess) {
-                request.getRequestDispatcher("profilePage.jsp").forward(request, response);
+                request.setAttribute("message", "Your Information updated successfully");
+                request.setAttribute("toastMessage", "success");
             } else {
-                request.getRequestDispatcher("editProfile.jsp").forward(request, response);
+                request.setAttribute("message", "An error occurred while update your information");
+                request.setAttribute("toastMessage", "error");
             }
+
+            request.getRequestDispatcher("profilePage.jsp").forward(request, response);
         }
     }
 

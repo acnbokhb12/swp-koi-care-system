@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
-
-import com.swp.koiCareSystem.dao.PondDAO;
+ 
 import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
@@ -35,14 +34,14 @@ public class UpdatePondInformationController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            request.setCharacterEncoding("UTF-8");
             int pondID = Integer.parseInt(request.getParameter("pondID"));
             String name = request.getParameter("pondName");
             String description = request.getParameter("descriptionPond");
             float depth = Float.parseFloat(request.getParameter("depth"));
             float volume = Float.parseFloat(request.getParameter("volume"));
             int drainCount = Integer.parseInt(request.getParameter("drainCount"));
-            float pumpPower = Float.parseFloat(request.getParameter("pumpPower"));
-            int numberOfFish = Integer.parseInt(request.getParameter("numberOfFish"));
+            float pumpPower = Float.parseFloat(request.getParameter("pumpPower")); 
             int skimmer = Integer.parseInt(request.getParameter("skimmer"));
 
             Pond pond = new Pond();
@@ -52,17 +51,19 @@ public class UpdatePondInformationController extends HttpServlet {
             pond.setDepth(depth);
             pond.setVolume(volume);
             pond.setDrainCount(drainCount);
-            pond.setPumpPower(pumpPower);
-            pond.setNumberOfFish(numberOfFish);
+            pond.setPumpPower(pumpPower); 
             pond.setSkimmer(skimmer);
-
-            PondDAO pondDAO = new PondDAO();
-            boolean upinfo = pondDAO.updatePondInformationByID(pond);
+ 
+            PondService psv = new PondService();
+            boolean upinfo = psv.updatePondInformationByID(pond);
             
             if (upinfo) {
-                request.setAttribute("message", "New Pond has been created");
+                request.setAttribute("message", "Pond information updated successfully");
+                request.setAttribute("toastMessage", "success");
             } else {
-                request.setAttribute("message", "An error occurred while creating the pond.");
+                request.setAttribute("message", "Error occurred while updating pond information");
+                request.setAttribute("toastMessage", "error");
+
             }
             
             PondService ponds = new PondService();

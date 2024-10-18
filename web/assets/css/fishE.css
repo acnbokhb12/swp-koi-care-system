@@ -463,15 +463,15 @@
     padding: 0 1.5rem;
 } 
 .pond-item-img { 
-    width: 100%;  
-    display: flex;
+    width: 100%;   
 }
 
 .pond-item-img img {
     /* width: 300px; */
     width: 100%;
     height: auto;
-    object-fit: cover; 
+    /*object-fit: cover;*/
+    height: 400px;
 }
 
  

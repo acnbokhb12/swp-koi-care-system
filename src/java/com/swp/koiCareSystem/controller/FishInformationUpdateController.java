@@ -47,6 +47,7 @@ public class FishInformationUpdateController extends HttpServlet {
             String descriptionKoi = request.getParameter("descriptionKoi");
             String pondId = request.getParameter("pondkoi");
             int pid = Integer.parseInt(pondId);
+            int oldPond = Integer.parseInt(request.getParameter("oldPond"));
 
             // Tạo đối tượng Fish
             Fish fish = new Fish();
@@ -58,26 +59,28 @@ public class FishInformationUpdateController extends HttpServlet {
             fish.setWeight(weight);
             fish.setGender(gender);
             fish.setDescriptionKoi(descriptionKoi);
-            if (pid != 0) {
-               fish.setPondID(pid);
-            }
-
+            fish.setPondID(pid);
+              
             // Cập nhật thông tin cá
 //            FishDAO fishDAO = new FishDAO();
 //            boolean isUpdated = fishDAO.updateFishInformationByID(fish);
             FishService fsv = new FishService();
-            boolean isUpdated = fsv.updateFishInformationByID(fish);
+            boolean isUpdated = fsv.updateFishInformationByID(fish, oldPond);
 
             // Thông báo kết quả
             if (isUpdated) {
                 request.setAttribute("message", "Fish information updated successfully");
-            } else {
-                 request.setAttribute("message", "Error occurred while updating fish information");
-            }  
-            
-            request.getRequestDispatcher("FishInforController?fid="+fishID).forward(request, response);
+                request.setAttribute("toastMessage", "success");
 
-        }  
+            } else {
+                request.setAttribute("message", "Error occurred while updating fish information");
+                request.setAttribute("toastMessage", "error");
+
+            }
+
+            request.getRequestDispatcher("FishInforController?fid=" + fishID).forward(request, response);
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

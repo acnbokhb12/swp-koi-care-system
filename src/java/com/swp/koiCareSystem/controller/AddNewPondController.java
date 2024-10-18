@@ -73,11 +73,9 @@ public class AddNewPondController extends HttpServlet {
             float volume = Float.parseFloat(request.getParameter("volume"));
             int drainCount = Integer.parseInt(request.getParameter("drainCount"));
             float pumpPower = Float.parseFloat(request.getParameter("pumpPower"));
-            String descriptionPond = request.getParameter("descriptionPond");
-            int numberOfFish = Integer.parseInt(request.getParameter("numberOfFish"));
+            String descriptionPond = request.getParameter("descriptionPond"); 
             int skimmerQuantity = Integer.parseInt(request.getParameter("skimmer"));
 
-            PondService ps = new PondService();
 
             newPond.setAccID(acid);
             newPond.setName(name);
@@ -85,10 +83,10 @@ public class AddNewPondController extends HttpServlet {
             newPond.setVolume(volume);
             newPond.setDrainCount(drainCount);
             newPond.setPumpPower(pumpPower);
-            newPond.setDescriptionPond(descriptionPond);
-            newPond.setNumberOfFish(numberOfFish);
+            newPond.setDescriptionPond(descriptionPond); 
             newPond.setSkimmer(skimmerQuantity);
             newPond.setIsActive(true);
+            PondService ps = new PondService();
 
             boolean isCreated = ps.createNewPond(newPond);
 

@@ -36,8 +36,9 @@ public class FishImageUpdateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {   /* TODO output your page here. You may use following sample code. */
-            
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
             ImageUploadService imgs = new ImageUploadService();
@@ -51,21 +52,24 @@ public class FishImageUpdateController extends HttpServlet {
 
             }
             String fishid = request.getParameter("fishID");
-            int fishID = Integer.parseInt(fishid); 
+            int fishID = Integer.parseInt(fishid);
 
             FishService fsv = new FishService();
             boolean upImage = fsv.updateFishImageByPondId(fishID, imageUrl);
 
             if (upImage) {
                 request.setAttribute("message", "Image of fish updated successfully");
+                request.setAttribute("toastMessage", "success");
+
             } else {
                 request.setAttribute("message", "Error occurred while updating image of fish");
+                request.setAttribute("toastMessage", "error");
+
             }
 //            Fish updatedPond = fs.GetFishInforByIDS(fishID);
 //            request.setAttribute("fish", updatedPond);
-           
 
-            request.getRequestDispatcher("FishInforController?fid="+fishID).forward(request, response);
+            request.getRequestDispatcher("FishInforController?fid=" + fishID).forward(request, response);
         }
     }
 

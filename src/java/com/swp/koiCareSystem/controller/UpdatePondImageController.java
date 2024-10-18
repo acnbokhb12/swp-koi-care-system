@@ -55,9 +55,13 @@ public class UpdatePondImageController extends HttpServlet {
             boolean upImage = ponds.updatePondImageByPondID(pondID, imageUrl);
 
             if (upImage) {
-                request.setAttribute("message", "New Pond has been created");
+                request.setAttribute("message", "Image of pond updated successfully");
+                request.setAttribute("toastMessage", "success");
+
             } else {
-                request.setAttribute("message", "An error occurred while creating the pond.");
+                request.setAttribute("message", "Error occurred while updating image of pond");
+                request.setAttribute("toastMessage", "error");
+
             }
             Pond updatedPond = ponds.getPondInforByID(pondID);
             request.setAttribute("pond", updatedPond);

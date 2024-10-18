@@ -4,17 +4,16 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
- 
-import com.swp.koiCareSystem.model.Account; 
+
+import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
-import java.io.PrintWriter; 
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 
 /**
  *
@@ -31,7 +30,7 @@ public class FishDeleteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -40,19 +39,22 @@ public class FishDeleteController extends HttpServlet {
             Account acc = (Account) session.getAttribute("userAccount");
             if (acc == null) {
                 response.sendRedirect("home.jsp");
-            }
+            } else {
 
-            String fishID = request.getParameter("fishID");
- 
-            FishService fsv = new FishService();
-            boolean isDelete = fsv.deletFishByID(fishID);
- 
-            if (isDelete) { 
-                request.setAttribute("message", "Fish deleted successfully");
-            } else { 
-                request.setAttribute("message", "An error occurred while deleting the fish");
-            } 
-            request.getRequestDispatcher("FishController").forward(request, response);
+                String fishID = request.getParameter("fishID");
+                int pondID = Integer.parseInt(request.getParameter("pondID"));
+                FishService fsv = new FishService();
+                boolean isDelete = fsv.deletFishByID(fishID, pondID); 
+                if (isDelete) {
+                    request.setAttribute("message", "Fish deleted successfully");
+                    request.setAttribute("toastMessage", "success");
+                } else {
+                    request.setAttribute("message", "An error occurred while deleting the fish");
+                    request.setAttribute("toastMessage", "error");
+
+                }
+                request.getRequestDispatcher("FishController").forward(request, response);
+            }
         }
     }
 
@@ -96,4 +98,3 @@ public class FishDeleteController extends HttpServlet {
     }// </editor-fold>
 
 }
-    

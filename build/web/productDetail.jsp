@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
     <link rel="stylesheet" href="./assets/css/shopPage.css">
 </head>
-<body>
+<body class="body__shop">
     <!-- start header -->
          <div id="header"></div>
         <!-- end header -->

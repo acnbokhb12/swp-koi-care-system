@@ -44,13 +44,15 @@ public class FishInforController extends HttpServlet {
             if(acc == null){
                 response.sendRedirect("home.jsp"); 
             }else{ 
-                int id = Integer.parseInt(request.getParameter("fid"));
+                int id = Integer.parseInt(request.getParameter("fid")); 
                 FishService fins = new FishService();
                 Fish fin = fins.GetFishInforByIDS(id);
                 PondService psv = new  PondService(); 
                 ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
+                Pond pondOfFish = psv.getPondOfFishByPondId(fin.getPondID());
                 
                 request.setAttribute("fish", fin);
+                request.setAttribute("pondFish", pondOfFish);
                 request.setAttribute("ListPond", listP);
                 request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
             }

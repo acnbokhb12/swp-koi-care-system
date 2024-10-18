@@ -28,7 +28,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="./assets/css/base.css">
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
-            <link rel="stylesheet" href="./assets/css/news_blogs.css">
+        <link rel="stylesheet" href="./assets/css/news_blogs.css">
 
         <link rel="stylesheet" href="./assets/css/pondkoi.css">
     </head>
@@ -99,26 +99,48 @@
         <div class="container container-fish">
             <h1>List Of Koi Fishes</h1>
             <div class="container-list-arrow">
-                    <div class="swiper container__news">
-                <div class="swiper-wrapper container__news-list">
-                <c:forEach items="${listFishInPond}" var="f">
-                    <div class="container__news-item swiper-slide">
-                        <a href="" class="container__news-item-desc">
-                            <img src="${f.fishImage}" alt="">
-                            <div class="container__news-item-cap">
-                                <div class="news-item-cap-detail">
-                                    <span>${f.fishName}</span> 
-                                </div> 
+                <c:choose>
+                    <c:when test="${pond.numberOfFish >5}"> 
+                        <div class="swiper container__news">
+                            <div class="swiper-wrapper container__news-list">
+                                <c:forEach items="${listFishInPond}" var="f">
+                                    <div class="container__news-item swiper-slide">
+                                        <a href="MainController?action=fishinfor&fid=${f.fishID}" class="container__news-item-desc">
+                                            <img src="${f.fishImage}" alt="">
+                                            <div class="container__news-item-cap">
+                                                <div class="news-item-cap-detail">
+                                                    <span>${f.fishName}</span> 
+                                                </div> 
+                                            </div>
+                                        </a>
+                                    </div> 
+                                </c:forEach>
                             </div>
-                        </a>
-                    </div> 
-                </c:forEach>
-                </div>
-                <div class="news-title-btn">
-                    <button class="f_owl-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="f_owl-next"><i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-            </div>
+                            <div class="news-title-btn">
+                                <button class="f_owl-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="f_owl-next"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class=" container-list-fish ">
+                            <div class="row"  >
+                                <c:forEach items="${listFishInPond}" var="f">  
+                                    <a href="MainController?action=fishinfor&fid=${f.fishID}" class="fish-item col-lg-3 mb-4">
+                                        <div class="fish-item-img">
+                                            <img src="${f.fishImage}" alt="">
+                                            <div class="fish-item-desc">
+                                                <p>${f.fishName}</p>
+                                            </div>
+                                        </div> 
+                                    </a>
+                                </c:forEach>
+
+                            </div>
+                        </div>
+                    </c:otherwise>
+
+                </c:choose>
             </div>
         </div>
 
@@ -174,10 +196,6 @@
                                     <input type="number" id="pumpPower" name="pumpPower" value="${formatPumpPower}" required>
                                 </div>
                                 <div class="col-md-6 edit-item-detail">
-                                    <label for="numberOfFish">Number of Fish</label>
-                                    <input type="number" id="numberOfFish" name="numberOfFish" value="${pond.numberOfFish}" required>
-                                </div>
-                                <div class="col-md-6 edit-item-detail">
                                     <label for="descriptionPond">Description</label>
                                     <input type="text" id="descriptionPond" name="descriptionPond" value="${pond.descriptionPond}" required>
                                 </div>
@@ -196,9 +214,27 @@
                 </div>
             </div>
         </div>
-
+        <!-- Toast -->
+        <c:if test="${toastMessage != null}"> 
+            <div id="toast">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </c:if>                              
         <!-- footer -->
         <div id="footer"></div>
+        <script src="assets/js/notification.js"></script>
+
     </body>
     <style>
         .label-witdh{
@@ -218,7 +254,7 @@
             background: none;
             padding: 10px;
         }
-        
+
         .container__news-item:hover img{
             transform: none;
         }
@@ -269,33 +305,33 @@
             }
         });
 
-         var swiperNews = new Swiper(".container__news", {
-        spaceBetween: 30,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-            delay: 5500,
-            disableOnineraction: false,
-        },
-        navigation: {
-            nextEl: ".f_owl-next",
-            prevEl: ".f_owl-prev",
-        },
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
+        var swiperNews = new Swiper(".container__news", {
+            spaceBetween: 30,
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 5500,
+                disableOnineraction: false,
             },
-            450: {
-                slidesPerView: 2,
+            navigation: {
+                nextEl: ".f_owl-next",
+                prevEl: ".f_owl-prev",
             },
-            768: {
-                slidesPerView: 3,
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                450: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 4,
+                }
+
             },
-            1024:{
-                 slidesPerView: 5,
-            }
-            
-        },
-    });
+        });
     </script>
 </html>

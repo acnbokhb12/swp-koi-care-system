@@ -38,9 +38,11 @@ public class PondInforController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String pondid = request.getParameter("pid");
             int id = Integer.parseInt(pondid);
+            
             PondService psv = new PondService();  
             Pond p = psv.getPondInforByID(id);
-            ArrayList<Fish> listFishInPond = psv.GetAllFishInPondByPondID(id); 
+            ArrayList<Fish> listFishInPond = psv.GetAllFishInPondByPondID(id);
+            
             request.setAttribute("pond", p); 
             request.setAttribute("listFishInPond", listFishInPond); 
             request.getRequestDispatcher("pondInfor.jsp").forward(request, response);

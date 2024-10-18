@@ -104,11 +104,7 @@
                                     <div class="col-md-6 edit-item-detail">
                                         <span>Pump Power (l/h)</span>
                                         <input type="number" step="0.1" class="pump-power" name="pumpPower" min="1" placeholder="Enter pump power in liters per hour" required>
-                                    </div>
-                                    <div class="col-md-6 edit-item-detail">
-                                        <span>Quantity of Fish</span>
-                                        <input type="number" class="quantity-fish" name="numberOfFish" min="0" placeholder="Enter number of fish" required>
-                                    </div>
+                                    </div> 
                                     <div class="col-md-6 edit-item-detail">
                                         <span>Description</span>
                                         <input type="text" class="pond-description" name="descriptionPond" placeholder="Enter pond description" required>
@@ -130,7 +126,7 @@
             </div>
         </div>
         <!-- Modal Delete -->
-        <div id="myModal" class="modal-confirm-delete" dísplay="none">
+        <div id="myModal" class="modal-confirm-delete" style="display: none;">
             <div class="modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header flex-column">
@@ -174,91 +170,7 @@
         <style>
             .link-delete-pond{
                 cursor: pointer;
-            }
-            #toast{
-                position: fixed;
-                top: 12.2rem;
-                right: 3.2rem;
-            }
-
-            .toast_main{
-                display: flex;
-                align-items: center;
-                background-color: #fff;
-                border-radius: 2px;
-                min-width: 40rem;
-                max-width: 45rem;
-                padding: 1.4rem 0;
-                border-left: 4px solid;
-                box-shadow: 0 5px  8px rgba(0, 0, 0, 0.08);
-                /* justify-content: space-between; */
-                animation: slideInfeltToast ease 0.3s, fadeOut linear 1s 3s forwards ;
-            }
-
-            @keyframes slideInfeltToast {
-                from{
-                    opacity: 0;
-                    transform: translateX(calc(100% + 32px ));
-                }
-                to{
-                    opacity: 1; 
-                    transform: translateX( 0); 
-                }
-            }
-            @keyframes fadeOut {
-                to{
-                    opacity: 0;
-                }
-            }
-            .toast_main+ .toast_main{
-                margin-top: 2.4rem;
-            }
-            .toast--success {
-                border-color: #47d864;
             } 
-            .toast--success .toast__icon{
-                color: #47d864;
-            }
-            .toast--error{
-                border-color:#ff623d ;
-            }
-            .toast--error .toast__icon{
-                color:#ff623d ;
-            }
-
-            .toast__icon{
-                font-size: 2.4rem;
-            }
-
-            .toast__icon,
-            .toast__close{
-                padding: 0 1.6rem ;
-                /* margin: 0 1rem; */
-            }
-            .toast_body{
-                flex-grow: 1;
-            }
-            .toast__title{
-                font-size: 1.6rem;
-                font-weight: 600;
-                color: #333;
-            }
-            .toast__msg{
-                font-size: 1.4rem;
-                font-weight: 600;
-                color: #888;
-                margin-top: 6px;
-                line-height: 1.5;
-            }
-            .toast__close{
-                font-size: 2.4rem;
-                color: rgba(0, 0, 0, 0.7);
-                cursor: pointer;
-                /* margin-left: auto; */
-            }
-            .close_toast{
-                display: none;
-            }
         </style>
     </body>
     <script>
@@ -310,5 +222,6 @@
             });
         });
     </script>
+    <script src="./assets/js/notification.js"></script>
     <script src="./assets/js/utils.js"></script>
 </html>

@@ -331,8 +331,8 @@
 }
 
 .container-list-fish{
-    width: 100%;
-    overflow: hidden;
+    /*width: 100%;*/
+    /*overflow: hidden;*/
 }
 .container-list-arrow{
     position: relative;
@@ -345,17 +345,18 @@
     position: relative;
 }
 .fish-item-img img{
-    object-fit: cover;
+    /*object-fit: cover;*/
     height: 150px;
-    /* width: 100%; */
+     width: 100%; 
     border-radius: 8px;
 }
 .fish-item-desc{
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 10px;
     background-color: rgba(0, 0, 0, 0.6);
     padding-bottom: 1.6rem;
+    padding-top: 1rem;
     overflow: hidden;
     border-radius: 8px;
 

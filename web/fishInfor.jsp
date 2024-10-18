@@ -18,7 +18,8 @@
         <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
         <!-- Font gg family -->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-              rel="stylesheet">
+              rel="stylesheet"> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Font icon -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
         <!-- bootstrap -->
@@ -41,8 +42,8 @@
             <div class="tilte-fish container">
                 <h1>Fish Information</h1>
                 <div class="text-right">
-                    <a href="MainController?action=fish" class="back-btn">Back to List</a>
-                    <a href="MainController?action=fishdelete&fishID=${fish.fishID}" class="delete-btn-fish">Delete</a>                
+                    <a href="MainCon?action=fish" class="back-btn">Back to List</a>
+                    <a href="#" data-fishid="${fish.fishID}" data-fishname="${fish.fishName}" data-pondid="${fish.pondID}" class="delete-btn-fish" data-toggle="modal" data-target="#myModal">Delete</a>                
                     <button class="edit-btn-out">Edit Information</button>
                 </div>
             </div>
@@ -107,7 +108,7 @@
 
         <!-- Go to pond -->
         <section class="container container-pond-fish "> 
-            <div class="pond-item  ">
+            <div class="pond-item" style="display: block;" >
                 <div class="tilte-fish-growth  "> 
                     <h1>The pond of this fish</h1>
                     <div class="text-right">
@@ -115,13 +116,13 @@
                     </div>
                 </div>
                 <div class="pond-item-img mt-4">
-                    <div href="#">
-                        <img src="https://animals.sandiegozoo.org/sites/default/files/2016-11/Koi.jpg" alt="Pond" />
-                    </div>
                     <div class="pond-item-desc">
                         <p>
-                            Tranquil Waters Pond Tranquil Waters Pond Tranquil Waters Pond
+                             ${pondFish.name}
                         </p>
+                    </div>
+                    <div>
+                        <img src="${pondFish.image}" alt="Pond" />
                     </div>
                 </div>
 
@@ -216,6 +217,7 @@
                                         </c:if>
                                     </select>
                                 </div>
+                                <input type="hidden" value="${fish.pondID}" name="oldPond">
                             </div>
 
                             <div class="text-center">
@@ -226,12 +228,76 @@
                 </div>
             </div>
         </div>
-
-
+        <!-- Toast -->
+        <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        </c:if>  
+        <!-- Modal Delete -->
+ <!-- Modal Delete -->
+ <div id="myModal" class="modal-confirm-delete" style="display: none;">
+            <div class="modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header flex-column">
+                        <div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>
+                        <h4 class="modal-title w-100">Are you sure?</h4>
+                        <button type="button" class="close-confirm-delete close" data-dismiss="modal" aria-hidden="true" style="font-size: 30px; color: #000">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p  style="font-size: 16px; color: #000;">Do you really want to delete <span style="color: #000; font-weight: 600; background-color: #ff5656; padding: 4px 10px; border-radius: 4px;" id="fishNameDisplay"></span> ? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn-cancel-delete btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <form id="deleteForm" action="MainController?action=fishdelete" method="post">
+                            <input type="hidden" name="fishID" id="fishIDToDelete">
+                            <input type="hidden" name="pondID" id="pondIDToCaculate">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- footer -->
 
         <div id="footer"></div>
         <script src="./assets/js/utils.js"></script> 
+         <script src="assets/js/notification.js"></script>
+          <script>
+        $(document).ready(function () {
+            $('#myModal').hide();
+            $('.delete-btn-fish').on('click', function () {
+                const fishID = $(this).data('fishid');
+                const pondID = $(this).data('pondid');
+                const fishName = $(this).data('fishname');
+                $('#fishIDToDelete').val(fishID);
+                $('#pondIDToCaculate').val(pondID); 
+                $('#fishNameDisplay').text(fishName); 
+                $('#myModal').show();
+            });
+            $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {
+                $('#myModal').hide();
+            });
+            $(window).on('click', function (event) {
+                if (event.target.id === 'myModal') {
+                    $('#myModal').hide();
+                }
+            });
+        });
+    </script>
     </body>
     <style>
         .label-witdh{

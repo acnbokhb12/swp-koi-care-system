@@ -20,7 +20,7 @@
 .info__user-container{
     position: relative; 
     margin: 0px auto;
-    padding-top: 8vh; 
+    padding-top: 3rem; 
 }
 .container__sigin-form{
     background-color: var(--white-color);

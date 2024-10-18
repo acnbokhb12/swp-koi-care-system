@@ -28,6 +28,15 @@ public class PondService {
     public Pond getPondInforByID(int id) {
         return pd.getPondInforByID(id);
     }
+    public Pond getPondOfFishByPondId(int pondId){
+        if(pondId == 0){
+            Pond virtualPond = new Pond();
+            virtualPond.setImage("https://img.freepik.com/premium-photo/question-mark-wooden-cube-grey-background-faq-concept-ask-questions-find-answers-online-customer-support_29488-10170.jpg");
+            virtualPond.setName("This fish not yet assigned");
+            return virtualPond;
+        }
+        return  pd.getPondInforByID(pondId);
+    }
     
     public boolean updatePondImageByPondID(int pid, String imgLink) {
         return pd.updatePondImageByPondID(pid, imgLink);
@@ -38,10 +47,31 @@ public class PondService {
     }
 
     public boolean createNewPond(Pond pond) {
+        pond.setNumberOfFish(0);
         pond.setImage("https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg");
         return pd.createNewPond(pond);
     }
     public boolean deletePondByID(String pondId){
         return pd.deletePondByID(pondId);
     }
+    public boolean updatePondInformationByID(Pond p){
+        return  pd.updatePondInformationByID(p);
+    } 
+    
+    public int getNumberFishInPond(int pondId){
+        return pd.getNumberFishInPond(pondId);
+    }
+    public boolean updateNumberFishInPond(int quantity, int pondId){
+        return pd.updateNumberFishInPond(quantity, pondId);
+    }
+    
+//    public Pond getPondOfFishByPondID(int id){
+//        Pond virtualPond = new Pond();
+//        if(id > 0){
+//            return pd.getPondInforByID(id);
+//        }else{
+//            virtualPond.setName("Unsigned");
+//        }
+//        return  virtualPond;
+//    }
 }

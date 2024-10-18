@@ -132,21 +132,27 @@ public class PondDAO {
                     + "WHERE [PondID] = ?";
             ps1 = conn.prepareStatement(sql1);
             ps1.setString(1, pondID);
-             int affectedRows1 = ps1.executeUpdate();
-             
+            int affectedRows1 = ps1.executeUpdate();
+
             String sql2 = "UPDATE Ponds SET isActive = 0  WHERE [PondID] = ?";
             ps2 = conn.prepareStatement(sql2);
             ps2.setString(1, pondID);
             int affectedRows2 = ps2.executeUpdate();
-            
+
             return affectedRows1 > 0 && affectedRows2 > 0;
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         } finally {
             try {
-                if (ps1 != null) ps1.close(); 
-                if(ps2!=null) ps2.close();
-                if (conn != null) conn.close(); 
+                if (ps1 != null) {
+                    ps1.close();
+                }
+                if (ps2 != null) {
+                    ps2.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -197,20 +203,19 @@ public class PondDAO {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "UPDATE Ponds SET PondName=?, Description=?, NumberOfFish=?, Volume=?, Depth=?, PumpPower=?, DrainCount=?, Skimmer=? WHERE PondID=?";
+        String sql = "UPDATE Ponds SET PondName=?, Description=?, Volume=?, Depth=?, PumpPower=?, DrainCount=?, Skimmer=? WHERE PondID=?";
         try {
             conn = DatabaseConnectionManager.getConnection();
             ps = conn.prepareStatement(sql);
 
             ps.setString(1, pond.getName());
             ps.setString(2, pond.getDescriptionPond());
-            ps.setInt(3, pond.getNumberOfFish());
-            ps.setFloat(4, (float) pond.getVolume());
-            ps.setFloat(5, (float) pond.getDepth());
-            ps.setFloat(6, (float) pond.getPumpPower());
-            ps.setInt(7, pond.getDrainCount());
-            ps.setInt(8, pond.getSkimmer());
-            ps.setInt(9, pond.getPondID());
+            ps.setFloat(3, (float) pond.getVolume());
+            ps.setFloat(4, (float) pond.getDepth());
+            ps.setFloat(5, (float) pond.getPumpPower());
+            ps.setInt(6, pond.getDrainCount());
+            ps.setInt(7, pond.getSkimmer());
+            ps.setInt(8, pond.getPondID());
 
             int affectedRows = ps.executeUpdate();
             return affectedRows > 0;
@@ -311,6 +316,76 @@ public class PondDAO {
             }
         }
         return listFish;
+    }
+
+    public int getNumberFishInPond(int pondId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select [NumberOfFish] from [dbo].[Ponds] where [PondID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, pondId);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public boolean updateNumberFishInPond(int quantity, int pondId) {
+        Connection cn = null;
+        PreparedStatement pst = null; 
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "Update [dbo].[Ponds] \n"
+                        + "set [NumberOfFish] = ?\n"
+                        + "where [PondID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, quantity);
+                pst.setInt(2, pondId); 
+                
+                int rowsUpdated  = pst.executeUpdate();
+                if(rowsUpdated >0)
+                    return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try { 
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {

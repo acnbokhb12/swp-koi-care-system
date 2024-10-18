@@ -44,7 +44,7 @@ public class FishCreateNewController extends HttpServlet {
             Account acc = (Account) session.getAttribute("userAccount");
 
             if (acc == null) {
-                response.sendRedirect("home.jsp"); 
+                response.sendRedirect("home.jsp");
             } else {
 
                 Part filePart = request.getPart("fileimg");
@@ -70,8 +70,7 @@ public class FishCreateNewController extends HttpServlet {
                 String gender = request.getParameter("gender");
                 String pondId = request.getParameter("pondkoi");
                 int pid = Integer.parseInt(pondId);
-
-//            FishDAO fishDAO = new FishDAO();
+ 
                 Fish newFish = new Fish();
 
                 newFish.setAccID(accID);
@@ -83,21 +82,23 @@ public class FishCreateNewController extends HttpServlet {
                 newFish.setLength(length);
                 newFish.setWeight(weight);
                 newFish.setGender(gender);
-                newFish.setIsActive(true);
-                if (pid != 0) {
-                    newFish.setPondID(pid);
-                }
+                newFish.setIsActive(true); 
+                newFish.setPondID(pid);
+               
 
                 FishService fsv = new FishService();
                 boolean isCreated = fsv.addNewFish(newFish);
 
                 if (isCreated) {
                     request.setAttribute("message", "New Fish has been created");
+                    request.setAttribute("toastMessage", "success");
+
                 } else {
                     request.setAttribute("message", "An error occurred while creating the fish.");
-                }
+                    request.setAttribute("toastMessage", "error");
 
-//            request.setAttribute("listFish", fishList); 
+                }
+ 
                 request.getRequestDispatcher("FishController").forward(request, response);
             }
         }

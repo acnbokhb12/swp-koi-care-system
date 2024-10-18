@@ -74,7 +74,11 @@ public class AccountService {
         return googlePojo;
 
     }
-
+    
+    public String getPasswordByAccID(int acid){
+        return acd.getPasswordByAccID(acid);
+    }
+    
     public boolean registerUser(Account account) {
         account.setPassword(hashPassword(account.getPassword()));
         return acd.registerUser(account);

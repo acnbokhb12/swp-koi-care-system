@@ -1047,6 +1047,8 @@
     position: fixed;
     top: 12.2rem;
     right: 3.2rem;
+    transition: opacity 0.5s ease;
+
 }
 
 .toast_main{
@@ -1060,7 +1062,7 @@
     border-left: 4px solid;
     box-shadow: 0 5px  8px rgba(0, 0, 0, 0.08);
     /* justify-content: space-between; */
-    animation: slideInfeltToast ease 0.3s, fadeOut linear 1s 3s forwards ;
+    animation: slideInfeltToast ease 0.3s  ;
 }
 
 @keyframes slideInfeltToast {
