@@ -46,7 +46,7 @@ public class FishInforController extends HttpServlet {
             }else{ 
                 int id = Integer.parseInt(request.getParameter("fid")); 
                 FishService fins = new FishService();
-                Fish fin = fins.GetFishInforByIDS(id);
+                Fish fin = fins.getFishInforByIDS(id);
                 
                 
                 

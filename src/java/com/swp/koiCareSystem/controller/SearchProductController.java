@@ -47,14 +47,14 @@ public class SearchProductController extends HttpServlet {
             }
             int index = Integer.parseInt(indexPage);
             ProductService pds = new ProductService(); 
-            int count = pds.CountProductsByName(name);
+            int count = pds.countProductsByName(name);
             
             int endPage = count/32; 
             if(count % 32 != 0){
                 endPage++;
             } 
-            ArrayList<Product> listProduct = pds.SearchProductsByName(name, index);
-            ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
+            ArrayList<Product> listProduct = pds.searchProductsByName(name, index);
+            ArrayList<ProductCategory> listCate = pds.getAllProductCate();
 
             request.setAttribute("ListC", listCate);
             request.setAttribute("ListP", listProduct);

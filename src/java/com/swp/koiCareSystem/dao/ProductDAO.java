@@ -23,7 +23,7 @@ public class ProductDAO {
 //        return list;
 //    }   
 
-    public int CountProducts() {
+    public int countProducts() {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -58,7 +58,7 @@ public class ProductDAO {
         return 0;
     }
 
-    public int CountProductsByCate(int cateID) {
+    public int countProductsByCate(int cateID) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -94,7 +94,7 @@ public class ProductDAO {
         return 0;
     }
 
-    public int CountProductsByName(String name) {
+    public int countProductsByName(String name) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -130,7 +130,7 @@ public class ProductDAO {
         return 0;
     }
 
-    public ArrayList<Product> GetAllProducts(int index) {
+    public ArrayList<Product> getAllProducts(int index) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -181,7 +181,7 @@ public class ProductDAO {
         return listP;
     }
 
-    public ArrayList<ProductCategory> GetAllCategory() {
+    public ArrayList<ProductCategory> getAllCategory() {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -220,7 +220,7 @@ public class ProductDAO {
         return listPC;
     }
 
-    public ArrayList<Product> GetProductsByCateId(int cateId, int index) {
+    public ArrayList<Product> getProductsByCateId(int cateId, int index) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -274,7 +274,7 @@ public class ProductDAO {
         return listP;
     }
 
-    public ArrayList<Product> SearchProductsByName(String name, int index) {
+    public ArrayList<Product> searchProductsByName(String name, int index) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -326,7 +326,7 @@ public class ProductDAO {
         return listP;
     }
 
-    public Product GetProductById(int id) {
+    public Product getProductById(int id) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -372,7 +372,7 @@ public class ProductDAO {
         return pd;
     }
 
-    public ArrayList<Product> GetProducts(int index) {
+    public ArrayList<Product> getProducts(int index) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -424,20 +424,19 @@ public class ProductDAO {
     }
 
     public static void main(String[] args) {
-        ProductDAO pd = new ProductDAO();
-//        ArrayList<Product> list = pd.SearchProductsByName("koi", 1);
-        ArrayList<Product> list = pd.GetProducts(1);
+//        ProductDAO pd = new ProductDAO();
+//        ArrayList<Product> list = pd.SearchProductsByName("koi", 1); 
 //        Product p = pd.GetProductById(1);
 //        System.out.println(p);
 //        ArrayList<ProductCategory> lp = pd.GetAllCategory();
 //        ArrayList<Product> list = pd.PagingGetProductByCateId(1, 1);
-        if (list != null) {
-            for (Product i : list) {
-                System.out.println(i);
-            }
-
-        } else {
-            System.out.println(list);
-        }
+//        if (list != null) {
+//            for (Product i : list) {
+//                System.out.println(i);
+//            }
+//
+//        } else {
+//            System.out.println(list);
+//        }
     }
 }

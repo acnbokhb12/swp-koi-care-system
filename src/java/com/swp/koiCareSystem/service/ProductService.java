@@ -24,41 +24,41 @@ public class ProductService {
         productDAO = new ProductDAO();
     }
 
-    public int CountAllProduct() {
-        return productDAO.CountProducts();
+    public int countAllProduct() {
+        return productDAO.countProducts();
     }
 
-    public int CountProductsByCate(int cateId) {
-        return productDAO.CountProductsByCate(cateId);
+    public int countProductsByCate(int cateId) {
+        return productDAO.countProductsByCate(cateId);
     }
 
-    public int CountProductsByName(String name) {
-        return productDAO.CountProductsByName(name);
+    public int countProductsByName(String name) {
+        return productDAO.countProductsByName(name);
     }
 
-    public ArrayList<Product> GetAllProducts(int index) {
-        ArrayList<Product> list = productDAO.GetAllProducts(index);
+    public ArrayList<Product> getAllProducts(int index) {
+        ArrayList<Product> list = productDAO.getAllProducts(index);
         return list;
     }
 
-    public ArrayList<ProductCategory> GetAllProductCate() {
-        return productDAO.GetAllCategory();
+    public ArrayList<ProductCategory> getAllProductCate() {
+        return productDAO.getAllCategory();
     }
 
-    public ArrayList<Product> GetProductsByCateId(int cateId, int index) {
-        return productDAO.GetProductsByCateId(cateId, index);
+    public ArrayList<Product> getProductsByCateId(int cateId, int index) {
+        return productDAO.getProductsByCateId(cateId, index);
     }
 
-    public ArrayList<Product> SearchProductsByName(String name, int index) {
-        return productDAO.SearchProductsByName(name, index);
+    public ArrayList<Product> searchProductsByName(String name, int index) {
+        return productDAO.searchProductsByName(name, index);
     }
 
-    public Product GetProductById(int id) {
-        return productDAO.GetProductById(id);
+    public Product getProductById(int id) {
+        return productDAO.getProductById(id);
     }
 
-    public ArrayList<Product> GetProducts(int index) {
-        ArrayList<Product> list = productDAO.GetProducts(index);
+    public ArrayList<Product> getProducts(int index) {
+        ArrayList<Product> list = productDAO.getProducts(index);
         return list;
     }
 }

@@ -42,14 +42,14 @@ public class ManageShopController extends HttpServlet {
             
             
             ProductService pds = new ProductService(); 
-            int count = pds.CountAllProduct();
+            int count = pds.countAllProduct();
             
             int endPage = count/32; 
             if(count % 32 != 0){
                 endPage++;
             }
-            ArrayList<Product> listProduct = pds.GetAllProducts(index);
-            ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
+            ArrayList<Product> listProduct = pds.getAllProducts(index);
+            ArrayList<ProductCategory> listCate = pds.getAllProductCate();
             
             request.setAttribute("ListC", listCate);
             request.setAttribute("ListP", listProduct);

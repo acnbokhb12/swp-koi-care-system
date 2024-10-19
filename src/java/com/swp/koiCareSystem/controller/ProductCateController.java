@@ -47,15 +47,15 @@ public class ProductCateController extends HttpServlet {
             int index = Integer.parseInt(indexPage);
             
             ProductService pds = new ProductService();
-            int count = pds.CountProductsByCate(cid);
+            int count = pds.countProductsByCate(cid);
             int endPage = count/32;
             if(count % 32 != 0){
                 endPage++;
             }
-            ArrayList<Product> listProduct = pds.GetProductsByCateId(cid, index);
+            ArrayList<Product> listProduct = pds.getProductsByCateId(cid, index);
             String url = "";
             if(listProduct != null ){
-                ArrayList<ProductCategory> listCate = pds.GetAllProductCate();
+                ArrayList<ProductCategory> listCate = pds.getAllProductCate();
                 request.setAttribute("ListC", listCate);
                 request.setAttribute("ListP", listProduct);
                 request.setAttribute("tag", index);

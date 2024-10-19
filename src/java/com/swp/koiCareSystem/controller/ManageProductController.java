@@ -41,13 +41,13 @@ public class ManageProductController extends HttpServlet {
             int index = Integer.parseInt(indexPage);
 
             ProductService pds = new ProductService();
-            int count = pds.CountAllProduct();//200
+            int count = pds.countAllProduct();//200
 
             int endPage = count / 20;
             if (count % 20 != 0) {
                 endPage++;
             }
-            ArrayList<Product> listProduct = pds.GetProducts(index);
+            ArrayList<Product> listProduct = pds.getProducts(index);
 
             request.setAttribute("ListP", listProduct);
             request.setAttribute("tag", index);

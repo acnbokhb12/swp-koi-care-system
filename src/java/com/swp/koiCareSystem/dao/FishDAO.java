@@ -312,7 +312,79 @@ public class FishDAO {
         }
         return 0;
     }
+      public boolean checkFishIsExist(int fishId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        boolean isExist = false;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select [isActive] from [dbo].[Fish] where [FishID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, fishId);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                     isExist = rs.getBoolean(1);
+                }
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isExist;
+    }
+      public boolean checkFishIsExistInPondById(int fishId, int pondId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null; 
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select*   from Ponds p inner join Fish f on p.PondID = f.PondID where f.FishID = ? and p.PondID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, fishId);
+                pst.setInt(2, pondId);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                     return true;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+      
     /*
 
 //    // TEST DAO
@@ -392,4 +464,9 @@ public class FishDAO {
         System.out.println("Failed to create new fish.");
     }
 }*/
+      public static void main(String[] args) {
+        FishDAO fd = new FishDAO();
+        boolean i = fd.checkFishIsExistInPondById(110, 19);
+          System.out.println(i);
+    }
 }

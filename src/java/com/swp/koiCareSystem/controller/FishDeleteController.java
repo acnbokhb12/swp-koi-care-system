@@ -44,15 +44,20 @@ public class FishDeleteController extends HttpServlet {
                 String fishID = request.getParameter("fishID");
                 int pondID = Integer.parseInt(request.getParameter("pondID"));
                 FishService fsv = new FishService();
-                boolean isDelete = fsv.deletFishByID(fishID, pondID); 
-                if (isDelete) {
-                    request.setAttribute("message", "Fish deleted successfully");
-                    request.setAttribute("toastMessage", "success");
-                } else {
-                    request.setAttribute("message", "An error occurred while deleting the fish");
-                    request.setAttribute("toastMessage", "error");
 
+                boolean isFishExist = fsv.checkFishExist(Integer.parseInt(fishID));
+                if (isFishExist) { 
+                    boolean isDelete = fsv.deletFishByID(fishID, pondID);
+                    if (isDelete) {
+                        request.setAttribute("message", "Fish deleted successfully");
+                        request.setAttribute("toastMessage", "success");
+                    } else {
+                        request.setAttribute("message", "An error occurred while deleting the fish");
+                        request.setAttribute("toastMessage", "error");
+
+                    }
                 }
+
                 request.getRequestDispatcher("FishController").forward(request, response);
             }
         }

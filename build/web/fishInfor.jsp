@@ -111,9 +111,11 @@
             <div class="pond-item" style="display: block;" >
                 <div class="tilte-fish-growth  "> 
                     <h1>The pond of this fish</h1>
+                    <c:if test="${fish.pondID != 0}"> 
                     <div class="text-right">
-                        <a href="pondinfor.html" class="back-btn grow__detail-btn">View Pond Detail</a> 
+                        <a href="MainController?action=pondinfor&pid=${fish.pondID}" class="back-btn grow__detail-btn">View Pond Detail</a> 
                     </div>
+                    </c:if>
                 </div>
                 <div class="pond-item-img mt-4">
                     <div class="pond-item-desc">

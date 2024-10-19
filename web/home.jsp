@@ -200,7 +200,7 @@
                                 provide everything you need for the perfect Koi care experience. Visit us to explore our
                                 collection and transform your pond into a serene oasis</p>
                             <div class="shop__link-to-intro ">
-                                <a href="">SHOP NOW</a>
+                                <a href="MainController?action=shop">SHOP NOW</a>
                             </div>
                         </div>
                     </div>

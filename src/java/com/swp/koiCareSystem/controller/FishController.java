@@ -44,7 +44,7 @@ public class FishController extends HttpServlet {
                 response.sendRedirect("home.jsp");
             }else{
                 FishService fs = new FishService();
-                ArrayList<Fish> listF = fs.GetAllFishS(acc.getUserID());
+                ArrayList<Fish> listF = fs.getAllFishS(acc.getUserID());
                 PondService psv = new  PondService();
                 ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
                 

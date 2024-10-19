@@ -249,6 +249,10 @@
         <servlet-name>ManageProductController</servlet-name>
         <url-pattern>/ManageProductController</url-pattern> 
     </servlet-mapping>
+      <error-page>
+        <error-code>404</error-code>
+        <location>/404page.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30

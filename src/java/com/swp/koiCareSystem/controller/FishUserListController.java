@@ -6,14 +6,10 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Fish;
-import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.service.AccountService;
-import com.swp.koiCareSystem.service.FishService;
-import com.swp.koiCareSystem.service.PondService;
+import com.swp.koiCareSystem.model.Fish; 
+import com.swp.koiCareSystem.service.FishService; 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.PrintWriter; 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +60,7 @@ public class FishUserListController extends HttpServlet {
 
             // Get fish data for the logged-in user
             FishService fishService = new FishService();
-            Fish fish = fishService.GetFishInforByIDS(id);
+            Fish fish = fishService.getFishInforByIDS(id);
 
             if (fish == null) {
                 // Handle the case where no fish is found with the given ID

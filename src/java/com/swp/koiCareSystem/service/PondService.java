@@ -32,7 +32,7 @@ public class PondService {
         if(pondId == 0){
             Pond virtualPond = new Pond();
             virtualPond.setImage("https://img.freepik.com/premium-photo/question-mark-wooden-cube-grey-background-faq-concept-ask-questions-find-answers-online-customer-support_29488-10170.jpg");
-            virtualPond.setName("This fish not yet assigned");
+            virtualPond.setName("This fish has not been assigned to any pond yet.");
             return virtualPond;
         }
         return  pd.getPondInforByID(pondId);

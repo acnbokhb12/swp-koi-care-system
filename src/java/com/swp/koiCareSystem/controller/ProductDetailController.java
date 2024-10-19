@@ -40,7 +40,7 @@ public class ProductDetailController extends HttpServlet {
             int id = Integer.parseInt(pid);
             
             ProductService pds = new ProductService();
-            Product pd = pds.GetProductById(id);
+            Product pd = pds.getProductById(id);
             String url="";
             if(pd != null){
                 request.setAttribute("Product", pd);    

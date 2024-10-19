@@ -39,8 +39,7 @@ public class DeletePondController extends HttpServlet {
             Account acc = (Account) session.getAttribute("userAccount");
             if (acc == null) {
                 response.sendRedirect("home.jsp"); 
-            } else {
-
+            } else { 
                 String pondID = request.getParameter("pondID"); 
                 PondService psv = new PondService();
                 boolean isDelete = psv.deletePondByID(pondID);
