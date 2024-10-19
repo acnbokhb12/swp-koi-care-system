@@ -65,9 +65,9 @@
                         <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/120846118_1393138717744114_5343318628172679837_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=HRW0w38pbEQQ7kNvgF_Y1rD&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=ARzB8qdQeV6A2gtFkV7lUga&oh=00_AYDhskM-yEdWNkPKeY4tujMz6Vwn07AZEpNMCJn3qOn-hA&oe=67242460" class="manage-img" alt="">
                         <div class="manage-info">
                             <!-- name manage - admin -->
-                            <p class="manage-name mb-0">Khanh Huynh</p>
+                            <p class="manage-name mb-0">${sessionScope.userAccount.fullName}</p>
                             <!-- role -->
-                            <p class="role designattion mb-0">Admin</p>    
+                            <p class="role designattion mb-0">${sessionScope.userAccount.userRole}</p>    
                         </div>
                     </a>
                     <div class="col-auto app-box-admin">
@@ -81,7 +81,7 @@
                                         <a href="#">Profile</a>
                                     </li>
                                     <li class="modal-more-info-items">
-                                        <a href="#">Log out</a>
+                                        <a href="MainController?action=logout">Log out</a>
                                     </li>
                                 </ul>
                             </div>
@@ -94,35 +94,11 @@
         
     </div>
     <!-- End Admin -->
-
-    <!-- Sidebar manager -->
-    <div id="sidebar_manager"> 
-        <div class="left-navbar-admin-manage  vh-100 simplebar-scrollable-y "> 
-            <div class="sidebar">
-                <div class="img-header">
-            <div class="contain__img-desc">
-            <a href="#" class="img-page-admin_link">
-                <img src="./assets/img/logo/logoSignin-removebg-preview.png" alt="picture page"> 
-            </a>
-            <div class="desc-img-admin">
-                <p>Koi Care System</p> 
-            </div>
-            </div> 
-                </div>
-                <ul class="menu">
-                    <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
-                    <li><a href="manageProduct.jsp"><i class="fa-solid fa-warehouse"></i> Producy Manager</a></li> 
-                    <li><a href="manageOrder.jsp"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
-                    <li><a href="manageFishUser.jsp"><i class="fa-solid fa-fish"></i>Fist of Customer Management</a></li>   
-                    <li><a href="#"><i class="fa-solid fa-water"></i>Water Management</a></li>       
-                </ul>
-            </div>
-        </div>
-    </div>
+ 
 
     <!-- Start Customer --> 
 
-        <!-- Sidebar admin -->
+        <!-- Sidebar Manager -->
         <div id="sidebar_manager"> 
             <div class="left-navbar-admin-manage  vh-100 simplebar-scrollable-y "> 
                 <div class="sidebar">
@@ -139,7 +115,7 @@
                     <ul class="menu">
                         <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                         <li><a href="manageCategory.jsp"><i class="fa-solid fa-tags"></i> Category Manager</a></li>
-                        <li><a href="manageProduct.jsp"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
+                        <li><a href="MainController?action=productmanage"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
                         <li><a href="manageOrder.jsp"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
                         <li><a href="MainController?action=fishuser"><i class="fa-solid fa-fish"></i>Fish User Management</a></li>   
                         <li><a href="#"><i class="fa-solid fa-water"></i>Water Parameter Management</a></li>   

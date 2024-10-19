@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> >
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +35,7 @@
     <body>
 
         <div class="container_admin">
-            <div id="db-wrapper">
+            <div id="db-wrapper" class="flex-column">                
                 <!-- start-sidebar -->
                 <div id="sidebar_admin"></div>
                 <!-- start header -->
@@ -51,6 +52,32 @@
                                 <button id="createNewProduct">Create New Product</button> 
                             </div>
                         </div>
+                        <!--  -->
+                        <div class="row row-user-main"> 
+                            <div class="col-auto">
+                                <form class="table-search-form row gx-1 align-items-center" action="">
+                                    <div class="col-auto">
+                                        <input type="text" class="search-order" placeholder="Search..." id="searchInput" required>
+                                    </div>
+                                    <div class="col-auto contain-btn-select-order">
+                                        <select class="contain-btn-select-search" name="searchChoice" id="searchChoice" onchange="handleSearchChoice()">
+                                            <option value="name" selected>Product Name</option>
+                                            <option value="category">Category</option>
+                                            <option value="price">Price</option>
+                                        </select>
+                                    </div>
+                                    <!-- Các trường Min và Max Price được hiển thị kế bên khi chọn "Price" -->
+                                    <div class="col-auto contain-price-range" id="priceRange" style="display:none;">
+                                        <input type="number" class="search-order" id="minPrice" placeholder="Min Price" name="minPrice">
+                                        <input type="number" class="search-order" id="maxPrice" placeholder="Max Price" name="maxPrice">
+                                    </div>
+                                    <div class="col-auto contain-btn-search-order">
+                                        <button class="btn-submit-search-order" type="submit">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <!-- Product Table -->
                         <div class="table-container" id="productTableContainer">
                             <table id="productTable">
@@ -65,60 +92,80 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>#PD12387</td>
-                                        <td>Example Product</td>
-                                        <td>
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Image of Example Product" />
-                                        </td> 
-                                        <td>Category Name</td> 
-                                        <td>$19.99</td>
-                                        <td> 
-                                            <button class="edit-btn" onclick="window.location.href = 'manageProductDetails.jsp'">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button class="delete-btn">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#PD12387</td>
-                                        <td>Example Product</td>
-                                        <td>
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Image of Example Product" />
-                                        </td> 
-                                        <td>Category Name</td> 
-                                        <td>$19.99</td>
-                                        <td> 
-                                            <button class="edit-btn" onclick="window.location.href = 'manageProductDetails.jsp'">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button class="delete-btn">
-                                                <a href="#"  class="text-danger"> 
+                                    <c:forEach items="${ListP}" var="p">  
+                                        <tr>
+                                            <td>${p.productID}</td>
+                                            <td>${p.nameProduct}</td>
+                                            <td>
+                                                <img src="${p.imgProduct}" alt="Image of ${p.nameProduct}" />
+                                            </td> 
+                                            <td>${p.categoryP.categoryName}</td> 
+                                            <td>${p.price}</td>
+                                            <td> 
+                                                <button class="edit-btn" onclick="window.location.href = 'manageProductDetails.jsp?pid=${p.productID}'">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="delete-btn" onclick="deleteProduct('${p.productID}')">
                                                     <i class="fas fa-trash"></i>
-                                                </a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
 
                             <!-- Footer and Pagination -->
                             <div class="footer">
+                                <ul class="pagination">
+                                    <!-- Previous Button -->
+                                    <c:if test="${tag > 1}">
+                                        <li class="page-item">
+                                            <a href="ManageProductController?index=${tag-1}" class="page-link text-dark">
+                                                <i class="fa-solid fa-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                    </c:if>
 
-                                <div class="pagination" >
-                                    <button><a href="" class="text-dark">Previous</a></button>
-                                    <button><a href=""  class="text-dark">1</a></button>
-                                    <button><a href="" class="text-dark">Next</a></button>
-                                </div>
+                                    <!-- Display current page and next two pages (4, 5, 6) -->
+                                    <c:forEach begin="${tag}" end="${tag + 2}" var="i">
+                                        <c:if test="${i <= endPage - 3}">
+                                            <li class="page-item ${tag == i ? 'active' : ''}">
+                                                <a href="ManageProductController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                                    ${i}
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+
+                                    <!-- Display "..." if there is a gap between page 6 and (endPage - 3) -->
+                                    <c:if test="${tag + 2 < endPage - 2}">
+                                        <li class="page-item disabled">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                    </c:if>
+
+                                    <!-- Always show the last 3 pages (8, 9, 10) -->
+                                    <c:forEach begin="${endPage - 2}" end="${endPage}" var="i">
+                                        <li class="page-item ${tag == i ? 'active' : ''}">
+                                            <a href="ManageProductController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                                ${i}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+
+                                    <!-- Next Button -->
+                                    <c:if test="${tag < endPage}">
+                                        <li class="page-item">
+                                            <a href="ManageProductController?index=${tag+1}" class="page-link text-dark">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
         </div>
         <!-- Table adn new product -->
@@ -227,5 +274,18 @@
             containerAdd.classList.remove('open');
 
         });
+
+        function handleSearchChoice() {
+            const searchChoice = document.getElementById("searchChoice").value;
+            const priceRange = document.getElementById("priceRange");
+
+            if (searchChoice === "price") {
+                priceRange.style.display = "flex"; // Hiện các trường Min và Max Price kế bên
+            } else {
+                priceRange.style.display = "none"; // Ẩn khi không chọn "Price"
+            }
+        }
+
+
     </script>
 </html>

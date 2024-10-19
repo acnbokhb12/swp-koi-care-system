@@ -123,15 +123,18 @@ public class MainController extends HttpServlet {
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
                     break;
-
-                //START ACCOUNT
-                    case IConstant.FISH_USER:
+                //START ACCOUNT HAVE FISH---------------------------------------------------------------------------------
+                case IConstant.FISH_USER:
                     url = "UserFishController";
                     break;
-                         case IConstant.FISH_USER_LIST:
+                case IConstant.FISH_USER_LIST:
                     url = "FishUserListController";
+                    break; 
+                // START PLACE MANAGER -------------------------------------------------------------     
+                case IConstant.PRODUCT_MANAGE:
+                    url = "ManageProductController";
                     break;
-                // DEFAULT IF ERROR ACTION --------------------------------------------------------            
+                // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";
                     break;
