@@ -66,4 +66,5 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = "dkn16ntvy";
     public final String CLOUDINARY_API_KEY = "953513337114448";
     public final String CLOUDINARY_API_SECRET = "GDsBV9a9z9bhLx7_6SFVT40rZ8M";
+// BOtay     ko hieu kieu gi
 }
