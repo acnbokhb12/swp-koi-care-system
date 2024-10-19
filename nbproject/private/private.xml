@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FA24_Ky_5/KOISYSTEM/Main/swp-koi-care-system/web/manageFish.jsp</file>
-            <file>file:/E:/FA24_Ky_5/KOISYSTEM/Main/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/FishInforController.java</file>
-            <file>file:/E:/FA24_Ky_5/KOISYSTEM/Main/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/FishUserListController.java</file>
-            <file>file:/E:/FA24_Ky_5/KOISYSTEM/Main/swp-koi-care-system/web/manageFishUser.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/pond.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/fishInfor.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/FishDAO.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/FishService.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/fish.jsp</file>
         </group>
     </open-files>
 </project-private>
