@@ -435,7 +435,7 @@ public class ProductDAO {
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, id);
                 int rowsAffected = pst.executeUpdate();
-                isUpdated = (rowsAffected > 0); 
+                isUpdated = (rowsAffected > 0);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -451,23 +451,40 @@ public class ProductDAO {
                 e.printStackTrace();
             }
         }
-        return isUpdated; 
+        return isUpdated;
     }
 
-    public static void main(String[] args) {
-//        ProductDAO pd = new ProductDAO();
-//        ArrayList<Product> list = pd.SearchProductsByName("koi", 1); 
-//        Product p = pd.GetProductById(1);
-//        System.out.println(p);
-//        ArrayList<ProductCategory> lp = pd.GetAllCategory();
-//        ArrayList<Product> list = pd.PagingGetProductByCateId(1, 1);
-//        if (list != null) {
-//            for (Product i : list) {
-//                System.out.println(i);
-//            }
-//
-//        } else {
-//            System.out.println(list);
-//        }
+    public boolean updateProduct(Product product) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Products SET CategoryID = ?, Name = ?, Description = ?, Price = ? WHERE ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, product.getCateId());
+                pst.setString(2, product.getNameProduct());
+                pst.setString(3, product.getDescription());
+                pst.setFloat(4, product.getPrice());
+                pst.setInt(5, product.getProductID());
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }

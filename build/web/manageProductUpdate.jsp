@@ -59,7 +59,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form action="updateProductServlet" method="POST" class="form-update-details">
+                                            <form action="MainController?action=productupdate" method="POST" class="form-update-details">
                                                 <div class="details-wrapper">
                                                     <div class="detail-field">
                                                         <h1>Product ID</h1>

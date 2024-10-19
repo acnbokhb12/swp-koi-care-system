@@ -149,6 +149,9 @@ public class MainController extends HttpServlet {
                 case IConstant.PRODUCT_DELETE:
                     url = "ManagerProductDeleteController";
                     break;
+                case IConstant.PRODUCT_UPDATE:
+                    url = "ManagerProductUpdateController";
+                    break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

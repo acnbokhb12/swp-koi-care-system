@@ -136,6 +136,10 @@
         <servlet-name>ManagerProductDeleteController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerProductDeleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerProductUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductUpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -275,6 +279,10 @@
     <servlet-mapping>
         <servlet-name>ManagerProductDeleteController</servlet-name>
         <url-pattern>/ManagerProductDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductUpdateController</servlet-name>
+        <url-pattern>/ManagerProductUpdateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

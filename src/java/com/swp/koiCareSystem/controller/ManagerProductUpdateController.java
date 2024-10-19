@@ -10,7 +10,6 @@ import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class ManagerProductDeleteController extends HttpServlet {
+public class ManagerProductUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,19 +35,35 @@ public class ManagerProductDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String pid = request.getParameter("pid");
-            ProductService ps = new ProductService();
-            boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
 
-            if (isDeleted) {
-                response.sendRedirect("MainController?action="+ IConstant.PRODUCT_MANAGE);
+            String pid = request.getParameter("productID");
+            String productName = request.getParameter("productName");
+            String productDescription = request.getParameter("productDescription");
+            String productCategory = request.getParameter("productCategory");
+            String productPrice = request.getParameter("productPrice");
+
+            // Tạo đối tượng Product
+            Product product = new Product();
+            product.setProductID(Integer.parseInt(pid));
+            product.setCateId(productCategory);
+            product.setNameProduct(productName);
+            product.setDescription(productDescription);
+            product.setPrice(Float.parseFloat(productPrice));
+
+            ProductService ps = new ProductService();
+            boolean isUpdated = ps.updateProduct(product);
+
+            String url = "";
+            if (isUpdated) {
+                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION + "&pid=" + product.getProductID();
             } else {
-                request.setAttribute("errorMessage", "Failed to delete the product.");
+                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION_UPDATE;
             }
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
