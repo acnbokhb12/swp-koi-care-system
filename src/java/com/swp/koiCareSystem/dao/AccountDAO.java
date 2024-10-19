@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +21,61 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
+    private static final String SELECT_ALL_ACCOUNTS = 
+        "SELECT AccID, Email, KoiCareID, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus " + 
+        "FROM Accounts WHERE UserRole = 'customer'";
+
+
+    // Method to retrieve the list of accounts from the database
+    public ArrayList<Account> getFishAccounts() {
+        ArrayList<Account> listAccounts = new ArrayList<>();
+
+        ResultSet rs = null;
+        try {
+            Connection conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+
+                PreparedStatement ps = conn.prepareStatement(SELECT_ALL_ACCOUNTS);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("idStatus"));
+
+                    listAccounts.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listAccounts;
+    }
+
+    //================================================================
+    // TEST : GELL LIST ACCOUNT
+    public static void main(String[] args) {
+        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+
+        // Test retrieving all accounts from the database
+        ArrayList<Account> accounts = accountDAO.getFishAccounts();
+
+        // Loop through the result and print each account's details
+        for (Account account : accounts) {
+            System.out.println(account);
+        }
+    }
+
+    //================================================================
     public boolean isKoiCareIDExist(String kcid) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -395,7 +451,7 @@ public class AccountDAO {
         }
         return acc;
     }
-    
+
     public boolean updateImgByAccountID(int acid, String img) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -409,10 +465,11 @@ public class AccountDAO {
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, img);
                 pst.setInt(2, acid);
-                
+
                 int rowAffect = pst.executeUpdate();
-                if(rowAffect > 0)
+                if (rowAffect > 0) {
                     return true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -420,7 +477,7 @@ public class AccountDAO {
             e.printStackTrace();
         } finally {
             try {
-                
+
                 if (pst != null) {
                     pst.close();
                 }
@@ -433,20 +490,19 @@ public class AccountDAO {
         }
         return false;
     }
-    
-    public static void main(String[] args) {
-        AccountDAO acd = new AccountDAO();
-//        boolean c = acd.isKoiCareIDExist("rikawa1");
-//        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
-        Account acc = new Account();
-               acc.setFullName("Khánh");
-                acc.setPhoneNumber("0908765567");
-                acc.setAddress("12 đường cây keo");
-                acc.setGender("Men");
-//                acc.setKoiCareID("21212");
-                acc.setUserID(9);
-        boolean c= acd.updateAccount(acc);
-        System.out.println(c);
-    }
 
+//    public static void main(String[] args) {
+//        AccountDAO acd = new AccountDAO();
+////        boolean c = acd.isKoiCareIDExist("rikawa1");
+////        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
+//        Account acc = new Account();
+//        acc.setFullName("Khánh");
+//        acc.setPhoneNumber("0908765567");
+//        acc.setAddress("12 đường cây keo");
+//        acc.setGender("Men");
+////                acc.setKoiCareID("21212");
+//        acc.setUserID(9);
+//        boolean c = acd.updateAccount(acc);
+//        System.out.println(c);
+//    }
 }

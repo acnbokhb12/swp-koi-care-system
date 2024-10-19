@@ -112,6 +112,18 @@
         <servlet-name>DeletePondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserFishController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.UserFishController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishUserListController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishUserListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -224,14 +236,23 @@
         <servlet-name>DeletePondController</servlet-name>
         <url-pattern>/DeletePondController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/AccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserFishController</servlet-name>
+        <url-pattern>/UserFishController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishUserListController</servlet-name>
+        <url-pattern>/FishUserListController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>MainController</welcome-file>
-    </welcome-file-list>
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>
     </welcome-file-list>

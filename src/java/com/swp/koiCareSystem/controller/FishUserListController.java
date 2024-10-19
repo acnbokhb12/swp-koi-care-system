@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
- 
+
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Fish; 
+import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
+import com.swp.koiCareSystem.service.AccountService;
 import com.swp.koiCareSystem.service.FishService;
 import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PC
  */
-public class FishInforController extends HttpServlet {
+public class FishUserListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +39,53 @@ public class FishInforController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if(acc == null){
-                response.sendRedirect("home.jsp"); 
-            }else{ 
-                int id = Integer.parseInt(request.getParameter("fid")); 
-                FishService fins = new FishService();
-                Fish fin = fins.GetFishInforByIDS(id);
-                
-                
-                
-                PondService psv = new  PondService(); 
-                
-                ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
-                Pond pondOfFish = psv.getPondOfFishByPondId(fin.getPondID());
-                
-                request.setAttribute("fish", fin);
-                request.setAttribute("pondFish", pondOfFish);
-                request.setAttribute("ListPond", listP);
-                request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-            }
-             
 
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("userAccount");
+
+        // Check if the user is logged in
+        if (acc == null) {
+            response.sendRedirect("home.jsp");
+            return;
+        }
+
+        // Get user fish ID from request parameter
+        String userFishIdStr = request.getParameter("userfishid");
+
+        // Validate the fish ID
+        if (userFishIdStr == null || userFishIdStr.isEmpty()) {
+            request.setAttribute("error", "Fish ID is required");
+            request.getRequestDispatcher("manageFish.jsp").forward(request, response);
+            return;
+        }
+
+        try {
+            int id = Integer.parseInt(userFishIdStr);
+
+            // Get fish data for the logged-in user
+            FishService fishService = new FishService();
+            Fish fish = fishService.GetFishInforByIDS(id);
+
+            if (fish == null) {
+                // Handle the case where no fish is found with the given ID
+                request.setAttribute("error", "No fish found with the provided ID");
+                request.getRequestDispatcher("manageFish.jsp").forward(request, response);
+                return;
+            }
+
+            // Set the fish object as a request attribute
+            request.setAttribute("fish", fish);
+
+            // Forward the request to the JSP page
+            request.getRequestDispatcher("manageFish.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            // Handle the case where the ID is not a valid integer
+            request.setAttribute("error", "Invalid Fish ID format");
+            request.getRequestDispatcher("manageFish.jsp").forward(request, response);
+        }
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

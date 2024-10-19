@@ -4,12 +4,9 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
- 
+
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Fish; 
-import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.service.FishService;
-import com.swp.koiCareSystem.service.PondService;
+import com.swp.koiCareSystem.service.AccountService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PC
  */
-public class FishInforController extends HttpServlet {
+public class UserFishController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,38 +30,32 @@ public class FishInforController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+         */
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if(acc == null){
-                response.sendRedirect("home.jsp"); 
-            }else{ 
-                int id = Integer.parseInt(request.getParameter("fid")); 
-                FishService fins = new FishService();
-                Fish fin = fins.GetFishInforByIDS(id);
-                
-                
-                
-                PondService psv = new  PondService(); 
-                
-                ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
-                Pond pondOfFish = psv.getPondOfFishByPondId(fin.getPondID());
-                
-                request.setAttribute("fish", fin);
-                request.setAttribute("pondFish", pondOfFish);
-                request.setAttribute("ListPond", listP);
-                request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-            }
-             
+               HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("userAccount");
 
+        if (acc == null ) {  
+            response.sendRedirect("home.jsp");
+            return; 
         }
-    }
 
+        AccountService accountService = new AccountService();
+        ArrayList<Account> listAccounts = accountService.GetFishAccountsS();
+
+        if (listAccounts != null && !listAccounts.isEmpty()) {
+            request.setAttribute("listAccounts", listAccounts);
+        } else {
+            request.setAttribute("errorMessage", "No accounts found.");
+        }
+
+        request.getRequestDispatcher("manageFishUser.jsp").forward(request, response);
+    }
+     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

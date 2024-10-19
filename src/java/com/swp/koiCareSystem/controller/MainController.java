@@ -45,14 +45,14 @@ public class MainController extends HttpServlet {
                 case IConstant.HOME:
                     url = "home.jsp";
                     break;
-        // START PLACE SHOP -------------------------------------------------------------                                     
+                // START PLACE SHOP -------------------------------------------------------------                                     
                 case IConstant.SHOP:
                     url = "ManageShopController";
                     break;
                 case IConstant.PRODUCTDETAIL:
                     url = "ProductDetailController";
                     break;
-        // START PLACE LOGIN-REGISTER-LOGOUT -------------------------------------------------------------                        
+                // START PLACE LOGIN-REGISTER-LOGOUT -------------------------------------------------------------                        
                 case IConstant.LOGIN:
                     url = "LoginController";
                     break;
@@ -62,7 +62,7 @@ public class MainController extends HttpServlet {
                 case IConstant.LOGOUT:
                     url = "LogoutController";
                     break;
-        // START PLACE PROFILE -------------------------------------------------------------                                         
+                // START PLACE PROFILE -------------------------------------------------------------                                         
                 case IConstant.PROFILE_JSP:
                     url = "profilePage.jsp";
                     break;
@@ -78,14 +78,14 @@ public class MainController extends HttpServlet {
                 case IConstant.UP_IMG_SINGLE:
                     url = "ImageUploadSingleController";
                     break;
-        // START PLACE BLOG -------------------------------------------------------------                                                     
+                // START PLACE BLOG -------------------------------------------------------------                                                     
                 case IConstant.BLOG:
                     url = "ManageBlogController";
                     break;
                 case IConstant.GET_BLOG_CID:
                     url = "GetBlogsByCateIdController";
                     break;
-        // START PLACE FISH -------------------------------------------------------------    
+                // START PLACE FISH -------------------------------------------------------------    
                 case IConstant.FISH:
                     url = "FishController";
                     break;
@@ -103,8 +103,8 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.FISH_IMAGE_UPDATE:
                     url = "FishImageUpdateController";
-                    break; 
-        // START PLACE POND -------------------------------------------------------------     
+                    break;
+                // START PLACE POND -------------------------------------------------------------     
                 case IConstant.POND:
                     url = "PondController";
                     break;
@@ -123,7 +123,15 @@ public class MainController extends HttpServlet {
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
                     break;
-        // DEFAULT IF ERROR ACTION --------------------------------------------------------            
+
+                //START ACCOUNT
+                    case IConstant.FISH_USER:
+                    url = "UserFishController";
+                    break;
+                         case IConstant.FISH_USER_LIST:
+                    url = "FishUserListController";
+                    break;
+                // DEFAULT IF ERROR ACTION --------------------------------------------------------            
                 default:
                     url = "home.jsp";
                     break;
