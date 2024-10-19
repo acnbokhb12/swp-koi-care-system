@@ -141,7 +141,7 @@
                         <li><a href="manageCategory.jsp"><i class="fa-solid fa-tags"></i> Category Manager</a></li>
                         <li><a href="manageProduct.jsp"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
                         <li><a href="manageOrder.jsp"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
-                        <li><a href="manageFish.jsp"><i class="fa-solid fa-fish"></i>Fish Management</a></li>   
+                        <li><a href="MainController?action=fishuser"><i class="fa-solid fa-fish"></i>Fish User Management</a></li>   
                         <li><a href="#"><i class="fa-solid fa-water"></i>Water Parameter Management</a></li>   
                     </ul>
                 </div>

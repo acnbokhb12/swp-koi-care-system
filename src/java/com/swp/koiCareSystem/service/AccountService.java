@@ -19,6 +19,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
@@ -29,6 +30,13 @@ import org.apache.http.client.fluent.Request;
 public class AccountService {
 
     private final AccountDAO acd = new AccountDAO();
+    
+    
+        // Get all fish for the specific account ID
+    public ArrayList<Account> GetFishAccountsS() {
+        return acd.getFishAccounts();
+
+}
 
     public String hashPassword(String password) {
         String salt = "salt";
