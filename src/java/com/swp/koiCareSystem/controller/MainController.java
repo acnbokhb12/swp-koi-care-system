@@ -91,7 +91,7 @@ public class MainController extends HttpServlet {
                 case IConstant.DELET_BLOG:
                     url = "DeleteBlogController";
                     break;
-        // START PLACE FISH -------------------------------------------------------------  
+                // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";
                     break;
@@ -135,10 +135,13 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.FISH_USER_LIST:
                     url = "FishUserListController";
-                    break; 
+                    break;
                 // START PLACE MANAGER -------------------------------------------------------------     
                 case IConstant.PRODUCT_MANAGE:
                     url = "ManageProductController";
+                    break;
+                case IConstant.PRODUCT_INFORMATION:
+                    url = "ManagerProductInformationController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/pond.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/ProductDAO.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/fishInfor.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/FishUserListController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/ProductService.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/FishController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/home.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/FishDAO.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/BlogService.java</file>
+            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/model/Account.java</file>
+            <file>file:/D:/GitHubGroup5/swp-koi-care-system/web/manageProductDetails.jsp</file>
+            <file>file:/D:/GitHubGroup5/swp-koi-care-system/web/manageProduct.jsp</file>
+            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
+            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManagerProductInformationController.java</file>
+            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
         </group>
     </open-files>
 </project-private>

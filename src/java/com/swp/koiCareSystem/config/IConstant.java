@@ -48,7 +48,7 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
-  // START ACCOUNT ---------------------------------------------------------------------------------------------------------------------------------------
+    // START ACCOUNT ---------------------------------------------------------------------------------------------------------------------------------------
     public final String FISH_USER = "fishuser";
     public final String FISH_USER_LIST = "fishuserlist";
 
@@ -61,6 +61,7 @@ public interface IConstant {
 
 // START MANAGER ----------------------------------------------------------------------------------------------------------------------------------     
     public static String PRODUCT_MANAGE = "productmanage";
+    public static String PRODUCT_INFORMATION = "productinformation";
 
 // GOOGLE LOGIN ----------------------------------------------------------------------------------------------------------------------------------
     public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";

@@ -102,7 +102,7 @@
                                             <td>${p.categoryP.categoryName}</td> 
                                             <td>${p.price}</td>
                                             <td> 
-                                                <button class="edit-btn" onclick="window.location.href = 'manageProductDetails.jsp?pid=${p.productID}'">
+                                                <button class="edit-btn" onclick="window.location.href = 'MainController?action=productinformation&pid=${p.productID}'">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button class="delete-btn" onclick="deleteProduct('${p.productID}')">
