@@ -237,10 +237,10 @@ public class ProductDAO {
                 pst.setInt(1, cateId);
                 pst.setInt(2, distance);
                 rs = pst.executeQuery();
-                if (rs != null && rs.next()) { 
-                    
+                if (rs != null && rs.next()) {
+
                     listP = new ArrayList<>();
-                    do{
+                    do {
                         Product pd = new Product();
                         ProductCategory pdct = new ProductCategory(rs.getInt(8), rs.getString(9));
                         pd.setProductID(rs.getInt(1));
@@ -251,7 +251,7 @@ public class ProductDAO {
                         pd.setIsActive(rs.getBoolean(7));
                         pd.setCategoryP(pdct);
                         listP.add(pd);
-                    }while(rs.next()) ;
+                    } while (rs.next());
                 }
             }
         } catch (Exception e) {
@@ -372,22 +372,72 @@ public class ProductDAO {
         return pd;
     }
 
+    public ArrayList<Product> GetProducts(int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Product> listP = new ArrayList<>();
+        int distance = (index - 1) * 20;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID  \n"
+                        + "	where p.isActive =1\n"
+                        + "                                    order by ProductID  \n"
+                        + "                           offset ? rows fetch next 20 rows only;";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, distance);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        Product pd = new Product();
+                        ProductCategory pdct = new ProductCategory(rs.getInt(8), rs.getString(9));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
+                        pd.setIsActive(rs.getBoolean(7));
+                        pd.setCategoryP(pdct);
+                        listP.add(pd);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listP;
+    }
+
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
 //        ArrayList<Product> list = pd.SearchProductsByName("koi", 1);
-        ArrayList<Product> list = pd.GetProductsByCateId(10,1);
+        ArrayList<Product> list = pd.GetProducts(1);
 //        Product p = pd.GetProductById(1);
 //        System.out.println(p);
 //        ArrayList<ProductCategory> lp = pd.GetAllCategory();
 //        ArrayList<Product> list = pd.PagingGetProductByCateId(1, 1);
-        if(list!=null){
-        for (Product i : list) {
-            System.out.println(i);
-        }
-            
-        }else{
+        if (list != null) {
+            for (Product i : list) {
+                System.out.println(i);
+            }
+
+        } else {
             System.out.println(list);
         }
-            
     }
 }

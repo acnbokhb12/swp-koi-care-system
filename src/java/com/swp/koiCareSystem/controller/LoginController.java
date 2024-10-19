@@ -76,11 +76,11 @@ public class LoginController extends HttpServlet {
                 switch (role) {
                     case "admin":
                         session.setAttribute("userAccount", account);
-                        response.sendRedirect("manageUser.jsp");
+                        response.sendRedirect("manageAccount.jsp");
                         break;
                     case "manager":
                         session.setAttribute("userAccount", account);
-                        response.sendRedirect("manageProduct.jsp");
+                        response.sendRedirect("MainController?action=productmanage");
                        break;
                     default:
                         session.setAttribute("userAccount", account);

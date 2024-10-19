@@ -112,6 +112,10 @@
         <servlet-name>DeletePondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageProductController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManageProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>DeletePondController</servlet-name>
         <url-pattern>/DeletePondController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageProductController</servlet-name>
+        <url-pattern>/ManageProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -17,42 +17,48 @@ import java.util.Collections;
  * @author DELL
  */
 public class ProductService {
-    private ProductDAO productDAO ;
-    
-    public ProductService(){
+
+    private ProductDAO productDAO;
+
+    public ProductService() {
         productDAO = new ProductDAO();
     }
-    
-    public int CountAllProduct(){ 
+
+    public int CountAllProduct() {
         return productDAO.CountProducts();
-    } 
-    
-    public int CountProductsByCate(int cateId){ 
+    }
+
+    public int CountProductsByCate(int cateId) {
         return productDAO.CountProductsByCate(cateId);
     }
-    
-    public int CountProductsByName(String name){ 
+
+    public int CountProductsByName(String name) {
         return productDAO.CountProductsByName(name);
     }
-    
-    public ArrayList<Product> GetAllProducts(int index){
-        ArrayList<Product> list = productDAO.GetAllProducts(index);  
+
+    public ArrayList<Product> GetAllProducts(int index) {
+        ArrayList<Product> list = productDAO.GetAllProducts(index);
         return list;
     }
-    
-    public ArrayList<ProductCategory> GetAllProductCate(){ 
-        return  productDAO.GetAllCategory();
-    } 
-    
-    public ArrayList<Product> GetProductsByCateId(int cateId, int index){ 
+
+    public ArrayList<ProductCategory> GetAllProductCate() {
+        return productDAO.GetAllCategory();
+    }
+
+    public ArrayList<Product> GetProductsByCateId(int cateId, int index) {
         return productDAO.GetProductsByCateId(cateId, index);
-    } 
-    
-    public ArrayList<Product> SearchProductsByName(String name, int index){ 
+    }
+
+    public ArrayList<Product> SearchProductsByName(String name, int index) {
         return productDAO.SearchProductsByName(name, index);
     }
-    
-    public Product GetProductById(int id){
-       return productDAO.GetProductById(id);
+
+    public Product GetProductById(int id) {
+        return productDAO.GetProductById(id);
+    }
+
+    public ArrayList<Product> GetProducts(int index) {
+        ArrayList<Product> list = productDAO.GetProducts(index);
+        return list;
     }
 }

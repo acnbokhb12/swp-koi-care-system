@@ -123,6 +123,10 @@ public class MainController extends HttpServlet {
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
                     break;
+        // START PLACE MANAGER -------------------------------------------------------------     
+                case IConstant.PRODUCT_MANAGE:
+                    url = "ManageProductController";
+                    break;
         // DEFAULT IF ERROR ACTION --------------------------------------------------------            
                 default:
                     url = "home.jsp";
