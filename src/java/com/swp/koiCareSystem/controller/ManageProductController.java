@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,6 +36,14 @@ public class ManageProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
+
+            if (acc == null) {
+                response.sendRedirect("home.jsp");
+                return;
+            }
+            
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";

@@ -423,6 +423,37 @@ public class ProductDAO {
         return listP;
     }
 
+    public boolean deleteProduct(int id) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        boolean isUpdated = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Products SET isActive = 0 WHERE ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, id);
+                int rowsAffected = pst.executeUpdate();
+                isUpdated = (rowsAffected > 0); 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isUpdated; 
+    }
+
     public static void main(String[] args) {
 //        ProductDAO pd = new ProductDAO();
 //        ArrayList<Product> list = pd.SearchProductsByName("koi", 1); 

@@ -43,7 +43,7 @@
                             <h2>Product Information</h2>
                             <div class="button-group">
                                 <a href="MainController?action=productinformationupdate&pid=${Product.productID}" class="btn btn-primary" id="updateButton">Update Product</a>
-                                <a href="#" class="btn btn-danger" id="deleteButton">Delete</a>
+                                <a href="MainController?action=productdelete&pid=${Product.productID}" class="btn btn-danger" id="deleteButton">Delete</a>
                             </div>
                         </div>
                         <div class="details-section">

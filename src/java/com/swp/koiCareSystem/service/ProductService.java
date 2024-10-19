@@ -61,4 +61,8 @@ public class ProductService {
         ArrayList<Product> list = productDAO.getProducts(index);
         return list;
     }
+
+    public boolean deleteProduct(int id) {
+        return productDAO.deleteProduct(id);
+    }
 }

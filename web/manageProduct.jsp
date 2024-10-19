@@ -102,12 +102,12 @@
                                             <td>${p.categoryP.categoryName}</td> 
                                             <td>${p.price}</td>
                                             <td> 
-                                                <button class="edit-btn" onclick="window.location.href = 'MainController?action=productinformation&pid=${p.productID}'">
+                                                <a href="MainController?action=productinformation&pid=${p.productID}" class="edit-btn">
                                                     <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="delete-btn" onclick="deleteProduct('${p.productID}')">
+                                                </a>
+                                                <a href="MainController?action=productdelete&pid=${p.productID}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this product?');">
                                                     <i class="fas fa-trash"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     </c:forEach>

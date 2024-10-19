@@ -5,23 +5,21 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-public class ManagerProductInformationController extends HttpServlet {
+public class ManagerProductDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,30 +35,15 @@ public class ManagerProductInformationController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-                return;
-            }
-
             String pid = request.getParameter("pid");
-            if (pid == null) {
-                pid = "1";
-            }
-            int id = Integer.parseInt(pid);
+            ProductService ps = new ProductService();
+            boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
 
-            ProductService pds = new ProductService();
-            Product pd = pds.getProductById(id);
-            String url = "";
-            if (pd != null) {
-                request.setAttribute("Product", pd);
-                url = "manageProductDetails.jsp";
+            if (isDeleted) {
+                response.sendRedirect("MainController?action=productmanage");
             } else {
-                url = "MainController?action=" + IConstant.PRODUCT_MANAGE;
+                request.setAttribute("errorMessage", "Failed to delete the product.");
             }
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
