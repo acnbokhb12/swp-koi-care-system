@@ -42,7 +42,7 @@
             <div class="tilte-fish container">
                 <h1>Fish Information</h1>
                 <div class="text-right">
-                    <a href="MainCon?action=fish" class="back-btn">Back to List</a>
+                    <a href="MainController?action=fish" class="back-btn">Back to List</a>
                     <a href="#" data-fishid="${fish.fishID}" data-fishname="${fish.fishName}" data-pondid="${fish.pondID}" class="delete-btn-fish" data-toggle="modal" data-target="#myModal">Delete</a>                
                     <button class="edit-btn-out">Edit Information</button>
                 </div>

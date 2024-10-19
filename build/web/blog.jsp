@@ -97,26 +97,20 @@
             <div class="sidebar col-md-4">
                 <div class="create-sidebar">
                     <div class="create-post">
-                        <form action=""  enctype="multipart/form-data"> 
+                        <form action="MainController?action=createNewBlog" method="post" enctype="multipart/form-data"> 
                         <h2 class="text-dark">Create New Post</h2>
-                        <input type="text" placeholder="Title">
-                        <textarea placeholder="Content"></textarea>
+                        <input type="text" placeholder="Title" name="title">
+                        <textarea placeholder="Content" name="content"></textarea>
                         <!-- <div class="upload-image">Upload Image<br>PNG, JPG, GIF up to 10MB</div> -->
-                        <img id="imagePreview" class="img_to_upload" src="https://t4.ftcdn.net/jpg/05/75/48/57/360_F_575485756_WSQ6ZzqMhD0JnPcEupxyKikKKCE5p5jo.jpg" alt="">
+                        <img id="imagePreview" class="img_to_upload" src="" alt="">
                         <input id="imageInput" type="file" accept="img/*" >
                         <h5>Select a category</h5>
-                        <select> 
-                            
-                            <option>Koi Pond Maintenance</option>
-                            <option>Koi Fish Health</option>
-                            <option>Koi Breeding</option>
-                            <option>Koi Varieties and Selection</option>
-                            <option>Koi Competitions and Exhibitions</option>
-                            <option>Koi Pond DIY Projects</option>
-                            <option>Personal Koi Stories</option>
-                            <option>Koi Culture and History</option>
+                        <select name="blogCategoryId=${id}">
+                            <c:forEach var="category" items="${ListBC}">
+                                <option value="${category.id}">${category.nameCategory}</option>
+                            </c:forEach>
                         </select>
-                        <button  type="submit">
+                        <button type="submit">
                             <h4>Create Post</h4>
                         </button>
                         </form>

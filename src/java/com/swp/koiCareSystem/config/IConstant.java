@@ -52,6 +52,8 @@ public interface IConstant {
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
     public static String GET_BLOG_CID = "getBlogCid";
+    public static String CREATE_NEW_BLOG = "createNewBlog";
+    public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
   
 // GOOGLE LOGIN ----------------------------------------------------------------------------------------------------------------------------------
