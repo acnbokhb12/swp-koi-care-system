@@ -52,8 +52,9 @@
                                                 <div class="img-detail-field">
                                                     <h3>Upload New Image</h3>
                                                     <div class="file-upload-container">
-                                                        <form action="uploadProductImageServlet" method="POST" enctype="multipart/form-data" class="form-image-upload">
-                                                            <input type="file" id="fishImage" name="fishImage" accept="image/*" required style="width: 100%;" />
+                                                        <form action="MainController?action=productimgageupdate" method="POST" enctype="multipart/form-data" class="form-image-upload">
+                                                            <input type="hidden" id="productID" name="productID" value="${Product.productID}" />
+                                                            <input type="file" id="productImage" name="fileimg" accept="image/*" required style="width: 100%;" />
                                                             <button type="submit" class="btn btn-upload">Submit</button>  
                                                         </form>
                                                     </div>

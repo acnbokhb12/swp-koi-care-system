@@ -65,8 +65,12 @@ public class ProductService {
     public boolean deleteProduct(int id) {
         return productDAO.deleteProduct(id);
     }
-    
+
     public boolean updateProduct(Product p) {
         return productDAO.updateProduct(p);
+    }
+
+    public boolean updateImgAccountById(int id, String imgLink) {
+        return productDAO.updateImgByProductID(id, imgLink);
     }
 }

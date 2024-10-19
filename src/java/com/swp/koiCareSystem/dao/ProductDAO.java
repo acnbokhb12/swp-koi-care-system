@@ -487,4 +487,36 @@ public class ProductDAO {
         }
         return false;
     }
+
+    public boolean updateImgByProductID(int productId, String img) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Products SET Image = ? WHERE ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, img);
+                pst.setInt(2, productId);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 }

@@ -6,20 +6,23 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.service.ImageUploadService;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ASUS
  */
-public class ManagerProductUpdateController extends HttpServlet {
+@MultipartConfig
+public class ManagerProductImageUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,35 +38,34 @@ public class ManagerProductUpdateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            int productId = Integer.parseInt(request.getParameter("productID"));
+            Part filePart = request.getPart("fileimg");
+            String tempDir = getServletContext().getRealPath("/") + "uploads";
 
-            String pid = request.getParameter("productID");
-            String productName = request.getParameter("productName");
-            String productDescription = request.getParameter("productDescription");
-            String productCategory = request.getParameter("productCategory");
-            String productPrice = request.getParameter("productPrice");
+            ImageUploadService imgs = new ImageUploadService();
+            String imageUrl = "";
+            try {
+                imageUrl = imgs.uploadImage(filePart, tempDir);
+                System.out.println(imageUrl);
 
-            // Tạo đối tượng Product
-            Product product = new Product();
-            product.setProductID(Integer.parseInt(pid));
-            product.setCateId(productCategory);
-            product.setNameProduct(productName);
-            product.setDescription(productDescription);
-            product.setPrice(Float.parseFloat(productPrice));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             ProductService ps = new ProductService();
-            boolean isUpdated = ps.updateProduct(product);
+            boolean isUpdated = ps.updateImgAccountById(productId, imageUrl);
 
             String url = "";
             if (isUpdated) {
-                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION + "&pid=" + product.getProductID();
+                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION + "&pid=" + productId;
             } else {
-                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION_UPDATE+ "&pid=" + product.getProductID();
+                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION_UPDATE + "&pid=" + productId;
             }
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
