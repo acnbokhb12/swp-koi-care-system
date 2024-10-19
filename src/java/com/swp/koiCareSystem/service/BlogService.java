@@ -8,6 +8,11 @@ package com.swp.koiCareSystem.service;
 import com.swp.koiCareSystem.dao.BlogDAO;
 import com.swp.koiCareSystem.model.Blog;
 import com.swp.koiCareSystem.model.BlogCategory;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -43,5 +48,28 @@ public class BlogService {
     
     public ArrayList<Blog> pagingCount(int index){
         return blogDAO.pagingCount(index);
+    }
+    
+    public boolean createNewBlog(Blog newBlog){
+        LocalDate currentDate = LocalDate.now();
+        
+        Date utilDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        System.out.println(utilDate);
+        
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
+        newBlog.setBlogDate(sqlDate);
+        return blogDAO.createNewBlog(newBlog);
+    }
+    
+    public static void main(String[] args) {
+        Blog b = new Blog();
+        BlogDAO dao = new BlogDAO();
+        LocalDate currentDate = LocalDate.now();
+        
+        Date utilDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        System.out.println(sqlDate);
     }
 }

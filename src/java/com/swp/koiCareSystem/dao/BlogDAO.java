@@ -10,6 +10,8 @@ import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Blog;
 import com.swp.koiCareSystem.model.BlogCategory;
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.Calendar;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,12 +22,13 @@ import java.util.ArrayList;
  */
 public class BlogDAO {
 
-    Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+    
 
     //đếm số lượng blog trong db
     public int countBlog() {
+        Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         String sql = "select count(*) from Blogs";
         try {
             c = DatabaseConnectionManager.getConnection();
@@ -40,6 +43,9 @@ public class BlogDAO {
     }
 
     public int countBlogByCate(int IDBlogCate) {
+        Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         try {
             c = DatabaseConnectionManager.getConnection();
             if (c != null) {
@@ -79,7 +85,9 @@ public class BlogDAO {
 ////        ArrayList
 //    }
     public ArrayList<Blog> getAllBlogs(int index) {
-
+Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         ArrayList<Blog> listB = new ArrayList<>();
         int distance = (index - 1) * 8;
         try {
@@ -138,7 +146,9 @@ public class BlogDAO {
     }
 
     public ArrayList<BlogCategory> getAllBlogCategory() {
-
+Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         ArrayList<BlogCategory> listBC = new ArrayList<>();
         try {
             c = DatabaseConnectionManager.getConnection();
@@ -173,7 +183,9 @@ public class BlogDAO {
     }
 
     public ArrayList<Blog> getBlogByCateId(int catBlogId, int index) {
-
+Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         ArrayList<Blog> listB = new ArrayList<>();
         int distance = (index - 1) * 5;
         try {
@@ -225,6 +237,9 @@ public class BlogDAO {
     }
 
     public ArrayList<Blog> getBlogsByCateId(String cid, int index) {
+        Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         ArrayList<Blog> listB = new ArrayList<>();
         int distance = (index - 1) * 8;
         try {
@@ -277,6 +292,9 @@ public class BlogDAO {
     }
 
     public int countBlogByCateId(String cid) {
+        Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         try {
             c = DatabaseConnectionManager.getConnection();
             if (c != null) {
@@ -309,6 +327,9 @@ public class BlogDAO {
     }
 
     public ArrayList<Blog> pagingCount(int index) {
+        Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         ArrayList<Blog> list = new ArrayList<>();
 
         String sql = "select b.BlogID, b.AccID, acc.FullName, acc.UserImage, b.BlogsDate, b.BlogsImage, b.Title, b.Content, b.IDBlogCate, ctb.NameBlogCate \n"
@@ -359,29 +380,29 @@ public class BlogDAO {
         return list;
     }
 
-    public boolean createNewBlog(Blog b) {
-        boolean checkInsert = false;
+    public boolean createNewBlog(Blog newBlog) {
+        Connection c = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
         try {
             c = DatabaseConnectionManager.getConnection();
-            if (c != null) {
-                String sql = "insert into Blogs(AccID, IDBlogCate, Title, Content, BlogsImage, BlogsDate) "
-                        + "values (?, ?, ?, ?, ?, ?, ?)";
-                ps = c.prepareStatement(sql);
-                ps.setInt(1, b.getBlogID());
-                ps.setInt(2, b.getBlogCateId());
-                ps.setString(3, b.getTitle());
-                ps.setString(4, b.getContent());
-                ps.setString(5, b.getBlogImage());
-                ps.setDate(6, b.getBlogDate());
-                checkInsert = ps.executeUpdate() > 0 ? true : false;
-            }
+            String sql = "INSERT INTO Blogs (AccID, IDBlogCate, Title, Content, BlogsImage, BlogsDate) VALUES (?, ?, ?, ?, ?, ?)";
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, newBlog.getUserID() );
+            ps.setInt(2, newBlog.getBlogCateId());
+            ps.setString(3, newBlog.getTitle());
+            ps.setString(4, newBlog.getContent());
+            ps.setString(5, newBlog.getBlogImage());
+            ps.setDate(6, newBlog.getBlogDate());
+            
+
+            // Execute the update
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (ps != null) {
                     ps.close();
                 }
@@ -392,11 +413,24 @@ public class BlogDAO {
                 e.printStackTrace();
             }
         }
-        return checkInsert;
+        return false; 
     }
 
     public static void main(String[] args) {
         BlogDAO blogDAO = new BlogDAO();
+        
+//        Blog newBlog = new Blog();
+//        newBlog.setUserID(1);  // Set a sample user ID
+//        newBlog.setBlogCateId(2);  // Set a sample Blog Category ID
+//        newBlog.setTitle("My New Blog Post");
+//        newBlog.setContent("This is the content of my new blog post.");
+//        newBlog.setBlogImage("image1.png");  // Sample blog image
+//        newBlog.setBlogDate(new java.sql.Date(System.currentTimeMillis()));  // Set current date
+//
+//        // Test the createNewBlog() method
+//        boolean isCreated = blogDAO.createNewBlog(newBlog);
+//
+//        System.out.println(newBlog);
 //        ArrayList<BlogCategory> b = blogDAO.getAllBlogCategory();
         //ArrayList<Blog> list = blogDAO.SearchBlogByCateName("2", 1);
 //        ArrayList<Blog> list = blogDAO.pagingCount(2);

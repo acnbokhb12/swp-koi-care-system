@@ -85,7 +85,13 @@ public class MainController extends HttpServlet {
                 case IConstant.GET_BLOG_CID:
                     url = "GetBlogsByCateIdController";
                     break;
-                // START PLACE FISH -------------------------------------------------------------    
+                case IConstant.CREATE_NEW_BLOG:
+                    url = "CreateNewBlogController";
+                    break;
+                case IConstant.DELET_BLOG:
+                    url = "DeleteBlogController";
+                    break;
+        // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";
                     break;
