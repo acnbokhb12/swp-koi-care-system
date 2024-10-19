@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,9 +46,9 @@
                                     <div class="form-container">
                                         <div class="form-wrapper">
                                             <div class="product-image-upload">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdTvpksqwVza-WmPCNDXK-T00gAIh3cSUIYg&s" 
-                                                alt="Product Image" 
-                                                class="product-image-update"/> 
+                                                <img src="${Product.imgProduct}" 
+                                                     alt="${Product.nameProduct}" 
+                                                     class="product-image-update"/> 
                                                 <div class="img-detail-field">
                                                     <h3>Upload New Image</h3>
                                                     <div class="file-upload-container">
@@ -63,33 +63,34 @@
                                                 <div class="details-wrapper">
                                                     <div class="detail-field">
                                                         <h1>Product ID</h1>
-                                                        <input type="text" id="productID" name="productID" value="12345" readonly style="width: 100%;" />
+                                                        <input type="text" id="productID" name="productID" value="${Product.productID}" readonly style="width: 100%;" />
                                                     </div>
                                                     <div class="detail-field">
                                                         <h1>Product Name:</h1>
-                                                        <input type="text" id="productName" name="productName" value="Koi Food" required style="width: 100%;" />
+                                                        <input type="text" id="productName" name="productName" value="${Product.nameProduct}" required style="width: 100%;" />
                                                     </div>
                                                     <div class="detail-field">
                                                         <h1>Description:</h1>
-                                                        <textarea id="productDescription" name="productDescription" class="description-text" required style="width: 100%; height: 100px;"></textarea>
+                                                        <input type="text" id="productDescription" name="productDescription" value="${Product.description}" required style="width: 100%;" />
                                                     </div>
                                                     <div class="detail-field">
-                                                        <h1>Category:</h1>
+                                                        <h5>Select a category</h5>
                                                         <select id="productCategory" name="productCategory" required style="width: 100%;">
-                                                            <option value="Food" selected>Food</option>
-                                                            <option value="Accessories">Accessories</option>
-                                                            <option value="Equipment">Equipment</option>
-                                                            <option value="Maintenance">Maintenance</option>
+                                                            <c:forEach items="${ListC}" var="ct">
+                                                                <option value="${ct.categoryID}" ${Product.categoryP.categoryID == ct.categoryID ? 'selected' : ''}>
+                                                                    ${ct.categoryName}
+                                                                </option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                     <div class="detail-field">
                                                         <h1>Product Price:</h1>
-                                                        <input type="text" id="productPrice" name="productPrice" value="$20.00" required style="width: 100%;" />
+                                                        <input type="text" id="productPrice" name="productPrice" value="${Product.price}" required style="width: 100%;" />
                                                     </div>
                                                 </div>
                                                 <div class="action-buttons">
                                                     <button type="submit" class="btn btn-save">Submit</button>
-                                                    <a href="manageProductDetails.jsp" class="btn btn-cancel">Cancel</a>
+                                                    <a href="MainController?action=productinformation&pid=${Product.productID}" class="btn btn-cancel">Cancel</a>
                                                 </div>
                                             </form>
                                         </div> 
@@ -99,12 +100,13 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    $('#header').load('utils.jsp #header_admin', () => {
+                        $.getScript('./assets/js/utilsAdmin.js');
+                    });
+                    $('#sidebar_admin').load('utils.jsp #sidebar_manager');
+                </script>
             </div>
-            <script>
-                $('#header').load('utils.jsp #header_admin', () => {
-                    $.getScript('./assets/js/utilsAdmin.js');
-                });
-                $('#sidebar_admin').load('utils.jsp  #sidebar_manager');
-            </script>
+        </div>
     </body>
 </html>

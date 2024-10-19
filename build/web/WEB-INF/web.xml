@@ -128,6 +128,10 @@
         <servlet-name>ManagerProductInformationController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerProductInformationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerProductInformationUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductInformationUpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -259,6 +263,10 @@
     <servlet-mapping>
         <servlet-name>ManagerProductInformationController</servlet-name>
         <url-pattern>/ManagerProductInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductInformationUpdateController</servlet-name>
+        <url-pattern>/ManagerProductInformationUpdateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

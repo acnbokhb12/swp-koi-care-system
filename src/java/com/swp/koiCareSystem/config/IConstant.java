@@ -62,6 +62,9 @@ public interface IConstant {
 // START MANAGER ----------------------------------------------------------------------------------------------------------------------------------     
     public static String PRODUCT_MANAGE = "productmanage";
     public static String PRODUCT_INFORMATION = "productinformation";
+    public static String PRODUCT_INFORMATION_UPDATE = "productinformationupdate";
+    public static String PRODUCT_UPDATE = "productupdate";
+    public static String PRODUCT_DELETE = "productdelete";
 
 // GOOGLE LOGIN ----------------------------------------------------------------------------------------------------------------------------------
     public static final String GOOGLE_CLIENT_ID = "826453818267-omsh2s4t4ab4rs6eijvgop9bokm52v9q.apps.googleusercontent.com";
