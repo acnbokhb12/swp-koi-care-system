@@ -48,8 +48,8 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
   // START ACCOUNT 
-        public final String FISH_USER = "fishuser";
-                public final String FISH_USER_LIST = "fishuserlist";
+    public final String FISH_USER = "fishuser";
+    public final String FISH_USER_LIST = "fishuserlist";
 
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
