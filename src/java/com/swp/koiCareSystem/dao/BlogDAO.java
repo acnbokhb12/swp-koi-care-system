@@ -383,7 +383,6 @@ Connection c = null;
     public boolean createNewBlog(Blog newBlog) {
         Connection c = null;
     PreparedStatement ps = null;
-    ResultSet rs = null;
         try {
             c = DatabaseConnectionManager.getConnection();
             String sql = "INSERT INTO Blogs (AccID, IDBlogCate, Title, Content, BlogsImage, BlogsDate) VALUES (?, ?, ?, ?, ?, ?)";
@@ -415,9 +414,48 @@ Connection c = null;
         }
         return false; 
     }
+    
+    public boolean deleteBlogByID(int blogID){
+        Connection c = null;
+        PreparedStatement ps = null;
+        
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "UPDATE [dbo].[Blogs] SET [isActive] = 0  WHERE [BlogID] = ?";
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, blogID);
+
+            int affectedRows = ps.executeUpdate();
+            
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         BlogDAO blogDAO = new BlogDAO();
+        
+        int blogID = 21;
+        boolean isDeleted = blogDAO.deleteBlogByID(blogID);
+//        System.out.println(blogID);
+if (isDeleted) {
+        System.out.println("Blog with ID " + blogID + " was successfully deleted.");
+    } else {
+        System.out.println("Failed to delete blog with ID " + blogID);
+    }
         
 //        Blog newBlog = new Blog();
 //        newBlog.setUserID(1);  // Set a sample user ID

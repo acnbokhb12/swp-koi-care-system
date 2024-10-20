@@ -111,7 +111,7 @@
     <servlet>
         <servlet-name>DeletePondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
-    </servlet> 
+    </servlet>
     <servlet>
         <servlet-name>UserFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.UserFishController</servlet-class>
@@ -120,10 +120,17 @@
         <servlet-name>FishUserListController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishUserListController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageProductController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>CreateNewBlogController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.CreateNewBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DeleteBlogController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -243,16 +250,24 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FishUserListController</servlet-name>
-        <url-pattern>/FishUserListController</url-pattern> 
-    </servlet-mapping>   
-    <servlet-mapping> 
-        <servlet-name>ManageProductController</servlet-name>
-        <url-pattern>/ManageProductController</url-pattern> 
+        <url-pattern>/FishUserListController</url-pattern>
     </servlet-mapping>
-      <error-page>
+    <servlet-mapping>
+        <servlet-name>ManageProductController</servlet-name>
+        <url-pattern>/ManageProductController</url-pattern>
+    </servlet-mapping>
+    <error-page>
         <error-code>404</error-code>
         <location>/404page.jsp</location>
     </error-page>
+    <servlet-mapping>
+        <servlet-name>CreateNewBlogController</servlet-name>
+        <url-pattern>/CreateNewBlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogController</servlet-name>
+        <url-pattern>/DeleteBlogController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

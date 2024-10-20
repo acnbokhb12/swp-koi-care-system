@@ -62,6 +62,10 @@ public class BlogService {
         return blogDAO.createNewBlog(newBlog);
     }
     
+    public boolean deleteBlogById(int blogID){
+        return blogDAO.deleteBlogByID(blogID);
+    }
+    
     public static void main(String[] args) {
         Blog b = new Blog();
         BlogDAO dao = new BlogDAO();
