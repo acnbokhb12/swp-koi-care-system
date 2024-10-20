@@ -96,19 +96,23 @@
                 <div class="sidebar col-md-4">
                     <div class="create-sidebar">
                         <div class="create-post">
-                            <form action="MainController?action=createNewBlogbid=${b.blogID}" method="post" enctype="multipart/form-data"> 
+                            <form action="MainController?action=createNewBlog" method="post" enctype="multipart/form-data">  
                                 <h2 class="text-dark">Create New Post</h2>
                                 <input type="text" placeholder="Title" name="title">
                                 <textarea placeholder="Content" name="content"></textarea>
                                 <!-- <div class="upload-image">Upload Image<br>PNG, JPG, GIF up to 10MB</div> -->
-                                <img id="imagePreview" class="img_to_upload" src="" alt="">
-                                <input id="imageInput" type="file" accept="img/*" >
+                                <c:if test="${not empty blogImage}">
+                                    <img id="imagePreview" class="img_to_upload" src="${blogImage}" alt="Uploaded Image">
+                                </c:if>
+                                <input id="imageInput" type="file" accept="img/*" name="fileimg" >
+
                                 <h5>Select a category</h5>
-                                <select name="blogCategoryId=${id}">
+                                <select name="blogCateId"> 
                                     <c:forEach var="category" items="${ListBC}">
                                         <option value="${category.id}">${category.nameCategory}</option>
                                     </c:forEach>
-                                </select>
+                                </select>  
+
                                 <button type="submit">
                                     <h4>Create Post</h4>
                                 </button>

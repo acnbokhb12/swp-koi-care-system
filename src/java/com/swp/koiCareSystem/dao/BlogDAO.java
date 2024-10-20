@@ -22,13 +22,11 @@ import java.util.ArrayList;
  */
 public class BlogDAO {
 
-    
-
     //đếm số lượng blog trong db
     public int countBlog() {
         Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "select count(*) from Blogs";
         try {
             c = DatabaseConnectionManager.getConnection();
@@ -44,8 +42,8 @@ public class BlogDAO {
 
     public int countBlogByCate(int IDBlogCate) {
         Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             c = DatabaseConnectionManager.getConnection();
             if (c != null) {
@@ -85,9 +83,9 @@ public class BlogDAO {
 ////        ArrayList
 //    }
     public ArrayList<Blog> getAllBlogs(int index) {
-Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Blog> listB = new ArrayList<>();
         int distance = (index - 1) * 8;
         try {
@@ -146,9 +144,9 @@ Connection c = null;
     }
 
     public ArrayList<BlogCategory> getAllBlogCategory() {
-Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<BlogCategory> listBC = new ArrayList<>();
         try {
             c = DatabaseConnectionManager.getConnection();
@@ -183,9 +181,9 @@ Connection c = null;
     }
 
     public ArrayList<Blog> getBlogByCateId(int catBlogId, int index) {
-Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Blog> listB = new ArrayList<>();
         int distance = (index - 1) * 5;
         try {
@@ -238,8 +236,8 @@ Connection c = null;
 
     public ArrayList<Blog> getBlogsByCateId(String cid, int index) {
         Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Blog> listB = new ArrayList<>();
         int distance = (index - 1) * 8;
         try {
@@ -249,7 +247,7 @@ Connection c = null;
                         + "inner join CategoryBlog ctb on b.IDBlogCate = ctb.IDBlogCate inner join Accounts acc on b.AccID = acc.AccID \n"
                         + "where b.isActive = 1 and ctb.IDBlogCate = ? order by BlogID offset ? rows fetch next 8 rows only";
                 ps = c.prepareStatement(sql);
-                ps.setString(1, cid );
+                ps.setString(1, cid);
                 ps.setInt(2, distance);
                 rs = ps.executeQuery();
                 if (rs != null) {
@@ -293,8 +291,8 @@ Connection c = null;
 
     public int countBlogByCateId(String cid) {
         Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             c = DatabaseConnectionManager.getConnection();
             if (c != null) {
@@ -328,8 +326,8 @@ Connection c = null;
 
     public ArrayList<Blog> pagingCount(int index) {
         Connection c = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Blog> list = new ArrayList<>();
 
         String sql = "select b.BlogID, b.AccID, acc.FullName, acc.UserImage, b.BlogsDate, b.BlogsImage, b.Title, b.Content, b.IDBlogCate, ctb.NameBlogCate \n"
@@ -382,22 +380,24 @@ Connection c = null;
 
     public boolean createNewBlog(Blog newBlog) {
         Connection c = null;
-    PreparedStatement ps = null;
+        PreparedStatement ps = null;
         try {
             c = DatabaseConnectionManager.getConnection();
             String sql = "INSERT INTO Blogs (AccID, IDBlogCate, Title, Content, BlogsImage, BlogsDate) VALUES (?, ?, ?, ?, ?, ?)";
             ps = c.prepareStatement(sql);
-            ps.setInt(1, newBlog.getUserID() );
+            ps.setInt(1, newBlog.getUserID());
             ps.setInt(2, newBlog.getBlogCateId());
             ps.setString(3, newBlog.getTitle());
             ps.setString(4, newBlog.getContent());
-            ps.setString(5, newBlog.getBlogImage());
-            ps.setDate(6, newBlog.getBlogDate());
             
+                
+                ps.setString(5, newBlog.getBlogImage());
+            
+            ps.setDate(6, newBlog.getBlogDate());
 
             // Execute the update
             int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0; 
+            return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -412,13 +412,13 @@ Connection c = null;
                 e.printStackTrace();
             }
         }
-        return false; 
+        return false;
     }
-    
-    public boolean deleteBlogByID(int blogID){
+
+    public boolean deleteBlogByID(int blogID) {
         Connection c = null;
         PreparedStatement ps = null;
-        
+
         try {
             c = DatabaseConnectionManager.getConnection();
             String sql = "UPDATE [dbo].[Blogs] SET [isActive] = 0  WHERE [BlogID] = ?";
@@ -426,7 +426,7 @@ Connection c = null;
             ps.setInt(1, blogID);
 
             int affectedRows = ps.executeUpdate();
-            
+
             return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -447,22 +447,21 @@ Connection c = null;
 
     public static void main(String[] args) {
         BlogDAO blogDAO = new BlogDAO();
-        
-        int blogID = 21;
-        boolean isDeleted = blogDAO.deleteBlogByID(blogID);
-//        System.out.println(blogID);
-if (isDeleted) {
-        System.out.println("Blog with ID " + blogID + " was successfully deleted.");
-    } else {
-        System.out.println("Failed to delete blog with ID " + blogID);
-    }
-        
+
+//        int blogID = 21;
+//        boolean isDeleted = blogDAO.deleteBlogByID(blogID);
+////        System.out.println(blogID);
+//if (isDeleted) {
+//        System.out.println("Blog with ID " + blogID + " was successfully deleted.");
+//    } else {
+//        System.out.println("Failed to delete blog with ID " + blogID);
+//    }
 //        Blog newBlog = new Blog();
 //        newBlog.setUserID(1);  // Set a sample user ID
 //        newBlog.setBlogCateId(2);  // Set a sample Blog Category ID
 //        newBlog.setTitle("My New Blog Post");
 //        newBlog.setContent("This is the content of my new blog post.");
-//        newBlog.setBlogImage("image1.png");  // Sample blog image
+//        newBlog.setBlogImage(null);  // Sample blog image
 //        newBlog.setBlogDate(new java.sql.Date(System.currentTimeMillis()));  // Set current date
 //
 //        // Test the createNewBlog() method
