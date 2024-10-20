@@ -46,8 +46,7 @@ public class ManagerProductInformationUpdateController extends HttpServlet {
                 response.sendRedirect("home.jsp");
                 return;
             }
-            
-            
+                     
             String pid = request.getParameter("pid");
             int id = Integer.parseInt(pid);
 

@@ -383,7 +383,7 @@ public class ProductDAO {
             if (cn != null) {
                 String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID  \n"
                         + "	where p.isActive =1\n"
-                        + "                                    order by ProductID  \n"
+                        + "                                    order by ProductID DESC \n"
                         + "                           offset ? rows fetch next 20 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, distance);
@@ -518,5 +518,45 @@ public class ProductDAO {
             }
         }
         return false;
+    }
+
+    public static boolean createNewProduct(Product product) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        boolean isInserted = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO Products (CategoryID, Name, Image, Description, Price, isActive) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, product.getCategoryP().getCategoryID());
+                pst.setString(2, product.getNameProduct());
+                pst.setString(3, product.getImgProduct());
+                pst.setString(4, product.getDescription());
+                pst.setFloat(5, product.getPrice());
+                pst.setBoolean(6, product.isIsActive());
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    isInserted = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isInserted;
     }
 }

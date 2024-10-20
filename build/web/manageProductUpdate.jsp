@@ -52,7 +52,7 @@
                                                 <div class="img-detail-field">
                                                     <h3>Upload New Image</h3>
                                                     <div class="file-upload-container">
-                                                        <form action="MainController?action=productimgageupdate" method="POST" enctype="multipart/form-data" class="form-image-upload">
+                                                        <form action="MainController?action=productimgageupdate" method="POST" enctype="multipart/form-data" onsubmit="return confirmSubmit('Are you sure you want to update product image');">
                                                             <input type="hidden" id="productID" name="productID" value="${Product.productID}" />
                                                             <input type="file" id="productImage" name="fileimg" accept="image/*" required style="width: 100%;" />
                                                             <button type="submit" class="btn btn-upload">Submit</button>  
@@ -60,7 +60,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form action="MainController?action=productupdate" method="POST" class="form-update-details">
+                                            <form action="MainController?action=productupdate" method="POST" class="form-update-details" onsubmit="return confirmSubmit('Are you sure you want to update product details');">
                                                 <div class="details-wrapper">
                                                     <div class="detail-field">
                                                         <h1>Product ID</h1>
@@ -106,6 +106,10 @@
                         $.getScript('./assets/js/utilsAdmin.js');
                     });
                     $('#sidebar_admin').load('utils.jsp #sidebar_manager');
+
+                    function confirmSubmit(message) {
+                        return confirm(message);
+                    }
                 </script>
             </div>
         </div>

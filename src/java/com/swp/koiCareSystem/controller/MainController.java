@@ -146,6 +146,9 @@ public class MainController extends HttpServlet {
                 case IConstant.PRODUCT_INFORMATION_UPDATE:
                     url = "ManagerProductInformationUpdateController";
                     break;
+                case IConstant.PRODUCT_CREATE_NEW:
+                    url = "ManagerCreateNewProductController";
+                    break;
                 case IConstant.PRODUCT_DELETE:
                     url = "ManagerProductDeleteController";
                     break;

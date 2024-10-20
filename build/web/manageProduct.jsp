@@ -105,7 +105,7 @@
                                                 <a href="MainController?action=productinformation&pid=${p.productID}" class="edit-btn">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="MainController?action=productdelete&pid=${p.productID}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this product?');">
+                                                <a href="MainController?action=productdelete&pid=${p.productID}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this product ?');">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -171,58 +171,56 @@
         <!-- Table adn new product -->
         <div class="container_main-add">
             <div class="contain_add-detail">
-                <form action="" id="fomr_fill-add">
-                    <div class="row row-add-detail"> 
-                        <div class="col-4 " >
+                <form action="MainController?action=productcreatenew" id="form_fill-add" method="post" enctype="multipart/form-data">
+                    <div class="row row-add-detail">
+                        <div class="col-4">
                             <div class="img-add-submit">
                                 <div class="img-info-add">
-                                    <img id="imagePreview" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Koi Pond" > 
+                                    <img id="imagePreview" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Koi Pond">
                                 </div>
-                                <div class="add-img-detail"> 
-                                    <input id="imageInput" type="file" required> 
+                                <div class="add-img-detail">
+                                    <input id="imageInput" type="file" name="product_image" accept="image/*" required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-8 edit-info">
                             <div class="text-right">
-                                <button  class="btn-close-add">
+                                <button type="button" class="btn-close-add">
                                     <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
                                 </button>
                             </div>
                             <h2 class="text-center">Create New Product</h2>
-                            <form action="" class="fomr_fill-add">
-                                <div class="row row-edit-info-detail">
-                                    <div class="col-md-6 add-item-detail">
-                                        <label for="name_p" >Product Name: </label >
-                                        <input id="name_p" type="text" value="" placeholder="Enter name" required />
-                                    </div> 
-                                    <div class="col-md-6 add-item-detail">
-                                        <label for="price_p" >Product Price: </label >
-                                        <input id="price_p" type="number" value="" placeholder="Enter price" required/>
-                                    </div>  
-                                    <div class="col-md-6 add-item-detail">
-                                        <label for="" >Category </label >
-                                        <select class="add-item-detail-select"> 
-                                            <option selected value="">Food</option>
-                                            <option value="">Medicine</option>
-                                            <option value="">Machine</option>
-                                        </select>
-                                    </div> 
-                                    <div class="col-md-6 add-item-detail">
-                                        <label for="desc_p">Description: </label>
-                                        <input id="desc_p" type="text" value="" placeholder="Description" required /> 
-                                    </div>  
+                            <div class="row row-edit-info-detail">
+                                <div class="col-md-6 add-item-detail">
+                                    <label for="name_p">Product Name: </label>
+                                    <input id="name_p" name="product_name" type="text" value="" placeholder="Enter name" required />
+                                </div>
+                                <div class="col-md-6 add-item-detail">
+                                    <label for="desc_p">Description: </label>
+                                    <input id="desc_p" name="product_description" type="text" value="" placeholder="Description" required />
+                                </div>
+                                <div class="col-md-6 add-item-detail">
+                                    <label for="category_p">Category: </label>
+                                    <select id="category_p" name="product_category" class="add-item-detail-select">
+                                        <c:forEach var="category" items="${ListC}">
+                                            <option value="${category.categoryID}">${category.categoryName}</option>
+                                        </c:forEach>
+                                    </select>
 
                                 </div>
-                                <div class="text-center mt-3">
-                                    <button type="submit" class="add-btn-utils blue-btn" style="margin-top: 10px">
-                                        Confirm
-                                    </button>                    
+                                <div class="col-md-6 add-item-detail">
+                                    <label for="price_p">Product Price: </label>
+                                    <input id="price_p" name="product_price" type="number" value="" placeholder="Enter price" required />
                                 </div>
-                            </form>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button type="submit" class="add-btn-utils blue-btn" style="margin-top: 10px">
+                                    Confirm
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </form> 
+                </form>
             </div>
         </div>
     </body>
@@ -248,7 +246,7 @@
                 imagePreview.style.display = 'none'; // Ẩn ảnh nếu không có file nào được chọn
             }
         });
-        const formAddProduct = document.getElementById('fomr_fill-add');
+        const formAddProduct = document.getElementById('form_fill-add');
         formAddProduct.addEventListener('submit', (e) => {
             const isConfirmed = confirm('Are you sure you want to submit this news?');
             if (!isConfirmed) {

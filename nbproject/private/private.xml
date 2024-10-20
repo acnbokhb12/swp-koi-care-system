@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManagerProductImageUpdateController.java</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManagerProductDeleteController.java</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ImageUploadSingleController.java</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManagerProductInformationUpdateController.java</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/web/manageProductUpdate.jsp</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/ProductService.java</file>
-            <file>file:/D:/GitHubGroup5/swp-koi-care-system/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

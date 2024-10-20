@@ -73,4 +73,8 @@ public class ProductService {
     public boolean updateImgAccountById(int id, String imgLink) {
         return productDAO.updateImgByProductID(id, imgLink);
     }
+    
+    public boolean createNewProduct(Product p) {
+        return productDAO.createNewProduct(p);
+    }
 }

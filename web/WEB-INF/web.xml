@@ -144,6 +144,10 @@
         <servlet-name>ManagerProductImageUpdateController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerProductImageUpdateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerCreateNewProductController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerCreateNewProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -291,6 +295,10 @@
     <servlet-mapping>
         <servlet-name>ManagerProductImageUpdateController</servlet-name>
         <url-pattern>/ManagerProductImageUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCreateNewProductController</servlet-name>
+        <url-pattern>/ManagerCreateNewProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
