@@ -33,10 +33,14 @@ public class AccountService {
     
     
         // Get all fish for the specific account ID
-    public ArrayList<Account> GetFishAccountsS() {
-        return acd.getFishAccounts();
+    public int countAllAccountS() {
+        return acd.countAllAccounts();
 
 }
+      public ArrayList<Account> getAllAccountsS(int index) {
+        ArrayList<Account> listacc = acd.getAccounts(index);
+        return listacc;
+    }
 
     public String hashPassword(String password) {
         String salt = "salt";

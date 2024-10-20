@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,21 +22,17 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
-    private static final String SELECT_ALL_ACCOUNTS = 
-        "SELECT AccID, Email, KoiCareID, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus " + 
-        "FROM Accounts WHERE UserRole = 'customer'";
-
-
-    // Method to retrieve the list of accounts from the database
-    public ArrayList<Account> getFishAccounts() {
+    public ArrayList<Account> getAllAccounts() {
         ArrayList<Account> listAccounts = new ArrayList<>();
-
         ResultSet rs = null;
+        Connection conn = null;
+        String sql
+                = "SELECT *  FROM Accounts WHERE UserRole = 'customer'";
         try {
-            Connection conn = DatabaseConnectionManager.getConnection();
+            conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
 
-                PreparedStatement ps = conn.prepareStatement(SELECT_ALL_ACCOUNTS);
+                PreparedStatement ps = conn.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Account account = new Account();
@@ -61,20 +58,132 @@ public class AccountDAO {
         return listAccounts;
     }
 
-    //================================================================
-    // TEST : GELL LIST ACCOUNT
-    public static void main(String[] args) {
-        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+    public int countAllAccounts() {
+        ArrayList<Account> listAccounts = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement psm = null; // Declare psm outside the try block
+        String sql = "SELECT count(*) FROM Accounts WHERE UserRole = 'customer'";
 
-        // Test retrieving all accounts from the database
-        ArrayList<Account> accounts = accountDAO.getFishAccounts();
-
-        // Loop through the result and print each account's details
-        for (Account account : accounts) {
-            System.out.println(account);
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                psm = conn.prepareStatement(sql);
+                rs = psm.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (psm != null) {
+                    psm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        return 0;
     }
 
+    public ArrayList<Account> getAccounts(int index) {
+        ArrayList<Account> listAcc = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int distance = (index - 1) * 5;
+
+        String sql
+                = "SELECT * \n"
+                + "FROM Accounts \n"
+                + "WHERE UserRole = 'customer' \n"
+                + "ORDER BY AccID \n"
+                + "OFFSET ? ROWS \n"
+                + "FETCH NEXT 5 ROWS ONLY;";
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, distance);
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("idStatus"));
+
+                    listAcc.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listAcc;
+    }
+
+    //================================================================
+    // TEST : GELL LIST ACCOUNT
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+//        // Test retrieving all accounts from the database
+//        ArrayList<Account> accounts = accountDAO.getAllAccounts();
+//
+//        // Loop through the result and print each account's details
+//        for (Account account : accounts) {
+//            System.out.println(account);
+//        }
+//    }
+    // COUNT  ACCOUNT
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+//        int count = accountDAO.countAllAccounts();
+//        System.out.println(count);
+//
+//    }
+    public static void main(String[] args) {
+        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+        List<Account> accl = accountDAO.getAccounts(2);
+        for(Account a : accl){
+            
+            System.out.println(a);
+            
+        }
+    }
+    
+    
+    
     //================================================================
     public boolean isKoiCareIDExist(String kcid) {
         Connection cn = null;
