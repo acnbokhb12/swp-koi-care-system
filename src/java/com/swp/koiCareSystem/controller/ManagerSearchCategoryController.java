@@ -6,23 +6,22 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.service.ImageUploadService;
+import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.model.ProductCategory;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author ASUS
  */
-@MultipartConfig
-public class ManagerProductImageUpdateController extends HttpServlet {
+public class ManagerSearchCategoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,31 +36,43 @@ public class ManagerProductImageUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            int productId = Integer.parseInt(request.getParameter("productID"));
-            Part filePart = request.getPart("fileimg");
-            String tempDir = getServletContext().getRealPath("/") + "uploads";
+            String cateId = request.getParameter("categoryID");
+            String indexPage = request.getParameter("index");
 
-            ImageUploadService imgs = new ImageUploadService();
-            String imageUrl = "";
-            try {
-                imageUrl = imgs.uploadImage(filePart, tempDir);
-                System.out.println(imageUrl);
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (cateId == null) {
+                cateId = "1"; // Default category ID
+            }
+            if (indexPage == null) {
+                indexPage = "1"; // Default index page
             }
 
-            ProductService ps = new ProductService();
-            boolean isUpdated = ps.updateImgByProductID(productId, imageUrl);
+            int cid = Integer.parseInt(cateId);
+            int index = Integer.parseInt(indexPage);
 
-            String url = "";
-            if (isUpdated) {
-                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION + "&pid=" + productId;
+            ProductService pds = new ProductService();
+            int count = pds.countProductsByCate(cid);
+            int endPage = count / 20;
+            if (count % 20 != 0) {
+                endPage++;
+            }
+            ArrayList<Product> listProduct = pds.managerGetProductsByCateId(cid, index);
+            String url;
+
+            if (listProduct != null) {
+                ArrayList<ProductCategory> listCate = pds.getAllProductCate();
+                request.setAttribute("ListC", listCate);
+                request.setAttribute("ListP", listProduct);
+                request.setAttribute("tag", index);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("cateID", cateId);
+                request.setAttribute("TagsCate", cid);
+                url = "manageProduct.jsp";
             } else {
-                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION_UPDATE + "&pid=" + productId;
+                url = "MainController?action=" + IConstant.PRODUCT_MANAGE;
             }
+
             request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 

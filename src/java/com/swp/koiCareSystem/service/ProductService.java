@@ -70,11 +70,19 @@ public class ProductService {
         return productDAO.updateProduct(p);
     }
 
-    public boolean updateImgAccountById(int id, String imgLink) {
+    public boolean updateImgByProductID(int id, String imgLink) {
         return productDAO.updateImgByProductID(id, imgLink);
     }
-    
+
     public boolean createNewProduct(Product p) {
         return productDAO.createNewProduct(p);
+    }
+
+    public ArrayList<Product> managerSearchProductsByName(String name, int index) {
+        return productDAO.managerSearchProductsByName(name, index);
+    }
+
+    public ArrayList<Product> managerGetProductsByCateId(int cateId, int index) {
+        return productDAO.managerGetProductsByCateId(cateId, index);
     }
 }

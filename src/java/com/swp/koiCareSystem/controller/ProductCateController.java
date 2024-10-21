@@ -61,7 +61,6 @@ public class ProductCateController extends HttpServlet {
                 request.setAttribute("tag", index);
                 request.setAttribute("endPage", endPage);
                 request.setAttribute("cateID", cateId); 
-                request.setAttribute("TagsCate", cid); 
                 url = "shop.jsp";
             }else{
                 url = "MainController?action=" + IConstant.SHOP;

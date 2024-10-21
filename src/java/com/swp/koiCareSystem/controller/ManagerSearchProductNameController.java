@@ -6,23 +6,22 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.service.ImageUploadService;
+import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.model.ProductCategory;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author ASUS
  */
-@MultipartConfig
-public class ManagerProductImageUpdateController extends HttpServlet {
+public class ManagerSearchProductNameController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,31 +36,46 @@ public class ManagerProductImageUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            int productId = Integer.parseInt(request.getParameter("productID"));
-            Part filePart = request.getPart("fileimg");
-            String tempDir = getServletContext().getRealPath("/") + "uploads";
+            String name = request.getParameter("searchInput");
 
-            ImageUploadService imgs = new ImageUploadService();
-            String imageUrl = "";
-            try {
-                imageUrl = imgs.uploadImage(filePart, tempDir);
-                System.out.println(imageUrl);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            ProductService ps = new ProductService();
-            boolean isUpdated = ps.updateImgByProductID(productId, imageUrl);
-
-            String url = "";
-            if (isUpdated) {
-                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION + "&pid=" + productId;
+            // Check if searchInput is null or empty
+            if (name == null || name.trim().isEmpty()) {
+                String url = "MainController?action=" + IConstant.PRODUCT_MANAGE;
+                response.sendRedirect(url);
+                return;
             } else {
-                url = "MainController?action=" + IConstant.PRODUCT_INFORMATION_UPDATE + "&pid=" + productId;
+                // Trim and replace multiple spaces
+                name = name.trim();
+                name = name.replaceAll(" +", " ");
             }
-            request.getRequestDispatcher(url).forward(request, response);
+
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            if (index < 1) {
+                index = 1;
+            }
+
+            ProductService pds = new ProductService();
+            int count = pds.countProductsByName(name);
+            int endPage = count / 20;
+            if (count % 20 != 0) {
+                endPage++;
+            }
+
+            ArrayList<Product> listProduct = pds.managerSearchProductsByName(name, index);
+            ArrayList<ProductCategory> listCate = pds.getAllProductCate();
+
+            request.setAttribute("ListC", listCate);
+            request.setAttribute("ListP", listProduct);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("OldSearch", name);
+
+            request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
+
         }
     }
 

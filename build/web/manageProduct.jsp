@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> >
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,23 +57,26 @@
                         <!--  -->
                         <div class="row row-user-main"> 
                             <div class="col-auto">
-                                <form class="table-search-form row gx-1 align-items-center" action="">
-                                    <div class="col-auto">
-                                        <input type="text" class="search-order" placeholder="Search..." id="searchInput" required>
+                                <div class="form-toggle-buttons" style="margin-bottom: 5px">
+                                    <button type="button" onclick="showSearchByName()">Search by Product Name</button>
+                                    <button type="button" onclick="showSearchByCategory()">Search by Category</button>
+                                </div>
+                                <form id="searchByNameForm" action="ManagerSearchProductNameController" method="POST" class="table-search-form row gx-1 align-items-center">
+                                    <div class="col-auto contain-btn-search-order" style="display: flex;">
+                                        <input type="text" name="searchInput" class="search-order" placeholder="Search Product by Name"  
+                                               value="${OldSearch}" style="margin-right: 10px; flex: 1;">
+                                        <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
-                                    <div class="col-auto contain-btn-select-order">
-                                        <select class="contain-btn-select-search" name="searchChoice" id="searchChoice" onchange="handleSearchChoice()">
-                                            <option value="name" selected>Product Name</option>
-                                            <option value="category">Category</option>
-                                            <option value="price">Price</option>
+                                </form>
+                                <!-- Form for searching by Category -->
+                                <form id="searchByCategoryForm" action="ManagerSearchCategoryController" method="POST" class="table-search-form row gx-1 align-items-center" style="display: none;">
+                                    <div class="col-auto contain-btn-select-order" style="display: flex;">
+                                        <select class="contain-btn-select-search" name="categoryID" id="categoryID" required style="margin-right: 10px;">
+                                            <option value="" disabled selected>Select a Category</option>
+                                            <c:forEach var="category" items="${ListC}">
+                                                <option value="${category.categoryID}">${category.categoryName}</option>
+                                            </c:forEach>
                                         </select>
-                                    </div>
-                                    <!-- Các trường Min và Max Price được hiển thị kế bên khi chọn "Price" -->
-                                    <div class="col-auto contain-price-range" id="priceRange" style="display:none;">
-                                        <input type="number" class="search-order" id="minPrice" placeholder="Min Price" name="minPrice">
-                                        <input type="number" class="search-order" id="maxPrice" placeholder="Max Price" name="maxPrice">
-                                    </div>
-                                    <div class="col-auto contain-btn-search-order">
                                         <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
                                 </form>
@@ -100,7 +105,9 @@
                                                 <img src="${p.imgProduct}" alt="Image of ${p.nameProduct}" />
                                             </td> 
                                             <td>${p.categoryP.categoryName}</td> 
-                                            <td>${p.price}</td>
+                                            <td>
+                                                <fmt:formatNumber value="${p.price}" pattern="#,###"/>
+                                            </td>
                                             <td> 
                                                 <a href="MainController?action=productinformation&pid=${p.productID}" class="edit-btn">
                                                     <i class="fas fa-edit"></i>
@@ -117,50 +124,93 @@
                             <!-- Footer and Pagination -->
                             <div class="footer">
                                 <ul class="pagination">
-                                    <!-- Previous Button -->
-                                    <c:if test="${tag > 1}">
-                                        <li class="page-item">
-                                            <a href="ManageProductController?index=${tag-1}" class="page-link text-dark">
-                                                <i class="fa-solid fa-chevron-left"></i>
-                                            </a>
-                                        </li>
-                                    </c:if>
+                                    <c:choose>
+                                        <c:when test="${not empty OldSearch}">
+                                            <!-- Previous Button for product name search -->
+                                            <c:if test="${tag > 1}">
+                                                <li class="page-item">
+                                                    <a href="ManagerSearchProductNameController?index=${tag - 1}&searchInput=${OldSearch}" class="page-link text-dark">
+                                                        <i class="fa-solid fa-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
 
-                                    <!-- Display current page and next two pages (4, 5, 6) -->
-                                    <c:forEach begin="${tag}" end="${tag + 2}" var="i">
-                                        <c:if test="${i <= endPage - 3}">
-                                            <li class="page-item ${tag == i ? 'active' : ''}">
-                                                <a href="ManageProductController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
-                                                    ${i}
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                    </c:forEach>
+                                            <!-- Display all available pages -->
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                                    <a href="ManagerSearchProductNameController?index=${i}&searchInput=${OldSearch}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                                        ${i}
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
 
-                                    <!-- Display "..." if there is a gap between page 6 and (endPage - 3) -->
-                                    <c:if test="${tag + 2 < endPage - 2}">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">...</span>
-                                        </li>
-                                    </c:if>
+                                            <!-- Next Button -->
+                                            <c:if test="${tag < endPage}">
+                                                <li class="page-item">
+                                                    <a href="ManagerSearchProductNameController?index=${tag + 1}&searchInput=${OldSearch}" class="page-link text-dark">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </c:when>
+                                        <c:when test="${not empty cateID}">
+                                            <!-- Previous Button for category search -->
+                                            <c:if test="${tag > 1}">
+                                                <li class="page-item">
+                                                    <a href="ManagerSearchCategoryController?index=${tag - 1}&categoryID=${cateID}" class="page-link text-dark">
+                                                        <i class="fa-solid fa-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
 
-                                    <!-- Always show the last 3 pages (8, 9, 10) -->
-                                    <c:forEach begin="${endPage - 2}" end="${endPage}" var="i">
-                                        <li class="page-item ${tag == i ? 'active' : ''}">
-                                            <a href="ManageProductController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
-                                                ${i}
-                                            </a>
-                                        </li>
-                                    </c:forEach>
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                                    <a href="ManagerSearchCategoryController?index=${i}&categoryID=${cateID}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                                        ${i}
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
 
-                                    <!-- Next Button -->
-                                    <c:if test="${tag < endPage}">
-                                        <li class="page-item">
-                                            <a href="ManageProductController?index=${tag+1}" class="page-link text-dark">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </a>
-                                        </li>
-                                    </c:if>
+                                            <!-- Next Button -->
+                                            <c:if test="${tag < endPage}">
+                                                <li class="page-item">
+                                                    <a href="ManagerSearchCategoryController?index=${tag + 1}&categoryID=${cateID}" class="page-link text-dark">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- Previous Button for normal case -->
+                                            <c:if test="${tag > 1}">
+                                                <li class="page-item">
+                                                    <a href="ManageProductController?index=${tag - 1}" class="page-link text-dark">
+                                                        <i class="fa-solid fa-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+
+                                            <c:set var="startPage" value="${tag - 2 < 1 ? 1 : tag - 2}"/>
+                                            <c:set var="endPage" value="${startPage + 5 > endPage ? endPage : startPage + 5}"/>
+
+                                            <c:forEach begin="${startPage}" end="${endPage}" var="i">
+                                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                                    <a href="ManageProductController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                                        ${i}
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+
+                                            <!-- Next Button -->
+                                            <c:if test="${tag < endPage}">
+                                                <li class="page-item">
+                                                    <a href="ManageProductController?index=${tag + 1}" class="page-link text-dark">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                         </div>
@@ -206,7 +256,6 @@
                                             <option value="${category.categoryID}">${category.categoryName}</option>
                                         </c:forEach>
                                     </select>
-
                                 </div>
                                 <div class="col-md-6 add-item-detail">
                                     <label for="price_p">Product Price: </label>
@@ -273,17 +322,17 @@
 
         });
 
-        function handleSearchChoice() {
-            const searchChoice = document.getElementById("searchChoice").value;
-            const priceRange = document.getElementById("priceRange");
-
-            if (searchChoice === "price") {
-                priceRange.style.display = "flex"; // Hiện các trường Min và Max Price kế bên
-            } else {
-                priceRange.style.display = "none"; // Ẩn khi không chọn "Price"
-            }
+        function showSearchByName() {
+            document.getElementById("searchByNameForm").style.display = "block";
+            document.getElementById("searchByCategoryForm").style.display = "none";
         }
-
+        function showSearchByCategory() {
+            document.getElementById("searchByCategoryForm").style.display = "block";
+            document.getElementById("searchByNameForm").style.display = "none";
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            showSearchByName();
+        });
 
     </script>
 </html>

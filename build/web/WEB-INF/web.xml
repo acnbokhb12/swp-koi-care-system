@@ -13,10 +13,6 @@
         <servlet-class>com.swp.koiCareSystem.controller.ProductCateController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchProductController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.RegisterController</servlet-class>
     </servlet>
@@ -148,6 +144,18 @@
         <servlet-name>ManagerCreateNewProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerCreateNewProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerSearchProductNameController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchProductNameController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerSearchCategoryController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -159,10 +167,6 @@
     <servlet-mapping>
         <servlet-name>ProductCateController</servlet-name>
         <url-pattern>/ProductCateController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchProductController</servlet-name>
-        <url-pattern>/SearchProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -299,6 +303,18 @@
     <servlet-mapping>
         <servlet-name>ManagerCreateNewProductController</servlet-name>
         <url-pattern>/ManagerCreateNewProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerSearchProductNameController</servlet-name>
+        <url-pattern>/ManagerSearchProductNameController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerSearchCategoryController</servlet-name>
+        <url-pattern>/ManagerSearchCategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
