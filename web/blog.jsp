@@ -42,22 +42,26 @@
                                         <span>${b.blogDate}</span>
                                         <span>${b.blogCategory.nameCategory}</span>
                                     </div>
-                                    <form action="MainController?action=deleteBlog&blogID=${b.blogID}" method="POST" style="display:inline;">
-                                        <button type="button" class="btn btn-danger btn-sm delete-button" data-id="${b.blogID}" data-title="${b.title}" data-toggle="modal" data-target="#myModal">Delete</button>
-                                    </form> 
+
+                                    <c:if test="${sessionScope.userAccount.userID == b.userID}">
+                                        <form action="MainController?action=deleteBlog&blogID=${b.blogID}" method="POST" style="display:inline;">
+                                            <button type="button" class="btn btn-danger btn-sm delete-button" data-id="${b.blogID}" data-title="${b.title}" data-toggle="modal" data-target="#myModal">Delete</button>
+                                        </form>
+                                    </c:if>
+
                                 </div>
+
                                 <div class="post-title mb-4 text-danger" style="font-size: 28px; display: block;">${b.title}</div>
+                                <div class="post-body" style="font-size: 28px; display: block;">
+                                    ${b.content}
+                                </div>
                                 <c:if test="${not empty b.blogImage}">
                                     <div class="post-image">
                                         <img src="${b.blogImage}" alt="Blog Image">
                                     </div>
                                 </c:if>
-                                <div class="post-body">
-                                    <p>${b.content}</p>
-                                </div>
+
                                 <div class="post-footer">
-                                    <div><i class="fas fa-fire"></i> 24 Likes</div>
-                                    <div><i class="fas fa-comment"></i> 12 Comments</div>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <!-- Toast -->
+        <!-- Toast Delete -->
         <c:if test="${toastMessage != null}"> 
             <div id="toast" style="z-index: 10">  
                 <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }" style="display:flex">
@@ -177,6 +181,7 @@
                 </div>
             </div>
         </c:if>
+
         <div id="footer"></div>
         <style>
             .pagination-list li .active-page{
@@ -238,6 +243,17 @@
             $(window).on('click', function (event) {
                 if (event.target.id === 'myModal') {
                     $('#myModal').hide();
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Add confirmation for creating a new post
+            $('form').on('submit', function (e) {
+                const confirmation = confirm("Are you sure you want to create this post?");
+                if (!confirmation) {
+                    e.preventDefault(); // Prevent form submission if user cancels
                 }
             });
         });
