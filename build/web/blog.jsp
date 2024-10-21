@@ -47,9 +47,11 @@
                                     </form> 
                                 </div>
                                 <div class="post-title mb-4 text-danger" style="font-size: 28px; display: block;">${b.title}</div>
-                                <div class="post-image">
-                                    <img src="${b.blogImage}" alt="">
-                                </div>
+                                <c:if test="${not empty b.blogImage}">
+                                    <div class="post-image">
+                                        <img src="${b.blogImage}" alt="Blog Image">
+                                    </div>
+                                </c:if>
                                 <div class="post-body">
                                     <p>${b.content}</p>
                                 </div>
