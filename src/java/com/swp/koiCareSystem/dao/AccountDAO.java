@@ -21,10 +21,9 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
-    private static final String SELECT_ALL_ACCOUNTS = 
-        "SELECT AccID, Email, KoiCareID, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus " + 
-        "FROM Accounts WHERE UserRole = 'customer'";
-
+    private static final String SELECT_ALL_ACCOUNTS
+            = "SELECT AccID, Email, KoiCareID, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus "
+            + "FROM Accounts WHERE UserRole = 'customer'";
 
     // Method to retrieve the list of accounts from the database
     public ArrayList<Account> getFishAccounts() {
@@ -483,6 +482,39 @@ public class AccountDAO {
                 }
                 if (cn != null) {
                     cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean updatePasswordWithEmail(String email, String newPassword) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Accounts SET Password = ? WHERE Email = ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, newPassword);
+                pstmt.setString(2, email);
+                int rowsAffected = pstmt.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

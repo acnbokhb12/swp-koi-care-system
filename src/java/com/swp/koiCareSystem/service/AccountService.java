@@ -30,13 +30,12 @@ import org.apache.http.client.fluent.Request;
 public class AccountService {
 
     private final AccountDAO acd = new AccountDAO();
-    
-    
-        // Get all fish for the specific account ID
+
+    // Get all fish for the specific account ID
     public ArrayList<Account> GetFishAccountsS() {
         return acd.getFishAccounts();
 
-}
+    }
 
     public String hashPassword(String password) {
         String salt = "salt";
@@ -82,11 +81,11 @@ public class AccountService {
         return googlePojo;
 
     }
-    
-    public String getPasswordByAccID(int acid){
+
+    public String getPasswordByAccID(int acid) {
         return acd.getPasswordByAccID(acid);
     }
-    
+
     public boolean registerUser(Account account) {
         account.setPassword(hashPassword(account.getPassword()));
         return acd.registerUser(account);
@@ -123,10 +122,20 @@ public class AccountService {
         String hashedPassword = hashPassword(newPassword);
         return acd.updatePassword(accID, hashedPassword);
     }
-    
-    public boolean upDateImgAccountById(int acid, String imgLink){
+
+    public boolean upDateImgAccountById(int acid, String imgLink) {
         return acd.updateImgByAccountID(acid, imgLink);
     }
+
+    public boolean checkEmail(String email) {
+        return acd.checkEmail(email);
+    }
+
+    public boolean updatePasswordWithEmail(String email, String newPassword) {
+        String hashedPassword = hashPassword(newPassword);
+        return acd.updatePasswordWithEmail(email, hashedPassword);
+    }
+
     public static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");

@@ -62,6 +62,9 @@ public class MainController extends HttpServlet {
                 case IConstant.LOGOUT:
                     url = "LogoutController";
                     break;
+                case IConstant.FORGET_PASSWORD:
+                    url = "forgetpassword.jsp";
+                    break;
                 // START PLACE PROFILE -------------------------------------------------------------                                         
                 case IConstant.PROFILE_JSP:
                     url = "profilePage.jsp";

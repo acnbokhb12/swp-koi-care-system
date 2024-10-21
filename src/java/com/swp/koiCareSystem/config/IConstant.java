@@ -27,11 +27,11 @@ public interface IConstant {
     public final String UP_IMG_SINGLE = "upImgSingle";
     public final String EDIT_PROFILE = "editProfile";
 
-// START LOGIN-REGISTER-LOGOUT ----------------------------------------------------------------------------------------------------------------------------------
+// START LOGIN-REGISTER-LOGOUT-FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
     public final String LOGIN = "login";
     public final String REGISTER = "register";
     public final String LOGOUT = "logout";
-
+    public final String FORGET_PASSWORD = "forgetpassword";
 // START FISH ----------------------------------------------------------------------------------------------------------------------------------
     public final String FISH = "fish";
     public final String FISH_INFOR = "fishinfor";
@@ -67,7 +67,6 @@ public interface IConstant {
     public static String PRODUCT_UPDATE = "productupdate";
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
-
-// GOOGLE LOGIN ----------------------------------------------------------------------------------------------------------------------------------
 // CLOUDINARY ----------------------------------------------------------------------------------------------------------------------------------
+// GOOGLE LOGIN ---------------------------------------------------------------------------------------------------------------------------------
 }

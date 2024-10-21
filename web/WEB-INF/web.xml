@@ -156,6 +156,10 @@
         <servlet-name>ManagerSearchCategoryController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgetPasswordController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ForgetPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -315,6 +319,10 @@
     <servlet-mapping>
         <servlet-name>ManagerSearchCategoryController</servlet-name>
         <url-pattern>/ManagerSearchCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgetPasswordController</servlet-name>
+        <url-pattern>/ForgetPasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
