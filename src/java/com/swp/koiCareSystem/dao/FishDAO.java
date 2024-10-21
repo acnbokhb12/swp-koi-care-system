@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fish Data Access Object for interacting with the Fish database table.
@@ -113,6 +114,101 @@ public class FishDAO {
             }
         }
         return fish;
+    }
+
+    //MANAGE
+    public int countFishs() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select count(*) from Fish where [isActive] =1";
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Fish> getFishs(int index) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ArrayList<Fish> listFishs = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "SELECT *\n"
+                        + "FROM Fish f\n"
+                        + "JOIN Accounts a ON f.AccID = a.AccID\n"
+                        + "WHERE a.UserRole = 'customer'\n"
+                        + "ORDER BY f.FishID\n"
+                        + "OFFSET ? ROWS\n"
+                        + "FETCH NEXT 10 ROWS ONLY;";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, distance);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int fishID = rs.getInt("FishID");
+                    int accID = rs.getInt("AccID");
+                    int pondID = rs.getInt("PondID");
+                    String fishImage = rs.getString("FishImage");
+                    String fishName = rs.getString("FishName");
+                    String descriptionKoi = rs.getString("DescriptionKoi");
+                    String bodyShape = rs.getString("BodyShape");
+                    float age = rs.getFloat("Age");
+                    float length = rs.getFloat("Length");
+                    float weight = rs.getFloat("Weight");
+                    String gender = rs.getString("Gender");
+
+                    // Create a new Fish object and add it to the list
+                    listFishs.add(new Fish(fishID, accID, pondID, fishImage, fishName,
+                            descriptionKoi, bodyShape, age, length, weight, gender));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return listFishs;
     }
 
     //DELETE
@@ -277,7 +373,8 @@ public class FishDAO {
             }
         }
     }
-     public int countFishInPondByPondId(int pondID) {
+
+    public int countFishInPondByPondId(int pondID) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -312,7 +409,8 @@ public class FishDAO {
         }
         return 0;
     }
-      public boolean checkFishIsExist(int fishId) {
+
+    public boolean checkFishIsExist(int fishId) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -325,7 +423,7 @@ public class FishDAO {
                 pst.setInt(1, fishId);
                 rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
-                     isExist = rs.getBoolean(1);
+                    isExist = rs.getBoolean(1);
                 }
 
             }
@@ -348,10 +446,11 @@ public class FishDAO {
         }
         return isExist;
     }
-      public boolean checkFishIsExistInPondById(int fishId, int pondId) {
+
+    public boolean checkFishIsExistInPondById(int fishId, int pondId) {
         Connection cn = null;
         PreparedStatement pst = null;
-        ResultSet rs = null; 
+        ResultSet rs = null;
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
@@ -361,7 +460,7 @@ public class FishDAO {
                 pst.setInt(2, pondId);
                 rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
-                     return true;
+                    return true;
                 }
 
             }
@@ -384,7 +483,7 @@ public class FishDAO {
         }
         return false;
     }
-      
+
     /*
 
 //    // TEST DAO
@@ -412,7 +511,8 @@ public class FishDAO {
         System.out.println(fish);
 >>>>>>> CRUDFish
 }
- 
+     //===========================================
+
  //TEST UPDATE  -- pass
  
   public static void main(String[] args) {
@@ -438,7 +538,8 @@ public class FishDAO {
             System.out.println("Failed to update fish information.");
         }
     }
- 
+     //===========================================
+
   //TEST CREATE -- pass
   public static void main(String[] args) {
     Fish newFish = new Fish();
@@ -464,9 +565,29 @@ public class FishDAO {
         System.out.println("Failed to create new fish.");
     }
 }*/
-      public static void main(String[] args) {
-        FishDAO fd = new FishDAO();
-        boolean i = fd.checkFishIsExistInPondById(110, 19);
-          System.out.println(i);
-    }
+//    public static void main(String[] args) {
+//        FishDAO fd = new FishDAO();
+//        boolean i = fd.checkFishIsExistInPondById(110, 19);
+//        System.out.println(i);
+//    }
+    
+    //===========================================
+    //TEST
+    // COUNT  ACCOUNT
+//    public static void main(String[] args) {
+//        FishDAO fd = new FishDAO(); // Initialize the DAO
+//        int count = fd.countFishs();
+//        System.out.println(count);
+//
+//    }
+//    public static void main(String[] args) {
+//        FishDAO fd = new FishDAO(); // Initialize the DAO
+//        List<Fish> fl = fd.getAllFishs(1);
+//        for(Fish f : fl){
+//            
+//            System.out.println(f);
+//            
+//        }
+//    }
+
 }

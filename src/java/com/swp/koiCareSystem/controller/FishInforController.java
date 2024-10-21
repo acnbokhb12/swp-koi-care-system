@@ -45,7 +45,10 @@ public class FishInforController extends HttpServlet {
                 response.sendRedirect("home.jsp"); 
             }else{ 
                 int id = Integer.parseInt(request.getParameter("fid")); 
+                
                 FishService fins = new FishService();
+                
+                
                 Fish fin = fins.getFishInforByIDS(id);
                 
                 

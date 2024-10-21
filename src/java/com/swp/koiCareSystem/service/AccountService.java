@@ -37,11 +37,20 @@ public class AccountService {
         return acd.countAllAccounts();
 
 }
+      public ArrayList<Account> getAccountsS() {
+        ArrayList<Account> listA = acd.getAccounts();
+        return listA;
+    }
+
+    
       public ArrayList<Account> getAllAccountsS(int index) {
         ArrayList<Account> listacc = acd.getAccounts(index);
         return listacc;
     }
-
+ public boolean createNewAccountFishS(Account accfish) {
+        return acd.createNewAccount(accfish);
+        
+    }
     public String hashPassword(String password) {
         String salt = "salt";
         String result = null;

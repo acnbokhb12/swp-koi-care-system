@@ -113,16 +113,16 @@
         <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FishUserListController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.FishUserListController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageAccountFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageAccountFishController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageFishController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManageFishController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -237,10 +237,6 @@
         <url-pattern>/DeletePondController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FishUserListController</servlet-name>
-        <url-pattern>/FishUserListController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ManageProductController</servlet-name>
         <url-pattern>/ManageProductController</url-pattern>
     </servlet-mapping>
@@ -251,6 +247,10 @@
     <servlet-mapping>
         <servlet-name>ManageAccountFishController</servlet-name>
         <url-pattern>/ManageAccountFishController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageFishController</servlet-name>
+        <url-pattern>/ManageFishController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

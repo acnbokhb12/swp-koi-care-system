@@ -25,12 +25,12 @@
                 <header id="header"></header>
                 <div class="right-navbar-admin-manage"> 
 
-                    <!-- Main Content Section -->
+                    <!-- Phần Nội Dung Chính -->
                     <div class="content">
                         <div class="header">
                             <h2>User List</h2>
                             <div class="actions"> 
-                                <a href="addUser.jsp" class="btn btn-primary">Add User</a> <!-- Button to add a new user -->
+                                <a href="addUser.jsp" class="btn btn-primary">Add User</a> <!-- Nút để thêm người dùng mới -->
                             </div>
                         </div>
                         <div class="table-container" id="userTableContainer">
@@ -44,9 +44,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Check if there are any accounts -->
+                                    <!-- Kiểm tra xem có tài khoản nào không -->
                                     <c:if test="${not empty listAcc}">
-                                        <!-- Use JSTL loop to display the account list -->
+                                        <!-- Sử dụng vòng lặp JSTL để hiển thị danh sách tài khoản -->
                                         <c:forEach var="account" items="${listAcc}">
                                             <tr>
                                                 <td>${account.userID}</td>
@@ -55,23 +55,26 @@
                                                     <img src="${account.profileImage}" alt="User Image" style="width: 50px; height: 50px;"/>
                                                 </td> 
                                                 <td>
-                                                    <button class="edit-btn" onclick="window.location.href = 'MainController?action=fishuserlist&userfishid=${account.userID}'">
-                                                        <i class="fas fa-edit"></i> <!-- Edit button -->
+                                                    <button class="btn btn-primary" onclick="window.location.href='ManageFishController?acid=${account.userID}'">
+                                                      
                                                     </button>
+                                                    <a href="editUser.jsp?userid=${account.userID}" class="btn btn-warning">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
                                     </c:if>
                                     <c:if test="${empty listAcc}">
                                         <tr>
-                                            <td colspan="4" class="text-center">No accounts found.</td> <!-- Message if no accounts are found -->
+                                            <td colspan="4" class="text-center">No accounts found.</td> <!-- Thông báo nếu không có tài khoản nào -->
                                         </tr>
                                     </c:if>
                                 </tbody>
                             </table>
                             <div class="footer">
                                 <ul class="pagination">
-                                    <!-- Previous Button -->
+                                    <!-- Nút Previous -->
                                     <c:if test="${tag > 1}">
                                         <li class="page-item">
                                             <a href="ManageAccountFishController?index=${tag-1}" class="page-link text-dark">
@@ -80,7 +83,7 @@
                                         </li>
                                     </c:if>
 
-                                    <!-- Page numbers -->
+                                    <!-- Số trang -->
                                     <c:forEach var="i" begin="1" end="${endPage}" step="1">
                                         <c:if test="${i <= 3 || i >= endPage - 2 || (i >= tag - 1 && i <= tag + 1)}">
                                             <li class="page-item ${tag == i ? 'active' : ''}">
@@ -90,7 +93,7 @@
                                             </li>
                                         </c:if>
 
-                                        <!-- Check if there's a gap and add "..." -->
+                                        <!-- Kiểm tra nếu có khoảng trống và thêm "..." -->
                                         <c:if test="${i == 3 && tag > 4}">
                                             <li class="page-item disabled">
                                                 <span class="page-link">...</span>
@@ -104,7 +107,7 @@
                                         </c:if>
                                     </c:forEach>
 
-                                    <!-- Next Button -->
+                                    <!-- Nút Next -->
                                     <c:if test="${tag < endPage}">
                                         <li class="page-item">
                                             <a href="ManageAccountFishController?index=${tag + 1}" class="page-link text-dark">
@@ -114,19 +117,17 @@
                                     </c:if>
                                 </ul>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
 
             <script>
-                // Load header and sidebar from utils.jsp
+                // Tải header và sidebar từ utils.jsp
                 $('#header').load('utils.jsp #header_admin', () => {
-                    $.getScript('./assets/js/utilsAdmin.js'); // Load additional scripts for admin functionality
+                    $.getScript('./assets/js/utilsAdmin.js'); // Tải thêm script cho chức năng quản trị viên
                 });
-                $('#sidebar_admin').load('utils.jsp #sidebar_manager'); // Load sidebar
+                $('#sidebar_admin').load('utils.jsp #sidebar_manager'); // Tải sidebar
             </script>
     </body>
 </html>

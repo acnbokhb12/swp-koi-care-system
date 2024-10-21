@@ -19,6 +19,14 @@ public class FishService {
     public FishService() {
         fishDAO = new FishDAO();
     }
+    
+  public int countAllFishS() {
+        return fishDAO.countFishs();
+    }
+      public ArrayList<Fish> getFishsS(int index) {
+        ArrayList<Fish> list  = fishDAO.getFishs(index);
+        return list;
+    }
 
     // Get all fish for the specific account ID
     public ArrayList<Fish> getAllFishS(int accountID) {
