@@ -98,7 +98,7 @@ public class BlogDAO {
                         + "inner join [dbo].[Accounts] acc\n"
                         + "on b.AccID = acc.AccID\n"
                         + "where b.isActive = 1\n"
-                        + "order by BlogID \n"
+                        + "order by BlogID desc \n"
                         + "offset ? rows \n"
                         + "fetch next 8 rows only";
                 ps = c.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class BlogDAO {
         try {
             c = DatabaseConnectionManager.getConnection();
             if (c != null) {
-                String sql = "select * from CategoryBlog";
+                String sql = "select * from CategoryBlog ";
                 ps = c.prepareStatement(sql);
                 rs = ps.executeQuery();
                 if (rs != null) {
