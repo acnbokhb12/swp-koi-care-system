@@ -38,6 +38,7 @@ public class LoginGoogleController extends HttpServlet {
              String code = request.getParameter("code");
             AccountService acs = new AccountService();
             String accessToken = acs.getToken(code);
+            System.out.println(accessToken);
             Account acc = acs.getUserInfo(accessToken);
             String email = acc.getEmail();
             Account account = acs.getAccountByEmail(email);
