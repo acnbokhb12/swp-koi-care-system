@@ -105,8 +105,8 @@
                                                 <img src="${p.imgProduct}" alt="Image of ${p.nameProduct}" />
                                             </td> 
                                             <td>${p.categoryP.categoryName}</td> 
-                                            <td>
-                                                <fmt:formatNumber value="${p.price}" pattern="#,###"/>
+                                            <td class="price-product-detail">
+                                                <fmt:formatNumber value="${p.price}" pattern="#,###"/> đ
                                             </td>
                                             <td> 
                                                 <a href="MainController?action=productinformation&pid=${p.productID}" class="edit-btn">
@@ -333,6 +333,6 @@
         document.addEventListener("DOMContentLoaded", function () {
             showSearchByName();
         });
-
+       
     </script>
 </html>

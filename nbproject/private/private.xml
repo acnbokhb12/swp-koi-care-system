@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/PondController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/UpdatePondInformationController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/manageProduct.jsp</file>
+        </group>
     </open-files>
 </project-private>
