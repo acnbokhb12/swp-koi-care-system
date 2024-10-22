@@ -91,7 +91,7 @@ public class MainController extends HttpServlet {
                 case IConstant.DELET_BLOG:
                     url = "DeleteBlogController";
                     break;
-        // START PLACE FISH -------------------------------------------------------------  
+                // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";
                     break;
@@ -135,10 +135,28 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.FISH_USER_LIST:
                     url = "FishUserListController";
-                    break; 
-                // START PLACE MANAGER -------------------------------------------------------------     
+                    break;
+                // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
                 case IConstant.PRODUCT_MANAGE:
                     url = "ManageProductController";
+                    break;
+                case IConstant.PRODUCT_INFORMATION:
+                    url = "ManagerProductInformationController";
+                    break;
+                case IConstant.PRODUCT_INFORMATION_UPDATE:
+                    url = "ManagerProductInformationUpdateController";
+                    break;
+                case IConstant.PRODUCT_CREATE_NEW:
+                    url = "ManagerCreateNewProductController";
+                    break;
+                case IConstant.PRODUCT_DELETE:
+                    url = "ManagerProductDeleteController";
+                    break;
+                case IConstant.PRODUCT_UPDATE:
+                    url = "ManagerProductUpdateController";
+                    break;
+                case IConstant.PRODUCT_IMAGE_UPDATE:
+                    url = "ManagerProductImageUpdateController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

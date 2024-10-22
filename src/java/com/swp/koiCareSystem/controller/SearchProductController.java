@@ -101,4 +101,4 @@ public class SearchProductController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+}   

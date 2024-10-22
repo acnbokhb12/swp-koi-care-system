@@ -541,15 +541,17 @@ input, textarea {
     padding: 0;
 
 }
-.contain-btn-select-search{
+.contain-btn-select-search {
     font-weight: 600;
-    padding: 0.4rem 4rem ;
+    padding: 0.4rem 4rem;
     height: 3.2rem;
-    font-size:1.4rem;
+    font-size: 1.4rem;
     background: #fff;
     color: #4a4f57;
-    border: 1px solid #525456; 
+    border: 1px solid #525456;
+    margin-left: 15px;
 }
+
 .btn-submit-search-order{
     font-weight: 600;
     padding: 0.4rem 2rem ;
@@ -612,4 +614,8 @@ input, textarea {
         font-size: 12px;
     }
 
+}
+
+.flex-container select {
+    margin-right: 10px;
 }

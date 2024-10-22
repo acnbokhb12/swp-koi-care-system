@@ -383,7 +383,7 @@ public class ProductDAO {
             if (cn != null) {
                 String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID  \n"
                         + "	where p.isActive =1\n"
-                        + "                                    order by ProductID  \n"
+                        + "                                    order by ProductID DESC \n"
                         + "                           offset ? rows fetch next 20 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, distance);
@@ -423,20 +423,246 @@ public class ProductDAO {
         return listP;
     }
 
-    public static void main(String[] args) {
-//        ProductDAO pd = new ProductDAO();
-//        ArrayList<Product> list = pd.SearchProductsByName("koi", 1); 
-//        Product p = pd.GetProductById(1);
-//        System.out.println(p);
-//        ArrayList<ProductCategory> lp = pd.GetAllCategory();
-//        ArrayList<Product> list = pd.PagingGetProductByCateId(1, 1);
-//        if (list != null) {
-//            for (Product i : list) {
-//                System.out.println(i);
-//            }
-//
-//        } else {
-//            System.out.println(list);
-//        }
+    public boolean deleteProduct(int id) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        boolean isUpdated = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Products SET isActive = 0 WHERE ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, id);
+                int rowsAffected = pst.executeUpdate();
+                isUpdated = (rowsAffected > 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isUpdated;
+    }
+
+    public boolean updateProduct(Product product) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Products SET CategoryID = ?, Name = ?, Description = ?, Price = ? WHERE ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, product.getCateId());
+                pst.setString(2, product.getNameProduct());
+                pst.setString(3, product.getDescription());
+                pst.setFloat(4, product.getPrice());
+                pst.setInt(5, product.getProductID());
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateImgByProductID(int productId, String img) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Products SET Image = ? WHERE ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, img);
+                pst.setInt(2, productId);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean createNewProduct(Product product) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        boolean isInserted = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO Products (CategoryID, Name, Image, Description, Price, isActive) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, product.getCategoryP().getCategoryID());
+                pst.setString(2, product.getNameProduct());
+                pst.setString(3, product.getImgProduct());
+                pst.setString(4, product.getDescription());
+                pst.setFloat(5, product.getPrice());
+                pst.setBoolean(6, product.isIsActive());
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    isInserted = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isInserted;
+    }
+
+    public ArrayList<Product> managerSearchProductsByName(String name, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Product> listP = new ArrayList<>();
+        int distance = (index - 1) * 20;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "                       where  p.[Name] like ? and p.[isActive] =1\n"
+                        + "                       order by ProductID DESC \n"
+                        + "                       offset ? rows fetch next 20 rows only;";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + name + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        Product pd = new Product();
+                        ProductCategory pdct = new ProductCategory(rs.getInt(8), rs.getString(9));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
+                        pd.setIsActive(rs.getBoolean(7));
+                        pd.setCategoryP(pdct);
+                        listP.add(pd);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listP;
+    }
+
+    public ArrayList<Product> managerGetProductsByCateId(int cateId, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Product> listP = null;
+        int distance = (index - 1) * 20;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select *  from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "                      where  ctp.CategoryID = ? and p.isActive =1\n"
+                        + "                       order by ProductID DESC  \n"
+                        + "                        offset ? rows fetch next 20 rows only;";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, cateId);
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+
+                    listP = new ArrayList<>();
+                    do {
+                        Product pd = new Product();
+                        ProductCategory pdct = new ProductCategory(rs.getInt(8), rs.getString(9));
+                        pd.setProductID(rs.getInt(1));
+                        pd.setNameProduct(rs.getString(3));
+                        pd.setImgProduct(rs.getString(4));
+                        pd.setDescription(rs.getString(5));
+                        pd.setPrice(rs.getFloat(6));
+                        pd.setIsActive(rs.getBoolean(7));
+                        pd.setCategoryP(pdct);
+                        listP.add(pd);
+                    } while (rs.next());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listP;
     }
 }

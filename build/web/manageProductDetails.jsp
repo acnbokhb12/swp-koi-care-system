@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,44 +42,44 @@
                         <div class="header-information">
                             <h2>Product Information</h2>
                             <div class="button-group">
-                                <a href="manageProductUpdate.jsp" class="btn btn-primary" id="updateButton">Update Product</a>
-                                <a href="#" class="btn btn-danger" id="deleteButton">Delete</a>
+                                <a href="MainController?action=productinformationupdate&pid=${Product.productID}" class="btn btn-primary" id="updateButton">Update Product</a>
+                                <a href="MainController?action=productdelete&pid=${Product.productID}" class="btn btn-danger" id="deleteButton">Delete</a>
                             </div>
                         </div>
                         <div class="details-section">
                             <div class="product-wrapper row">
                                 <div class="col-lg-6 pt-4">
                                     <img
-                                    src="https://mazuri.com/cdn/shop/files/727613004804-center-1.jpg?v=1714180786"
-                                    alt="Product Image"
-                                    class="product-img  "
-                                    />
+                                        src="${Product.imgProduct}"
+                                        alt="${Product.nameProduct}"
+                                        class="product-img  "
+                                        />
                                 </div>
-                               
+
                                 <div class="product-info-block col-lg-6 pt-4">
                                     <div class="info-field">
                                         <label for="productID">Product ID:</label>
-                                        <span id="productID">12345</span>
+                                        <span id="productID">${Product.productID}</span>
                                     </div>
                                     <div class="info-field">
                                         <label for="productName">Product Name:</label>
-                                        <span id="productName">Koi Food</span>
+                                        <span id="productName">${Product.nameProduct}</span>
                                     </div>
                                     <div class="info-field">
                                         <div class="info-item">
                                             <label for="productDescription">Description:</label>
                                             <span id="productDescription" class="description-text">
-                                                High-quality food for Koi fish, packed with essential nutrients.
+                                                ${Product.description}
                                             </span>
                                         </div>
                                     </div>
                                     <div class="info-field">
                                         <label for="productCategory">Category:</label>
-                                        <span id="productCategory">Food</span>
+                                        <span id="productCategory">${Product.categoryP.categoryName}</span>
                                     </div>
                                     <div class="info-field">
                                         <label for="productPrice">Product Price:</label>
-                                        <span id="product__detail-price-id">20000</span>
+                                        <span id="product__detail-price-id">${Product.price}</span>
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +95,8 @@
             $('#sidebar_admin').load('utils.jsp  #sidebar_manager');
 
             let amount = parseInt(document.getElementById('product__detail-price-id').innerText);
-      let formattedAmount = amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
-      document.getElementById('product__detail-price-id').innerText = formattedAmount;
+            let formattedAmount = amount.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})
+            document.getElementById('product__detail-price-id').innerText = formattedAmount;
         </script>
     </body>
 </html>

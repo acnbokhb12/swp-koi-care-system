@@ -13,10 +13,6 @@
         <servlet-class>com.swp.koiCareSystem.controller.ProductCateController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchProductController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.RegisterController</servlet-class>
     </servlet>
@@ -111,7 +107,7 @@
     <servlet>
         <servlet-name>DeletePondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
-    </servlet> 
+    </servlet>
     <servlet>
         <servlet-name>UserFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.UserFishController</servlet-class>
@@ -120,10 +116,45 @@
         <servlet-name>FishUserListController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishUserListController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageProductController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductInformationController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductInformationUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductInformationUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductDeleteController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductImageUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerProductImageUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerCreateNewProductController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerCreateNewProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SearchProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerSearchProductNameController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchProductNameController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerSearchCategoryController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -136,10 +167,6 @@
     <servlet-mapping>
         <servlet-name>ProductCateController</servlet-name>
         <url-pattern>/ProductCateController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchProductController</servlet-name>
-        <url-pattern>/SearchProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -243,16 +270,52 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FishUserListController</servlet-name>
-        <url-pattern>/FishUserListController</url-pattern> 
-    </servlet-mapping>   
-    <servlet-mapping> 
-        <servlet-name>ManageProductController</servlet-name>
-        <url-pattern>/ManageProductController</url-pattern> 
+        <url-pattern>/FishUserListController</url-pattern>
     </servlet-mapping>
-      <error-page>
+    <servlet-mapping>
+        <servlet-name>ManageProductController</servlet-name>
+        <url-pattern>/ManageProductController</url-pattern>
+    </servlet-mapping>
+    <error-page>
         <error-code>404</error-code>
         <location>/404page.jsp</location>
     </error-page>
+    <servlet-mapping>
+        <servlet-name>ManagerProductInformationController</servlet-name>
+        <url-pattern>/ManagerProductInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductInformationUpdateController</servlet-name>
+        <url-pattern>/ManagerProductInformationUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductDeleteController</servlet-name>
+        <url-pattern>/ManagerProductDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductUpdateController</servlet-name>
+        <url-pattern>/ManagerProductUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductImageUpdateController</servlet-name>
+        <url-pattern>/ManagerProductImageUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCreateNewProductController</servlet-name>
+        <url-pattern>/ManagerCreateNewProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerSearchProductNameController</servlet-name>
+        <url-pattern>/ManagerSearchProductNameController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerSearchCategoryController</servlet-name>
+        <url-pattern>/ManagerSearchCategoryController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

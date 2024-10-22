@@ -61,4 +61,28 @@ public class ProductService {
         ArrayList<Product> list = productDAO.getProducts(index);
         return list;
     }
+
+    public boolean deleteProduct(int id) {
+        return productDAO.deleteProduct(id);
+    }
+
+    public boolean updateProduct(Product p) {
+        return productDAO.updateProduct(p);
+    }
+
+    public boolean updateImgByProductID(int id, String imgLink) {
+        return productDAO.updateImgByProductID(id, imgLink);
+    }
+
+    public boolean createNewProduct(Product p) {
+        return productDAO.createNewProduct(p);
+    }
+
+    public ArrayList<Product> managerSearchProductsByName(String name, int index) {
+        return productDAO.managerSearchProductsByName(name, index);
+    }
+
+    public ArrayList<Product> managerGetProductsByCateId(int cateId, int index) {
+        return productDAO.managerGetProductsByCateId(cateId, index);
+    }
 }
