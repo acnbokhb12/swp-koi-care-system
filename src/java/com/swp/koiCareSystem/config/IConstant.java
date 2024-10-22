@@ -59,7 +59,7 @@ public interface IConstant {
     public static String PRODUCT_MANAGE = "productmanage";
     public static String ACCOUNT_FISH_MANAGE = "accountfishmanage";
     public static String CREATE_USER_FISH_MANAGE = "createuserfishmanage";
-
     public static String FISH_MANAGE = "fishmanage";
+
 
 }

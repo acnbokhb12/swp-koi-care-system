@@ -20,11 +20,11 @@ public class FishService {
         fishDAO = new FishDAO();
     }
     
-  public int countAllFishS() {
-        return fishDAO.countFishs();
+  public int countAllFishByIdS(int id) {
+        return fishDAO.countFishs(id);
     }
-      public ArrayList<Fish> getFishsS(int index) {
-        ArrayList<Fish> list  = fishDAO.getFishs(index);
+      public ArrayList<Fish> getFishsbById(int id, int index) {
+        ArrayList<Fish> list  = fishDAO.getFishsByAccID(id, index);
         return list;
     }
 

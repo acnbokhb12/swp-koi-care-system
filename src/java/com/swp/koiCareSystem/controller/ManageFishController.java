@@ -34,35 +34,33 @@ public class ManageFishController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-     String indexPage = request.getParameter("index");
+            int accID = Integer.parseInt(request.getParameter("acid"));
+
+            String indexPage = request.getParameter("index");
             if (indexPage == null) {
-                indexPage = "1"; // Default to page 1
+                indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            
-            // Get fish ID from request
-            int id = Integer.parseInt(request.getParameter("acid"));
-            
-            FishService fs = new FishService();
-            int count = fs.countAllFishS(); //84
 
-             int endPage = count / 10;
+            FishService fs = new FishService();
+
+            int count = fs.countAllFishByIdS(accID);
+
+            int endPage = count / 10;
             if (count % 10 != 0) {
                 endPage++;
             }
-            
-            ArrayList<Fish> fish = fs.getAllFishS(id);
-            ArrayList<Fish> listFishs = fs.getFishsS(index);
-            
-            request.setAttribute("fish", fish);
-            request.setAttribute("listFishs", listFishs);
+
+            ArrayList<Fish> listFishs = fs.getFishsbById(accID, index);
+
+            request.setAttribute("listFish", listFishs);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
-            
+
             request.getRequestDispatcher("manageFish.jsp").forward(request, response);
-        } 
+        }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

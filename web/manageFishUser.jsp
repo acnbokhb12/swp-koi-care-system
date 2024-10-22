@@ -54,14 +54,12 @@
                                                 <td>
                                                     <img src="${account.profileImage}" alt="User Image" style="width: 50px; height: 50px;"/>
                                                 </td> 
+
                                                 <td>
-                                                    <button class="btn btn-primary" onclick="window.location.href='ManageFishController?acid=${account.userID}'">
-                                                      
-                                                    </button>
-                                                    <a href="editUser.jsp?userid=${account.userID}" class="btn btn-warning">
-                                                        <i class="fas fa-edit"></i> Edit
-                                                    </a>
-                                                </td>
+                                            <button class="edit-btn" onclick="window.location.href='ManageFishController?acid=${account.userID}'">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </td>
                                             </tr>
                                         </c:forEach>
                                     </c:if>
@@ -72,6 +70,8 @@
                                     </c:if>
                                 </tbody>
                             </table>
+                            
+                            <!--Phân trang-->
                             <div class="footer">
                                 <ul class="pagination">
                                     <!-- Nút Previous -->
@@ -83,7 +83,6 @@
                                         </li>
                                     </c:if>
 
-                                    <!-- Số trang -->
                                     <c:forEach var="i" begin="1" end="${endPage}" step="1">
                                         <c:if test="${i <= 3 || i >= endPage - 2 || (i >= tag - 1 && i <= tag + 1)}">
                                             <li class="page-item ${tag == i ? 'active' : ''}">
@@ -93,7 +92,6 @@
                                             </li>
                                         </c:if>
 
-                                        <!-- Kiểm tra nếu có khoảng trống và thêm "..." -->
                                         <c:if test="${i == 3 && tag > 4}">
                                             <li class="page-item disabled">
                                                 <span class="page-link">...</span>
