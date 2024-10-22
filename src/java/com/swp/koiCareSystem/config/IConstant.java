@@ -48,9 +48,10 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
-    // START ACCOUNT ---------------------------------------------------------------------------------------------------------------------------------------
-    public final String FISH_USER = "fishuser";
-    public final String FISH_USER_LIST = "fishuserlist";
+
+    // START ACCOUNT HAVE FISH- MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
+    public static String ACCOUNT_FISH_MANAGE = "accountfishmanage"; 
+    public static String FISH_MANAGE = "fishmanage";
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
@@ -60,8 +61,8 @@ public interface IConstant {
     public final String NEWS = "news";
 
 // START MANAGER PRODUCT ----------------------------------------------------------------------------------------------------------------------------------     
+  
     public static String PRODUCT_MANAGE = "productmanage";
-
     public static String PRODUCT_INFORMATION = "productinformation";
     public static String PRODUCT_INFORMATION_UPDATE = "productinformationupdate";
     public static String PRODUCT_CREATE_NEW = "productcreatenew";
@@ -69,5 +70,5 @@ public interface IConstant {
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
  
-
+ 
 }

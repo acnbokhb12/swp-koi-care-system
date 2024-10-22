@@ -14,13 +14,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author PC
  */
-public class UserFishController extends HttpServlet {
+public class ManageAccountFishController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,32 +29,34 @@ public class UserFishController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-         */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-               HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("userAccount");
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            AccountService accs = new AccountService();
+            int count = accs.countAllAccountS();//20
+            int endPage = count / 5;
+            if (count % 5 != 0) {
+                endPage++;
+            }
+            
 
-        if (acc == null ) {  
-            response.sendRedirect("home.jsp");
-            return; 
+            ArrayList<Account> listAccount = accs.getAllAccountsS(index);
+            request.setAttribute("listAcc", listAccount);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
+
+            request.getRequestDispatcher("manageFishUser.jsp").forward(request, response);
         }
-
-        AccountService accountService = new AccountService();
-        ArrayList<Account> listAccounts = accountService.GetFishAccountsS();
-
-        if (listAccounts != null && !listAccounts.isEmpty()) {
-            request.setAttribute("listAccounts", listAccounts);
-        } else {
-            request.setAttribute("errorMessage", "No accounts found.");
-        }
-
-        request.getRequestDispatcher("manageFishUser.jsp").forward(request, response);
     }
-     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

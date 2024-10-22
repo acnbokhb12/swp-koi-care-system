@@ -128,14 +128,14 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
+                    break; 
+                //START ACCOUNT HAVE FISH - MANAGER --------------------------------------------------------------------------------- 
+                 case IConstant.ACCOUNT_FISH_MANAGE:
+                    url = "ManageAccountFishController";
                     break;
-                //START ACCOUNT HAVE FISH---------------------------------------------------------------------------------
-                case IConstant.FISH_USER:
-                    url = "UserFishController";
-                    break;
-                case IConstant.FISH_USER_LIST:
-                    url = "FishUserListController";
-                    break;
+                case IConstant.FISH_MANAGE:
+                    url = "ManageFishController";
+                    break;    
                 // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
                 case IConstant.PRODUCT_MANAGE:
                     url = "ManageProductController";
@@ -156,8 +156,7 @@ public class MainController extends HttpServlet {
                     url = "ManagerProductUpdateController";
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
-                    url = "ManagerProductImageUpdateController";
-                    break;
+                    url = "ManagerProductImageUpdateController";  
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

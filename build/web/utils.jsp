@@ -62,7 +62,7 @@
                 <!-- avatar -->
                  <div class="manager-box dropdown gap-3 px-3">
                     <a href="#" class="d-flex align-items-center nav-link click_btn-subnav  gap-3   ">
-                        <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/120846118_1393138717744114_5343318628172679837_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=HRW0w38pbEQQ7kNvgF_Y1rD&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=ARzB8qdQeV6A2gtFkV7lUga&oh=00_AYDhskM-yEdWNkPKeY4tujMz6Vwn07AZEpNMCJn3qOn-hA&oe=67242460" class="manage-img" alt="">
+                        <img src="${sessionScope.userAccount.profileImage}" class="manage-img" alt="">
                         <div class="manage-info">
                             <!-- name manage - admin -->
                             <p class="manage-name mb-0">${sessionScope.userAccount.fullName}</p>
@@ -117,7 +117,7 @@
                         <li><a href="manageCategory.jsp"><i class="fa-solid fa-tags"></i> Category Manager</a></li>
                         <li><a href="MainController?action=productmanage"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
                         <li><a href="manageOrder.jsp"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
-                        <li><a href="MainController?action=fishuser"><i class="fa-solid fa-fish"></i>Fish User Management</a></li>   
+                        <li><a href="MainController?action=accountfishmanage"><i class="fa-solid fa-fish"></i>Fish User Management</a></li>   
                         <li><a href="#"><i class="fa-solid fa-water"></i>Water Parameter Management</a></li>   
                     </ul>
                 </div>

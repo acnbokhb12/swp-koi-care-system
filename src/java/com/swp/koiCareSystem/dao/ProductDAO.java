@@ -253,7 +253,7 @@ public class ProductDAO {
                         listP.add(pd);
                     } while (rs.next());
                 }
-            }
+             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
