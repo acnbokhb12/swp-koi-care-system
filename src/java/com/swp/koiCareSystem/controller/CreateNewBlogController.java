@@ -8,12 +8,10 @@ package com.swp.koiCareSystem.controller;
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Blog;
-import com.swp.koiCareSystem.model.BlogCategory;
 import com.swp.koiCareSystem.service.BlogService;
 import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -48,10 +46,6 @@ public class CreateNewBlogController extends HttpServlet {
 
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-                return;
-            }
 
             Part filePart = request.getPart("fileimg");
             String temDir = getServletContext().getRealPath("/") + "uploads";

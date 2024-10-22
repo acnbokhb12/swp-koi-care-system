@@ -45,11 +45,6 @@ public class AddNewPondController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-                return;
-            }
-
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
             ImageUploadService imgs = new ImageUploadService();

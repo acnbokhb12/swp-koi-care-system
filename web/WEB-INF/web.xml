@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.swp.koiCareSystem.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name> 
+        <url-pattern>/cart.jsp</url-pattern>
+        <url-pattern>/checkout.jsp</url-pattern>
+        <url-pattern>/cart.jsp</url-pattern>  
+        <url-pattern>/fish.jsp</url-pattern>
+        <url-pattern>/fishGrowth.jsp</url-pattern>
+        <url-pattern>/fishInfor.jsp</url-pattern>   
+        <url-pattern>/pond.jsp</url-pattern>
+        <url-pattern>/pondInfor.jsp</url-pattern>  
+        <url-pattern>/profilePage.jsp</url-pattern>
+        <url-pattern>/purchaseHistory.jsp</url-pattern>          
+        <url-pattern>/manageAccount.jsp</url-pattern>
+        <url-pattern>/manageAddNews.jsp</url-pattern>
+        <url-pattern>/manageFish.jsp</url-pattern>
+        <url-pattern>/manageFishDetail.jsp</url-pattern>
+        <url-pattern>/manageFishUser.jsp</url-pattern>
+        <url-pattern>/manageNews.jsp</url-pattern>
+        <url-pattern>/manageNewsDetailAdmin.jsp</url-pattern>
+        <url-pattern>/manageOrder.jsp</url-pattern>
+        <url-pattern>/manageOrderDetail.jsp</url-pattern>
+        <url-pattern>/manageProduct.jsp</url-pattern>
+        <url-pattern>/manageProduct.jsp</url-pattern>
+        <url-pattern>/manageProductDetails.jsp</url-pattern>
+        <url-pattern>/manageProductUpdate.jsp</url-pattern>
+        <url-pattern>/manageProfileAccount.jsp</url-pattern>
+        <url-pattern>/manageUpdateAccount.jsp</url-pattern>      
+        <servlet-name>PasswordProfileController</servlet-name>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-name>ImageUploadSingleController</servlet-name>   
+        <servlet-name>CreateNewBlogController</servlet-name>
+        <servlet-name>DeleteBlogController</servlet-name>      
+        <servlet-name>FishController</servlet-name>
+        <servlet-name>FishInforController</servlet-name>
+        <servlet-name>FishCreateNewController</servlet-name>
+        <servlet-name>FishDeleteController</servlet-name>
+        <servlet-name>FishInformationUpdateController</servlet-name>
+        <servlet-name>FishImageUpdateController</servlet-name>      
+        <servlet-name>PondController</servlet-name>
+        <servlet-name>PondInforController</servlet-name>
+        <servlet-name>AddNewPondController</servlet-name>
+        <servlet-name>DeletePondController</servlet-name>
+        <servlet-name>UpdatePondInformationController</servlet-name>
+        <servlet-name>UpdatePondImageController</servlet-name>       
+        <servlet-name>ManageAccountFishController</servlet-name>
+        <servlet-name>ManageFishController</servlet-name>
+        <servlet-name>ManageProductController</servlet-name>
+        <servlet-name>ManagerProductInformationController</servlet-name>
+        <servlet-name>ManagerProductInformationUpdateController</servlet-name>
+        <servlet-name>ManagerCreateNewProductController</servlet-name>
+        <servlet-name>ManagerProductDeleteController</servlet-name>
+        <servlet-name>ManagerProductUpdateController</servlet-name>
+        <servlet-name>ManagerProductImageUpdateController</servlet-name>
+
+
+
+    </filter-mapping>
     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.MainController</servlet-class>
@@ -107,12 +168,12 @@
     <servlet>
         <servlet-name>DeletePondController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.DeletePondController</servlet-class>
-    </servlet>  
-    <servlet> 
+    </servlet>
+    <servlet>
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageProductController</servlet-class>
     </servlet>
-    <servlet> 
+    <servlet>
         <servlet-name>ManagerProductInformationController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerProductInformationController</servlet-class>
     </servlet>
@@ -146,7 +207,7 @@
     </servlet>
     <servlet>
         <servlet-name>ManagerSearchCategoryController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateNewBlogController</servlet-name>
@@ -154,15 +215,15 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteBlogController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.DeleteBlogController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.DeleteBlogController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>ManageAccountFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageAccountFishController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageFishController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManageFishController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.ManageFishController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -271,16 +332,16 @@
     <servlet-mapping>
         <servlet-name>DeletePondController</servlet-name>
         <url-pattern>/DeletePondController</url-pattern>
-    </servlet-mapping> 
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageProductController</servlet-name>
         <url-pattern>/ManageProductController</url-pattern>
-    </servlet-mapping> 
+    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/404page.jsp</location>
-    </error-page> 
-    <servlet-mapping> 
+    </error-page>
+    <servlet-mapping>
         <servlet-name>ManagerProductInformationController</servlet-name>
         <url-pattern>/ManagerProductInformationController</url-pattern>
     </servlet-mapping>
@@ -314,7 +375,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerSearchCategoryController</servlet-name>
-        <url-pattern>/ManagerSearchCategoryController</url-pattern> 
+        <url-pattern>/ManagerSearchCategoryController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateNewBlogController</servlet-name>
@@ -322,15 +383,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteBlogController</servlet-name>
-        <url-pattern>/DeleteBlogController</url-pattern> 
-    </servlet-mapping>    
+        <url-pattern>/DeleteBlogController</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageAccountFishController</servlet-name>
         <url-pattern>/ManageAccountFishController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageFishController</servlet-name>
-        <url-pattern>/ManageFishController</url-pattern> 
+        <url-pattern>/ManageFishController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
