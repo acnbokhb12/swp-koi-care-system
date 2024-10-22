@@ -87,7 +87,7 @@ public class CreateNewBlogController extends HttpServlet {
 
             if (isCreated) {
                 request.setAttribute("message", "New Blog has been created.");
-                request.setAttribute("toastMessage", "seuccess");
+                request.setAttribute("toastMessage", "success");
             } else {
                 request.setAttribute("message", "An error occured while creating the blog.");
                 request.setAttribute("toastMessage", "error");

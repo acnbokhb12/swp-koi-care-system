@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <!-- Toast Delete -->
+        <!-- Toast  -->
         <c:if test="${toastMessage != null}"> 
             <div id="toast" style="z-index: 10">  
                 <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }" style="display:flex">
@@ -249,14 +249,23 @@
     </script>
     <script>
         $(document).ready(function () {
-            // Add confirmation for creating a new post
-            $('form').on('submit', function (e) {
-                const confirmation = confirm("Are you sure you want to create this post?");
-                if (!confirmation) {
-                    e.preventDefault(); // Prevent form submission if user cancels
-                }
-            });
-        });
+    // Add confirmation for creating a new post
+    $('form[action="MainController?action=createNewBlog"]').on('submit', function (e) {
+        const title = $('input[name="title"]').val().trim();
+        const content = $('textarea[name="content"]').val().trim();
+
+        // Check if title and content are not empty
+        if (title === "" || content === "") {
+            alert("Please fill out both the title and content.");
+            e.preventDefault(); // Prevent form submission if fields are empty
+        } else {
+            const confirmation = confirm("Are you sure you want to create this post?");
+            if (!confirmation) {
+                e.preventDefault(); // Prevent form submission if user cancels
+            }
+        }
+    });
+});
     </script>
     <script src="./assets/js/notification.js"></script>
     <script src="./assets/js/utils.js"></script>
