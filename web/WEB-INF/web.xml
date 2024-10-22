@@ -154,7 +154,15 @@
     </servlet>
     <servlet>
         <servlet-name>ManagerSearchCategoryController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchCategoryController</servlet-class> 
+    </servlet>
+    <servlet>
+        <servlet-name>CreateNewBlogController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.CreateNewBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DeleteBlogController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -280,7 +288,7 @@
         <error-code>404</error-code>
         <location>/404page.jsp</location>
     </error-page>
-    <servlet-mapping>
+    <servlet-mapping> 
         <servlet-name>ManagerProductInformationController</servlet-name>
         <url-pattern>/ManagerProductInformationController</url-pattern>
     </servlet-mapping>
@@ -314,7 +322,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerSearchCategoryController</servlet-name>
-        <url-pattern>/ManagerSearchCategoryController</url-pattern>
+        <url-pattern>/ManagerSearchCategoryController</url-pattern> 
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateNewBlogController</servlet-name>
+        <url-pattern>/CreateNewBlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogController</servlet-name>
+        <url-pattern>/DeleteBlogController</url-pattern> 
     </servlet-mapping>
     <session-config>
         <session-timeout>
