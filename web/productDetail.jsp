@@ -65,17 +65,18 @@
                 </p>
                 <!-- quantity buy product -->
                 <div class="product__content__detail-form">
-                  <form action="" method="post">
+                  <form action="AddProductToCartController" method="post">
                     <div class="product__detail-form-desc">
                       <h1>Quantity</h1>
                       <div class="product__detail-quantity-btn">
+                          <input type="hidden" value="${Product.productID}" name="idProduct"> 
                         <button type="button" class="minus-btn-quantity"><i class="fa-solid fa-minus"></i></button>
-                        <input type="number" min="1" id="quantity-input" value="1">
+                        <input type="number" min="1" id="quantity-input" name="quantityP" value="1">
                         <button type="button" class="plus-btn-quantity"><i class="fa-solid fa-plus"></i></button>
                       </div>
                       <!-- submit buy product -->
                       <div class="product__btnbuy-ing-pro">
-                        <button type="submit" name="acction" value="buyProduct" class="product__detail-buybtn ">
+                        <button type="submit" name="acction" class="product__detail-buybtn ">
                           <i class="fa-solid fa-cart-shopping"></i> Add product to cart
                         </button> 
                       </div>

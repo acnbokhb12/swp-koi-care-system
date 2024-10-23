@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.service.AccountService;
 import java.io.IOException;
@@ -84,7 +85,7 @@ public class LoginController extends HttpServlet {
                        break;
                     default:
                         session.setAttribute("userAccount", account);
-                        response.sendRedirect("home.jsp");
+                        response.sendRedirect("MainController?action="+ IConstant.HOME);
                         break;
                 }
             } else {

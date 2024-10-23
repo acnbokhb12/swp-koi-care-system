@@ -11,6 +11,7 @@ import com.swp.koiCareSystem.model.ProductCategory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  *
@@ -84,5 +85,5 @@ public class ProductService {
 
     public ArrayList<Product> managerGetProductsByCateId(int cateId, int index) {
         return productDAO.managerGetProductsByCateId(cateId, index);
-    }
+    } 
 }
