@@ -40,7 +40,7 @@ public class ManageProductController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc == null) {
+            if (acc != null && acc.getUserRole().equalsIgnoreCase("manager")) {
                 response.sendRedirect("home.jsp");
                 return;
             }

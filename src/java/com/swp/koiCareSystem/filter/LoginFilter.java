@@ -111,8 +111,9 @@ public class LoginFilter implements Filter {
             HttpSession session = req.getSession();
             if (session.getAttribute("userAccount") == null) {
                 res.sendRedirect("login.jsp");
-                 return; 
-            } 
+                  
+            } else{
+                
 
             Throwable problem = null;
             try {
@@ -139,6 +140,7 @@ public class LoginFilter implements Filter {
                 sendProcessingError(problem, response);
             }
         
+            }
     }
 
     /**

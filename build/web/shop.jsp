@@ -109,7 +109,7 @@
                                 </h3>
                                 <ul class="category-list row"> 
                                     <c:forEach items="${ListC}" var="ct"> 
-                                        <li class="category-item col-lg-12 col-custom-cate ${TagsCate == ct.categoryID ? 'category-item--active' : ''} ">
+                                        <li class="category-item col-lg-12 col-custom-cate ${cateID == ct.categoryID ? 'category-item--active' : ''} ">
                                             <a href="ProductCateController?cateID=${ct.categoryID}" class="category-item__link">${ct.categoryName} </a>
                                         </li>
                                     </c:forEach> 
@@ -190,6 +190,14 @@
 
         <!-- footer -->
         <div id="footer"></div>
+        <style>
+            .category-item--active{
+    background-color: var(--bs-orange);
+} 
+.category-item--active .category-item__link{
+    color: #fff;
+} 
+        </style>
     </body>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {

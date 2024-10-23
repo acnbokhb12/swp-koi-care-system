@@ -35,28 +35,24 @@ public class DeletePondController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if (acc == null) {
-                response.sendRedirect("home.jsp"); 
-            } else { 
-                String pondID = request.getParameter("pondID"); 
-                PondService psv = new PondService();
-                boolean isDelete = psv.deletePondByID(pondID);
+             
+            String pondID = request.getParameter("pondID");
+            PondService psv = new PondService();
+            boolean isDelete = psv.deletePondByID(pondID);
 
 //            PondService ponds = new PondService();
 //            ArrayList<Pond> listP = ponds.GetAllPondS(acc.getUserID());
-                if (isDelete) {
-                    request.setAttribute("message", "Your Pond has been delete");
-                    request.setAttribute("toastMessage", "success");
-                } else {
-                    request.setAttribute("message", "An error occurred while deleting the pond.");
-                    request.setAttribute("toastMessage", "error");
-                }
+            if (isDelete) {
+                request.setAttribute("message", "Your Pond has been delete");
+                request.setAttribute("toastMessage", "success");
+            } else {
+                request.setAttribute("message", "An error occurred while deleting the pond.");
+                request.setAttribute("toastMessage", "error");
+            }
 
 //            request.setAttribute("listPonds", listP);
-                request.getRequestDispatcher("PondController").forward(request, response);
-            }
+            request.getRequestDispatcher("PondController").forward(request, response);
+
         }
     }
 

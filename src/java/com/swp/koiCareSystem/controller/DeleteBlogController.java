@@ -34,25 +34,21 @@ public class DeleteBlogController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-            }else{
-                int blogID = Integer.parseInt(request.getParameter("blogID"));
-                BlogService bs = new BlogService();
-                boolean isDeleted = bs.deleteBlogById(blogID);
-                if (isDeleted) {
-                    request.setAttribute("message", "Your Blog has been delete");
-                    request.setAttribute("toastMessage", "success");
-                } else {
-                    request.setAttribute("message", "An error occurred while deleting the blog.");
-                    request.setAttribute("toastMessage", "error");
-                }
+            /* TODO output your page here. You may use following sample code. */ 
 
-                request.getRequestDispatcher("ManageBlogController").forward(request, response);
+            int blogID = Integer.parseInt(request.getParameter("blogID"));
+            BlogService bs = new BlogService();
+            boolean isDeleted = bs.deleteBlogById(blogID);
+            if (isDeleted) {
+                request.setAttribute("message", "Your Blog has been delete");
+                request.setAttribute("toastMessage", "success");
+            } else {
+                request.setAttribute("message", "An error occurred while deleting the blog.");
+                request.setAttribute("toastMessage", "error");
             }
+
+            request.getRequestDispatcher("ManageBlogController").forward(request, response);
+
         }
     }
 

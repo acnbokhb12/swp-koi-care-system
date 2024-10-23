@@ -39,12 +39,7 @@ public class EditProfileController extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
-
-            // Redirect to home if the user is not logged in
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-                return;
-            }
+ 
             int accID = Integer.parseInt(request.getParameter("accID"));
             String newKoiCareID = (String) request.getParameter("KoiCareId");
             String fullName = (String) request.getParameter("fullname");

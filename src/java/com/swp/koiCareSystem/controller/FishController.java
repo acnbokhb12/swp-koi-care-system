@@ -40,17 +40,15 @@ public class FishController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
-            if(acc == null){
-                response.sendRedirect("home.jsp");
-            }else{
-                FishService fs = new FishService();
-                ArrayList<Fish> listF = fs.getAllFishS(acc.getUserID());
-                PondService psv = new  PondService();
-                ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
-                
-                request.setAttribute("listFish", listF);
-                request.setAttribute("ListPond", listP);                
-            }
+
+            FishService fs = new FishService();
+            ArrayList<Fish> listF = fs.getAllFishS(acc.getUserID());
+            PondService psv = new PondService();
+            ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
+
+            request.setAttribute("listFish", listF);
+            request.setAttribute("ListPond", listP);
+
             request.getRequestDispatcher("fish.jsp").forward(request, response);
 
         }

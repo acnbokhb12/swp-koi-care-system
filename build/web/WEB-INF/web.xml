@@ -57,9 +57,12 @@
         <servlet-name>ManagerProductDeleteController</servlet-name>
         <servlet-name>ManagerProductUpdateController</servlet-name>
         <servlet-name>ManagerProductImageUpdateController</servlet-name>
-
-
-
+        <servlet-name>ManagerSearchProductNameController</servlet-name>
+        
+        
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+      
     </filter-mapping>
     <servlet>
         <servlet-name>MainController</servlet-name>

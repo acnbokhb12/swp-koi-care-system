@@ -141,7 +141,7 @@ public class ProductDAO {
             if (cn != null) {
                 String sql = "select * from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID  \n"
                         + "	where p.isActive =1\n"
-                        + "                                    order by ProductID  \n"
+                        + "                                    order by ProductID desc \n"
                         + "                           offset ? rows fetch next 32 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, distance);
@@ -231,7 +231,7 @@ public class ProductDAO {
             if (cn != null) {
                 String sql = "select *  from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
                         + "                      where  ctp.CategoryID = ? and p.isActive =1\n"
-                        + "                       order by ProductID   \n"
+                        + "                       order by ProductID \n"
                         + "                        offset ? rows fetch next 32 rows only;";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, cateId);

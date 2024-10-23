@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
- 
+
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Fish; 
+import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.FishService;
 import com.swp.koiCareSystem.service.PondService;
@@ -41,29 +41,22 @@ public class FishInforController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
-            if(acc == null){
-                response.sendRedirect("home.jsp"); 
-            }else{ 
-                int id = Integer.parseInt(request.getParameter("fid")); 
-                
-                FishService fins = new FishService();
-                
-                
-                Fish fin = fins.getFishInforByIDS(id);
-                
-                
-                
-                PondService psv = new  PondService(); 
-                
-                ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
-                Pond pondOfFish = psv.getPondOfFishByPondId(fin.getPondID());
-                
-                request.setAttribute("fish", fin);
-                request.setAttribute("pondFish", pondOfFish);
-                request.setAttribute("ListPond", listP);
-                request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
-            }
-             
+
+            int id = Integer.parseInt(request.getParameter("fid"));
+
+            FishService fins = new FishService();
+
+            Fish fin = fins.getFishInforByIDS(id);
+
+            PondService psv = new PondService();
+
+            ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
+            Pond pondOfFish = psv.getPondOfFishByPondId(fin.getPondID());
+
+            request.setAttribute("fish", fin);
+            request.setAttribute("pondFish", pondOfFish);
+            request.setAttribute("ListPond", listP);
+            request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
 
         }
     }

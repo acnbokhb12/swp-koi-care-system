@@ -35,31 +35,25 @@ public class FishDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-            } else {
+            String fishID = request.getParameter("fishID");
+            int pondID = Integer.parseInt(request.getParameter("pondID"));
+            FishService fsv = new FishService();
 
-                String fishID = request.getParameter("fishID");
-                int pondID = Integer.parseInt(request.getParameter("pondID"));
-                FishService fsv = new FishService();
+            boolean isFishExist = fsv.checkFishExist(Integer.parseInt(fishID));
+            if (isFishExist) {
+                boolean isDelete = fsv.deletFishByID(fishID, pondID);
+                if (isDelete) {
+                    request.setAttribute("message", "Fish deleted successfully");
+                    request.setAttribute("toastMessage", "success");
+                } else {
+                    request.setAttribute("message", "An error occurred while deleting the fish");
+                    request.setAttribute("toastMessage", "error");
 
-                boolean isFishExist = fsv.checkFishExist(Integer.parseInt(fishID));
-                if (isFishExist) { 
-                    boolean isDelete = fsv.deletFishByID(fishID, pondID);
-                    if (isDelete) {
-                        request.setAttribute("message", "Fish deleted successfully");
-                        request.setAttribute("toastMessage", "success");
-                    } else {
-                        request.setAttribute("message", "An error occurred while deleting the fish");
-                        request.setAttribute("toastMessage", "error");
-
-                    }
                 }
-
-                request.getRequestDispatcher("FishController").forward(request, response);
             }
+
+            request.getRequestDispatcher("FishController").forward(request, response);
+
         }
     }
 
