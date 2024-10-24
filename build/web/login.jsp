@@ -67,7 +67,7 @@
                                     </c:if>
                                 </div>
                                 <div class="link-forgot-acc">
-                                    <a href="#" class="">Forgot password?</a><br>
+                                    <a href="forgetpassword.jsp" class="">Forgot password?</a><br>
                                 </div>
 
                                 <button class="btn btn-info btn-signin-acc ">Sign In</button><br>

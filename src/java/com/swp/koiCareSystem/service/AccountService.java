@@ -30,27 +30,28 @@ import org.apache.http.client.fluent.Request;
 public class AccountService {
 
     private final AccountDAO acd = new AccountDAO();
-    
-    
-        // Get all fish for the specific account ID
+
+    // Get all fish for the specific account ID
     public int countAllAccountS() {
         return acd.countAllAccounts();
 
-}
-      public ArrayList<Account> getAccountsS() {
+    }
+
+    public ArrayList<Account> getAccountsS() {
         ArrayList<Account> listA = acd.getAccounts();
         return listA;
     }
 
-    
-      public ArrayList<Account> getAllAccountsS(int index) {
+    public ArrayList<Account> getAllAccountsS(int index) {
         ArrayList<Account> listacc = acd.getAccounts(index);
         return listacc;
     }
- public boolean createNewAccountFishS(Account accfish) {
+
+    public boolean createNewAccountFishS(Account accfish) {
         return acd.createNewAccount(accfish);
-        
+
     }
+
     public String hashPassword(String password) {
         String salt = "salt";
         String result = null;
@@ -95,11 +96,11 @@ public class AccountService {
         return googlePojo;
 
     }
-    
-    public String getPasswordByAccID(int acid){
+
+    public String getPasswordByAccID(int acid) {
         return acd.getPasswordByAccID(acid);
     }
-    
+
     public boolean registerUser(Account account) {
         account.setPassword(hashPassword(account.getPassword()));
         return acd.registerUser(account);
@@ -136,10 +137,20 @@ public class AccountService {
         String hashedPassword = hashPassword(newPassword);
         return acd.updatePassword(accID, hashedPassword);
     }
-    
-    public boolean upDateImgAccountById(int acid, String imgLink){
+
+    public boolean upDateImgAccountById(int acid, String imgLink) {
         return acd.updateImgByAccountID(acid, imgLink);
     }
+
+    public boolean updatePasswordWithEmail(String newPassword, String email) {
+        String hashedPassword = hashPassword(newPassword);
+        return acd.updatePasswordWithEmail(hashedPassword, email);
+    }
+
+    public boolean checkEmail(String email) {
+        return acd.checkEmail(email);
+    }
+
     public static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");
