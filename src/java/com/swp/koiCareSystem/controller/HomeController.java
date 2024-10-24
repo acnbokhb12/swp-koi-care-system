@@ -40,7 +40,7 @@ public class HomeController extends HttpServlet {
             Account acc = (Account) session.getAttribute("userAccount");
             if(acc!=null){
                 HashMap<Product, Integer> cart = (HashMap<Product, Integer>) session.getAttribute("cart");
-                if (cart == null) {
+                if (cart == null || cart.isEmpty()) {
                     CartService cv = new CartService();
                     // Gọi getCart từ Redis nếu giỏ hàng chưa có trong session
                     HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());

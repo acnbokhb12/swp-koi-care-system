@@ -67,7 +67,7 @@
                                     <!-- desc namr-->
                                     <div class="cart__about__property-infor-desc col-md-6">
                                         <div class="cart__about__property-name">
-                                            <h3>Amish White Bread</h3>
+                                            <h3>${entry.key.nameProduct}</h3>
                                         </div>
                                         <div class="cart__about__property-quantity ">
                                             <h3>Quantity: <span>${entry.value}</span></h3>
@@ -76,9 +76,17 @@
                                             <h3>Type: <span>${entry.key.categoryP.categoryName}</span></h3>
                                         </div>
                                         <div class="cart__about__property-update-delete">
-                                            <button type="button" class="cart__property-update">Edit</button>    
+                                            <button type="button"
+                                                    data-id="${entry.key.productID}"
+                                                    data-name="${entry.key.nameProduct}"
+                                                    data-quantity="${entry.value}"
+                                                    data-image="${entry.key.imgProduct}"
+                                                    class="cart__property-update">Edit</button>    
                                             <!-- delete -->
-                                            <button class="cart__property-delete">
+                                            <button class="cart__property-delete"
+                                                    data-id="${entry.key.productID}"
+                                                    data-name="${entry.key.nameProduct}">
+                                                 
                                                 Delete
                                                 <div class="icon-1">
                                                     <svg
@@ -193,19 +201,20 @@
                                             Amissh bread
                                         </h1>
                                         <div class="modal__product-body-update-quantity">
-                                            <form action="error.html" method="post">
+                                            <form action="EditProductCartController" method="get">
+                                               <input class="idProductToUpdate" type="hidden" name="txteditId" value="1">
                                                 <div class="product__detail-form-desc">
                                                     <h1>Quantity</h1>
                                                     <div class="product__detail-quantity-btn">
                                                         <button type="button" class="minus-btn-quantity"><i
                                                                 class="fa-solid fa-minus"></i></button>
-                                                        <input type="number" min="1" id="quantity-input" value="1">
+                                                                <input type="number" min="1" id="quantity-input" value="1" name="newQuantity">
                                                         <button type="button" class="plus-btn-quantity"><i
                                                                 class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                     <!-- submit buy product -->
                                                     <div class="product__btnbuy-ing-pro">
-                                                        <button type="submit" name="acction" value="buyProduct"
+                                                        <button type="submit" name="btnActionEditCart" value="update"       
                                                                 class="product__detail-buybtn ">
                                                             <i class="fa-solid fa-circle-check"></i> Update
                                                         </button>
@@ -232,13 +241,17 @@
                                     <button type="button" class="close-confirm-delete close " data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                                    <p style="font-size: 16px; color: #000;">
+                                        Do you really want to delete 
+                                        <span class="nameProductToDelete" 
+                                            style="color: #000; font-weight: 600; background-color: #ff5656; padding: 2px 10px; border-radius: 4px;">                                                  
+                                        </span>  ? This process cannot be undone.</p>
                                 </div>
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn-cancel-delete btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <form action="" method="post">
-
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    <form action="EditProductCartController" method="post">
+                                         <input class="idProductToDelete" type="hidden" name="txteditId" value="1">
+                                         <button type="submit" class="btn btn-danger" name="btnActionEditCart" value="remove">Delete</button>
                                     </form>
                                 </div>
                             </div>
@@ -283,6 +296,23 @@
             </c:choose>
 
         </div>
+        <!-- Toast -->
+        <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        </c:if>
         <!-- footer -->
         <div id="footer"></div>
 
@@ -295,8 +325,10 @@
             $.getScript('./assets/js/utilsCustomer.js');
         });
     </script>
+        <script src="assets/js/notification.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+       
             const minusBtn = document.querySelector('.minus-btn-quantity');
             const plusBtn = document.querySelector('.plus-btn-quantity');
             const quantityInput = document.getElementById('quantity-input');
@@ -332,15 +364,29 @@
             document.getElementById('subtotal-quantity-price-item').innerText = formattedsubTotal;
 
 
-        });
+        
 
         const closeUpadte = document.querySelector('.modal__cart__product-header i');
         const openEditProducts = document.querySelectorAll('.cart__property-update');
 
         const modalProduct = document.querySelector('.modal__cart__product');
-
+        const modalNameProduct = document.querySelector('.modal__product-body-name');
+        const modalImgProduct = document.querySelector('.modal__product-body-img img');
+        const modalQuantityInput = document.querySelector('#quantity-input');
+        const modalProductIdUpdate = document.querySelector('.idProductToUpdate');
+  
         for (const openeditPr of openEditProducts) {
-            openeditPr.addEventListener('click', function () {
+            openeditPr.addEventListener('click', function() {
+                const productData ={
+                    idP: this.getAttribute('data-id'),
+                    nameP: this.getAttribute('data-name'),
+                    imgP : this.getAttribute('data-image'),
+                    quantityP: this.getAttribute('data-quantity')
+                };
+                modalProductIdUpdate.value = productData.idP;
+                modalNameProduct.innerText = productData.nameP;
+                modalImgProduct.src = productData.imgP;
+                modalQuantityInput.value = productData.quantityP;
                 modalProduct.classList.add('modal__cart__product-open');
             });
         }
@@ -365,9 +411,17 @@
         const btnCloseConfirm = document.querySelector('.close-confirm-delete');
         const btnCancelDelete = document.querySelector('.btn-cancel-delete');
         const modalStopPropafation = document.querySelector('.modal-confirm');
-
+        
+        const nameFoodDelete = document.querySelector('.nameProductToDelete');
+        const modalIdDelete = document.querySelector('.idProductToDelete');
         for (const openConfirm of btnDelete) {
             openConfirm.addEventListener('click', function () {
+                const productData ={
+                    idP: this.getAttribute('data-id'),
+                    nameP: this.getAttribute('data-name')
+                };
+                nameFoodDelete.innerText = productData.nameP;
+                modalIdDelete.value = productData.idP;
                 modalConfirmDelete.classList.add('modal-confirm-delete-open');
             });
         }
