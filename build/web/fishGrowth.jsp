@@ -51,14 +51,15 @@
                         </div>
                         <div class="col-md-3 item_grow_fish-detail">
                             <h2>Search statistics </h2>
-                            <form action="" id="date_growth-length">
+                            <form action="MainController?action=fishgrowthchartsearchlength" method="post" id="date_growth-length">
+                                <input type="hidden" name="fishID" value="${fishInfo.fishID}"/>
                                 <div class="form-date-input-growth">
-                                    <label class="lable_form-date" for="">From Date:</label>
-                                    <input id="input_date_length_from" class="input_form-date lastweek_growth-input" type="date" name="" id="">
+                                    <label class="lable_form-date" for="input_date_length_from">From Date:</label>
+                                    <input id="input_date_length_from" class="input_form-date lastweek_growth-input" type="date" name="fromDate" id="" required>
                                 </div>
                                 <div class="form-date-input-growth">
-                                    <label class="lable_form-date" for="">To Date:</label>
-                                    <input id="input_date_length_to" class="input_form-date today_growth-input" type="date" name="" id="">
+                                    <label class="lable_form-date" for="input_date_length_to">To Date:</label>
+                                    <input id="input_date_length_to" class="input_form-date today_growth-input" type="date" name="toDate"  id="" required>
                                 </div>
                                 <button class="btn-submit-search-date" type="submit">Search</button>
                             </form>
@@ -70,14 +71,15 @@
                         </div>
                         <div class="col-md-3 item_grow_fish-detail">
                             <h2>Search statistics </h2>
-                            <form action="#" id="date_growth-weight">
+                            <form action="MainController?action=fishgrowthchartsearchweight" method="post" id="date_growth-weight">
+                                <input type="hidden" name="fishID" value="${fishInfo.fishID}"/>
                                 <div class="form-date-input-growth">
                                     <label class="lable_form-date" for="">From Date:</label>
-                                    <input id="input_date_weight_from" class="input_form-date lastweek_growth-input" type="date" name="" id="">
+                                    <input id="input_date_weight_from" class="input_form-date lastweek_growth-input" type="date" name="fromDate" id="" required>
                                 </div>
                                 <div class="form-date-input-growth">
                                     <label class="lable_form-date" for="">To Date:</label>
-                                    <input id="input_date_weight_to" class="input_form-date today_growth-input" type="date" name="" id="">
+                                    <input id="input_date_weight_to" class="input_form-date today_growth-input" type="date" name="toDate" id="" required >
                                 </div>
                                 <button class="btn-submit-search-date" type="submit">Search</button>
                             </form>
@@ -176,17 +178,25 @@
         }
     </style>
     <script>
-        // Initialize the growth chart
+
         var chart = echarts.init(document.getElementById('koiGrowthChart_length'));
         var lengthData = [];
         var dateLabels = [];
 
-        <c:if test="${not empty fishdevelop}">
-            <c:forEach var="development" items="${fishdevelop}">
-        lengthData.push(${development.updateLength});
+        <c:choose>
+            <c:when test="${not empty fishDevelopmentsLength}">
+                <c:forEach var="development" items="${fishDevelopmentsLength}">
+        lengthData.push(parseFloat(${development.updateLength}));
         dateLabels.push('${development.updateDate}');
-            </c:forEach>
-        </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="development" items="${fishdevelop}">
+        lengthData.push(parseFloat(${development.updateLength}));
+        dateLabels.push('${development.updateDate}');
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
 
         var option = {
             title: {
@@ -254,12 +264,20 @@
         var weightData = [];
         var weightDateLabels = [];
 
-        <c:if test="${not empty fishdevelop}">
-            <c:forEach var="development" items="${fishdevelop}">
+        <c:choose>
+            <c:when test="${not empty fishDevelopmentsWeight}">
+                <c:forEach var="development" items="${fishDevelopmentsWeight}">
         weightData.push(parseFloat(${development.updateWeight}));
         weightDateLabels.push('${development.updateDate}');
-            </c:forEach>
-        </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="develop" items="${fishdevelop}">
+        weightData.push(parseFloat(${develop.updateWeight}));
+        weightDateLabels.push('${develop.updateDate}');
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
 
         var option = {
             title: {
@@ -323,6 +341,8 @@
         };
 
         chartWeight.setOption(option);
+
+
     </script>
     <script>
         const formNews = document.getElementById('fomr_fill-news');
@@ -353,7 +373,7 @@
             if (dayDifference < 1) {
                 alert('The gap between From Date and To Date must be at least 1 day.');
             } else if (dayDifference > 12) {
-                alert('The gap between From Date and To Date cannot be more than 12 days.');
+                alert('The gap between From Date and To Date cannot be more than 11 days.');
             } else {
                 e.target.submit();
             }
@@ -378,13 +398,11 @@
             console.log(dayDifference)
             if (dayDifference < 1) {
                 alert('The gap between From Date and To Date must be at least 1 day.');
-            } else if (dayDifference > 12) {
-                alert('The gap between From Date and To Date cannot be more than 12 days.');
+            } else if (dayDifference > 11) {
+                alert('The gap between From Date and To Date cannot be more than 11 days.');
             } else {
                 e.target.submit();
             }
         });
-
     </script>
-
 </html>

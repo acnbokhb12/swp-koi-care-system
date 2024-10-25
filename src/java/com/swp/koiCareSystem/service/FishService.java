@@ -9,6 +9,7 @@ import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.FishDevelopment;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -155,5 +156,9 @@ public class FishService {
 
     public boolean checkDateExists(int fishId, Date updateDate) {
         return fishDAO.checkGrowthChartDateExists(fishId, updateDate);
+    }
+
+    public ArrayList<FishDevelopment> getFishDevelopmentByDateRange(int fishId, Date fromDate, Date toDate) {
+        return fishDAO.getFishDevelopmentByDateRange(fishId, fromDate, toDate);
     }
 }

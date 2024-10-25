@@ -633,6 +633,56 @@ public class FishDAO {
         return exists;
     }
 
+    public ArrayList<FishDevelopment> getFishDevelopmentByDateRange(int fishId, Date fromDate, Date toDate) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<FishDevelopment> listdevelopment = new ArrayList<>();
+
+        try {
+            // Establish connection
+            conn = DatabaseConnectionManager.getConnection();
+
+            String sql = "SELECT FishDevelopmentID, FishID, UpdateDate, UpdateLength, UpdateWeight "
+                    +"FROM FishDevelopment "
+                    + "WHERE FishID = ? AND UpdateDate BETWEEN ? AND ? "
+                    + "ORDER BY UpdateDate ASC";
+
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, fishId);
+            ps.setDate(2, fromDate);
+            ps.setDate(3, toDate);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("FishDevelopmentID");
+                Date updateDate = rs.getDate("UpdateDate");
+                float updateLength = rs.getFloat("UpdateLength");
+                float updateWeight = rs.getFloat("UpdateWeight");
+
+                listdevelopment.add(new FishDevelopment(id, fishId, updateDate, updateLength, updateWeight));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listdevelopment;
+    }
 
     /*
 

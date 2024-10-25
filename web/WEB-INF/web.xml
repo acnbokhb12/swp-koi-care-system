@@ -233,6 +233,14 @@
         <servlet-name>FishGrowthChartCreateNewController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartCreateNewController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartSearchLengthController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartSearchLengthController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartSearchWeightController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -408,6 +416,14 @@
     <servlet-mapping>
         <servlet-name>FishGrowthChartCreateNewController</servlet-name>
         <url-pattern>/FishGrowthChartCreateNewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartSearchLengthController</servlet-name>
+        <url-pattern>/FishGrowthChartSearchLengthController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
+        <url-pattern>/FishGrowthChartSearchWeightController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
