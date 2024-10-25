@@ -51,15 +51,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="age">Age:</label>
-                                            <p id="age" class="fish-detail">${fish.age}</p>
+                                            <p id="age" class="fish-detail">${fish.age} <span class="sub_span-highlight">year(s)</span></p>
                                         </div>
                                         <div class="form-group">
                                             <label for="length">Length:</label>
-                                            <p id="length" class="fish-detail">${fish.length} cm</p>
+                                            <p id="length" class="fish-detail">${fish.length} <span class="sub_span-highlight">cm</span> </p>
                                         </div>
                                         <div class="form-group">
                                             <label for="weight">Weight:</label>
-                                            <p id="weight" class="fish-detail">${fish.weight} kg</p>
+                                            <p id="weight" class="fish-detail">${fish.weight} <span class="sub_span-highlight">kg</span></p>
                                         </div>
                                         <div class="form-group">
                                             <label for="gender">Gender:</label>
@@ -70,11 +70,10 @@
                             </div>
                             <!-- Pond Information Section -->
                             <div class="pond-container">
-                                <fmt:setLocale value="en_US" />
                                 <h3>Pond Information</h3>
                                 <div class="form-group">
                                     <label for="pondID">Pond ID:</label>
-                                    <p id="pondID" class="pond-detail">${pond.pondID}</p>
+                                    <p id="pondId" class="pond-detail">${pond.pondID}</p>
                                 </div>
                                 <div class="form-group d-flex align-items-start">
                                     <img id="pondImage" src="${pond.image}" alt="${pond.name}" class="img-fluid pond-image" />
@@ -90,17 +89,17 @@
                                         <div class="form-group">
                                             <label for="volume">Volume:</label>
                                             <fmt:formatNumber value="${pond.volume}" pattern="0.0" var="formattedVolume" />
-                                            <p id="volume" class="pond-detail">${formattedVolume} liters</p>
+                                            <p id="volume" class="pond-detail highlight">${formattedVolume} <span class="sub_span-highlight"> (l)</span></p>
                                         </div>
                                         <div class="form-group">
                                             <label for="depth">Depth:</label>
                                             <fmt:formatNumber value="${pond.depth}" pattern="0.0" var="formattedDepth" />
-                                            <p id="depth" class="pond-detail">${formattedDepth} meters</p>
+                                            <p id="depth" class="pond-detail highlight">${formattedDepth} <span class="sub_span-highlight">(m)</span></p>
                                         </div>
                                         <div class="form-group">
                                             <label for="pumpPower">Pump Power:</label>
                                             <fmt:formatNumber value="${pond.pumpPower}" pattern="0.0" var="formattedPumpPower" />
-                                            <p id="pumpPower" class="pond-detail">${formattedPumpPower} watts</p>
+                                            <p id="pumpPower" class="pond-detail highlight">${formattedPumpPower} <span class="sub_span-highlight">(l/h)</span></p>
                                         </div>
                                         <div class="form-group">
                                             <label for="drainCount">Drain Count:</label>
