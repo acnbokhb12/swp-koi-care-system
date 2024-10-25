@@ -31,22 +31,22 @@ public class ManageFishDetailController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    try (PrintWriter out = response.getWriter()) {
-        int fdid = Integer.parseInt(request.getParameter("fdid"));
-        PondService pservice = new PondService();
-        Pond pdetail = pservice.getPondDetailByIDS(fdid);
-        FishService fins = new FishService();
-        Fish fdetail = fins.getFishDetailByIDS(fdid);
-        
-        request.setAttribute("fish", fdetail);
-        request.setAttribute("pond", pdetail); // Pass the pond object to JSP
-        
-        request.getRequestDispatcher("manageFishDetail.jsp").forward(request, response);
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            int fdid = Integer.parseInt(request.getParameter("fdid"));
+            FishService fins = new FishService();
+            Fish fdetail = fins.getFishDetailByIDS(fdid);
+            PondService pservice = new PondService();
+            Pond pdetail = pservice.getPondDetailByIDS(fdetail.getPondID());
+
+            request.setAttribute("fish", fdetail);
+            request.setAttribute("pond", pdetail); 
+
+            request.getRequestDispatcher("manageFishDetail.jsp").forward(request, response);
+        }
     }
-}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

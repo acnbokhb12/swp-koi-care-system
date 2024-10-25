@@ -71,52 +71,56 @@
                             <!-- Pond Information Section -->
                             <div class="pond-container">
                                 <h3>Pond Information</h3>
-                                <div class="form-group">
-                                    <label for="pondID">Pond ID:</label>
-                                    <p id="pondId" class="pond-detail">${pond.pondID}</p>
-                                </div>
-                                <div class="form-group d-flex align-items-start">
-                                    <img id="pondImage" src="${pond.image}" alt="${pond.name}" class="img-fluid pond-image" />
-                                    <div class="pond-details">
-                                        <div class="form-group">
-                                            <label for="pondName">Pond Name:</label>
-                                            <p id="pondName" class="pond-detail">${pond.name}</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="descriptionPond">Description:</label>
-                                            <p id="descriptionPond" class="pond-detail">${pond.descriptionPond}</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="volume">Volume:</label>
-                                            <fmt:formatNumber value="${pond.volume}" pattern="0.0" var="formattedVolume" />
-                                            <p id="volume" class="pond-detail highlight">${formattedVolume} <span class="sub_span-highlight"> (l)</span></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="depth">Depth:</label>
-                                            <fmt:formatNumber value="${pond.depth}" pattern="0.0" var="formattedDepth" />
-                                            <p id="depth" class="pond-detail highlight">${formattedDepth} <span class="sub_span-highlight">(m)</span></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pumpPower">Pump Power:</label>
-                                            <fmt:formatNumber value="${pond.pumpPower}" pattern="0.0" var="formattedPumpPower" />
-                                            <p id="pumpPower" class="pond-detail highlight">${formattedPumpPower} <span class="sub_span-highlight">(l/h)</span></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="drainCount">Drain Count:</label>
-                                            <p id="drainCount" class="pond-detail">${pond.drainCount}</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="skimmer">Skimmer:</label>
-                                            <p id="skimmer" class="pond-detail">${pond.skimmer}</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="numberOfFish">Number of Fish:</label>
-                                            <p id="numberOfFish" class="pond-detail">${pond.numberOfFish}</p>
+                                <c:if test="${not empty pond}">
+                                    <div class="form-group">
+                                        <label for="pondID">Pond ID:</label>
+                                        <p id="pondId" class="pond-detail">${pond.pondID}</p>
+                                    </div>
+                                    <div class="form-group d-flex align-items-start">
+                                        <img id="pondImage" src="${pond.image}" alt="${pond.name}" class="img-fluid pond-image" />
+                                        <div class="pond-details">
+                                            <div class="form-group">
+                                                <label for="pondName">Pond Name:</label>
+                                                <p id="pondName" class="pond-detail">${pond.name}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descriptionPond">Description:</label>
+                                                <p id="descriptionPond" class="pond-detail">${pond.descriptionPond}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="volume">Volume:</label>
+                                                <fmt:formatNumber value="${pond.volume}" pattern="0.0" var="formattedVolume" />
+                                                <p id="volume" class="pond-detail highlight">${formattedVolume} <span class="sub_span-highlight"> (l)</span></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="depth">Depth:</label>
+                                                <fmt:formatNumber value="${pond.depth}" pattern="0.0" var="formattedDepth" />
+                                                <p id="depth" class="pond-detail highlight">${formattedDepth} <span class="sub_span-highlight">(m)</span></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pumpPower">Pump Power:</label>
+                                                <fmt:formatNumber value="${pond.pumpPower}" pattern="0.0" var="formattedPumpPower" />
+                                                <p id="pumpPower" class="pond-detail highlight">${formattedPumpPower} <span class="sub_span-highlight">(l/h)</span></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="drainCount">Drain Count:</label>
+                                                <p id="drainCount" class="pond-detail">${pond.drainCount}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="skimmer">Skimmer:</label>
+                                                <p id="skimmer" class="pond-detail">${pond.skimmer}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="numberOfFish">Number of Fish:</label>
+                                                <p id="numberOfFish" class="pond-detail">${pond.numberOfFish}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </c:if>
+                                <c:if test="${empty pond}">
+                                    <p class="pond-detail">This fish has not been assigned to any pond yet.</p>
+                                </c:if>
                             </div>
-
                         </form>
                     </div>
                 </div>

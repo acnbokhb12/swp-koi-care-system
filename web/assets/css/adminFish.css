@@ -194,7 +194,14 @@ label {
     padding: 15px;
 }
 
-.fish-image,
+.fish-image
+{
+    max-width: 150px;
+    height: auto;
+    margin-right: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 .pond-image {
     max-width: 150px;
     height: auto;
@@ -359,7 +366,7 @@ h3 {
 }
 
 .pond-image {
-    max-width: 300px;
+    max-width: 450px;
     width: 100%;
     border-radius: 10px;
     margin-right: 20px;
@@ -392,7 +399,7 @@ h3 {
     }
 }
 /*Đơn vị thông số*/
-   .sub_span-highlight{
-            color: red;
-            font-weight: 500;
-        }
+.sub_span-highlight{
+    color: red;
+    font-weight: 500;
+}
