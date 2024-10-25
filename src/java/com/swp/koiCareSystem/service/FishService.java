@@ -6,7 +6,9 @@ package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.dao.FishDAO;
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.model.FishDevelopment;
 import java.util.ArrayList;
+import java.sql.Date;
 
 /**
  *
@@ -19,12 +21,13 @@ public class FishService {
     public FishService() {
         fishDAO = new FishDAO();
     }
-    
-  public int countAllFishByIdS(int id) {
+
+    public int countAllFishByIdS(int id) {
         return fishDAO.countFishs(id);
     }
-      public ArrayList<Fish> getFishsbById(int id, int index) {
-        ArrayList<Fish> list  = fishDAO.getFishsByAccID(id, index);
+
+    public ArrayList<Fish> getFishsbById(int id, int index) {
+        ArrayList<Fish> list = fishDAO.getFishsByAccID(id, index);
         return list;
     }
 
@@ -108,7 +111,7 @@ public class FishService {
             } else if (f.getPondID() != oldPondId) {
                 // Check coi ho cun con fish ton tai ko
                 isExistFishInPond = fishDAO.checkFishIsExistInPondById(f.getFishID(), oldPondId);
-                if (isExistFishInPond) { 
+                if (isExistFishInPond) {
 // Decrease quantity of fish in old pond                
                     int quantityFishInOldPond = psv.getNumberFishInPond(oldPondId);
                     quantityFishInOldPond -= 1;
@@ -123,11 +126,12 @@ public class FishService {
                     int quantityNewPond = psv.getNumberFishInPond(f.getPondID());
                     quantityNewPond += 1;
                     boolean isUpdateQuantityNew = psv.updateNumberFishInPond(quantityNewPond, f.getPondID());
-                    if (!isUpdateQuantityNew) 
+                    if (!isUpdateQuantityNew) {
                         return false;
+                    }
                 } else {
                     return false;
-                } 
+                }
             }
         }
         return fishDAO.updateFishInformationByID(f);
@@ -141,4 +145,15 @@ public class FishService {
         return fishDAO.checkFishIsExist(fishId);
     }
 
+    public ArrayList<FishDevelopment> getFishDevelopmentByFishID(int fishID) {
+        return fishDAO.getFishDevelopmentByFishID(fishID);
+    }
+
+    public boolean createNewFishDevelopment(FishDevelopment fd) {
+        return fishDAO.createNewFishDevelopment(fd);
+    }
+
+    public boolean checkDateExists(int fishId, Date updateDate) {
+        return fishDAO.checkGrowthChartDateExists(fishId, updateDate);
+    }
 }

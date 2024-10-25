@@ -7,6 +7,7 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.model.FishDevelopment;
 import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.FishService;
 import com.swp.koiCareSystem.service.PondService;
@@ -52,10 +53,12 @@ public class FishInforController extends HttpServlet {
 
             ArrayList<Pond> listP = psv.getAllPondS(acc.getUserID());
             Pond pondOfFish = psv.getPondOfFishByPondId(fin.getPondID());
+            ArrayList<FishDevelopment> fishDevelopments = fins.getFishDevelopmentByFishID(id);
 
             request.setAttribute("fish", fin);
             request.setAttribute("pondFish", pondOfFish);
             request.setAttribute("ListPond", listP);
+            request.setAttribute("fishDevelopments", fishDevelopments); 
             request.getRequestDispatcher("fishInfor.jsp").forward(request, response);
 
         }

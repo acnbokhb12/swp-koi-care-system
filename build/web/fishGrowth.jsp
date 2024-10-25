@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,9 +40,8 @@
                 <div class="container container-growth">
                     <div class="tilte-fish">
                         <h1>Fish Growth Chart</h1>
-                        <div class="text-right">
-                            <a href="fishinfor.html" class="back-btn" style="margin-right: 10px;">Back to Koi</a>
-
+                        <div class="text-right">    
+                            <a href="MainController?action=fishinfor&fid=${fishInfo.fishID}" class="back-btn" style="margin-right: 10px;">Back to Koi</a>
                             <button class="edit-btn-out">Add New Information</button>
                         </div>
                     </div>
@@ -92,9 +92,8 @@
                     <div class="col-4  " style="padding: 0">
                         <div class="img-edit-submit">
                             <div class="fish-img-info-edit">
-                                <img src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Koi Pond" > 
+                                <img src="${fishInfo.fishImage}" alt="${fishInfo.fishName}" />
                             </div>
-
                         </div>
                     </div>
                     <div class="col-8 edit-info">
@@ -104,39 +103,31 @@
                             </button>
                         </div>
                         <h2>New Information</h2>
-                        <form action="#"  id="">
-                            <div class="row row-edit-info-detail"> 
+                        <form action="MainController?action=fishgrowthchartcreate" method="post">
+                            <div class="row row-edit-info-detail">
+                                <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
                                 <div class="col-12 edit-item-detail">
-                                    <span>Weight(Gram) </span>
-                                    <input type="number" value="" placeholder="Enter age" required/>
+                                    <span>Weight (Gram)</span>
+                                    <input type="number" name="weight" value="" placeholder="Enter your fish weight in grams" required />
                                 </div>
                                 <div class="col-12 edit-item-detail">
-                                    <span>Length (cm) </span>
-                                    <input
-                                        type="number"
-                                        step="0.1"
-                                        value=""
-                                        placeholder="Enter length in cm"
-                                        required
-                                        />
+                                    <span>Length (cm)</span>
+                                    <input type="number" name="length" step="0.1" value="" placeholder="Enter length in cm" required />
                                 </div>
                                 <div class="col-12 edit-item-detail">
-                                    <span>Date </span>
-                                    <input
-                                        type="date"
-                                        step="0.1"
-                                        value=""
-                                        placeholder="Enter length in cm"
-                                        required
-                                        />
-                                </div>  
-
-
+                                    <span>Date</span>
+                                    <input type="date" name="date" required />
+                                    <c:if test="${not empty dateExist}">
+                                        <div class="alert alert-danger">
+                                            <strong>${dateExist}</strong>
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
                             <div class="text-center">
-                                <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px" >
+                                <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
                                     Confirm
-                                </button>                    
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -145,14 +136,14 @@
         </div>
         <script src="./assets/js/footer.js"></script>
     </body>
-     <script>
-    $('#header').load('utils.jsp #header__nav', ()=>{
-        $.getScript('./assets/js/utilsCustomer.js');
-    });
-    $('#footer').load('utils.jsp #footer__nav', ()=>{
-        $.getScript('./assets/js/utilsCustomer.js');
-    });
-</script>
+    <script>
+        $('#header').load('utils.jsp #header__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#footer').load('utils.jsp #footer__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+    </script>
     <script>
         const btnClose = document.querySelector(".btn-close-fish");
         const tableEdit = document.querySelector(".container__infor__fish");
@@ -185,12 +176,21 @@
         }
     </style>
     <script>
+        // Initialize the growth chart
         var chart = echarts.init(document.getElementById('koiGrowthChart_length'));
+        var lengthData = [];
+        var dateLabels = [];
 
-        option = {
+        <c:if test="${not empty fishdevelop}">
+            <c:forEach var="development" items="${fishdevelop}">
+        lengthData.push(${development.updateLength});
+        dateLabels.push('${development.updateDate}');
+            </c:forEach>
+        </c:if>
+
+        var option = {
             title: {
-                text: 'Length of fish 2024'
-
+                text: 'Length of Fish'
             },
             tooltip: {
                 trigger: 'axis',
@@ -202,8 +202,8 @@
                 itemWidth: 50,
                 itemHeight: 12,
                 textStyle: {
-                    fontSize: 16, // Tăng kích thước chữ
-                    fontWeight: 'bold' // Làm đậm chữ nếu muốn
+                    fontSize: 16,
+                    fontWeight: 'bold'
                 }
             },
             grid: {
@@ -215,9 +215,15 @@
             xAxis: [
                 {
                     type: 'category',
-                    data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09', '09/09', '09/09', '09/09', '09/09', '09/09', '09/09'],
+                    data: dateLabels,
                     axisTick: {
                         alignWithLabel: true
+                    },
+                    axisLabel: {
+                        rotate: 45,
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        margin: 20
                     }
                 }
             ],
@@ -234,25 +240,30 @@
                     name: 'Cm',
                     type: 'bar',
                     barWidth: '60%',
-                    data: [10, 52, 200, 334, 390, 330, 320, 400, 200, 100, 320, 220, 500]
-                            // ,
-                            // itemStyle:{
-                            //   color : function(param){
-                            //     return '#000';
-                            //   }
-                            // }
+                    data: lengthData
                 }
             ]
         };
 
         chart.setOption(option);
-    </script> 
+    </script>
     <!-- weight -->
     <script>
-        var chart = echarts.init(document.getElementById('koiGrowthChart_weight'));
-        option = {
+        var chartWeight = echarts.init(document.getElementById('koiGrowthChart_weight'));
+
+        var weightData = [];
+        var weightDateLabels = [];
+
+        <c:if test="${not empty fishdevelop}">
+            <c:forEach var="development" items="${fishdevelop}">
+        weightData.push(parseFloat(${development.updateWeight}));
+        weightDateLabels.push('${development.updateDate}');
+            </c:forEach>
+        </c:if>
+
+        var option = {
             title: {
-                text: 'Weight of fish 2024',
+                text: 'Weight of Fish 2024',
             },
             tooltip: {
                 trigger: 'axis',
@@ -263,13 +274,10 @@
             legend: {
                 itemWidth: 50,
                 itemHeight: 12,
-                itemStyle: {
-                    color: '#d29763'
-                },
                 textStyle: {
                     color: '#000',
-                    fontSize: 16, // Tăng kích thước chữ
-                    fontWeight: 'bold' // Làm đậm chữ nếu muốn
+                    fontSize: 16,
+                    fontWeight: 'bold'
                 }
             },
             grid: {
@@ -281,9 +289,15 @@
             xAxis: [
                 {
                     type: 'category',
-                    data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
+                    data: weightDateLabels,
                     axisTick: {
                         alignWithLabel: true
+                    },
+                    axisLabel: {
+                        rotate: 45,
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        margin: 20
                     }
                 }
             ],
@@ -300,18 +314,15 @@
                     name: 'Gram',
                     type: 'bar',
                     barWidth: '60%',
-                    data: [10, 52, 200, 334, 390, 330, 320]
-                    ,
+                    data: weightData,
                     itemStyle: {
-                        color: function (param) {
-                            return '#d29763';
-                        }
+                        color: '#d29763'
                     }
                 }
             ]
         };
 
-        chart.setOption(option);
+        chartWeight.setOption(option);
     </script>
     <script>
         const formNews = document.getElementById('fomr_fill-news');
@@ -373,7 +384,7 @@
                 e.target.submit();
             }
         });
-         
+
     </script>
 
 </html>

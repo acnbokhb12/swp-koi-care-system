@@ -110,6 +110,12 @@ public class MainController extends HttpServlet {
                 case IConstant.FISH_IMAGE_UPDATE:
                     url = "FishImageUpdateController";
                     break;
+                case IConstant.FISH_GROWTH_CHART_INFO:
+                    url = "FishGrowthChartController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_CREATE:
+                    url = "FishGrowthChartCreateNewController";
+                    break;
                 // START PLACE POND -------------------------------------------------------------     
                 case IConstant.POND:
                     url = "PondController";
@@ -128,14 +134,14 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
-                    break; 
+                    break;
                 //START ACCOUNT HAVE FISH - MANAGER --------------------------------------------------------------------------------- 
-                 case IConstant.ACCOUNT_FISH_MANAGE:
+                case IConstant.ACCOUNT_FISH_MANAGE:
                     url = "ManageAccountFishController";
                     break;
                 case IConstant.FISH_MANAGE:
                     url = "ManageFishController";
-                    break;    
+                    break;
                 // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
                 case IConstant.PRODUCT_MANAGE:
                     url = "ManageProductController";
@@ -156,7 +162,7 @@ public class MainController extends HttpServlet {
                     url = "ManagerProductUpdateController";
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
-                    url = "ManagerProductImageUpdateController";  
+                    url = "ManagerProductImageUpdateController";
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

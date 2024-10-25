@@ -40,6 +40,11 @@ public interface IConstant {
     public final String FISH_INFOR_UPDATE = "fishinformationupdate";
     public final String FISH_IMAGE_UPDATE = "fishimageupdate";
 
+    public final String FISH_GROWTH_CHART_INFO = "fishgrowthchartinformation";
+    public final String FISH_GROWTH_CHART_CREATE = "fishgrowthchartcreate";
+    public final String FISH_GROWTH_CHART_SEARCH_LENGTH = "fishgrowthchartsearchlength";
+    public final String FISH_GROWTH_CHART_SEARCH_WEIGHT = "fishgrowthchartsearchweight";
+
 // START POND ----------------------------------------------------------------------------------------------------------------------------------   
     public final String POND = "pond";
     public final String POND_INFOR = "pondinfor";
@@ -48,9 +53,8 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
-
     // START ACCOUNT HAVE FISH- MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
-    public static String ACCOUNT_FISH_MANAGE = "accountfishmanage"; 
+    public static String ACCOUNT_FISH_MANAGE = "accountfishmanage";
     public static String FISH_MANAGE = "fishmanage";
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
@@ -61,7 +65,6 @@ public interface IConstant {
     public final String NEWS = "news";
 
 // START MANAGER PRODUCT ----------------------------------------------------------------------------------------------------------------------------------     
-  
     public static String PRODUCT_MANAGE = "productmanage";
     public static String PRODUCT_INFORMATION = "productinformation";
     public static String PRODUCT_INFORMATION_UPDATE = "productinformationupdate";
@@ -69,5 +72,17 @@ public interface IConstant {
     public static String PRODUCT_UPDATE = "productupdate";
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
- 
+
+    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
+//
+    public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
+    public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
+    public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
+    public static final String GOOGLE_GRANT_TYPE = dotenv.get("GOOGLE_GRANT_TYPE");
+    public static final String GOOGLE_LINK_GET_TOKEN = dotenv.get("GOOGLE_LINK_GET_TOKEN");
+    public static final String GOOGLE_LINK_GET_USER_INFO = dotenv.get("GOOGLE_LINK_GET_USER_INFO");
+//
+    public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
+    public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
+    public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
 }

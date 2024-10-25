@@ -92,7 +92,7 @@
             <div class="tilte-fish-growth"> 
                 <h1>Fish Growth</h1>
                 <div class="text-right">
-                    <a href="fishGrowth.jsp" class="back-btn grow__detail-btn">View Growth Detail</a> 
+                    <a href="MainController?action=fishgrowthchartinformation&fishID=${fish.fishID}" class="back-btn grow__detail-btn">View Growth Detail</a>
                 </div>
             </div>
             <div class="row mt-4">
@@ -112,15 +112,15 @@
                 <div class="tilte-fish-growth  "> 
                     <h1>The pond of this fish</h1>
                     <c:if test="${fish.pondID != 0}"> 
-                    <div class="text-right">
-                        <a href="MainController?action=pondinfor&pid=${fish.pondID}" class="back-btn grow__detail-btn">View Pond Detail</a> 
-                    </div>
+                        <div class="text-right">
+                            <a href="MainController?action=pondinfor&pid=${fish.pondID}" class="back-btn grow__detail-btn">View Pond Detail</a> 
+                        </div>
                     </c:if>
                 </div>
                 <div class="pond-item-img mt-4">
                     <div class="pond-item-desc">
                         <p>
-                             ${pondFish.name}
+                            ${pondFish.name}
                         </p>
                     </div>
                     <div>
@@ -201,7 +201,7 @@
                                         <option value="Male" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Male</option>
                                         <option value="Female" <c:if test="${fish.gender == 'Female'}">selected</c:if>>Female</option>
                                         </select>
-                                </div>
+                                    </div>
 
 
                                     <div class="col-md-6 edit-item-detail">
@@ -232,24 +232,24 @@
         </div>
         <!-- Toast -->
         <c:if test="${toastMessage != null}"> 
-        <div id="toast">  
-            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
-                <div class="toast__icon">
-                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
-                </div>
-                <div class="toast_body">
-                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
-                    <p class="toast__msg">${message}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
+            <div id="toast">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
                 </div>
             </div>
-        </div>
         </c:if>  
         <!-- Modal Delete -->
- <!-- Modal Delete -->
- <div id="myModal" class="modal-confirm-delete" style="display: none;">
+        <!-- Modal Delete -->
+        <div id="myModal" class="modal-confirm-delete" style="display: none;">
             <div class="modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header flex-column">
@@ -277,29 +277,29 @@
 
         <div id="footer"></div>
         <script src="./assets/js/utils.js"></script> 
-         <script src="assets/js/notification.js"></script>
-          <script>
-        $(document).ready(function () {
-            $('#myModal').hide();
-            $('.delete-btn-fish').on('click', function () {
-                const fishID = $(this).data('fishid');
-                const pondID = $(this).data('pondid');
-                const fishName = $(this).data('fishname');
-                $('#fishIDToDelete').val(fishID);
-                $('#pondIDToCaculate').val(pondID); 
-                $('#fishNameDisplay').text(fishName); 
-                $('#myModal').show();
-            });
-            $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {
+        <script src="assets/js/notification.js"></script>
+        <script>
+            $(document).ready(function () {
                 $('#myModal').hide();
-            });
-            $(window).on('click', function (event) {
-                if (event.target.id === 'myModal') {
+                $('.delete-btn-fish').on('click', function () {
+                    const fishID = $(this).data('fishid');
+                    const pondID = $(this).data('pondid');
+                    const fishName = $(this).data('fishname');
+                    $('#fishIDToDelete').val(fishID);
+                    $('#pondIDToCaculate').val(pondID);
+                    $('#fishNameDisplay').text(fishName);
+                    $('#myModal').show();
+                });
+                $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {
                     $('#myModal').hide();
-                }
+                });
+                $(window).on('click', function (event) {
+                    if (event.target.id === 'myModal') {
+                        $('#myModal').hide();
+                    }
+                });
             });
-        });
-    </script>
+        </script>
     </body>
     <style>
         .label-witdh{
@@ -338,7 +338,7 @@
 
         btnClose.addEventListener("click", () => {
             tableEdit.classList.remove("open");
-        }); 
+        });
         subTable.addEventListener("click", (e) => {
             e.stopPropagation();
         });
@@ -350,17 +350,24 @@
     <script>
         var chart = echarts.init(document.getElementById('koiGrowthChart_length'));
 
-        option = {
-            title: {
-                text: 'Length of fish 2024',
+        var lengthData = [];
+        var dateLabels = [];
 
+        <c:forEach var="development" items="${fishDevelopments}">
+        lengthData.push(${development.updateLength});
+        dateLabels.push('${development.updateDate}');
+        </c:forEach>
+
+        var option = {
+            title: {
+                text: 'Length of Fish',
             },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow'
                 }
-            }, 
+            },
             grid: {
                 left: '3%',
                 right: '4%',
@@ -370,9 +377,15 @@
             xAxis: [
                 {
                     type: 'category',
-                    data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
+                    data: dateLabels,
                     axisTick: {
                         alignWithLabel: true
+                    },
+                    axisLabel: {
+                        rotate: 45,
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        margin: 20
                     }
                 }
             ],
@@ -389,13 +402,7 @@
                     name: 'Cm',
                     type: 'bar',
                     barWidth: '60%',
-                    data: [10, 52, 200, 334, 390, 330, 320]
-                            // ,
-                            // itemStyle:{
-                            //   color : function(param){
-                            //     return '#000';
-                            //   }
-                            // }
+                    data: lengthData
                 }
             ]
         };
@@ -405,9 +412,17 @@
     <script>
         var chart = echarts.init(document.getElementById('koiGrowthChart_weight'));
 
-        option = {
+        var weightData = [];
+        var dateLabels = [];
+
+        <c:forEach var="development" items="${fishDevelopments}">
+        weightData.push(${development.updateWeight});
+        dateLabels.push('${development.updateDate}');
+        </c:forEach>
+
+        var option = {
             title: {
-                text: 'Weight of fish 2024',
+                text: 'Weight of Fish 2024',
             },
             tooltip: {
                 trigger: 'axis',
@@ -424,9 +439,15 @@
             xAxis: [
                 {
                     type: 'category',
-                    data: ['01/09', '02/09', '03/09', '04/09', '05/09', '06/09', '07/09'],
+                    data: dateLabels,
                     axisTick: {
                         alignWithLabel: true
+                    },
+                    axisLabel: {
+                        rotate: 45,
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        margin: 20
                     }
                 }
             ],
@@ -443,8 +464,7 @@
                     name: 'Gram',
                     type: 'bar',
                     barWidth: '60%',
-                    data: [10, 52, 200, 334, 390, 330, 320]
-                    ,
+                    data: weightData,
                     itemStyle: {
                         color: function (param) {
                             return '#d29763';
