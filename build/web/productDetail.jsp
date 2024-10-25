@@ -65,17 +65,18 @@
                 </p>
                 <!-- quantity buy product -->
                 <div class="product__content__detail-form">
-                  <form action="" method="post">
+                  <form action="AddProductToCartController" method="post">
                     <div class="product__detail-form-desc">
                       <h1>Quantity</h1>
                       <div class="product__detail-quantity-btn">
+                          <input type="hidden" value="${Product.productID}" name="idProduct"> 
                         <button type="button" class="minus-btn-quantity"><i class="fa-solid fa-minus"></i></button>
-                        <input type="number" min="1" id="quantity-input" value="1">
+                        <input type="number" min="1" id="quantity-input" name="quantityP" value="1">
                         <button type="button" class="plus-btn-quantity"><i class="fa-solid fa-plus"></i></button>
                       </div>
                       <!-- submit buy product -->
                       <div class="product__btnbuy-ing-pro">
-                        <button type="submit" name="acction" value="buyProduct" class="product__detail-buybtn ">
+                        <button type="submit" name="acction" class="product__detail-buybtn ">
                           <i class="fa-solid fa-cart-shopping"></i> Add product to cart
                         </button> 
                       </div>
@@ -103,7 +104,23 @@
           
         </div>
       </div>
-
+    <!-- Toast -->
+        <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+        </c:if>
     <!-- footer -->
         <div id="footer"></div>
 </body>
@@ -115,6 +132,8 @@
         $.getScript('./assets/js/utilsCustomer.js');
     });
 </script>
+    <script src="assets/js/notification.js"></script>
+
 <script>
     const minusBtn = document.querySelector('.minus-btn-quantity');
       const plusBtn = document.querySelector('.plus-btn-quantity');

@@ -43,7 +43,7 @@ public class MainController extends HttpServlet {
             }
             switch (ac) {
                 case IConstant.HOME:
-                    url = "home.jsp";
+                    url = "HomeController";
                     break;
                 // START PLACE SHOP -------------------------------------------------------------                                     
                 case IConstant.SHOP:
