@@ -136,6 +136,9 @@ public class MainController extends HttpServlet {
                 case IConstant.FISH_MANAGE:
                     url = "ManageFishController";
                     break;    
+                      case IConstant.MANAGE_FISH_DETAIL:
+                    url = "ManageFishDetailController";
+                    break;
                 // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
                 case IConstant.PRODUCT_MANAGE:
                     url = "ManageProductController";

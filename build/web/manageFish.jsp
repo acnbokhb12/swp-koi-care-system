@@ -65,7 +65,7 @@
                                             <td>${fish.weight} kg</td> 
                                             <td>${fish.gender}</td> 
                                             <td>
-                                                <button class="edit-btn" onclick="window.location.href = 'manageFishDetail.jsp?fishID=${fish.fishID}'">
+                                                <button class="edit-btn" onclick="window.location.href = 'ManageFishDetailController?fdid=${fish.fishID}'">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>

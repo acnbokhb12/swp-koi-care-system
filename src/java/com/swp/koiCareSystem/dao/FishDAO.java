@@ -116,143 +116,6 @@ public class FishDAO {
         return fish;
     }
 
-    //MANAGE
-    
-    public int countFishs(int accID) {
-    Connection cn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    try {
-        cn = DatabaseConnectionManager.getConnection();
-        if (cn != null) {
-            String sql = "SELECT count(*) FROM Fish WHERE [isActive] = 1 AND AccID = ?";
-            pst = cn.prepareStatement(sql);
-            pst.setInt(1, accID);
-            rs = pst.executeQuery();
-            if (rs != null && rs.next()) {
-                return rs.getInt(1);
-            }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (pst != null) {
-                pst.close();
-            }
-            if (cn != null) {
-                cn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    return 0; 
-}
-
-    
-    
-   public ArrayList<Fish> getFishsByAccID(int accID, int index) {
-    Connection conn = null;
-    PreparedStatement ptm = null;
-    ResultSet rs = null;
-    ArrayList<Fish> listFish = new ArrayList<>();
-    int distance = (index - 1) * 10;      
-
-    try {
-        conn = DatabaseConnectionManager.getConnection();
-        if (conn != null) {
-            String sql = "SELECT *\n"
-                       + "FROM Fish f\n"
-                       + "JOIN Accounts a ON f.AccID = a.AccID\n"
-                       + "WHERE f.AccID = ? AND a.UserRole = 'customer'\n" 
-                       + "ORDER BY f.FishID\n"
-                       + "OFFSET ? ROWS\n"
-                       + "FETCH NEXT 10 ROWS ONLY;";
-            ptm = conn.prepareStatement(sql);
-            ptm.setInt(1, accID);
-            ptm.setInt(2, distance); 
-
-            rs = ptm.executeQuery();
-            while (rs.next()) {
-                int fishID = rs.getInt("FishID");
-                int pondID = rs.getInt("PondID");
-                String fishImage = rs.getString("FishImage");
-                String fishName = rs.getString("FishName");
-                String descriptionKoi = rs.getString("DescriptionKoi");
-                String bodyShape = rs.getString("BodyShape");
-                float age = rs.getFloat("Age");
-                float length = rs.getFloat("Length");
-                float weight = rs.getFloat("Weight");
-                String gender = rs.getString("Gender");
-
-                listFish.add(new Fish(fishID, accID, pondID, fishImage, fishName,
-                        descriptionKoi, bodyShape, age, length, weight, gender));
-            }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    return listFish; // Trả về danh sách các đối tượng Fish
-}
-   //====================================================
-   
-//// TEST COUNT FISH BY ACCOUNT
-//public static void main(String[] args) {
-//    FishDAO fd = new FishDAO(); // Khởi tạo DAO
-//    
-//    // Test phương thức countFishs
-//    int accID = 5; // accID bạn muốn kiểm tra
-//    int count = fd.countFishs(accID); // Gọi phương thức countFishs với accID
-//    System.out.println("Số lượng cá của tài khoản " + accID + ": " + count); // In kết quả
-//}
-
-   
-   
-// TEST GET FISH BY ACCOUNT ID
-public static void main(String[] args) {
-    FishDAO fd = new FishDAO(); // Khởi tạo DAO
-    
-    // Test phương thức getFishsByAccID
-    int accID = 5; // accID bạn muốn kiểm tra
-    int index = 1; // Số trang bạn muốn kiểm tra (phân trang)
-    List<Fish> fishList = fd.getFishsByAccID(accID, index); // Gọi phương thức getFishsByAccID
-
-    // In danh sách cá trả về
-    for (Fish f : fishList) {
-        System.out.println(f); // In ra từng đối tượng cá
-    }
-}
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   //=====================================================
-
     //DELETE
     public boolean deleteFishByID(String fishID) {
         Connection conn = null;
@@ -526,6 +389,154 @@ public static void main(String[] args) {
         return false;
     }
 
+    //MANAGE
+    public int countFishs(int accID) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT count(*) FROM Fish WHERE [isActive] = 1 AND AccID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, accID);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Fish> getFishsByAccID(int accID, int index) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ArrayList<Fish> listFish = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "SELECT *\n"
+                        + "FROM Fish f\n"
+                        + "JOIN Accounts a ON f.AccID = a.AccID\n"
+                        + "WHERE f.AccID = ? AND a.UserRole = 'customer'\n"
+                        + "ORDER BY f.FishID\n"
+                        + "OFFSET ? ROWS\n"
+                        + "FETCH NEXT 10 ROWS ONLY;";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, accID);
+                ptm.setInt(2, distance);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int fishID = rs.getInt("FishID");
+                    int pondID = rs.getInt("PondID");
+                    String fishImage = rs.getString("FishImage");
+                    String fishName = rs.getString("FishName");
+                    String descriptionKoi = rs.getString("DescriptionKoi");
+                    String bodyShape = rs.getString("BodyShape");
+                    float age = rs.getFloat("Age");
+                    float length = rs.getFloat("Length");
+                    float weight = rs.getFloat("Weight");
+                    String gender = rs.getString("Gender");
+
+                    listFish.add(new Fish(fishID, accID, pondID, fishImage, fishName,
+                            descriptionKoi, bodyShape, age, length, weight, gender));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return listFish; // Trả về danh sách các đối tượng Fish
+    }
+
+    public Fish getFishDetailByFishID(int fishID) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        Fish fish = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Fish f "
+                        + "JOIN Accounts a ON f.AccID = a.AccID "
+                        + "WHERE f.FishID = ? AND a.UserRole = 'customer';";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, fishID);
+
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int accID = rs.getInt("AccID");
+                    int pondID = rs.getInt("PondID");
+                    String fishImage = rs.getString("FishImage");
+                    String fishName = rs.getString("FishName");
+                    String descriptionKoi = rs.getString("DescriptionKoi");
+                    String bodyShape = rs.getString("BodyShape");
+                    float age = rs.getFloat("Age");
+                    float length = rs.getFloat("Length");
+                    float weight = rs.getFloat("Weight");
+                    String gender = rs.getString("Gender");
+
+                    fish = new Fish(fishID, accID, pondID, fishImage, fishName,
+                            descriptionKoi, bodyShape, age, length, weight, gender);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return fish;
+    }
+
     /*
 
 //    // TEST DAO
@@ -612,7 +623,6 @@ public static void main(String[] args) {
 //        boolean i = fd.checkFishIsExistInPondById(110, 19);
 //        System.out.println(i);
 //    }
-    
     //===========================================
     //TEST
     // COUNT  ACCOUNT
@@ -631,5 +641,49 @@ public static void main(String[] args) {
 //            
 //        }
 //    }
-
+    //====================================================
+// TEST COUNT FISH BY ACCOUNT
+public static void main(String[] args) {
+    FishDAO fd = new FishDAO(); // Khởi tạo DAO
+    
+    // Test phương thức countFishs
+    int accID = 9; // accID bạn muốn kiểm tra
+    int count = fd.countFishs(accID); // Gọi phương thức countFishs với accID
+    System.out.println("Số lượng cá của tài khoản " + accID + ": " + count); // In kết quả
+}
+//// TEST GET FISH BY ACCOUNT ID
+//public static void main(String[] args) {
+//    FishDAO fd = new FishDAO(); // Khởi tạo DAO
+//    
+//    // Test phương thức getFishsByAccID
+//    int accID = 5; // accID bạn muốn kiểm tra
+//    int index = 1; // Số trang bạn muốn kiểm tra (phân trang)
+//    List<Fish> fishList = fd.getFishsByAccID(accID, index); // Gọi phương thức getFishsByAccID
+//
+//    // In danh sách cá trả về
+//    for (Fish f : fishList) {
+//        System.out.println(f); // In ra từng đối tượng cá
+//    }
+//}
+// FISH DETAIL
+//    public static void main(String[] args) {
+//        FishDAO fd = new FishDAO(); 
+//        int fishID = 1; 
+//        Fish fish = fd.getFishDetailByFishID(fishID); 
+//        
+//        if (fish != null) {
+//            System.out.println("Thông tin cá với ID " + fishID + ":");
+//            System.out.println("Tên: " + fish.getFishName());
+//            System.out.println("Hình ảnh: " + fish.getFishImage());
+//            System.out.println("Mô tả: " + fish.getDescriptionKoi());
+//            System.out.println("Hình dáng: " + fish.getBodyShape());
+//            System.out.println("Tuổi: " + fish.getAge());
+//            System.out.println("Chiều dài: " + fish.getLength());
+//            System.out.println("Cân nặng: " + fish.getWeight());
+//            System.out.println("Giới tính: " + fish.getGender());
+//        } else {
+//            System.out.println("Không tìm thấy cá với ID " + fishID);
+//        }
+//    }
+    //=====================================================
 }

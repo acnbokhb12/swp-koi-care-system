@@ -28,6 +28,10 @@ public class PondService {
     public Pond getPondInforByID(int id) {
         return pd.getPondInforByID(id);
     }
+     public Pond getPondDetailByIDS(int id) {
+        return pd.getPondDetailByID(id);
+    }
+
     public Pond getPondOfFishByPondId(int pondId){
         if(pondId == 0){
             Pond virtualPond = new Pond();

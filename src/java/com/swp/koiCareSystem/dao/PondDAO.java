@@ -388,6 +388,52 @@ public class PondDAO {
         return false;
     }
 
+     public Pond getPondDetailByID(int accountID) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Pond p = null;
+        String sql = "SELECT * FROM Ponds WHERE PondID = ? and isActive =1";
+        try {
+            conn = DatabaseConnectionManager.getConnection(); 
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+
+            if (rs != null && rs.next()) {
+                p = new Pond();
+                p.setPondID(rs.getInt(1));
+                p.setAccID(rs.getInt(2));
+                p.setImage(rs.getString(3));
+                p.setName(rs.getString(4));
+                p.setDescriptionPond(rs.getString(5));
+                p.setNumberOfFish(rs.getInt(6));
+                p.setVolume(rs.getFloat(7));
+                p.setDepth(rs.getFloat(8));
+                p.setPumpPower(rs.getFloat(9));
+                p.setDrainCount(rs.getInt(10));
+                p.setSkimmer(rs.getInt(11));
+                p.setIsActive(rs.getBoolean(12));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return p; 
+    }
     public static void main(String[] args) {
         PondDAO pd = new PondDAO();
         Pond p = pd.getPondInforByID(3);
