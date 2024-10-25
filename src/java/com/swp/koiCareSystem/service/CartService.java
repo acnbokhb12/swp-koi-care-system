@@ -9,8 +9,7 @@ import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Product;
 import java.util.HashMap;
 import java.util.Map;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Connection;
+import redis.clients.jedis.Jedis; 
 
 /**
  *
@@ -24,25 +23,29 @@ public class CartService {
         this.jedis = new Jedis(IConstant.URI_JEDIS);
     }
 
-    public void saveCart(int userId, int quantityToBuyProduct, String productID) {
+    public boolean saveCart(int userId, int quantityToBuyProduct, String productID) {
+        
+            
         Map<String, String> cartData = jedis.hgetAll("cart:" + userId);
 
         if (cartData == null || cartData.isEmpty()) {
             cartData = new HashMap<>();
-        } else {
-            // Chuyển đổi cartData thành HashMap có thể thay đổi
+        } else { 
             cartData = new HashMap<>(cartData);
-        }
-        if (cartData.containsKey(productID)) {
-            int existingQuantity = Integer.parseInt(cartData.get(productID));
+        } 
+        if (cartData.containsKey(productID)) {  
+             int existingQuantity = Integer.parseInt(cartData.get(productID));                             
             quantityToBuyProduct += existingQuantity;
         }
         cartData.put(productID, String.valueOf(quantityToBuyProduct));
 
         // save cart to jedis
         jedis.hmset("cart:" + userId, cartData);
-        //jedis.expire("cart:" + userId, 604800); // Đặt thời gian hết hạn là 1 tuần (604800 giây)
-        jedis.expire("cart:" + userId, 60 * 60);
+        jedis.expire("cart:" + userId, 604800); // Đặt thời gian hết hạn là 1 tuần (604800 giây)
+//        jedis.expire("cart:" + userId, 60 * 60);
+            
+       
+        return true;
     }
 
     public HashMap<Product, Integer> getCart(int userId) {

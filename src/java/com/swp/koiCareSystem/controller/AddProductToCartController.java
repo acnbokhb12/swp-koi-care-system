@@ -47,11 +47,16 @@ public class AddProductToCartController extends HttpServlet {
             if(p!=null && p.isIsActive() ){                
                 Account acc = (Account) session.getAttribute("userAccount");
                 CartService cv = new CartService();
-                cv.saveCart(acc.getUserID(), quantityBuy, String.valueOf(idProduct));
-//                HashMap<Product, Integer> cartUser = (HashMap<Product, Integer>) session.getAttribute("cart");
-                
-                HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());
-                session.setAttribute("cart", getCart);
+                boolean isAddSuccess = cv.saveCart(acc.getUserID(), quantityBuy, String.valueOf(idProduct)); 
+                if(isAddSuccess){ 
+                    HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());
+                    session.setAttribute("cart", getCart);
+                    request.setAttribute("message", "Add product to cart successfully");
+                    request.setAttribute("toastMessage", "success"); 
+                }else{
+                    request.setAttribute("message", "An error occurred while deleting the product from the cart");
+                    request.setAttribute("toastMessage", "error"); 
+                }
                 request.setAttribute("Product", p);
                 url = "productDetail.jsp";
             }else

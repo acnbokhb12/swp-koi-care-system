@@ -63,9 +63,9 @@ public class EditProductCartController extends HttpServlet {
                     try{
                         newQuantity = Integer.parseInt(request.getParameter("newQuantity"));                        
                     }catch (NumberFormatException e){
-                        request.setAttribute("message", "Invalid quantity format");
+                        request.setAttribute("message", "An error occurred while updating quantity of product from cart");
                         request.setAttribute("toastMessage", "error");
-                        request.getRequestDispatcher("MainController?action="+ IConstant.SHOP).forward(request, response);
+                        request.getRequestDispatcher("cart.jsp").forward(request, response);
                         return ;
                     } 
                     editSuccess = cv.updateCart(acc.getUserID(), productId, newQuantity);

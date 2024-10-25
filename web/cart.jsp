@@ -271,10 +271,9 @@
                                     <!-- info -->
                                     <p class="mb-0">I think the below button is important. Hit this button and you will find a lot of interesting products on our "Shop" page</p>
                                     <!-- Button -->
-                                    <a class="link__go_shop-cartempty" href="shop.jsp">                     
+                                    <a class="link__go_shop-cartempty" href="MainController?action=shop">                     
                                         <button class="cssbuttons-io-button" type="submit">
-                                            Back to Menu
-
+                                            Back to Shop 
                                             <div class="icon">
                                                 <svg  height="24" width="24" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg"  >
 
