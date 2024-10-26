@@ -54,6 +54,9 @@ public class FishGrowthChartSearchWeightController extends HttpServlet {
             request.setAttribute("fishInfo", fishInfo);
             request.setAttribute("fishDevelopmentsWeight", developments);
             request.setAttribute("fishID", fishId);
+            
+            request.setAttribute("oldFromDateWeight", fromDateStr);
+            request.setAttribute("oldToDateWeight", toDateStr);
 
             request.getRequestDispatcher("fishGrowth.jsp").forward(request, response);
         }

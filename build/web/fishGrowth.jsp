@@ -42,7 +42,8 @@
                         <h1>Fish Growth Chart</h1>
                         <div class="text-right">    
                             <a href="MainController?action=fishinfor&fid=${fishInfo.fishID}" class="back-btn" style="margin-right: 10px;">Back to Koi</a>
-                            <button class="edit-btn-out">Add New Information</button>
+                            <button class="edit-btn-out">Add New Fish Growth</button>
+                            <button class="update-delete-btn">Update & Delete</button>
                         </div>
                     </div>
                     <div class="row mt-4 row-growth_fish">
@@ -55,14 +56,27 @@
                                 <input type="hidden" name="fishID" value="${fishInfo.fishID}"/>
                                 <div class="form-date-input-growth">
                                     <label class="lable_form-date" for="input_date_length_from">From Date:</label>
-                                    <input id="input_date_length_from" class="input_form-date lastweek_growth-input" type="date" name="fromDate" id="" required>
+                                    <input 
+                                        id="input_date_length_from" 
+                                        class="input_form-date lastweek_growth-input" 
+                                        type="date" 
+                                        name="fromDate" 
+                                        value="${oldFromDateLength}" 
+                                        required>
                                 </div>
                                 <div class="form-date-input-growth">
                                     <label class="lable_form-date" for="input_date_length_to">To Date:</label>
-                                    <input id="input_date_length_to" class="input_form-date today_growth-input" type="date" name="toDate"  id="" required>
+                                    <input 
+                                        id="input_date_length_to" 
+                                        class="input_form-date today_growth-input" 
+                                        type="date" 
+                                        name="toDate" 
+                                        value="${oldToDateLength}" 
+                                        required>
                                 </div>
                                 <button class="btn-submit-search-date" type="submit">Search</button>
                             </form>
+
                         </div>
                     </div>
                     <div class="row mt-4 row-growth_fish">
@@ -74,12 +88,24 @@
                             <form action="MainController?action=fishgrowthchartsearchweight" method="post" id="date_growth-weight">
                                 <input type="hidden" name="fishID" value="${fishInfo.fishID}"/>
                                 <div class="form-date-input-growth">
-                                    <label class="lable_form-date" for="">From Date:</label>
-                                    <input id="input_date_weight_from" class="input_form-date lastweek_growth-input" type="date" name="fromDate" id="" required>
+                                    <label class="lable_form-date" for="input_date_weight_from">From Date:</label>
+                                    <input 
+                                        id="input_date_weight_from" 
+                                        class="input_form-date lastweek_growth-input" 
+                                        type="date" 
+                                        name="fromDate" 
+                                        value="${oldFromDateWeight}" 
+                                        required>
                                 </div>
                                 <div class="form-date-input-growth">
-                                    <label class="lable_form-date" for="">To Date:</label>
-                                    <input id="input_date_weight_to" class="input_form-date today_growth-input" type="date" name="toDate" id="" required >
+                                    <label class="lable_form-date" for="input_date_weight_to">To Date:</label>
+                                    <input 
+                                        id="input_date_weight_to" 
+                                        class="input_form-date today_growth-input" 
+                                        type="date" 
+                                        name="toDate" 
+                                        value="${oldToDateWeight}" 
+                                        required>
                                 </div>
                                 <button class="btn-submit-search-date" type="submit">Search</button>
                             </form>
@@ -88,6 +114,8 @@
                 </div>
             </section>
         </div> 
+
+        <!-- New Growth-->
         <div class="container__infor__fish">
             <div class="infor__fish-detail">
                 <div class="row row-fish-detail">
@@ -104,8 +132,8 @@
                                 <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
                             </button>
                         </div>
-                        <h2>New Information</h2>
-                        <form action="MainController?action=fishgrowthchartcreate" method="post">
+                        <h2>New Growth</h2>
+                        <form action="MainController?action=fishgrowthchartcreate" method="post" id="form_fill-news">
                             <div class="row row-edit-info-detail">
                                 <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
                                 <div class="col-12 edit-item-detail">
@@ -130,6 +158,65 @@
                                 <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
                                     Confirm
                                 </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        Delete Update-->
+
+        <div class="fish-data-container" style="display: none;">
+            <div class="fish-details-view">
+                <div class="row fish-row-view">
+                    <div class="col-4" style="padding: 0">
+                        <div class="image-upload-container">
+                            <div class="fish-image-view">
+                                <img src="${fishInfo.fishImage}" alt="${fishInfo.fishName}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 fish-info-view">
+                        <div class="text-right">
+                            <button class="btn-close-fish-view">
+                                <i class="fa-solid fa-xmark close-icon-view"></i>
+                            </button>
+                        </div>
+                        <h2>Fish Growth Information</h2>
+
+                        <!-- Step 1: Date Confirmation Form -->
+                        <form id="date-confirmation-form">
+                            <div class="row growth-info-row">
+                                <div class="col-12 date-detail">
+                                    <span>Date</span>
+                                    <input type="date" name="date" id="growthDateView" required />
+                                    <div id="dateErrorMsgView" class="alert alert-danger" style="display:none;">
+                                        <strong>Date is required!</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="action-button-view" id="confirmDateButton" style="margin-top: 10px">Confirm Date</button>
+                            </div>
+                        </form>
+
+                        <!-- Step 2: Weight and Length Form (initially hidden) -->
+                        <form id="growth-form-view" style="display: none;">
+                            <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
+                            <div class="row growth-info-row">
+                                <div class="col-12 weight-detail" id="weightDetail">
+                                    <span>Weight (Gram)</span>
+                                    <input type="number" name="weight" id="fishWeightView" placeholder="Enter your fish weight in grams" required />
+                                </div>
+                                <div class="col-12 length-detail" id="lengthDetail">
+                                    <span>Length (cm)</span>
+                                    <input type="number" name="length" id="fishLengthView" step="0.1" placeholder="Enter length in cm" required />
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="action-button-view" id="updateButtonView">Update</button>
+                                <button type="button" class="action-button-view" id="deleteButtonView">Delete</button>
                             </div>
                         </form>
                     </div>
@@ -281,7 +368,7 @@
 
         var option = {
             title: {
-                text: 'Weight of Fish 2024',
+                text: 'Weight of Fish',
             },
             tooltip: {
                 trigger: 'axis',
@@ -341,17 +428,20 @@
         };
 
         chartWeight.setOption(option);
-
-
     </script>
     <script>
-        const formNews = document.getElementById('fomr_fill-news');
-        formNews.addEventListener('submit', (e) => {
-            const isConfirmed = confirm('Are you sure you want to submit this news?');
-            if (!isConfirmed) {
-                e.preventDefault();
-            }
-        });
+        const formNews = document.getElementById('form_fill-news'); // Corrected ID
+
+        if (formNews) { // Check if formNews is not null
+            formNews.addEventListener('submit', (e) => {
+                const isConfirmed = confirm('Are you sure you want to submit this news?');
+                if (!isConfirmed) {
+                    e.preventDefault(); // Prevent form submission if the user cancels
+                }
+            });
+        } else {
+            console.error("Form with ID 'form_fill-news' not found.");
+        }
 
         document.getElementById('date_growth-weight').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -372,13 +462,20 @@
             console.log(dayDifference)
             if (dayDifference < 1) {
                 alert('The gap between From Date and To Date must be at least 1 day.');
-            } else if (dayDifference > 12) {
+            } else if (dayDifference > 11) {
                 alert('The gap between From Date and To Date cannot be more than 11 days.');
             } else {
                 e.target.submit();
             }
         });
 
+        document.addEventListener("DOMContentLoaded", function () {
+            if ("${oldFromDateWeight}" && "${oldToDateWeight}") {
+                const chartSection = document.getElementById("koiGrowthChart_weight");
+                chartSection?.scrollIntoView({behavior: "smooth"}
+                );
+            }
+        });
         document.getElementById('date_growth-length').addEventListener('submit', (e) => {
             e.preventDefault();
             const fromDate = new Date(document.getElementById('input_date_length_from').value);
@@ -402,6 +499,75 @@
                 alert('The gap between From Date and To Date cannot be more than 11 days.');
             } else {
                 e.target.submit();
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const updateDeleteButton = document.querySelector(".update-delete-btn");
+            const fishDataContainer = document.querySelector(".fish-data-container");
+            const btnCloseFishView = document.querySelector(".btn-close-fish-view");
+            const confirmDateButton = document.getElementById("confirmDateButton");
+            const growthDateView = document.getElementById("growthDateView");
+            const weightDetail = document.getElementById("weightDetail");
+            const lengthDetail = document.getElementById("lengthDetail");
+            const growthFormView = document.getElementById("growth-form-view");
+
+            // Hiển thị thông tin cá khi nhấn nút "Update & Delete"
+            updateDeleteButton.addEventListener("click", function () {
+                fishDataContainer.style.display = "block";
+            });
+
+            // Đóng thông tin cá
+            btnCloseFishView.addEventListener("click", function () {
+                fishDataContainer.style.display = "none";
+            });
+
+            // Xác nhận ngày và hiển thị thông tin trọng lượng và chiều dài
+            confirmDateButton.addEventListener("click", function () {
+                const selectedDate = growthDateView.value;
+                if (!selectedDate) {
+                    alert("Please select a date.");
+                    return;
+                }
+                fetchFishData(selectedDate);
+            });
+
+            // Xử lý hành động cập nhật
+            document.getElementById("updateButtonView").addEventListener("click", function () {
+                const weight = document.getElementById("fishWeightView").value;
+                const length = document.getElementById("fishLengthView").value;
+                alert(`Weight: ${weight}, Length: ${length} updated!`);
+                fishDataContainer.style.display = "none"; // Đóng container
+            });
+
+            // Xử lý hành động xóa
+            document.getElementById("deleteButtonView").addEventListener("click", function () {
+                const selectedDate = growthDateView.value;
+                if (!selectedDate) {
+                    alert("Please select a date.");
+                    return;
+                }
+                alert(`Data for ${selectedDate} deleted!`);
+                fishDataContainer.style.display = "none"; // Đóng container
+            });
+
+            function fetchFishData(date) {
+                // Thay đổi URL và phương thức phù hợp với server của bạn
+                fetch(`your-api-endpoint?date=${date}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data) {
+                                document.getElementById("fishWeightView").value = data.weight; // Cập nhật trọng lượng
+                                document.getElementById("fishLengthView").value = data.length; // Cập nhật chiều dài
+                                growthFormView.style.display = "block"; // Hiện form cập nhật
+                            } else {
+                                // Nếu không có dữ liệu cho ngày đã chọn
+                                alert("No data found for the selected date.");
+                                growthFormView.style.display = "none"; // Ẩn form cập nhật
+                            }
+                        })
+                        .catch(error => console.error('Error fetching data:', error));
             }
         });
     </script>

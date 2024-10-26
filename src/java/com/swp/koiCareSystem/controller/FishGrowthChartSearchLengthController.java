@@ -55,6 +55,9 @@ public class FishGrowthChartSearchLengthController extends HttpServlet {
             request.setAttribute("fishDevelopmentsLength", developments);
             request.setAttribute("fishID", fishId);
 
+            request.setAttribute("oldFromDateLength", fromDateStr);
+            request.setAttribute("oldToDateLength", toDateStr);
+
             request.getRequestDispatcher("fishGrowth.jsp").forward(request, response);
         }
     }
