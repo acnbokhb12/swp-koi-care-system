@@ -8,11 +8,12 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.CartService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.ArrayList; 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,7 @@ public class EditProductCartController extends HttpServlet {
                 if(btnaction.equalsIgnoreCase("remove")){
                     editSuccess = cv.deleteProductFromCart(acc.getUserID(), productId);
                     if(editSuccess){
-                        HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());
+                        ArrayList<OrderItem> getCart = cv.getCart(acc.getUserID());
                         session.setAttribute("cart", getCart);
                         request.setAttribute("message", "Deleted product from cart successfully");
                         request.setAttribute("toastMessage", "success"); 
@@ -70,16 +71,14 @@ public class EditProductCartController extends HttpServlet {
                     } 
                     editSuccess = cv.updateCart(acc.getUserID(), productId, newQuantity);
                     if(editSuccess){
-                        HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());
+                          ArrayList<OrderItem> getCart = cv.getCart(acc.getUserID()); 
                         session.setAttribute("cart", getCart);
                         request.setAttribute("message", "Update new quantity of product successfully");
-                        request.setAttribute("toastMessage", "success");   
+                        request.setAttribute("toastMessage", "success");  
                     }else{
                         request.setAttribute("message", "An error occurred while Updating new quantity of product");
                         request.setAttribute("toastMessage", "error"); 
-                    }
-                    request.getRequestDispatcher("cart.jsp").forward(request, response);
-
+                    }  
                 }
                 request.getRequestDispatcher("cart.jsp").forward(request, response);
                 

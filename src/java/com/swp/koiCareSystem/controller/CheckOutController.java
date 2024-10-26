@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.AccountService;
+import com.swp.koiCareSystem.model.OrderItem;
+import com.swp.koiCareSystem.service.CartService;
+import com.swp.koiCareSystem.service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,45 +24,46 @@ import javax.servlet.http.HttpSession;
  *
  * @author DELL
  */
-public class LoginGoogleController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class CheckOutController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             String code = request.getParameter("code");
-            AccountService acs = new AccountService();
-            String accessToken = acs.getToken(code);
-            System.out.println(accessToken);
-            Account acc = acs.getUserInfo(accessToken);
-            String email = acc.getEmail();
-            Account account = acs.getAccountByEmail(email);
-            if (account != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("userAccount", account);
-                response.sendRedirect("MainController?action="+ IConstant.HOME);
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("VirturalAcc", acc);
-                request.getRequestDispatcher("createPassword.jsp").forward(request, response);
+            request.setCharacterEncoding("UTF-8"); 
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount"); 
+            int accid = acc.getUserID();
+            String name = (String) request.getParameter("cusname");
+            String phone = (String) request.getParameter("phone");
+            String address = (String) request.getParameter("address");
+            ArrayList<OrderItem> cart = (ArrayList<OrderItem>) session.getAttribute("cart");
+            OrderService ods = new OrderService();
+            boolean isSucess = ods.saveOrder(accid,cart, name, phone, address );
+            if(isSucess){
+                CartService csv = new CartService();
+                boolean cleanSuccess = csv.clearCart(accid);
+                if(cleanSuccess){
+                    session.setAttribute("cart", new ArrayList<OrderItem>());
+                }
+                response.sendRedirect("home.jsp");
+            }else{
+                response.sendRedirect("MainController?action="+IConstant.SHOP);
             }
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -66,13 +71,12 @@ public class LoginGoogleController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -80,13 +84,12 @@ public class LoginGoogleController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

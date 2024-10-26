@@ -8,11 +8,13 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.CartService;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,7 +51,7 @@ public class AddProductToCartController extends HttpServlet {
                 CartService cv = new CartService();
                 boolean isAddSuccess = cv.saveCart(acc.getUserID(), quantityBuy, String.valueOf(idProduct)); 
                 if(isAddSuccess){ 
-                    HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());
+                    ArrayList<OrderItem> getCart = cv.getCart(acc.getUserID());
                     session.setAttribute("cart", getCart);
                     request.setAttribute("message", "Add product to cart successfully");
                     request.setAttribute("toastMessage", "success"); 

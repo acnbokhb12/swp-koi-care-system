@@ -7,11 +7,11 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.model.OrderItem; 
 import com.swp.koiCareSystem.service.CartService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.ArrayList; 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,11 +39,11 @@ public class HomeController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
             if(acc!=null){
-                HashMap<Product, Integer> cart = (HashMap<Product, Integer>) session.getAttribute("cart");
+                ArrayList<OrderItem> cart =  (ArrayList<OrderItem>) session.getAttribute("cart");
                 if (cart == null || cart.isEmpty()) {
                     CartService cv = new CartService();
-                    // Gọi getCart từ Redis nếu giỏ hàng chưa có trong session
-                    HashMap<Product,Integer> getCart = cv.getCart(acc.getUserID());
+                    // Gọi getCart từ Redis nếu giỏ hàng chưa có trong session 
+                    ArrayList<OrderItem> getCart = cv.getCart(acc.getUserID());
                     session.setAttribute("cart", getCart);
                 }
             }

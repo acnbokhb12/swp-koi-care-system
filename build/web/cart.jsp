@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +38,7 @@
 
         <!-- view cart -->
         <div class="cart__main container">
+            <c:set var="TotalProduct" value="0"></c:set>
             <c:choose>
                 <c:when test="${not empty sessionScope.cart}"> 
 
@@ -52,14 +56,14 @@
                     </div>
                     <!-- section order cart -->
                         <section class="cart__about__property"  >
-                    <c:forEach items="${sessionScope.cart}" var="entry">  
+                    <c:forEach items="${sessionScope.cart}" var="odi">  
 
                         <div class="cart__about__property-desc row">
                             <!-- img -->
                             <div class="cart__about__property-img col-sm-6 col-md-3 ">
-                                <a href="MainController?action=productDetail&pid=${entry.key.productID}" class="cart__about__property-img-link">
-                                    <img src="${entry.key.imgProduct}"
-                                         alt=""> 
+                                <a href="MainController?action=productDetail&pid=${odi.product.productID}" class="cart__about__property-img-link">
+                                    <img src="${odi.product.imgProduct}"
+                                         alt="${odi.product.nameProduct}"> 
                                 </a>
                             </div>
                             <div class="cart__about__property-infor-container col-sm-6 col-md-9">
@@ -67,25 +71,25 @@
                                     <!-- desc namr-->
                                     <div class="cart__about__property-infor-desc col-md-6">
                                         <div class="cart__about__property-name">
-                                            <h3>${entry.key.nameProduct}</h3>
+                                            <h3>${odi.product.nameProduct}</h3>
                                         </div>
                                         <div class="cart__about__property-quantity ">
-                                            <h3>Quantity: <span>${entry.value}</span></h3>
+                                            <h3>Quantity: <span>${odi.quantity}</span></h3>
                                         </div>
                                         <div class="cart__about__property-quantity ">
-                                            <h3>Type: <span>${entry.key.categoryP.categoryName}</span></h3>
+                                            <h3>Type: <span>${odi.product.categoryP.categoryName}</span></h3>
                                         </div>
                                         <div class="cart__about__property-update-delete">
                                             <button type="button"
-                                                    data-id="${entry.key.productID}"
-                                                    data-name="${entry.key.nameProduct}"
-                                                    data-quantity="${entry.value}"
-                                                    data-image="${entry.key.imgProduct}"
+                                                    data-id="${odi.product.productID}"
+                                                    data-name="${odi.product.nameProduct}"
+                                                    data-quantity="${odi.quantity}"
+                                                    data-image="${odi.product.imgProduct}"
                                                     class="cart__property-update">Edit</button>    
                                             <!-- delete -->
                                             <button class="cart__property-delete"
-                                                    data-id="${entry.key.productID}"
-                                                    data-name="${entry.key.nameProduct}">
+                                                    data-id="${odi.product.productID}"
+                                                    data-name="${odi.product.nameProduct}">
                                                  
                                                 Delete
                                                 <div class="icon-1">
@@ -154,11 +158,16 @@
                                     </div>
                                     <!-- price -->
                                     <div class="cart__about__property-price col-md-3">
-                                        <h3 class="property-price-cart">${entry.key.price}</h3>
+                                        <h3 class="property-price-cart">
+                                            <fmt:formatNumber value="${odi.unitPrice}" pattern="#,###"/> đ
+                                        </h3>
                                     </div>
                                     <!-- total -->
                                     <div class="cart__about__property-total col-md-3">
-                                        <h3 class="property-total-cart">1000000</h3>
+                                        <h3 class="property-total-cart">
+                                            <fmt:formatNumber value="${odi.totalPrice}" pattern="#,###"/> đ
+                                        </h3>
+                                           <c:set var="TotalProduct" value="${TotalProduct + odi.totalPrice   }" />
                                     </div>
                                 </div>
                             </div>
@@ -170,10 +179,11 @@
                         <div class="cart__about__check-subtotal-container">
                             <div class="row cart__about__check-subtotal-container-row">
                                 <div class="check-subtotal-quantity-total-item col-md-4">
-                                    <h3>Subtotal ( <span>2 Items</span> ):</h3>
+                                     <c:set var="cartSize" value="${fn:length(sessionScope.cart)}" />
+                                    <h3>Subtotal ( <span>${cartSize} Items</span> ):</h3>
                                 </div>
                                 <div class="check-subtotal-quantity-price-item col-md-4">
-                                    <h3 id="subtotal-quantity-price-item">2000000 </h3>
+                                    <h3 id="subtotal-quantity-price-item"><fmt:formatNumber value="${TotalProduct}" pattern="#,###"/> đ </h3>
                                 </div>
                                 <div class="cart__about__checkout-btn col-md-4">
                                     <a class="checkout-btn" href="checkout.jsp">Check Out </a>
@@ -344,23 +354,23 @@
                 quantityInput.value = currentValue + 1;
 
             });
-            const priceElements = document.querySelectorAll('.property-price-cart');
-            const totalElements = document.querySelectorAll('.property-total-cart');
+//            const priceElements = document.querySelectorAll('.property-price-cart');
+//            const totalElements = document.querySelectorAll('.property-total-cart');
+//
+//            priceElements.forEach(function (element) {
+//                let price = parseInt(element.innerText);
+//                let formattedAmount = price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+//                element.innerText = formattedAmount;
+//            });
+//            totalElements.forEach(function (element) {
+//                let total = parseInt(element.innerText);
+//                let formattedTotal = total.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+//                element.innerText = formattedTotal;
+//            });
 
-            priceElements.forEach(function (element) {
-                let price = parseInt(element.innerText);
-                let formattedAmount = price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
-                element.innerText = formattedAmount;
-            });
-            totalElements.forEach(function (element) {
-                let total = parseInt(element.innerText);
-                let formattedTotal = total.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
-                element.innerText = formattedTotal;
-            });
-
-            let subTotal = parseInt(document.getElementById('subtotal-quantity-price-item').innerText);
-            let formattedsubTotal = subTotal.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
-            document.getElementById('subtotal-quantity-price-item').innerText = formattedsubTotal;
+//            let subTotal = parseInt(document.getElementById('subtotal-quantity-price-item').innerText);
+//            let formattedsubTotal = subTotal.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+//            document.getElementById('subtotal-quantity-price-item').innerText = formattedsubTotal;
 
 
         

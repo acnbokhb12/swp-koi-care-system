@@ -6,7 +6,9 @@
 package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.Product;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import redis.clients.jedis.Jedis; 
@@ -41,27 +43,27 @@ public class CartService {
 
         // save cart to jedis
         jedis.hmset("cart:" + userId, cartData);
-        jedis.expire("cart:" + userId, 604800); // Đặt thời gian hết hạn là 1 tuần (604800 giây)
-//        jedis.expire("cart:" + userId, 60 * 60);
+//        jedis.expire("cart:" + userId, 604800); // Đặt thời gian hết hạn là 1 tuần (604800 giây)
+        jedis.expire("cart:" + userId, 60 * 60);
             
        
         return true;
     }
 
-    public HashMap<Product, Integer> getCart(int userId) {
-        Map<String, String> cartData = jedis.hgetAll("cart:" + userId);
-        if (cartData == null && cartData.isEmpty()) {
-            return null;
-        }
-        // convert to cart real
-        ProductService pds = new ProductService();
-        HashMap<Product, Integer> cartUser = new HashMap<>();
-        for (String productId : cartData.keySet()) {
-            Product p = pds.getProductById(Integer.parseInt(productId));
-            cartUser.put(p, Integer.parseInt(cartData.get(productId)));
-        }
-        return cartUser;
-    }
+//    public HashMap<Product, Integer> getCart(int userId) {
+//        Map<String, String> cartData = jedis.hgetAll("cart:" + userId);
+//        if (cartData == null && cartData.isEmpty()) {
+//            return null;
+//        }
+//        // convert to cart real
+//        ProductService pds = new ProductService();
+//        HashMap<Product, Integer> cartUser = new HashMap<>();
+//        for (String productId : cartData.keySet()) {
+//            Product p = pds.getProductById(Integer.parseInt(productId));
+//            cartUser.put(p, Integer.parseInt(cartData.get(productId)));
+//        }
+//        return cartUser;
+//    }
 
     public boolean updateCart(int userId, String productId, int newQuantity) {
         Map<String, String> cartData = jedis.hgetAll("cart:" + userId);
@@ -69,10 +71,11 @@ public class CartService {
             return false;
         }
         if (cartData.containsKey(productId)) {
-            if (newQuantity > 0) 
+            if (newQuantity > 0){ 
                 jedis.hset("cart:" + userId, productId, String.valueOf(newQuantity));
-                else 
-                jedis.hdel("cart:" + userId, productId); 
+            }else{ 
+                jedis.hdel("cart:" + userId, productId);
+            }    
             jedis.expire("cart:" + userId, 60 * 60);
             return true;
         }
@@ -93,4 +96,37 @@ public class CartService {
         }
         return false; 
     }
+    public float totalPriceOrderItem(int quantity, float price){
+        return quantity*price;
+    }
+    
+    public ArrayList<OrderItem> getCart(int userId) {
+        Map<String, String> cartData = jedis.hgetAll("cart:" + userId);
+        if (cartData == null && cartData.isEmpty()) {
+            return new ArrayList<>();
+        }
+        // convert to cart real
+        ProductService pds = new ProductService();
+        ArrayList<OrderItem> cartUser = new ArrayList<>();
+        for (String productId : cartData.keySet()) {
+            Product p = pds.getProductById(Integer.parseInt(productId));
+            OrderItem item = new OrderItem();
+            item.setProduct(p);
+            int quantity = Integer.parseInt(cartData.get(productId));
+            item.setQuantity(quantity);
+            item.setUnitPrice(p.getPrice());
+            float totalPrice = quantity * p.getPrice();
+            item.setTotalPrice(totalPrice);
+            cartUser.add(item);
+        }
+        return cartUser;
+    }
+    public boolean clearCart(int userId) {
+    String cartKey = "cart:" + userId;
+    if (jedis.exists(cartKey)) {
+        jedis.del(cartKey);
+        return true;
+    }
+    return false;
+}
 }
