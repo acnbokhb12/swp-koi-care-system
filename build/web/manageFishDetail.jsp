@@ -17,7 +17,6 @@
         <link rel="stylesheet" href="./assets/css/base.css">
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
         <link rel="stylesheet" href="./assets/css/adminFish.css">
-        <link rel="stylesheet" href="./assets/css/manageFishDetail.css"> <!-- Liên kết CSS tùy chỉnh -->
     </head>
     <body>
         <div class="container_admin">
@@ -29,6 +28,9 @@
                     <div class="content">
                         <div class="header">
                             <h2>Fish and Pond Details</h2>
+                               <div class="actions"> 
+                                 <a href="ManageFishController?acid=${fish.accID}" class="btn btn-primary">Back to Fish List</a> 
+                            </div>
                         </div>
                         <form class="fish-pond-form">
                             <!-- Fish Information Section (Left) -->

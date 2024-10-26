@@ -30,7 +30,6 @@
                         <div class="header">
                             <h2>User List</h2>
                             <div class="actions"> 
-                                <a href="addUser.jsp" class="btn btn-primary">Add User</a> <!-- Nút để thêm người dùng mới -->
                             </div>
                         </div>
                         <div class="table-container" id="userTableContainer">
@@ -65,7 +64,7 @@
                                     </c:if>
                                     <c:if test="${empty listAcc}">
                                         <tr>
-                                            <td colspan="4" class="text-center">No accounts found.</td> <!-- Thông báo nếu không có tài khoản nào -->
+                                            <td colspan="4" class="text-center">No accounts found.</td> 
                                         </tr>
                                     </c:if>
                                 </tbody>

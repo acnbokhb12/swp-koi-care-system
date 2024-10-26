@@ -69,6 +69,18 @@ public interface IConstant {
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
 
+// GOOGLE & CLOUDINARY
+    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
+    public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
+    public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
+    public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
+    public static final String GOOGLE_GRANT_TYPE = dotenv.get("GOOGLE_GRANT_TYPE");
+    public static final String GOOGLE_LINK_GET_TOKEN = dotenv.get("GOOGLE_LINK_GET_TOKEN");
+    public static final String GOOGLE_LINK_GET_USER_INFO = dotenv.get("GOOGLE_LINK_GET_USER_INFO");
+
+    public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
+    public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
+    public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
 
 
 }

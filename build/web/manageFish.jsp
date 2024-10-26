@@ -37,7 +37,8 @@
                     <div class="content">
                         <div class="header">
                             <h2>Fish List</h2>
-                            <div class="actions"> 
+                               <div class="actions"> 
+                                 <a href="MainController?action=accountfishmanage" class="btn btn-primary">Back to Account List</a> 
                             </div>
                         </div>
                         <div class="table-container" id="fishTableContainer">
