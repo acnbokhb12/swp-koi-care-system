@@ -38,7 +38,9 @@
             <div class="tilte-ponds"> 
                 <h1>Koi Fish Ponds</h1>
                 <div class="button-container"> 
-                    <button class="btn edit-btn-out">Add New Pond</button>
+                    <button class="btn edit-btn-out">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
             </div> 
             <div class="row pond-list">

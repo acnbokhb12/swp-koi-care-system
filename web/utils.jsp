@@ -30,7 +30,7 @@
             </div> 
                 </div>
                 <ul class="menu">
-                    <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
+                    <li><a href="dashboardAdmin.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                     <li><a href="manageAccount.jsp"><i class="fas fa-users"></i> Account Management</a></li> 
                     <li><a href="manageNews.jsp"><i class="fa-solid fa-newspaper"></i>News Management</a></li>   
                 </ul>
@@ -213,7 +213,7 @@
                                             </a>
                                         </li>
                                         <li class="contain__item-nav contain__item-nav-open">
-                                            <a href="#" class="contain__item-nav-link">
+                                            <a  class="contain__item-nav-link">
                                                 <span>News <i class="fa-solid fa-chevron-down ml-1"></i></span>
                                             </a>
                                             <div class="contain__sub-item_nav-link">
@@ -280,7 +280,7 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="#">
+                                                                        <a href="waterParameter.jsp">
                                                                             <i class="fa-solid fa-droplet"></i> Water Parameters
                                                                         </a>
                                                                     </li>
@@ -331,7 +331,7 @@
                                 <img src="./assets/img/logo/Logo_Koi_Care.png" alt="">
                             </a>
                             <p class="desc-footer-infor">
-                                <i class="fa-solid fa-location-dot"></i>  Student Culture House, 643 dien Bien Phu, Phuong 1, Quan 3, HCM
+                                <i class="fa-solid fa-location-dot"></i>  FPT University, Tp Thu Duc, HCM
                             </p>
                             <p class="desc-footer-infor">
                                 <i class="fa-solid fa-phone" style="margin-right: 0.4rem;"></i> +84 1234 567 890

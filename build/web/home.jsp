@@ -394,12 +394,21 @@
 </body>
  <script>
     $('#header').load('utils.jsp #header__nav', ()=>{
-        $.getScript('./assets/js/utilsCustomer.js');
+        $.getScript('./assets/js/utilsCustomer.js'); 
     });
     $('#footer').load('utils.jsp #footer__nav', ()=>{
         $.getScript('./assets/js/utilsCustomer.js');
     });
 </script>
+<style>
+    @media screen and (max-width: 1000px) {
+        .contain__task-user{ 
+            margin-top: 10px;
+            justify-items: center;
+         
+        }
+    }
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 <script>
      var swiper = new Swiper(".latest__news-card-wrapper", {

@@ -852,9 +852,9 @@
     .contain__sub-item_nav-list{
       
     }
-    .contain__task-user{
-        /* margin-top: 0; */
+    .contain__task-user{ 
         padding-bottom: 1rem;
+       justify-items: center;
          
     }
     .header__task-right{

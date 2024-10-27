@@ -37,7 +37,9 @@
             <div class="tilte-fish"> 
                 <h1>Koi Fish</h1>
                 <div class="button-container"> 
-                    <button class="btn">Add New Fish</button>
+                    <button class="btn">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
             </div>
             <div class="fish-list row mt-4">
