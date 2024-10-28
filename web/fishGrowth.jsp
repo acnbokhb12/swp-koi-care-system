@@ -43,8 +43,8 @@
                         <div class="text-right">    
                             <a href="MainController?action=fishinfor&fid=${fishInfo.fishID}" class="back-btn" style="margin-right: 10px;">Back to Koi</a>
                             <button class="edit-btn-out">Add New Fish Growth</button>
-                            <button class="update-btn-out" onclick="openModal()">Update</button>
-                            <button class="delete-btn-out">Delete</button>
+                            <button class="update-btn-out" onclick="openUpdateModal()">Update</button>
+                            <button class="delete-btn-out" onclick="openDeleteModal()">Delete</button>
                         </div>
                     </div>
                     <div class="row mt-4 row-growth_fish">
@@ -167,7 +167,41 @@
         </div>
 
         <!-- Update -->
-        <div class="modal" id="modalDelete">
+        <div class="modal" id="modalUpdate" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modalUpdate')">&times;</span>
+                <form action="MainController?action=fishgrowthchartupdate" method="post" id="form_update-growth">
+                    <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
+                    <div class="edit-item-detail">
+                        <span>Select Update Date</span>
+                        <select id="updateDateSelect" name="updateDate" onchange="updateFields()">
+                            <c:forEach var="dev" items="${fishdevelop}">
+                                <option value="${dev.updateDate}">${dev.updateDate}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="edit-item-detail">
+                        <span>Weight (Gram)</span>
+                        <input type="number" id="updateWeight" name="weight" placeholder="Weight will be updated automatically" required />
+                    </div>
+                    <div class="edit-item-detail">
+                        <span>Length (cm)</span>
+                        <input type="number" id="updateLength" name="length" step="0.1" placeholder="Length will be updated automatically" required />
+                    </div>
+                    <div class="text-center">
+                        <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
+                            Update
+                        </button>
+                        <button class="edit-btn cancel-btn" type="button" style="margin-top: 10px" onclick="closeModal('modalUpdate')">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--            Delete-->
+        <div class="modal" id="modalDelete" style="display: none;">
             <div class="modal-content">
                 <span class="close" onclick="closeModal('modalDelete')">&times;</span>
                 <form action="MainController?action=fishgrowthchartdelete" method="post" id="form_delete-growth">
@@ -175,7 +209,6 @@
                     <div class="edit-item-detail">
                         <span>Select Update Date</span>
                         <select id="deleteUpdateDateSelect" name="updateDate">
-                            <option value="">-- Select Update Date --</option>
                             <c:forEach var="dev" items="${fishdevelop}">
                                 <option value="${dev.updateDate}">${dev.updateDate}</option>
                             </c:forEach>
@@ -183,7 +216,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button class="edit-btn red-btn" type="submit" style="margin-top: 10px">
+                        <button class="edit-btn delete-btn" type="submit" style="margin-top: 10px">
                             Delete
                         </button>
                         <button class="edit-btn cancel-btn" type="button" style="margin-top: 10px" onclick="closeModal('modalDelete')">
@@ -193,36 +226,15 @@
                 </form>
             </div>
         </div>
-
-        <!--            Delete-->
-        <form action="MainController?action=fishgrowthchartdelete" method="post" id="form_delete-growth">
-            <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
-            <div class="edit-item-detail">
-                <span>Select Update Date</span>
-                <select id="deleteUpdateDateSelect">
-                    <option value="">-- Select Update Date --</option>
-                    <c:forEach var="dev" items="${fishdevelop}">
-                        <option value="${dev.updateDate}">${dev.updateDate}</option>
-                    </c:forEach>
-                </select>
-            </div>
-
-            <div class="text-center">
-                <button class="edit-btn red-btn" type="submit" style="margin-top: 10px">
-                    Delete
-                </button>
-            </div>
-        </form>
-
         <script src="./assets/js/footer.js"></script>
     </body>
     <script>
-                    $('#header').load('utils.jsp #header__nav', () => {
-                        $.getScript('./assets/js/utilsCustomer.js');
-                    });
-                    $('#footer').load('utils.jsp #footer__nav', () => {
-                        $.getScript('./assets/js/utilsCustomer.js');
-                    });
+                            $('#header').load('utils.jsp #header__nav', () => {
+                                $.getScript('./assets/js/utilsCustomer.js');
+                            });
+                            $('#footer').load('utils.jsp #footer__nav', () => {
+                                $.getScript('./assets/js/utilsCustomer.js');
+                            });
     </script>
     <script>
         const btnClose = document.querySelector(".btn-close-fish");
@@ -494,18 +506,26 @@
         });
     </script>
     <script>
-        function openModal() {
-            document.getElementById('modal').style.display = 'block';
+        function openUpdateModal() {
+            document.getElementById('modalUpdate').style.display = 'block';
         }
 
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
+        function openDeleteModal() {
+            document.getElementById('modalDelete').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         window.onclick = function (event) {
-            const modal = document.getElementById('modal');
-            if (event.target === modal) {
-                closeModal();
+            const updateModal = document.getElementById('modalUpdate');
+            const deleteModal = document.getElementById('modalDelete');
+            if (event.target === updateModal) {
+                closeModal('modalUpdate');
+            }
+            if (event.target === deleteModal) {
+                closeModal('modalDelete');
             }
         }
     </script>

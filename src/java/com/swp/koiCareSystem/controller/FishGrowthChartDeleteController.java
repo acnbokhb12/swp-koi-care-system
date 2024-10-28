@@ -5,8 +5,11 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +35,16 @@ public class FishGrowthChartDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            
+            int fishID = Integer.parseInt(request.getParameter("fishID"));
+            String updateDateStr = request.getParameter("updateDate");
+            Date updateDate = Date.valueOf(updateDateStr); // Chuyển đổi chuỗi thành Date
+
+            FishService fs = new FishService();
+            boolean isDeleted = fs.deleteFishDevelopmentByIDAndDate(fishID, updateDate);
+
+            String url = null;
+            url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

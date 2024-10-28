@@ -676,8 +676,24 @@
 .edit-btn.blue-btn:hover {
     background-color: #0056b3;
 }
+.delete-btn {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #2980b9;
+}
+
 .cancel-btn {
-    background-color: #dc3545; /* Red color for cancel */
+    background-color: #dc3545;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -687,5 +703,5 @@
 }
 
 .cancel-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #c82333;
 }
