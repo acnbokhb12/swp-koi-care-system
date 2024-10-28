@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manage User Accounts</title>
+        <title>Manage Accounts Fish</title>
         <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -28,7 +28,7 @@
                     <!-- Phần Nội Dung Chính -->
                     <div class="content">
                         <div class="header">
-                            <h2>User List</h2>
+                            <h2>Manage Accounts List</h2>
                             <div class="actions"> 
                             </div>
                         </div>

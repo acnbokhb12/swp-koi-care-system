@@ -229,6 +229,10 @@
         <servlet-name>ManageFishDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageFishDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerWaterParameterController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerWaterParameterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -400,6 +404,10 @@
     <servlet-mapping>
         <servlet-name>ManageFishDetailController</servlet-name>
         <url-pattern>/ManageFishDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerWaterParameterController</servlet-name>
+        <url-pattern>/ManagerWaterParameterController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

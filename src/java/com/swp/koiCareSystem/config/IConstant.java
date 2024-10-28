@@ -68,6 +68,11 @@ public interface IConstant {
     public static String PRODUCT_UPDATE = "productupdate";
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
+   
+  // START MANAGER WATER PARAMETER ----------------------------------------------------------------------------------------------------------------------------------     
+       public static String WATER_PARAMETER_MANAGE = "managewaterparameter";
+
+
 
 // GOOGLE & CLOUDINARY
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();

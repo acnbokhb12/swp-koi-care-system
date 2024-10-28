@@ -105,7 +105,7 @@ public class AccountDAO {
         ArrayList<Account> listAccounts = new ArrayList<>();
         ResultSet rs = null;
         Connection conn = null;
-        PreparedStatement psm = null; // Declare psm outside the try block
+        PreparedStatement psm = null; 
         String sql = "SELECT count(*) FROM Accounts WHERE UserRole = 'customer'";
 
         try {

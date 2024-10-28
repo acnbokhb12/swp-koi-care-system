@@ -36,7 +36,7 @@
                     <!-- Main Content Section -->
                     <div class="content">
                         <div class="header">
-                            <h2>Fish List</h2>
+                            <h2>Manage Fish List</h2>
                                <div class="actions"> 
                                  <a href="MainController?action=accountfishmanage" class="btn btn-primary">Back to Account List</a> 
                             </div>

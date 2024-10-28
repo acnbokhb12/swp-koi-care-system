@@ -27,7 +27,7 @@
                     <!-- Main Content Section -->
                     <div class="content">
                         <div class="header">
-                            <h2>Fish and Pond Details</h2>
+                            <h2>Manage Fish and Pond Details</h2>
                                <div class="actions"> 
                                  <a href="ManageFishController?acid=${fish.accID}" class="btn btn-primary">Back to Fish List</a> 
                             </div>
