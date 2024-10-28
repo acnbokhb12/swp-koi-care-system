@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,6 +56,7 @@
                                             <th>Order ID</th>
                                             <th>Customer Name</th>
                                             <th>Order Date</th>
+                                            <th>Order Time</th>
                                             <th>Status</th>
                                             <th>Total Money</th>
                                             <th>Actions</th>
@@ -60,38 +64,77 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Example Order Row -->
-                                        <tr>
-                                            <td>#ORD12345</td>
-                                            <td>John Doe</td>
-                                            <td>2024-10-06</td>
-                                            <td>Delivered</td>
-                                            <td>$100.00</td>
-                                            <td>
-                                                <button class="edit-btn" onclick="window.location.href = 'manageOrderDetails.jsp'">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <a href="#" class="text-danger">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="confirm-btn" onclick="confirmOrder('#ORD12345')">
-                                                    <i class="fas fa-check"></i> Confirm
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tbody>
+                                        <c:forEach var="order" items="${ListO}">
+                                            <tr>
+                                                <td>#${order.id}</td>
+                                                <td>${order.customerName}</td>
+                                                <td>
+                                                    <c:set var="orderDate" value="${order.orderDate}" />
+                                                    <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                                                    ${formattedDate}
+                                                </td>
+                                                <td>
+                                                    <c:set var="orderDate" value="${order.orderDate}" />
+                                                    <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                                                    ${formattedTime} 
+                                                </td>
+                                                <td>
+                                                    ${order.orderS.orderStatusName}
+                                                </td>
+                                                <td>    
+                                                    <fmt:formatNumber value="${order.total}" pattern="#,###"/> đ
+                                                </td>
+                                                <td>
+                                                    <button class="edit-btn" onclick="window.location.href = 'manageOrderDetails.jsp?orderId=${order.id}'">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="delete-btn">
+                                                        <a href="#" class="text-danger" onclick="deleteOrder(${order.id})">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="confirm-btn" onclick="confirmOrder('#${order.id}')">
+                                                        <i class="fas fa-check"></i> Confirm
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
                                     </tbody>
                                 </table>
                                 <!-- Footer and Pagination -->
                                 <div class="footer">
-                                    <div class="pagination">
-                                        <button><a href="#" class="text-dark">Previous</a></button>
-                                        <button><a href="#" class="text-dark">1</a></button>
-                                        <button><a href="#" class="text-dark">Next</a></button>
-                                    </div>
+                                    <ul class="pagination">
+                                        <c:if test="${tag > 1}">
+                                            <li class="page-item">
+                                                <a href="ManagerOrderManageController?index=${tag - 1}" class="page-link text-dark">
+                                                    <i class="fa-solid fa-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                        </c:if>
+
+                                        <c:set var="startPage" value="${tag - 1 < 1 ? 1 : tag - 1}" />
+                                        <c:set var="lastPage" value="${tag + 1 > endPage ? endPage : tag + 1}" />
+
+                                        <c:forEach begin="${startPage}" end="${lastPage}" var="i">
+                                            <li class="page-item ${tag == i ? 'active' : ''}">
+                                                <a href="ManagerOrderManageController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                                    ${i}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+
+                                        <c:if test="${tag < endPage}">
+                                            <li class="page-item">
+                                                <a href="ManagerOrderManageController?index=${tag + 1}" class="page-link text-dark">
+                                                    <i class="fa-solid fa-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

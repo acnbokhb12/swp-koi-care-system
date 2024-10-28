@@ -8,6 +8,7 @@ package com.swp.koiCareSystem.dao;
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
+import com.swp.koiCareSystem.model.OrderStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class OrderDAO {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        int rowEffectV2 =0;
+        int rowEffectV2 = 0;
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
@@ -62,7 +63,7 @@ public class OrderDAO {
                 }
                 cn.setAutoCommit(true);
                 cn.commit();
-                if(rowEffectV2 >0 ){
+                if (rowEffectV2 > 0) {
                     return true;
                 }
             }
@@ -86,4 +87,100 @@ public class OrderDAO {
         return false;
     }
 
+    public int countOrders() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Orders WHERE isActive = 1";
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Order> getAllOrders(int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Order> listOrders = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT o.OrderID, o.AccID, o.OrderStatusID, o.OrderDate, "
+                        + "o.UserNameOrdered, o.PhoneOrdered, o.AddressOrdered, "
+                        + "o.TotalAmount, o.isActive, os.OrderStatusName "
+                        + "FROM Orders o "
+                        + "JOIN OrderStatus os ON o.OrderStatusID = os.OrderStatusID "
+                        + "WHERE o.isActive = 1 "
+                        + "ORDER BY o.OrderID DESC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, distance);
+                rs = pst.executeQuery();
+
+                while (rs != null && rs.next()) {
+                    Order order = new Order();
+                    order.setId(rs.getInt("OrderID"));
+                    order.setCustomerID(rs.getInt("AccID"));
+                    order.setOrderDate(rs.getTimestamp("OrderDate").toLocalDateTime());
+                    order.setCustomerName(rs.getString("UserNameOrdered"));
+                    order.setPhone(rs.getString("PhoneOrdered"));
+                    order.setAddressOrder(rs.getString("AddressOrdered"));
+
+                    // Tạo đối tượng OrderStatus và gán cho Order
+                    OrderStatus orderS = new OrderStatus();
+                    orderS.setOrderStatusID(rs.getInt("OrderStatusID"));
+                    orderS.setOrderStatusName(rs.getString("OrderStatusName"));
+                    order.setOrderS(orderS);
+
+                    order.setTotal(rs.getFloat("TotalAmount"));
+                    order.setIsActive(rs.getBoolean("isActive"));
+
+                    listOrders.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listOrders;
+    }
 }

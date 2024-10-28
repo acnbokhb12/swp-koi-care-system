@@ -253,6 +253,10 @@
         <servlet-name>CheckOutController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.CheckOutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderManageController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -448,6 +452,10 @@
     <servlet-mapping>
         <servlet-name>CheckOutController</servlet-name>
         <url-pattern>/CheckOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderManageController</servlet-name>
+        <url-pattern>/ManagerOrderManageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

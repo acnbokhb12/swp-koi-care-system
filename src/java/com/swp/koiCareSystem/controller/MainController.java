@@ -157,7 +157,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
-                // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
+                // START PLACE CUSTOMER FORGET PASSWORD -------------------------------------------------------------     
                 case IConstant.CustomerForgetPassword:
                     url = "CustomerForgetPasswordController";
                     break;
@@ -166,6 +166,10 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.CustomerNewPassword:
                     url = "CustomerNewPassWordController";
+                    break;
+                // START PLACE MANAGER ORDER -------------------------------------------------------------     
+                case IConstant.MANAGER_ORDER_MANAGE:
+                    url = "ManagerOrderManageController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

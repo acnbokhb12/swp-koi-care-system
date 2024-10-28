@@ -24,6 +24,7 @@ public class Order {
     private float total;
     private ArrayList<OrderItem> orderItems;
     private boolean isActive;
+    private OrderStatus orderS;
 
     public Order() {
     }
@@ -122,6 +123,14 @@ public class Order {
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public OrderStatus getOrderS() {
+        return orderS;
+    }
+
+    public void setOrderS(OrderStatus orderS) {
+        this.orderS = orderS;
     }
     
     

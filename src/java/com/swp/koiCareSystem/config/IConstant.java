@@ -68,9 +68,11 @@ public interface IConstant {
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
 
+// START MANAGER ORDER ----------------------------------------------------------------------------------------------------------------------------------     
+    public static String MANAGER_ORDER_MANAGE  = "managerordermanage";
 
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
-    public final String CustomerForgetPassword  = "forgetpassword";
+    public final String CustomerForgetPassword = "forgetpassword";
     public final String CustomerValidateOtp = "validateotp";
     public final String CustomerNewPassword = "newpassword";
 
@@ -86,7 +88,7 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
     public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
     public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
-    
+
     public final String URI_JEDIS = dotenv.get("URI_JEDIS");
 
 }
