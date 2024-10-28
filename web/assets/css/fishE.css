@@ -705,3 +705,11 @@
 .cancel-btn:hover {
     background-color: #c82333;
 }
+#toast {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+#toast.fade-out {
+    opacity: 0;
+}

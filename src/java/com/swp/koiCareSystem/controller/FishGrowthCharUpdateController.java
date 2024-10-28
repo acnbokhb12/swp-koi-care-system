@@ -54,8 +54,21 @@ public class FishGrowthCharUpdateController extends HttpServlet {
             FishService fs = new FishService();
             boolean isUpdated = fs.updateFishDevelopment(fishDevelopment);
 
-            String url = null;
-            url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
+            String toastMessage;
+            String message;
+
+            if (isUpdated) {
+                toastMessage = "success";
+                message = "Fish development updated successfully.";
+            } else {
+                toastMessage = "error";
+                message = "Failed to update fish development.";
+            }
+
+            request.setAttribute("toastMessage", toastMessage);
+            request.setAttribute("message", message);
+
+            String url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

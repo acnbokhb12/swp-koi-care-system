@@ -148,11 +148,6 @@
                                 <div class="col-12 edit-item-detail">
                                     <span>Date</span>
                                     <input type="date" name="date" required />
-                                    <c:if test="${not empty dateExist}">
-                                        <div class="alert alert-danger">
-                                            <strong>${dateExist}</strong>
-                                        </div>
-                                    </c:if>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -226,6 +221,25 @@
                 </form>
             </div>
         </div>
+
+        <!--          Thông báo-->
+        <c:if test="${toastMessage != null}"> 
+            <div id="toast" style="z-index: 10">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }" style="display:flex">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close" onclick="closeToast()">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
         <script src="./assets/js/footer.js"></script>
     </body>
     <script>
@@ -528,4 +542,24 @@
                 closeModal('modalDelete');
             }
         }
+    </script>
+    <script>
+        function closeToast() {
+            var toast = document.getElementById('toast');
+            if (toast) {
+                toast.style.display = 'none';
+            }
+        }
+        
+        window.onload = function () {
+            var toast = document.getElementById('toast');
+            if (toast) {
+                setTimeout(function () {
+                    toast.classList.add('fade-out');
+                    setTimeout(function () {
+                        toast.style.display = 'none';
+                    }, 500);
+                }, 3000);
+            }
+        };
     </script>

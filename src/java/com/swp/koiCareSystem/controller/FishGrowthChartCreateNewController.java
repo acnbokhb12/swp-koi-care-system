@@ -36,37 +36,44 @@ public class FishGrowthChartCreateNewController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-                String fid = request.getParameter("fishID");
-                String weightStr = request.getParameter("weight");
-                String lengthStr = request.getParameter("length");
-                String dateStr = request.getParameter("date");
+            String fid = request.getParameter("fishID");
+            String weightStr = request.getParameter("weight");
+            String lengthStr = request.getParameter("length");
+            String dateStr = request.getParameter("date");
 
-                int fishID = Integer.parseInt(fid);
-                float weight = Float.parseFloat(weightStr);
-                float length = Float.parseFloat(lengthStr);
-                Date updateDate = Date.valueOf(dateStr);
+            int fishID = Integer.parseInt(fid);
+            float weight = Float.parseFloat(weightStr);
+            float length = Float.parseFloat(lengthStr);
+            Date updateDate = Date.valueOf(dateStr);
 
-                FishService fs = new FishService();
-                String url = "";
-                boolean dateExists = fs.checkDateExists(fishID, updateDate);
-                if (dateExists) {
-                    request.setAttribute("dateExist", "A growth record for this fish already exists on " + updateDate);
-                    url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
-                    request.getRequestDispatcher(url).forward(request, response);
+            FishService fs = new FishService();
+            String url = "";
+            boolean dateExists = fs.checkDateExists(fishID, updateDate);
+
+            if (dateExists) {
+                request.setAttribute("toastMessage", "error");
+                request.setAttribute("message", "A record for this fish exists on " + updateDate);
+                url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
+                request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                // Create a FishDevelopment instance
+                FishDevelopment fd = new FishDevelopment(fishID, updateDate, length, weight);
+
+                boolean success = fs.createNewFishDevelopment(fd);
+
+                url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
+
+                if (success) {
+                    request.setAttribute("toastMessage", "success");
+                    request.setAttribute("message", "Fish development record added successfully.");
                 } else {
-                    // Create a FishDevelopment instance
-                    FishDevelopment fd = new FishDevelopment(fishID, updateDate, length, weight);
+                    request.setAttribute("toastMessage", "error");
+                    request.setAttribute("message", "Failed to add fish development record.");
+                }
 
-                    boolean success = fs.createNewFishDevelopment(fd);
-
-                    url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
-                    if (success) {
-    //                    request.setAttribute("message", "Fish development record added successfully.");
-                    } else {
-    //                    request.setAttribute("message", "Failed to add fish development record.");
-                    }
-                    request.getRequestDispatcher(url).forward(request, response);
+                request.getRequestDispatcher(url).forward(request, response);
             }
+
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

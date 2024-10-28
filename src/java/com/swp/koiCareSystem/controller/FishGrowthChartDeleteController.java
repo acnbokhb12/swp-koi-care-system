@@ -42,8 +42,16 @@ public class FishGrowthChartDeleteController extends HttpServlet {
             FishService fs = new FishService();
             boolean isDeleted = fs.deleteFishDevelopmentByIDAndDate(fishID, updateDate);
 
-            String url = null;
-            url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
+            String url = "MainController?action=" + IConstant.FISH_GROWTH_CHART_INFO;
+
+            if (isDeleted) {
+                request.setAttribute("toastMessage", "success");
+                request.setAttribute("message", "Record deleted successfully.");
+            } else {
+                request.setAttribute("toastMessage", "error");
+                request.setAttribute("message", "Failed to delete the record.");
+            }
+
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
