@@ -59,6 +59,9 @@ public interface IConstant {
     public static String CREATE_NEW_BLOG = "createNewBlog";
     public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
+    public final String CREATE_NEWS = "createNews";
+    public final String NEWS_INFOR_CREATE = "newsInforCreate";
+    public final String ADMIN_NEWS = "adminNews";
 
 // START MANAGER PRODUCT ----------------------------------------------------------------------------------------------------------------------------------     
   
@@ -69,5 +72,18 @@ public interface IConstant {
     public static String PRODUCT_UPDATE = "productupdate";
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
+    
+    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
+    public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
+    public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
+    public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
+    public static final String GOOGLE_GRANT_TYPE = dotenv.get("GOOGLE_GRANT_TYPE");
+    public static final String GOOGLE_LINK_GET_TOKEN = dotenv.get("GOOGLE_LINK_GET_TOKEN");
+    public static final String GOOGLE_LINK_GET_USER_INFO = dotenv.get("GOOGLE_LINK_GET_USER_INFO");
+
+    public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
+    public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
+    public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
+
  
 }

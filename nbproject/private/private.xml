@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/assets/css/shopPage.css</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/ProductDAO.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/shop.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/ProductCateController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/ManageShopController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/PondDAO.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManageProductController.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/ProductDAO.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/ProductService.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/NewsDAO.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageNews.jsp</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManageNewsController.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageProduct.jsp</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/NewsService.java</file>
         </group>
     </open-files>
 </project-private>
