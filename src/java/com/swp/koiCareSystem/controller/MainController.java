@@ -116,6 +116,12 @@ public class MainController extends HttpServlet {
                 case IConstant.FISH_GROWTH_CHART_CREATE:
                     url = "FishGrowthChartCreateNewController";
                     break;
+                case IConstant.FISH_GROWTH_CHART_UPDATE:
+                    url = "FishGrowthCharUpdateController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_DELETE:
+                    url = "FishGrowthChartDeleteController";
+                    break;
                 case IConstant.FISH_GROWTH_CHART_SEARCH_LENGTH:
                     url = "FishGrowthChartSearchLengthController";
                     break;

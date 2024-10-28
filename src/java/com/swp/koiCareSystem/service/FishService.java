@@ -161,4 +161,13 @@ public class FishService {
     public ArrayList<FishDevelopment> getFishDevelopmentByDateRange(int fishId, Date fromDate, Date toDate) {
         return fishDAO.getFishDevelopmentByDateRange(fishId, fromDate, toDate);
     }
+
+    public boolean updateFishDevelopment(FishDevelopment fd) {
+        return fishDAO.updateFishDevelopment(fd);
+    }
+
+    public boolean deleteFishDevelopmentByIDAndDate(int fishId, Date updateDate) {
+        return fishDAO.deleteFishDevelopmentByIDAndDate(fishId, updateDate);
+    }
+
 }

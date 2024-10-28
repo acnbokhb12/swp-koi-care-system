@@ -36,6 +36,10 @@ public class FishDevelopment {
         this.updateLength = updateLength;
         this.updateWeight = updateWeight;
     }
+
+    public FishDevelopment(String fishID, String updateDate, double weight, double length) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public int getFishDevelopmentID() {

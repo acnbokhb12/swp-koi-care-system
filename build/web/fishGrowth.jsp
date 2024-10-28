@@ -43,7 +43,8 @@
                         <div class="text-right">    
                             <a href="MainController?action=fishinfor&fid=${fishInfo.fishID}" class="back-btn" style="margin-right: 10px;">Back to Koi</a>
                             <button class="edit-btn-out">Add New Fish Growth</button>
-                            <button class="update-delete-btn">Update & Delete</button>
+                            <button class="update-btn-out" onclick="openModal()">Update</button>
+                            <button class="delete-btn-out">Delete</button>
                         </div>
                     </div>
                     <div class="row mt-4 row-growth_fish">
@@ -165,73 +166,63 @@
             </div>
         </div>
 
-        <!--        Delete Update-->
-
-        <div class="fish-data-container" style="display: none;">
-            <div class="fish-details-view">
-                <div class="row fish-row-view">
-                    <div class="col-4" style="padding: 0">
-                        <div class="image-upload-container">
-                            <div class="fish-image-view">
-                                <img src="${fishInfo.fishImage}" alt="${fishInfo.fishName}" />
-                            </div>
-                        </div>
+        <!-- Update -->
+        <div class="modal" id="modalDelete">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modalDelete')">&times;</span>
+                <form action="MainController?action=fishgrowthchartdelete" method="post" id="form_delete-growth">
+                    <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
+                    <div class="edit-item-detail">
+                        <span>Select Update Date</span>
+                        <select id="deleteUpdateDateSelect" name="updateDate">
+                            <option value="">-- Select Update Date --</option>
+                            <c:forEach var="dev" items="${fishdevelop}">
+                                <option value="${dev.updateDate}">${dev.updateDate}</option>
+                            </c:forEach>
+                        </select>
                     </div>
-                    <div class="col-8 fish-info-view">
-                        <div class="text-right">
-                            <button class="btn-close-fish-view">
-                                <i class="fa-solid fa-xmark close-icon-view"></i>
-                            </button>
-                        </div>
-                        <h2>Fish Growth Information</h2>
 
-                        <!-- Step 1: Date Confirmation Form -->
-                        <form id="date-confirmation-form">
-                            <div class="row growth-info-row">
-                                <div class="col-12 date-detail">
-                                    <span>Date</span>
-                                    <input type="date" name="date" id="growthDateView" required />
-                                    <div id="dateErrorMsgView" class="alert alert-danger" style="display:none;">
-                                        <strong>Date is required!</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="action-button-view" id="confirmDateButton" style="margin-top: 10px">Confirm Date</button>
-                            </div>
-                        </form>
-
-                        <!-- Step 2: Weight and Length Form (initially hidden) -->
-                        <form id="growth-form-view" style="display: none;">
-                            <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
-                            <div class="row growth-info-row">
-                                <div class="col-12 weight-detail" id="weightDetail">
-                                    <span>Weight (Gram)</span>
-                                    <input type="number" name="weight" id="fishWeightView" placeholder="Enter your fish weight in grams" required />
-                                </div>
-                                <div class="col-12 length-detail" id="lengthDetail">
-                                    <span>Length (cm)</span>
-                                    <input type="number" name="length" id="fishLengthView" step="0.1" placeholder="Enter length in cm" required />
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="action-button-view" id="updateButtonView">Update</button>
-                                <button type="button" class="action-button-view" id="deleteButtonView">Delete</button>
-                            </div>
-                        </form>
+                    <div class="text-center">
+                        <button class="edit-btn red-btn" type="submit" style="margin-top: 10px">
+                            Delete
+                        </button>
+                        <button class="edit-btn cancel-btn" type="button" style="margin-top: 10px" onclick="closeModal('modalDelete')">
+                            Cancel
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+
+        <!--            Delete-->
+        <form action="MainController?action=fishgrowthchartdelete" method="post" id="form_delete-growth">
+            <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
+            <div class="edit-item-detail">
+                <span>Select Update Date</span>
+                <select id="deleteUpdateDateSelect">
+                    <option value="">-- Select Update Date --</option>
+                    <c:forEach var="dev" items="${fishdevelop}">
+                        <option value="${dev.updateDate}">${dev.updateDate}</option>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <button class="edit-btn red-btn" type="submit" style="margin-top: 10px">
+                    Delete
+                </button>
+            </div>
+        </form>
+
         <script src="./assets/js/footer.js"></script>
     </body>
     <script>
-        $('#header').load('utils.jsp #header__nav', () => {
-            $.getScript('./assets/js/utilsCustomer.js');
-        });
-        $('#footer').load('utils.jsp #footer__nav', () => {
-            $.getScript('./assets/js/utilsCustomer.js');
-        });
+                    $('#header').load('utils.jsp #header__nav', () => {
+                        $.getScript('./assets/js/utilsCustomer.js');
+                    });
+                    $('#footer').load('utils.jsp #footer__nav', () => {
+                        $.getScript('./assets/js/utilsCustomer.js');
+                    });
     </script>
     <script>
         const btnClose = document.querySelector(".btn-close-fish");
@@ -503,72 +494,18 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const updateDeleteButton = document.querySelector(".update-delete-btn");
-            const fishDataContainer = document.querySelector(".fish-data-container");
-            const btnCloseFishView = document.querySelector(".btn-close-fish-view");
-            const confirmDateButton = document.getElementById("confirmDateButton");
-            const growthDateView = document.getElementById("growthDateView");
-            const weightDetail = document.getElementById("weightDetail");
-            const lengthDetail = document.getElementById("lengthDetail");
-            const growthFormView = document.getElementById("growth-form-view");
+        function openModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
 
-            // Hiển thị thông tin cá khi nhấn nút "Update & Delete"
-            updateDeleteButton.addEventListener("click", function () {
-                fishDataContainer.style.display = "block";
-            });
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
 
-            // Đóng thông tin cá
-            btnCloseFishView.addEventListener("click", function () {
-                fishDataContainer.style.display = "none";
-            });
-
-            // Xác nhận ngày và hiển thị thông tin trọng lượng và chiều dài
-            confirmDateButton.addEventListener("click", function () {
-                const selectedDate = growthDateView.value;
-                if (!selectedDate) {
-                    alert("Please select a date.");
-                    return;
-                }
-                fetchFishData(selectedDate);
-            });
-
-            // Xử lý hành động cập nhật
-            document.getElementById("updateButtonView").addEventListener("click", function () {
-                const weight = document.getElementById("fishWeightView").value;
-                const length = document.getElementById("fishLengthView").value;
-                alert(`Weight: ${weight}, Length: ${length} updated!`);
-                fishDataContainer.style.display = "none"; // Đóng container
-            });
-
-            // Xử lý hành động xóa
-            document.getElementById("deleteButtonView").addEventListener("click", function () {
-                const selectedDate = growthDateView.value;
-                if (!selectedDate) {
-                    alert("Please select a date.");
-                    return;
-                }
-                alert(`Data for ${selectedDate} deleted!`);
-                fishDataContainer.style.display = "none"; // Đóng container
-            });
-
-            function fetchFishData(date) {
-                // Thay đổi URL và phương thức phù hợp với server của bạn
-                fetch(`your-api-endpoint?date=${date}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data) {
-                                document.getElementById("fishWeightView").value = data.weight; // Cập nhật trọng lượng
-                                document.getElementById("fishLengthView").value = data.length; // Cập nhật chiều dài
-                                growthFormView.style.display = "block"; // Hiện form cập nhật
-                            } else {
-                                // Nếu không có dữ liệu cho ngày đã chọn
-                                alert("No data found for the selected date.");
-                                growthFormView.style.display = "none"; // Ẩn form cập nhật
-                            }
-                        })
-                        .catch(error => console.error('Error fetching data:', error));
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
             }
-        });
+        }
     </script>
-</html>

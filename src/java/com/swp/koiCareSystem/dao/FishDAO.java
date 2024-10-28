@@ -645,7 +645,7 @@ public class FishDAO {
             conn = DatabaseConnectionManager.getConnection();
 
             String sql = "SELECT FishDevelopmentID, FishID, UpdateDate, UpdateLength, UpdateWeight "
-                    +"FROM FishDevelopment "
+                    + "FROM FishDevelopment "
                     + "WHERE FishID = ? AND UpdateDate BETWEEN ? AND ? "
                     + "ORDER BY UpdateDate ASC";
 
@@ -684,6 +684,69 @@ public class FishDAO {
         return listdevelopment;
     }
 
+    public boolean updateFishDevelopment(FishDevelopment fishDevelopment) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            String sql = "UPDATE FishDevelopment SET UpdateLength = ?, UpdateWeight = ? WHERE FishID = ? AND UpdateDate = ?";
+            ps = conn.prepareStatement(sql);
+
+            ps.setFloat(1, (float) fishDevelopment.getUpdateLength());
+            ps.setFloat(2, (float) fishDevelopment.getUpdateWeight());
+            ps.setInt(3, fishDevelopment.getFishID());
+            ps.setDate(4, fishDevelopment.getUpdateDate());
+
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean deleteFishDevelopmentByIDAndDate(int fishID, Date updateDate) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            String sql = "DELETE FROM FishDevelopment WHERE FishID = ? AND UpdateDate = ?";
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, fishID);
+            ps.setDate(2, updateDate);
+
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /*
 
 //    // TEST DAO

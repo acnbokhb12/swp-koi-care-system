@@ -40,8 +40,11 @@ public interface IConstant {
     public final String FISH_INFOR_UPDATE = "fishinformationupdate";
     public final String FISH_IMAGE_UPDATE = "fishimageupdate";
 
+// START FISH GROWTH ----------------------------------------------------------------------------------------------------------------------------------
     public final String FISH_GROWTH_CHART_INFO = "fishgrowthchartinformation";
     public final String FISH_GROWTH_CHART_CREATE = "fishgrowthchartcreate";
+    public final String FISH_GROWTH_CHART_UPDATE= "fishgrowthchartupdate";
+    public final String FISH_GROWTH_CHART_DELETE = "fishgrowthchartdelete";
     public final String FISH_GROWTH_CHART_SEARCH_LENGTH = "fishgrowthchartsearchlength";
     public final String FISH_GROWTH_CHART_SEARCH_WEIGHT = "fishgrowthchartsearchweight";
 

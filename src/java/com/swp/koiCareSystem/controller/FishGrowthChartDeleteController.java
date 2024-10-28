@@ -5,12 +5,8 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Fish;
-import com.swp.koiCareSystem.model.FishDevelopment;
-import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class FishGrowthChartController extends HttpServlet {
+public class FishGrowthChartDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +31,13 @@ public class FishGrowthChartController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int fishID = Integer.parseInt(request.getParameter("fishID"));
-
-            FishService fs = new FishService();
-            ArrayList<FishDevelopment> FishDevelop = fs.getFishDevelopmentByFishID(fishID);
-            Fish fishInfo = fs.getFishInforByIDS(fishID);
-
-            request.setAttribute("fishdevelop", FishDevelop);
-            request.setAttribute("fishInfo", fishInfo);   
-            request.getRequestDispatcher("fishGrowth.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            
+            
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

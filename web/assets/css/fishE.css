@@ -557,10 +557,10 @@
 }
 
 /*Fish Growth Delete Update*/
-.update-delete-btn {
-    background-color: #4CAF50;
+.update-btn-out {
+    background-color: #2196F3;
     color: #fff;
-    border: 2px solid #4CAF50;
+    border: 2px solid #2196F3;
     border-radius: 8px;
     font-size: 1.6rem;
     font-weight: 600;
@@ -569,123 +569,123 @@
     cursor: pointer;
 }
 
-.update-delete-btn:hover {
-    background-color: #45a049;
-    border-color: #45a049;
+.update-btn-out:hover {
+    background-color: #1976D2;
+    border-color: #1976D2;
     transform: scale(1.05);
 }
 
-.update-delete-btn:active {
-    background-color: #388E3C;
+.update-btn-out:active {
+    background-color: #1565C0;
     transform: scale(0.95);
 }
+.delete-btn-out {
+    background-color: #f44336; /* Red for Delete */
+    color: #fff;
+    border: 2px solid #f44336;
+    border-radius: 8px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform: 0.2s ease;
+    cursor: pointer;
+}
 
-.fish-data-container {
+.delete-btn-out:hover {
+    background-color: #e53935; /* Darker red on hover */
+    border-color: #e53935;
+    transform: scale(1.05);
+}
+
+.delete-btn-out:active {
+    background-color: #c62828; /* Even darker red on active */
+    transform: scale(0.95);
+}
+.modal {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.fish-details-view {
-    max-width: 600px; /* Giới hạn kích thước tối đa */
+.modal-content {
     background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 780px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     animation: smoothTable 0.4s ease-in;
-    padding: 20px;
 }
 
-.image-upload-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.close {
+    color: #555;
+    float: right;
+    padding-left: 690px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
-.fish-image-view img {
-    max-width: 100%;
-    border-radius: 8px;
-}
-
-.fish-info-view {
-    padding: 20px;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.btn-close-fish-view {
-    background-color: transparent;
-    border: none;
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
     cursor: pointer;
-    font-size: 1.5rem;
 }
-
-h2 {
-    margin: 0;
-}
-
-.growth-info-row {
-    margin-top: 20px;
-}
-
-.weight-detail,
-.length-detail,
-.date-detail {
+.edit-item-detail {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
-input[type="number"],
-input[type="date"],
-input[type="text"] {
+.edit-item-detail span {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.edit-item-detail select,
+.edit-item-detail input {
     width: 100%;
     padding: 10px;
     border: 2px solid #adadad;
     border-radius: 4px;
+    font-size: 1.25rem;
 }
-.action-button-view {
-    background-color: #28a745;
-    color: #fff;
+
+.text-center {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.edit-btn.blue-btn {
+    background-color: #007bff;
+    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.6rem;
-    font-weight: 500;
-    padding: 0.7rem 1.2rem;
-    transition: background-color 0.4s ease, transform 0.2s ease;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.25rem;
     cursor: pointer;
 }
 
-.action-button-view:hover {
-    background-color: var(--bs-orange);
-    transform: scale(1.05);
+.edit-btn.blue-btn:hover {
+    background-color: #0056b3;
+}
+.cancel-btn {
+    background-color: #dc3545; /* Red color for cancel */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.25rem;
+    cursor: pointer;
 }
 
-.action-button-view:active {
-    transform: scale(0.95);
-}
-#confirmationContainerView {
-    margin-top: 20px;
-}
-
-.alert.alert-danger {
-    color: red;
-    margin-top: 10px;
-}
-
-@keyframes smoothTable {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.cancel-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
 }

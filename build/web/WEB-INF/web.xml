@@ -241,6 +241,14 @@
         <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartSearchWeightController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FishGrowthCharUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthCharUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartDeleteController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartDeleteController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -424,6 +432,14 @@
     <servlet-mapping>
         <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
         <url-pattern>/FishGrowthChartSearchWeightController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthCharUpdateController</servlet-name>
+        <url-pattern>/FishGrowthCharUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartDeleteController</servlet-name>
+        <url-pattern>/FishGrowthChartDeleteController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
