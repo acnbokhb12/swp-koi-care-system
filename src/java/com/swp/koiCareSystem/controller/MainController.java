@@ -171,6 +171,9 @@ public class MainController extends HttpServlet {
                 case IConstant.MANAGER_ORDER_MANAGE:
                     url = "ManagerOrderManageController";
                     break;
+                case IConstant.MANAGER_ORDER_DETAILS:
+                    url = "ManagerOrderDetailsController";
+                    break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

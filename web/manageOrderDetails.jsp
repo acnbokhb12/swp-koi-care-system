@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,11 +47,14 @@
                     <div class="content">
                         <h2>Order Details</h2>
                         <div class="order-info">
-                            <p><strong>Order ID:</strong> #OD12345</p>
-                            <p><strong>Order Date:</strong> 2024-10-03</p>
-                            <p><strong>Status:</strong> Processing</p>
-                            <p><strong>Address:</strong> 123 Main St, Springfield</p>
-                            <p><strong>Phone:</strong> +1-234-567-890</p>
+                            <c:if test="${not empty order}">
+                                <p><strong>Order ID:</strong> #${order.id}</p>
+                                <p><strong>Order Date:</strong> ${fn:substring(order.orderDate, 0, 10)}</p> <!-- Hiển thị ngày -->
+                                <p><strong>Status:</strong> ${order.orderS.orderStatusName}</p> <!-- Có thể cần phải chuyển đổi mã trạng thái sang tên -->
+                                <p><strong>Address:</strong> ${order.addressOrder}</p>
+                                <p><strong>Phone:</strong> ${order.phone}</p>
+                                <p><strong>Total Amount:</strong> <fmt:formatNumber value="${order.total}" pattern="#,###"/> đ</p>
+                            </c:if>
                         </div>
                         <h3>Product List</h3>
                         <table>
@@ -64,40 +70,59 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Product A</td>
-                                    <td><img class="order-details-image" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Product A"></td>
-                                    <td>Category A</td>
-                                    <td>$10.00</td>
-                                    <td>2</td>
-                                    <td>$20.00</td>
-                                    <td class="button-cell"><a class="details-btn" href="manageProductDetails.jsp?productId=1">View Details</a></td> <!-- Added class here -->
-                                </tr>
-                                <tr>
-                                    <td>Product B</td>
-                                    <td><img class="order-details-image" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Product B"></td>
-                                    <td>Category B</td>
-                                    <td>$15.00</td>
-                                    <td>1</td>
-                                    <td>$15.00</td>
-                                    <td class="button-cell"><a class="details-btn" href="manageProductDetails.jsp?productId=2">View Details</a></td> <!-- Added class here -->
-                                </tr>
-                                <tr>
-                                    <td>Product C</td>
-                                    <td><img class="order-details-image" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="Product C"></td>
-                                    <td>Category C</td>
-                                    <td>$8.00</td>
-                                    <td>3</td>
-                                    <td>$24.00</td>
-                                    <td class="button-cell"><a class="details-btn" href="manageProductDetails.jsp?productId=3">View Details</a></td> <!-- Added class here -->
-                                </tr>
+                                <c:forEach var="item" items="${orderItems}">
+                                    <c:if test="${not empty item.product.nameProduct}">
+                                        <tr>
+                                            <td>${item.product.nameProduct}</td>
+                                            <td><img class="order-details-image" src="${item.product.imgProduct}" alt="${item.product.nameProduct}"></td>
+                                            <td>${item.product.categoryP.categoryName}</td>
+                                            <td><fmt:formatNumber value="${item.unitPrice}" pattern="#,###"/> đ</td>
+                                            <td>${item.quantity}</td>
+                                            <td><fmt:formatNumber value="${item.unitPrice * item.quantity}" pattern="#,###"/> đ</td>
+                                            <td class="button-cell">
+                                                <a class="details-btn" href="MainController?action=productinformation&pid=${item.product.productID}">View Details</a>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
                             </tbody>
                         </table>
+                        <c:if test="${itemCount > 0}">
+                            <ul class="pagination">
+                                <c:if test="${tag > 1}">
+                                    <li class="page-item">
+                                        <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag - 1}" class="page-link text-dark">
+                                            <i class="fa-solid fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                                <!-- Page Links -->
+                                <c:forEach begin="1" end="${endPage}" var="i">
+                                    <li class="page-item ${tag == i ? 'active' : ''}">
+                                        <a href="ManageOrderDetailsController?orderId=${order.id}&index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                            ${i}
+                                        </a>
+                                    </li>
+                                </c:forEach>
+
+                                <!-- Next Button -->
+                                <c:if test="${tag < endPage}">
+                                    <li class="page-item">
+                                        <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag + 1}" class="page-link text-dark">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </c:if>
                         <div class="back-container">
                             <div class="total-price">
-                                Total Amount: $59.00
+                                <c:if test="${not empty order}">
+                                    Total Amount: <fmt:formatNumber value="${order.total}" pattern="#,###"/> đ
+                                </c:if>
                             </div>
-                            <a class="back-button" href="manageOrder.jsp">Back</a>
+                            <a class="back-button" href="MainController?action=managerordermanage">Back</a>
                         </div>
                     </div>
                 </div>

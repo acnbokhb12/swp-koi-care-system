@@ -86,9 +86,9 @@
                                                     <fmt:formatNumber value="${order.total}" pattern="#,###"/> đ
                                                 </td>
                                                 <td>
-                                                    <button class="edit-btn" onclick="window.location.href = 'manageOrderDetails.jsp?orderId=${order.id}'">
+                                                    <a href="MainController?action=managerorderdetails&orderId=${order.id}" class="edit-btn">
                                                         <i class="fas fa-edit"></i>
-                                                    </button>
+                                                    </a>
                                                     <button class="delete-btn">
                                                         <a href="#" class="text-danger" onclick="deleteOrder(${order.id})">
                                                             <i class="fas fa-trash"></i>

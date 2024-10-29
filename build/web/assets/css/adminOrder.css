@@ -224,3 +224,48 @@ td.button-cell {
     border-radius: 5px;
     font-size: 16px;
 }
+
+
+/*Pagging*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-item a {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-item a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .page-item.active a {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination .page-item i {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .pagination {
+        flex-wrap: wrap;
+    }
+}

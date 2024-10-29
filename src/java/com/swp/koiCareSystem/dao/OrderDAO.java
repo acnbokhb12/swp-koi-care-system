@@ -9,6 +9,7 @@ import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
+import com.swp.koiCareSystem.model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -152,7 +153,6 @@ public class OrderDAO {
                     order.setPhone(rs.getString("PhoneOrdered"));
                     order.setAddressOrder(rs.getString("AddressOrdered"));
 
-                    // Tạo đối tượng OrderStatus và gán cho Order
                     OrderStatus orderS = new OrderStatus();
                     orderS.setOrderStatusID(rs.getInt("OrderStatusID"));
                     orderS.setOrderStatusName(rs.getString("OrderStatusName"));
@@ -182,5 +182,150 @@ public class OrderDAO {
             }
         }
         return listOrders;
+    }
+
+    public Order getOrderById(int orderId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Order order = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT o.[OrderID], o.[AccID], o.[OrderDate], o.[UserNameOrdered], o.[PhoneOrdered], "
+                        + "o.[AddressOrdered], o.[TotalAmount], os.[OrderStatusID], os.[OrderStatusName] "
+                        + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
+                        + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
+                        + "WHERE o.[OrderID] = ?";
+
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, orderId);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    order = new Order();
+                    order.setId(rs.getInt("OrderID"));
+                    order.setCustomerID(rs.getInt("AccID"));
+                    order.setOrderDate(rs.getTimestamp("OrderDate").toLocalDateTime());
+                    order.setCustomerName(rs.getString("UserNameOrdered"));
+                    order.setPhone(rs.getString("PhoneOrdered"));
+                    order.setAddressOrder(rs.getString("AddressOrdered"));
+                    order.setTotal(rs.getFloat("TotalAmount"));
+
+                    OrderStatus orderS = new OrderStatus();
+                    orderS.setOrderStatusID(rs.getInt("OrderStatusID"));
+                    orderS.setOrderStatusName(rs.getString("OrderStatusName"));
+
+                    order.setOrderS(orderS);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return order;
+    }
+
+    public int countOrderItemsByOrderId(int orderId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM [Koi_Care_System_At_Home].[dbo].[OrderItem] WHERE [OrderID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, orderId);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<OrderItem> getOrderItemsByOrderId(int orderId, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<OrderItem> listOrderItems = new ArrayList<>();
+        int offset = (index - 1) * 5;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT [OrderItemID], [OrderID], [ProductID], [Quantity], [UnitPrice], [TotalPrice] "
+                        + "FROM [Koi_Care_System_At_Home].[dbo].[OrderItem] "
+                        + "WHERE [OrderID] = ? "
+                        + "ORDER BY [OrderItemID] DESC "
+                        + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, orderId);
+                pst.setInt(2, offset);
+
+                rs = pst.executeQuery();
+                ProductDAO productDAO = new ProductDAO();
+
+                while (rs.next()) {
+                    OrderItem item = new OrderItem();
+                    item.setId(rs.getInt("OrderItemID"));
+                    item.setOrderID(rs.getInt("OrderID"));
+                    item.setProduct(productDAO.getProductById(rs.getInt("ProductID")));
+                    item.setQuantity(rs.getInt("Quantity"));
+                    item.setUnitPrice(rs.getFloat("UnitPrice"));
+                    item.setTotalPrice(rs.getFloat("TotalPrice"));
+                    listOrderItems.add(item);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listOrderItems;
     }
 }

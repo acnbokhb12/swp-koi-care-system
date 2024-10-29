@@ -69,7 +69,8 @@ public interface IConstant {
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
 
 // START MANAGER ORDER ----------------------------------------------------------------------------------------------------------------------------------     
-    public static String MANAGER_ORDER_MANAGE  = "managerordermanage";
+    public final String MANAGER_ORDER_MANAGE = "managerordermanage";
+    public final String MANAGER_ORDER_DETAILS = "managerorderdetails";
 
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
     public final String CustomerForgetPassword = "forgetpassword";

@@ -257,6 +257,10 @@
         <servlet-name>ManagerOrderManageController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderDetailsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderDetailsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -456,6 +460,10 @@
     <servlet-mapping>
         <servlet-name>ManagerOrderManageController</servlet-name>
         <url-pattern>/ManagerOrderManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderDetailsController</servlet-name>
+        <url-pattern>/ManagerOrderDetailsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

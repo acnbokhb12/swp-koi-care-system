@@ -50,7 +50,6 @@ public class OrderService {
 //        boolean is = ods.saveOrder(1, items, "kahnh", "01234567890", "Thu duc");
 //        System.out.println(is);
 //    }
-
     public int countOrders() {
         return od.countOrders();
     }
@@ -59,29 +58,15 @@ public class OrderService {
         return od.getAllOrders(index);
     }
 
-    public static void main(String[] args) {
-        // Tạo một đối tượng OrderService (giả sử nó đã được khởi tạo đúng cách)
-        OrderService orderService = new OrderService();
+    public int countOrderItems(int orderId) {
+        return od.countOrderItemsByOrderId(orderId);
+    }
 
-        // Chỉ định chỉ số trang mà bạn muốn lấy (ví dụ: trang 1)
-        int index = 1;
+    public ArrayList<OrderItem> getOrderItemsByOrderId(int orderId, int index) {
+        return od.getOrderItemsByOrderId(orderId, index);
+    }
 
-        // Gọi phương thức getAllOrders và lấy danh sách đơn hàng
-        ArrayList<Order> orders = orderService.getAllOrders(index);
-
-        // In danh sách đơn hàng
-        if (orders.isEmpty()) {
-            System.out.println("Không có đơn hàng nào.");
-        } else {
-            System.out.println("Danh sách đơn hàng:");
-            for (Order order : orders) {
-                System.out.println("Order ID: " + order.getId());
-                System.out.println("Khách hàng: " + order.getCustomerName());
-                System.out.println("Ngày đặt hàng: " + order.getOrderDate());
-                System.out.println("Tổng tiền: " + order.getTotal());
-                System.out.println("Trạng thái: " + (order.getOrderS() != null ? order.getOrderS().getOrderStatusName() : "Chưa xác định"));
-                System.out.println("-----------------------------");
-            }
-        }
+    public Order getOrderById(int orderId) {
+        return od.getOrderById(orderId);
     }
 }
