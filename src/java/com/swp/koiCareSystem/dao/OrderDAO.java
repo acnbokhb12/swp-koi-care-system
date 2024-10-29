@@ -328,4 +328,35 @@ public class OrderDAO {
         }
         return listOrderItems;
     }
+
+    public boolean deleteOrder(int orderId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        boolean isDeleted = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Orders SET isActive = 0 WHERE OrderID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, orderId);
+                int rowsAffected = pst.executeUpdate();
+                isDeleted = (rowsAffected > 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isDeleted;
+    }
 }

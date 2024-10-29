@@ -71,7 +71,8 @@ public interface IConstant {
 // START MANAGER ORDER ----------------------------------------------------------------------------------------------------------------------------------     
     public final String MANAGER_ORDER_MANAGE = "managerordermanage";
     public final String MANAGER_ORDER_DETAILS = "managerorderdetails";
-
+    public final String MANAGER_ORDER_DELETE = "managerorderdelete";
+    public final String MANAGER_ORDER_STATUS_CHANGE = "managerorderstatuschange";
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
     public final String CustomerForgetPassword = "forgetpassword";
     public final String CustomerValidateOtp = "validateotp";

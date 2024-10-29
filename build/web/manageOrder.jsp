@@ -64,7 +64,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tbody>
                                         <c:forEach var="order" items="${ListO}">
                                             <tr>
                                                 <td>#${order.id}</td>
@@ -89,20 +88,17 @@
                                                     <a href="MainController?action=managerorderdetails&orderId=${order.id}" class="edit-btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button class="delete-btn">
-                                                        <a href="#" class="text-danger" onclick="deleteOrder(${order.id})">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </button>
+                                                    <a href="MainController?action=managerorderdelete&orderId=${order.id}" class="text-danger delete-btn">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <button class="confirm-btn" onclick="confirmOrder('#${order.id}')">
+                                                    <button class="confirm-btn" onclick="confirmOrder(${order.id}, '${order.orderS.orderStatusID}')">
                                                         <i class="fas fa-check"></i> Confirm
                                                     </button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
-                                    </tbody>
                                     </tbody>
                                 </table>
                                 <!-- Footer and Pagination -->
@@ -148,14 +144,35 @@
             $.getScript('./assets/js/utilsAdmin.js');
         });
         $('#sidebar_admin').load('utils.jsp #sidebar_manager');
-        function confirmOrder(orderId) {
-            if (confirm("Are you sure you want to confirm this order: " + orderId + "?")) {
-                // Logic to handle the order confirmation
-                // Example: AJAX request or redirection to the server-side confirmation process
-                alert("Order " + orderId + " has been confirmed!");
-            } else {
-                alert("Order confirmation canceled.");
+
+        function confirmOrder(orderId, currentStatus) {
+            let newStatus;
+            switch (currentStatus) {
+                case '1':
+                    newStatus = '2';
+                    break;
+                case '2':
+                    newStatus = '3';
+                    break;
+                case '3':
+                    alert('Order is already completed.');
+                    return;
+                    e
+                default:
+                    newStatus = '1';
             }
+
+            fetch(`MainController?action=updateOrderStatus&orderId=${orderId}&newStatus=${newStatus}`)
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            alert('Failed to update order status.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating order status:', error);
+                    });
         }
     </script>
 </html>

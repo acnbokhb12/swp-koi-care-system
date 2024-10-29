@@ -87,7 +87,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <c:if test="${itemCount > 0}">
+                        <c:if test="${not empty orderItems && itemCount > 0}">
                             <ul class="pagination">
                                 <c:if test="${tag > 1}">
                                     <li class="page-item">

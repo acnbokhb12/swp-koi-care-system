@@ -69,4 +69,8 @@ public class OrderService {
     public Order getOrderById(int orderId) {
         return od.getOrderById(orderId);
     }
+
+    public boolean deleteOrder(int orderId) {
+        return od.deleteOrder(orderId);
+    }
 }
