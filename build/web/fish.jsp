@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-md-6 edit-item-detail">
                             <span>Body Shape</span>
-                            <select name="bodyShape" style="width: 100%; padding: 4px; border: 1px solid #000;">  
+                            <select name="bodyShape" style="width: 100%;  border: 1px solid #000;">  
                                 <option value="Slim" selected>Slim</option>
                                 <option value="Fat">Fat</option>
                                 <option value="Long">Long</option>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="col-md-6 edit-item-detail">
                             <span>Gender</span>
-                            <select name="gender" style="width: 100%; padding: 4px; border: 1px solid #000;"> 
+                            <select name="gender" style="width: 100%; border: 1px solid #000;"> 
                                 <option selected value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="col-md-6 edit-item-detail">
                             <span>Pond</span>
-                            <select name="pondkoi" style="width: 100%; padding: 4px; border: 1px solid #000;">
+                            <select name="pondkoi" style="width: 100%; border: 1px solid #000;">
                                 <option value="0" selected>Unassigned</option>
                                 <c:if test="${ListPond != null}">                                    
                                     <c:forEach items="${ListPond}" var="pd">
@@ -198,6 +198,19 @@
             
             .link__to-fish-detail:hover{
                 text-decoration: underline;
+            }
+            .edit-item-detail{
+                margin-bottom: 0;
+            }
+            .row-edit-info-detail input{
+                border: 1px solid #000;
+            }
+            .edit-item-detail select, .edit-item-detail input{
+                padding: 4px;
+               font-size: 1.4rem; 
+            }
+            .edit-btn.blue-btn {
+                background-color: var(--bs-orange);
             }
         </style>
     </body>

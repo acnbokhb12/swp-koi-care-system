@@ -225,7 +225,7 @@
         <servlet-name>ManageFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageFishController</servlet-class>
     </servlet>
-    <servlet>
+    <servlet> 
         <servlet-name>CustomerForgetPasswordController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.CustomerForgetPasswordController</servlet-class>
     </servlet>
@@ -251,7 +251,31 @@
     </servlet>
     <servlet>
         <servlet-name>CheckOutController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.CheckOutController</servlet-class>
+        <servlet-class>com.swp.koiCareSystem.controller.CheckOutController</servlet-class> 
+    </servlet>
+    <servlet>    
+        <servlet-name>FishGrowthChartController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartCreateNewController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartCreateNewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartSearchLengthController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartSearchLengthController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartSearchWeightController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthCharUpdateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthCharUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FishGrowthChartDeleteController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartDeleteController</servlet-class> 
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -421,7 +445,7 @@
         <servlet-name>ManageFishController</servlet-name>
         <url-pattern>/ManageFishController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <servlet-mapping> 
         <servlet-name>CustomerForgetPasswordController</servlet-name>
         <url-pattern>/CustomerForgetPasswordController</url-pattern>
     </servlet-mapping>
@@ -447,7 +471,31 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckOutController</servlet-name>
-        <url-pattern>/CheckOutController</url-pattern>
+        <url-pattern>/CheckOutController</url-pattern> 
+    </servlet-mapping>
+    <servlet-mapping>     
+        <servlet-name>FishGrowthChartController</servlet-name>
+        <url-pattern>/FishGrowthChartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartCreateNewController</servlet-name>
+        <url-pattern>/FishGrowthChartCreateNewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartSearchLengthController</servlet-name>
+        <url-pattern>/FishGrowthChartSearchLengthController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
+        <url-pattern>/FishGrowthChartSearchWeightController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthCharUpdateController</servlet-name>
+        <url-pattern>/FishGrowthCharUpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FishGrowthChartDeleteController</servlet-name>
+        <url-pattern>/FishGrowthChartDeleteController</url-pattern> 
     </servlet-mapping>
     <session-config>
         <session-timeout>

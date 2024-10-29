@@ -110,6 +110,24 @@ public class MainController extends HttpServlet {
                 case IConstant.FISH_IMAGE_UPDATE:
                     url = "FishImageUpdateController";
                     break;
+                case IConstant.FISH_GROWTH_CHART_INFO:
+                    url = "FishGrowthChartController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_CREATE:
+                    url = "FishGrowthChartCreateNewController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_UPDATE:
+                    url = "FishGrowthCharUpdateController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_DELETE:
+                    url = "FishGrowthChartDeleteController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_SEARCH_LENGTH:
+                    url = "FishGrowthChartSearchLengthController";
+                    break;
+                case IConstant.FISH_GROWTH_CHART_SEARCH_WEIGHT:
+                    url = "FishGrowthChartSearchWeightController";
+                    break;
                 // START PLACE POND -------------------------------------------------------------     
                 case IConstant.POND:
                     url = "PondController";
@@ -157,6 +175,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
+                    break;
                 // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
                 case IConstant.CustomerForgetPassword:
                     url = "CustomerForgetPasswordController";

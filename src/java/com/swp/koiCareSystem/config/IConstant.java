@@ -40,6 +40,14 @@ public interface IConstant {
     public final String FISH_INFOR_UPDATE = "fishinformationupdate";
     public final String FISH_IMAGE_UPDATE = "fishimageupdate";
 
+// START FISH GROWTH ----------------------------------------------------------------------------------------------------------------------------------
+    public final String FISH_GROWTH_CHART_INFO = "fishgrowthchartinformation";
+    public final String FISH_GROWTH_CHART_CREATE = "fishgrowthchartcreate";
+    public final String FISH_GROWTH_CHART_UPDATE= "fishgrowthchartupdate";
+    public final String FISH_GROWTH_CHART_DELETE = "fishgrowthchartdelete";
+    public final String FISH_GROWTH_CHART_SEARCH_LENGTH = "fishgrowthchartsearchlength";
+    public final String FISH_GROWTH_CHART_SEARCH_WEIGHT = "fishgrowthchartsearchweight";
+
 // START POND ----------------------------------------------------------------------------------------------------------------------------------   
     public final String POND = "pond";
     public final String POND_INFOR = "pondinfor";
@@ -68,14 +76,13 @@ public interface IConstant {
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
 
-
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
     public final String CustomerForgetPassword  = "forgetpassword";
     public final String CustomerValidateOtp = "validateotp";
     public final String CustomerNewPassword = "newpassword";
 
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
-
+//
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
     public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
     public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
