@@ -7,6 +7,7 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.model.FishDevelopment;
 import com.swp.koiCareSystem.service.FishService;
 import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
@@ -80,9 +81,13 @@ public class FishCreateNewController extends HttpServlet {
             newFish.setGender(gender);
             newFish.setIsActive(true);
             newFish.setPondID(pid);
-
+            
+            FishDevelopment fishDevelop = new FishDevelopment();
+            fishDevelop.setUpdateLength(length);
+            fishDevelop.setUpdateWeight(weight);
+            
             FishService fsv = new FishService();
-            boolean isCreated = fsv.addNewFish(newFish);
+            boolean isCreated = fsv.addNewFish(newFish,fishDevelop);
 
             if (isCreated) {
                 request.setAttribute("message", "New Fish has been created");

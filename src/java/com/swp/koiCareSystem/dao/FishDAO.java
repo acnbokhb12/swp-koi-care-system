@@ -8,6 +8,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -277,22 +280,20 @@ public class FishDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Fish SET FishName = ?, BodyShape = ?, Age = ?, Length = ?, Weight = ?, Gender = ?, DescriptionKoi = ?, PondID = ? WHERE FishID = ?";
+                String sql = "UPDATE Fish SET FishName = ?, BodyShape = ?, Age = ?, Gender = ?, DescriptionKoi = ?, PondID = ? WHERE FishID = ?";
                 ptm = conn.prepareStatement(sql);
 
                 ptm.setString(1, fish.getFishName());
                 ptm.setString(2, fish.getBodyShape());
-                ptm.setFloat(3, (float) fish.getAge());
-                ptm.setFloat(4, (float) fish.getLength());
-                ptm.setFloat(5, (float) fish.getWeight());
-                ptm.setString(6, fish.getGender());
-                ptm.setString(7, fish.getDescriptionKoi());
+                ptm.setFloat(3, (float) fish.getAge()); 
+                ptm.setString(4, fish.getGender());
+                ptm.setString(5, fish.getDescriptionKoi());
                 if (fish.getPondID() != 0) {
-                    ptm.setInt(8, fish.getPondID());
+                    ptm.setInt(6, fish.getPondID());
                 } else {
-                    ptm.setNull(8, java.sql.Types.INTEGER);
+                    ptm.setNull(6, java.sql.Types.INTEGER);
                 }
-                ptm.setInt(9, fish.getFishID());
+                ptm.setInt(7, fish.getFishID());
 
                 int affectedRows = ptm.executeUpdate();
                 return affectedRows > 0;
@@ -354,24 +355,20 @@ public class FishDAO {
         return false;
     }
 
-    public boolean addNewFish(Fish fish) {
+    public boolean addNewFish(Fish fish, FishDevelopment fdv) {
         Connection conn = null;
         PreparedStatement ps = null;
-        String sql = "INSERT INTO Fish (AccID,PondID ,FishImage, FishName, DescriptionKoi, BodyShape, Age, Length, Weight, Gender, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
+            String sql = "INSERT INTO Fish (AccID,PondID ,FishImage, FishName, DescriptionKoi, BodyShape, Age, Length, Weight, Gender, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             conn = DatabaseConnectionManager.getConnection();
             ps = conn.prepareStatement(sql);
-
-            // Set parameters for the prepared statement
             ps.setInt(1, fish.getAccID());
-
             if (fish.getPondID() != 0) {
                 ps.setInt(2, fish.getPondID());
             } else {
                 ps.setNull(2, java.sql.Types.INTEGER);
             }
-
             ps.setString(3, fish.getFishImage());
             ps.setString(4, fish.getFishName());
             ps.setString(5, fish.getDescriptionKoi());
@@ -381,9 +378,29 @@ public class FishDAO {
             ps.setFloat(9, fish.getWeight());
             ps.setString(10, fish.getGender());
             ps.setBoolean(11, fish.isIsActive());
-
             int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0;
+            if (rowsAffected > 0) {
+                String sql2 = "select top 1 [FishID] from [dbo].[Fish] order by [FishID] desc";
+                PreparedStatement pst2 = conn.prepareStatement(sql2);
+                ResultSet rs2 = pst2.executeQuery();
+                if (rs2 != null && rs2.next()) {
+                    int fid = rs2.getInt(1);
+                    String sql3 = "INSERT INTO FishDevelopment (FishID, UpdateDate, UpdateLength, UpdateWeight) VALUES (?, ?, ?, ?)";
+                    PreparedStatement pst3 = conn.prepareStatement(sql3);
+                    pst3.setInt(1, fid);
+                    LocalDate localDate = LocalDate.now();
+                    java.util.Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    String formattedDate = formatter.format(date);
+                    pst3.setString(2, formattedDate);
+                    pst3.setFloat(3, fdv.getUpdateLength());
+                    pst3.setFloat(4, fdv.getUpdateWeight());
+                    int rowEffectV2 = pst3.executeUpdate();
+                    if (rowEffectV2 > 0) {
+                        return true;
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -400,6 +417,7 @@ public class FishDAO {
                 e.printStackTrace(); // Print any errors that occur during closing
             }
         }
+        return false;
     }
 
     public int countFishInPondByPondId(int pondID) {
@@ -570,7 +588,6 @@ public class FishDAO {
             conn = DatabaseConnectionManager.getConnection();
             String sql = "INSERT INTO FishDevelopment (FishID, UpdateDate, UpdateLength, UpdateWeight) VALUES (?, ?, ?, ?)";
             ps = conn.prepareStatement(sql);
-
             ps.setInt(1, fd.getFishID());
             ps.setDate(2, new java.sql.Date(fd.getUpdateDate().getTime()));
             ps.setFloat(3, fd.getUpdateLength());
@@ -746,6 +763,53 @@ public class FishDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean updateLengthAndWeightOfFish(int fishId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = " select top 1 UpdateLength, UpdateWeight from FishDevelopment where FishID = ? order by UpdateDate desc";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, fishId);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    float lengthUpdate = rs.getFloat(1);
+                    float weightUpdate = rs.getFloat(2);
+
+                    String sql2 = "Update [dbo].[Fish]\n"
+                            + "set [Length] = ?, [Weight] = ?\n"
+                            + "where [FishID] =?";
+                    PreparedStatement pst2 = cn.prepareStatement(sql2);
+                    pst2.setFloat(1, lengthUpdate);
+                    pst2.setFloat(2, weightUpdate);
+                    pst2.setInt(3, fishId);
+                    int rowEffect = pst2.executeUpdate();
+                    if(rowEffect > 0)
+                        return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
     /*
 

@@ -40,9 +40,7 @@ public class FishInformationUpdateController extends HttpServlet {
             int fishID = Integer.parseInt(request.getParameter("fishID"));
             String fishName = request.getParameter("fishName");
             String bodyShape = request.getParameter("bodyShape");
-            float age = Float.parseFloat(request.getParameter("age"));
-            float length = Float.parseFloat(request.getParameter("length"));
-            float weight = Float.parseFloat(request.getParameter("weight"));
+            float age = Float.parseFloat(request.getParameter("age")); 
             String gender = request.getParameter("gender");
             String descriptionKoi = request.getParameter("descriptionKoi");
             String pondId = request.getParameter("pondkoi");
@@ -54,9 +52,7 @@ public class FishInformationUpdateController extends HttpServlet {
             fish.setFishID(fishID);
             fish.setFishName(fishName);
             fish.setBodyShape(bodyShape);
-            fish.setAge(age);
-            fish.setLength(length);
-            fish.setWeight(weight);
+            fish.setAge(age); 
             fish.setGender(gender);
             fish.setDescriptionKoi(descriptionKoi);
             fish.setPondID(pid);

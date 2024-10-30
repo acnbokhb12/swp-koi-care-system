@@ -9,6 +9,9 @@ import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.FishDevelopment;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -46,10 +49,10 @@ public class FishService {
         return fishDAO.updateFishImageByFishID(pid, imgLink);
     }
 
-    public boolean addNewFish(Fish f) {
+    public boolean addNewFish(Fish f, FishDevelopment fdv) {
         if (f.getFishImage() == null || f.getFishImage().isEmpty()) {
             f.setFishImage("https://plus.unsplash.com/premium_photo-1723672584731-52b5f1a67543?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a29pJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D");
-        }
+        } 
         if (f.getPondID() > 0) {
             PondService psv = new PondService();
             int quantityFishInPond = psv.getNumberFishInPond(f.getPondID());
@@ -59,7 +62,7 @@ public class FishService {
                 return false;
             }
         }
-        return fishDAO.addNewFish(f);
+        return fishDAO.addNewFish(f, fdv);
     }
 
     public boolean deletFishByID(String fishId, int pondId) {
@@ -151,7 +154,15 @@ public class FishService {
     }
 
     public boolean createNewFishDevelopment(FishDevelopment fd) {
-        return fishDAO.createNewFishDevelopment(fd);
+        
+        boolean isCreateNewFishDevelop = fishDAO.createNewFishDevelopment(fd);
+        if(isCreateNewFishDevelop){
+            boolean isUpdateLengtWeight = fishDAO.updateLengthAndWeightOfFish(fd.getFishID());
+            if(isUpdateLengtWeight){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean checkDateExists(int fishId, Date updateDate) {
@@ -163,11 +174,27 @@ public class FishService {
     }
 
     public boolean updateFishDevelopment(FishDevelopment fd) {
-        return fishDAO.updateFishDevelopment(fd);
+        boolean isUpdateFishGrowth = fishDAO.updateFishDevelopment(fd);
+        if(isUpdateFishGrowth){
+            boolean isUpdateLengtWeight = fishDAO.updateLengthAndWeightOfFish(fd.getFishID());
+            if(isUpdateLengtWeight){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean deleteFishDevelopmentByIDAndDate(int fishId, Date updateDate) {
         return fishDAO.deleteFishDevelopmentByIDAndDate(fishId, updateDate);
     }
+    public static void main(String[] args) {
+        LocalDate localDate = LocalDate.now();  
+        java.util.Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        String formattedDate = formatter.format(date);
+
+        System.out.println("LocalDate: " + localDate);
+        System.out.println("java.util.Date (định dạng): " + formattedDate);
+    }
 }

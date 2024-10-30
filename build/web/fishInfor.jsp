@@ -183,17 +183,7 @@
                                 <div class="col-md-6 edit-item-detail">
                                     <span>Age </span>
                                     <input type="number" name="age"  value="${fish.age}" step="0.1" placeholder="Enter age" required min="0.1" />
-                                </div>
-
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Length (cm) </span>
-                                    <input type="number" name="length" value="${fish.length}" step="0.1" placeholder="Enter length in cm" required min="0" />
-                                </div>
-
-                                <div class="col-md-6 edit-item-detail">
-                                    <span>Weight (kg) </span>
-                                    <input type="number" name="weight" value="${fish.weight}" step="0.1" placeholder="Enter weight in kg" required min="0" />
-                                </div>
+                                </div> 
 
                                 <div class="col-md-6 edit-item-detail">
                                     <span style="display: block;">Gender </span>
@@ -455,13 +445,13 @@
                 {
                     type: 'value',
                     axisLabel: {
-                        formatter: '{value} Gram'
+                        formatter: '{value} Kg'
                     }
                 }
             ],
             series: [
                 {
-                    name: 'Gram',
+                    name: 'Kg',
                     type: 'bar',
                     barWidth: '60%',
                     data: weightData,
