@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/AdminDeleteNewsByIdController.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageNewsDetailAdmin.jsp</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageNews.jsp</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/DeleteBlogController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/assets/css/history.css</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/assets/css/fishE.css</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/checkout.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/cart.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/Account.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/ManageProductController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/utils.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/fish.jsp</file>
         </group>
     </open-files>
 </project-private>
