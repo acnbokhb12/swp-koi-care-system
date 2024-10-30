@@ -122,6 +122,6 @@ public class OrderService {
     }
 
     public ArrayList<Order> searchOrdersByCustomerNames(String userName, int index) {
-        return od.searchOrdersByCustomerName(userName, index);
+        return od.searchOrdersByCustomerNames(userName, index);
     }
 }

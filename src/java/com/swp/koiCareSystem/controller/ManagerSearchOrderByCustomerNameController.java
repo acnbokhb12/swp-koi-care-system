@@ -66,7 +66,6 @@ public class ManagerSearchOrderByCustomerNameController extends HttpServlet {
             }
 
             ArrayList<Order> listOrderSearchName = os.searchOrdersByCustomerNames(customerName, index);
-
             ArrayList<String> ListCustomerName = os.getListCustomerNames();
             ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
 
@@ -75,8 +74,8 @@ public class ManagerSearchOrderByCustomerNameController extends HttpServlet {
             request.setAttribute("ListS", listStatus);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
+            request.setAttribute("customerName", customerName); 
 
-            // Forward to JSP
             request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
 
         }

@@ -131,7 +131,7 @@
                                                     ${order.orderS.orderStatusID == 1 ? 'order-pending' : 
                                                       order.orderS.orderStatusID == 2 ? 'order-processing' : 
                                                       order.orderS.orderStatusID == 3 ? 'order-completed' : ''}">
-                                                        ${order.orderS.orderStatusName}
+                                                         ${order.orderS.orderStatusName}
                                                     </td>
 
                                                     <td>    
@@ -165,33 +165,62 @@
                                     </table>
                                     <!-- Footer and Pagination -->
                                     <div class="footer">
-                                        <ul class="pagination">
-                                            <c:if test="${tag > 1}">
-                                                <li class="page-item">
-                                                    <a href="ManagerOrderManageController?index=${tag - 1}" class="page-link text-dark">
-                                                        <i class="fa-solid fa-chevron-left"></i>
-                                                    </a>
-                                                </li>
-                                            </c:if>
+                                        <ul class="pagination"> 
+                                            <c:choose>
+                                                <c:when test="${not empty customerName}">
+                                                    <c:if test="${tag > 1}"> 
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="ManagerSearchOrderByCustomerNameController?customerName=${customerName}&index=${tag - 1}">
+                                                                <i class="fa-solid fa-chevron-left"></i>
+                                                            </a>
+                                                        </li>
+                                                    </c:if>
 
-                                            <c:set var="startPage" value="${tag - 1 < 1 ? 1 : tag - 1}" />
-                                            <c:set var="lastPage" value="${tag + 1 > endPage ? endPage : tag + 1}" />
+                                                    <c:set var="startPage" value="${tag - 1 < 1 ? 1 : tag - 1}" />
+                                                    <c:set var="lastPage" value="${tag + 1 > endPage ? endPage : tag + 1}" />
 
-                                            <c:forEach begin="${startPage}" end="${lastPage}" var="i">
-                                                <li class="page-item ${tag == i ? 'active' : ''}">
-                                                    <a href="ManagerOrderManageController?index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
-                                                        ${i}
-                                                    </a>
-                                                </li>
-                                            </c:forEach>
+                                                    <c:forEach begin="${startPage}" end="${lastPage}" var="i">
+                                                        <li class="page-item ${tag == i ? 'active' : ''}">
+                                                            <a class="page-link ${tag == i ? 'active__page' : ''}" href="ManagerSearchOrderByCustomerNameController?customerName=${customerName}&index=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach> 
 
-                                            <c:if test="${tag < endPage}">
-                                                <li class="page-item">
-                                                    <a href="ManagerOrderManageController?index=${tag + 1}" class="page-link text-dark">
-                                                        <i class="fa-solid fa-chevron-right"></i>
-                                                    </a>
-                                                </li>
-                                            </c:if>
+                                                    <c:if test="${tag < endPage}"> 
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="ManagerSearchOrderByCustomerNameController?customerName=${customerName}&index=${tag + 1}">
+                                                                <i class="fa-solid fa-chevron-right"></i>
+                                                            </a>
+                                                        </li>
+                                                    </c:if>
+                                                </c:when>
+
+                                                <c:otherwise>
+                                                    <c:if test="${tag > 1}"> 
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="ManagerOrderManageController?index=${tag - 1}">
+                                                                <i class="fa-solid fa-chevron-left"></i>
+                                                            </a>
+                                                        </li>
+                                                    </c:if>
+
+                                                    <c:set var="startPage" value="${tag - 1 < 1 ? 1 : tag - 1}" />
+                                                    <c:set var="lastPage" value="${tag + 1 > endPage ? endPage : tag + 1}" />
+
+                                                    <c:forEach begin="${startPage}" end="${lastPage}" var="i">
+                                                        <li class="page-item ${tag == i ? 'active' : ''}">
+                                                            <a class="page-link ${tag == i ? 'active__page' : ''}" href="ManagerOrderManageController?index=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach> 
+
+                                                    <c:if test="${tag < endPage}"> 
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="ManagerOrderManageController?index=${tag + 1}">
+                                                                <i class="fa-solid fa-chevron-right"></i>
+                                                            </a>
+                                                        </li>
+                                                    </c:if>
+                                                </c:otherwise>
+                                            </c:choose>  
                                         </ul>
                                     </div>
                                 </div>
