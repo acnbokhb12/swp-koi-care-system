@@ -177,14 +177,30 @@ public class MainController extends HttpServlet {
                     url = "ManagerProductImageUpdateController";
                     break;
                 // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
-                case IConstant.CustomerForgetPassword:
+                case IConstant.CUSTOMER_FORGET_PASSWORD:
                     url = "CustomerForgetPasswordController";
                     break;
-                case IConstant.CustomerValidateOtp:
+                case IConstant.CUSTOMER_VALIDATE_OTP:
                     url = "CustomerValidateOtpController";
                     break;
-                case IConstant.CustomerNewPassword:
-                    url = "CustomerNewPassWordController";
+                case IConstant.CUSTOMER_NEW_PASSWORD:
+                    url = "CustomerNewPassWordController"; 
+                    break;
+                // START PLACE ADMIN NEWS CRUD -------------------------------------------------------- 
+                case IConstant.CREATE_NEWS:
+                    url = "AdminCreateNewsController";
+                    break;
+                case IConstant.NEWS_INFOR_CREATE:
+                    url = "AdminNewsCateController";
+                    break;
+                case IConstant.ADMIN_NEWS:
+                    url = "AdminManageNewsController";
+                    break;
+                case IConstant.ADMIN_NEWS_DETAIL:
+                    url = "AdminManageNewsDetailController";
+                    break;
+                case IConstant.ADMIN_DELETE_NEWS:
+                    url = "AdminDeleteNewsByIdController"; 
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

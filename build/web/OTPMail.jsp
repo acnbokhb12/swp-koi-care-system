@@ -11,6 +11,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OTP Validation</title>
+        <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
+
         <!-- Bootstrap CSS -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome Icons -->

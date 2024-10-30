@@ -224,7 +224,7 @@
     <servlet>
         <servlet-name>ManageFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageFishController</servlet-class>
-    </servlet>
+    </servlet> 
     <servlet> 
         <servlet-name>CustomerForgetPasswordController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.CustomerForgetPasswordController</servlet-class>
@@ -275,7 +275,27 @@
     </servlet>
     <servlet>
         <servlet-name>FishGrowthChartDeleteController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartDeleteController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartDeleteController</servlet-class>  
+    </servlet>    
+    <servlet>
+        <servlet-name>AdminManageNewsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminManageNewsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCreateNewsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminCreateNewsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminNewsCateController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminNewsCateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminManageNewsDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminManageNewsDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteNewsByIdController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteNewsByIdController</servlet-class> 
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -444,7 +464,7 @@
     <servlet-mapping>
         <servlet-name>ManageFishController</servlet-name>
         <url-pattern>/ManageFishController</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> 
     <servlet-mapping> 
         <servlet-name>CustomerForgetPasswordController</servlet-name>
         <url-pattern>/CustomerForgetPasswordController</url-pattern>
@@ -495,7 +515,27 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FishGrowthChartDeleteController</servlet-name>
-        <url-pattern>/FishGrowthChartDeleteController</url-pattern> 
+        <url-pattern>/FishGrowthChartDeleteController</url-pattern>  
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>AdminManageNewsController</servlet-name>
+        <url-pattern>/AdminManageNewsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCreateNewsController</servlet-name>
+        <url-pattern>/AdminCreateNewsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminNewsCateController</servlet-name>
+        <url-pattern>/AdminNewsCateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageNewsDetailController</servlet-name>
+        <url-pattern>/AdminManageNewsDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteNewsByIdController</servlet-name>
+        <url-pattern>/AdminDeleteNewsByIdController</url-pattern> 
     </servlet-mapping>
     <session-config>
         <session-timeout>

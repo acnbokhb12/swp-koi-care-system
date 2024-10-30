@@ -66,6 +66,13 @@ public interface IConstant {
     public static String CREATE_NEW_BLOG = "createNewBlog";
     public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
+    
+// START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
+    public final String CREATE_NEWS = "createNews";
+    public final String NEWS_INFOR_CREATE = "newsInforCreate";
+    public final String ADMIN_NEWS = "adminNews";
+    public final String ADMIN_NEWS_DETAIL = "adminNewsDetail";
+    public final String ADMIN_DELETE_NEWS = "adminDeleteNews";
 
 // START MANAGER PRODUCT ----------------------------------------------------------------------------------------------------------------------------------     
     public static String PRODUCT_MANAGE = "productmanage";
@@ -74,15 +81,15 @@ public interface IConstant {
     public static String PRODUCT_CREATE_NEW = "productcreatenew";
     public static String PRODUCT_UPDATE = "productupdate";
     public static String PRODUCT_DELETE = "productdelete";
-    public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
-
+    public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate"; 
+    
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
-    public final String CustomerForgetPassword  = "forgetpassword";
-    public final String CustomerValidateOtp = "validateotp";
-    public final String CustomerNewPassword = "newpassword";
+    public final String CUSTOMER_FORGET_PASSWORD  = "forgetpassword";
+    public final String CUSTOMER_VALIDATE_OTP = "validateotp";
+    public final String CUSTOMER_NEW_PASSWORD = "newpassword";
 
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
-//
+
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
     public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
     public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
@@ -93,7 +100,9 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
     public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
     public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
+
     
     public final String URI_JEDIS = dotenv.get("URI_JEDIS");
+
 
 }

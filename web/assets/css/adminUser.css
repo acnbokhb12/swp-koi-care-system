@@ -54,7 +54,7 @@
 .contain-btn-select-search{
     font-weight: 600;
     padding: 0.4rem 4rem ;
-     height: 3.2rem;
+    height: 3.2rem;
     font-size:1.4rem;
     background: #fff;
     color: #4a4f57;
@@ -63,14 +63,14 @@
 .btn-submit-search-order{
     font-weight: 600;
     padding: 0.4rem 2rem ;
-     height: 3.2rem;
+    height: 3.2rem;
     font-size:1.4rem;
     /* background: #fff; */
     color: #4a4a4a;
     border: 1px solid #525456; 
-    
+
 }
- 
+
 /* End search */
 /* Content styling */
 
@@ -154,7 +154,7 @@
 .content .table-container button:hover {
     /* color: #0056b3;   */
 }
- 
+
 /* New Account Form Styling */
 #newAccountForm {
     background-color: #f9f9f9; 
@@ -164,7 +164,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     margin-top: 20px; 
 }
-    /* Button background color */
+/* Button background color */
 .address__acc{
     white-space: nowrap;
     overflow: hidden;
@@ -216,7 +216,7 @@
 #newAccountForm button:hover {
     background-color: #004085; 
 }
- 
+
 #toggleAccountTable {
     margin-left: auto;
     /* Push to the right */
@@ -256,7 +256,7 @@
 }
 
 /* Pagination buttons */
-.pagination button {
+/*.pagination button {
     padding: 5px 10px;
     background-color: #007bff;
     color: white;
@@ -268,7 +268,7 @@
 
 .pagination button:hover {
     background-color: #0056b3;
-}
+}*/
 
 /* --------------------- */
 .container_main-add{
@@ -284,60 +284,60 @@
     justify-content: center;
 }  
 .contain_add-detail{
-  background-color: #fff;
-  width: 80%;
+    background-color: #fff;
+    width: 80%;
 }
 .row-add-detail{
     padding: 2rem;
     margin: 0;
 }
 .img-add-submit img{
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
 }
 .add-item-detail{
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 .add-item-detail > label{
-  font-size: 1.6rem;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 1rem;
 }
 .add-item-detail > textarea,
 .add-item-detail > input{
-  padding: 0.8rem;
-  font-size: 1.6rem;
-  width: 100%;
+    padding: 0.8rem;
+    font-size: 1.6rem;
+    width: 100%;
 }
 .add-item-detail-select{
-  display: block;
-  padding: 0.8rem;
-  font-size: 1.6rem;
-  width: 100%;
+    display: block;
+    padding: 0.8rem;
+    font-size: 1.6rem;
+    width: 100%;
 }
 .add-btn-utils{
     color: #fff;
     background-color: #1abc9c;
     padding: 0.6rem 1.2rem;
-  font-size: 1.6rem;
-  border: none;
+    font-size: 1.6rem;
+    border: none;
 }
 .add-img-detail{
-  font-size: 1.6rem;
+    font-size: 1.6rem;
 }
-  .btn-close-add{
+.btn-close-add{
     font-size: 2rem;
     border: none;
     padding: 0.5rem 1.2rem;
     background-color: #1abc9c;
 
-  }
-.container_main-add.open{
-  display: flex;
 }
- 
+.container_main-add.open{
+    display: flex;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -345,6 +345,52 @@
     list-style-type: none;
     padding: 0;
     margin: 20px 0; 
+}
+
+.pagination-list {
+    display: flex; /* Đảm bảo phần tử con nằm ngang */
+    gap: 10px;
+    list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+    padding: 0;
+}
+
+.pagination-list li {
+    list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+}
+
+.pagination-list a {
+    display: inline-block;
+    padding: 10px 15px;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-list a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination-list .active-page {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Left and right arrows styling */
+.pagination-list .fa-chevron-left,
+.pagination-list .fa-chevron-right {
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.pagination-list .fa-chevron-left:hover,
+.pagination-list .fa-chevron-right:hover {
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
 }
 
 .page-item {
@@ -383,8 +429,9 @@
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    .pagination {
+    .pagination-list {
         flex-direction: column;
+        gap: 5px;
     }
     .page-item {
         margin: 5px 0; 
