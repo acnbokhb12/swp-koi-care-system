@@ -43,9 +43,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Kiểm tra xem có tài khoản nào không -->
                                     <c:if test="${not empty listAcc}">
-                                        <!-- Sử dụng vòng lặp JSTL để hiển thị danh sách tài khoản -->
                                         <c:forEach var="account" items="${listAcc}">
                                             <tr>
                                                 <td>${account.userID}</td>
@@ -122,9 +120,9 @@
             <script>
                 // Tải header và sidebar từ utils.jsp
                 $('#header').load('utils.jsp #header_admin', () => {
-                    $.getScript('./assets/js/utilsAdmin.js'); // Tải thêm script cho chức năng quản trị viên
+                    $.getScript('./assets/js/utilsAdmin.js'); 
                 });
-                $('#sidebar_admin').load('utils.jsp #sidebar_manager'); // Tải sidebar
+                $('#sidebar_admin').load('utils.jsp #sidebar_manager'); 
             </script>
     </body>
 </html>

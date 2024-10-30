@@ -40,20 +40,16 @@ public class ManagerAquariumDetailsController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int accID = Integer.parseInt(request.getParameter("acid"));
+            
             FishService fs = new FishService();
             PondService ps = new PondService();
-//            AccountService accs = new AccountService();
-//            Account acc = accs.getAccountByIDS(accID);
-
-            // Đếm số lượng cá
+            
             int fishCount = fs.countAllFishByIdS(accID);
             request.setAttribute("fishCount", fishCount);
 
-            // Đếm số lượng hồ
             int pondCount = ps.countAllPondsByIdS(accID);
             request.setAttribute("pondCount", pondCount);
 
-            // Lấy danh sách cá và hồ
             ArrayList<Fish> listFish = fs.getAllFishS(accID);
             ArrayList<Pond> listPonds = ps.getAllPondS(accID);
 

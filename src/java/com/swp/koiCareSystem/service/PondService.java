@@ -24,9 +24,11 @@ public class PondService {
     public ArrayList<Pond> getAllPondS(int accountID) {
         return pd.getAllPond(accountID);
     }
+    //Count
         public int countAllPondsByIdS(int id) {
         return pd.countPonds(id);
     }
+        //Phân Trang
             public ArrayList<Pond> getPondsbById(int id, int index) {
         ArrayList<Pond> list =pd.getPondsByAccID(id, index);
         return list;
@@ -35,7 +37,7 @@ public class PondService {
     public Pond getPondInforByID(int id) {
         return pd.getPondInforByID(id);
     }
-
+//Detail Fish Unassigned Pond
     public Pond getPondDetailByIDS(int id) {
         if (id == 0) {
             Pond virtualPond = new Pond();

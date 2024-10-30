@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <form class="fish-pond-form">
-                            <!-- Fish Information Section (Left) -->
+                            <!-- Fish Information Section -->
                             <div class="fish-details-container">
                                 <h3>Fish Information</h3>
                                 <div class="form-group">

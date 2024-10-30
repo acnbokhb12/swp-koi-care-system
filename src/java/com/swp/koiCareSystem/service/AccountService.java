@@ -35,12 +35,11 @@ public class AccountService {
         ArrayList<Account> listA = acd.getAccounts();
         return listA;
     }
-
+//Count
     public int countAllAccountS() {
         return acd.countAllAccounts();
-
     }
-
+ //Phân Trang
     public ArrayList<Account> getAllAccountsS(int index) {
         ArrayList<Account> listacc = acd.getAccounts(index);
         return listacc;
