@@ -106,15 +106,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="drainCount">Drain Count:</label>
-                                                <p id="drainCount" class="pond-detail">${pond.drainCount}</p>
+                                                <p id="drainCount" class="pond-detail">${pond.drainCount} <span class="sub_span-highlight">pieces</span></p>
                                             </div>
                                             <div class="form-group">
                                                 <label for="skimmer">Skimmer:</label>
-                                                <p id="skimmer" class="pond-detail">${pond.skimmer}</p>
+                                                <p id="skimmer" class="pond-detail">${pond.skimmer} <span class="sub_span-highlight">pieces</span></p>
                                             </div>
                                             <div class="form-group">
                                                 <label for="numberOfFish">Number of Fish:</label>
-                                                <p id="numberOfFish" class="pond-detail">${pond.numberOfFish}</p>
+                                                <p id="numberOfFish" class="pond-detail">${pond.numberOfFish} <span class="sub_span-highlight">fish(s)</span></p>
                                             </div>
                                         </div>
                                     </div>

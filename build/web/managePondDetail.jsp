@@ -80,11 +80,11 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="drainCount">Drain Count:</label>
-                                                        <p id="drainCount">${pond.drainCount} <span class="sub_span-highlight">(pieces)</span></p>
+                                                        <p id="drainCount">${pond.drainCount} <span class="sub_span-highlight">pieces</span></p>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="skimmer">Skimmer:</label>
-                                                        <p id="skimmer">${pond.skimmer} <span class="sub_span-highlight">(pieces)</span></p>
+                                                        <p id="skimmer">${pond.skimmer} <span class="sub_span-highlight">pieces</span></p>
                                                     </div>
                                                 </div>
                                             </div>
