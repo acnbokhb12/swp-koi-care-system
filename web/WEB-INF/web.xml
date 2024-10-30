@@ -230,8 +230,16 @@
         <servlet-class>com.swp.koiCareSystem.controller.ManageFishDetailController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManagerWaterParameterController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManagerWaterParameterController</servlet-class>
+        <servlet-name>ManagerAquariumDetailsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerAquariumDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerPondController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerPondController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerPondDetailsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerPondDetailsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -406,8 +414,16 @@
         <url-pattern>/ManageFishDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManagerWaterParameterController</servlet-name>
-        <url-pattern>/ManagerWaterParameterController</url-pattern>
+        <servlet-name>ManagerAquariumDetailsController</servlet-name>
+        <url-pattern>/ManagerAquariumDetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPondController</servlet-name>
+        <url-pattern>/ManagerPondController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPondDetailsController</servlet-name>
+        <url-pattern>/ManagerPondDetailsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

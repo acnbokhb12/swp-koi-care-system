@@ -55,7 +55,7 @@
                                                 </td> 
 
                                                 <td>
-                                            <button class="edit-btn" onclick="window.location.href='ManageFishController?acid=${account.userID}'">
+                                            <button class="edit-btn" onclick="window.location.href='ManagerAquariumDetailsController?acid=${account.userID}'">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </td>

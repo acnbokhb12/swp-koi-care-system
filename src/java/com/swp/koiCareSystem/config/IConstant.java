@@ -48,10 +48,13 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
-    // START ACCOUNT HAVE FISH- MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
+    // START AQUARIUM MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
     public static String ACCOUNT_FISH_MANAGE = "accountfishmanage";
     public static String FISH_MANAGE = "fishmanage";
     public static String MANAGE_FISH_DETAIL = "managefishdetail";
+    public static String MANAGE_AQUARIUM_DETAILS = "manageaquariumdetails";
+    public static String MANAGE_POND = "managepond";
+    public static String MANAGE_POND_DETAILS = "manageponddetails";
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
@@ -68,11 +71,6 @@ public interface IConstant {
     public static String PRODUCT_UPDATE = "productupdate";
     public static String PRODUCT_DELETE = "productdelete";
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
-   
-  // START MANAGER WATER PARAMETER ----------------------------------------------------------------------------------------------------------------------------------     
-       public static String WATER_PARAMETER_MANAGE = "managewaterparameter";
-
-
 
 // GOOGLE & CLOUDINARY
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
@@ -86,6 +84,5 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
     public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
     public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
-
 
 }

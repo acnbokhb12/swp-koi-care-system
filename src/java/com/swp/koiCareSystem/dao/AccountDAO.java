@@ -22,6 +22,53 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
+     public Account getAccountById(int accID) {
+        Account account = null; // Khởi tạo đối tượng Account
+        ResultSet rs = null;
+        Connection conn = null;
+        String sql = "SELECT * FROM Accounts WHERE AccID = ?"; // Câu truy vấn để lấy tài khoản theo AccID
+
+        try {
+            conn = DatabaseConnectionManager.getConnection(); // Kết nối đến cơ sở dữ liệu
+            if (conn != null) {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, accID); // Thiết lập tham số cho truy vấn
+                rs = ps.executeQuery(); // Thực thi truy vấn
+
+                if (rs.next()) { // Nếu có kết quả
+                    account = new Account(); // Khởi tạo đối tượng Account
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("idStatus"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // In ra lỗi nếu có
+        } finally {
+            // Đóng tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return account; // Trả về đối tượng Account
+    }
+
     public ArrayList<Account> getAccounts() {
         ArrayList<Account> listAccounts = new ArrayList<>();
         ResultSet rs = null;
@@ -59,53 +106,52 @@ public class AccountDAO {
     }
 
     public boolean createNewAccount(Account account) {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    String sql = "INSERT INTO Accounts (Email, KoiCareID, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO Accounts (Email, KoiCareID, UserImage, Password, FullName, PhoneNumber, UserRole, Address, Gender, idStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    try {
-        conn = DatabaseConnectionManager.getConnection(); // Lấy kết nối đến cơ sở dữ liệu
-        ps = conn.prepareStatement(sql); // Tạo PreparedStatement để thực hiện câu truy vấn
-
-        // Đặt các tham số cho PreparedStatement
-        ps.setString(1, account.getEmail());
-        ps.setString(2, account.getKoiCareID());
-        ps.setString(3, account.getProfileImage());
-        ps.setString(4, account.getPassword());
-        ps.setString(5, account.getFullName());
-        ps.setString(6, account.getPhoneNumber());
-        ps.setString(7, account.getUserRole());
-        ps.setString(8, account.getAddress());
-        ps.setString(9, account.getGender());
-        ps.setInt(10, account.getAccountStatus()); // Giả sử idStatus là kiểu int
-
-        // Thực hiện câu truy vấn và kiểm tra số hàng bị ảnh hưởng
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected > 0; // Trả về true nếu có ít nhất một hàng bị ảnh hưởng
-    } catch (Exception e) {
-        e.printStackTrace(); // In ra thông báo lỗi nếu có
-        return false; // Trả về false nếu có lỗi
-    } finally {
         try {
-            // Đóng tài nguyên
-            if (ps != null) {
-                ps.close();
+            conn = DatabaseConnectionManager.getConnection(); // Lấy kết nối đến cơ sở dữ liệu
+            ps = conn.prepareStatement(sql); // Tạo PreparedStatement để thực hiện câu truy vấn
+
+            // Đặt các tham số cho PreparedStatement
+            ps.setString(1, account.getEmail());
+            ps.setString(2, account.getKoiCareID());
+            ps.setString(3, account.getProfileImage());
+            ps.setString(4, account.getPassword());
+            ps.setString(5, account.getFullName());
+            ps.setString(6, account.getPhoneNumber());
+            ps.setString(7, account.getUserRole());
+            ps.setString(8, account.getAddress());
+            ps.setString(9, account.getGender());
+            ps.setInt(10, account.getAccountStatus()); // Giả sử idStatus là kiểu int
+
+            // Thực hiện câu truy vấn và kiểm tra số hàng bị ảnh hưởng
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // Trả về true nếu có ít nhất một hàng bị ảnh hưởng
+        } catch (Exception e) {
+            e.printStackTrace(); // In ra thông báo lỗi nếu có
+            return false; // Trả về false nếu có lỗi
+        } finally {
+            try {
+                // Đóng tài nguyên
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // In ra lỗi trong quá trình đóng
             }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // In ra lỗi trong quá trình đóng
         }
     }
-}
-
 
     public int countAllAccounts() {
         ArrayList<Account> listAccounts = new ArrayList<>();
         ResultSet rs = null;
         Connection conn = null;
-        PreparedStatement psm = null; 
+        PreparedStatement psm = null;
         String sql = "SELECT count(*) FROM Accounts WHERE UserRole = 'customer'";
 
         try {
@@ -197,41 +243,35 @@ public class AccountDAO {
     }
 //========================================================================
     //TEST CREATE
+
     public static void main(String[] args) {
-    // Thiết lập đối tượng Account mới
-    Account newAccount = new Account();
-    newAccount.setEmail("test@example.com");
-    newAccount.setKoiCareID("Koi123");
-    newAccount.setProfileImage("image.png");
-    newAccount.setPassword("password");
-    newAccount.setFullName("Full Name");
-    newAccount.setPhoneNumber("123456789");
-    newAccount.setUserRole("User");
-    newAccount.setAddress("123 Street");
-    newAccount.setGender("Male");
-    newAccount.setAccountStatus(1); // Giả sử idStatus là kiểu int
+        // Thiết lập đối tượng Account mới
+        Account newAccount = new Account();
+        newAccount.setEmail("test@example.com");
+        newAccount.setKoiCareID("Koi123");
+        newAccount.setProfileImage("image.png");
+        newAccount.setPassword("password");
+        newAccount.setFullName("Full Name");
+        newAccount.setPhoneNumber("123456789");
+        newAccount.setUserRole("User");
+        newAccount.setAddress("123 Street");
+        newAccount.setGender("Male");
+        newAccount.setAccountStatus(1); // Giả sử idStatus là kiểu int
 
-    // Tạo đối tượng AccountDAO để gọi phương thức createNewAccount
-    AccountDAO accountDAO = new AccountDAO();
-    
-    // Gọi phương thức tạo tài khoản mới và lưu kết quả
-    boolean isCreated = accountDAO.createNewAccount(newAccount);
+        // Tạo đối tượng AccountDAO để gọi phương thức createNewAccount
+        AccountDAO accountDAO = new AccountDAO();
 
-    // Kiểm tra và in ra kết quả
-    if (isCreated) {
-        System.out.println("New account created successfully.");
-    } else {
-        System.out.println("Failed to create new account.");
+        // Gọi phương thức tạo tài khoản mới và lưu kết quả
+        boolean isCreated = accountDAO.createNewAccount(newAccount);
+
+        // Kiểm tra và in ra kết quả
+        if (isCreated) {
+            System.out.println("New account created successfully.");
+        } else {
+            System.out.println("Failed to create new account.");
+        }
     }
-}
 
-    
-    
-    
-    
-    
-    
-    
     //================================================================
     // TEST : GELL LIST ACCOUNT
 //    public static void main(String[] args) {
@@ -260,7 +300,6 @@ public class AccountDAO {
 //
 //        }
 //    }
-
     //================================================================
     public boolean isKoiCareIDExist(String kcid) {
         Connection cn = null;

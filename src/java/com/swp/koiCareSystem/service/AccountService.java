@@ -37,12 +37,15 @@ public class AccountService {
         return acd.countAllAccounts();
 
 }
+      public Account getAccountByIDS(int id) {
+        return acd.getAccountById(id);
+    }
+    
       public ArrayList<Account> getAccountsS() {
         ArrayList<Account> listA = acd.getAccounts();
         return listA;
     }
 
-    
       public ArrayList<Account> getAllAccountsS(int index) {
         ArrayList<Account> listacc = acd.getAccounts(index);
         return listacc;

@@ -5,8 +5,8 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.AccountService;
+import com.swp.koiCareSystem.model.Pond;
+import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-public class ManagerWaterParameterController extends HttpServlet {
+public class ManagerPondController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,30 +30,35 @@ public class ManagerWaterParameterController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-                        String indexPage = request.getParameter("index");
+            int accID = Integer.parseInt(request.getParameter("acid"));
+            String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            AccountService accs = new AccountService();
-            int count = accs.countAllAccountS();
-            int endPage = count / 5;
-            if (count % 5 != 0) {
+
+            PondService ps = new PondService();
+            int count = ps.countAllPondsByIdS(accID);
+            int endPage = count / 10;
+            if (count % 10 != 0) {
                 endPage++;
             }
-            ArrayList<Account> listAccount = accs.getAllAccountsS(index);
-            request.setAttribute("listAcc", listAccount);
+
+            ArrayList<Pond> listPonds = ps.getPondsbById(accID, index);
+
+            request.setAttribute("listPond", listPonds);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
 
-            request.getRequestDispatcher("manageWaterParameterUser.jsp").forward(request, response);
+            request.getRequestDispatcher("managePond.jsp").forward(request, response);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

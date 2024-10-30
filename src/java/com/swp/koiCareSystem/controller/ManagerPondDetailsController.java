@@ -6,10 +6,11 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.FishService;
+import com.swp.koiCareSystem.service.PondService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-public class ManageFishController extends HttpServlet {
+public class ManagerPondDetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,34 +31,19 @@ public class ManageFishController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int accID = Integer.parseInt(request.getParameter("acid"));
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
+            int pdid = Integer.parseInt(request.getParameter("pdid"));
+            PondService pservice = new PondService();
+            Pond pdetail = pservice.getPondDetailByIDS(pdid);
+            request.setAttribute("pond", pdetail);
 
-            FishService fs = new FishService();
-            int count = fs.countAllFishByIdS(accID);
-         int endPage = count / 10;
-            if (count % 10 != 0) {
-                endPage++;
-            }
-
-            ArrayList<Fish> listFishs = fs.getFishsbById(accID, index);
-
-            request.setAttribute("listFish", listFishs);
-            request.setAttribute("tag", index);
-            request.setAttribute("endPage", endPage);
-
-            request.getRequestDispatcher("manageFish.jsp").forward(request, response);
+            request.getRequestDispatcher("managePondDetail.jsp").forward(request, response);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

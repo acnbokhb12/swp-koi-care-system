@@ -356,7 +356,7 @@ public class PondDAO {
 
     public boolean updateNumberFishInPond(int quantity, int pondId) {
         Connection cn = null;
-        PreparedStatement pst = null; 
+        PreparedStatement pst = null;
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
@@ -365,16 +365,17 @@ public class PondDAO {
                         + "where [PondID] = ?";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, quantity);
-                pst.setInt(2, pondId); 
-                
-                int rowsUpdated  = pst.executeUpdate();
-                if(rowsUpdated >0)
+                pst.setInt(2, pondId);
+
+                int rowsUpdated = pst.executeUpdate();
+                if (rowsUpdated > 0) {
                     return true;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try { 
+            try {
                 if (pst != null) {
                     pst.close();
                 }
@@ -388,14 +389,14 @@ public class PondDAO {
         return false;
     }
 
-     public Pond getPondDetailByID(int accountID) {
+    public Pond getPondDetailByID(int accountID) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Pond p = null;
         String sql = "SELECT * FROM Ponds WHERE PondID = ? and isActive =1";
         try {
-            conn = DatabaseConnectionManager.getConnection(); 
+            conn = DatabaseConnectionManager.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, accountID);
             rs = ps.executeQuery();
@@ -432,11 +433,129 @@ public class PondDAO {
                 e.printStackTrace();
             }
         }
-        return p; 
+        return p;
     }
+
+    public int countPonds(int accID) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT count(*) FROM Ponds WHERE isActive = 1 AND AccID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, accID);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Pond> getPondsByAccID(int accID, int index) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ArrayList<Pond> listPonds = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Ponds WHERE AccID = ? AND [isActive] = 1 "
+                        + "ORDER BY PondID "
+                        + "OFFSET ? ROWS "
+                        + "FETCH NEXT 10 ROWS ONLY;";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, accID);
+                ptm.setInt(2, distance);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int pondID = rs.getInt("PondID");
+                    String pondImage = rs.getString("PondImage");
+                    String pondName = rs.getString("PondName");
+                    String description = rs.getString("Description");
+                    int numberOfFish = rs.getInt("NumberOfFish");
+                    float volume = rs.getFloat("Volume");
+                    float depth = rs.getFloat("Depth");
+                    float pumpPower = rs.getFloat("PumpPower");
+                    int drainCount = rs.getInt("DrainCount");
+                    int skimmer = rs.getInt("Skimmer");
+
+                    listPonds.add(new Pond(pondID, accID, pondImage, pondName, description, numberOfFish, volume, depth, pumpPower, drainCount, skimmer));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return listPonds; // Trả về danh sách các đối tượng Pond
+    }
+
+//    public static void main(String[] args) {
+//        PondDAO pd = new PondDAO();
+//        Pond p = pd.getPondInforByID(3);
+//        System.out.println(p);
+//    }
+//    public static void main(String[] args) {
+//        try {
+//            PondDAO pd = new PondDAO(); // Tạo một đối tượng PondDAO
+//
+//            // Test phương thức countPonds
+//            int accID = 5;
+//            int count = pd.countPonds(accID);
+//
+//            // In kết quả
+//            System.out.println("Số lượng hồ của tài khoản " + accID + ": " + count);
+//        } catch (Exception e) {
+//            System.err.println("Lỗi khi kiểm tra phương thức countPonds: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
     public static void main(String[] args) {
         PondDAO pd = new PondDAO();
-        Pond p = pd.getPondInforByID(3);
-        System.out.println(p);
+
+        int accID = 5;
+        int index = 1;
+        ArrayList<Pond> pondList = pd.getPondsByAccID(accID, index);
+
+        for (Pond p : pondList) {
+            System.out.println(p);
+        }
     }
+
 }

@@ -24,6 +24,13 @@ public class PondService {
     public ArrayList<Pond> getAllPondS(int accountID) {
         return pd.getAllPond(accountID);
     }
+        public int countAllPondsByIdS(int id) {
+        return pd.countPonds(id);
+    }
+            public ArrayList<Pond> getPondsbById(int id, int index) {
+        ArrayList<Pond> list =pd.getPondsByAccID(id, index);
+        return list;
+    }
 
     public Pond getPondInforByID(int id) {
         return pd.getPondInforByID(id);
