@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 
 <!DOCTYPE html>
@@ -52,30 +54,43 @@
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th>Volume</th>
-                                        <th>Depth</th>
-                                        <th>Pump Power</th>
+                                        <th>Volume (l)</th>
+                                        <th>Depth (m)</th>
+                                        <th>Pump Power (l/h)</th>
+                                        <th>Drain Count</th>
+                                        <th>Skimmer</th>
+                                        <th>Number of Fish</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     <c:forEach var="pond" items="${listPond}">
                                         <tr>
                                             <td>${pond.pondID}</td>
                                             <td>
-                                                <img src="${pond.image}" alt="Image of ${pond.name}" />                                             </td>
+                                                <img src="${pond.image}" alt="Image of ${pond.name}" />
+                                            </td>
                                             <td>${pond.name}</td> 
                                             <td>${pond.descriptionPond}</td>
-                                            <td>${pond.volume} (l)</td>
-                                            <td>${pond.depth} (m)</td> 
-                                            <td>${pond.pumpPower} (l/h)</td> 
+
+                                            <td><fmt:formatNumber value="${pond.volume}" pattern="0.0" /> (l)</td>
+
+                                            <td><fmt:formatNumber value="${pond.depth}" pattern="0.0" /> (m)</td> 
+                                            <td><fmt:formatNumber value="${pond.pumpPower}" pattern="0" /> (l/h)</td> 
+                                            <td>${pond.drainCount}</td> 
+                                            <td>${pond.skimmer}</td>
+                                            <td>${pond.numberOfFish}</td>
                                             <td>
-                                                <button class="edit-btn" onclick="window.location.href = 'ManagerPondDetailController?pid=1'">
+                                                <button class="edit-btn" onclick="window.location.href = 'ManagerPondDetailsController?pid=${pond.pondID}'">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                     </c:forEach>
+
+
+
                                 </tbody>                            
                             </table>
                             <!-- Pagination : Pond - 10  -->

@@ -22,53 +22,6 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
-     public Account getAccountById(int accID) {
-        Account account = null; // Khởi tạo đối tượng Account
-        ResultSet rs = null;
-        Connection conn = null;
-        String sql = "SELECT * FROM Accounts WHERE AccID = ?"; // Câu truy vấn để lấy tài khoản theo AccID
-
-        try {
-            conn = DatabaseConnectionManager.getConnection(); // Kết nối đến cơ sở dữ liệu
-            if (conn != null) {
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setInt(1, accID); // Thiết lập tham số cho truy vấn
-                rs = ps.executeQuery(); // Thực thi truy vấn
-
-                if (rs.next()) { // Nếu có kết quả
-                    account = new Account(); // Khởi tạo đối tượng Account
-                    account.setUserID(rs.getInt("AccID"));
-                    account.setEmail(rs.getString("Email"));
-                    account.setKoiCareID(rs.getString("KoiCareID"));
-                    account.setProfileImage(rs.getString("UserImage"));
-                    account.setPassword(rs.getString("Password"));
-                    account.setFullName(rs.getString("FullName"));
-                    account.setPhoneNumber(rs.getString("PhoneNumber"));
-                    account.setUserRole(rs.getString("UserRole"));
-                    account.setAddress(rs.getString("Address"));
-                    account.setGender(rs.getString("Gender"));
-                    account.setAccountStatus(rs.getInt("idStatus"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // In ra lỗi nếu có
-        } finally {
-            // Đóng tài nguyên
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return account; // Trả về đối tượng Account
-    }
-
     public ArrayList<Account> getAccounts() {
         ArrayList<Account> listAccounts = new ArrayList<>();
         ResultSet rs = null;

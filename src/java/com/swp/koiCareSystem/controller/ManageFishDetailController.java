@@ -36,8 +36,10 @@ public class ManageFishDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int fdid = Integer.parseInt(request.getParameter("fdid"));
+            
             FishService fins = new FishService();
             Fish fdetail = fins.getFishDetailByIDS(fdid);
+            
             PondService pservice = new PondService();
             Pond pdetail = pservice.getPondDetailByIDS(fdetail.getPondID());
 

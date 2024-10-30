@@ -8,3 +8,141 @@ and open the template in the editor.
     Author     : PC
 */
 
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container_admin {
+    padding: 20px;
+}
+
+.content .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.content .header h2 {
+    margin: 0;
+    font-size: 3.5rem;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff; 
+    padding-bottom: 10px; 
+}
+.pond-detail-container h3 {
+    font-size: 2.5rem; 
+    font-weight: bold;
+    color: black;
+    border-bottom: 2px solid #007bff; 
+    padding-bottom: 5px; 
+    text-align: center; 
+}
+.col-md-6 {
+    margin-top: 20px; 
+}
+
+.content .header h3 {
+    margin: 0;
+    font-size: 2.5rem; 
+    font-weight: bold;
+    border-bottom: 2px solid #007bff; 
+    padding-bottom: 5px; 
+}
+
+.content .actions {
+    display: flex;
+    align-items: center;
+}
+
+.content .actions .btn {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.content .actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.pond-detail-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: blue;
+    margin-bottom: 5px;
+    font-size: 2rem;
+}
+
+.sub_span-highlight {
+    color: red;
+    font-weight: 500;
+}
+
+#pondImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#pondId {
+    font-size: 2rem;
+    color: red;
+    font-weight: bold;
+}
+
+#pondName,
+#descriptionPond,
+#volume,
+#depth,
+#pumpPower,
+#drainCount,
+#skimmer,
+#numberOfFish {
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .pond-detail-container {
+        padding: 15px;
+    }
+
+    .content .header h2 {
+        font-size: 2.5rem;
+    }
+
+    .content .header h3 {
+        font-size: 2rem; 
+    }
+
+    .content .actions .btn {
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .sub_span-highlight {
+        font-size: 0.9rem;
+    }
+}

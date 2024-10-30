@@ -35,8 +35,11 @@ public class ManagerPondDetailsController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int pdid = Integer.parseInt(request.getParameter("pdid"));
+            
+            int pdid = Integer.parseInt(request.getParameter("pid"));
+            
             PondService pservice = new PondService();
+            
             Pond pdetail = pservice.getPondDetailByIDS(pdid);
             request.setAttribute("pond", pdetail);
 

@@ -32,14 +32,10 @@ public class AccountService {
     private final AccountDAO acd = new AccountDAO();
     
     
-        // Get all fish for the specific account ID
     public int countAllAccountS() {
         return acd.countAllAccounts();
 
 }
-      public Account getAccountByIDS(int id) {
-        return acd.getAccountById(id);
-    }
     
       public ArrayList<Account> getAccountsS() {
         ArrayList<Account> listA = acd.getAccounts();
