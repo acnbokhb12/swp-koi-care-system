@@ -171,6 +171,12 @@ public class MainController extends HttpServlet {
                 case IConstant.ADMIN_NEWS:
                     url = "AdminManageNewsController";
                     break;
+                case IConstant.ADMIN_NEWS_DETAIL:
+                    url = "AdminManageNewsDetailController";
+                    break;
+                case IConstant.ADMIN_DELETE_NEWS:
+                    url = "AdminDeleteNewsByIdController";
+                    break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

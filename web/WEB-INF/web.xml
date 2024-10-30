@@ -237,6 +237,14 @@
         <servlet-name>AdminNewsCateController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AdminNewsCateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminManageNewsDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminManageNewsDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteNewsByIdController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteNewsByIdController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -416,6 +424,14 @@
     <servlet-mapping>
         <servlet-name>AdminNewsCateController</servlet-name>
         <url-pattern>/AdminNewsCateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageNewsDetailController</servlet-name>
+        <url-pattern>/AdminManageNewsDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteNewsByIdController</servlet-name>
+        <url-pattern>/AdminDeleteNewsByIdController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

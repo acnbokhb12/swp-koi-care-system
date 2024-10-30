@@ -7,24 +7,20 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.News;
-import com.swp.koiCareSystem.service.ImageUploadService;
 import com.swp.koiCareSystem.service.NewsService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author Khanh
  */
-@MultipartConfig
-public class AdminCreateNewsController extends HttpServlet {
+public class AdminDeleteNewsByIdController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,50 +35,21 @@ public class AdminCreateNewsController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            request.setCharacterEncoding("UTF-8");
-            HttpSession session = request.getSession();
-            Part filePart = request.getPart("fileimg");
-            String temDir = getServletContext().getRealPath("/") + "uploads";
-            ImageUploadService img = new ImageUploadService();
             
-            String imgUrl = "";
-            if (filePart != null && filePart.getSize() > 0) {
-                try {
-                    imgUrl = img.uploadImage(filePart, temDir);
-                    System.out.println(imgUrl);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+            String newsId = request.getParameter("nId");
             
-            String ntitle = request.getParameter("Title");
-            String ndescrip = request.getParameter("NewsDescription");
-            int ncid = Integer.parseInt(request.getParameter("newsCategoryID"));
+            NewsService newsService = new NewsService();
+            boolean isDeleted = newsService.adminDeleteNewsById(newsId);
             
-            News news = new News();
-            
-            
-            news.setTitle(ntitle);
-            news.setNewsDescription(ndescrip);
-            news.setNewsImage(imgUrl);
-            news.setNewsCategoryID(ncid);
-            news.setIsActive(true);
-            
-            NewsService ns = new NewsService();
-            
-            boolean isCreated = ns.createNews(news);
-            
-            if (isCreated) {
-                request.setAttribute("message", "News has been created.");
+            if (isDeleted) {
+                request.setAttribute("message", "Your News has been delete");
                 request.setAttribute("toastMessage", "success");
             } else {
-                request.setAttribute("message", "An error occured while creating the news.");
+                request.setAttribute("message", "An error occurred while deleting the news.");
                 request.setAttribute("toastMessage", "error");
             }
             
-            request.setAttribute("NewsImage", imgUrl);
-            String url = "MainController?action=" + IConstant.ADMIN_NEWS;
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("AdminManageNewsController").forward(request, response);
         }
     }
 

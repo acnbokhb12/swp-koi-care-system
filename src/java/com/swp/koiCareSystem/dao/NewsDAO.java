@@ -223,12 +223,91 @@ public class NewsDAO {
         return list;
     }
 
+    public ArrayList<News> getNewsDetail(int newsId) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<News> list = new ArrayList<>();
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "select n.Title, n.NewsDate, nc.newsCategoryID, nc.name, n.NewsImage, n.NewsDescription\n"
+                    + "from [dbo].[News] n \n"
+                    + "inner join [dbo].[newsCategory] nc \n"
+                    + "on n.newsCategoryID = nc.newsCategoryID "
+                    + "where n.NewsID = ?";
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, newsId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                News n = new News();
+                NewsCategory nc = new NewsCategory(rs.getInt(3), rs.getString(4));
+                n.setTitle(rs.getString(1));
+                n.setNewsDate(rs.getTimestamp(2));
+                n.setNewsImage(rs.getString(5));
+                n.setNewsDescription(rs.getString(6));
+                n.setNewsCategory(nc);
+                list.add(n);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    public boolean deleteNewsById(String newsId) {
+        Connection c = null;
+        PreparedStatement ps = null;
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "UPDATE [dbo].[News] SET [isActive] = 0  WHERE [NewsID] = ?";
+            ps = c.prepareStatement(sql);
+            ps.setString(1, newsId);
+
+            int affectedRows = ps.executeUpdate();
+
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         NewsDAO ndao = new NewsDAO();
 
-        ArrayList<News> newsList = ndao.getAllNews(1);
-        System.out.println(newsList);
 
+//        int newsId = 2;
+//        ArrayList<News> list = ndao.getNewsDetail(newsId);
+//        System.out.println(list);
+//        ArrayList<News> newsList = ndao.getAllNews(1);
+//        System.out.println(newsList);
 //        ArrayList<News> list = ndao.pagingCount(1);
 //        System.out.println(list);
 //        int count = ndao.countAllNews();

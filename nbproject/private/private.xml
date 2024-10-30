@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManageProductController.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/ProductDAO.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/ProductService.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/NewsDAO.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/AdminDeleteNewsByIdController.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageNewsDetailAdmin.jsp</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageNews.jsp</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/ManageNewsController.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/web/manageProduct.jsp</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/NewsService.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/23-10/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/DeleteBlogController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -62,6 +62,8 @@ public interface IConstant {
     public final String CREATE_NEWS = "createNews";
     public final String NEWS_INFOR_CREATE = "newsInforCreate";
     public final String ADMIN_NEWS = "adminNews";
+    public final String ADMIN_NEWS_DETAIL = "adminNewsDetail";
+    public final String ADMIN_DELETE_NEWS = "adminDeleteNews";
 
 // START MANAGER PRODUCT ----------------------------------------------------------------------------------------------------------------------------------     
   

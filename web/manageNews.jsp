@@ -92,7 +92,7 @@
                                             <td>${newsItem.newsDate}</td> 
                                             <td>${newsItem.isActive}</td> <!-- Giá trị cố định -->
                                             <td class="text-center">
-                                                <a href="manageNewsDetailAdmin.jsp?id=${newsItem.newsID}"> 
+                                                <a href="MainController?action=adminNewsDetail&id=${newsItem.newsID}"> 
                                                     <button class="edit-btn"><i class="fas fa-edit"></i></button> 
                                                 </a>
                                             </td>
@@ -125,17 +125,17 @@
                                         <c:otherwise>
                                             <c:if test="${tag > 1}">
                                                 <li>
-                                                    <a href="ManageNewsController?index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                                                    <a href="AdminManageNewsController?index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
                                                 </li>
                                             </c:if>
                                             <c:forEach begin="1" end="${endPage}" var="i">
                                                 <li>
-                                                    <a class="${tag == i ? "active-page" : ""}" href="ManageNewsController?index=${i}">${i}</a>
+                                                    <a class="${tag == i ? "active-page" : ""}" href="AdminManageNewsController?index=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${tag < endPage}">
                                                 <li>
-                                                    <a href="ManageNewsController?index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                                                    <a href="AdminManageNewsController?index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
                                                 </li>
                                             </c:if>
                                         </c:otherwise>
@@ -164,10 +164,15 @@
                 </div>
             </div>
         </c:if>
+        <script>
+            .pagination - list li.active - page{
+            background - color: orange;
+            }
+        </script>
     </body>
     <script>
         $('#header').load('utils.jsp #header_admin', () => {
-            $.getScript('./assets/js/utilsAdmin.js');
+        $.getScript('./assets/js/utilsAdmin.js');
         });
         $('#sidebar_admin').load('utils.jsp  #sidebar_admin');
     </script>
