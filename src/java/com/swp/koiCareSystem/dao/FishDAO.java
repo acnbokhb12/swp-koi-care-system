@@ -390,6 +390,8 @@ public class FishDAO {
     }
 
     //MANAGE
+    
+    //COUNT
     public int countFishs(int accID) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -424,7 +426,7 @@ public class FishDAO {
         }
         return 0;
     }
-
+//Phân Trang
     public ArrayList<Fish> getFishsByAccID(int accID, int index) {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -483,7 +485,7 @@ public class FishDAO {
 
         return listFish; // Trả về danh sách các đối tượng Fish
     }
-
+//Details
     public Fish getFishDetailByFishID(int fishID) {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -537,8 +539,7 @@ public class FishDAO {
         return fish;
     }
 
-    /*
-
+/*
 //    // TEST DAO
     public static void main(String[] args) {
         FishDAO fdao = new FishDAO();
@@ -559,7 +560,6 @@ public class FishDAO {
            System.out.println(f);
        }
     }
-=======
         Fish fish = fishDAO.getFishInforByI;
         System.out.println(fish);
 >>>>>>> CRUDFish

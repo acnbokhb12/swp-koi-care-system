@@ -34,7 +34,7 @@
                         </div>
                         <form class="fish-pond-form">
                             <!-- Fish Information Section (Left) -->
-                            <div class="fish-container">
+                            <div class="fish-details-container">
                                 <h3>Fish Information</h3>
                                 <div class="form-group">
                                     <label for="fishId">Fish ID:</label>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <!-- Pond Information Section -->
-                            <div class="pond-container">
+                            <div class="pond-details-container">
                                 <h3>Pond Information</h3>
                                 <c:if test="${not empty pond}">
                                     <div class="form-group">

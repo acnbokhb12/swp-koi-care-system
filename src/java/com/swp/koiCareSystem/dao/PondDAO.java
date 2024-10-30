@@ -388,7 +388,7 @@ public class PondDAO {
         }
         return false;
     }
-
+//Details
     public Pond getPondDetailByID(int accountID) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -435,7 +435,7 @@ public class PondDAO {
         }
         return p;
     }
-
+//COUNT
     public int countPonds(int accID) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -470,13 +470,13 @@ public class PondDAO {
         }
         return 0;
     }
-
+//Phân Trang
     public ArrayList<Pond> getPondsByAccID(int accID, int index) {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         ArrayList<Pond> listPonds = new ArrayList<>();
-        int distance = (index - 1) * 10;
+        int distance = (index - 1) * 5;
 
         try {
             conn = DatabaseConnectionManager.getConnection();
@@ -484,7 +484,7 @@ public class PondDAO {
                 String sql = "SELECT * FROM Ponds WHERE AccID = ? AND [isActive] = 1 "
                         + "ORDER BY PondID "
                         + "OFFSET ? ROWS "
-                        + "FETCH NEXT 10 ROWS ONLY;";
+                        + "FETCH NEXT 5 ROWS ONLY;";
                 ptm = conn.prepareStatement(sql);
                 ptm.setInt(1, accID);
                 ptm.setInt(2, distance);

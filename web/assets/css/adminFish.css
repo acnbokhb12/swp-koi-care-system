@@ -50,9 +50,11 @@
 .content .table-container td {
     padding: 8px;
     text-align: center;
+    vertical-align: middle;  
     border: 1px solid #ddd;
-    font-size: 1.6rem;
+    font-size: 20px;
 }
+
 
 .content .table-container th {
     background-color: #1abc9c;
@@ -176,7 +178,7 @@ label {
 
 
 
-/* Để Fish và Pond nằm ngang trên cùng một dòng */
+/* Fish và Pond */
 .fish-pond-form {
     display: flex;
     width: 100%;
@@ -188,8 +190,8 @@ label {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.fish-container,
-.pond-container {
+.fish-details-container,
+.pond-details-container {
     width: 48%;
     padding: 15px;
 }
@@ -249,8 +251,8 @@ h3 {
         align-items: center; 
     }
 
-    .fish-container,
-    .pond-container {
+    .fish-details-container,
+    .pond-details-container {
         width: 100%; 
         margin-bottom: 20px; 
     }
@@ -286,13 +288,13 @@ h3 {
     color: red;
     padding-top: 7px;
 }
-.fish-container {
+.fish-details-container {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.fish-container h3 {
+.fish-details-container h3 {
     font-size: 3rem;
     color: #333;
     margin-bottom: 15px;
@@ -319,9 +321,6 @@ h3 {
     flex: 1;
 }
 
-.fish-container {
-    margin-bottom: 30px; 
-}
 
 .d-flex {
     display: flex;
@@ -342,7 +341,7 @@ h3 {
 
 
 /*Start Pond*/
-.pond-container {
+.pond-details-container {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -356,7 +355,7 @@ h3 {
     padding-top: 7px;
 }
 
-.pond-container h3 {
+.pond-details-container h3 {
     font-size: 3rem;
     color: #333;
     margin-bottom: 15px;
@@ -389,7 +388,7 @@ h3 {
 }
 
 @media (max-width: 768px) {
-    .pond-container {
+    .pond-details-container {
         flex-direction: column;
     }
 

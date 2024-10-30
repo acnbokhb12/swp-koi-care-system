@@ -44,8 +44,8 @@ public class ManagerPondController extends HttpServlet {
 
             PondService ps = new PondService();
             int count = ps.countAllPondsByIdS(accID);
-            int endPage = count / 10;
-            if (count % 10 != 0) {
+            int endPage = count / 5;
+            if (count % 5 != 0) {
                 endPage++;
             }
 

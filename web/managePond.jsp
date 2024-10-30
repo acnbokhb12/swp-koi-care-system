@@ -57,9 +57,9 @@
                                         <th>Volume (l)</th>
                                         <th>Depth (m)</th>
                                         <th>Pump Power (l/h)</th>
-                                        <th>Drain Count</th>
-                                        <th>Skimmer</th>
-                                        <th>Number of Fish</th>
+                                        <th>Drain Count (pieces)</th>
+                                        <th>Skimmer (pieces)</th>
+                                        <th>Number of Fish (fish)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -74,10 +74,10 @@
                                             <td>${pond.name}</td> 
                                             <td>${pond.descriptionPond}</td>
 
-                                            <td><fmt:formatNumber value="${pond.volume}" pattern="0.0" /> (l)</td>
+                                            <td><fmt:formatNumber value="${pond.volume}" pattern="0.0" /> </td>
 
-                                            <td><fmt:formatNumber value="${pond.depth}" pattern="0.0" /> (m)</td> 
-                                            <td><fmt:formatNumber value="${pond.pumpPower}" pattern="0" /> (l/h)</td> 
+                                            <td><fmt:formatNumber value="${pond.depth}" pattern="0.0" /></td> 
+                                            <td><fmt:formatNumber value="${pond.pumpPower}" pattern="0" /></td> 
                                             <td>${pond.drainCount}</td> 
                                             <td>${pond.skimmer}</td>
                                             <td>${pond.numberOfFish}</td>

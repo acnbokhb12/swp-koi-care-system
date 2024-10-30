@@ -100,160 +100,6 @@ public class AccountDAO {
         }
     }
 
-    public int countAllAccounts() {
-        ArrayList<Account> listAccounts = new ArrayList<>();
-        ResultSet rs = null;
-        Connection conn = null;
-        PreparedStatement psm = null;
-        String sql = "SELECT count(*) FROM Accounts WHERE UserRole = 'customer'";
-
-        try {
-            conn = DatabaseConnectionManager.getConnection();
-            if (conn != null) {
-                psm = conn.prepareStatement(sql);
-                rs = psm.executeQuery();
-                if (rs != null && rs.next()) {
-                    return rs.getInt(1);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (psm != null) {
-                    psm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return 0;
-    }
-
-    public ArrayList<Account> getAccounts(int index) {
-        ArrayList<Account> listAcc = new ArrayList<>();
-        ResultSet rs = null;
-        Connection conn = null;
-        PreparedStatement ps = null;
-        int distance = (index - 1) * 5;
-
-        String sql
-                = "SELECT * \n"
-                + "FROM Accounts \n"
-                + "WHERE UserRole = 'customer' \n"
-                + "ORDER BY AccID \n"
-                + "OFFSET ? ROWS \n"
-                + "FETCH NEXT 5 ROWS ONLY;";
-        try {
-            conn = DatabaseConnectionManager.getConnection();
-            if (conn != null) {
-
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, distance);
-
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    Account account = new Account();
-                    account.setUserID(rs.getInt("AccID"));
-                    account.setEmail(rs.getString("Email"));
-                    account.setKoiCareID(rs.getString("KoiCareID"));
-                    account.setProfileImage(rs.getString("UserImage"));
-                    account.setPassword(rs.getString("Password"));
-                    account.setFullName(rs.getString("FullName"));
-                    account.setPhoneNumber(rs.getString("PhoneNumber"));
-                    account.setUserRole(rs.getString("UserRole"));
-                    account.setAddress(rs.getString("Address"));
-                    account.setGender(rs.getString("Gender"));
-                    account.setAccountStatus(rs.getInt("idStatus"));
-
-                    listAcc.add(account);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return listAcc;
-    }
-//========================================================================
-    //TEST CREATE
-
-    public static void main(String[] args) {
-        // Thiết lập đối tượng Account mới
-        Account newAccount = new Account();
-        newAccount.setEmail("test@example.com");
-        newAccount.setKoiCareID("Koi123");
-        newAccount.setProfileImage("image.png");
-        newAccount.setPassword("password");
-        newAccount.setFullName("Full Name");
-        newAccount.setPhoneNumber("123456789");
-        newAccount.setUserRole("User");
-        newAccount.setAddress("123 Street");
-        newAccount.setGender("Male");
-        newAccount.setAccountStatus(1); // Giả sử idStatus là kiểu int
-
-        // Tạo đối tượng AccountDAO để gọi phương thức createNewAccount
-        AccountDAO accountDAO = new AccountDAO();
-
-        // Gọi phương thức tạo tài khoản mới và lưu kết quả
-        boolean isCreated = accountDAO.createNewAccount(newAccount);
-
-        // Kiểm tra và in ra kết quả
-        if (isCreated) {
-            System.out.println("New account created successfully.");
-        } else {
-            System.out.println("Failed to create new account.");
-        }
-    }
-
-    //================================================================
-    // TEST : GELL LIST ACCOUNT
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
-//        // Test retrieving all accounts from the database
-//        ArrayList<Account> accounts = accountDAO.getAllAccounts();
-//
-//        // Loop through the result and print each account's details
-//        for (Account account : accounts) {
-//            System.out.println(account);
-//        }
-//    }
-    // COUNT  ACCOUNT
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
-//        int count = accountDAO.countAllAccounts();
-//        System.out.println(count);
-//
-//    }
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); 
-//        List<Account> accl = accountDAO.getAccounts(2);
-//        for (Account a : accl) {
-//
-//            System.out.println(a);
-//
-//        }
-//    }
-    //================================================================
     public boolean isKoiCareIDExist(String kcid) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -668,6 +514,104 @@ public class AccountDAO {
         }
         return false;
     }
+    
+                            // MANAGE
+//COUNT
+    public int countAllAccounts() {
+        ArrayList<Account> listAccounts = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement psm = null;
+        String sql = "SELECT count(*) FROM Accounts WHERE UserRole = 'customer'";
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                psm = conn.prepareStatement(sql);
+                rs = psm.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (psm != null) {
+                    psm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+//Phân Trang 
+
+    public ArrayList<Account> getAccounts(int index) {
+        ArrayList<Account> listAcc = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int distance = (index - 1) * 10;
+
+        String sql
+                = "SELECT * \n"
+                + "FROM Accounts \n"
+                + "WHERE UserRole = 'customer' \n"
+                + "ORDER BY AccID \n"
+                + "OFFSET ? ROWS \n"
+                + "FETCH NEXT 10 ROWS ONLY;";
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, distance);
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("idStatus"));
+
+                    listAcc.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listAcc;
+    }
 
 //    public static void main(String[] args) {
 //        AccountDAO acd = new AccountDAO();
@@ -683,4 +627,57 @@ public class AccountDAO {
 //        boolean c = acd.updateAccount(acc);
 //        System.out.println(c);
 //    }
+    //========================================================================
+    //TEST CREATE
+    public static void main(String[] args) {
+        // Thiết lập đối tượng Account mới
+        Account newAccount = new Account();
+        newAccount.setEmail("test@example.com");
+        newAccount.setKoiCareID("Koi123");
+        newAccount.setProfileImage("image.png");
+        newAccount.setPassword("password");
+        newAccount.setFullName("Full Name");
+        newAccount.setPhoneNumber("123456789");
+        newAccount.setUserRole("User");
+        newAccount.setAddress("123 Street");
+        newAccount.setGender("Male");
+        newAccount.setAccountStatus(1); 
+        AccountDAO accountDAO = new AccountDAO();
+        boolean isCreated = accountDAO.createNewAccount(newAccount);
+        if (isCreated) {
+            System.out.println("New account created successfully.");
+        } else {
+            System.out.println("Failed to create new account.");
+        }
+    }
+
+    //================================================================
+    // TEST : GELL LIST ACCOUNT
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+//        // Test retrieving all accounts from the database
+//        ArrayList<Account> accounts = accountDAO.getAllAccounts();
+//
+//        // Loop through the result and print each account's details
+//        for (Account account : accounts) {
+//            System.out.println(account);
+//        }
+//    }
+    // COUNT  ACCOUNT
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
+//        int count = accountDAO.countAllAccounts();
+//        System.out.println(count);
+//
+//    }
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); 
+//        List<Account> accl = accountDAO.getAccounts(2);
+//        for (Account a : accl) {
+//
+//            System.out.println(a);
+//
+//        }
+//    }
+    //================================================================
 }
