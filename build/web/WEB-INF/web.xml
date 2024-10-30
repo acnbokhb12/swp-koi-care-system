@@ -269,6 +269,10 @@
         <servlet-name>ManagerChangeOrderStatusController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerChangeOrderStatusController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerSearchOrderByCustomerNameController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchOrderByCustomerNameController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -480,6 +484,10 @@
     <servlet-mapping>
         <servlet-name>ManagerChangeOrderStatusController</servlet-name>
         <url-pattern>/ManagerChangeOrderStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerSearchOrderByCustomerNameController</servlet-name>
+        <url-pattern>/ManagerSearchOrderByCustomerNameController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

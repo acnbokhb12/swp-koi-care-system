@@ -71,51 +71,47 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="item" items="${orderItems}">
-                                    <c:if test="${not empty item.product.nameProduct}">
-                                        <tr>
-                                            <td>${item.product.nameProduct}</td>
-                                            <td><img class="order-details-image" src="${item.product.imgProduct}" alt="${item.product.nameProduct}"></td>
-                                            <td>${item.product.categoryP.categoryName}</td>
-                                            <td><fmt:formatNumber value="${item.unitPrice}" pattern="#,###"/> đ</td>
-                                            <td>${item.quantity}</td>
-                                            <td><fmt:formatNumber value="${item.unitPrice * item.quantity}" pattern="#,###"/> đ</td>
-                                            <td class="button-cell">
-                                                <a class="details-btn" href="MainController?action=productinformation&pid=${item.product.productID}">View Details</a>
-                                            </td>
-                                        </tr>
-                                    </c:if>
+                                    <tr>
+                                        <td>${item.product.nameProduct}</td>
+                                        <td><img class="order-details-image" src="${item.product.imgProduct}" alt="${item.product.nameProduct}"></td>
+                                        <td>${item.product.categoryP.categoryName}</td>
+                                        <td><fmt:formatNumber value="${item.unitPrice}" pattern="#,###"/> đ</td>
+                                        <td>${item.quantity}</td>
+                                        <td><fmt:formatNumber value="${item.unitPrice * item.quantity}" pattern="#,###"/> đ</td>
+                                        <td class="button-cell">
+                                            <a class="details-btn" href="MainController?action=productinformation&pid=${item.product.productID}">View Details</a>
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <c:if test="${not empty orderItems && itemCount > 0}">
-                            <ul class="pagination">
-                                <c:if test="${tag > 1}">
-                                    <li class="page-item">
-                                        <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag - 1}" class="page-link text-dark">
-                                            <i class="fa-solid fa-chevron-left"></i>
-                                        </a>
-                                    </li>
-                                </c:if>
+                        <ul class="pagination">
+                            <c:if test="${tag > 1}">
+                                <li class="page-item">
+                                    <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag - 1}" class="page-link text-dark">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </a>
+                                </li>
+                            </c:if>
 
-                                <!-- Page Links -->
-                                <c:forEach begin="1" end="${endPage}" var="i">
-                                    <li class="page-item ${tag == i ? 'active' : ''}">
-                                        <a href="ManageOrderDetailsController?orderId=${order.id}&index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
-                                            ${i}
-                                        </a>
-                                    </li>
-                                </c:forEach>
+                            <!-- Page Links -->
+                            <c:forEach begin="1" end="${endPage}" var="i">
+                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                    <a href="ManageOrderDetailsController?orderId=${order.id}&index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                        ${i}
+                                    </a>
+                                </li>
+                            </c:forEach>
 
-                                <!-- Next Button -->
-                                <c:if test="${tag < endPage}">
-                                    <li class="page-item">
-                                        <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag + 1}" class="page-link text-dark">
-                                            <i class="fa-solid fa-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                </c:if>
-                            </ul>
-                        </c:if>
+                            <!-- Next Button -->
+                            <c:if test="${tag < endPage}">
+                                <li class="page-item">
+                                    <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag + 1}" class="page-link text-dark">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </c:if>
+                        </ul>
                         <div class="back-container">
                             <div class="total-price">
                                 <c:if test="${not empty order}">

@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.OrderStatus;
 import com.swp.koiCareSystem.service.OrderService;
 import java.io.IOException;
@@ -34,20 +35,22 @@ public class ManagerChangeOrderStatusController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             String newStatusStr = request.getParameter("newStatus");
+            String indexStr = request.getParameter("index");
 
-            int newStatus = Integer.parseInt(newStatusStr);
+            if (newStatusStr != null && !newStatusStr.isEmpty()) {
+                int newStatus = Integer.parseInt(newStatusStr);
 
-            OrderService orderService = new OrderService();
-            boolean isUpdated = orderService.updateOrderStatusByOrderId(orderId, newStatus);
+                OrderService os = new OrderService();
+                String message = os.updateOrderStatusByOrderId(orderId, newStatus);
 
-            if (isUpdated) {
-                response.sendRedirect("MainController?action=managerOrderDetails&orderId=" + orderId);
-            } else {
-                request.setAttribute("errorMessage", "Failed to update order status.");
-                request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+                if (message.startsWith("Order status updated")) {
+                    response.sendRedirect("ManagerOrderManageController?index=" + indexStr);
+                } else {
+                    request.setAttribute("errorMessage", message);
+                    request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+                }
             }
         }
     }
