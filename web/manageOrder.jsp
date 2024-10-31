@@ -62,31 +62,39 @@
                                     <div class="contain-btn-search-order">
                                         <select name="customerName" class="search-order" required>
                                             <c:forEach var="customer" items="${ListCN}">
-                                                <option value="${customer}">${customer}</option>
+                                                <option value="${customer}" 
+                                                        <c:if test="${customer == customerName}">selected</c:if>
+                                                        >${customer}</option>
                                             </c:forEach>
                                         </select>
                                         <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
                                 </form>
+
                                 <!-- Form for searching by Order Date -->
                                 <form id="searchByOrderDateForm" action="ManagerOrderSearchByDateController" method="POST" class="table-search-form row gx-1 align-items-center" style="display: none;">
                                     <div class="date-range-form">
                                         <label for="startDate">Start Date</label>
-                                        <input type="date" id="startDate" name="startDate" class="search-order" required>
+                                        <input type="date" id="startDate" name="startDate" class="search-order" required 
+                                               value="${startDate != null ? startDate : ''}">
 
                                         <label for="endDate">End Date</label>
-                                        <input type="date" id="endDate" name="endDate" class="search-order" required>
+                                        <input type="date" id="endDate" name="endDate" class="search-order" required 
+                                               value="${endDate != null ? endDate : ''}">
 
                                         <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
                                 </form>
+
 
                                 <!-- Form for searching by Status -->
                                 <form id="searchByStatusForm" action="ManagerOrderSearchByOrderStatusController" method="POST" class="table-search-form row gx-1 align-items-center" style="display: none;">
                                     <div class="contain-btn-select-order">
                                         <select class="contain-btn-select-search" name="status" id="status" required>
                                             <c:forEach var="status" items="${ListS}">
-                                                <option value="${status.orderStatusID}">${status.orderStatusName}</option>
+                                                <option value="${status.orderStatusID}" 
+                                                        <c:if test="${status.orderStatusID == OrderStatus}">selected</c:if>
+                                                        >${status.orderStatusName}</option>
                                             </c:forEach>
                                         </select>
                                         <button class="btn-submit-search-order" type="submit">Search</button>
@@ -323,25 +331,6 @@
                 document.getElementById('searchByStatusForm').style.display = 'block';
             }
         </script>
-        <script>
-            document.querySelectorAll('.toast__close').forEach(function (closeBtn) {
-                closeBtn.addEventListener('click', function () {
-                    const toast = this.closest('#toast');
-                    if (toast) {
-                        toast.style.opacity = '0';
-                        toast.style.transform = 'translateY(-20px)'; 
-                        setTimeout(() => toast.remove(), 500);
-                    }
-                });
-            });
-
-            setTimeout(function () {
-                const toast = document.getElementById('toast');
-                if (toast) {
-                    toast.style.opacity = '0';
-                    toast.style.transform = 'translateY(-20px)';
-                    setTimeout(() => toast.remove(), 500);
-                }
-            }, 5000); 
-        </script>
+        <script src="./assets/js/notification.js"></script>
+        <script src="./assets/js/utils.js"></script>
     </html>

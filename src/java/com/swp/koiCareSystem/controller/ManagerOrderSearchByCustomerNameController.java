@@ -47,10 +47,8 @@ public class ManagerOrderSearchByCustomerNameController extends HttpServlet {
                 return;
             }
 
-            // Get the customer name from the request
             String customerName = request.getParameter("customerName");
 
-            // Pagination setup
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";

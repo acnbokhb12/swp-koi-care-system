@@ -79,7 +79,7 @@ public class ManagerOrderSearchByDateController extends HttpServlet {
             request.setAttribute("endPage", endPage);
             request.setAttribute("startDate", startDateStr);
             request.setAttribute("endDate", endDateStr);
-
+            
             request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
         }
     }
