@@ -270,8 +270,12 @@
         <servlet-class>com.swp.koiCareSystem.controller.ManagerChangeOrderStatusController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManagerSearchOrderByCustomerNameController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManagerSearchOrderByCustomerNameController</servlet-class>
+        <servlet-name>ManagerOrderSearchByCustomerNameController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchByCustomerNameController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderSearchByOrderStatusController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchByOrderStatusController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -486,8 +490,12 @@
         <url-pattern>/ManagerChangeOrderStatusController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManagerSearchOrderByCustomerNameController</servlet-name>
-        <url-pattern>/ManagerSearchOrderByCustomerNameController</url-pattern>
+        <servlet-name>ManagerOrderSearchByCustomerNameController</servlet-name>
+        <url-pattern>/ManagerOrderSearchByCustomerNameController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderSearchByOrderStatusController</servlet-name>
+        <url-pattern>/ManagerOrderSearchByOrderStatusController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

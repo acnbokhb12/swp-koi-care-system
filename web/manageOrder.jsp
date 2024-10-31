@@ -58,7 +58,7 @@
                                 </div>  
 
                                 <!-- Form for searching by Customer Name -->
-                                <form id="searchByCustomerNameForm" action="ManagerSearchOrderByCustomerNameController" method="POST" class="table-search-form row gx-1 align-items-center">
+                                <form id="searchByCustomerNameForm" action="ManagerOrderSearchByCustomerNameController" method="POST" class="table-search-form row gx-1 align-items-center">
                                     <div class="contain-btn-search-order">
                                         <select name="customerName" class="search-order" required>
                                             <c:forEach var="customer" items="${ListCN}">
@@ -82,7 +82,7 @@
                                 </form>
 
                                 <!-- Form for searching by Status -->
-                                <form id="searchByStatusForm" action="ManagerSearchStatusController" method="POST" class="table-search-form row gx-1 align-items-center" style="display: none;">
+                                <form id="searchByStatusForm" action="ManagerOrderSearchByOrderStatusController" method="POST" class="table-search-form row gx-1 align-items-center" style="display: none;">
                                     <div class="contain-btn-select-order">
                                         <select class="contain-btn-select-search" name="status" id="status" required>
                                             <c:forEach var="status" items="${ListS}">

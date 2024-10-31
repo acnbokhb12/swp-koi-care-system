@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ASUS
  */
-public class ManagerSearchOrderByCustomerNameController extends HttpServlet {
+public class ManagerOrderSearchByCustomerNameController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,7 +74,7 @@ public class ManagerSearchOrderByCustomerNameController extends HttpServlet {
             request.setAttribute("ListS", listStatus);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
-            request.setAttribute("customerName", customerName); 
+            request.setAttribute("customerName", customerName);
 
             request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
 

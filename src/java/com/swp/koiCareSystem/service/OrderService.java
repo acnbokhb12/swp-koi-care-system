@@ -9,6 +9,7 @@ import com.swp.koiCareSystem.dao.OrderDAO;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -123,5 +124,21 @@ public class OrderService {
 
     public ArrayList<Order> searchOrdersByCustomerNames(String userName, int index) {
         return od.searchOrdersByCustomerNames(userName, index);
+    }
+
+    public int countOrdersByStatus(int statusID) {
+        return od.countOrdersByStatus(statusID);
+    }
+
+    public ArrayList<Order> searchOrdersByStatus(int statusID, int index) {
+        return od.searchOrdersByStatus(statusID, index);
+    }
+
+    public int countOrdersByDateRange(Date startDate, Date endDate) {
+        return od.countOrdersByDateRange(startDate, endDate);
+    }
+
+    public ArrayList<Order> searchOrdersByDateRange(Date startDate, Date endDate, int index) {
+        return od.searchOrdersByDateRange(startDate, endDate, index);
     }
 }
