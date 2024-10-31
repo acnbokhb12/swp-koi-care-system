@@ -147,12 +147,24 @@ public class MainController extends HttpServlet {
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
                     break;
-                //START ACCOUNT HAVE FISH - MANAGER --------------------------------------------------------------------------------- 
+                //START ACCOUNT AQUARIUM MANAGER --------------------------------------------------------------------------------- 
                 case IConstant.ACCOUNT_FISH_MANAGE:
                     url = "ManageAccountFishController";
                     break;
                 case IConstant.FISH_MANAGE:
                     url = "ManageFishController";
+                    break;
+                case IConstant.MANAGE_FISH_DETAIL:
+                    url = "ManageFishDetailController";
+                    break;
+                case IConstant.MANAGE_AQUARIUM_DETAILS:
+                    url = "ManagerAquariumDetailsController";
+                    break;
+                case IConstant.MANAGE_POND:
+                    url = "ManagerPondController";
+                    break;
+                case IConstant.MANAGE_POND_DETAILS:
+                    url = "ManagerPondDetailsController";
                     break;
                 // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
                 case IConstant.PRODUCT_MANAGE:
@@ -175,8 +187,8 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
-                    break;
-                // START PLACE MANAGER PRODUCT -------------------------------------------------------------     
+                    break; 
+                // START PLACE MANAGER PRODUCT -------------------------------------------------------------                     
                 case IConstant.CUSTOMER_FORGET_PASSWORD:
                     url = "CustomerForgetPasswordController";
                     break;
@@ -184,7 +196,7 @@ public class MainController extends HttpServlet {
                     url = "CustomerValidateOtpController";
                     break;
                 case IConstant.CUSTOMER_NEW_PASSWORD:
-                    url = "CustomerNewPassWordController"; 
+                    url = "CustomerNewPassWordController";
                     break;
                 // START PLACE ADMIN NEWS CRUD -------------------------------------------------------- 
                 case IConstant.CREATE_NEWS:
@@ -200,7 +212,7 @@ public class MainController extends HttpServlet {
                     url = "AdminManageNewsDetailController";
                     break;
                 case IConstant.ADMIN_DELETE_NEWS:
-                    url = "AdminDeleteNewsByIdController"; 
+                    url = "AdminDeleteNewsByIdController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

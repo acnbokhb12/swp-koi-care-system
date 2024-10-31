@@ -100,8 +100,7 @@ public class AccountDAO {
         }
     }
 
-    public int countAllAccounts() {
-        ArrayList<Account> listAccounts = new ArrayList<>();
+    public int countAllAccounts() { 
         ResultSet rs = null;
         Connection conn = null;
         PreparedStatement psm = null; // Declare psm outside the try block

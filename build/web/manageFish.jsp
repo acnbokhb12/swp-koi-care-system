@@ -36,8 +36,9 @@
                     <!-- Main Content Section -->
                     <div class="content">
                         <div class="header">
-                            <h2>Fish List</h2>
-                            <div class="actions"> 
+                            <h2>Manage Fish List</h2>
+                               <div class="actions"> 
+                                 <a href="MainController?action=accountfishmanage" class="btn btn-primary">Back to Account List</a> 
                             </div>
                         </div>
                         <div class="table-container" id="fishTableContainer">
@@ -65,7 +66,7 @@
                                             <td>${fish.weight} kg</td> 
                                             <td>${fish.gender}</td> 
                                             <td>
-                                                <button class="edit-btn" onclick="window.location.href = 'manageFishDetail.jsp?fishID=${fish.fishID}'">
+                                                <button class="edit-btn" onclick="window.location.href = 'ManageFishDetailController?fdid=${fish.fishID}'">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>

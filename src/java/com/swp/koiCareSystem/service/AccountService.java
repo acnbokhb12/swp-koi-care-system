@@ -30,18 +30,18 @@ import org.apache.http.client.fluent.Request;
 public class AccountService {
 
     private final AccountDAO acd = new AccountDAO();
-
+ 
     // Get all fish for the specific account ID
     public int countAllAccountS() {
         return acd.countAllAccounts();
 
-    }
-
+    } 
+ 
     public ArrayList<Account> getAccountsS() {
         ArrayList<Account> listA = acd.getAccounts();
         return listA;
-    }
-
+    }  
+ //Phân Trang 
     public ArrayList<Account> getAllAccountsS(int index) {
         ArrayList<Account> listacc = acd.getAccounts(index);
         return listacc;
@@ -140,8 +140,7 @@ public class AccountService {
 
     public boolean upDateImgAccountById(int acid, String imgLink) {
         return acd.updateImgByAccountID(acid, imgLink);
-    }
-
+    } 
     public boolean updatePasswordWithEmail(String newPassword, String email) {
         String hashedPassword = hashPassword(newPassword);
         return acd.updatePasswordWithEmail(hashedPassword, email);
@@ -150,7 +149,7 @@ public class AccountService {
     public boolean checkEmail(String email) {
         return acd.checkEmail(email);
     }
-
+ 
     public static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");

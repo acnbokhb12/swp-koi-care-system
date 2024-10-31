@@ -56,9 +56,13 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
-    // START ACCOUNT HAVE FISH- MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
+    // START AQUARIUM MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
     public static String ACCOUNT_FISH_MANAGE = "accountfishmanage";
     public static String FISH_MANAGE = "fishmanage";
+    public static String MANAGE_FISH_DETAIL = "managefishdetail";
+    public static String MANAGE_AQUARIUM_DETAILS = "manageaquariumdetails";
+    public static String MANAGE_POND = "managepond";
+    public static String MANAGE_POND_DETAILS = "manageponddetails";
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
@@ -80,16 +84,17 @@ public interface IConstant {
     public static String PRODUCT_INFORMATION_UPDATE = "productinformationupdate";
     public static String PRODUCT_CREATE_NEW = "productcreatenew";
     public static String PRODUCT_UPDATE = "productupdate";
-    public static String PRODUCT_DELETE = "productdelete";
+    public static String PRODUCT_DELETE = "productdelete"; 
     public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate"; 
     
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
     public final String CUSTOMER_FORGET_PASSWORD  = "forgetpassword";
     public final String CUSTOMER_VALIDATE_OTP = "validateotp";
-    public final String CUSTOMER_NEW_PASSWORD = "newpassword";
-
-    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
-
+    public final String CUSTOMER_NEW_PASSWORD = "newpassword"; 
+    
+    // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
+    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load(); 
+    
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
     public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
     public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
@@ -100,9 +105,6 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
     public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
     public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
-
     
-    public final String URI_JEDIS = dotenv.get("URI_JEDIS");
-
-
+    public final String URI_JEDIS = dotenv.get("URI_JEDIS"); 
 }

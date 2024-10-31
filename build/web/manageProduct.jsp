@@ -272,6 +272,11 @@
                 </form>
             </div>
         </div>
+        <style>
+            .content .table-container{
+                overflow: auto;
+            }
+        </style>
     </body>
     <script>
         $('#header').load('utils.jsp #header_admin', () => {

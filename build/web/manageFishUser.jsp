@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manage User Accounts</title>
+        <title>Manage Accounts Fish</title>
         <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -28,9 +28,8 @@
                     <!-- Phần Nội Dung Chính -->
                     <div class="content">
                         <div class="header">
-                            <h2>User List</h2>
+                            <h2>Manage Accounts List</h2>
                             <div class="actions"> 
-                                <a href="addUser.jsp" class="btn btn-primary">Add User</a> <!-- Nút để thêm người dùng mới -->
                             </div>
                         </div>
                         <div class="table-container" id="userTableContainer">
@@ -44,9 +43,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Kiểm tra xem có tài khoản nào không -->
                                     <c:if test="${not empty listAcc}">
-                                        <!-- Sử dụng vòng lặp JSTL để hiển thị danh sách tài khoản -->
                                         <c:forEach var="account" items="${listAcc}">
                                             <tr>
                                                 <td>${account.userID}</td>
@@ -56,7 +53,7 @@
                                                 </td> 
 
                                                 <td>
-                                            <button class="edit-btn" onclick="window.location.href='ManageFishController?acid=${account.userID}'">
+                                            <button class="edit-btn" onclick="window.location.href='ManagerAquariumDetailsController?acid=${account.userID}'">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </td>
@@ -65,7 +62,7 @@
                                     </c:if>
                                     <c:if test="${empty listAcc}">
                                         <tr>
-                                            <td colspan="4" class="text-center">No accounts found.</td> <!-- Thông báo nếu không có tài khoản nào -->
+                                            <td colspan="4" class="text-center">No accounts found.</td> 
                                         </tr>
                                     </c:if>
                                 </tbody>
@@ -123,9 +120,9 @@
             <script>
                 // Tải header và sidebar từ utils.jsp
                 $('#header').load('utils.jsp #header_admin', () => {
-                    $.getScript('./assets/js/utilsAdmin.js'); // Tải thêm script cho chức năng quản trị viên
+                    $.getScript('./assets/js/utilsAdmin.js'); 
                 });
-                $('#sidebar_admin').load('utils.jsp #sidebar_manager'); // Tải sidebar
+                $('#sidebar_admin').load('utils.jsp #sidebar_manager'); 
             </script>
     </body>
 </html>

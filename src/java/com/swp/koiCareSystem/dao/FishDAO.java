@@ -811,6 +811,60 @@ public class FishDAO {
         }
         return false;
     }
+    
+    //Details
+    public Fish getFishDetailByFishID(int fishID) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        Fish fish = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Fish f "
+                        + "JOIN Accounts a ON f.AccID = a.AccID "
+                        + "WHERE f.FishID = ? AND a.UserRole = 'customer';";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, fishID);
+
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int accID = rs.getInt("AccID");
+                    int pondID = rs.getInt("PondID");
+                    String fishImage = rs.getString("FishImage");
+                    String fishName = rs.getString("FishName");
+                    String descriptionKoi = rs.getString("DescriptionKoi");
+                    String bodyShape = rs.getString("BodyShape");
+                    float age = rs.getFloat("Age");
+                    float length = rs.getFloat("Length");
+                    float weight = rs.getFloat("Weight");
+                    String gender = rs.getString("Gender");
+
+                    fish = new Fish(fishID, accID, pondID, fishImage, fishName,
+                            descriptionKoi, bodyShape, age, length, weight, gender);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return fish;
+    }
     /*
 
 //    // TEST DAO

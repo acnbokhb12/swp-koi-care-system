@@ -42,12 +42,10 @@ public class ManageAccountFishController extends HttpServlet {
             int index = Integer.parseInt(indexPage);
             AccountService accs = new AccountService();
             int count = accs.countAllAccountS();//20
-            int endPage = count / 5;
-            if (count % 5 != 0) {
+            int endPage = count / 10;
+            if (count % 10 != 0) {
                 endPage++;
             }
-            
-
             ArrayList<Account> listAccount = accs.getAllAccountsS(index);
             request.setAttribute("listAcc", listAccount);
             request.setAttribute("tag", index);

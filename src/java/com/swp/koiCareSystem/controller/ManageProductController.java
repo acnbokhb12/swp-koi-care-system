@@ -38,7 +38,7 @@ public class ManageProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
+           Account acc = (Account) session.getAttribute("userAccount");
 
             if (acc != null && !acc.getUserRole().equalsIgnoreCase("manager")) {
                 response.sendRedirect("home.jsp");
