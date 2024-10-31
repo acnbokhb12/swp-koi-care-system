@@ -138,7 +138,7 @@
                             <div class="row row-edit-info-detail">
                                 <input type="hidden" name="fishID" value="${fishInfo.fishID}" />
                                 <div class="col-12 edit-item-detail">
-                                    <span>Weight (Gram)</span>
+                                    <span>Weight (Kg)</span>
                                     <input type="number" name="weight" value="" placeholder="Enter your fish weight in grams" required />
                                 </div>
                                 <div class="col-12 edit-item-detail">
@@ -176,7 +176,7 @@
                         </select>
                     </div>
                     <div class="edit-item-detail">
-                        <span>Weight (Gram)</span>
+                        <span>Weight (Kg)</span>
                         <input type="number" id="updateWeight" name="weight" placeholder="Weight will be updated automatically" required />
                     </div>
                     <div class="edit-item-detail">
@@ -427,13 +427,13 @@
                 {
                     type: 'value',
                     axisLabel: {
-                        formatter: '{value} Gram'
+                        formatter: '{value} Kg'
                     }
                 }
             ],
             series: [
                 {
-                    name: 'Gram',
+                    name: 'Kg',
                     type: 'bar',
                     barWidth: '60%',
                     data: weightData,
