@@ -92,7 +92,6 @@
                                         <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
 
@@ -275,6 +274,25 @@
                     </div>
                 </div>
             </div>
+
+            <!--        Thong bao-->
+            <c:if test="${toastMessage != null}"> 
+                <div id="toast" style="z-index: 10">  
+                    <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }" style="display:flex">
+                        <div class="toast__icon">
+                            <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                        </div>
+                        <div class="toast_body">
+                            <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                            <p class="toast__msg">${message}</p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+
         </body>
         <script>
             // Loading header and sidebar
@@ -304,5 +322,26 @@
                 document.getElementById('searchByOrderDateForm').style.display = 'none';
                 document.getElementById('searchByStatusForm').style.display = 'block';
             }
+        </script>
+        <script>
+            document.querySelectorAll('.toast__close').forEach(function (closeBtn) {
+                closeBtn.addEventListener('click', function () {
+                    const toast = this.closest('#toast');
+                    if (toast) {
+                        toast.style.opacity = '0';
+                        toast.style.transform = 'translateY(-20px)'; 
+                        setTimeout(() => toast.remove(), 500);
+                    }
+                });
+            });
+
+            setTimeout(function () {
+                const toast = document.getElementById('toast');
+                if (toast) {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(-20px)';
+                    setTimeout(() => toast.remove(), 500);
+                }
+            }, 5000); 
         </script>
     </html>

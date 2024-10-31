@@ -40,12 +40,13 @@ public class ManagerOrderDeleteController extends HttpServlet {
             boolean isDeleted = os.deleteOrder(Integer.parseInt(orderId));
 
             if (isDeleted) {
-                request.setAttribute("message", "Order delete successfully.");
-                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                request.setAttribute("toastMessage", "success");
+                request.setAttribute("message", "Order deleted successfully.");
             } else {
-                request.setAttribute("errorMessage", "Failed to delete the order.");
-                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                request.setAttribute("toastMessage", "error");
+                request.setAttribute("message", "Failed to delete the order.");
             }
+            request.getRequestDispatcher("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE).forward(request, response);
         }
     }
 

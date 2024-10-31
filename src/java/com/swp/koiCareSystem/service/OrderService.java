@@ -79,35 +79,18 @@ public class OrderService {
     public String updateOrderStatusByOrderId(int orderId, int newStatusId) {
         int currentStatus = od.getOrderStatusByOrderId(orderId);
 
-        switch (currentStatus) {
-            case 1:
-                if (newStatusId == 2) {
-                    if (od.updateOrderStatusByOrderId(orderId, newStatusId)) {
-                        return "Order status updated to Proccessing.";
-                    } else {
-                        return "Failed to update order status.";
-                    }
-                } else {
-                    return "Invalid status transition from Pending to Proccessing";
-                }
-
-            case 2:
-                if (newStatusId == 3) {
-                    if (od.updateOrderStatusByOrderId(orderId, newStatusId)) {
-                        return "Order status updated to Done.";
-                    } else {
-                        return "Failed to update order status.";
-                    }
-                } else {
-                    return "Invalid status transition from Proccessing to Done";
-                }
-
-            case 3:
-                return "Order is already completed and cannot be changed.";
-
-            default:
-                return "Invalid order status.";
+        if ((currentStatus == 1 && newStatusId == 2) || (currentStatus == 2 && newStatusId == 3)) {
+            return od.updateOrderStatusByOrderId(orderId, newStatusId)
+                    ? "Order status updated to " + (newStatusId == 2 ? "Processing." : "Done.")
+                    : "Failed to update order status.";
         }
+
+        if (currentStatus == 3) {
+            return "Order is already completed and cannot be changed.";
+        }
+
+        return "Invalid status transition from " + (currentStatus == 1 ? "Pending" : "Processing")
+                + " to " + (newStatusId == 2 ? "Processing" : "Done") + ".";
     }
 
     public ArrayList<String> getListCustomerNames() {
@@ -140,5 +123,5 @@ public class OrderService {
 
     public ArrayList<Order> searchOrdersByDateRange(Date startDate, Date endDate, int index) {
         return od.searchOrdersByDateRange(startDate, endDate, index);
-    }    
+    }
 }

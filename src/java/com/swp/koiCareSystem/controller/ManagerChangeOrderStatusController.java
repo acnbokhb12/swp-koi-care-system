@@ -34,24 +34,24 @@ public class ManagerChangeOrderStatusController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             int orderId = Integer.parseInt(request.getParameter("orderId"));
-            String newStatusStr = request.getParameter("newStatus");
+            int newStatusStr = Integer.parseInt(request.getParameter("newStatus"));
             String indexStr = request.getParameter("index");
+            
+            OrderService os = new OrderService();
+            
+            String message = os.updateOrderStatusByOrderId(orderId, newStatusStr);
 
-            if (newStatusStr != null && !newStatusStr.isEmpty()) {
-                int newStatus = Integer.parseInt(newStatusStr);
-
-                OrderService os = new OrderService();
-                String message = os.updateOrderStatusByOrderId(orderId, newStatus);
-
-                if (message.startsWith("Order status updated")) {
-                    response.sendRedirect("ManagerOrderManageController?index=" + indexStr);
-                } else {
-                    request.setAttribute("errorMessage", message);
-                    request.getRequestDispatcher("errorPage.jsp").forward(request, response);
-                }
+            if (message.contains("Order status updated")) {
+                request.setAttribute("toastMessage", "success");
+                request.setAttribute("message", message);
+            } else {
+                request.setAttribute("toastMessage", "error");
+                request.setAttribute("message", message);
             }
+
+            request.getRequestDispatcher("ManagerOrderManageController?index=" + indexStr).forward(request, response);
         }
     }
 

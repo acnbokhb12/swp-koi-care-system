@@ -354,3 +354,39 @@ td.button-cell {
 .btn-submit-search-order:hover {
     background: #218838;
 }
+
+/*Toast*/
+
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px; /* Hoặc chiều rộng mong muốn */
+    z-index: 10;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast_main {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.toast--success {
+    border-left: 4px solid green;
+}
+
+.toast--error {
+    border-left: 4px solid red;
+}
+
+.toast__close {
+    cursor: pointer;
+    margin-left: auto; 
+}
