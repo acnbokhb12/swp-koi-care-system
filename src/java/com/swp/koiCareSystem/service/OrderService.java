@@ -140,5 +140,5 @@ public class OrderService {
 
     public ArrayList<Order> searchOrdersByDateRange(Date startDate, Date endDate, int index) {
         return od.searchOrdersByDateRange(startDate, endDate, index);
-    }
+    }    
 }

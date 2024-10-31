@@ -564,7 +564,7 @@ public class OrderDAO {
                         + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
                         + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
                         + "WHERE o.[UserNameOrdered] = ? AND o.[isActive] = 1 "
-                        + "ORDER BY o.[OrderID] "
+                        + "ORDER BY o.[OrderDate] DESC "
                         + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
 
                 pst = cn.prepareStatement(sql);
@@ -657,7 +657,7 @@ public class OrderDAO {
                 + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
                 + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
                 + "WHERE o.[OrderStatusID] = ? AND o.[isActive] = 1 "
-                + "ORDER BY o.[OrderID] "
+                + "ORDER BY o.[OrderDate] DESC "
                 + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
 
         try (Connection cn = DatabaseConnectionManager.getConnection();
@@ -739,9 +739,9 @@ public class OrderDAO {
                 + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
                 + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
                 + "WHERE o.[OrderDate] BETWEEN ? AND ? AND o.[isActive] = 1 "
-                + "ORDER BY o.[OrderID] "
+                + "ORDER BY o.[OrderDate] DESC "
                 + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
-
+        
         try (Connection cn = DatabaseConnectionManager.getConnection();
                 PreparedStatement pst = cn.prepareStatement(sql)) {
 
