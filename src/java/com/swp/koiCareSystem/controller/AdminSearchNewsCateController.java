@@ -5,7 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.News;
 import com.swp.koiCareSystem.model.NewsCategory;
 import com.swp.koiCareSystem.service.NewsService;
@@ -16,13 +16,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Khanh
  */
-public class AdminManageNewsController extends HttpServlet {
+public class AdminSearchNewsCateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,40 +36,48 @@ public class AdminManageNewsController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
+            /* TODO output your page here. You may use following sample code. */
+            request.setCharacterEncoding("UTF-8");
+            String newsCate = request.getParameter("newsCategory");
+            String indexPage = request.getParameter("index");
 
-            if (acc != null && !acc.getUserRole().equalsIgnoreCase("admin")) {
-                response.sendRedirect("home.jsp");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+
+            int ncid = Integer.parseInt(newsCate);
+            int index = 1;
+            try {
+                index = Integer.parseInt(indexPage);
+            } catch (Exception e) {
+                response.sendRedirect("MainController?action=" + IConstant.ADMIN_NEWS);
                 return;
             }
-             // Lấy chỉ số trang từ request
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1"; // Giá trị mặc định là 1 nếu không có chỉ số trang
-            }
-            int index = Integer.parseInt(indexPage);
 
-            // Gọi NewsService để lấy danh sách tin tức
             NewsService ns = new NewsService();
-            ArrayList<News> listN = ns.GetAllNews(index);
-            ArrayList<NewsCategory> listNC = ns.getAllNewsCategory();
+            int count = ns.countNewsByCategoryID(ncid);
             
-            int count = ns.countAllNews();//200
-
             int endPage = count / 10;
             if (count % 10 != 0) {
                 endPage++;
             }
+            ArrayList<News> listNews = ns.searchNewsByCate(newsCate, index);
+            ArrayList<NewsCategory> listCate = ns.getAllNewsCategory();
 
-            // Thiết lập danh sách tin tức vào request
-            request.setAttribute("ListN", listN);
-            request.setAttribute("listNC", listNC);
-            request.setAttribute("tag", index);
-            request.setAttribute("endPage", endPage);
-            
+            String url = "";
+            if (listNews != null && !listNews.isEmpty()) {
+                request.setAttribute("ListN", listNews);
+                request.setAttribute("listNC", listCate);
+                request.setAttribute("tag", index);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("OldSearchNewsCate", newsCate);
+                request.setAttribute("TagsNewsCate", ncid);
+                url = "manageNews.jsp";
+            } else {
+                url = "MainController?action=" + IConstant.ADMIN_NEWS;
+            }
 
-            request.getRequestDispatcher("manageNews.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

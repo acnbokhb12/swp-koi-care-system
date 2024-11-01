@@ -48,26 +48,40 @@
                                 <a  class="link_add-account" href="MainController?action=newsInforCreate">Add News</a>
                             </div>
                         </div>
-                        <!-- Search -->
+                        <!-- Search by Title -->
                         <div class="row row-user-main"> 
                             <div class="col-auto">
-                                <form class="table-search-form row gx-1 align-items-center" action="">
-                                    <div class="col-auto ">
-                                        <input type="text" class="search-order" placeholder="Search..." id="searchInput">
+                                <!-- Toggle Buttons -->
+                                <div class="form-toggle-buttons" style="margin-bottom: 5px">
+                                    <button type="button" onclick="showSearchByTitle()">Search by Title</button>
+                                    <button type="button" onclick="showSearchByCategory()">Search by Category</button>
+                                </div>
+
+                                <!-- Form for searching by Title -->
+                                <form id="searchByTitleForm" action="AdminSearchNewsTitleController" method="get" class="table-search-form row gx-1 align-items-center">
+                                    <div class="col-auto contain-btn-search-order" style="display: flex;">
+                                        <input type="text" name="newsTitle" class="search-order" placeholder="Search by title..." 
+                                               value="${OldSearch}" style="margin-right: 10px; flex: 1;">
+                                        <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
-                                    <div class="col-auto contain-btn-select-order">
-                                        <select class="contain-btn-select-search" name="searchChoice" id="searchChoice">
-                                            <option value="email" selected>Title</option>
-                                            <option value="phone">Name</option>
-                                            <option value="phone">Category</option>
+                                </form>
+
+                                <!-- Form for searching by Category -->
+                                <form id="searchByCategoryForm" action="AdminSearchNewsCateController" method="get" class="table-search-form row gx-1 align-items-center" style="display: none;">
+                                    <div class="col-auto contain-btn-select-order" style="display: flex;">
+                                        <select class="contain-btn-select-search" name="newsCategory" id="searchCategory" required style="margin-right: 10px; flex: 1;">
+                                            <option value="" disabled selected>Select a Category</option>
+                                            <!-- Loop through each category -->
+                                            <c:forEach  var="nct" items="${listNC}"  >
+                                                <option value="${nct.id}">${nct.name}</option>
+                                            </c:forEach>
                                         </select>
-                                    </div>
-                                    <div class="col-auto contain-btn-search-order">
                                         <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
                         <!-- List -->
                         <div class="table-container" id="accountTableContainer">
 
@@ -105,23 +119,42 @@
                             <div class="pagination">
                                 <ul class="pagination-list">
                                     <c:choose>
-                                        <c:when test="${newsCategoryID != null}">
+                                        <c:when test="${not empty OldSearch}">
                                             <c:if test="${tag > 1}">
                                                 <li>
-                                                    <a href="NewsCateController?index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                                                    <a href="AdminSearchNewsTitleController?newsTitle=${OldSearch}&index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
                                                 </li>
                                             </c:if>
                                             <c:forEach begin="1" end="${endPage}" var="i">
                                                 <li>
-                                                    <a class="${tag == i ? "active-page" : ""}" href="NewsCateController?index=${i}">${i}</a>
+                                                    <a class="${tag == i ? "active-page" : ""}" href="AdminSearchNewsTitleController?newsTitle=${OldSearch}&index=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${tag < endPage}">
                                                 <li>
-                                                    <a href="NewsCateController?index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                                                    <a href="AdminSearchNewsTitleController?newsTitle=${OldSearch}&index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
                                                 </li>
                                             </c:if>
-                                        </c:when>
+                                        </c:when>  
+                                        
+                                        <c:when test="${not empty OldSearchNewsCate}">
+                                            <c:if test="${tag > 1}">
+                                                <li>
+                                                    <a href="AdminSearchNewsCateController?newsCategory=${OldSearchNewsCate}&index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li>
+                                                    <a class="${tag == i ? "active-page" : ""}" href="AdminSearchNewsCateController?newsCategory=${OldSearchNewsCate}&index=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${tag < endPage}">
+                                                <li>
+                                                    <a href="AdminSearchNewsCateController?newsCategory=${OldSearchNewsCate}&index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                                                </li>
+                                            </c:if>
+                                        </c:when>          
+                                                
                                         <c:otherwise>
                                             <c:if test="${tag > 1}">
                                                 <li>
@@ -169,12 +202,36 @@
             background - color: orange;
             }
         </script>
+        <script>
+            function toggleDateOptions() {
+            const searchChoice = document.getElementById('searchChoice').value;
+            const dateOptions = document.getElementById('dateOptions');
+            if (searchChoice === 'date') {
+            dateOptions.style.display = 'block';
+            } else {
+            dateOptions.style.display = 'none';
+            }
+            }
+        </script>
     </body>
     <script>
         $('#header').load('utils.jsp #header_admin', () => {
         $.getScript('./assets/js/utilsAdmin.js');
         });
         $('#sidebar_admin').load('utils.jsp  #sidebar_admin');
+    </script>
+
+    <script>
+        // JavaScript functions to toggle forms
+        function showSearchByTitle() {
+        document.getElementById('searchByTitleForm').style.display = 'flex';
+        document.getElementById('searchByCategoryForm').style.display = 'none';
+        }
+
+        function showSearchByCategory() {
+        document.getElementById('searchByTitleForm').style.display = 'none';
+        document.getElementById('searchByCategoryForm').style.display = 'flex';
+        }
     </script>
     <script src="./assets/js/notification.js"></script>
     <script src="./assets/js/utils.js"></script>

@@ -299,10 +299,206 @@ public class NewsDAO {
         return false;
     }
 
+    public ArrayList<News> searchNewsCategory(String idCate, int index) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<News> listN = new ArrayList<>();
+
+        int distance = (index - 1) * 10;
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "select n.NewsID, n.Title,  ctn.name, n.NewsDate, n.isActive\n"
+                    + "from [dbo].[News] n inner join [dbo].[newsCategory] ctn \n"
+                    + "on n.newsCategoryID = ctn.newsCategoryID\n"
+                    + "where n.newsCategoryID = ? and n.[isActive] = 1\n"
+                    + "order by n.NewsID\n"
+                    + "offset ? rows fetch next 10 rows only";
+            ps = c.prepareStatement(sql);
+
+            ps.setString(1, idCate);
+            ps.setInt(2, distance);
+            rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    News n = new News();
+                    NewsCategory nc = new NewsCategory();
+                    n.setNewsID(rs.getInt(1));
+                    n.setTitle(rs.getString(2));
+                    nc.setName(rs.getString(3));
+                    n.setNewsDate(rs.getTimestamp(4));
+                    n.setIsActive(rs.getBoolean(5));
+                    n.setNewsCategory(nc);
+                    listN.add(n);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listN;
+    }
+
+    public int countNewsByCategoryID(int category) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            if (c != null) {
+                String sql = "select count(*) from News where [newsCategoryID] = ? and [isActive] = 1";
+                ps = c.prepareStatement(sql);
+                ps.setInt(1, category);
+                rs = ps.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<News> adminSearchNewsByTitle(String title, int index) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<News> listN = new ArrayList<>();
+
+        int distance = (index - 1) * 10;
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "select n.NewsID, n.Title, ctn.name, n.NewsDate, n.isActive \n"
+                    + "from [dbo].[News] n inner join [dbo].[newsCategory] ctn \n"
+                    + "on n.newsCategoryID = ctn.newsCategoryID\n"
+                    + "where  n.Title like ? and n.isActive = 1\n"
+                    + "order by n.NewsID DESC \n"
+                    + "offset ? rows fetch next 10 rows only";
+            ps = c.prepareStatement(sql);
+            ps.setString(1, "%" + title + "%");
+            ps.setInt(2, distance);
+            rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    News n = new News();
+                    NewsCategory nc = new NewsCategory();
+                    n.setNewsID(rs.getInt(1));
+                    n.setTitle(rs.getString(2));
+                    nc.setName(rs.getString(3));
+                    n.setNewsDate(rs.getTimestamp(4));
+                    n.setIsActive(rs.getBoolean(5));
+                    n.setNewsCategory(nc);
+                    listN.add(n);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listN;
+    }
+
+    public int countNewsByTitle(String title) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            if (c != null) {
+                String sql = "SELECT COUNT(*) \n"
+                        + "FROM [dbo].[News] \n"
+                        + "WHERE [Title] LIKE ? AND isActive = 1";
+                ps = c.prepareStatement(sql);
+                ps.setString(1, "%" + title + "%");
+                rs = ps.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    
+
     public static void main(String[] args) {
         NewsDAO ndao = new NewsDAO();
-
-
+        
+//        ArrayList<News> list = ndao.searchNewsCategory("1", 1);
+        
+//        int count = ndao.countNewsByCategoryID(2);
+//        System.out.println(count);
+//        ArrayList<NewsCategory> list = ndao.getAllNewsCategory();
+//        System.out.println(list);
+//        ArrayList<News> list = ndao.adminSearchNewsByTitle("koi", 1);
+//
+//        for (News news : list) {
+//            System.out.println(news);
+//        }
 //        int newsId = 2;
 //        ArrayList<News> list = ndao.getNewsDetail(newsId);
 //        System.out.println(list);

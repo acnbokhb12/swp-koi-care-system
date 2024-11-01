@@ -67,12 +67,14 @@ public interface IConstant {
     public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
     
-// START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
+// START ADMIN NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public final String CREATE_NEWS = "createNews";
     public final String NEWS_INFOR_CREATE = "newsInforCreate";
     public final String ADMIN_NEWS = "adminNews";
     public final String ADMIN_NEWS_DETAIL = "adminNewsDetail";
     public final String ADMIN_DELETE_NEWS = "adminDeleteNews";
+    public final String ADMIN_SEARCH_NEWS_CATE = "adminSearchNewsCate";
+    public final String ADMIN_SEARCH_NEWS_TITLE = "adminSearchNewsTitle";
 
 // START MANAGER PRODUCT ----------------------------------------------------------------------------------------------------------------------------------     
     public static String PRODUCT_MANAGE = "productmanage";

@@ -52,8 +52,47 @@ public class NewsService {
         return ndao.deleteNewsById(newsId);
     }
 
+    public ArrayList<News> searchNewsByCate(String newsCate, int index) {
+        return ndao.searchNewsCategory(newsCate, index);
+    }
+
+    public int countNewsByCategoryID(int category) {
+        return ndao.countNewsByCategoryID(category);
+    }
+
+    public ArrayList<News> adminSearchNewsByTitle(String title, int index) {
+        return ndao.adminSearchNewsByTitle(title, index);
+    }
+
+    public int countNewsByTitle(String title) {
+        return ndao.countNewsByTitle(title);
+    }
+
     public static void main(String[] args) {
         NewsService nsv = new NewsService();
+
+//        int day = 20;
+//        int month = 11;
+//        Integer year = null;
+//
+//        int index = 1;
+//
+//        ArrayList<News> list = nsv.adminSearchNewsByDate(day, month, year, index);
+//        System.out.println(list);
+//        ArrayList<News> list = nsv.adminSearchNewsByTitle("koi", 2);
+//
+//        for (News news : list) {
+//            System.out.println(news);
+//        }
+
+//        String category = "Pond"; // Thay bằng tên chuyên mục bạn muốn kiểm tra
+//        int count = nsv.countNewsByCategory(category);
+//        System.out.println("Số lượng bài viết trong chuyên mục '" + category + "': " + count);
+//        ArrayList<News> list = nsv.searchNewsByCate("Water Parameter Control", 1);
+//
+//        for (News news : list) {
+//            System.out.println(news);
+//        }
 //        String newsId = "42";
 //        boolean isDeleted = nsv.adminDeleteNewsById(newsId);
 ////        System.out.println(blogID);
