@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,7 +140,9 @@
                                                         </p>
                                                         <!-- price- category -->
                                                         <div class="contain-cat-price ">
-                                                            <h5 class="shop__product-price ">${p.price}</h5>
+                                                            <h5 class="shop__product-price "> 
+                                                                <fmt:formatNumber value="${p.price}" pattern="#,###"/> đ
+                                                            </h5>
                                                             <h5 class="shop__product-category-list ">
                                                                 <p class="shop__product-category-item">
                                                                     ${p.categoryP.categoryName}
@@ -155,9 +159,9 @@
                             <div class="pagincontainer"> 
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination"> 
-                                        <c:choose>
-                                            <c:when test="${cateID != null}">
-                                                 <c:if test="${tag > 1}"> 
+                                         
+                                            <c:if test="${cateID != null}">
+                                                <c:if test="${tag > 1}"> 
                                                     <li class="page-item"><a class="page-link" href="ProductCateController?index=${tag-1}&cateID=${cateID}"><i class="fa-solid fa-chevron-left"></i></a></li>
                                                 </c:if>
                                                 <c:forEach begin="1" end="${endPage}" var="i">
@@ -166,8 +170,8 @@
                                                 <c:if test="${tag < endPage }"> 
                                                     <li class="page-item"><a class="page-link" href="ProductCateController?index=${tag+1}&cateID=${cateID}"><i class="fa-solid fa-chevron-right"></i></a></li>
                                                 </c:if> 
-                                            </c:when>
-                                            <c:otherwise>
+                                            </c:if>
+                                            <c:if test="${shop != null}">        
                                                 <c:if test="${tag > 1}"> 
                                                     <li class="page-item"><a class="page-link" href="ManageShopController?index=${tag-1}"><i class="fa-solid fa-chevron-left"></i></a></li>
                                                 </c:if>
@@ -176,9 +180,20 @@
                                                 </c:forEach> 
                                                 <c:if test="${tag < endPage }"> 
                                                     <li class="page-item"><a class="page-link" href="ManageShopController?index=${tag+1}"><i class="fa-solid fa-chevron-right"></i></a></li>
-                                                </c:if> 
-                                            </c:otherwise>
-                                        </c:choose>  
+                                                </c:if>
+                                            </c:if>
+                                            <c:if test="${OldSearch != null }">
+                                                <c:if test="${tag > 1}"> 
+                                                    <li class="page-item"><a class="page-link" href="SearchProductController?index=${tag-1}&productName=${OldSearch}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                </c:if>        
+                                                <c:forEach begin="1" end="${endPage}" var="i">
+                                                    <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="SearchProductController?index=${i}&productName=${OldSearch}">${i}</a></li>
+                                                </c:forEach>
+                                                <c:if test="${tag < endPage }"> 
+                                                    <li class="page-item"><a class="page-link" href="SearchProductController?index=${tag+1}&productName=${OldSearch}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                                </c:if>    
+                                            </c:if>        
+                                           
                                     </ul>
                                 </nav>
                             </div>
@@ -205,7 +220,7 @@
         </div>
         </c:if>
         <!-- footer -->
-        <div id="footer"></div>
+        <div id="footer"></div> 
         <style>
             .category-item--active{
     background-color: var(--bs-orange);
@@ -245,12 +260,7 @@
         });
 
         // tien vnd
-        const priceElements = document.querySelectorAll('.shop__product-price');
-        priceElements.forEach(function (element) {
-            let price = parseInt(element.innerText);
-            let formattedAmount = price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
-            element.innerText = formattedAmount;
-        });
+         
 
     </script>
  <script>

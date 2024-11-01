@@ -43,8 +43,16 @@ public class ProductCateController extends HttpServlet {
             }else if(indexPage == null){
                 indexPage = "1";
             }
-            int cid = Integer.parseInt(cateId);
-            int index = Integer.parseInt(indexPage);
+            int cid = 1;
+            int index = 1;
+            try {
+                cid = Integer.parseInt(cateId);
+                index = Integer.parseInt(indexPage);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("MainController?action="+IConstant.SHOP);
+                return;
+            }
             
             ProductService pds = new ProductService();
             int count = pds.countProductsByCate(cid);
