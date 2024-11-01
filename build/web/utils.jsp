@@ -294,7 +294,7 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="foodCaculator.jsp">
+                                                                        <a href="FoodCaculatorController">
                                                                             <i class="fa-solid fa-calculator"></i> Food Caculator
                                                                         </a>
                                                                     </li>

@@ -7,7 +7,9 @@
 package com.swp.koiCareSystem.controller; 
  
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.FeedPercentage;
 import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.service.CaculatorService;
 import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,8 +43,15 @@ public class FoodCaculatorController extends HttpServlet {
                     
             FishService fsv = new FishService();
             ArrayList<Fish> listFish = fsv.getAllFishS(acc.getUserID());
+            CaculatorService clts = new CaculatorService();
+            ArrayList<String> listGrowthMode = clts.getListGrowthMode();
+            ArrayList<FeedPercentage> getMinMaxOfTemp = clts.getMinMaxTemperature();
+            int lengtArr = getMinMaxOfTemp.size();
             
             request.setAttribute("listFish", listFish);
+            request.setAttribute("listGrowthMode", listGrowthMode);
+            request.setAttribute("temperatureList", getMinMaxOfTemp);
+            request.setAttribute("size", lengtArr);
             request.getRequestDispatcher("foodCaculator.jsp").forward(request, response);
         }
     } 
