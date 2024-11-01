@@ -63,6 +63,10 @@ public interface IConstant {
     public static String MANAGE_AQUARIUM_DETAILS = "manageaquariumdetails";
     public static String MANAGE_POND = "managepond";
     public static String MANAGE_POND_DETAILS = "manageponddetails";
+    
+// START FOOD CACULATOR
+    public final String FOOD_CACULATOR = "foodCaculator";
+    
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
