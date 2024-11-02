@@ -330,6 +330,19 @@
                 document.getElementById('searchByOrderDateForm').style.display = 'none';
                 document.getElementById('searchByStatusForm').style.display = 'block';
             }
+            
+            document.getElementById("searchByOrderDateForm").addEventListener("submit", function (event) {
+                const startDate = document.getElementById("startDate").value;
+                const endDate = document.getElementById("endDate").value;
+
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+
+                if (start > end) {
+                    event.preventDefault();
+                    alert("From Date should be earlier than or the same as End Date.");
+                }
+            });
         </script>
         <script src="./assets/js/notification.js"></script>
         <script src="./assets/js/utils.js"></script>

@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
@@ -42,11 +43,12 @@ public class ManagerOrderDetailsController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc != null && !acc.getUserRole().equalsIgnoreCase("manager")) {
-                response.sendRedirect("home.jsp");
-                return;
+            if (acc.getUserRole().equalsIgnoreCase("customer")) {
+                request.getRequestDispatcher("HomeController").forward(request, response);
+            } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
+                request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
             }
-          
+
             String orderIdParam = request.getParameter("orderId");
             int orderId = Integer.parseInt(orderIdParam);
 
@@ -54,15 +56,31 @@ public class ManagerOrderDetailsController extends HttpServlet {
             if (indexPage == null || indexPage.isEmpty()) {
                 indexPage = "1";
             }
-            int index = Integer.parseInt(indexPage);
+
+            int index = 1;
+            try {
+                index = Integer.parseInt(indexPage);
+                if (index < 0) {
+                    response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_DETAILS
+                            + "&orderId=" + orderId
+                            + "&index=" + 1);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_DETAILS
+                        + "&orderId=" + orderId
+                        + "&index=" + 1);
+                return;
+            }
 
             OrderService os = new OrderService();
             int count = os.countOrderItems(orderId);
 
-            int itemsPerPage = 5; 
-            int endPage = (int) Math.ceil((double) count / itemsPerPage); 
+            int endPage = count / 5;
+            if (count % 5 != 0) {
+                endPage++;
+            }
 
-            // Get the order items for the current page
             ArrayList<OrderItem> orderItems = os.getOrderItemsByOrderId(orderId, index);
             Order orderInfo = os.getOrderById(orderId);
 

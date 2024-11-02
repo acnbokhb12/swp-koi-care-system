@@ -88,7 +88,8 @@
                         <ul class="pagination">
                             <c:if test="${tag > 1}">
                                 <li class="page-item">
-                                    <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag - 1}" class="page-link text-dark">
+                                    
+                                    <a href="MainController?action=managerorderdetails&orderId=${order.id}&index=${tag - 1}" class="page-link text-dark">
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                 </li>
@@ -97,7 +98,7 @@
                             <!-- Page Links -->
                             <c:forEach begin="1" end="${endPage}" var="i">
                                 <li class="page-item ${tag == i ? 'active' : ''}">
-                                    <a href="ManageOrderDetailsController?orderId=${order.id}&index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
+                                    <a href="MainController?action=managerorderdetails&orderId=${order.id}&index=${i}" class="page-link text-dark ${tag == i ? 'active__page' : ''}">
                                         ${i}
                                     </a>
                                 </li>
@@ -106,7 +107,7 @@
                             <!-- Next Button -->
                             <c:if test="${tag < endPage}">
                                 <li class="page-item">
-                                    <a href="ManageOrderDetailsController?orderId=${order.id}&index=${tag + 1}" class="page-link text-dark">
+                                    <a href="MainController?action=managerorderdetails&orderId=${order.id}&index=${tag + 1}" class="page-link text-dark">
                                         <i class="fa-solid fa-chevron-right"></i>
                                     </a>
                                 </li>

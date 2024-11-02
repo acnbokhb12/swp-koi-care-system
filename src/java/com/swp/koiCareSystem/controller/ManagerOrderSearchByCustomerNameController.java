@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderStatus;
@@ -42,9 +43,10 @@ public class ManagerOrderSearchByCustomerNameController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc != null && !acc.getUserRole().equalsIgnoreCase("manager")) {
-                response.sendRedirect("home.jsp");
-                return;
+            if (acc.getUserRole().equalsIgnoreCase("customer")) {
+                request.getRequestDispatcher("HomeController").forward(request, response);
+            } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
+                request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
             }
 
             String customerName = request.getParameter("customerName");
@@ -53,8 +55,19 @@ public class ManagerOrderSearchByCustomerNameController extends HttpServlet {
             if (indexPage == null) {
                 indexPage = "1";
             }
-            int index = Integer.parseInt(indexPage);
+            int index = 1;
 
+            try {
+                index = Integer.parseInt(indexPage);
+                if (index <= 0) {
+                    response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                return;
+            }
+            
             OrderService os = new OrderService();
 
             int count = os.countOrdersByCustomerNames(customerName);
