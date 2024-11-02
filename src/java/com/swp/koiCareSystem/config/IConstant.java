@@ -65,7 +65,7 @@ public interface IConstant {
     public static String MANAGE_POND_DETAILS = "manageponddetails";
     
 // START FOOD CACULATOR
-    public final String FOOD_CACULATOR = "foodCaculator";
+    public final String FOOD_CALCULATOR = "foodCaculator";
     
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     

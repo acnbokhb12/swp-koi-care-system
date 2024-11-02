@@ -4,27 +4,22 @@
  * and open the template in the editor.
  */
 
-package com.swp.koiCareSystem.controller; 
- 
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.FeedPercentage;
-import com.swp.koiCareSystem.model.Fish;
+package com.swp.koiCareSystem.controller;
+
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.service.CaculatorService;
-import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author DELL
  */
-public class FoodCaculatorController extends HttpServlet {
+public class FoodCalculatorDetailController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,21 +33,37 @@ public class FoodCaculatorController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-                    
-            FishService fsv = new FishService();
-            ArrayList<Fish> listFish = fsv.getAllFishS(acc.getUserID());
+            String fishInfo  = request.getParameter("fishInfo"); 
+            String growthMode = request.getParameter("growth");
+            String temp = request.getParameter("temperature");
+            String fishId = "";
+            String weightF = "";
+            if (fishInfo != null){
+                String[] parts = fishInfo.split("-");
+                fishId = parts[0];
+                weightF = parts[1];
+            } 
+            float weightFish = (float) 0.1;
+            float temperature = (float) 0.1;
+            try {
+                weightFish = Float.parseFloat(weightF);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action="+IConstant.FOOD_CALCULATOR);
+                return;
+            }
+            try {
+                temperature = Float.parseFloat(temp);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action="+IConstant.FOOD_CALCULATOR);
+                return;
+            }
             CaculatorService clts = new CaculatorService();
-            ArrayList<String> listGrowthMode = clts.getListGrowthMode();
-            ArrayList<FeedPercentage> getMinMaxOfTemp = clts.getMinMaxTemperature();
-            int lengtArr = getMinMaxOfTemp.size();
-            
-            request.setAttribute("listFish", listFish);
-            request.setAttribute("listGrowthMode", listGrowthMode);
-            request.setAttribute("temperatureList", getMinMaxOfTemp);
-            request.setAttribute("size", lengtArr);
-            request.getRequestDispatcher("foodCaculator.jsp").forward(request, response);
+            int amountFood = clts.calculatorFoodForFish(growthMode, weightFish, temperature);
+            request.setAttribute("amountFood", amountFood);
+            request.setAttribute("growthM", growthMode);
+            request.setAttribute("averageTemperature", temperature);
+            request.setAttribute("fishId", fishId);
+            request.getRequestDispatcher("MainController?action="+IConstant.FOOD_CALCULATOR).forward(request, response);
         }
     } 
 

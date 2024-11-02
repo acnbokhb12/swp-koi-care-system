@@ -43,12 +43,14 @@
                 <div class="row mb-5">
                     <div class="col-lg-6">
                         <div class="body_caculator_detail">
-                            <form action="">
+                            <form action="FoodCalculatorDetailController" method="get">
                                 <div class="select_option-fish text-center mb-4">
                                     <h3>Choose fish</h3>
-                                    <select name="" id="">
-                                        <c:forEach items="${listFish}" var="fitem">                                       
-                                            <option value="${fitem.weight}">${fitem.fishName}</option> 
+                                    <c:set var="countFish" value="0" />
+                                    <select name="fishInfo" id="">
+                                        <c:forEach items="${listFish}" var="fitem"> 
+                                            <c:set var="countFish" value="${countFish+1}" />
+                                            <option value="${fitem.fishID}-${fitem.weight}" ${fishId==fitem.fishID ? 'selected' : (countFish == 1 ? 'selected' : ''  ) }>${fitem.fishName} </option> 
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -60,7 +62,7 @@
                                             <c:forEach items="${listGrowthMode}" var="grMode"  > 
                                                 <c:set var="count" value="${count+1}"/>
                                                 <label for="${grMode}-btn">
-                                                    <input id="${grMode}-btn"  type="radio" name="growth" value="${grMode}" ${count == 1 ? 'checked' : ''} hidden>
+                                                    <input id="${grMode}-btn"  type="radio" name="growth" value="${grMode}" ${(growthM != null && growthM.equalsIgnoreCase(grMode) ) ? 'checked' : (count == 1 ? 'checked' : '')} hidden>
                                                     <div class="radio-item p-3">
                                                         <h2 class="text-center font-weight-bold">${grMode}</h2>
                                                         <p class=" d-flex justify-content-center">
@@ -79,9 +81,10 @@
                                         <h3 class="mb-3">Water Temperature</h3>
                                         <div class="row_radio-btn d-flex justify-content-between ">
                                             <c:set var="countTemp" value="0"/>
-                                            <c:forEach items="${temperatureList}" var="temp" begin="0" end="0"> 
+                                            <c:forEach items="${temperatureList}" var="temp" begin="0" end="0">
+                                                <c:set var="avg" value="${(temp.temperatureMin + temp.temperatureMax) / 2}" />   
                                                 <label for="${temp.temperatureMax}-btn">
-                                                    <input id="${temp.temperatureMax}-btn" type="radio" name="temperature" value="9" checked hidden>
+                                                    <input id="${temp.temperatureMax}-btn" type="radio" name="temperature" value="${avg}" ${ (averageTemperature!= null && averageTemperature == avg) ? 'checked' : (averageTemperature == null ? 'checked' : '') } hidden>
                                                     <div class="radio-item p-3">
                                                         <h2 class="text-center font-weight-bold"><i class="fa-solid fa-less-than-equal"></i>${temp.temperatureMax}°</h2>
                                                         <p class=" d-flex justify-content-center">
@@ -90,38 +93,44 @@
                                                     </div>
                                                 </label>
                                             </c:forEach>
-                                            <c:forEach items="${temperatureList}" var="temp" begin="1" end="${size-2}"> 
-                                                <label for="${temp.temperatureMax}-btn">
-                                                    <input id="${temp.temperatureMax}-btn" type="radio" name="temperature" value="9" hidden>
-                                                    <div class="radio-item p-3">
-                                                        <h2 class="text-center font-weight-bold">${temp.temperatureMin}°-${temp.temperatureMax}°</h2>
-                                                        <p class=" d-flex justify-content-center">
-                                                            <i class="fa fa-circle"></i>
-                                                            <i class="fa fa-circle"></i> 
-                                                        </p>
-                                                    </div>
-                                                </label>
+                                            <c:forEach items="${temperatureList}" var="temp" varStatus="status">
+                                                <c:if test="${status.index > 0 && !status.last}">
+                                                      <c:set var="avg" value="${(temp.temperatureMin + temp.temperatureMax) / 2}" />
+                                                    <label for="${temp.temperatureMax}-btn">
+                                                        <input id="${temp.temperatureMax}-btn" type="radio" name="temperature" ${ (averageTemperature!= null && averageTemperature == avg) ? 'checked' : '' } value="${avg}" hidden>
+                                                        <div class="radio-item p-3">
+                                                            <h2 class="text-center font-weight-bold">${temp.temperatureMin}°-${temp.temperatureMax}°</h2>
+                                                            <p class=" d-flex justify-content-center">
+                                                                <i class="fa fa-circle"></i>
+                                                                <i class="fa fa-circle"></i> 
+                                                            </p>
+                                                        </div>
+                                                    </label>
+                                                </c:if>
                                             </c:forEach>
-                                            <c:forEach items="${temperatureList}" var="temp" begin="${size-1}" end="${size-1}"> 
-                                                <label for="${temp.temperatureMax}-btn">
-                                                    <input id="${temp.temperatureMax}-btn" type="radio" name="temperature" value="9" hidden>
-                                                    <div class="radio-item p-3">
-                                                        <h2 class="text-center font-weight-bold">${temp.temperatureMin}°<i class="fa-solid fa-less-than-equal"></i></h2>
-                                                        <p class=" d-flex justify-content-center">
-                                                            <i class="fa fa-circle"></i>
-                                                            <i class="fa fa-circle"></i>
-                                                            <i class="fa fa-circle"></i>
+                                            <c:forEach items="${temperatureList}" var="temp" varStatus="status">
+                                                <c:if test="${status.last}">
+                                                    <c:set var="avg" value="${(temp.temperatureMin + temp.temperatureMax) / 2}" />   
+                                                    <label for="${temp.temperatureMax}-btn">
+                                                        <input id="${temp.temperatureMax}-btn" type="radio" name="temperature" value="${avg}" ${ (averageTemperature!= null && averageTemperature == avg) ? 'checked' : '' } hidden>
+                                                        <div class="radio-item p-3">
+                                                            <h2 class="text-center font-weight-bold">${temp.temperatureMin}°<i class="fa-solid fa-less-than-equal"></i></h2>
+                                                            <p class=" d-flex justify-content-center">
+                                                                <i class="fa fa-circle"></i>
+                                                                <i class="fa fa-circle"></i>
+                                                                <i class="fa fa-circle"></i>
 
-                                                        </p>
-                                                    </div>
-                                                </label>
+                                                            </p>
+                                                        </div>
+                                                    </label>
+                                                </c:if>
                                             </c:forEach>
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="contain-btn-confirm text-center">
-                                    <button type="submit">Confirm</button>
+                                    <button type="submit">Start calculate</button>
                                 </div>
                             </form>
                         </div>
@@ -146,7 +155,7 @@
                         <h2 class="m-0" >Recommended amount</h2>
                     </div>
                     <div class="item-recommened d-flex flex-column">
-                        <h1 class="m-0 font-weight-bold">121g</h1>
+                        <h1 class="m-0 font-weight-bold">${amountFood != null ? amountFood : '0' }g</h1>
                         <p class="m-0">per day</p>
                     </div>
 

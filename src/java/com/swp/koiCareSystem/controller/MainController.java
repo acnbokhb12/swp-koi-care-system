@@ -92,8 +92,8 @@ public class MainController extends HttpServlet {
                     url = "DeleteBlogController";
                     break;
                 // START FOOD Caculator
-                case IConstant.FOOD_CACULATOR:
-                    url= "FoodCaculatorController";
+                case IConstant.FOOD_CALCULATOR:
+                    url= "FoodCalculatorController";
                     break;
                 // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:

@@ -294,7 +294,7 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="FoodCaculatorController">
+                                                                        <a href="MainController?action=foodCaculator">
                                                                             <i class="fa-solid fa-calculator"></i> Food Caculator
                                                                         </a>
                                                                     </li>
