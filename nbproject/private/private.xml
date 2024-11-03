@@ -5,14 +5,14 @@
         <group>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/CaculatorDAO.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/ProductDAO.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/foodCaculator.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/cart.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/manageProduct.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/PondService.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/Fish.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/FoodCalculatorDetailController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/FoodCalculatorController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/FeedPercentage.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/FoodCaculatorController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/utils.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/CaculatorService.java</file>
         </group>
     </open-files>
