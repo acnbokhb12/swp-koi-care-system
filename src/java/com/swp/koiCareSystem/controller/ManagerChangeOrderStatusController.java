@@ -36,13 +36,13 @@ public class ManagerChangeOrderStatusController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             int orderId = Integer.parseInt(request.getParameter("orderId"));
-            int newStatusStr = Integer.parseInt(request.getParameter("newStatus"));
-            String indexStr = request.getParameter("index");
-            
-            OrderService os = new OrderService();
-            
-            String message = os.updateOrderStatusByOrderId(orderId, newStatusStr);
+            int newStatus = Integer.parseInt(request.getParameter("newStatus"));
+            String statusId = request.getParameter("statusId");
 
+            OrderService orderService = new OrderService();
+            String message = orderService.updateOrderStatusByOrderId(orderId, newStatus);
+
+            // Set a toast message based on the result of the update
             if (message.contains("Order status updated")) {
                 request.setAttribute("toastMessage", "success");
                 request.setAttribute("message", message);
@@ -51,7 +51,11 @@ public class ManagerChangeOrderStatusController extends HttpServlet {
                 request.setAttribute("message", message);
             }
 
-            request.getRequestDispatcher("ManagerOrderManageController?index=" + indexStr).forward(request, response);
+            if (statusId != null && !statusId.isEmpty()) {
+                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId);
+            } else {
+                request.getRequestDispatcher("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE).forward(request, response);
+            }
         }
     }
 

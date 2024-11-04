@@ -66,13 +66,12 @@
                         </form>
                     </div>
 
-                    <c:forEach var="status" items="${ListS}">
-                        <a class="link-processing all" href="ManagerOrderSearchByOrderStatusController?status=${status.orderStatusID}">${status.orderStatusName}</a>
-                    </c:forEach>
-
-
                     <div class="table-container" id="orderTableContainer">
                         <div class="table-container" id="orderTableContainer">
+                            <a class="link-processing all" href="MainController?action=managerordermanage">All</a>
+                            <c:forEach var="statusId" items="${ListS}">
+                                <a class="link-processing all" href="ManagerOrderSearchByOrderStatusController?status=${statusId.orderStatusID}">${statusId.orderStatusName}</a>
+                            </c:forEach>
                             <table id="orderTable">
                                 <thead>
                                     <tr>
@@ -82,7 +81,8 @@
                                         <th>Order Time</th>
                                         <th>Status</th>
                                         <th>Total Money</th>
-                                        <th>Actions</th>
+                                        <th>Detail</th>
+                                        <th>Delete</th>
                                         <th>Order Confirm</th>
                                     </tr>
                                 </thead>
@@ -116,11 +116,15 @@
                                                     <a href="MainController?action=managerorderdetails&orderId=${order.id}" class="edit-btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="MainController?action=managerorderdelete&orderId=${order.id}" 
-                                                       class="text-danger delete-btn" 
-                                                       onclick="return confirmDelete();">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="MainController?action=managerorderdelete" method="POST" onsubmit="return confirmDelete();">
+                                                        <input type="hidden" name="orderId" value="${order.id}">
+                                                        <input type="hidden" name="statusId" value="${TagStatusId != null ? TagStatusId : ''}">
+                                                        <button type="submit" class="text-danger delete-btn">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td>
                                                     <form action="ManagerChangeOrderStatusController" method="POST">
@@ -128,6 +132,7 @@
                                                         <input type="hidden" name="index" value="${tag}">
                                                         <input type="hidden" name="newStatus" 
                                                                value="${order.orderS.orderStatusID == 1 ? 2 : (order.orderS.orderStatusID == 2 ? 3 : '')}">
+                                                        <input type="hidden" name="statusId" value="${TagStatusId != null ? TagStatusId : ''}">
                                                         <button type="submit" class="confirm-btn" 
                                                                 ${order.orderS.orderStatusID == 3 ? 'disabled' : ''}>
                                                             <i class="fas fa-check"></i> Confirm
@@ -165,6 +170,30 @@
                                                     </li>
                                                 </c:if>
                                             </c:when>
+                                            <c:when test="${not empty TagStatusId}">
+                                                <c:if test="${tag > 1}">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="ManagerOrderSearchByOrderStatusController?status=${TagStatusId}&index=${tag - 1}">
+                                                            <i class="fa-solid fa-chevron-left"></i>
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+
+                                                <c:forEach begin="${tag - 1 < 1 ? 1 : tag - 1}" end="${tag + 1 > endPage ? endPage : tag + 1}" var="i">
+                                                    <li class="page-item ${tag == i ? 'active' : ''}">
+                                                        <a class="page-link ${tag == i ? 'active__page' : ''}" href="ManagerOrderSearchByOrderStatusController?status=${TagStatusId}&index=${i}">${i}</a>
+                                                    </li>
+                                                </c:forEach>
+
+                                                <c:if test="${tag < endPage}">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="ManagerOrderSearchByOrderStatusController?status=${TagStatusId}&index=${tag + 1}">
+                                                            <i class="fa-solid fa-chevron-right"></i>
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+                                            </c:when>
+
                                             <c:otherwise>
                                                 <c:if test="${tag > 1}">
                                                     <li class="page-item">

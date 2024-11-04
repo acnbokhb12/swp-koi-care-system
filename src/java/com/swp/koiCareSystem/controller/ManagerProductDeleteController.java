@@ -41,7 +41,6 @@ public class ManagerProductDeleteController extends HttpServlet {
             boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
 
             if (isDeleted) {
-                response.sendRedirect("MainController?action="+ IConstant.PRODUCT_MANAGE);
             } else {
                 request.setAttribute("errorMessage", "Failed to delete the product.");
             }

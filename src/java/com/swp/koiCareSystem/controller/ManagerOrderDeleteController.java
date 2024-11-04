@@ -35,27 +35,44 @@ public class ManagerOrderDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String orderId = request.getParameter("orderId");
+            String orderIdStr = request.getParameter("orderId");
+            String statusId = request.getParameter("statusId");
+
             OrderService os = new OrderService();
+            String message;
+            String toastMessage;
 
-            Order order = os.getOrderById(Integer.parseInt(orderId));
+            try {
+                int orderId = Integer.parseInt(orderIdStr);
+                Order order = os.getOrderById(orderId);
 
-            if (order != null) {
-                boolean isDeleted = os.deleteOrder(Integer.parseInt(orderId));
+                if (order != null) {
+                    boolean isDeleted = os.deleteOrder(orderId);
 
-                if (isDeleted) {
-                    request.setAttribute("toastMessage", "success");
-                    request.setAttribute("message", "Order deleted successfully.");
+                    if (isDeleted) {
+                        toastMessage = "success";
+                        message = "Order deleted successfully.";
+                    } else {
+                        toastMessage = "error";
+                        message = "Failed to delete the order.";
+                    }
                 } else {
-                    request.setAttribute("toastMessage", "error");
-                    request.setAttribute("message", "Failed to delete the order.");
+                    toastMessage = "error";
+                    message = "Order not found.";
                 }
-            } else {
-                request.setAttribute("toastMessage", "error");
-                request.setAttribute("message", "Order not found.");
+            } catch (NumberFormatException e) {
+                toastMessage = "error";
+                message = "Invalid order ID.";
             }
 
-            request.getRequestDispatcher("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE).forward(request, response);
+            request.getSession().setAttribute("toastMessage", toastMessage);
+            request.getSession().setAttribute("message", message);
+
+            if (statusId != null && !statusId.isEmpty()) {
+                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId);
+            } else {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+            }
         }
     }
 

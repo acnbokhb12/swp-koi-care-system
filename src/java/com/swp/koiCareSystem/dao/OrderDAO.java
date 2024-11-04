@@ -446,9 +446,7 @@ public class OrderDAO {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
                 String sql = "SELECT DISTINCT os.orderStatusID, os.orderStatusName "
-                        + "FROM OrderStatus os "
-                        + "JOIN Orders o ON os.orderStatusID = o.OrderStatusID "
-                        + "WHERE o.isActive = 1";
+                        + "FROM OrderStatus os";
                 pst = cn.prepareStatement(sql);
                 rs = pst.executeQuery();
                 while (rs != null && rs.next()) {

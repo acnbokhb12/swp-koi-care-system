@@ -48,8 +48,8 @@ public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
             } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
                 request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
             }
-
-            int status = Integer.parseInt(request.getParameter("status"));
+            String statusId = request.getParameter("status");
+            int status = Integer.parseInt(statusId);
             String indexPage = request.getParameter("index");
 
             if (indexPage == null) {
@@ -84,7 +84,7 @@ public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
             request.setAttribute("ListS", listStatus);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
-            request.setAttribute("OrderStatus", status);
+            request.setAttribute("TagStatusId", statusId);
 
             request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
         }
