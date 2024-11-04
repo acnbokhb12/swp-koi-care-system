@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +45,7 @@
                         <!-- Your code here -->
                         <!-- Title -->
                         <div class="header d-flex "> 
-                            <h1>News List</h1>  
+                            <h1 style="font-size: 3rem;">News List</h1>  
                             <div>
                                 <a  class="link_add-account" href="MainController?action=newsInforCreate">Add News</a>
                             </div>
@@ -53,12 +55,12 @@
                             <div class="col-auto">
                                 <!-- Toggle Buttons -->
                                 <div class="form-toggle-buttons" style="margin-bottom: 5px">
-                                    <button type="button" onclick="showSearchByTitle()">Search by Title</button>
-                                    <button type="button" onclick="showSearchByCategory()">Search by Category</button>
+                                    <button class="btn-edit-search" type="button" onclick="showSearchByTitle()">Search by Title</button>
+                                    <button class="btn-edit-search" type="button" onclick="showSearchByCategory()">Search by Category</button>
                                 </div>
 
                                 <!-- Form for searching by Title -->
-                                <form id="searchByTitleForm" action="AdminSearchNewsTitleController" method="get" class="table-search-form row gx-1 align-items-center">
+                                <form id="searchByTitleForm" action="AdminSearchNewsTitleController" method="get" class="table-search-form row gx-1 align-items-center" >
                                     <div class="col-auto contain-btn-search-order" style="display: flex;">
                                         <input type="text" name="newsTitle" class="search-order" placeholder="Search by title..." 
                                                value="${OldSearch}" style="margin-right: 10px; flex: 1;">
@@ -68,12 +70,12 @@
 
                                 <!-- Form for searching by Category -->
                                 <form id="searchByCategoryForm" action="AdminSearchNewsCateController" method="get" class="table-search-form row gx-1 align-items-center" style="display: none;">
-                                    <div class="col-auto contain-btn-select-order" style="display: flex;">
-                                        <select class="contain-btn-select-search" name="newsCategory" id="searchCategory" required style="margin-right: 10px; flex: 1;">
+                                    <div class="col-auto contain-btn-select-order" style="display: flex; margin-left: 15px; ">
+                                        <select class="contain-btn-select-search  " name="newsCategory" id="searchCategory" required style="margin-right: 10px; flex: 1; padding-left: 6px;">
                                             <option value="" disabled selected>Select a Category</option>
                                             <!-- Loop through each category -->
                                             <c:forEach  var="nct" items="${listNC}"  >
-                                                <option value="${nct.id}">${nct.name}</option>
+                                                <option value="${nct.id}" ${TagsNewsCate!=null && TagsNewsCate==nct.id ? 'selected' : ''}>${nct.name}</option>
                                             </c:forEach>
                                         </select>
                                         <button class="btn-submit-search-order" type="submit">Search</button>
@@ -91,8 +93,7 @@
                                         <th>News ID</th> 
                                         <th>Title</th>  
                                         <th>Category</th> 
-                                        <th>Date</th> 
-                                        <th>Active</th>
+                                        <th>Date</th>  
                                         <th>View</th> 
                                     </tr>
                                 </thead>
@@ -103,11 +104,15 @@
                                             <td>${newsItem.newsID}</td> 
                                             <td class="address__acc">${newsItem.title}</td>
                                             <td>${newsItem.newsCategory.name}</td>
-                                            <td>${newsItem.newsDate}</td> 
-                                            <td>${newsItem.isActive}</td> <!-- Giá trị cố định -->
+                                            <td> 
+                                                <fmt:formatDate value="${newsItem.newsDate}" pattern="dd-MM-yyyy hh:mm" />
+                                            </td>  
                                             <td class="text-center">
-                                                <a href="MainController?action=adminNewsDetail&id=${newsItem.newsID}"> 
+                                                <a class="p-0" href="MainController?action=adminNewsDetail&id=${newsItem.newsID}"> 
                                                     <button class="edit-btn"><i class="fas fa-edit"></i></button> 
+                                                </a> 
+                                                <a href="#" id="btn-delete-acc"  class="btn-delete-acc text-danger"> 
+                                                    <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>  
@@ -197,11 +202,24 @@
                 </div>
             </div>
         </c:if>
-        <script>
-            .pagination - list li.active - page{
-            background - color: orange;
+        <style>
+            .pagination-list li.active-page{
+                background-color: orange;
             }
-        </script>
+            .btn-edit-search{
+                background-color: #edfdf6;
+                padding: 6px 12px;
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin: 0 6px 10px 0;
+                border: 1px solid #000;
+                
+            }
+            .btn-edit-search:hover{
+                  background-color: #15a362;
+                  color: #fff;
+            }
+        </style>
         <script>
             function toggleDateOptions() {
             const searchChoice = document.getElementById('searchChoice').value;
@@ -225,13 +243,22 @@
         // JavaScript functions to toggle forms
         function showSearchByTitle() {
         document.getElementById('searchByTitleForm').style.display = 'flex';
-        document.getElementById('searchByCategoryForm').style.display = 'none';
+        document.getElementById('searchByCategoryForm').style.display = 'none'; 
         }
 
         function showSearchByCategory() {
         document.getElementById('searchByTitleForm').style.display = 'none';
         document.getElementById('searchByCategoryForm').style.display = 'flex';
         }
+        
+        window.onload = function() {
+        var formStatus = "${tagSearch}";
+        if (formStatus === 'category') {
+            showSearchByCategory();
+        } else {
+            showSearchByTitle();
+        }
+    };
     </script>
     <script src="./assets/js/notification.js"></script>
     <script src="./assets/js/utils.js"></script>

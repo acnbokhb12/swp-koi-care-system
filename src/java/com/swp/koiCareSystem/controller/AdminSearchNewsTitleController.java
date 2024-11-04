@@ -76,7 +76,7 @@ public class AdminSearchNewsTitleController extends HttpServlet {
             request.setAttribute("listNC", listNC);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
-            request.setAttribute("OldSearch", title);
+            request.setAttribute("OldSearch", title); 
             request.getRequestDispatcher("manageNews.jsp").forward(request, response);
         }
     }

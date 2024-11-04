@@ -72,6 +72,7 @@ public class AdminSearchNewsCateController extends HttpServlet {
                 request.setAttribute("endPage", endPage);
                 request.setAttribute("OldSearchNewsCate", newsCate);
                 request.setAttribute("TagsNewsCate", ncid);
+                request.setAttribute("tagSearch", "category");
                 url = "manageNews.jsp";
             } else {
                 url = "MainController?action=" + IConstant.ADMIN_NEWS;
