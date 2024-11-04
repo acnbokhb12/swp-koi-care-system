@@ -81,7 +81,7 @@ public class ManagerOrderManageController extends HttpServlet {
             ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
 
             request.setAttribute("ListO", listOrder);
-
+            request.setAttribute("ListS", listStatus);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
             request.getRequestDispatcher("manageOrder.jsp").forward(request, response);

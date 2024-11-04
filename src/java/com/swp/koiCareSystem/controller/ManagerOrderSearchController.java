@@ -102,7 +102,9 @@ public class ManagerOrderSearchController extends HttpServlet {
             if (count % 10 != 0) {
                 endPage++;
             }
+            ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
 
+            request.setAttribute("ListS", listStatus);
             request.setAttribute("ListO", ListResults);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);

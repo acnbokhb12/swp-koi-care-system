@@ -199,7 +199,7 @@ public class OrderDAO {
                         + "o.[AddressOrdered], o.[TotalAmount], os.[OrderStatusID], os.[OrderStatusName] "
                         + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
                         + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
-                        + "WHERE o.[OrderID] = ?";
+                        + "WHERE o.[OrderID] = ? AND o.isActive = 1";
 
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, orderId);

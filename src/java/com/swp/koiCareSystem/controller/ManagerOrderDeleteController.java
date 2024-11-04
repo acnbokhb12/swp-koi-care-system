@@ -6,6 +6,7 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,18 +35,26 @@ public class ManagerOrderDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
             String orderId = request.getParameter("orderId");
             OrderService os = new OrderService();
-            boolean isDeleted = os.deleteOrder(Integer.parseInt(orderId));
 
-            if (isDeleted) {
-                request.setAttribute("toastMessage", "success");
-                request.setAttribute("message", "Order deleted successfully.");
+            Order order = os.getOrderById(Integer.parseInt(orderId));
+
+            if (order != null) {
+                boolean isDeleted = os.deleteOrder(Integer.parseInt(orderId));
+
+                if (isDeleted) {
+                    request.setAttribute("toastMessage", "success");
+                    request.setAttribute("message", "Order deleted successfully.");
+                } else {
+                    request.setAttribute("toastMessage", "error");
+                    request.setAttribute("message", "Failed to delete the order.");
+                }
             } else {
                 request.setAttribute("toastMessage", "error");
-                request.setAttribute("message", "Failed to delete the order.");
+                request.setAttribute("message", "Order not found.");
             }
+
             request.getRequestDispatcher("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE).forward(request, response);
         }
     }

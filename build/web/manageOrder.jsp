@@ -66,6 +66,11 @@
                         </form>
                     </div>
 
+                    <c:forEach var="status" items="${ListS}">
+                        <a class="link-processing all" href="ManagerOrderSearchByOrderStatusController?status=${status.orderStatusID}">${status.orderStatusName}</a>
+                    </c:forEach>
+
+
                     <div class="table-container" id="orderTableContainer">
                         <div class="table-container" id="orderTableContainer">
                             <table id="orderTable">
