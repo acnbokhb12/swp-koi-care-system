@@ -73,7 +73,7 @@ public class AdminSearchNewsTitleController extends HttpServlet {
             ArrayList<NewsCategory> listNC = ns.getAllNewsCategory();
             
             request.setAttribute("ListN", listN);
-            request.setAttribute("ListNC", listNC);
+            request.setAttribute("listNC", listNC);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
             request.setAttribute("OldSearch", title);
