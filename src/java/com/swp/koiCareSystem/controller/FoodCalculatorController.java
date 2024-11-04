@@ -52,7 +52,7 @@ public class FoodCalculatorController extends HttpServlet {
             request.setAttribute("listGrowthMode", listGrowthMode);
             request.setAttribute("temperatureList", getMinMaxOfTemp);
             request.setAttribute("size", lengtArr);
-            request.getRequestDispatcher("foodCaculator.jsp").forward(request, response);
+            request.getRequestDispatcher("foodCalculator.jsp").forward(request, response);
         }
     } 
 
