@@ -43,8 +43,8 @@ public class CartService {
 
         // save cart to jedis
         jedis.hmset("cart:" + userId, cartData);
-//        jedis.expire("cart:" + userId, 604800); // Đặt thời gian hết hạn là 1 tuần (604800 giây)
-        jedis.expire("cart:" + userId, 60 * 60);
+        jedis.expire("cart:" + userId, 604800); // Đặt thời gian hết hạn là 1 tuần (604800 giây)
+//        jedis.expire("cart:" + userId, 60 * 60);
             
        
         return true;

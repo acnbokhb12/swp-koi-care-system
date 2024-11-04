@@ -1,6 +1,6 @@
 <%-- 
-    Document   : foodCaculator
-    Created on : Oct 29, 2024, 11:45:17 PM
+    Document   : foodCalculator
+    Created on : Nov 4, 2024, 11:59:58 AM
     Author     : DELL
 --%>
 
@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Food Caculator</title>
+        <title>Food Calculator</title>
         <!-- link logo img page -->
         <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
         <!-- Font gg family -->
@@ -140,8 +140,7 @@
                             <h2>Feeding information</h2>
                             <p>The recommended amount of food should be split evenly into <span class="font-weight-bold">4-8
                                     feedings per day.</span> This way the koi will ingest the food better.</p>
-                            <h4 class="warm_infor-temp font-weight-bold">Feeding is not recommended at a temperature above
-                                28°C!</h4>
+                            <h4 class="warm_infor-temp font-weight-bold">${recommend != null ? recommend : ''}</h4>
                             <p>Please note that the displayed amount of food and the number of feedings are approximations.
                                 Therefore, only feed as much as your koi can actually ingest. In general, it is recommended
                                 to split the total amount of food into as many feedings as possible. The growth mode "low"

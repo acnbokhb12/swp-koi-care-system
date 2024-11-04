@@ -38,7 +38,14 @@ public class ManageShopController extends HttpServlet {
             if(indexPage==null){
                 indexPage= "1";
             }
-            int index = Integer.parseInt(indexPage);
+            int index = 1;
+            try {
+                index = Integer.parseInt(indexPage);                
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("ManageShopController");
+                return;
+            }
             
             
             ProductService pds = new ProductService(); 
@@ -51,6 +58,7 @@ public class ManageShopController extends HttpServlet {
             ArrayList<Product> listProduct = pds.getAllProducts(index);
             ArrayList<ProductCategory> listCate = pds.getAllProductCate();
             
+            request.setAttribute("shop", "shop");
             request.setAttribute("ListC", listCate);
             request.setAttribute("ListP", listProduct);
             request.setAttribute("tag", index);

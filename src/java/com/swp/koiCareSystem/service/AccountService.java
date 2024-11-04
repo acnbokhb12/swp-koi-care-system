@@ -115,6 +115,13 @@ public class AccountService {
         account.setPassword(hashPassword(account.getPassword()));
         account.setUserRole("customer");
         account.setAccountStatus(1);
+        ImageUploadService imgUs = new ImageUploadService();
+        String linkAvatar = imgUs.uploadImageFromUrl(account.getProfileImage());
+        if(linkAvatar==null){
+            return false;
+        }else{
+            account.setProfileImage(linkAvatar);
+        }
         return acd.registerWithGoogleAcc(account);
 
     }

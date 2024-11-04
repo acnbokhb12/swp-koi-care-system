@@ -6,6 +6,7 @@
 
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.model.ProductCategory;
 import com.swp.koiCareSystem.service.ProductService;
@@ -45,7 +46,14 @@ public class SearchProductController extends HttpServlet {
             if(indexPage==null){
                 indexPage= "1";
             }
-            int index = Integer.parseInt(indexPage);
+            int index = 1;
+            try {
+                index = Integer.parseInt(indexPage);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("MainController?action="+ IConstant.SHOP);
+                return;
+            }
             ProductService pds = new ProductService(); 
             int count = pds.countProductsByName(name);
             

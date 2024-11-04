@@ -7,12 +7,9 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.model.ProductCategory;
-import com.swp.koiCareSystem.service.ProductService;
+import com.swp.koiCareSystem.service.CalculatorService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class ProductCateController extends HttpServlet {
+public class FoodCalculatorDetailController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,46 +33,39 @@ public class ProductCateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String cateId = request.getParameter("cateID");
-            String indexPage = request.getParameter("index");  
-            if(cateId==null){
-                cateId = "1";
-            }else if(indexPage == null){
-                indexPage = "1";
-            }
-            int cid = 1;
-            int index = 1;
+            String fishInfo  = request.getParameter("fishInfo"); 
+            String growthMode = request.getParameter("growth");
+            String temp = request.getParameter("temperature");
+            String fishId = "";
+            String weightF = "";
+            if (fishInfo != null){
+                String[] parts = fishInfo.split("-");
+                fishId = parts[0];
+                weightF = parts[1];
+            } 
+            float weightFish = (float) 0.1;
+            float temperatureAvg = (float) 0.1;
             try {
-                cid = Integer.parseInt(cateId);
-                index = Integer.parseInt(indexPage);
+                weightFish = Float.parseFloat(weightF);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
-                response.sendRedirect("MainController?action="+IConstant.SHOP);
+                response.sendRedirect("MainController?action="+IConstant.FOOD_CALCULATOR);
                 return;
             }
-            
-            ProductService pds = new ProductService();
-            int count = pds.countProductsByCate(cid);
-            int endPage = count/32;
-            if(count % 32 != 0){
-                endPage++;
+            try {
+                temperatureAvg = Float.parseFloat(temp);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action="+IConstant.FOOD_CALCULATOR);
+                return;
             }
-            ArrayList<Product> listProduct = pds.getProductsByCateId(cid, index);
-            String url = "";
-            if(listProduct != null ){
-                ArrayList<ProductCategory> listCate = pds.getAllProductCate();
-                request.setAttribute("ListC", listCate);
-                request.setAttribute("ListP", listProduct);
-                request.setAttribute("tag", index);
-                request.setAttribute("endPage", endPage);
-                request.setAttribute("cateID", cateId); 
-                url = "shop.jsp";
-            }else{
-                url = "MainController?action=" + IConstant.SHOP;
-            }
-            request.getRequestDispatcher(url).forward(request, response);
-
-
+            CalculatorService clts = new CalculatorService();
+            int amountFood = clts.calculatorFoodForFish(growthMode, weightFish, temperatureAvg);
+            String recommend = clts.getDescriptionrecommendation(growthMode, temperatureAvg);
+            request.setAttribute("amountFood", amountFood);
+            request.setAttribute("growthM", growthMode);
+            request.setAttribute("averageTemperature", temperatureAvg);
+            request.setAttribute("fishId", fishId);
+            request.setAttribute("recommend", recommend);
+            request.getRequestDispatcher("MainController?action="+IConstant.FOOD_CALCULATOR).forward(request, response);
         }
     } 
 

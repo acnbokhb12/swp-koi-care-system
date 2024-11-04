@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package com.swp.koiCareSystem.controller;
-
-import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.model.ProductCategory;
-import com.swp.koiCareSystem.service.ProductService;
+package com.swp.koiCareSystem.controller; 
+ 
+import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.FeedPercentage;
+import com.swp.koiCareSystem.model.Fish;
+import com.swp.koiCareSystem.service.CalculatorService;
+import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -17,12 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author DELL
  */
-public class ProductCateController extends HttpServlet {
+public class FoodCalculatorController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,46 +38,21 @@ public class ProductCateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String cateId = request.getParameter("cateID");
-            String indexPage = request.getParameter("index");  
-            if(cateId==null){
-                cateId = "1";
-            }else if(indexPage == null){
-                indexPage = "1";
-            }
-            int cid = 1;
-            int index = 1;
-            try {
-                cid = Integer.parseInt(cateId);
-                index = Integer.parseInt(indexPage);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                response.sendRedirect("MainController?action="+IConstant.SHOP);
-                return;
-            }
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
+                    
+            FishService fsv = new FishService();
+            ArrayList<Fish> listFish = fsv.getAllFishS(acc.getUserID());
+            CalculatorService clts = new CalculatorService();
+            ArrayList<String> listGrowthMode = clts.getListGrowthMode();
+            ArrayList<FeedPercentage> getMinMaxOfTemp = clts.getMinMaxTemperature();
+            int lengtArr = getMinMaxOfTemp.size();
             
-            ProductService pds = new ProductService();
-            int count = pds.countProductsByCate(cid);
-            int endPage = count/32;
-            if(count % 32 != 0){
-                endPage++;
-            }
-            ArrayList<Product> listProduct = pds.getProductsByCateId(cid, index);
-            String url = "";
-            if(listProduct != null ){
-                ArrayList<ProductCategory> listCate = pds.getAllProductCate();
-                request.setAttribute("ListC", listCate);
-                request.setAttribute("ListP", listProduct);
-                request.setAttribute("tag", index);
-                request.setAttribute("endPage", endPage);
-                request.setAttribute("cateID", cateId); 
-                url = "shop.jsp";
-            }else{
-                url = "MainController?action=" + IConstant.SHOP;
-            }
-            request.getRequestDispatcher(url).forward(request, response);
-
-
+            request.setAttribute("listFish", listFish);
+            request.setAttribute("listGrowthMode", listGrowthMode);
+            request.setAttribute("temperatureList", getMinMaxOfTemp);
+            request.setAttribute("size", lengtArr);
+            request.getRequestDispatcher("foodCalculator.jsp").forward(request, response);
         }
     } 
 

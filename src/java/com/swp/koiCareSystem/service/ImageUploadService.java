@@ -45,4 +45,19 @@ public class ImageUploadService {
         }
         return imageUrl;
     }
+    public String uploadImageFromUrl(String imageUrl) {
+        try {
+            // Tải ảnh lên Cloudinary từ URL
+            Map<String, Object> uploadResult = cloudinary.uploader().upload(imageUrl, 
+                    ObjectUtils.emptyMap());
+
+            // Lấy link ảnh mới từ kết quả trả về
+            return (String) uploadResult.get("secure_url");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    
 }

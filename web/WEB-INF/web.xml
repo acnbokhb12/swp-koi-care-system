@@ -321,6 +321,14 @@
         <servlet-name>ManagerPondDetailsController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerPondDetailsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FoodCalculatorController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FoodCalculatorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FoodCalculatorDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.FoodCalculatorDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -584,6 +592,14 @@
     <servlet-mapping>
         <servlet-name>ManagerPondDetailsController</servlet-name>
         <url-pattern>/ManagerPondDetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FoodCalculatorController</servlet-name>
+        <url-pattern>/FoodCalculatorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FoodCalculatorDetailController</servlet-name>
+        <url-pattern>/FoodCalculatorDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

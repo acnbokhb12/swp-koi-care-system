@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +63,9 @@
                   </p>
                 </div>
                 <p class="product__content__detail-price">
-                  <span id="product__detail-price-id" class="product__detail-price">${Product.price}</span>
+                  <span id="product__detail-price-id" class="product__detail-price"> 
+                      <fmt:formatNumber value="${Product.price}" pattern="#,###"/> đ
+                  </span>
                 </p>
                 <!-- quantity buy product -->
                 <div class="product__content__detail-form">
@@ -151,10 +155,7 @@
         quantityInput.value = currentValue + 1;
 
       });
-      
-      let amount = parseInt(document.getElementById('product__detail-price-id').innerText);
-      let formattedAmount = amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-      document.getElementById('product__detail-price-id').innerText = formattedAmount;
+       
 </script>
 <style>
     .title_cate_pd{
