@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,7 +55,9 @@
                                 <h1>${news.title}</h1>
                                 <div class="desc_short-detail">
                                     <h2 class="user_post">Posted on 
-                                        <span>${news.newsDate}</span>
+                                        <span class="font-weight-bold text-dark">
+                                            <fmt:formatDate value="${news.newsDate}" pattern="dd-MM-yyyy hh:mm" /> 
+                                        </span>
                                     </h2>
                                     <h2 class="cate_news">${news.newsCategory.name}</h2>
                                 </div>

@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,31 +45,45 @@
                         <!-- Your code here -->
                         <!-- Title -->
                         <div class="header d-flex "> 
-                            <h1>News List</h1>  
+                            <h1 style="font-size: 3rem;">News List</h1>  
                             <div>
                                 <a  class="link_add-account" href="MainController?action=newsInforCreate">Add News</a>
                             </div>
                         </div>
-                        <!-- Search -->
+                        <!-- Search by Title -->
                         <div class="row row-user-main"> 
                             <div class="col-auto">
-                                <form class="table-search-form row gx-1 align-items-center" action="">
-                                    <div class="col-auto ">
-                                        <input type="text" class="search-order" placeholder="Search..." id="searchInput">
+                                <!-- Toggle Buttons -->
+                                <div class="form-toggle-buttons" style="margin-bottom: 5px">
+                                    <button class="btn-edit-search" type="button" onclick="showSearchByTitle()">Search by Title</button>
+                                    <button class="btn-edit-search" type="button" onclick="showSearchByCategory()">Search by Category</button>
+                                </div>
+
+                                <!-- Form for searching by Title -->
+                                <form id="searchByTitleForm" action="AdminSearchNewsTitleController" method="get" class="table-search-form row gx-1 align-items-center" >
+                                    <div class="col-auto contain-btn-search-order" style="display: flex;">
+                                        <input type="text" name="newsTitle" class="search-order" placeholder="Search by title..." 
+                                               value="${OldSearch}" style="margin-right: 10px; flex: 1;">
+                                        <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
-                                    <div class="col-auto contain-btn-select-order">
-                                        <select class="contain-btn-select-search" name="searchChoice" id="searchChoice">
-                                            <option value="email" selected>Title</option>
-                                            <option value="phone">Name</option>
-                                            <option value="phone">Category</option>
+                                </form>
+
+                                <!-- Form for searching by Category -->
+                                <form id="searchByCategoryForm" action="AdminSearchNewsCateController" method="get" class="table-search-form row gx-1 align-items-center" style="display: none;">
+                                    <div class="col-auto contain-btn-select-order" style="display: flex; margin-left: 15px; ">
+                                        <select class="contain-btn-select-search  " name="newsCategory" id="searchCategory" required style="margin-right: 10px; flex: 1; padding-left: 6px;">
+                                            <option value="" disabled selected>Select a Category</option>
+                                            <!-- Loop through each category -->
+                                            <c:forEach  var="nct" items="${listNC}"  >
+                                                <option value="${nct.id}" ${TagsNewsCate!=null && TagsNewsCate==nct.id ? 'selected' : ''}>${nct.name}</option>
+                                            </c:forEach>
                                         </select>
-                                    </div>
-                                    <div class="col-auto contain-btn-search-order">
                                         <button class="btn-submit-search-order" type="submit">Search</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
                         <!-- List -->
                         <div class="table-container" id="accountTableContainer">
 
@@ -77,8 +93,7 @@
                                         <th>News ID</th> 
                                         <th>Title</th>  
                                         <th>Category</th> 
-                                        <th>Date</th> 
-                                        <th>Active</th>
+                                        <th>Date</th>  
                                         <th>View</th> 
                                     </tr>
                                 </thead>
@@ -89,11 +104,15 @@
                                             <td>${newsItem.newsID}</td> 
                                             <td class="address__acc">${newsItem.title}</td>
                                             <td>${newsItem.newsCategory.name}</td>
-                                            <td>${newsItem.newsDate}</td> 
-                                            <td>${newsItem.isActive}</td> <!-- Giá trị cố định -->
+                                            <td> 
+                                                <fmt:formatDate value="${newsItem.newsDate}" pattern="dd-MM-yyyy hh:mm" />
+                                            </td>  
                                             <td class="text-center">
-                                                <a href="MainController?action=adminNewsDetail&id=${newsItem.newsID}"> 
+                                                <a class="p-0" href="MainController?action=adminNewsDetail&id=${newsItem.newsID}"> 
                                                     <button class="edit-btn"><i class="fas fa-edit"></i></button> 
+                                                </a> 
+                                                <a href="MainController?action=adminDeleteNews&nId=${newsItem.newsID}" id="btn-delete-acc"  class="btn-delete-news text-danger"> 
+                                                    <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>  
@@ -105,23 +124,42 @@
                             <div class="pagination">
                                 <ul class="pagination-list">
                                     <c:choose>
-                                        <c:when test="${newsCategoryID != null}">
+                                        <c:when test="${not empty OldSearch}">
                                             <c:if test="${tag > 1}">
                                                 <li>
-                                                    <a href="NewsCateController?index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                                                    <a href="AdminSearchNewsTitleController?newsTitle=${OldSearch}&index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
                                                 </li>
                                             </c:if>
                                             <c:forEach begin="1" end="${endPage}" var="i">
                                                 <li>
-                                                    <a class="${tag == i ? "active-page" : ""}" href="NewsCateController?index=${i}">${i}</a>
+                                                    <a class="${tag == i ? "active-page" : ""}" href="AdminSearchNewsTitleController?newsTitle=${OldSearch}&index=${i}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <c:if test="${tag < endPage}">
                                                 <li>
-                                                    <a href="NewsCateController?index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                                                    <a href="AdminSearchNewsTitleController?newsTitle=${OldSearch}&index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
                                                 </li>
                                             </c:if>
-                                        </c:when>
+                                        </c:when>  
+                                        
+                                        <c:when test="${not empty OldSearchNewsCate}">
+                                            <c:if test="${tag > 1}">
+                                                <li>
+                                                    <a href="AdminSearchNewsCateController?newsCategory=${OldSearchNewsCate}&index=${tag - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li>
+                                                    <a class="${tag == i ? "active-page" : ""}" href="AdminSearchNewsCateController?newsCategory=${OldSearchNewsCate}&index=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${tag < endPage}">
+                                                <li>
+                                                    <a href="AdminSearchNewsCateController?newsCategory=${OldSearchNewsCate}&index=${tag + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                                                </li>
+                                            </c:if>
+                                        </c:when>          
+                                                
                                         <c:otherwise>
                                             <c:if test="${tag > 1}">
                                                 <li>
@@ -164,9 +202,33 @@
                 </div>
             </div>
         </c:if>
+        <style>
+            .pagination-list li.active-page{
+                background-color: orange;
+            }
+            .btn-edit-search{
+                background-color: #edfdf6;
+                padding: 6px 12px;
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin: 0 6px 10px 0;
+                border: 1px solid #000;
+                
+            }
+            .btn-edit-search:hover{
+                  background-color: #15a362;
+                  color: #fff;
+            }
+        </style>
         <script>
-            .pagination - list li.active - page{
-            background - color: orange;
+            function toggleDateOptions() {
+            const searchChoice = document.getElementById('searchChoice').value;
+            const dateOptions = document.getElementById('dateOptions');
+            if (searchChoice === 'date') {
+            dateOptions.style.display = 'block';
+            } else {
+            dateOptions.style.display = 'none';
+            }
             }
         </script>
     </body>
@@ -175,6 +237,38 @@
         $.getScript('./assets/js/utilsAdmin.js');
         });
         $('#sidebar_admin').load('utils.jsp  #sidebar_admin');
+        
+        const btnDeleteList = document.querySelectorAll('.btn-delete-news');
+        btnDeleteList.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+        const sure = confirm('Are you sure you want to delete this news?');
+        if (!sure) {
+            e.preventDefault(); // Ngăn không cho thực hiện hành động nếu người dùng chọn "Cancel"
+        }
+    });
+});
+    </script>
+
+    <script>
+        // JavaScript functions to toggle forms
+        function showSearchByTitle() {
+        document.getElementById('searchByTitleForm').style.display = 'flex';
+        document.getElementById('searchByCategoryForm').style.display = 'none'; 
+        }
+
+        function showSearchByCategory() {
+        document.getElementById('searchByTitleForm').style.display = 'none';
+        document.getElementById('searchByCategoryForm').style.display = 'flex';
+        }
+        
+        window.onload = function() {
+        var formStatus = "${tagSearch}";
+        if (formStatus === 'category') {
+            showSearchByCategory();
+        } else {
+            showSearchByTitle();
+        }
+    };
     </script>
     <script src="./assets/js/notification.js"></script>
     <script src="./assets/js/utils.js"></script>
