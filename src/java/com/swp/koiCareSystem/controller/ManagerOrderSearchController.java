@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ASUS
  */
-public class ManagerOrderSearchByCustomerNameController extends HttpServlet {
+public class ManagerOrderSearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,60 +39,81 @@ public class ManagerOrderSearchByCustomerNameController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc.getUserRole().equalsIgnoreCase("customer")) {
-                request.getRequestDispatcher("HomeController").forward(request, response);
-            } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
-                request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
-            }
-
-            String customerName = request.getParameter("customerName");
-
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = 1;
-
-            try {
-                index = Integer.parseInt(indexPage);
-                if (index <= 0) {
-                    response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+            if (acc != null && acc.getUserRole() != null) {
+                if (acc.getUserRole().equalsIgnoreCase("customer")) {
+                    request.getRequestDispatcher("HomeController").forward(request, response);
+                    return;
+                } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
+                    request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
                     return;
                 }
-            } catch (NumberFormatException e) {
-                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
-                return;
             }
-            
+
+            String searchInput = request.getParameter("searchInput");
+            String searchChoice = request.getParameter("searchChoice");
+            String indexPage = request.getParameter("index");
+
             OrderService os = new OrderService();
 
-            int count = os.countOrdersByCustomerNames(customerName);
+            int index = 1;
+            if (indexPage != null) {
+                try {
+                    index = Integer.parseInt(indexPage);
+                    if (index <= 0) {
+                        response.sendRedirect("ManagerOrderSearchController?searchInput=" + searchInput + "&searchChoice=" + searchChoice + "&index=1");
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("ManagerOrderSearchController?searchInput=" + searchInput + "&searchChoice=" + searchChoice + "&index=1");
+                }
+            }
+
+            if (searchInput != null) {
+                searchInput = searchInput.trim();
+                searchInput = searchInput.replaceAll(" +", " ");
+            }
+
+            ArrayList<Order> ListResults = new ArrayList<>();
+            int count = 0;
+
+            if (searchInput.isEmpty()) {
+                count = os.countOrders();
+                ListResults = os.getAllOrders(index);
+            } else if (searchChoice != null) {
+                switch (searchChoice) {
+                    case "name":
+                        count = os.countOrdersByCustomerNames(searchInput);
+                        ListResults = os.searchOrdersByCustomerNames(searchInput, index);
+                        break;
+                    case "phone":
+                        count = os.countOrdersByPhone(searchInput);
+                        ListResults = os.searchOrdersByPhone(searchInput, index);
+                        break;
+                    case "address":
+                        count = os.countOrdersByAddress(searchInput);
+                        ListResults = os.searchOrdersByAddress(searchInput, index);
+                        break;
+                }
+            }
+
             int endPage = count / 10;
             if (count % 10 != 0) {
                 endPage++;
             }
 
-            ArrayList<Order> listOrderSearchName = os.searchOrdersByCustomerNames(customerName, index);
-            ArrayList<String> ListCustomerName = os.getListCustomerNames();
-            ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
-
-            request.setAttribute("ListO", listOrderSearchName);
-            request.setAttribute("ListCN", ListCustomerName);
-            request.setAttribute("ListS", listStatus);
+            request.setAttribute("ListO", ListResults);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
-            request.setAttribute("customerName", customerName);
+            request.setAttribute("searchInput", searchInput);
+            request.setAttribute("searchChoice", searchChoice);
 
             request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
-
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

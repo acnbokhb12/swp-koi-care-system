@@ -56,7 +56,7 @@ public class ManagerOrderManageController extends HttpServlet {
             if (indexPage == null) {
                 indexPage = "1";
             }
-            
+
             int index = 1;
 
             try {
@@ -78,12 +78,9 @@ public class ManagerOrderManageController extends HttpServlet {
                 endPage++;
             }
             ArrayList<Order> listOrder = os.getAllOrders(index);
-            ArrayList<String> ListCustomerName = os.getListCustomerNames();
             ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
 
             request.setAttribute("ListO", listOrder);
-            request.setAttribute("ListCN", ListCustomerName);
-            request.setAttribute("ListS", listStatus);
 
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);

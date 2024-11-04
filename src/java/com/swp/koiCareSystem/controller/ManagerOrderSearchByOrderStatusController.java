@@ -38,6 +38,7 @@ public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
@@ -54,7 +55,7 @@ public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
             if (indexPage == null) {
                 indexPage = "1";
             }
-            
+
             int index = 1;
 
             try {
@@ -77,11 +78,9 @@ public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
             }
 
             ArrayList<Order> listOrderSearchName = os.searchOrdersByStatus(status, index);
-            ArrayList<String> ListCustomerName = os.getListCustomerNames();
             ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
 
             request.setAttribute("ListO", listOrderSearchName);
-            request.setAttribute("ListCN", ListCustomerName);
             request.setAttribute("ListS", listStatus);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);

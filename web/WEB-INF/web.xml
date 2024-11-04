@@ -270,16 +270,12 @@
         <servlet-class>com.swp.koiCareSystem.controller.ManagerChangeOrderStatusController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManagerOrderSearchByCustomerNameController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchByCustomerNameController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ManagerOrderSearchByOrderStatusController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchByOrderStatusController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManagerOrderSearchByDateController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchByDateController</servlet-class>
+        <servlet-name>ManagerOrderSearchController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -494,16 +490,12 @@
         <url-pattern>/ManagerChangeOrderStatusController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManagerOrderSearchByCustomerNameController</servlet-name>
-        <url-pattern>/ManagerOrderSearchByCustomerNameController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ManagerOrderSearchByOrderStatusController</servlet-name>
         <url-pattern>/ManagerOrderSearchByOrderStatusController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManagerOrderSearchByDateController</servlet-name>
-        <url-pattern>/ManagerOrderSearchByDateController</url-pattern>
+        <servlet-name>ManagerOrderSearchController</servlet-name>
+        <url-pattern>/ManagerOrderSearchController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,11 +5,15 @@
  */
 package com.swp.koiCareSystem.service;
 
+import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.dao.OrderDAO;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -93,10 +97,6 @@ public class OrderService {
                 + " to " + (newStatusId == 2 ? "Processing" : "Done") + ".";
     }
 
-    public ArrayList<String> getListCustomerNames() {
-        return od.getListCustomerNames();
-    }
-
     public ArrayList<OrderStatus> getAllOrderStatuses() {
         return od.getAllOrderStatuses();
     }
@@ -117,11 +117,20 @@ public class OrderService {
         return od.searchOrdersByStatus(statusID, index);
     }
 
-    public int countOrdersByDateRange(Date startDate, Date endDate) {
-        return od.countOrdersByDateRange(startDate, endDate);
+    public int countOrdersByAddress(String address) {
+        return od.countOrdersByAddress(address);
+
     }
 
-    public ArrayList<Order> searchOrdersByDateRange(Date startDate, Date endDate, int index) {
-        return od.searchOrdersByDateRange(startDate, endDate, index);
+    public ArrayList<Order> searchOrdersByAddress(String address, int index) {
+        return od.searchOrdersByAddress(address, index);
+    }
+
+    public int countOrdersByPhone(String phone) {
+        return od.countOrdersByPhone(phone);
+    }
+
+    public ArrayList<Order> searchOrdersByPhone(String phone, int index) {
+        return od.searchOrdersByPhone(phone, index);
     }
 }

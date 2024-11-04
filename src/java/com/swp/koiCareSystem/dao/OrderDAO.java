@@ -10,6 +10,7 @@ import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
 import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.service.OrderService;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -436,41 +437,6 @@ public class OrderDAO {
         return isUpdated;
     }
 
-    public ArrayList<String> getListCustomerNames() {
-        Connection cn = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        ArrayList<String> listName = new ArrayList<>();
-        try {
-            cn = DatabaseConnectionManager.getConnection();
-            if (cn != null) {
-                String sql = "SELECT DISTINCT UserNameOrdered FROM Orders WHERE isActive = 1";
-                pst = cn.prepareStatement(sql);
-                rs = pst.executeQuery();
-                while (rs != null && rs.next()) {
-                    listName.add(rs.getString("UserNameOrdered"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-                if (cn != null) {
-                    cn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return listName;
-    }
-
     public ArrayList<OrderStatus> getAllOrderStatuses() {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -519,12 +485,11 @@ public class OrderDAO {
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "SELECT COUNT(*) FROM Orders WHERE [UserNameOrdered] = ? AND [isActive] = 1";
+                String sql = "SELECT COUNT(*) FROM Orders WHERE [UserNameOrdered] LIKE ? AND [isActive] = 1";
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, userName);
+                pst.setString(1, "%" + userName + "%");
                 rs = pst.executeQuery();
-                // Get the count
-                if (rs.next()) {
+                if (rs != null && rs.next()) {
                     return rs.getInt(1);
                 }
             }
@@ -563,12 +528,12 @@ public class OrderDAO {
                         + "o.[TotalAmount], os.[OrderStatusName] "
                         + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
                         + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
-                        + "WHERE o.[UserNameOrdered] = ? AND o.[isActive] = 1 "
+                        + "WHERE o.[UserNameOrdered] LIKE ? AND o.[isActive] = 1 "
                         + "ORDER BY o.[OrderDate] DESC "
                         + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
 
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, userName);
+                pst.setString(1, "%" + userName + "%");
                 pst.setInt(2, distance);
                 rs = pst.executeQuery();
 
@@ -691,21 +656,18 @@ public class OrderDAO {
         return listO;
     }
 
-    public int countOrdersByDateRange(Date startDate, Date endDate) {
+    public int countOrdersByAddress(String address) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "SELECT COUNT(*) FROM Orders WHERE [OrderDate] BETWEEN ? AND ? AND [isActive] = 1";
+                String sql = "SELECT COUNT(*) FROM Orders WHERE [AddressOrdered] LIKE ? AND [isActive] = 1";
                 pst = cn.prepareStatement(sql);
-                pst.setDate(1, startDate);
-                pst.setDate(2, endDate);
+                pst.setString(1, "%" + address + "%");
                 rs = pst.executeQuery();
-
-                if (rs.next()) {
+                if (rs != null && rs.next()) {
                     return rs.getInt(1);
                 }
             }
@@ -729,27 +691,30 @@ public class OrderDAO {
         return 0;
     }
 
-    public ArrayList<Order> searchOrdersByDateRange(Date startDate, Date endDate, int index) {
+    public ArrayList<Order> searchOrdersByAddress(String address, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
         ArrayList<Order> listO = new ArrayList<>();
-        int offset = (index - 1) * 10;
+        int distance = (index - 1) * 10;
 
-        String sql = "SELECT o.[OrderID], o.[AccID], o.[OrderStatusID], o.[OrderDate], "
-                + "o.[UserNameOrdered], o.[PhoneOrdered], o.[AddressOrdered], "
-                + "o.[TotalAmount], os.[OrderStatusName] "
-                + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
-                + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
-                + "WHERE o.[OrderDate] BETWEEN ? AND ? AND o.[isActive] = 1 "
-                + "ORDER BY o.[OrderDate] DESC "
-                + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
-        
-        try (Connection cn = DatabaseConnectionManager.getConnection();
-                PreparedStatement pst = cn.prepareStatement(sql)) {
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT o.[OrderID], o.[AccID], o.[OrderStatusID], o.[OrderDate], "
+                        + "o.[UserNameOrdered], o.[PhoneOrdered], o.[AddressOrdered], "
+                        + "o.[TotalAmount], os.[OrderStatusName] "
+                        + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
+                        + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
+                        + "WHERE o.[AddressOrdered] LIKE ? AND o.[isActive] = 1 "
+                        + "ORDER BY o.[OrderDate] DESC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
 
-            pst.setDate(1, startDate);
-            pst.setDate(2, endDate);
-            pst.setInt(3, offset);
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + address + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
 
-            try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     Order order = new Order();
                     order.setId(rs.getInt("OrderID"));
@@ -770,6 +735,117 @@ public class OrderDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listO;
+    }
+
+    public int countOrdersByPhone(String phone) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Orders WHERE [PhoneOrdered] LIKE ? AND [isActive] = 1";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + phone + "%"); // Partial match on phone
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Order> searchOrdersByPhone(String phone, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Order> listO = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT o.[OrderID], o.[AccID], o.[OrderStatusID], o.[OrderDate], "
+                        + "o.[UserNameOrdered], o.[PhoneOrdered], o.[AddressOrdered], "
+                        + "o.[TotalAmount], os.[OrderStatusName] "
+                        + "FROM [Koi_Care_System_At_Home].[dbo].[Orders] o "
+                        + "JOIN [Koi_Care_System_At_Home].[dbo].[OrderStatus] os ON o.[OrderStatusID] = os.[OrderStatusID] "
+                        + "WHERE o.[PhoneOrdered] LIKE ? AND o.[isActive] = 1 "
+                        + "ORDER BY o.[OrderDate] DESC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + phone + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Order order = new Order();
+                    order.setId(rs.getInt("OrderID"));
+                    order.setCustomerID(rs.getInt("AccID"));
+                    order.setOrderDate(rs.getTimestamp("OrderDate").toLocalDateTime());
+                    order.setCustomerName(rs.getString("UserNameOrdered"));
+                    order.setPhone(rs.getString("PhoneOrdered"));
+                    order.setAddressOrder(rs.getString("AddressOrdered"));
+                    order.setTotal(rs.getFloat("TotalAmount"));
+
+                    OrderStatus orderS = new OrderStatus();
+                    orderS.setOrderStatusID(rs.getInt("OrderStatusID"));
+                    orderS.setOrderStatusName(rs.getString("OrderStatusName"));
+                    order.setOrderS(orderS);
+
+                    listO.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return listO;
     }
