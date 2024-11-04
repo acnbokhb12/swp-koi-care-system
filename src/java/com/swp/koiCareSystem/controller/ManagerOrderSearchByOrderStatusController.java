@@ -48,6 +48,7 @@ public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
             } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
                 request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
             }
+
             String statusId = request.getParameter("status");
             int status = Integer.parseInt(statusId);
             String indexPage = request.getParameter("index");

@@ -38,23 +38,23 @@ public class ManagerChangeOrderStatusController extends HttpServlet {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             int newStatus = Integer.parseInt(request.getParameter("newStatus"));
             String statusId = request.getParameter("statusId");
+            String index = request.getParameter("index");
 
             OrderService orderService = new OrderService();
             String message = orderService.updateOrderStatusByOrderId(orderId, newStatus);
 
-            // Set a toast message based on the result of the update
             if (message.contains("Order status updated")) {
-                request.setAttribute("toastMessage", "success");
-                request.setAttribute("message", message);
+                request.getSession().setAttribute("toastMessage", "success");
+                request.getSession().setAttribute("message", message);
             } else {
-                request.setAttribute("toastMessage", "error");
-                request.setAttribute("message", message);
+                request.getSession().setAttribute("toastMessage", "error");
+                request.getSession().setAttribute("message", message);
             }
 
             if (statusId != null && !statusId.isEmpty()) {
-                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId);
+                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId + "&index=" + (index != null ? index : "1"));
             } else {
-                request.getRequestDispatcher("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE).forward(request, response);
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE + "&index=" + (index != null ? index : "1"));
             }
         }
     }

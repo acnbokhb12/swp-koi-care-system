@@ -37,6 +37,7 @@ public class ManagerOrderDeleteController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String orderIdStr = request.getParameter("orderId");
             String statusId = request.getParameter("statusId");
+            String index = request.getParameter("index");
 
             OrderService os = new OrderService();
             String message;
@@ -69,9 +70,9 @@ public class ManagerOrderDeleteController extends HttpServlet {
             request.getSession().setAttribute("message", message);
 
             if (statusId != null && !statusId.isEmpty()) {
-                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId);
+                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId + "&index=" + (index != null ? index : "1"));
             } else {
-                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE + "&index=" + (index != null ? index : "1"));
             }
         }
     }

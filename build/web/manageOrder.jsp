@@ -120,6 +120,7 @@
                                                 <td>
                                                     <form action="MainController?action=managerorderdelete" method="POST" onsubmit="return confirmDelete();">
                                                         <input type="hidden" name="orderId" value="${order.id}">
+                                                        <input type="hidden" name="index" value="${tag}">
                                                         <input type="hidden" name="statusId" value="${TagStatusId != null ? TagStatusId : ''}">
                                                         <button type="submit" class="text-danger delete-btn">
                                                             <i class="fas fa-trash"></i>
@@ -228,69 +229,72 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--        Thong bao-->
-        <c:if test="${toastMessage != null}"> 
-            <div id="toast" style="z-index: 10">  
-                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }" style="display:flex">
-                    <div class="toast__icon">
-                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
-                    </div>
-                    <div class="toast_body">
-                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
-                        <p class="toast__msg">${message}</p>
-                    </div>
-                    <div class="toast__close">
-                        <i class="fas fa-times"></i>
+            <!--        Thong bao-->
+            <c:if test="${not empty sessionScope.toastMessage}">
+                <div id="toast" style="z-index: 10">  
+                    <div class="toast_main row ${sessionScope.toastMessage == 'success' ? 'toast--success' : 'toast--error' }" style="display:flex">
+                        <div class="toast__icon">
+                            <i class="fa-solid ${sessionScope.toastMessage == 'success' ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                        </div>
+                        <div class="toast_body">
+                            <h3 class="toast__title">${sessionScope.toastMessage == 'success' ? 'Success' : 'Error' }</h3>
+                            <p class="toast__msg">${sessionScope.message}</p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fas fa-times"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:if>
+                <!-- Remove the toast message and message attributes after displaying them -->
+                <c:remove var="toastMessage" scope="session"/>
+                <c:remove var="message" scope="session"/>
+            </c:if>
 
-    </body>
-    <script>
-        // Loading header and sidebar
-        $('#header').load('utils.jsp #header_admin', () => {
-            $.getScript('./assets/js/utilsAdmin.js');
-        });
-        $('#sidebar_admin').load('utils.jsp #sidebar_manager');
 
-        function confirmDelete() {
-            return confirm("Are you sure you want to delete this order?");
-        }
+        </body>
+        <script>
+            // Loading header and sidebar
+            $('#header').load('utils.jsp #header_admin', () => {
+                $.getScript('./assets/js/utilsAdmin.js');
+            });
+            $('#sidebar_admin').load('utils.jsp #sidebar_manager');
 
-        function showSearchByCustomerName() {
-            document.getElementById('searchByCustomerNameForm').style.display = 'block';
-            document.getElementById('searchByOrderDateForm').style.display = 'none';
-            document.getElementById('searchByStatusForm').style.display = 'none';
-        }
-
-        function showSearchByOrderDate() {
-            document.getElementById('searchByCustomerNameForm').style.display = 'none';
-            document.getElementById('searchByOrderDateForm').style.display = 'block';
-            document.getElementById('searchByStatusForm').style.display = 'none';
-        }
-
-        function showSearchByStatus() {
-            document.getElementById('searchByCustomerNameForm').style.display = 'none';
-            document.getElementById('searchByOrderDateForm').style.display = 'none';
-            document.getElementById('searchByStatusForm').style.display = 'block';
-        }
-
-        document.getElementById("searchByOrderDateForm").addEventListener("submit", function (event) {
-            const startDate = document.getElementById("startDate").value;
-            const endDate = document.getElementById("endDate").value;
-
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-
-            if (start > end) {
-                event.preventDefault();
-                alert("From Date should be earlier than or the same as End Date.");
+            function confirmDelete() {
+                return confirm("Are you sure you want to delete this order?");
             }
-        });
-    </script>
-    <script src="./assets/js/notification.js"></script>
-    <script src="./assets/js/utils.js"></script>
-</html>
+
+            function showSearchByCustomerName() {
+                document.getElementById('searchByCustomerNameForm').style.display = 'block';
+                document.getElementById('searchByOrderDateForm').style.display = 'none';
+                document.getElementById('searchByStatusForm').style.display = 'none';
+            }
+
+            function showSearchByOrderDate() {
+                document.getElementById('searchByCustomerNameForm').style.display = 'none';
+                document.getElementById('searchByOrderDateForm').style.display = 'block';
+                document.getElementById('searchByStatusForm').style.display = 'none';
+            }
+
+            function showSearchByStatus() {
+                document.getElementById('searchByCustomerNameForm').style.display = 'none';
+                document.getElementById('searchByOrderDateForm').style.display = 'none';
+                document.getElementById('searchByStatusForm').style.display = 'block';
+            }
+
+            document.getElementById("searchByOrderDateForm").addEventListener("submit", function (event) {
+                const startDate = document.getElementById("startDate").value;
+                const endDate = document.getElementById("endDate").value;
+
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+
+                if (start > end) {
+                    event.preventDefault();
+                    alert("From Date should be earlier than or the same as End Date.");
+                }
+            });
+        </script>
+        <script src="./assets/js/notification.js"></script>
+        <script src="./assets/js/utils.js"></script>
+    </html>
