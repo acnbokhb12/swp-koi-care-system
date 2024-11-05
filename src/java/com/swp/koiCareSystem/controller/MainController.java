@@ -224,6 +224,13 @@ public class MainController extends HttpServlet {
                 case IConstant.ADMIN_SEARCH_NEWS_TITLE:
                     url = "AdminSearchNewsTitleController";
                     break;
+                // START PLACE USER NEWS --------------------------------------------------------
+                case IConstant.NEWS:
+                    url = "ShowNewsController";
+                    break;
+                case IConstant.VIEW_NEWS:
+                    url = "ViewsNewsDetailController";
+                    break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

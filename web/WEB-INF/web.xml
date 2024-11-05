@@ -329,6 +329,14 @@
         <servlet-name>FoodCalculatorDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FoodCalculatorDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowNewsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ShowNewsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewsNewsDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ViewsNewsDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -600,6 +608,14 @@
     <servlet-mapping>
         <servlet-name>FoodCalculatorDetailController</servlet-name>
         <url-pattern>/FoodCalculatorDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowNewsController</servlet-name>
+        <url-pattern>/ShowNewsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewsNewsDetailController</servlet-name>
+        <url-pattern>/ViewsNewsDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

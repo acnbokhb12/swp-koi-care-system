@@ -74,6 +74,7 @@ public interface IConstant {
     public static String CREATE_NEW_BLOG = "createNewBlog";
     public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
+    public final String VIEW_NEWS = "viewNews";
     
 // START ADMIN NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public final String CREATE_NEWS = "createNews";
