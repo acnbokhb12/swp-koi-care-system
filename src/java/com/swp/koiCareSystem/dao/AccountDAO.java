@@ -779,25 +779,6 @@ public class AccountDAO {
         return listA;
     }
 
-// Get STATUS
-//    public static void main(String[] args) {
-//
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//
-//        ArrayList<AccountStatus> statuses = accountDAO.getAllAccountStatuses(); // Gọi phương thức lấy trạng thái
-//        System.out.println("All Account Statuses:");
-//
-//        // Kiểm tra và in thông tin từng trạng thái
-//        if (statuses.isEmpty()) {
-//            System.out.println("No account statuses found.");
-//        } else {
-//            for (AccountStatus status : statuses) {
-//                System.out.println("Status ID: " + status.getStatusID());
-//                System.out.println("Status Name: " + status.getStatusName());
-//                System.out.println("------------------------------");
-//            }
-//        }
-//    }
     public int countAccountsByStatus(int statusID) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -834,49 +815,6 @@ public class AccountDAO {
         }
         return 0;
     }
-// Search Status
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//        int statusID = 1; // Giả sử bạn có một trạng thái nào đó, có thể thay đổi
-//        int index = 1; // Chỉ số trang để lấy tài khoản, có thể thay đổi
-//
-//        ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, index); // Gọi phương thức tìm kiếm
-//        System.out.println("Accounts with status ID " + statusID + ":");
-//
-//        // Kiểm tra và in thông tin từng tài khoản
-//        if (accounts.isEmpty()) {
-//            System.out.println("No accounts found.");
-//        } else {
-//            for (Account account : accounts) {
-//                System.out.println("Account ID: " + account.getUserID());
-//                System.out.println("Email: " + account.getEmail());
-//                System.out.println("Koi Care ID: " + account.getKoiCareID());
-//                System.out.println("Full Name: " + account.getFullName());
-//                System.out.println("Phone Number: " + account.getPhoneNumber());
-//                System.out.println("User Role: " + account.getUserRole());
-//                System.out.println("Address: " + account.getAddress());
-//                System.out.println("Gender: " + account.getGender());
-//                System.out.println("Status ID: " + account.getAccstatus().getStatusID());
-//                System.out.println("Status Name: " + account.getAccstatus().getStatusName());
-//                System.out.println("------------------------------");
-//            }
-//        }
-//    }
-//    
-//COUNT STATUS
-//    public static void main(String[] args) {
-//
-//        AccountDAO accountDAO = new AccountDAO();
-//        int statusID = 1;
-//        int count = accountDAO.countAccountsByStatus(statusID); 
-//        System.out.println("Total accounts count with status ID " + statusID + ": " + count); 
-//
-//        // Nếu cần, có thể kiểm tra thêm các tài khoản này
-//        // ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, 1); // Lấy danh sách tài khoản theo trạng thái
-//        // for (Account account : accounts) {
-//        //     System.out.println(account); // In thông tin từng tài khoản
-//        // }
-//    }
 
 //CRETAE
     public boolean createNewAccount(Account account) {
@@ -922,18 +860,20 @@ public class AccountDAO {
     public boolean deleteAccountByID(int accountID) {
         Connection conn = null;
         PreparedStatement ps = null;
+        boolean isDeleted = false;
 
-        String sql = "UPDATE Accounts SET isActive = 0 WHERE AccID = ?";
         try {
             conn = DatabaseConnectionManager.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, accountID);
+            if (conn != null) {
+                String sql = "UPDATE Accounts SET isActive = 0 WHERE AccID = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, accountID);
 
-            int affectedRows = ps.executeUpdate();
-            return affectedRows > 0;
+                int affectedRows = ps.executeUpdate();
+                isDeleted = (affectedRows > 0);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         } finally {
             try {
                 if (ps != null) {
@@ -946,24 +886,8 @@ public class AccountDAO {
                 e.printStackTrace();
             }
         }
+        return isDeleted;
     }
-//
-//    public static void main(String[] args) {
-//
-//        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
-//
-//        // Thực hiện xóa tài khoản
-//        AccountDAO accountDAO = new AccountDAO();
-//
-//        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
-//
-//        // Kiểm tra xem tài khoản có bị xóa không
-//        if (result) {
-//            System.out.println("Account successfully deleted.");
-//        } else {
-//            System.out.println("Failed to delete account.");
-//        }
-//    }
 
     public Account getAccountInformationByID(int id) {
         Connection conn = null;
@@ -1013,25 +937,241 @@ public class AccountDAO {
         return account; // Trả về null nếu không tìm thấy tài khoản
     }
 
-    public static void main(String[] args) {
-        AccountDAO accountDAO = new AccountDAO();
-        Account accountInfo = accountDAO.getAccountInformationByID(10); 
+    //UPDATE 
+    // INFORMATION
+    public boolean updateInformationAccount(Account account) {
+        Connection conn = null;
+        PreparedStatement ps = null;
 
-        if (accountInfo != null) {
-            System.out.println("Account ID: " + accountInfo.getUserID());
-            System.out.println("Email: " + accountInfo.getEmail());
-            System.out.println("Koi Care ID: " + accountInfo.getKoiCareID());
-            System.out.println("Full Name: " + accountInfo.getFullName());
-            System.out.println("Phone Number: " + accountInfo.getPhoneNumber());
-            System.out.println("User Role: " + accountInfo.getUserRole());
-            System.out.println("Address: " + accountInfo.getAddress());
-            System.out.println("Gender: " + accountInfo.getGender());
-            System.out.println("Status ID: " + accountInfo.getAccountStatus());
+        try {
+            conn = DatabaseConnectionManager.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Accounts SET Email = ?, Password = ?, FullName = ?, PhoneNumber = ?, UserRole = ?, Address = ?, Gender = ? WHERE AccID = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, account.getEmail());
+                ps.setString(2, account.getPassword());
+                ps.setString(3, account.getFullName());
+                ps.setString(4, account.getPhoneNumber());
+                ps.setString(5, account.getUserRole());
+                ps.setString(6, account.getAddress());
+                ps.setString(7, account.getGender());
+                ps.setInt(8, account.getUserID());
+
+                int rowsAffected = ps.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    // Phương thức lấy thông tin tài khoản theo AccID
+    public Account getAccountById(int accountId) {
+        Account account = null; // Khởi tạo đối tượng Account
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DatabaseConnectionManager.getConnection(); 
+            if (conn != null) {
+                String sql = "SELECT * FROM Accounts WHERE AccID = ?"; 
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, accountId); 
+
+                rs = ps.executeQuery();
+                if (rs.next()) { 
+                    account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("idStatus"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return account; 
+    }
+ public static void main(String[] args) {
+        AccountDAO accountDAO = new AccountDAO();
+
+        int testAccountId = 1; 
+
+        Account account = accountDAO.getAccountById(testAccountId);
+
+        if (account != null) {
+            System.out.println("Account ID: " + account.getUserID());
+            System.out.println("Email: " + account.getEmail());
+            System.out.println("Full Name: " + account.getFullName());
+            System.out.println("Phone Number: " + account.getPhoneNumber());
+            System.out.println("User Role: " + account.getUserRole());
+            System.out.println("Address: " + account.getAddress());
+            System.out.println("Gender: " + account.getGender());
+            System.out.println("Is Active: " + account.getAccountStatus());
         } else {
-            System.out.println("No account found with the given ID.");
+            System.out.println("No account found with ID: " + testAccountId);
         }
     }
 }
+//UPDATE INFORMATION
+//     public static void main(String[] args) {
+//
+//        Account account = new Account();
+//        account.setEmail("test@example.com");
+//        account.setPassword("newPassword123");
+//        account.setFullName("John Doe");
+//        account.setPhoneNumber("0123456789");
+//        account.setUserRole("Customer");
+//        account.setAddress("123 Main St");
+//        account.setGender("Male");
+//        account.setUserID(31); // ID của tài khoản bạn muốn cập nhật
+//
+//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
+//
+//        // Gọi phương thức cập nhật thông tin tài khoản
+//        boolean isUpdated = accountDAO.updateInformationAccount(account); // Sửa từ AccountDAO.updateInformationAccount(account) thành accountDAO.updateInformationAccount(account)
+//
+//        // In ra kết quả kiểm tra
+//        if (isUpdated) {
+//            System.out.println("Account information updated successfully.");
+//        } else {
+//            System.out.println("Failed to update account information.");
+//        }
+//    }
+//}
+// Get STATUS
+//    public static void main(String[] args) {
+//
+//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
+//
+//        ArrayList<AccountStatus> statuses = accountDAO.getAllAccountStatuses(); // Gọi phương thức lấy trạng thái
+//        System.out.println("All Account Statuses:");
+//
+//        // Kiểm tra và in thông tin từng trạng thái
+//        if (statuses.isEmpty()) {
+//            System.out.println("No account statuses found.");
+//        } else {
+//            for (AccountStatus status : statuses) {
+//                System.out.println("Status ID: " + status.getStatusID());
+//                System.out.println("Status Name: " + status.getStatusName());
+//                System.out.println("------------------------------");
+//            }
+//        }
+//    }  
+// Search Status
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
+//        int statusID = 1; // Giả sử bạn có một trạng thái nào đó, có thể thay đổi
+//        int index = 1; // Chỉ số trang để lấy tài khoản, có thể thay đổi
+//
+//        ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, index); // Gọi phương thức tìm kiếm
+//        System.out.println("Accounts with status ID " + statusID + ":");
+//
+//        // Kiểm tra và in thông tin từng tài khoản
+//        if (accounts.isEmpty()) {
+//            System.out.println("No accounts found.");
+//        } else {
+//            for (Account account : accounts) {
+//                System.out.println("Account ID: " + account.getUserID());
+//                System.out.println("Email: " + account.getEmail());
+//                System.out.println("Koi Care ID: " + account.getKoiCareID());
+//                System.out.println("Full Name: " + account.getFullName());
+//                System.out.println("Phone Number: " + account.getPhoneNumber());
+//                System.out.println("User Role: " + account.getUserRole());
+//                System.out.println("Address: " + account.getAddress());
+//                System.out.println("Gender: " + account.getGender());
+//                System.out.println("Status ID: " + account.getAccstatus().getStatusID());
+//                System.out.println("Status Name: " + account.getAccstatus().getStatusName());
+//                System.out.println("------------------------------");
+//            }
+//        }
+//    }
+//    
+//COUNT STATUS
+//    public static void main(String[] args) {
+//
+//        AccountDAO accountDAO = new AccountDAO();
+//        int statusID = 1;
+//        int count = accountDAO.countAccountsByStatus(statusID); 
+//        System.out.println("Total accounts count with status ID " + statusID + ": " + count); 
+//
+//        // Nếu cần, có thể kiểm tra thêm các tài khoản này
+//        // ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, 1); // Lấy danh sách tài khoản theo trạng thái
+//        // for (Account account : accounts) {
+//        //     System.out.println(account); // In thông tin từng tài khoản
+//        // }
+//    }
+//DELETE
+//
+//    public static void main(String[] args) {
+//
+//        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
+//
+//        // Thực hiện xóa tài khoản
+//        AccountDAO accountDAO = new AccountDAO();
+//
+//        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
+//
+//        // Kiểm tra xem tài khoản có bị xóa không
+//        if (result) {
+//            System.out.println("Account successfully deleted.");
+//        } else {
+//            System.out.println("Failed to delete account.");
+//        }
+//    }
+// INFORMTION BY ID
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO();
+//        Account accountInfo = accountDAO.getAccountInformationByID(10); 
+//
+//        if (accountInfo != null) {
+//            System.out.println("Account ID: " + accountInfo.getUserID());
+//            System.out.println("Email: " + accountInfo.getEmail());
+//            System.out.println("Koi Care ID: " + accountInfo.getKoiCareID());
+//            System.out.println("Full Name: " + accountInfo.getFullName());
+//            System.out.println("Phone Number: " + accountInfo.getPhoneNumber());
+//            System.out.println("User Role: " + accountInfo.getUserRole());
+//            System.out.println("Address: " + accountInfo.getAddress());
+//            System.out.println("Gender: " + accountInfo.getGender());
+//            System.out.println("Status ID: " + accountInfo.getAccountStatus());
+//        } else {
+//            System.out.println("No account found with the given ID.");
+//        }
+//    }
+//}
 // CREATE 
 //    public static void main(String[] args) {
 //        AccountDAO accountDao = new AccountDAO(); 

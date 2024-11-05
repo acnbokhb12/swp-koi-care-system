@@ -333,6 +333,18 @@
         <servlet-name>AdminAccountInformationController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AdminAccountInformationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateInformationAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateInformationAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateImageAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateImageAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -608,6 +620,18 @@
     <servlet-mapping>
         <servlet-name>AdminAccountInformationController</servlet-name>
         <url-pattern>/AdminAccountInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateInformationAccountController</servlet-name>
+        <url-pattern>/AdminUpdateInformationAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateImageAccountController</servlet-name>
+        <url-pattern>/AdminUpdateImageAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateAccountController</servlet-name>
+        <url-pattern>/AdminUpdateAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

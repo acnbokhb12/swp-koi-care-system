@@ -230,7 +230,13 @@ public class MainController extends HttpServlet {
                 case IConstant.ADMIN_ACCOUNT_UPDATE:
                     url = "AdminUpdateAccountController";
                     break;
-                      case IConstant.ADMIN_ACCOUNT_INFORMATION:
+                case IConstant.ADMIN_ACCOUNT_UPDATE_INFORMATION:
+                    url = "AdminUpdateInformationAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_UPDATE_IMAGE:
+                    url = "AdminUpdateImageAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_INFORMATION:
                     url = "AdminAccountInformationController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               

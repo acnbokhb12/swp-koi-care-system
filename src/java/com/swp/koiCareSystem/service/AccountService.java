@@ -173,8 +173,8 @@ public class AccountService {
         ArrayList<AccountStatus> listacc = acd.getAllAccountStatuses();
         return listacc;
     }
-    
-   public ArrayList<Account> searchAccountByStatus(int statusID, int index) {
+
+    public ArrayList<Account> searchAccountByStatus(int statusID, int index) {
         return acd.searchAccountsByStatus(statusID, index);
     }
 
@@ -182,18 +182,30 @@ public class AccountService {
     public boolean createNewAccountToAdmin(Account account) {
         return acd.createNewAccount(account);
     }
+
     // DELETE
-    public boolean deleteAccountToAdmin(int accID){
+    public boolean deleteAccountToAdmin(int accID) {
         return acd.deleteAccountByID(accID);
     }
+    //INFORMATION
+
+    public Account getAccountInformationByID(int id) {
+        return acd.getAccountInformationByID(id);
+    }
+
+    //UPDATE 
+    public boolean updateInformationAccounts(Account account) {
+        return acd.updateInformationAccount(account);
+    }
+    
+        public Account getAccountsByIDS(int accountID) {
+        return acd.getAccountById(accountID);
+    }
+
     static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");
         System.out.println(acc);
     }
-    //INFORMATION
-    
-    public Account getAccountInformationByID(int id) {
-        return acd.getAccountInformationByID(id);
-    }
+
 }

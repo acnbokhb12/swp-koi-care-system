@@ -1,6 +1,6 @@
 <%-- 
     Document   : manageProfileAccount
-    Created on : Oct 4, 2024, 11:24:49 PM
+    Created on : Oct 4, 2024, 11:24:49 PM
     Author     : PC
 --%>
 
@@ -30,18 +30,18 @@
 
                 <div class="right-navbar-admin-manage">
                     <div class="content" style="padding: 20px;">
-                        <div class="header_ac-detail d-flex ">
+                        <div class="header_ac-detail d-flex justify-content-between align-items-center">
                             <h1>Account Detail</h1>  
                             <div>
-                                <a href="manageUpdateAccount.jsp" class="link_update-account">Update Account</a>
-                                <a href="" class="link_delete-account">Delete Account</a>
+                              <a href="AdminUpdateInformationAccountController?accid=${account.userID}" class="link_update-account">Update Account</a>
+                                <a href="AdminDeleteAccountController?accid=${account.userID}" class="link_delete-account">Delete Account</a>
                             </div>
                         </div>
                         <div class="content-from-container">
                             <div class="row m-0"> 
                                 <div class="col-lg-8" id="accountDetail"> 
                                     <p><strong>Account ID:</strong> <span id="accountId" class="text-danger">${account.userID}</span></p>
-                                    <p><strong>Role:</strong> <span id="accountPosition"  class="text-danger">${account.userRole}</span></p>
+                                    <p><strong>Role:</strong> <span id="accountPosition" class="text-danger">${account.userRole}</span></p>
 
                                     <p><strong>Email:</strong> <span>${account.email}</span></p>
                                     <p><strong>Name:</strong> <span id="accountName">${account.fullName}</span></p>
@@ -50,8 +50,8 @@
                                     <p><strong>Phone Number:</strong> <span id="accountPhone">${account.phoneNumber}</span></p>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="img-accout-detail">
-                                        <img src="${account.profileImage}" alt="Profile Image">
+                                    <div class="img-account-detail">
+                                        <img src="${account.profileImage}" alt="Profile Image" class="img-fluid rounded-circle">
                                     </div>
                                 </div>
                             </div>
@@ -63,23 +63,27 @@
 
         <style>
             body {
-                background: url(https://static.wikia.nocookie.net/0dfbc1cb-6311-45e0-8b74-fc965ca9afc7);
+                background: url(https://static.wikia.nocookie.net/0dfbc1cb-6311-45e0-8b74-fc965ca9afc7) no-repeat center center fixed;
+                background-size: cover;
                 background-color: #e3e3e3;
-                background-position: center;
             }
         </style>
 
         <script>
-            $('#header').load('utils.jsp #header_admin', () => {
-                $.getScript('./assets/js/utilsAdmin.js');
-            });
-            $('#sidebar_admin').load('utils.jsp #sidebar_admin');
-            const deleteAccount = document.querySelector('.link_delete-account');
-            deleteAccount.addEventListener('click', (e) => {
-                const isConfirmed = confirm('Are you sure you want to delete this account?');
-                if (!isConfirmed) {
-                    e.preventDefault();
-                }
+            $(document).ready(function() {
+                $('#header').load('utils.jsp #header_admin', () => {
+                    $.getScript('./assets/js/utilsAdmin.js');
+                });
+                $('#sidebar_admin').load('utils.jsp #sidebar_admin');
+
+                const deleteAccount = document.querySelector('.link_delete-account');
+                deleteAccount.addEventListener('click', (e) => {
+                    const isConfirmed = confirm('Are you sure you want to delete this account?');
+                    if (!isConfirmed) {
+                        e.preventDefault();
+                    }
+                });
             });
         </script>
+    </body>
 </html>
