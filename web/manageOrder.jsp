@@ -45,33 +45,35 @@
                 <div class="right-navbar-admin-manage"> 
                     <!-- Main Content -->
                     <div class="content">
-                        <div class="header">
-                            <h2>Order List</h2>
+                        <div class="header mb-3">
+                            <h2 class="font-weight-bold ">Order List</h2>
                         </div>
-                        <!--                        Search-->
-                        <form class="table-search-form row gx-1 align-items-center" action="ManagerOrderSearchController" method="POST">
-                            <div class="col-auto ">
-                                <input type="text" class="search-order" placeholder="Search..." id="searchInput" name="searchInput" value="${param.searchInput}">
-                            </div>
-                            <div class="col-auto contain-btn-select-order">
-                                <select class="contain-btn-select-search" name="searchChoice" id="searchChoice">
-                                    <option value="name" ${param.searchChoice == 'name' ? 'selected' : ''}>Name</option>
-                                    <option value="phone" ${param.searchChoice == 'phone' ? 'selected' : ''}>Phone</option>
-                                    <option value="address" ${param.searchChoice == 'address' ? 'selected' : ''}>Address</option>
-                                </select>
-                            </div>
-                            <div class="col-auto contain-btn-search-order">
-                                <button class="btn-submit-search-order" type="submit">Search</button>
-                            </div>
-                        </form>
-                    </div>
+                        <!--   Search-->
+                        <div class="mb-4">
+                            <form class="table-search-form row gx-1 align-items-center" action="ManagerOrderSearchController" method="POST">
+                                <div class="col-auto ">
+                                    <input  type="text" class="search-order m-0 pl-4 pr-4" placeholder="Search..." id="searchInput" name="searchInput" value="${param.searchInput}">
+                                </div>
+                                <div class="col-auto contain-btn-select-order">
+                                    <select class="contain-btn-select-search m-0 pl-5 pr-5" name="searchChoice" id="searchChoice">
+                                        <option value="name" ${param.searchChoice == 'name' ? 'selected' : ''}>Name</option>
+                                        <option value="phone" ${param.searchChoice == 'phone' ? 'selected' : ''}>Phone</option>
+                                        <option value="address" ${param.searchChoice == 'address' ? 'selected' : ''}>Address</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto contain-btn-search-order">
+                                    <button class="btn-submit-search-order" type="submit">Search</button>
+                                </div>
+                            </form>
+                        </div> 
 
-                    <div class="table-container" id="orderTableContainer">
-                        <div class="table-container" id="orderTableContainer">
-                            <a class="link-processing all" href="MainController?action=managerordermanage">All</a>
-                            <c:forEach var="statusId" items="${ListS}">
-                                <a class="link-processing all" href="ManagerOrderSearchByOrderStatusController?status=${statusId.orderStatusID}">${statusId.orderStatusName}</a>
-                            </c:forEach>
+                        <div class="table-container overflow-auto" id="orderTableContainer"> 
+                            <div class="row row-order-processing m-0 mb-3">
+                                <a class="link-processing-order col-3 ${TagStatusId == null ? 'active' : ''}" href="MainController?action=managerordermanage">All</a>
+                                <c:forEach var="statusId" items="${ListS}">
+                                    <a class="link-processing-order col-3 ${TagStatusId==statusId.orderStatusID ? 'active' : ''}" href="ManagerOrderSearchByOrderStatusController?status=${statusId.orderStatusID}">${statusId.orderStatusName}</a> 
+                                </c:forEach>
+                            </div>    
                             <table id="orderTable">
                                 <thead>
                                     <tr>
@@ -128,14 +130,13 @@
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="ManagerChangeOrderStatusController" method="POST">
+                                                    <form action="ManagerChangeOrderStatusController" method="POST" onsubmit="return confirmBeforeConfirm();">
                                                         <input type="hidden" name="orderId" value="${order.id}">
                                                         <input type="hidden" name="index" value="${tag}">
                                                         <input type="hidden" name="newStatus" 
                                                                value="${order.orderS.orderStatusID == 1 ? 2 : (order.orderS.orderStatusID == 2 ? 3 : '')}">
                                                         <input type="hidden" name="statusId" value="${TagStatusId != null ? TagStatusId : ''}">
-                                                        <button type="submit" class="confirm-btn" 
-                                                                ${order.orderS.orderStatusID == 3 ? 'disabled' : ''}>
+                                                        <button type="submit" class="confirm-btn font-weight-bold ${order.orderS.orderStatusID == 3 ? 'd-none' : ''}" >
                                                             <i class="fas fa-check"></i> Confirm
                                                         </button>
                                                     </form>
@@ -225,7 +226,11 @@
                                     </ul>
                                 </div>
                             </div>
+
+
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -251,7 +256,42 @@
                 <c:remove var="message" scope="session"/>
             </c:if>
 
-
+            <style>
+                #toast{
+                    top: 6.2rem;
+                }
+                .btn-submit-search-order{
+                    background-color: #78bf4d;
+                    color: #000;
+                    padding: 8px 20px;
+                }
+                .btn-submit-search-order:hover{
+                    background-color: #15a362;
+                    color: #fff;
+                }
+                .row-order-processing{
+                    background: #fff;
+                    padding: 0;
+                    margin-bottom: 2.4rem;
+                }
+                .link-processing-order{
+                    color: #5d6778;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    padding: 0.8rem 1.6rem;
+                }
+                .link-processing-order:hover{
+                    color: var(--color-word);
+                    background: #edfdf6;
+                    text-decoration: none;
+                }
+                .link-processing-order.active{
+                    color: var(--color-word);
+                    border-bottom: 2px solid var(--color-word);
+                }
+            </style>
         </body>
         <script>
             // Loading header and sidebar
@@ -262,6 +302,9 @@
 
             function confirmDelete() {
                 return confirm("Are you sure you want to delete this order?");
+            }
+            function confirmBeforeConfirm() {
+                return confirm("Are you sure you want to confirm this order?");
             }
 
             function showSearchByCustomerName() {
@@ -295,6 +338,5 @@
                 }
             });
         </script>
-        <script src="./assets/js/notification.js"></script>
-        <script src="./assets/js/utils.js"></script>
+        <script src="./assets/js/notification.js"></script> 
     </html>
