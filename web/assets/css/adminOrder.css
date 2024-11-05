@@ -224,3 +224,156 @@ td.button-cell {
     border-radius: 5px;
     font-size: 16px;
 }
+
+
+/*Pagging*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-item a {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-item a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .page-item.active a {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination .page-item i {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
+/*Order Status*/
+
+.order-status {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: block;
+}
+
+.order-pending {
+    color: #ffcc00;
+    background-color: rgba(255, 204, 0, 0.3);
+    border: 1px solid #ffcc00;
+}
+
+.order-processing {
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.3);
+    border: 1px solid #007bff;
+}
+
+.order-completed {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.3);
+    border: 1px solid #28a745;
+}
+
+/*Search*/
+
+.contain-btn-search-order,
+.contain-btn-select-order {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-order,
+.contain-btn-select-search {
+    padding: 8px 100px;
+    margin-left: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    flex: 1; 
+}
+
+.btn-submit-search-order {
+    padding: 8px 12px;
+    background: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit-search-order:hover {
+    background: #218838;
+}
+
+.date-range-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 17px;
+}
+
+.date-range-form label {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.btn-submit-search-order {
+    padding: 8px 12px;
+    font-size: 14px;
+    background: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit-search-order:hover {
+    background: #218838;
+}
+
+/*Toast*/
+.link-processing {
+    width: 20%;
+    color: #5d6778;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 0.8rem 1.6rem;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.link-processing:hover {
+    color: var(--color-word);
+    background: #edfdf6;
+    text-decoration: none;
+}
+
+.link-processing.active {
+    color: var(--color-word);
+    border-bottom: 2px solid var(--color-word);
+}

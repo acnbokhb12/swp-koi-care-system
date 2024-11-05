@@ -6,11 +6,10 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.service.ProductService;
+import com.swp.koiCareSystem.model.Order;
+import com.swp.koiCareSystem.service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class ManagerProductDeleteController extends HttpServlet {
+public class ManagerOrderDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,18 +35,45 @@ public class ManagerProductDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String pid = request.getParameter("pid");
-            ProductService ps = new ProductService();
-            boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
+            String orderIdStr = request.getParameter("orderId");
+            String statusId = request.getParameter("statusId");
+            String index = request.getParameter("index");
 
-            if (isDeleted) {
-                request.setAttribute("message", "Delete this product successfully");
-                request.setAttribute("toastMessage", "success");
-            } else {
-                request.setAttribute("message", "An error occurred while deleting product");
-                request.setAttribute("toastMessage", "error"); 
+            OrderService os = new OrderService();
+            String message;
+            String toastMessage;
+
+            try {
+                int orderId = Integer.parseInt(orderIdStr);
+                Order order = os.getOrderById(orderId);
+
+                if (order != null) {
+                    boolean isDeleted = os.deleteOrder(orderId);
+
+                    if (isDeleted) {
+                        toastMessage = "success";
+                        message = "Order deleted successfully.";
+                    } else {
+                        toastMessage = "error";
+                        message = "Failed to delete the order.";
+                    }
+                } else {
+                    toastMessage = "error";
+                    message = "Order not found.";
+                }
+            } catch (NumberFormatException e) {
+                toastMessage = "error";
+                message = "Invalid order ID.";
             }
-            request.getRequestDispatcher("MainController?action="+ IConstant.PRODUCT_MANAGE).forward(request, response);
+
+            request.getSession().setAttribute("toastMessage", toastMessage);
+            request.getSession().setAttribute("message", message);
+
+            if (statusId != null && !statusId.isEmpty()) {
+                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId + "&index=" + (index != null ? index : "1"));
+            } else {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE + "&index=" + (index != null ? index : "1"));
+            }
         }
     }
 

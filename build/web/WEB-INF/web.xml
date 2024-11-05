@@ -5,7 +5,7 @@
         <filter-class>com.swp.koiCareSystem.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
+         <filter-name>LoginFilter</filter-name>
         <url-pattern>/cart.jsp</url-pattern>
         <url-pattern>/checkout.jsp</url-pattern>
         <url-pattern>/cart.jsp</url-pattern>
@@ -36,20 +36,37 @@
         <servlet-name>ImageUploadSingleController</servlet-name>
         <servlet-name>CreateNewBlogController</servlet-name>
         <servlet-name>DeleteBlogController</servlet-name>
+        <!-- START PLACE FISH -->
         <servlet-name>FishController</servlet-name>
         <servlet-name>FishInforController</servlet-name>
         <servlet-name>FishCreateNewController</servlet-name>
         <servlet-name>FishDeleteController</servlet-name>
         <servlet-name>FishInformationUpdateController</servlet-name>
         <servlet-name>FishImageUpdateController</servlet-name>
+        <servlet-name>FishGrowthChartController</servlet-name>
+        <servlet-name>FishGrowthChartCreateNewController</servlet-name>
+        <servlet-name>FishGrowthCharUpdateController</servlet-name>
+        <servlet-name>FishGrowthChartDeleteController</servlet-name>
+        <servlet-name>FishGrowthChartSearchLengthController</servlet-name>
+        <servlet-name>FishGrowthChartSearchWeightController</servlet-name> 
+        
+        <!-- START PLACE POND -->
         <servlet-name>PondController</servlet-name>
         <servlet-name>PondInforController</servlet-name>
         <servlet-name>AddNewPondController</servlet-name>
         <servlet-name>DeletePondController</servlet-name>
         <servlet-name>UpdatePondInformationController</servlet-name>
         <servlet-name>UpdatePondImageController</servlet-name>
+        <!-- START PLACE MANAGER AQUARIUM -->
         <servlet-name>ManageAccountFishController</servlet-name>
         <servlet-name>ManageFishController</servlet-name>
+        <servlet-name>ManageFishDetailController</servlet-name>
+        <servlet-name>ManagerAquariumDetailsController</servlet-name>
+        <servlet-name>ManagerPondController</servlet-name>
+        <servlet-name>ManagerPondDetailsController</servlet-name>
+
+
+        <!-- START PLACE MANAGER PRODUCT -->
         <servlet-name>ManageProductController</servlet-name>
         <servlet-name>ManagerProductInformationController</servlet-name>
         <servlet-name>ManagerProductInformationUpdateController</servlet-name>
@@ -58,6 +75,19 @@
         <servlet-name>ManagerProductUpdateController</servlet-name>
         <servlet-name>ManagerProductImageUpdateController</servlet-name>
         <servlet-name>ManagerSearchProductNameController</servlet-name>
+        <!-- START PLACE MANAGER NEW -->
+        <servlet-name>AdminCreateNewsController</servlet-name>
+        <servlet-name>AdminNewsCateController</servlet-name>
+        <servlet-name>AdminManageNewsController</servlet-name>
+        <servlet-name>AdminManageNewsDetailController</servlet-name>
+        <servlet-name>AdminDeleteNewsByIdController</servlet-name>
+        <servlet-name>AdminSearchNewsCateController</servlet-name>
+        <servlet-name>AdminSearchNewsTitleController</servlet-name>
+        <!-- START PLACE MANAGER ORDER -->
+        <servlet-name>ManagerOrderManageController</servlet-name>
+        <servlet-name>ManagerOrderDetailsController</servlet-name>
+        <servlet-name>ManagerOrderDeleteController</servlet-name>
+        <servlet-name>ManagerChangeOrderStatusController</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -328,6 +358,30 @@
     <servlet>
         <servlet-name>FoodCalculatorDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FoodCalculatorDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderManageController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderDetailsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderDeleteController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerChangeOrderStatusController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerChangeOrderStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderSearchByOrderStatusController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchByOrderStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerOrderSearchController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -600,6 +654,30 @@
     <servlet-mapping>
         <servlet-name>FoodCalculatorDetailController</servlet-name>
         <url-pattern>/FoodCalculatorDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderManageController</servlet-name>
+        <url-pattern>/ManagerOrderManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderDetailsController</servlet-name>
+        <url-pattern>/ManagerOrderDetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderDeleteController</servlet-name>
+        <url-pattern>/ManagerOrderDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerChangeOrderStatusController</servlet-name>
+        <url-pattern>/ManagerChangeOrderStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderSearchByOrderStatusController</servlet-name>
+        <url-pattern>/ManagerOrderSearchByOrderStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerOrderSearchController</servlet-name>
+        <url-pattern>/ManagerOrderSearchController</url-pattern> 
     </servlet-mapping>
     <session-config>
         <session-timeout>

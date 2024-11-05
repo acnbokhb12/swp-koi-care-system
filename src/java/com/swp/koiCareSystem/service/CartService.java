@@ -110,6 +110,9 @@ public class CartService {
         ArrayList<OrderItem> cartUser = new ArrayList<>();
         for (String productId : cartData.keySet()) {
             Product p = pds.getProductById(Integer.parseInt(productId));
+            if (p == null) {
+                continue; // hoặc xử lý lỗi tùy ý
+            }
             OrderItem item = new OrderItem();
             item.setProduct(p);
             int quantity = Integer.parseInt(cartData.get(productId));

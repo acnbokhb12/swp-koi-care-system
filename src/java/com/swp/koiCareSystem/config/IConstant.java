@@ -98,9 +98,16 @@ public interface IConstant {
     public final String CUSTOMER_VALIDATE_OTP = "validateotp";
     public final String CUSTOMER_NEW_PASSWORD = "newpassword"; 
     
-    // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
-    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load(); 
-    
+
+// START MANAGER ORDER ----------------------------------------------------------------------------------------------------------------------------------     
+    public final String MANAGER_ORDER_MANAGE = "managerordermanage";
+    public final String MANAGER_ORDER_DETAILS = "managerorderdetails";
+    public final String MANAGER_ORDER_DELETE = "managerorderdelete";
+    public final String MANAGER_ORDER_STATUS_CHANGE = "managerorderstatuschange";
+
+// GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
+    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
+
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
     public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
     public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
@@ -111,6 +118,9 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
     public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
     public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
+
     
     public final String URI_JEDIS = dotenv.get("URI_JEDIS"); 
+
+
 }

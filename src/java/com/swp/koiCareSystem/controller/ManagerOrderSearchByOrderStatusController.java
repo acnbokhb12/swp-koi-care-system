@@ -6,8 +6,10 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.service.ProductService;
+import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.Order;
+import com.swp.koiCareSystem.model.OrderStatus;
+import com.swp.koiCareSystem.service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,12 +17,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-public class ManagerProductDeleteController extends HttpServlet {
+public class ManagerOrderSearchByOrderStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +38,56 @@ public class ManagerProductDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             /* TODO output your page here. You may use following sample code. */
-            String pid = request.getParameter("pid");
-            ProductService ps = new ProductService();
-            boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
 
-            if (isDeleted) {
-                request.setAttribute("message", "Delete this product successfully");
-                request.setAttribute("toastMessage", "success");
-            } else {
-                request.setAttribute("message", "An error occurred while deleting product");
-                request.setAttribute("toastMessage", "error"); 
+            if (acc.getUserRole().equalsIgnoreCase("customer")) {
+                request.getRequestDispatcher("HomeController").forward(request, response);
+            } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
+                request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("MainController?action="+ IConstant.PRODUCT_MANAGE).forward(request, response);
+
+            String statusId = request.getParameter("status");
+            int status = Integer.parseInt(statusId);
+            String indexPage = request.getParameter("index");
+
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+
+            int index = 1;
+
+            try {
+                index = Integer.parseInt(indexPage);
+                if (index <= 0) {
+                    response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                return;
+            }
+
+            OrderService os = new OrderService();
+
+            int count = os.countOrdersByStatus(status);
+            int endPage = count / 10;
+            if (count % 10 != 0) {
+                endPage++;
+            }
+
+            ArrayList<Order> listOrderSearchName = os.searchOrdersByStatus(status, index);
+            ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
+
+            request.setAttribute("ListO", listOrderSearchName);
+            request.setAttribute("ListS", listStatus);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("TagStatusId", statusId);
+
+            request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
         }
     }
 

@@ -191,9 +191,9 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
-                    break; 
-                // START PLACE MANAGER PRODUCT -------------------------------------------------------------                     
-                case IConstant.CUSTOMER_FORGET_PASSWORD:
+                    break;  
+                // START PLACE CUSTOMER FORGET PASSWORD -------------------------------------------------------------     
+                 case IConstant.CUSTOMER_FORGET_PASSWORD:
                     url = "CustomerForgetPasswordController";
                     break;
                 case IConstant.CUSTOMER_VALIDATE_OTP:
@@ -223,6 +223,19 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.ADMIN_SEARCH_NEWS_TITLE:
                     url = "AdminSearchNewsTitleController";
+                    break;
+                // START PLACE MANAGER ORDER -------------------------------------------------------------     
+                case IConstant.MANAGER_ORDER_MANAGE:
+                    url = "ManagerOrderManageController";
+                    break;
+                case IConstant.MANAGER_ORDER_DETAILS:
+                    url = "ManagerOrderDetailsController";
+                    break;
+                case IConstant.MANAGER_ORDER_DELETE:
+                    url = "ManagerOrderDeleteController";
+                    break;
+                case IConstant.MANAGER_ORDER_STATUS_CHANGE:
+                    url = "ManagerChangeOrderStatusController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

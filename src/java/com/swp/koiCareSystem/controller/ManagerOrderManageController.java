@@ -6,7 +6,12 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
+import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.Order;
+import com.swp.koiCareSystem.model.OrderStatus;
 import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.model.ProductCategory;
+import com.swp.koiCareSystem.service.OrderService;
 import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,12 +20,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-public class ManagerProductDeleteController extends HttpServlet {
+public class ManagerOrderManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,22 +42,53 @@ public class ManagerProductDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String pid = request.getParameter("pid");
-            ProductService ps = new ProductService();
-            boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
 
-            if (isDeleted) {
-                request.setAttribute("message", "Delete this product successfully");
-                request.setAttribute("toastMessage", "success");
-            } else {
-                request.setAttribute("message", "An error occurred while deleting product");
-                request.setAttribute("toastMessage", "error"); 
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
+
+            if (acc.getUserRole().equalsIgnoreCase("customer")) {
+                request.getRequestDispatcher("HomeController").forward(request, response);
+            } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
+                request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("MainController?action="+ IConstant.PRODUCT_MANAGE).forward(request, response);
+
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+
+            int index = 1;
+
+            try {
+                index = Integer.parseInt(indexPage);
+                if (index <= 0) {
+                    response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE);
+                return;
+            }
+
+            OrderService os = new OrderService();
+            int count = os.countOrders();//20
+
+            int endPage = count / 10;
+            if (count % 10 != 0) {
+                endPage++;
+            }
+            ArrayList<Order> listOrder = os.getAllOrders(index);
+            ArrayList<OrderStatus> listStatus = os.getAllOrderStatuses();
+
+            request.setAttribute("ListO", listOrder);
+            request.setAttribute("ListS", listStatus);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
+            request.getRequestDispatcher("manageOrder.jsp").forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

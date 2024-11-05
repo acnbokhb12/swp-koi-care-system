@@ -6,11 +6,10 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.service.ProductService;
+import com.swp.koiCareSystem.model.OrderStatus;
+import com.swp.koiCareSystem.service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class ManagerProductDeleteController extends HttpServlet {
+public class ManagerChangeOrderStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,23 +34,32 @@ public class ManagerProductDeleteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String pid = request.getParameter("pid");
-            ProductService ps = new ProductService();
-            boolean isDeleted = ps.deleteProduct(Integer.parseInt(pid));
 
-            if (isDeleted) {
-                request.setAttribute("message", "Delete this product successfully");
-                request.setAttribute("toastMessage", "success");
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            int newStatus = Integer.parseInt(request.getParameter("newStatus"));
+            String statusId = request.getParameter("statusId");
+            String index = request.getParameter("index");
+
+            OrderService orderService = new OrderService();
+            String message = orderService.updateOrderStatusByOrderId(orderId, newStatus);
+
+            if (message.contains("Order status updated")) {
+                request.getSession().setAttribute("toastMessage", "success");
+                request.getSession().setAttribute("message", message);
             } else {
-                request.setAttribute("message", "An error occurred while deleting product");
-                request.setAttribute("toastMessage", "error"); 
+                request.getSession().setAttribute("toastMessage", "error");
+                request.getSession().setAttribute("message", message);
             }
-            request.getRequestDispatcher("MainController?action="+ IConstant.PRODUCT_MANAGE).forward(request, response);
+
+            if (statusId != null && !statusId.isEmpty()) {
+                response.sendRedirect("ManagerOrderSearchByOrderStatusController?status=" + statusId + "&index=" + (index != null ? index : "1"));
+            } else {
+                response.sendRedirect("MainController?action=" + IConstant.MANAGER_ORDER_MANAGE + "&index=" + (index != null ? index : "1"));
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

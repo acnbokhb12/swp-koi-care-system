@@ -5,15 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> >
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en"> 
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Manager Page</title>
         <!-- link logo img page -->
         <link rel="icon" href="./assets/img/logo/logoSignin.jpg" type="image/x-icon" />
@@ -34,8 +33,7 @@
         <link rel="stylesheet" href="./assets/css/adminProduct.css">
     </head>
 
-    <body>
-
+    <body> 
         <div class="container_admin">
             <div id="db-wrapper" class="flex-column">                
                 <!-- start-sidebar -->
@@ -43,23 +41,22 @@
                 <!-- start header -->
                 <header id="header"> </header>
                 <!-- right -->
-                <div class="right-navbar-admin-manage"> 
-
+                <div class="right-navbar-admin-manage">  
                     <!-- Main Content Section -->
                     <div class="content">
                         <!-- Header with actions -->
-                        <div class="header">
-                            <h2>Product List</h2>
+                        <div class="header mb-4">
+                            <h1 class="font-weight-bold"> Product List</h1>
                             <div class="actions"> 
                                 <button id="createNewProduct">Create New Product</button> 
                             </div>
                         </div>
                         <!--  -->
-                        <div class="row row-user-main"> 
+                        <div class="row row-user-main m-0 mb-4"> 
                             <div class="col-auto">
                                 <div class="form-toggle-buttons" style="margin-bottom: 5px">
-                                    <button type="button" onclick="showSearchByName()">Search by Product Name</button>
-                                    <button type="button" onclick="showSearchByCategory()">Search by Category</button>
+                                    <button class="btn-edit-search" type="button" onclick="showSearchByName()">Search by Product Name</button>
+                                    <button class="btn-edit-search" type="button" onclick="showSearchByCategory()">Search by Category</button>
                                 </div>
                                 <form id="searchByNameForm" action="ManagerSearchProductNameController" method="POST" class="table-search-form row gx-1 align-items-center">
                                     <div class="col-auto contain-btn-search-order" style="display: flex;">
@@ -272,12 +269,42 @@
                 </form>
             </div>
         </div>
+        <c:if test="${toastMessage != null}">
+                <div id="toast" style="z-index: 10">  
+                    <div class="toast_main row ${toastMessage == 'success' ? 'toast--success' : 'toast--error' }" style="display:flex">
+                        <div class="toast__icon">
+                            <i class="fa-solid ${toastMessage == 'success' ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                        </div>
+                        <div class="toast_body">
+                            <h3 class="toast__title">${toastMessage == 'success' ? 'Success' : 'Error' }</h3>
+                            <p class="toast__msg">${message}</p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div> 
+            </c:if>
         <style>
             .content .table-container{
                 overflow: auto;
             }
+             .btn-edit-search{
+                background-color: #edfdf6;
+                padding: 6px 12px;
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin: 0 6px 10px 0;
+                border: 1px solid #000;
+                
+            }
+            .btn-edit-search:hover{
+                  background-color: #15a362;
+                  color: #fff;
+            }
         </style>
     </body>
+    <script src="./assets/js/notification.js"></script> 
     <script>
         $('#header').load('utils.jsp #header_admin', () => {
             $.getScript('./assets/js/utilsAdmin.js');

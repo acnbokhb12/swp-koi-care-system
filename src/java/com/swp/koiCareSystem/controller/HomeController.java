@@ -38,13 +38,15 @@ public class HomeController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
-            if(acc!=null){
+            String wasLogined =   (String) session.getAttribute("logined");
+            if(acc!=null && wasLogined ==null){
                 ArrayList<OrderItem> cart =  (ArrayList<OrderItem>) session.getAttribute("cart");
                 if (cart == null || cart.isEmpty()) {
                     CartService cv = new CartService();
                     // Gọi getCart từ Redis nếu giỏ hàng chưa có trong session 
                     ArrayList<OrderItem> getCart = cv.getCart(acc.getUserID());
                     session.setAttribute("cart", getCart);
+                    session.setAttribute("logined", "waslogin");
                 }
             }
             request.getRequestDispatcher("home.jsp").forward(request, response);

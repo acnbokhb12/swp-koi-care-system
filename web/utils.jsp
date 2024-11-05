@@ -116,7 +116,7 @@
                         <li><a href="dashboardManager.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                         <li><a href="manageCategory.jsp"><i class="fa-solid fa-tags"></i> Category Manager</a></li>
                         <li><a href="MainController?action=productmanage"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
-                        <li><a href="manageOrder.jsp"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
+                        <li><a href="MainController?action=managerordermanage"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
                         <li><a href="MainController?action=accountfishmanage"><i class="fa-solid fa-fish"></i>Aquarium Management</a></li>   
                     </ul>
                 </div>
@@ -197,7 +197,7 @@
                                 <div class="contain__list-nav">
                                     <ul class="contain__list-nav-detail">
                                         <li class="contain__item-nav">
-                                            <a href="home.jsp" class="contain__item-nav-link">
+                                            <a href="MainController?action=home" class="contain__item-nav-link">
                                                 <span>Home</span>
                                             </a>
                                         </li>
