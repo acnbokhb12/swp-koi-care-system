@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.dao.AccountDAO;
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.AccountStatus;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -30,18 +31,19 @@ import org.apache.http.client.fluent.Request;
 public class AccountService {
 
     private final AccountDAO acd = new AccountDAO();
- 
+
     // Get all fish for the specific account ID
     public int countAllAccountS() {
         return acd.countAllAccounts();
 
-    } 
- 
+    }
+
     public ArrayList<Account> getAccountsS() {
         ArrayList<Account> listA = acd.getAccounts();
         return listA;
-    }  
- //Phân Trang 
+    }
+    //Phân Trang 
+
     public ArrayList<Account> getAllAccountsS(int index) {
         ArrayList<Account> listacc = acd.getAccounts(index);
         return listacc;
@@ -140,7 +142,8 @@ public class AccountService {
 
     public boolean upDateImgAccountById(int acid, String imgLink) {
         return acd.updateImgByAccountID(acid, imgLink);
-    } 
+    }
+
     public boolean updatePasswordWithEmail(String newPassword, String email) {
         String hashedPassword = hashPassword(newPassword);
         return acd.updatePasswordWithEmail(hashedPassword, email);
@@ -149,8 +152,41 @@ public class AccountService {
     public boolean checkEmail(String email) {
         return acd.checkEmail(email);
     }
- 
-    public static void main(String[] args) throws Exception {
+
+    // ADMIN ACCOUNT======================================
+    //LIST ACCOUNT
+    public ArrayList<Account> getAllAccountsToAdminS(int index) {
+        ArrayList<Account> listacc = acd.getAccountsToAdmin(index);
+        return listacc;
+    }
+
+    public int countAllAccountsToAdminS() {
+        return acd.countAccountsToAdmin();
+    }
+
+    // LIST : STATUS
+    public int countAllAccountsStatusToAdminS(int idStatus) {
+        return acd.countAccountsByStatus(idStatus);
+    }
+
+    public ArrayList<AccountStatus> getAllAccountsStatusToAdminS(int idStatus, int index) {
+        ArrayList<AccountStatus> listacc = acd.getAllAccountStatuses();
+        return listacc;
+    }
+    
+   public ArrayList<Account> searchAccountByStatus(int statusID, int index) {
+        return acd.searchAccountsByStatus(statusID, index);
+    }
+
+// CREATE NEW ACCOUNT
+    public boolean createNewAccountToAdmin(Account account) {
+        return acd.createNewAccount(account);
+    }
+    // DELETE
+    public boolean deleteAccountToAdmin(int accID){
+        return acd.deleteAccountByID(accID);
+    }
+    static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
         Account acc = acs.checkLogin("rikawa", "123456");
         System.out.println(acc);

@@ -11,23 +11,24 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author DELL
  */
-public class Account {
+    public class Account {
 
-    private int userID;
-    @SerializedName("email")
-    private String email;
-    private String koiCareID;
-    @SerializedName("picture")
-    private String profileImage;
-    private String password;
-    @SerializedName("name")
-    private String fullName;
-    private String phoneNumber;
-    private String userRole;
-    private String address;
-    private String gender;
-    private int accountStatus;
-
+        private int userID;
+        @SerializedName("email")
+        private String email;
+        private String koiCareID;
+        @SerializedName("picture")
+        private String profileImage;
+        private String password;
+        @SerializedName("name")
+        private String fullName;
+        private String phoneNumber;
+        private String userRole;
+        private String address;
+        private String gender;
+        private int accountStatus;
+        private AccountStatus accstatus;
+    
     public Account() {
     }
 
@@ -144,6 +145,16 @@ public class Account {
         this.accountStatus = accountStatus;
     }
 
+    public AccountStatus getAccstatus() {
+        return accstatus;
+    }
+
+    public void setAccstatus(AccountStatus accstatus) {
+        this.accstatus = accstatus;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Account{" + "userID=" + userID + ", email=" + email + ", koiCareID=" + koiCareID + ", profileImage=" + profileImage + ", password=" + password + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", userRole=" + userRole + ", address=" + address + ", gender=" + gender + ", accountStatus=" + accountStatus + '}';

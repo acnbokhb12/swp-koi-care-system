@@ -224,8 +224,8 @@
     <servlet>
         <servlet-name>ManageFishController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManageFishController</servlet-class>
-    </servlet> 
-    <servlet> 
+    </servlet>
+    <servlet>
         <servlet-name>CustomerForgetPasswordController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.CustomerForgetPasswordController</servlet-class>
     </servlet>
@@ -251,9 +251,9 @@
     </servlet>
     <servlet>
         <servlet-name>CheckOutController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.CheckOutController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.CheckOutController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>FishGrowthChartController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartController</servlet-class>
     </servlet>
@@ -275,8 +275,8 @@
     </servlet>
     <servlet>
         <servlet-name>FishGrowthChartDeleteController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartDeleteController</servlet-class>  
-    </servlet>    
+        <servlet-class>com.swp.koiCareSystem.controller.FishGrowthChartDeleteController</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>AdminManageNewsController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AdminManageNewsController</servlet-class>
@@ -295,7 +295,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminDeleteNewsByIdController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteNewsByIdController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteNewsByIdController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageFishDetailController</servlet-name>
@@ -312,6 +312,22 @@
     <servlet>
         <servlet-name>ManagerPondDetailsController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerPondDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAccountStatusController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminAccountStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCreateNewAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminCreateNewAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteAccountController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -480,8 +496,8 @@
     <servlet-mapping>
         <servlet-name>ManageFishController</servlet-name>
         <url-pattern>/ManageFishController</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping> 
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CustomerForgetPasswordController</servlet-name>
         <url-pattern>/CustomerForgetPasswordController</url-pattern>
     </servlet-mapping>
@@ -507,9 +523,9 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckOutController</servlet-name>
-        <url-pattern>/CheckOutController</url-pattern> 
+        <url-pattern>/CheckOutController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>     
+    <servlet-mapping>
         <servlet-name>FishGrowthChartController</servlet-name>
         <url-pattern>/FishGrowthChartController</url-pattern>
     </servlet-mapping>
@@ -531,8 +547,8 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FishGrowthChartDeleteController</servlet-name>
-        <url-pattern>/FishGrowthChartDeleteController</url-pattern>  
-    </servlet-mapping>    
+        <url-pattern>/FishGrowthChartDeleteController</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminManageNewsController</servlet-name>
         <url-pattern>/AdminManageNewsController</url-pattern>
@@ -551,7 +567,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminDeleteNewsByIdController</servlet-name>
-        <url-pattern>/AdminDeleteNewsByIdController</url-pattern> 
+        <url-pattern>/AdminDeleteNewsByIdController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageFishDetailController</servlet-name>
@@ -568,6 +584,22 @@
     <servlet-mapping>
         <servlet-name>ManagerPondDetailsController</servlet-name>
         <url-pattern>/ManagerPondDetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAccountController</servlet-name>
+        <url-pattern>/AdminAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAccountStatusController</servlet-name>
+        <url-pattern>/AdminAccountStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCreateNewAccountController</servlet-name>
+        <url-pattern>/AdminCreateNewAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteAccountController</servlet-name>
+        <url-pattern>/AdminDeleteAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
