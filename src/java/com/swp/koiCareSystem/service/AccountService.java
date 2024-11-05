@@ -191,4 +191,9 @@ public class AccountService {
         Account acc = acs.checkLogin("rikawa", "123456");
         System.out.println(acc);
     }
+    //INFORMATION
+    
+    public Account getAccountInformationByID(int id) {
+        return acd.getAccountInformationByID(id);
+    }
 }

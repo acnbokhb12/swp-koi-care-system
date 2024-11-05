@@ -97,7 +97,8 @@ public interface IConstant {
     public final String ADMIN_ACCOUNT_STATUS = "adminAccountStatus";
     public final String ADMIN_ACCOUNT_CREATE = "adminAccountCreate";
     public final String ADMIN_ACCOUNT_DELETE = "adminAccountDelete";
-    public final String ADMIN_ACCOUNT_UPDATE= "adminAccountUpdate";
+    public final String ADMIN_ACCOUNT_UPDATE = "adminAccountUpdate";
+    public final String ADMIN_ACCOUNT_INFORMATION = "adminAccountInformation";
 
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();

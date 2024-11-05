@@ -77,8 +77,8 @@
                                             <td>${acc.userRole}</td>
                                             <td>${acc.accountStatus}</td>
                                             <td class="text-center">
-                                                <a href="manageProfileAccount.jsp?userID=${acc.userID}" class="edit-btn"><i class="fas fa-edit"></i></a>
-                                                <a href="AdminDeleteAccountController?accid=${acc.userID}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this account ?');">
+                                                <a href="AdminAccountInformationController?accid=${acc.userID}" class="edit-btn"><i class="fas fa-edit"></i></a>
+                                                <a href="MainController?action=adminAccountDelete&accid=${acc.userID}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this account ?');">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
 
@@ -134,7 +134,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="container_main-add">
                 <div class="contain_add-detail">
                     <form action="MainController?action=adminAccountCreate" id="form_fill-add" method="post" enctype="multipart/form-data">
@@ -172,13 +171,21 @@
                                         <input type="text" name="phoneNumber" placeholder="Enter phone number" required />
                                     </div>
                                     <div class="col-md-6 add-item-detail">
+                                        <label>Gender:</label>
+                                        <select name="gender" required class="form-control">
+                                            <option value="Male" selected>Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 add-item-detail">
                                         <label>Role:</label>
-                                        <select name="role" required>
+                                        <select name="role" required class="form-control">
                                             <option value="Customer" selected>Customer</option>
                                             <option value="Manager">Manager</option>
                                             <option value="Admin">Admin</option>
                                         </select>
-                                    </div>  
+                                    </div>
                                 </div>
                                 <button type="submit" class="add-btn-utils blue-btn">Confirm</button>                    
                             </div>
@@ -214,16 +221,16 @@
                                                         reader.readAsDataURL(file);
                                                     });
 
-                // Delete account functionality
-                $('.btn-delete-acc').click(function (e) {
-                    e.preventDefault();
-                    const userId = $(this).data('userID');
-                    const confirmation = confirm("Are you sure you want to delete this account?");
-                    if (confirmation) {
-                        // Call to delete the account
-                        window.location.href = "adminAccountDeleteController&accid=" + userId;
-                    }
-                });
+                                                    // Delete account functionality
+                                                    $('.btn-delete-acc').click(function (e) {
+                                                        e.preventDefault();
+                                                        const userId = $(this).data('userID');
+                                                        const confirmation = confirm("Are you sure you want to delete this account?");
+                                                        if (confirmation) {
+                                                            // Call to delete the account
+                                                            window.location.href = "adminAccountDeleteController&accid=" + userId;
+                                                        }
+                                                    });
             </script>
         </div>
     </body>

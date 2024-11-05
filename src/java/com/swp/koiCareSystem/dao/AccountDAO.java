@@ -947,26 +947,92 @@ public class AccountDAO {
             }
         }
     }
+//
+//    public static void main(String[] args) {
+//
+//        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
+//
+//        // Thực hiện xóa tài khoản
+//        AccountDAO accountDAO = new AccountDAO();
+//
+//        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
+//
+//        // Kiểm tra xem tài khoản có bị xóa không
+//        if (result) {
+//            System.out.println("Account successfully deleted.");
+//        } else {
+//            System.out.println("Failed to delete account.");
+//        }
+//    }
+
+    public Account getAccountInformationByID(int id) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Account account = null;
+        String sql = "SELECT * FROM Accounts WHERE AccID = ? AND idStatus = 1";
+
+        try {
+            conn = DatabaseConnectionManager.getConnection(); // Mở kết nối tới cơ sở dữ liệu
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            // Kiểm tra nếu có bản ghi được tìm thấy
+            if (rs != null && rs.next()) {
+                account = new Account();
+                account.setUserID(rs.getInt("AccID")); // Sử dụng tên cột
+                account.setEmail(rs.getString("Email"));
+                account.setKoiCareID(rs.getString("KoiCareID"));
+                account.setProfileImage(rs.getString("UserImage"));
+                account.setPassword(rs.getString("Password"));
+                account.setFullName(rs.getString("FullName"));
+                account.setPhoneNumber(rs.getString("PhoneNumber"));
+                account.setUserRole(rs.getString("UserRole"));
+                account.setAddress(rs.getString("Address"));
+                account.setGender(rs.getString("Gender"));
+                account.setAccountStatus(rs.getInt("idStatus"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return account; // Trả về null nếu không tìm thấy tài khoản
+    }
 
     public static void main(String[] args) {
-
-        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
-
-        // Thực hiện xóa tài khoản
         AccountDAO accountDAO = new AccountDAO();
+        Account accountInfo = accountDAO.getAccountInformationByID(10); 
 
-        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
-
-        // Kiểm tra xem tài khoản có bị xóa không
-        if (result) {
-            System.out.println("Account successfully deleted.");
+        if (accountInfo != null) {
+            System.out.println("Account ID: " + accountInfo.getUserID());
+            System.out.println("Email: " + accountInfo.getEmail());
+            System.out.println("Koi Care ID: " + accountInfo.getKoiCareID());
+            System.out.println("Full Name: " + accountInfo.getFullName());
+            System.out.println("Phone Number: " + accountInfo.getPhoneNumber());
+            System.out.println("User Role: " + accountInfo.getUserRole());
+            System.out.println("Address: " + accountInfo.getAddress());
+            System.out.println("Gender: " + accountInfo.getGender());
+            System.out.println("Status ID: " + accountInfo.getAccountStatus());
         } else {
-            System.out.println("Failed to delete account.");
+            System.out.println("No account found with the given ID.");
         }
     }
-}   
-
-        // CREATE 
+}
+// CREATE 
 //    public static void main(String[] args) {
 //        AccountDAO accountDao = new AccountDAO(); 
 //        Account account = new Account();
@@ -1083,4 +1149,4 @@ public class AccountDAO {
 //        }
 //    }
 //================================================================
-    
+

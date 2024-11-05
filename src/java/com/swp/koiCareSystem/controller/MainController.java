@@ -221,13 +221,17 @@ public class MainController extends HttpServlet {
                 case IConstant.ADMIN_ACCOUNT_STATUS:
                     url = "AdminAccountStatusController";
                     break;
-                      case IConstant.ADMIN_ACCOUNT_CREATE:
+                case IConstant.ADMIN_ACCOUNT_CREATE:
                     url = "AdminCreateNewAccountController";
                     break;
-                      case IConstant.ADMIN_ACCOUNT_DELETE:
+                case IConstant.ADMIN_ACCOUNT_DELETE:
                     url = "AdminDeleteAccountController";
-                    break;  case IConstant.ADMIN_ACCOUNT_UPDATE:
+                    break;
+                case IConstant.ADMIN_ACCOUNT_UPDATE:
                     url = "AdminUpdateAccountController";
+                    break;
+                      case IConstant.ADMIN_ACCOUNT_INFORMATION:
+                    url = "AdminAccountInformationController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
