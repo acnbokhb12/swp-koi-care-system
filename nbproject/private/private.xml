@@ -3,8 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FA24_Ky5_SE1860/SWP391/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/AccountService.java</file>
-            <file>file:/E:/FA24_Ky5_SE1860/SWP391/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/PondService.java</file>
+            <file>file:/E:/FA24_Ky5_SE1860/SWP391/swp-koi-care-system/web/manageAccount.jsp</file>
+            <file>file:/E:/FA24_Ky5_SE1860/SWP391/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/AdminDeleteAccountController.java</file>
         </group>
     </open-files>
 </project-private>

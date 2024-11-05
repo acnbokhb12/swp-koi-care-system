@@ -778,7 +778,7 @@ public class AccountDAO {
         }
         return listA;
     }
-    
+
 // Get STATUS
 //    public static void main(String[] args) {
 //
@@ -798,9 +798,7 @@ public class AccountDAO {
 //            }
 //        }
 //    }
-    
-    
-public int countAccountsByStatus(int statusID) {
+    public int countAccountsByStatus(int statusID) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -925,7 +923,7 @@ public int countAccountsByStatus(int statusID) {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "UPDATE Account SET isActive = 0 WHERE accountID = ?";
+        String sql = "UPDATE Accounts SET isActive = 0 WHERE AccID = ?";
         try {
             conn = DatabaseConnectionManager.getConnection();
             ps = conn.prepareStatement(sql);
@@ -950,7 +948,25 @@ public int countAccountsByStatus(int statusID) {
         }
     }
 
-    // CREATE 
+    public static void main(String[] args) {
+
+        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
+
+        // Thực hiện xóa tài khoản
+        AccountDAO accountDAO = new AccountDAO();
+
+        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
+
+        // Kiểm tra xem tài khoản có bị xóa không
+        if (result) {
+            System.out.println("Account successfully deleted.");
+        } else {
+            System.out.println("Failed to delete account.");
+        }
+    }
+}   
+
+        // CREATE 
 //    public static void main(String[] args) {
 //        AccountDAO accountDao = new AccountDAO(); 
 //        Account account = new Account();
@@ -1067,4 +1083,4 @@ public int countAccountsByStatus(int statusID) {
 //        }
 //    }
 //================================================================
-}
+    

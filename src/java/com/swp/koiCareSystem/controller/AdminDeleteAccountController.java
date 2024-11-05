@@ -33,7 +33,8 @@ public class AdminDeleteAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int accID = Integer.parseInt(request.getParameter("userID"));
+            int accID = Integer.parseInt(request.getParameter("accid"));
+
             AccountService accs = new AccountService();
             boolean isDelete = accs.deleteAccountToAdmin(accID);
             if (isDelete) {
