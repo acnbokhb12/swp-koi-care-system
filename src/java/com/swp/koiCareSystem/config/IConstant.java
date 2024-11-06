@@ -66,7 +66,8 @@ public interface IConstant {
     
 // START FOOD CACULATOR
     public final String FOOD_CALCULATOR = "foodCaculator";
-    
+// START PURCHASE HISTORY
+    public final String PURCHASE_HISTORY = "purchaseHistory";
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";

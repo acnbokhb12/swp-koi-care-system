@@ -289,7 +289,7 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="purchaseHistory.jsp">
+                                                                        <a href="MainController?action=purchaseHistory">
                                                                             <i class="fa-solid fa-receipt"></i> Purchase History
                                                                         </a>
                                                                     </li>

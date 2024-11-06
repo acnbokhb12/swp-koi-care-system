@@ -12,10 +12,11 @@ package com.swp.koiCareSystem.model;
 public class OrderItem {
     private int id;
     private int orderID;
-    private Product product;
+    private int productID;
     private int quantity;
     private float unitPrice;
     private float totalPrice;
+    private Product product;
 
     public OrderItem() {
     }
@@ -45,6 +46,15 @@ public class OrderItem {
         this.orderID = orderID;
     }
 
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    
     public Product getProduct() {
         return product;
     }
@@ -79,10 +89,8 @@ public class OrderItem {
 
     @Override
     public String toString() {
-        return "OrderItem{" + "id=" + id + ", orderID=" + orderID + ", product=" + product + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", totalPrice=" + totalPrice + '}';
+        return "OrderItem{" + "id=" + id + ", orderID=" + orderID + ", productID=" + productID + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", totalPrice=" + totalPrice + ", product=" + product + '}';
     }
- 
-    
     
     
 }

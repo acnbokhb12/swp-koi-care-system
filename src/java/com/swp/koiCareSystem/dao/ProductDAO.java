@@ -7,7 +7,7 @@ package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.model.ProductCategory;
+import com.swp.koiCareSystem.model.ProductCategory; 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -671,6 +671,51 @@ public class ProductDAO {
         PreparedStatement pst = null;
         ResultSet rs = null;
         Product pd = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select * \n"
+                        + "from Products p inner join CategoryProduct ctp on p.CategoryID = ctp.CategoryID \n"
+                        + "where p.ProductID = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, id);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    pd = new Product();
+                    ProductCategory pdct = new ProductCategory(rs.getInt(8), rs.getString(9));
+                    pd.setProductID(rs.getInt(1));
+                    pd.setNameProduct(rs.getString(3));
+                    pd.setImgProduct(rs.getString(4));
+                    pd.setDescription(rs.getString(5));
+                    pd.setPrice(rs.getFloat(6));
+                    pd.setIsActive(rs.getBoolean(7));
+                    pd.setCategoryP(pdct);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return pd;
+    }
+    public Product getProductByIdWithoutIsActive(int id) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Product pd = null; 
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {

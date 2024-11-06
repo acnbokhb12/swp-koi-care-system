@@ -20,7 +20,7 @@ public class Order {
     private String customerName;
     private String phone;
     private String addressOrder;
-    private int orderStatus;
+    private int orderStatusId;
     private float total;
     private ArrayList<OrderItem> orderItems;
     private boolean isActive;
@@ -36,7 +36,7 @@ public class Order {
         this.customerName = customerName;
         this.phone = phone;
         this.addressOrder = addressOrder;
-        this.orderStatus = orderStatus;
+        this.orderStatusId = orderStatus;
         this.total = total;
         this.orderItems = orderItems;
         this.isActive = isActive;
@@ -90,12 +90,12 @@ public class Order {
         this.addressOrder = addressOrder;
     }
 
-    public int getOrderStatus() {
-        return orderStatus;
+    public int getOrderStatusId() {
+        return orderStatusId;
     }
 
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStatusId(int orderStatusId) {
+        this.orderStatusId = orderStatusId;
     }
 
     public float getTotal() {
@@ -131,6 +131,11 @@ public class Order {
 
     public void setOrderS(OrderStatus orderS) {
         this.orderS = orderS;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id + ", customerID=" + customerID + ", orderDate=" + orderDate + ", customerName=" + customerName + ", phone=" + phone + ", addressOrder=" + addressOrder + ", orderStatusId=" + orderStatusId + ", total=" + total + ", orderItems=" + orderItems + ", isActive=" + isActive + ", orderS=" + orderS + '}';
     }
     
     
