@@ -115,6 +115,7 @@ public class CartService {
             }
             OrderItem item = new OrderItem();
             item.setProduct(p);
+            item.setProductID(p.getProductID());
             int quantity = Integer.parseInt(cartData.get(productId));
             item.setQuantity(quantity);
             item.setUnitPrice(p.getPrice());

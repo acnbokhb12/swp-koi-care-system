@@ -85,5 +85,9 @@ public class ProductService {
 
     public ArrayList<Product> managerGetProductsByCateId(int cateId, int index) {
         return productDAO.managerGetProductsByCateId(cateId, index);
-    } 
+    }
+    
+    public Product getProductByIdWithoutIsActive(int productId){
+        return productDAO.getProductByIdWithoutIsActive(productId);        
+    }
 }

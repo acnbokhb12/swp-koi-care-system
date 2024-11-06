@@ -65,8 +65,10 @@ public interface IConstant {
     public static String MANAGE_POND_DETAILS = "manageponddetails";
     
 // START FOOD CACULATOR
-    public final String FOOD_CALCULATOR = "foodCaculator";
-    
+    public final String FOOD_CALCULATOR = "foodCalculator";
+    public final String SALT_CALCULATOR  = "saltCalculator";
+// START PURCHASE HISTORY
+    public final String PURCHASE_HISTORY = "purchaseHistory";
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
@@ -98,14 +100,18 @@ public interface IConstant {
     public final String CUSTOMER_FORGET_PASSWORD  = "forgetpassword";
     public final String CUSTOMER_VALIDATE_OTP = "validateotp";
     public final String CUSTOMER_NEW_PASSWORD = "newpassword"; 
-    
-
+   
 // START MANAGER ORDER ----------------------------------------------------------------------------------------------------------------------------------     
     public final String MANAGER_ORDER_MANAGE = "managerordermanage";
     public final String MANAGER_ORDER_DETAILS = "managerorderdetails";
     public final String MANAGER_ORDER_DELETE = "managerorderdelete";
     public final String MANAGER_ORDER_STATUS_CHANGE = "managerorderstatuschange";
 
+// START MANAGE DASHBOARD ADMIN - MANAGER
+    public final String DASHBOARD_ADMIN = "dashboardAdmin";
+    public final String DASHBOARD_MANAGER = "dashboardManager";
+
+    
 // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
 

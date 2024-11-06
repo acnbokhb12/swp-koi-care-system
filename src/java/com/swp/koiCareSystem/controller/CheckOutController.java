@@ -54,7 +54,9 @@ public class CheckOutController extends HttpServlet {
                 if(cleanSuccess){
                     session.setAttribute("cart", new ArrayList<OrderItem>());
                 }
-                response.sendRedirect("home.jsp");
+                request.setAttribute("message", "Checkout completed successfully");
+                request.setAttribute("toastMessage", "success");
+                request.getRequestDispatcher("MainController?action="+ IConstant.PURCHASE_HISTORY).forward(request, response);
             }else{
                 response.sendRedirect("MainController?action="+IConstant.SHOP);
             }

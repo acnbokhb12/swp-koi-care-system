@@ -5,7 +5,7 @@
         <filter-class>com.swp.koiCareSystem.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
-         <filter-name>LoginFilter</filter-name>
+        <filter-name>LoginFilter</filter-name>
         <url-pattern>/cart.jsp</url-pattern>
         <url-pattern>/checkout.jsp</url-pattern>
         <url-pattern>/cart.jsp</url-pattern>
@@ -48,8 +48,7 @@
         <servlet-name>FishGrowthCharUpdateController</servlet-name>
         <servlet-name>FishGrowthChartDeleteController</servlet-name>
         <servlet-name>FishGrowthChartSearchLengthController</servlet-name>
-        <servlet-name>FishGrowthChartSearchWeightController</servlet-name> 
-        
+        <servlet-name>FishGrowthChartSearchWeightController</servlet-name>
         <!-- START PLACE POND -->
         <servlet-name>PondController</servlet-name>
         <servlet-name>PondInforController</servlet-name>
@@ -64,8 +63,6 @@
         <servlet-name>ManagerAquariumDetailsController</servlet-name>
         <servlet-name>ManagerPondController</servlet-name>
         <servlet-name>ManagerPondDetailsController</servlet-name>
-
-
         <!-- START PLACE MANAGER PRODUCT -->
         <servlet-name>ManageProductController</servlet-name>
         <servlet-name>ManagerProductInformationController</servlet-name>
@@ -391,6 +388,26 @@
         <servlet-name>ViewsNewsDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ViewsNewsDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PurchaseHistoryController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.PurchaseHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboarAdminController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DashboarAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardManagerController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DashboardManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaltCalculatorController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SaltCalculatorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaltCalculatorDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SaltCalculatorDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -685,7 +702,27 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerOrderSearchController</servlet-name>
-        <url-pattern>/ManagerOrderSearchController</url-pattern> 
+        <url-pattern>/ManagerOrderSearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseHistoryController</servlet-name>
+        <url-pattern>/PurchaseHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboarAdminController</servlet-name>
+        <url-pattern>/DashboarAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardManagerController</servlet-name>
+        <url-pattern>/DashboardManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaltCalculatorController</servlet-name>
+        <url-pattern>/SaltCalculatorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaltCalculatorDetailController</servlet-name>
+        <url-pattern>/SaltCalculatorDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>     
         <servlet-name>ShowNewsController</servlet-name>

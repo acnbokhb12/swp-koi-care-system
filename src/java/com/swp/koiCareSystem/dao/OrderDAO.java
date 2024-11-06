@@ -11,10 +11,12 @@ import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
 import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.OrderService;
+import com.swp.koiCareSystem.service.ProductService;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class OrderDAO {
                 pst.setString(4, od.getAddressOrder());
                 pst.setFloat(5, od.getTotal());
                 pst.setString(6, formattedNow);
-                pst.setInt(7, od.getOrderStatus());
+                pst.setInt(7, od.getOrderStatusId());
                 int rowEffect = pst.executeUpdate();
                 String sql3 = "select top 1 [OrderID] from  [dbo].[Orders] order by [OrderID] desc";
                 PreparedStatement pst3 = cn.prepareStatement(sql3);
@@ -304,6 +306,7 @@ public class OrderDAO {
                     OrderItem item = new OrderItem();
                     item.setId(rs.getInt("OrderItemID"));
                     item.setOrderID(rs.getInt("OrderID"));
+                    item.setProductID(rs.getInt("ProductID"));
                     item.setProduct(productDAO.getProductForOrderItemById(rs.getInt("ProductID")));
                     item.setQuantity(rs.getInt("Quantity"));
                     item.setUnitPrice(rs.getFloat("UnitPrice"));
@@ -846,5 +849,91 @@ public class OrderDAO {
             }
         }
         return listO;
+    }
+
+    public ArrayList<Order> getPurchaseHistoryByAccId(int accId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Order> listPurchaseHistory = new ArrayList<>();
+        ProductService prds = new ProductService();
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select [OrderID],[AccID],[UserNameOrdered],[PhoneOrdered],[AddressOrdered],[OrderDate],[TotalAmount] ,[isActive] , ord.OrderStatusID, ords.OrderStatusName\n"
+                        + "from [dbo].[Orders] as ord inner join [dbo].[OrderStatus] as ords on ord.OrderStatusID = ords.OrderStatusID\n"
+                        + "where [AccID] = ? order by [OrderID] desc ";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, accId);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        Order ord = new Order();
+                        int orderId = rs.getInt("OrderID");
+                        ord.setId(orderId);
+                        ord.setCustomerID(rs.getInt("AccID"));
+                        ord.setCustomerName("UserNameOrdered");
+                        ord.setPhone(rs.getString("PhoneOrdered"));
+                        ord.setAddressOrder("AddressOrdered");
+                        Timestamp timestamp = rs.getTimestamp("OrderDate");
+                        LocalDateTime dateTime = timestamp.toLocalDateTime();
+                        ord.setOrderDate(dateTime);
+                        ord.setTotal(rs.getFloat("TotalAmount")); 
+                        ord.setOrderStatusId(rs.getInt("OrderStatusID"));
+//                        Status Order
+                        OrderStatus ordeStatus = new OrderStatus();
+                        ordeStatus.setOrderStatusID(rs.getInt("OrderStatusID"));
+                        ordeStatus.setOrderStatusName(rs.getString("OrderStatusName"));
+                        ord.setOrderS(ordeStatus);
+                        String sql2 = "select* from [dbo].[OrderItem] where [OrderID] = ?";
+                        PreparedStatement pst2 = cn.prepareStatement(sql2);
+                        pst2.setInt(1, orderId);
+                        ResultSet rs2 = pst2.executeQuery();
+                        ArrayList<OrderItem> listOrderItem = new ArrayList<>();
+                        if(rs2!=null){                            
+                            while(rs2.next()){
+                                OrderItem item = new OrderItem();
+                                item.setId(rs2.getInt(1));
+                                item.setOrderID(orderId);
+                                Product product = prds.getProductByIdWithoutIsActive(rs2.getInt(3));
+                                item.setProductID(product.getProductID());
+                                item.setProduct(product);
+                                item.setQuantity(rs2.getInt(4));
+                                item.setUnitPrice(rs2.getFloat(5));
+                                item.setTotalPrice(rs2.getFloat(6));
+                                listOrderItem.add(item); 
+                            }
+                        }
+                        ord.setOrderItems(listOrderItem); 
+                        listPurchaseHistory.add(ord); 
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listPurchaseHistory;
+    }
+    public static void main(String[] args) {
+        OrderDAO ordao = new OrderDAO();
+        ArrayList<Order> list = ordao.getPurchaseHistoryByAccId(5);
+        for(Order o : list){
+            System.out.println(o);
+        }
     }
 }

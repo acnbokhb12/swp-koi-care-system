@@ -44,7 +44,7 @@ public class OrderService {
         order.setAddressOrder(address);
         order.setTotal(total);
         order.setOrderDate(now);
-        order.setOrderStatus(status);
+        order.setOrderStatusId(status);
         boolean suc = od.checkout(order, items);
         return suc;
     }
@@ -133,4 +133,9 @@ public class OrderService {
     public ArrayList<Order> searchOrdersByPhone(String phone, int index) {
         return od.searchOrdersByPhone(phone, index);
     }
+    public ArrayList<Order> getPurchaseHistoryByAccID(int accId){
+        return  od.getPurchaseHistoryByAccId(accId);
+    }
+        
+    
 }
