@@ -2,7 +2,7 @@
 #content-news{
     /* border-top:11.4rem solid  var(--bs-orange) ; */
     margin-top: 11.4rem;
-     
+
 }
 .shop__intro-container{ 
     width: 100%;
@@ -17,7 +17,7 @@
     /* height: 28rem; */
 }
 .shop__intro-img-contain{
-   width: 100vw;
+    width: 100vw;
 }
 .shop__intro-img-contain img{
     width: 100%;
@@ -150,7 +150,7 @@
 }
 .trending-bottom-single:hover h4{
     color: var(--bs-orange);
-    
+
 }
 .trending-bottom-img {
     margin-bottom: 1.6rem;
@@ -254,7 +254,7 @@
 .news-title-section h4{
     font-weight: bold;
     font-size: 2.6rem;
-    
+
 }
 .news__area__main{
 
@@ -280,10 +280,10 @@
     flex: 1 0 auto;
 }
 .container__news-item-desc{
-    
+
     position: relative;
     display: block; 
-    
+
 }
 .container__news-item-desc img{
     width: 100%;
@@ -479,9 +479,44 @@
     background-color: var(--color-for-cate);
     filter: brightness(0.8);
     color: #000000;
-
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.pagination-list li {
+    margin: 0 5px;
+}
+
+.pagination-list li a {
+    display: block;
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination-list li a.active {
+    background-color: var(--orange-color);
+    color: white;
+    border-color: var(--orange-color);
+}
+
+.pagination-list li a:hover {
+    background-color: var(--btn-pay);
+    color: white;
+}
 /* Blogs --------------------------------------- */
 
 .container-blog{
@@ -507,7 +542,7 @@
     color: #000;
     width: auto; 
     background-color: #fff;
-    
+
 }
 .create-sidebar::-webkit-scrollbar {
     display: none;
@@ -683,7 +718,7 @@
     background-color: var(--btn-pay);
     color: white;
 }
- 
+
 .modal-confirm-delete{
     top: 0;
     left: 0;
@@ -790,7 +825,7 @@
     .shop__intro-item-text p{
         font-size: 1.6rem;
     }
-    
+
 }
 @media screen and (max-width:768px) {
     .shop__intro-item-text h1{

@@ -221,7 +221,7 @@
                                                         <a href="MainController?action=blog">Blogs</a>
                                                     </li>
                                                     <li class="contain__sub-item_nav-items">
-                                                        <a href="news.jsp">News</a>
+                                                        <a href="MainController?action=news">News</a>
                                                     </li>
 
                                                 </ul>

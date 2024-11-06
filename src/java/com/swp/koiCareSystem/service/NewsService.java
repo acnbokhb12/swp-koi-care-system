@@ -68,9 +68,47 @@ public class NewsService {
         return ndao.countNewsByTitle(title);
     }
 
+    public ArrayList<News> getNewsLatest() {
+        return ndao.getNewsLatest();
+    }
+    
+    public ArrayList<News> getListNewsSpecialByCateId(int idCate){
+        return ndao.getListNewsSpecialByCateId(idCate);
+    }
+    
+    public ArrayList<News> getNormalNewsList(int index){
+        return ndao.getNormalNewsList(index);
+    }
+    
+    public int countNormalNewsList(){
+        return ndao.countNormalNewsList();
+    }
+    
+    public ArrayList<News> getNewsInNewsDetail(){
+        return ndao.getNewsListInNewsDetail();
+    }
+    
+    public ArrayList<News> getRandomNews(){
+        return ndao.randomNews();
+    }
+    
     public static void main(String[] args) {
         NewsService nsv = new NewsService();
 
+//        ArrayList<News> list = nsv.showNewsByCate("Events");
+//        if (list.isEmpty()) {
+//            System.out.println("Danh sách không có tin tức.");
+//        } else {
+//            for (News news : list) {
+//                // In ra thông tin của mỗi tin tức
+//                System.out.println("News ID: " + news.getNewsID());
+//                System.out.println("Title: " + news.getTitle());
+//                System.out.println("Category ID: " + news.getNewsCategory().getId());
+//                System.out.println("Category Name: " + news.getNewsCategory().getName());
+//                System.out.println("News Image: " + news.getNewsImage());
+//                System.out.println("-------------------------------");
+//            }
+//        }
 //        int day = 20;
 //        int month = 11;
 //        Integer year = null;

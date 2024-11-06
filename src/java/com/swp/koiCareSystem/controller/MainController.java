@@ -236,6 +236,12 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.MANAGER_ORDER_STATUS_CHANGE:
                     url = "ManagerChangeOrderStatusController";
+                // START PLACE USER NEWS --------------------------------------------------------
+                case IConstant.NEWS:
+                    url = "ShowNewsController";
+                    break;
+                case IConstant.VIEW_NEWS:
+                    url = "ViewsNewsDetailController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
