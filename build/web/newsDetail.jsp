@@ -84,6 +84,15 @@
 
         <!-- footer -->
         <div id="footer"></div>
+        <style>
+            .desc-all-infor{
+                font-size: 1.6rem;
+            }
+                        .desc-all-infor img{
+                            
+                             width: 100%;   
+                            }
+        </style>
     </body>
     <script>
         $('#header').load('utils.jsp #header__nav', () => {

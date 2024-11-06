@@ -45,7 +45,7 @@
                             <h1>Subscribe Today!</h1>
                             <p>Volume Five was released in June and is packed with fantastic koi content you simply can't get anywhere else. Exclusive interviews, in-depth articles</p>
                             <div class="link__goto-detail">
-                                <a href="#">Discover more</a>
+                                <a href="#trending-area">Discover more</a>
                             </div>
 
                         </div>
@@ -60,7 +60,7 @@
                             <h1>Major Awards - The Great British Koi Show '24</h1>
                             <p>It was the third year running for the GBKS, and (once again) they had worked to enhance what had gone before. The club had invested heavily in improvements.</p>
                             <div class="link__goto-detail">
-                                <a href="#">Discover more</a>
+                                <a href="#trending-area">Discover more</a>
                             </div>
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                             <h1>Koi pond box filter setup and a murky pond </h1>
                             <p>After building my new pond I went and had a look at the pond I look after for my mother. I had not cleaned the filter or the pond for a while and it was a little murkey.</p>
                             <div class="link__goto-detail">
-                                <a href="#">Discover more</a>
+                                <a href="#trending-area">Discover more</a>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </header>
-            <div class="trending__area">
+            <div class="trending__area" id="trending-area">
                 <div class="container">
                     <div class="trending__main">
                         <div class="row">
@@ -319,7 +319,7 @@
 
                                     <div class="bg-white text-center border border-top-0 p-3">
                                         <a href="MainController?action=viewNews&id=${random.newsID}">
-                                            <img src="${random.newsImage}" alt="" style="max-height: 150px; width: 330px ">
+                                            <img src="${random.newsImage}" alt="" style="max-height: 150px; ">
                                         </a>
                                     </div>
                                 </c:forEach> 
