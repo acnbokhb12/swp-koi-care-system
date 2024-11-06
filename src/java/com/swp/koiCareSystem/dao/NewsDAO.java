@@ -588,7 +588,7 @@ public class NewsDAO {
         int distance = (index - 1) * 6;
 
         try {
-            c = DatabaseConnectionManager.getConnection(); 
+            c = DatabaseConnectionManager.getConnection();
             String sql = "select n.NewsID, n.Title, ctn.newsCategoryID, ctn.name, n.NewsImage, n.NewsDate \n"
                     + "from [dbo].[News] n inner join [dbo].[newsCategory] ctn \n"
                     + "on n.newsCategoryID = ctn.newsCategoryID\n"
@@ -662,20 +662,67 @@ public class NewsDAO {
         }
         return 0;
     }
-    
-    public ArrayList<News> getNewsListInNewsDetail(){
+
+    public ArrayList<News> getNewsListInNewsDetail() {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         ArrayList<News> listN = new ArrayList<>();
-        
+
         try {
             c = DatabaseConnectionManager.getConnection();
             String sql = "select TOP 5 n.NewsID, n.Title, nc.newsCategoryID, nc.name, n.NewsImage\n"
                     + "from [dbo].[News] n inner join [dbo].[newsCategory] nc \n"
                     + "on n.newsCategoryID = nc.newsCategoryID\n"
-                    + "where n.isActive = 1";
+                    + "where n.isActive = 1 ORDER BY NEWID()";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    News n = new News();
+                    NewsCategory nc = new NewsCategory(rs.getInt(3), rs.getString(4));
+                    n.setNewsID(rs.getInt(1));
+                    n.setTitle(rs.getString(2));
+                    n.setNewsImage(rs.getString(5));
+                    n.setNewsCategory(nc);
+                    listN.add(n);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listN;
+    }
+
+    public ArrayList<News> randomNews() {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<News> listN = new ArrayList<>();
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "SELECT TOP 1 n.NewsID, n.Title, nc.newsCategoryID, nc.name, n.NewsImage\n"
+                    + "FROM [dbo].[News] n\n"
+                    + "INNER JOIN [dbo].[newsCategory] nc \n"
+                    + "ON n.newsCategoryID = nc.newsCategoryID\n"
+                    + "ORDER BY NEWID()";
             ps = c.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs != null) {
@@ -711,20 +758,19 @@ public class NewsDAO {
 
     public static void main(String[] args) {
         NewsDAO ndao = new NewsDAO();
-        
+
         ArrayList<News> list = ndao.getNewsListInNewsDetail();
-        for(News news : list){
-                            System.out.println("News ID: " + news.getNewsID());
-                System.out.println("Title: " + news.getTitle());
-                System.out.println("Category ID: " + news.getNewsCategory().getId());
-                System.out.println("Category Name: " + news.getNewsCategory().getName());
-                System.out.println("News Image: " + news.getNewsImage());
-                System.out.println("-------------------------------");
+        for (News news : list) {
+            System.out.println("News ID: " + news.getNewsID());
+            System.out.println("Title: " + news.getTitle());
+            System.out.println("Category ID: " + news.getNewsCategory().getId());
+            System.out.println("Category Name: " + news.getNewsCategory().getName());
+            System.out.println("News Image: " + news.getNewsImage());
+            System.out.println("-------------------------------");
         }
-        
+
 //        int count = ndao.countNormalNewsList();
 //        System.out.println(count);
-
 //        ArrayList<News> list = ndao.getNormalNewsList(1);
 //        if (list.isEmpty()) {
 //            System.out.println("Danh sách không có tin tức.");

@@ -88,6 +88,10 @@ public class NewsService {
         return ndao.getNewsListInNewsDetail();
     }
     
+    public ArrayList<News> getRandomNews(){
+        return ndao.randomNews();
+    }
+    
     public static void main(String[] args) {
         NewsService nsv = new NewsService();
 

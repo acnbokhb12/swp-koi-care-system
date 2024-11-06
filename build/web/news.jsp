@@ -310,16 +310,21 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="mar-bt-16">
-                                <div class="news-title-section m-0">
-                                    <h4 class="m-0 text-uppercase">Advertisement</h4> 
-                                </div>
-                                <div class="bg-white text-center border border-top-0 p-3">
-                                    <a href="#">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa23sv8ZAJQG67_aB46EVnMvCpqZdQUnU1mQ&s" alt="">
-                                    </a>
-                                </div>
+                                <c:forEach var="random" items="${randomNews}">
+                                    <div class="news-title-section m-0">
+                                        <h4 class="m-0 text-uppercase">Advertisement</h4> 
+                                    </div>
+
+                                    <div class="bg-white text-center border border-top-0 p-3">
+                                        <a href="MainController?action=viewNews&id=${random.newsID}">
+                                            <img src="${random.newsImage}" alt="" style="max-height: 150px; width: 330px ">
+                                        </a>
+                                    </div>
+                                </c:forEach> 
                             </div>
+
                             <div class="mar-bt-16">
                                 <div class="news-title-section m-0">
                                     <h4 class="m-0 text-uppercase">Newsletter</h4> 

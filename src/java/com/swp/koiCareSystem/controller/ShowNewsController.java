@@ -39,6 +39,7 @@ public class ShowNewsController extends HttpServlet {
             
             NewsService ns = new NewsService();
 
+            ArrayList<News> randomNews = ns.getRandomNews();
             ArrayList<News> newsListLatest = ns.getNewsLatest();
             ArrayList<News> listNewsSpecialV1 = ns.getListNewsSpecialByCateId(4);
             String titleNewsSpecialV1 = "Water Parameter Control News";
@@ -68,6 +69,7 @@ public class ShowNewsController extends HttpServlet {
             request.setAttribute("titleNewsSpecialV2", titleNewsSpecialV2);
             request.setAttribute("listNormalNews", listNormalNews);
             request.setAttribute("titleNewsNormal", titleNewsNormal);
+            request.setAttribute("randomNews", randomNews);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
 

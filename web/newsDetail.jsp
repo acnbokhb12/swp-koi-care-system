@@ -65,7 +65,7 @@
                         </div>
                         <div class="content-news-trend">
                             <c:forEach var="list" items="${listNewsInDetail}">
-                                <a href="#" class="trend-right-single d-flex">
+                                <a href="MainController?action=viewNews&id=${list.newsID}" class="trend-right-single d-flex">
                                     <div class="tren-right-img">
                                         <img src="${list.newsImage}" alt="">
                                     </div>

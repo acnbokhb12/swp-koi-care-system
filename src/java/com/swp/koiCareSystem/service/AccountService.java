@@ -159,7 +159,8 @@ public class AccountService {
  
     public static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
-        Account acc = acs.checkLogin("rikawa", "123456");
+//        Account acc = acs.checkLogin("rikawa", "123456");
+        String acc = acs.hashPassword("jinsu@123");
         System.out.println(acc);
     }
 }
