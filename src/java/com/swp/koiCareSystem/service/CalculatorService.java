@@ -40,10 +40,21 @@ public class CalculatorService {
     }
     public String getDescriptionrecommendation(String growthMode, float tempuratureAverage ){
         return  calculatorDAO.getDescriptionrecommendation(growthMode, tempuratureAverage);   
+    } 
+    public float calculateAmountOfSalt(float volumePond, float desiredSalt, float currenSalt){
+        float result = 0;
+        result = volumePond*((desiredSalt-currenSalt)/100);
+        return  result;
+        
     }
+    public float calculatePerWaterChange(int waterChagePercent, float volumnePond, float desiredSalt){
+        float result = 0 ;
+        result = ((float)waterChagePercent/100) * volumnePond * (desiredSalt/100);
+        return result;
+    }    
     public static void main(String[] args) {
         CalculatorService clts = new CalculatorService();
-       int amountFood = clts.calculatorFoodForFish("Low", (float) 0.8, (float) 18.3);
-        System.out.println(amountFood);
+        float i = clts.calculatePerWaterChange(20, 2300, (float) 0.4);
+        System.out.println(i);
     }
 }

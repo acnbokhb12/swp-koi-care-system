@@ -384,6 +384,22 @@
         <servlet-name>PurchaseHistoryController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.PurchaseHistoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DashboarAdminController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DashboarAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardManagerController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.DashboardManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaltCalculatorController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SaltCalculatorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaltCalculatorDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.SaltCalculatorDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -683,6 +699,22 @@
     <servlet-mapping>
         <servlet-name>PurchaseHistoryController</servlet-name>
         <url-pattern>/PurchaseHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboarAdminController</servlet-name>
+        <url-pattern>/DashboarAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardManagerController</servlet-name>
+        <url-pattern>/DashboardManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaltCalculatorController</servlet-name>
+        <url-pattern>/SaltCalculatorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaltCalculatorDetailController</servlet-name>
+        <url-pattern>/SaltCalculatorDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

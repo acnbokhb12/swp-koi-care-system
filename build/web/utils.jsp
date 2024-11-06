@@ -30,7 +30,7 @@
                         </div> 
                     </div>
                     <ul class="menu">
-                        <li><a href="dashboardAdmin.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
+                        <li><a href="MainController?action=dashboardAdmin"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                         <li><a href="manageAccount.jsp"><i class="fas fa-users"></i> Account Management</a></li> 
                         <li><a href="MainController?action=adminNews"><i class="fa-solid fa-newspaper"></i>News Management</a></li>   
                     </ul>
@@ -113,7 +113,7 @@
                         </div> 
                     </div>
                     <ul class="menu">
-                        <li><a href="dashboardManager.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="MainController?action=dashboardManager"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                         <li><a href="manageCategory.jsp"><i class="fa-solid fa-tags"></i> Category Manager</a></li>
                         <li><a href="MainController?action=productmanage"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
                         <li><a href="MainController?action=managerordermanage"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
@@ -294,13 +294,13 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="MainController?action=foodCaculator">
-                                                                            <i class="fa-solid fa-calculator"></i> Food Caculator
+                                                                        <a href="MainController?action=foodCalculator">
+                                                                            <i class="fa-solid fa-calculator"></i> Food Calculator
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="#">
-                                                                            <i class="fa-solid fa-calculator"></i> Salt Caculator
+                                                                        <a href="MainController?action=saltCalculator">
+                                                                            <i class="fa-solid fa-calculator"></i> Salt Calculator
                                                                         </a>
                                                                     </li>
 

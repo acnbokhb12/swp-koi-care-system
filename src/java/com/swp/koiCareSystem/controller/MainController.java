@@ -95,10 +95,13 @@ public class MainController extends HttpServlet {
                 case IConstant.FOOD_CALCULATOR:
                     url= "FoodCalculatorController";
                     break;
-                // START FOOD CALCULATOR ---------------------------------------------------------------------------------------
+                // START CALCULATOR ---------------------------------------------------------------------------------------
                 case IConstant.PURCHASE_HISTORY:
                     url = "PurchaseHistoryController";
                     break;
+                case IConstant.SALT_CALCULATOR:
+                    url = "SaltCalculatorController";
+                    break ;
                 // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";
@@ -240,6 +243,13 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.MANAGER_ORDER_STATUS_CHANGE:
                     url = "ManagerChangeOrderStatusController";
+                    break;
+                // START PLACE MANAGER ORDER -------------------------------------------------------------     
+                case IConstant.DASHBOARD_ADMIN:
+                    url = "DashboarAdminController";
+                    break;
+                case IConstant.DASHBOARD_MANAGER:
+                    url = "DashboardManagerController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
