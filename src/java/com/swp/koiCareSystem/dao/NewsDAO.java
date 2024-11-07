@@ -756,10 +756,57 @@ public class NewsDAO {
         return listN;
     }
 
+    public ArrayList<News> getLatestNewsInHome() {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<News> listN = new ArrayList<>();
+
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "select TOP 10 n.NewsID, n.Title, nc.newsCategoryID, nc.name, n.NewsImage, n.NewsDate\n"
+                    + "from [dbo].[News] n inner join [dbo].[newsCategory] nc\n"
+                    + "on n.newsCategoryID = nc.newsCategoryID\n"
+                    + "where n.isActive = 1 order by n.NewsID desc";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    News n = new News();
+                    NewsCategory nc = new NewsCategory(rs.getInt(3), rs.getString(4));
+                    n.setNewsID(rs.getInt(1));
+                    n.setTitle(rs.getString(2));
+                    n.setNewsImage(rs.getString(5));
+                    n.setNewsDate(rs.getTimestamp(6));
+                    n.setNewsCategory(nc);
+                    listN.add(n);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listN;
+    }
+
     public static void main(String[] args) {
         NewsDAO ndao = new NewsDAO();
 
-        ArrayList<News> list = ndao.getNewsListInNewsDetail();
+        ArrayList<News> list = ndao.getLatestNewsInHome();
         for (News news : list) {
             System.out.println("News ID: " + news.getNewsID());
             System.out.println("Title: " + news.getTitle());

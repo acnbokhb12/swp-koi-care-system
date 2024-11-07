@@ -92,6 +92,10 @@ public class NewsService {
         return ndao.randomNews();
     }
     
+    public ArrayList<News> getLatestNewsInHome(){
+        return ndao.getLatestNewsInHome();
+    }
+    
     public static void main(String[] args) {
         NewsService nsv = new NewsService();
 

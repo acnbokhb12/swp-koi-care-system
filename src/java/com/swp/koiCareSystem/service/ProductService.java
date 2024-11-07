@@ -90,4 +90,8 @@ public class ProductService {
     public Product getProductByIdWithoutIsActive(int productId){
         return productDAO.getProductByIdWithoutIsActive(productId);        
     }
+    
+    public ArrayList<Product> getTop10Product(){
+        return productDAO.getTop10Product();
+    }
 }

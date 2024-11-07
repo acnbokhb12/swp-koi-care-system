@@ -7,8 +7,12 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.News;
 import com.swp.koiCareSystem.model.OrderItem; 
+import com.swp.koiCareSystem.model.Product;
 import com.swp.koiCareSystem.service.CartService;
+import com.swp.koiCareSystem.service.NewsService;
+import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList; 
@@ -49,6 +53,14 @@ public class HomeController extends HttpServlet {
                     session.setAttribute("logined", "waslogin");
                 }
             }
+            
+            NewsService ns = new NewsService();
+            ArrayList<News> lastest = ns.getLatestNewsInHome();
+            ProductService ps = new ProductService();
+            ArrayList<Product> random = ps.getTop10Product();
+            
+            request.setAttribute("lastest", lastest);
+            request.setAttribute("random", random);
             request.getRequestDispatcher("home.jsp").forward(request, response);
  
         }
