@@ -41,11 +41,11 @@
              <div class="row mb-5">
                 <div class="col-lg-6">
                     <div class="body_caculator_detail">
-                        <form action="SaltCalculatorDetailController" method="post">
+                        <form action="SaltCalculatorDetailController" method="post" id="saltForm">
                             <div class="select_option-pond text-center  d-flex align-items-center flex-column">
                                 <div class="select_option-pond-detail mb-4 ">
                                     <h3>Choose Pond</h3>
-                                    <select name="pondInFor" id="" class="mb-3">
+                                    <select name="pondInFor" id="volumePond" class="mb-3" onchange="showVolumePond()">
                                         <c:forEach items="${listPond}" var="pItem"> 
                                             <option value="${pItem.pondID}-${pItem.volume}" ${pondId!=null && pondId==pItem.pondID ? 'selected' : '' } >${pItem.name}</option> 
                                         </c:forEach>
@@ -54,12 +54,19 @@
                                         <div class="desc-pond-detail">
                                             <div class="d-flex justify-content-between">
                                                 <h2>Pond Volume:</h2>
-                                                <h2 class="font-weight-bold">9,400 l</h2>
+                                                <div class="d-flex">
+                                                    <h2 class="font-weight-bold show_volume">
+                                                        0
+                                                    </h2>
+                                                    <h2 class="ml-2">
+                                                        l
+                                                    </h2>
+                                                </div>
 
                                             </div>
                                             <div class="">
                                                 <label for="currentConcentration" class="d-flex justify-content-between">
-                                                    <h2>Current Concentration:</h2> <h2 id="currentConcentrationValue" class="font-weight-bold">0%</h2>
+                                                    <h2>Current Concentration:</h2> <h2 id="currentConcentrationValue" class="font-weight-bold">${currentConcentration != null ? currentConcentration : 0}  %</h2>
                                                 </label>
                                             </div>
                                         </div>
@@ -74,7 +81,7 @@
                                         <div class="desc-pond-detail"> 
                                             <div class="">
                                                 <label for="desiredConcentration" class="d-flex justify-content-between m-0">
-                                                    <h2>Desired Concentration:</h2> <h2 class="font-weight-bold" id="desiredConcentrationValue">0%</h2>
+                                                    <h2>Desired Concentration:</h2> <h2 class="font-weight-bold" id="desiredConcentrationValue">${desiredConcentration != null ? desiredConcentration : 0}%</h2>
                                                  </label>
                                             </div>
                                         </div>
@@ -91,7 +98,7 @@
                                             <div class="">
                                                 <label for="waterChange" class="d-flex justify-content-between m-0">
                                                     <h2>Water Change:</h2>
-                                                    <h2 id="waterChangeValue">0%</h2></h2>
+                                                    <h2 id="waterChangeValue">${waterChange != null ? waterChange : 0}%</h2></h2>
                                                  </label>
                                             </div>
                                         </div>
@@ -116,6 +123,8 @@
                     <div class="body-desc-infor-caculator m-auto">
                         <h2 class="font-weight-bold">Disclaimer</h2> 
                         <p>Only add pure salt without iodine to the water! Too high of a salt concentration can be damaging to the koi. If you are unsure, please talk to a veterinarian. For fighting diseases and algae or for taking precautions a concentration of 0.5% is recommended.</p>
+                        
+                        <p class="pl-2 pr-2 pt-2 pb-2 m-0 text-white font-weight-bold d-inline-block" style="font-size: 1.4rem; background-color: #ff0b0b; border-radius: 8px;">Current concentration can not be greater than desired concentration</p>
                     </div>
                 </div>
              </div>
@@ -170,8 +179,31 @@
         updateSliderValue("currentConcentration", "currentConcentrationValue", "%");
         updateSliderValue("desiredConcentration", "desiredConcentrationValue", "%");
         updateSliderValue("waterChange", "waterChangeValue", "%"); 
+        
+        const volumeWithIdReal = document.getElementById('volumePond').value;
+        const arrayVolumeReal = volumeWithIdReal.split("-");
+        let volumeReal = parseFloat(arrayVolumeReal[1]);
+        const showVolume = document.querySelector('.show_volume');
+        showVolume.innerText = volumeReal;
+        
+        function showVolumePond(){
+            const volumeWithId = document.getElementById('volumePond').value;
+            const arrayVolume = volumeWithId.split("-");
+            let volume = parseFloat(arrayVolume[1]);
+            const showVolume = document.querySelector('.show_volume');
 
-
+            showVolume.innerText = volume;
+        }
+         
+       document.getElementById('saltForm').addEventListener('submit',(e)=>{
+            const currentSalt = parseFloat(document.getElementById('currentConcentration').value);
+            const desiredSalt = parseFloat(document.getElementById('desiredConcentration').value);
+            if(currentSalt > desiredSalt){
+                alert('Current concentration should not be greater than desired concentration');
+                e.preventDefault();
+                
+            }
+        });
     </script>
 </body>
 </html>

@@ -385,7 +385,8 @@
                 
             </div>
         </section>
-        
+        <div id="modal-logout-confirm"></div>
+
         <!-- footer -->
           <div id="footer"></div>
                     
@@ -399,6 +400,9 @@
     $('#footer').load('utils.jsp #footer__nav', ()=>{
         $.getScript('./assets/js/utilsCustomer.js');
     });
+      $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
 </script>
 <style>
     @media screen and (max-width: 1000px) {
