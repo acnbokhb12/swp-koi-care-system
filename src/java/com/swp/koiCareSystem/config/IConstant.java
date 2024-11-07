@@ -43,7 +43,7 @@ public interface IConstant {
 // START FISH GROWTH ----------------------------------------------------------------------------------------------------------------------------------
     public final String FISH_GROWTH_CHART_INFO = "fishgrowthchartinformation";
     public final String FISH_GROWTH_CHART_CREATE = "fishgrowthchartcreate";
-    public final String FISH_GROWTH_CHART_UPDATE= "fishgrowthchartupdate";
+    public final String FISH_GROWTH_CHART_UPDATE = "fishgrowthchartupdate";
     public final String FISH_GROWTH_CHART_DELETE = "fishgrowthchartdelete";
     public final String FISH_GROWTH_CHART_SEARCH_LENGTH = "fishgrowthchartsearchlength";
     public final String FISH_GROWTH_CHART_SEARCH_WEIGHT = "fishgrowthchartsearchweight";
@@ -56,6 +56,10 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
+// START POND ----------------------------------------------------------------------------------------------------------------------------------   
+    public final String WATER_PARAMETERS_MANAGE = "waterparametersmanage";
+    public final String WATER_PARAMETERS_CREATE_NEW = "waterparametercreatenew";
+
     // START AQUARIUM MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
     public static String ACCOUNT_FISH_MANAGE = "accountfishmanage";
     public static String FISH_MANAGE = "fishmanage";
@@ -63,10 +67,9 @@ public interface IConstant {
     public static String MANAGE_AQUARIUM_DETAILS = "manageaquariumdetails";
     public static String MANAGE_POND = "managepond";
     public static String MANAGE_POND_DETAILS = "manageponddetails";
-    
+
 // START FOOD CACULATOR
     public final String FOOD_CALCULATOR = "foodCaculator";
-    
 
 // START NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public static String BLOG = "blog";
@@ -74,7 +77,7 @@ public interface IConstant {
     public static String CREATE_NEW_BLOG = "createNewBlog";
     public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
-    
+
 // START ADMIN NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
     public final String CREATE_NEWS = "createNews";
     public final String NEWS_INFOR_CREATE = "newsInforCreate";
@@ -90,17 +93,17 @@ public interface IConstant {
     public static String PRODUCT_INFORMATION_UPDATE = "productinformationupdate";
     public static String PRODUCT_CREATE_NEW = "productcreatenew";
     public static String PRODUCT_UPDATE = "productupdate";
-    public static String PRODUCT_DELETE = "productdelete"; 
-    public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate"; 
-    
+    public static String PRODUCT_DELETE = "productdelete";
+    public static String PRODUCT_IMAGE_UPDATE = "productimgageupdate";
+
 // START FORGET PASSWORD ----------------------------------------------------------------------------------------------------------------------------------
-    public final String CUSTOMER_FORGET_PASSWORD  = "forgetpassword";
+    public final String CUSTOMER_FORGET_PASSWORD = "forgetpassword";
     public final String CUSTOMER_VALIDATE_OTP = "validateotp";
-    public final String CUSTOMER_NEW_PASSWORD = "newpassword"; 
-    
+    public final String CUSTOMER_NEW_PASSWORD = "newpassword";
+
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
-    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load(); 
-    
+    Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
+
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");
     public static final String GOOGLE_CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET");
     public static final String GOOGLE_REDIRECT_URI = dotenv.get("GOOGLE_REDIRECT_URI");
@@ -111,6 +114,6 @@ public interface IConstant {
     public final String CLOUDINARY_NAME = dotenv.get("CLOUDINARY_NAME");
     public final String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
     public final String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
-    
-    public final String URI_JEDIS = dotenv.get("URI_JEDIS"); 
+
+    public final String URI_JEDIS = dotenv.get("URI_JEDIS");
 }

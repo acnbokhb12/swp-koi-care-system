@@ -279,7 +279,7 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="waterParameter.jsp">
+                                                                        <a href="MainController?action=waterparametersmanage">
                                                                             <i class="fa-solid fa-droplet"></i> Water Parameters
                                                                         </a>
                                                                     </li>

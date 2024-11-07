@@ -329,6 +329,18 @@
         <servlet-name>FoodCalculatorDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.FoodCalculatorDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WaterParametersManageController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.WaterParametersManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WaterParametersInformationController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.WaterParametersInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WaterParametersCreateNewController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.WaterParametersCreateNewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -600,6 +612,18 @@
     <servlet-mapping>
         <servlet-name>FoodCalculatorDetailController</servlet-name>
         <url-pattern>/FoodCalculatorDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WaterParametersManageController</servlet-name>
+        <url-pattern>/WaterParametersManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WaterParametersInformationController</servlet-name>
+        <url-pattern>/WaterParametersInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WaterParametersCreateNewController</servlet-name>
+        <url-pattern>/WaterParametersCreateNewController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
