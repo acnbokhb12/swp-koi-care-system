@@ -169,9 +169,8 @@ public class AccountService {
         return acd.countAccountsByStatus(idStatus);
     }
 
-    public ArrayList<AccountStatus> getAllAccountsStatusToAdminS(int idStatus, int index) {
-        ArrayList<AccountStatus> listacc = acd.getAllAccountStatuses();
-        return listacc;
+    public ArrayList<AccountStatus> getAllAccountsStatusToAdminS() {
+        return acd.getAllAccountStatuses();
     }
 
     public ArrayList<Account> searchAccountByStatus(int statusID, int index) {
@@ -196,10 +195,6 @@ public class AccountService {
     //UPDATE 
     public boolean updateInformationAccounts(Account account) {
         return acd.updateInformationAccount(account);
-    }
-    
-        public Account getAccountsByIDS(int accountID) {
-        return acd.getAccountById(accountID);
     }
 
     static void main(String[] args) throws Exception {

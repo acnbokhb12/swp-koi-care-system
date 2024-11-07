@@ -605,7 +605,7 @@ public class AccountDAO {
         ResultSet rs = null;
         Connection conn = null;
         PreparedStatement psm = null;
-        String sql = "SELECT count(*) FROM Accounts";
+        String sql = "SELECT count(*) FROM Accounts WHERE isActive = 1";
 
         try {
             conn = DatabaseConnectionManager.getConnection();
@@ -643,11 +643,13 @@ public class AccountDAO {
         PreparedStatement ps = null;
         int distance = (index - 1) * 10;
 
-        String sql
-                = "SELECT * \n"
-                + "FROM Accounts \n"
-                + "ORDER BY AccID \n"
-                + "OFFSET ? ROWS \n"
+        String sql = "SELECT a.AccID, a.Email, a.KoiCareID, a.UserImage, a.Password, a.FullName, "
+                + "a.PhoneNumber, a.UserRole, a.Address, a.Gender, a.idStatus, s.name AS StatusName, a.isActive "
+                + "FROM Accounts a "
+                + "JOIN AccountStatus s ON a.idStatus = s.idStatus "
+                + "WHERE a.isActive = 1 "
+                + "ORDER BY a.AccID "
+                + "OFFSET ? ROWS "
                 + "FETCH NEXT 10 ROWS ONLY;";
         try {
             conn = DatabaseConnectionManager.getConnection();
@@ -670,6 +672,11 @@ public class AccountDAO {
                     account.setAddress(rs.getString("Address"));
                     account.setGender(rs.getString("Gender"));
                     account.setAccountStatus(rs.getInt("idStatus"));
+
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName"));
+                    account.setAccstatus(accStatus);
 
                     listAcc.add(account);
                 }
@@ -703,7 +710,7 @@ public class AccountDAO {
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
-                String sql = "SELECT DISTINCT idStatus, name FROM AccountStatus";
+                String sql = "SELECT idStatus, name FROM AccountStatus";
                 pst = cn.prepareStatement(sql);
                 rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
@@ -739,7 +746,7 @@ public class AccountDAO {
 
         String sql = "SELECT a.[AccID], a.[Email], a.[KoiCareID], a.[UserImage], a.[FullName], "
                 + "a.[PhoneNumber], a.[UserRole], a.[Address], a.[Gender], a.[idStatus], "
-                + "a.[isActive], s.[name] AS statusName "
+                + "a.[isActive], s.[name] "
                 + "FROM [Koi_Care_System_At_Home].[dbo].[Accounts] a "
                 + "JOIN [Koi_Care_System_At_Home].[dbo].[AccountStatus] s ON a.[idStatus] = s.[idStatus] "
                 + "WHERE a.[idStatus] = ? AND a.[isActive] = 1 "
@@ -767,7 +774,8 @@ public class AccountDAO {
 
                     AccountStatus status = new AccountStatus();
                     status.setStatusID(rs.getInt("idStatus"));
-                    status.setStatusName(rs.getString("statusName"));
+                    status.setStatusName(rs.getString("name"));
+
                     account.setAccstatus(status);
 
                     listA.add(account);
@@ -894,8 +902,11 @@ public class AccountDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Account account = null;
-        String sql = "SELECT * FROM Accounts WHERE AccID = ? AND idStatus = 1";
-
+        String sql = "SELECT a.AccID, a.Email, a.KoiCareID, a.UserImage, a.Password, a.FullName, "
+                + "a.PhoneNumber, a.UserRole, a.Address, a.Gender, a.idStatus, a.isActive, s.name AS StatusName "
+                + "FROM Accounts a "
+                + "LEFT JOIN AccountStatus s ON a.idStatus = s.idStatus "
+                + "WHERE a.AccID = ?";
         try {
             conn = DatabaseConnectionManager.getConnection(); // Mở kết nối tới cơ sở dữ liệu
             ps = conn.prepareStatement(sql);
@@ -915,7 +926,12 @@ public class AccountDAO {
                 account.setUserRole(rs.getString("UserRole"));
                 account.setAddress(rs.getString("Address"));
                 account.setGender(rs.getString("Gender"));
-                account.setAccountStatus(rs.getInt("idStatus"));
+                account.setAccountStatus(rs.getInt("isActive"));
+
+                AccountStatus accStatus = new AccountStatus();
+                accStatus.setStatusID(rs.getInt("idStatus"));
+                accStatus.setStatusName(rs.getString("StatusName"));
+                account.setAccstatus(accStatus);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -977,73 +993,11 @@ public class AccountDAO {
         return false;
     }
 
-    // Phương thức lấy thông tin tài khoản theo AccID
-    public Account getAccountById(int accountId) {
-        Account account = null; // Khởi tạo đối tượng Account
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DatabaseConnectionManager.getConnection(); 
-            if (conn != null) {
-                String sql = "SELECT * FROM Accounts WHERE AccID = ?"; 
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, accountId); 
-
-                rs = ps.executeQuery();
-                if (rs.next()) { 
-                    account = new Account();
-                    account.setUserID(rs.getInt("AccID"));
-                    account.setEmail(rs.getString("Email"));
-                    account.setPassword(rs.getString("Password"));
-                    account.setFullName(rs.getString("FullName"));
-                    account.setPhoneNumber(rs.getString("PhoneNumber"));
-                    account.setUserRole(rs.getString("UserRole"));
-                    account.setAddress(rs.getString("Address"));
-                    account.setAddress(rs.getString("Address"));
-                    account.setGender(rs.getString("Gender"));
-                    account.setAccountStatus(rs.getInt("idStatus"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return account; 
-    }
- public static void main(String[] args) {
+    public static void main(String[] args) {
         AccountDAO accountDAO = new AccountDAO();
 
-        int testAccountId = 1; 
+        int testAccountId = 1;
 
-        Account account = accountDAO.getAccountById(testAccountId);
-
-        if (account != null) {
-            System.out.println("Account ID: " + account.getUserID());
-            System.out.println("Email: " + account.getEmail());
-            System.out.println("Full Name: " + account.getFullName());
-            System.out.println("Phone Number: " + account.getPhoneNumber());
-            System.out.println("User Role: " + account.getUserRole());
-            System.out.println("Address: " + account.getAddress());
-            System.out.println("Gender: " + account.getGender());
-            System.out.println("Is Active: " + account.getAccountStatus());
-        } else {
-            System.out.println("No account found with ID: " + testAccountId);
-        }
     }
 }
 //UPDATE INFORMATION

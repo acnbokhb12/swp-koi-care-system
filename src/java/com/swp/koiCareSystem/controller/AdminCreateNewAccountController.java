@@ -39,15 +39,14 @@ public class AdminCreateNewAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
+           
+            ImageUploadService imgs = new ImageUploadService();
             String imageUrl = "";
 
             // Xử lý tải lên hình ảnh
             if (filePart != null) {
-                ImageUploadService imgs = new ImageUploadService();
                 try {
                     imageUrl = imgs.uploadImage(filePart, tempDir);
                     System.out.println(imageUrl);
@@ -64,7 +63,7 @@ public class AdminCreateNewAccountController extends HttpServlet {
             String address = request.getParameter("address");
             String phoneNumber = request.getParameter("phoneNumber");
             String gender = request.getParameter("gender");
-            int accountStatus = 1; // Bạn có thể thay đổi giá trị này nếu cần
+            int accountStatus = 1;
 
             // Tạo đối tượng Account
             Account account = new Account();

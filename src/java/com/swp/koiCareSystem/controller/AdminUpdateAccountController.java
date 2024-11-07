@@ -11,6 +11,7 @@ import com.swp.koiCareSystem.service.AccountService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,37 +36,40 @@ public class AdminUpdateAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-   String accid = request.getParameter("accid");
-    String accountEmail = request.getParameter("accountEmail");
-    String accountName = request.getParameter("accountName");
-    String accountAddress = request.getParameter("accountAddress");
-    String accountGender = request.getParameter("accountGender");
-    String accountPhone = request.getParameter("accountPhone");
-    String accountRole = request.getParameter("accountRole");
-    
-    // Tạo đối tượng Account
-    Account account = new Account();
-    account.setUserID(Integer.parseInt(accid));
-    account.setEmail(accountEmail);
-    account.setFullName(accountName);
-    account.setAddress(accountAddress);
-    account.setGender(accountGender);
-    account.setPhoneNumber(accountPhone);
-    account.setUserRole(accountRole);
+            String accid = request.getParameter("accountId");
+            String accountEmail = request.getParameter("accountEmail");
+            String accountName = request.getParameter("accountName");
+            String accountAddress = request.getParameter("accountAddress");
+            String accountGender = request.getParameter("accountGender");
+            String accountPhone = request.getParameter("accountPhone");
+            String accountRole = request.getParameter("accountRole");
+            String koiCareID = request.getParameter("koiCareID");
+            String password = request.getParameter("password");
 
-    AccountService accountService = new AccountService();
-    boolean isUpdated = accountService.updateInformationAccounts(account);
+            Account account = new Account();
+            account.setUserID(Integer.parseInt(accid));
+            account.setEmail(accountEmail);
+            account.setFullName(accountName);
+            account.setAddress(accountAddress);
+            account.setGender(accountGender);
+            account.setPhoneNumber(accountPhone);
+            account.setUserRole(accountRole);
+            account.setKoiCareID(koiCareID);
 
-    String url = "";
-    if (isUpdated) {
-        url = "MainController?action=" + IConstant.ADMIN_ACCOUNT_INFORMATION + "&accid=" + account.getUserID();
-    } else {
-        url = "MainController?action=" + IConstant.ADMIN_ACCOUNT_UPDATE + "&accid=" + account.getUserID();
+            AccountService accountService = new AccountService();
+            boolean isUpdated = accountService.updateInformationAccounts(account);
+
+            String url = "";
+            if (isUpdated) {
+                url = "MainController?action=" + IConstant.ADMIN_ACCOUNT_INFORMATION + "&accid=" + account.getUserID();
+            } else {
+                url = "MainController?action=" + IConstant.ADMIN_ACCOUNT_UPDATE + "&accid=" + account.getUserID();
+            }
+
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
-    
-    request.getRequestDispatcher(url).forward(request, response);
-}
-    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

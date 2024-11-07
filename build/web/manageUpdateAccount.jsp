@@ -42,16 +42,7 @@
                             <h3 id="formTitle">Edit Account</h3>
 
                             <!-- Check if update was successful and display a message -->
-                            <c:if test="${not empty isUpdated}">
-                                <div class="alert alert-success">
-                                    <strong>Success!</strong> The account was updated successfully.
-                                </div>
-                            </c:if>
-                            <c:if test="${empty isUpdated}">
-                                <div class="alert alert-danger">
-                                    <strong>Error!</strong> There was an issue updating the account.
-                                </div>
-                            </c:if>
+                            <!--Làm toast message truyền lên là được ko check empty tại nó đang ko có mặc định săn là empty dư-->
 
                             <form id="accountForm" action="adminAccountUpdate" method="POST">
                                 <label for="accountId">Account ID:</label>
@@ -68,9 +59,12 @@
 
                                 <label for="accountGender">Gender:</label>
                                 <select id="accountGender" name="accountGender" required>
-                                    <option value="male" ${account.gender == 'male' ? 'selected' : ''}>Male</option>
-                                    <option value="female" ${account.gender == 'female' ? 'selected' : ''}>Female</option>
-                                </select><br> 
+                                    <option value="male" ${account.gender == 'Man' ? 'selected' : ''}>Man</option>
+                                    <option value="female" ${account.gender == 'Woman' ? 'selected' : ''}>Woman</option>
+                                    <option value="other" ${account.gender == 'Other' ? 'selected' : ''}>Other</option>
+                                </select>
+                                <br>
+
 
                                 <label for="accountPhone">Phone Number:</label>
                                 <input type="text" id="accountPhone" name="accountPhone" value="${account.phoneNumber}" required><br>

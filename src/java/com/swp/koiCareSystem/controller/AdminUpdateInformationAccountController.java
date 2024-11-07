@@ -50,7 +50,7 @@ public class AdminUpdateInformationAccountController extends HttpServlet {
             int id = Integer.parseInt(accid);
 
             AccountService accs = new AccountService();
-            Account accountToUpdate = accs.getAccountsByIDS(id);
+            Account accountToUpdate = accs.getAccountInformationByID(id);
             request.setAttribute("account", accountToUpdate);
 
             request.getRequestDispatcher("manageUpdateAccount.jsp").forward(request, response);

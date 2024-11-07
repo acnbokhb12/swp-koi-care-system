@@ -41,96 +41,100 @@ public class AdminAccountStatusController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            if (acc.getUserRole().equalsIgnoreCase("user")) {
+            // Kiểm tra quyền truy cập
+            if (acc == null || acc.getUserRole().equalsIgnoreCase("user")) {
                 request.getRequestDispatcher("HomeController").forward(request, response);
-            } else if (acc.getUserRole().equalsIgnoreCase("admin")) {
+                return;
+            } else if (acc == null && acc.getUserRole().equalsIgnoreCase("admin")) {
                 request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
+                return;
             }
 
             String statusId = request.getParameter("status");
-            int status = Integer.parseInt(statusId);
-            String indexPage = request.getParameter("index");
+            int status = 1; 
+            if (statusId != null && !statusId.isEmpty()) {
+                try {
+                    status = Integer.parseInt(statusId); 
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    status = 0; 
+                }
+            }
 
+            String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";
             }
 
             int index = 1;
-
             try {
                 index = Integer.parseInt(indexPage);
                 if (index <= 0) {
-                    response.sendRedirect("MainController?action=" + IConstant.ADMIN_ACCOUNT);
-                    return;
+                    index = 1;
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("MainController?action=" + IConstant.ADMIN_ACCOUNT);
-                return;
+                index = 1; 
             }
 
+            // Gọi dịch vụ để lấy dữ liệu
             AccountService accountService = new AccountService();
 
-// Get the count of accounts by status ID
+            // Lấy số lượng tài khoản với trạng thái
             int count = accountService.countAllAccountsStatusToAdminS(status);
             int endPage = count / 10;
             if (count % 10 != 0) {
                 endPage++;
             }
 
-// Retrieve accounts based on status and page index
+            ArrayList<AccountStatus> listStatus = accountService.getAllAccountsStatusToAdminS();
             ArrayList<Account> listAccountSearchStatus = accountService.searchAccountByStatus(status, index);
-            ArrayList<AccountStatus> listStatus = accountService.getAllAccountsStatusToAdminS(status, index);
 
             request.setAttribute("listAcc", listAccountSearchStatus);
-            request.setAttribute("listAccS", listStatus);               
-            request.setAttribute("tag", index);                      
-            request.setAttribute("endPage", endPage);             
-            request.setAttribute("TagStatusId", statusId);           
+            request.setAttribute("listAccS", listStatus);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
 
             request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
         }
     }
-            // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-            /**
-             * Handles the HTTP <code>GET</code> method.
-             *
-             * @param request servlet request
-             * @param response servlet response
-             * @throws ServletException if a servlet-specific error occurs
-             * @throws IOException if an I/O error occurs
-             */
-            @Override
-            protected void doGet
-            (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-                processRequest(request, response);
-            }
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
-            /**
-             * Handles the HTTP <code>POST</code> method.
-             *
-             * @param request servlet request
-             * @param response servlet response
-             * @throws ServletException if a servlet-specific error occurs
-             * @throws IOException if an I/O error occurs
-             */
-            @Override
-            protected void doPost
-            (HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                processRequest(request, response);
-            }
+        processRequest(request, response);
+    }
 
-            /**
-             * Returns a short description of the servlet.
-             *
-             * @return a String containing servlet description
-             */
-            @Override
-            public String getServletInfo
-            
-                () {
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-            }// </editor-fold>
+    }// </editor-fold>
 
-        }
+}

@@ -45,12 +45,16 @@
                             <button class="btn-submit-search-order" type="submit">Search</button>
                         </form>
 
-                        <div class="d-flex row-processing">
-                            <a class="link-processing active" href="MainController?action=adminaccount">All</a>
-                            <c:forEach var="statusId" items="${listAccS}">
-                                <a class="link-processing ${TagStatusId == statusId.statusID ? 'active' : ''}" href="AdminAccountStatusController?status=${statusId.statusID}">${statusId.statusName}</a> 
-                            </c:forEach>
-                        </div>
+                        <div class="table-container overflow-auto"> 
+                            <div class="row row-order-processing m-0 mb-3">
+                                <a class="link-processing" href="MainController?action=adminAccount">All</a>
+                                <c:forEach var="statusId" items="${listAccS}">
+                                    <a class="link-processing" href="MainController?action=adminAccountStatus&status=${statusId.statusID}">
+                                        ${statusId.statusName}
+                                    </a>
+                                </c:forEach>
+                            </div>  
+                        </div> 
 
                         <div class="table-container">
                             <table id="accountTable" class="table">
@@ -62,7 +66,7 @@
                                         <th>Address</th> 
                                         <th>Phone Number</th> 
                                         <th>Role</th> 
-                                        <th>Status</th> 
+                                        <th>Status</th>
                                         <th>Actions</th> 
                                     </tr>
                                 </thead>
@@ -75,24 +79,25 @@
                                             <td class="address__acc">${acc.address}</td>
                                             <td>${acc.phoneNumber}</td>
                                             <td>${acc.userRole}</td>
-                                            <td>${acc.accountStatus}</td>
+                                            <td>${acc.accstatus.statusName}</td>
                                             <td class="text-center">
-                                                <a href="AdminAccountInformationController?accid=${acc.userID}" class="edit-btn"><i class="fas fa-edit"></i></a>
-                                                <a href="MainController?action=adminAccountDelete&accid=${acc.userID}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this account ?');">
+                                                <a href="MainController?action=adminAccountInformation&accid=${acc.userID}" class="edit-btn"><i class="fas fa-edit"></i></a>
+                                                <a href="MainController?action=adminAccountDelete&accid=${acc.userID}" class="delete-btn" id="delete-${acc.userID}">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-
                                             </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
                             <div class="footer">
-                                <ul class="pagination">s
+                                <ul class="pagination">
                                     <!-- Nút Previous -->
+
+                                    <!--                                    Thêm Pagging cho status nữa cái đó bà tham khảo tự làm-->
                                     <c:if test="${tag > 1}">
                                         <li class="page-item">
-                                            <a href="AdminAccountController?index=${tag-1}&acid=${param.acid}" class="page-link text-dark">
+                                            <a href="AdminAccountController?index=${tag-1}" class="page-link text-dark">
                                                 <i class="fa-solid fa-chevron-left"></i> Previous
                                             </a>
                                         </li>
@@ -101,7 +106,7 @@
                                     <c:forEach var="i" begin="1" end="${endPage}" step="1">
                                         <c:if test="${i <= 3 || i >= endPage - 2 || (i >= tag - 1 && i <= tag + 1)}">
                                             <li class="page-item ${tag == i ? 'active' : ''}">
-                                                <a href="AdminAccountController?index=${i}&acid=${param.acid}" class="page-link text-dark">
+                                                <a href="AdminAccountController?index=${i}" class="page-link text-dark">
                                                     ${i}
                                                 </a>
                                             </li>
@@ -123,7 +128,7 @@
                                     <!-- Nút Next -->
                                     <c:if test="${tag < endPage}">
                                         <li class="page-item">
-                                            <a href="AdminAccountController?index=${tag + 1}&acid=${param.acid}" class="page-link text-dark">
+                                            <a href="AdminAccountController?index=${tag + 1}" class="page-link text-dark">
                                                 Next <i class="fa-solid fa-chevron-right"></i>
                                             </a>
                                         </li>
@@ -141,9 +146,9 @@
                             <div class="col-4">
                                 <div class="img-add-submit">
                                     <div class="img-info-add">
-                                        <img id="imagePreview" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lq2v9pw1pdci29.webp" alt="account_image" class="account-image">
+                                        <img id="imagePreview" src="https://i.pinimg.com/564x/bc/43/98/bc439871417621836a0eeea768d60944.jpg" alt="account_image" class="account-image">
                                     </div>
-                                    <input id="imageInput" type="file" name="account_image" accept="image/*" required>
+                                    <input id="imageInput" type="file" name="fileimg" accept="image/*" required>
                                 </div>
                             </div>
                             <div class="col-8 edit-info">
@@ -173,17 +178,17 @@
                                     <div class="col-md-6 add-item-detail">
                                         <label>Gender:</label>
                                         <select name="gender" required class="form-control">
-                                            <option value="Male" selected>Male</option>
-                                            <option value="Female">Female</option>
+                                            <option value="Man" selected>Man</option>
+                                            <option value="Woman">Woman</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 add-item-detail">
                                         <label>Role:</label>
                                         <select name="role" required class="form-control">
-                                            <option value="Customer" selected>Customer</option>
-                                            <option value="Manager">Manager</option>
-                                            <option value="Admin">Admin</option>
+                                            <option value="customer" selected>Customer</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="admin">Admin</option>
                                         </select>
                                     </div>
                                 </div>
@@ -197,40 +202,37 @@
             <!-- Scripts -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
-                                                    $('#header').load('utils.jsp #header_admin', function () {
-                                                        $.getScript('./assets/js/utilsAdmin.js');
-                                                    });
-                                                    $('#sidebar_admin').load('utils.jsp #sidebar_admin', function () {
-                                                        $.getScript('./assets/js/utilsAdmin.js');
-                                                    });
+                $('#header').load('utils.jsp #header_admin', function () {
+                    $.getScript('./assets/js/utilsAdmin.js');
+                });
+                $('#sidebar_admin').load('utils.jsp #sidebar_admin', function () {
+                    $.getScript('./assets/js/utilsAdmin.js');
+                });
 
-                                                    $(document).on('click', '.link_add-account', function () {
-                                                        $('.container_main-add').css('display', 'flex');
-                                                    });
+                $(document).on('click', '.link_add-account', function () {
+                    $('.container_main-add').css('display', 'flex');
+                });
 
-                                                    $(document).on('click', '.btn-close-add', function () {
-                                                        $('.container_main-add').css('display', 'none');
-                                                    });
+                $(document).on('click', '.btn-close-add', function () {
+                    $('.container_main-add').css('display', 'none');
+                });
 
-                                                    $('#imageInput').change(function () {
-                                                        const file = this.files[0];
-                                                        const reader = new FileReader();
-                                                        reader.onload = function (e) {
-                                                            $('#imagePreview').attr('src', e.target.result);
-                                                        }
-                                                        reader.readAsDataURL(file);
-                                                    });
+                $('#imageInput').change(function () {
+                    const file = this.files[0];
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                });
 
-                                                    // Delete account functionality
-                                                    $('.btn-delete-acc').click(function (e) {
-                                                        e.preventDefault();
-                                                        const userId = $(this).data('userID');
-                                                        const confirmation = confirm("Are you sure you want to delete this account?");
-                                                        if (confirmation) {
-                                                            // Call to delete the account
-                                                            window.location.href = "adminAccountDeleteController&accid=" + userId;
-                                                        }
-                                                    });
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        if (!confirm('Are you sure you want to delete this account?')) {
+                            event.preventDefault();
+                        }
+                    });
+                });
             </script>
         </div>
     </body>

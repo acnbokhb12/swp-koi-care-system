@@ -33,7 +33,7 @@
                         <div class="header_ac-detail d-flex justify-content-between align-items-center">
                             <h1>Account Detail</h1>  
                             <div>
-                              <a href="AdminUpdateInformationAccountController?accid=${account.userID}" class="link_update-account">Update Account</a>
+                                <a href="AdminUpdateInformationAccountController?accid=${account.userID}" class="link_update-account">Update Account</a>
                                 <a href="AdminDeleteAccountController?accid=${account.userID}" class="link_delete-account">Delete Account</a>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
         </style>
 
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#header').load('utils.jsp #header_admin', () => {
                     $.getScript('./assets/js/utilsAdmin.js');
                 });

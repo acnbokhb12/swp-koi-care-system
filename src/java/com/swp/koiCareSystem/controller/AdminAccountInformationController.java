@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,6 +35,13 @@ public class AdminAccountInformationController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
+            if (acc == null) {
+                response.sendRedirect("home.jsp");
+                return;
+            }
+
             String accountId = request.getParameter("accid");
             int id = Integer.parseInt(accountId);
 
