@@ -7,7 +7,7 @@ package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.model.Product;
-import com.swp.koiCareSystem.model.ProductCategory; 
+import com.swp.koiCareSystem.model.ProductCategory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -711,11 +711,12 @@ public class ProductDAO {
         }
         return pd;
     }
+
     public Product getProductByIdWithoutIsActive(int id) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        Product pd = null; 
+        Product pd = null;
         try {
             cn = DatabaseConnectionManager.getConnection();
             if (cn != null) {
@@ -755,5 +756,68 @@ public class ProductDAO {
             }
         }
         return pd;
+    }
+
+    public ArrayList<Product> getTop10Product() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        ArrayList<Product> listP = new ArrayList<>();
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            String sql = "SELECT TOP 10 p.ProductID, p.Image, p.Name, p.Description, cp.CategoryID, cp.CategoryName\n"
+                    + "FROM [dbo].[Products] p\n"
+                    + "INNER JOIN [dbo].[CategoryProduct] cp\n"
+                    + "ON p.CategoryID = cp.CategoryID\n"
+                    + "WHERE p.isActive = 1 ORDER BY p.ProductID desc";
+            pst = cn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Product p = new Product();
+                    ProductCategory pc = new ProductCategory(rs.getInt(5), rs.getString(6));
+                    p.setProductID(rs.getInt(1));
+                    p.setImgProduct(rs.getString(2));
+                    p.setNameProduct(rs.getString(3));
+                    p.setDescription(rs.getString(4));
+                    p.setCategoryP(pc);
+                    listP.add(p);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listP;
+    }
+    
+    public static void main(String[] args) {
+        ProductDAO pdao = new ProductDAO();
+        
+        ArrayList<Product> list = pdao.getTop10Product();
+        for(Product product : list){
+            System.out.println("ID: " + product.getProductID());
+            System.out.println("Image: " + product.getImgProduct());
+            System.out.println("Name: " + product.getNameProduct());
+            System.out.println("Desc: " + product.getDescription());
+            System.out.println("Cate ID: " + product.getCateId());
+            System.out.println("Cate Name: " + product.getCategoryP().getCategoryName());
+            System.out.println("-------------------------------");
+        }
     }
 }
