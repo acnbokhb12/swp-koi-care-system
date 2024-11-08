@@ -416,6 +416,38 @@
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersCreateNewController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAccountStatusController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminAccountStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCreateNewAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminCreateNewAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAccountInformationController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminAccountInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateInformationAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateInformationAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateImageAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateImageAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateAccountController</servlet-class> 
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -747,6 +779,38 @@
     <servlet-mapping>
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <url-pattern>/WaterParametersCreateNewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>     
+        <servlet-name>AdminAccountController</servlet-name>
+        <url-pattern>/AdminAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAccountStatusController</servlet-name>
+        <url-pattern>/AdminAccountStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCreateNewAccountController</servlet-name>
+        <url-pattern>/AdminCreateNewAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteAccountController</servlet-name>
+        <url-pattern>/AdminDeleteAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAccountInformationController</servlet-name>
+        <url-pattern>/AdminAccountInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateInformationAccountController</servlet-name>
+        <url-pattern>/AdminUpdateInformationAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateImageAccountController</servlet-name>
+        <url-pattern>/AdminUpdateImageAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateAccountController</servlet-name>
+        <url-pattern>/AdminUpdateAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

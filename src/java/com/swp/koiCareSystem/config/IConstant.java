@@ -80,10 +80,9 @@ public interface IConstant {
     public static String CREATE_NEW_BLOG = "createNewBlog";
     public static String DELET_BLOG = "deleteBlog";
     public final String NEWS = "news";
-
     public final String VIEW_NEWS = "viewNews";
 
-// START ADMIN NEWS-BLOGS ----------------------------------------------------------------------------------------------------------------------------------     
+// START ADMIN NEWS ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public final String CREATE_NEWS = "createNews";
     public final String NEWS_INFOR_CREATE = "newsInforCreate";
     public final String ADMIN_NEWS = "adminNews";
@@ -116,7 +115,18 @@ public interface IConstant {
     public final String DASHBOARD_ADMIN = "dashboardAdmin";
     public final String DASHBOARD_MANAGER = "dashboardManager";
 
-// GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
+//START ADMIN ACCOUNT ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public final String ADMIN_ACCOUNT = "adminAccount";
+    public final String ADMIN_ACCOUNT_STATUS = "adminAccountStatus";
+    public final String ADMIN_ACCOUNT_CREATE = "adminAccountCreate";
+    public final String ADMIN_ACCOUNT_DELETE = "adminAccountDelete";
+    public final String ADMIN_ACCOUNT_UPDATE = "adminAccountUpdate";
+    public final String ADMIN_ACCOUNT_INFORMATION = "adminAccountInformation";
+    public final String ADMIN_ACCOUNT_UPDATE_INFORMATION = "adminAccountUpdateInformation";
+    public final String ADMIN_ACCOUNT_UPDATE_IMAGE = "adminAccountUpdateImage";
+
+    // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
+
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
 
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");

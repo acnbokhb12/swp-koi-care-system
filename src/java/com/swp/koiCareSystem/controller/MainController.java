@@ -206,8 +206,8 @@ public class MainController extends HttpServlet {
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
                     break;  
-                // START PLACE CUSTOMER FORGET PASSWORD -------------------------------------------------------------     
-                 case IConstant.CUSTOMER_FORGET_PASSWORD:
+                // START PLACE CUSTOMER FORGET PASSWORD -------------------------------------------------------------                   
+                case IConstant.CUSTOMER_FORGET_PASSWORD:
                     url = "CustomerForgetPasswordController";
                     break;
                 case IConstant.CUSTOMER_VALIDATE_OTP:
@@ -231,7 +231,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.ADMIN_DELETE_NEWS:
                     url = "AdminDeleteNewsByIdController";
-                    break;
+                    break; 
                 case IConstant.ADMIN_SEARCH_NEWS_CATE:
                     url = "AdminSearchNewsCateController";
                     break;
@@ -262,7 +262,32 @@ public class MainController extends HttpServlet {
                     url = "DashboarAdminController";
                     break;
                 case IConstant.DASHBOARD_MANAGER:
-                    url = "DashboardManagerController";
+                    url = "DashboardManagerController"; 
+                    break;
+                // START PLACE ADMIN ACCOUNT -------------------------------------------------------- 
+                case IConstant.ADMIN_ACCOUNT:
+                    url = "AdminAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_STATUS:
+                    url = "AdminAccountStatusController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_CREATE:
+                    url = "AdminCreateNewAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_DELETE:
+                    url = "AdminDeleteAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_UPDATE:
+                    url = "AdminUpdateAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_UPDATE_INFORMATION:
+                    url = "AdminUpdateInformationAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_UPDATE_IMAGE:
+                    url = "AdminUpdateImageAccountController";
+                    break;
+                case IConstant.ADMIN_ACCOUNT_INFORMATION:
+                    url = "AdminAccountInformationController";
                     break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:

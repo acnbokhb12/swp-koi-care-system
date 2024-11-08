@@ -437,3 +437,50 @@
         margin: 5px 0; 
     }
 }
+
+
+/* Start Paging */
+.pagination {
+    display: flex;
+    justify-content: center; /* Canh giữa phần tử */
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto; /* Thêm `auto` để căn giữa */
+}
+
+.page-item {
+    margin: 0 5px; 
+}
+
+.page-item a {
+    display: block;
+    padding: 10px 15px; 
+    color: #007bff; 
+    text-decoration: none; 
+    border: 1px solid #007bff; 
+    border-radius: 5px; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.page-item a:hover {
+    background-color: #007bff; 
+    color: white; 
+}
+
+.page-item.active a {
+    background-color: #007bff; 
+    color: white; 
+    border-color: #007bff; 
+}
+
+.page-item.disabled span {
+    color: #6c757d; 
+    pointer-events: none; 
+}
+
+.page-item.disabled span.page-link {
+    cursor: default; 
+}
+/* Finish Paging */
+

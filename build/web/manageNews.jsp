@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
         <link rel="stylesheet" href="./assets/css/adminUser.css">
     </head>
-    <body>
+    <body style="background-color: #f1f5f9;">
         <div class="container_admin">
             <div id="db-wrapper">
                 <!-- start-sidebar -->
