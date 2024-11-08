@@ -178,9 +178,12 @@ public class AccountService {
     }
 
 // CREATE NEW ACCOUNT
-    public boolean createNewAccountToAdmin(Account account) {
-        return acd.createNewAccount(account);
-    }
+   public boolean createNewAccountToAdmin(Account account) {
+    String hashedPassword = hashPassword(account.getPassword());
+    account.setPassword(hashedPassword);  
+    return acd.createNewAccount(account);
+}
+
 
     // DELETE
     public boolean deleteAccountToAdmin(int accID) {
