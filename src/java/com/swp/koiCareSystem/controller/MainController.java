@@ -93,7 +93,7 @@ public class MainController extends HttpServlet {
                     break;
                 // START FOOD CALCULATOR ---------------------------------------------------------------------------------------
                 case IConstant.FOOD_CALCULATOR:
-                    url= "FoodCalculatorController";
+                    url = "FoodCalculatorController";
                     break;
                 // START CALCULATOR ---------------------------------------------------------------------------------------
                 case IConstant.PURCHASE_HISTORY:
@@ -157,6 +157,13 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.POND_IMAGE_UPDATE:
                     url = "UpdatePondImageController";
+                    break;
+                // START PLACE WATER PARAMETERS-------------------------------------------------------------     
+                case IConstant.WATER_PARAMETERS_MANAGE:
+                    url = "WaterParametersManageController";
+                    break;
+                case IConstant.WATER_PARAMETERS_CREATE_NEW:
+                    url = "WaterParametersCreateNewController";
                     break;
                 //START ACCOUNT AQUARIUM MANAGER --------------------------------------------------------------------------------- 
                 case IConstant.ACCOUNT_FISH_MANAGE:

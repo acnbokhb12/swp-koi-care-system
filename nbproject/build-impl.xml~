@@ -999,7 +999,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.sqljdbc4.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
 =======
         <copyfiles files="${file.reference.sqljdbc4.jar-3}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
->>>>>>> showNews
+>>>>>>> CRUDWaterParameters
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1021,7 +1021,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.sqljdbc4.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
 =======
         <copyfiles files="${file.reference.sqljdbc4.jar-3}" todir="${build.web.dir}/WEB-INF/lib"/>
->>>>>>> showNews
+>>>>>>> CRUDWaterParameters
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>

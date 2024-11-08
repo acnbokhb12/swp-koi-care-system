@@ -408,6 +408,14 @@
         <servlet-name>SaltCalculatorDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.SaltCalculatorDetailController</servlet-class>
     </servlet>
+    <servlet>    
+        <servlet-name>WaterParametersManageController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.WaterParametersManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WaterParametersCreateNewController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.WaterParametersCreateNewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -731,6 +739,14 @@
     <servlet-mapping>
         <servlet-name>ViewsNewsDetailController</servlet-name>
         <url-pattern>/ViewsNewsDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WaterParametersManageController</servlet-name>
+        <url-pattern>/WaterParametersManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WaterParametersCreateNewController</servlet-name>
+        <url-pattern>/WaterParametersCreateNewController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
