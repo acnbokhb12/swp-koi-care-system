@@ -34,8 +34,6 @@
         <url-pattern>/statistic.jsp</url-pattern>
         <url-pattern>/saltCalculator.jsp</url-pattern>
         <url-pattern>/foodCalculator.jsp</url-pattern>
-
-                
         <servlet-name>PasswordProfileController</servlet-name>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-name>ImageUploadSingleController</servlet-name>
@@ -93,7 +91,6 @@
         <!-- START PLACE WaterParameter -->
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <servlet-name>WaterParametersManageController</servlet-name>
-
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -389,7 +386,7 @@
         <servlet-name>ManagerOrderSearchController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ManagerOrderSearchController</servlet-class>
     </servlet>
-    <servlet>     
+    <servlet>
         <servlet-name>ShowNewsController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.ShowNewsController</servlet-class>
     </servlet>
@@ -417,7 +414,7 @@
         <servlet-name>SaltCalculatorDetailController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.SaltCalculatorDetailController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>WaterParametersManageController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersManageController</servlet-class>
     </servlet>
@@ -455,7 +452,11 @@
     </servlet>
     <servlet>
         <servlet-name>AdminUpdateAccountController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateAccountController</servlet-class> 
+        <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSearchAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminSearchAccountController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -773,7 +774,7 @@
         <servlet-name>SaltCalculatorDetailController</servlet-name>
         <url-pattern>/SaltCalculatorDetailController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>     
+    <servlet-mapping>
         <servlet-name>ShowNewsController</servlet-name>
         <url-pattern>/ShowNewsController</url-pattern>
     </servlet-mapping>
@@ -789,7 +790,7 @@
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <url-pattern>/WaterParametersCreateNewController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>     
+    <servlet-mapping>
         <servlet-name>AdminAccountController</servlet-name>
         <url-pattern>/AdminAccountController</url-pattern>
     </servlet-mapping>
@@ -820,6 +821,10 @@
     <servlet-mapping>
         <servlet-name>AdminUpdateAccountController</servlet-name>
         <url-pattern>/AdminUpdateAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSearchAccountController</servlet-name>
+        <url-pattern>/AdminSearchAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

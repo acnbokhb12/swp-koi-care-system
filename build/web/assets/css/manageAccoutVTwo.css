@@ -12,152 +12,6 @@ body {
     height: auto; 
 }
 
-/* Content styling */
-#container-form {
-    flex: 1;
-    padding: 20px;
-}
-
-#newAccountForm {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px; 
-    padding: 40px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; 
-    position: relative; 
-}
-
-/* Form Title */
-#newAccountForm h3 {
-    margin-bottom: 30px;
-    color: black;
-    text-align: center; 
-    font-size: 40px;
-    font-family: 'Courier New', Courier, monospace;
-    text-transform: uppercase; 
-}
-
-/* Styling for labels */
-#newAccountForm label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-/* Styling for input fields and select */
-#newAccountForm input,
-#newAccountForm select {
-    width: 100%;
-    padding: 15px; 
-    margin-bottom: 15px; 
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s; 
-}
-
-/* Input focus effect */
-#newAccountForm input:focus,
-#newAccountForm select:focus {
-    border-color: #0056b3; 
-}
-
-/* Form actions styling */
-.form-actions {
-    display: flex;
-    justify-content: flex-end; 
-    margin-top: 20px; 
-}
-
-/* Styling for back button */
-#backToAccountManager {
-    background-color: #6c757d; 
-    color: white;
-    border: none;
-    padding: 5px 10px; 
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.7em; 
-    transition: background-color 0.3s ease;
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
-}
-
-#backToAccountManager:hover {
-    background-color: #5a6268; 
-}
-
-/* General button styles for Save and Cancel buttons */
-#newAccountForm button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 10px 15px; 
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em; 
-    transition: background-color 0.3s ease;
-    margin-left: 10px; 
-}
-
-#newAccountForm button:hover {
-    background-color: #004085; 
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px; 
-    }
-
-    .content {
-        padding: 10px; 
-    }
-
-    #newAccountForm {
-        padding: 20px; 
-        max-width: 90%; 
-    }
-}
-
-/* Main content styling */
-.content-from {
-    flex: 1; 
-    padding: 20px; 
-}
-
-/* Header styling for the main content */
-.content-from .header {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 20px; 
-}
-
-.content-from .header h2 {
-    margin: 0; 
-}
-
-/* Button styling in the header */
-.content-from .header .actions button {
-    margin-left: 10px; 
-    padding: 8px 12px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 14px; 
-    transition: background-color 0.3s ease; 
-}
-
-/* Button hover effect */
-.content-from .header .actions button:hover {
-    background-color: #0056b3; 
-}
-
 /* Account detail styling */
 #accountDetail {
     background-color: white;  
@@ -179,135 +33,11 @@ body {
     color: #0056b3; 
 }
 
-/* Button styling for Back button */
-button {
-    padding: 10px 15px; 
-    background-color: #0056b3; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-    margin-top: 20px; 
-}
-
-/* Button hover effect */
-button:hover {
-    background-color: #004085; 
-}
-
-/* Content styling */
-.content {
-    flex: 1;
-    padding: 20px;
-}
-
-#editAccountForm {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px; 
-    padding: 40px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; 
-}
-
-/* Form Title */
-#editAccountForm h3 {
-    margin-bottom: 30px;
-    color: black;
-    text-align: center; 
-    font-size: 30px;
-    font-family: 'Courier New', Courier, monospace;
-    text-transform: uppercase; 
-}
-
-/* Styling for labels */
-#editAccountForm label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-/* Styling for input fields and select */
-#editAccountForm input,
-#editAccountForm select {
-    width: 100%;
-    padding: 1rem; 
-    margin-bottom: 15px; 
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s; 
-}
-
-/* Form actions styling */
-.form-actions {
-    display: flex;
-    justify-content: space-between; 
-    margin-top: 20px; 
-    width: 300px; 
-    margin-left: auto;
-    margin-right: auto; 
-}
-
-#editAccountForm button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 10px 15px; 
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em; 
-    transition: background-color 0.3s ease;
-    flex: 1; 
-    margin: 0 5px; 
-}
-
-/* Button hover effect */
-#editAccountForm button:hover {
-    background-color: #004085;
-}
-
-/* Back button styling */
-#backToAccountManager {
-    margin-bottom: 15px; 
-    background-color: #6c757d; 
-    padding: 12px 20px; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%; 
-}
-
-#backToAccountManager:hover {
-    background-color: #5a6268; 
-}
-
 .img-accout-detail img {
     width: 100%;
     height: 300px;
     border:  1px solid #000;
     object-fit: cover;
-}
-
-.desc-account-detail h2 {
-    font-weight: bold;
-    margin-top: 2rem;
-}
-
-.header_ac-detail {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.4rem 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.header_ac-detail h1 {
-    font-size: 3rem;
-    font-weight: bold; 
 }
 
 .link_update-account,
@@ -327,40 +57,163 @@ button:hover {
 .link_delete-account:hover {
     color: #fff; 
 }
-
-#accountForm label {
-    font-size: 2rem;
-}
-
 #accountGender,
 #accountForm input {
     font-size: 2.7rem; 
 }
 
-/* Responsive Design */
+
+ /*Update Accoun*/
+ 
+/* Flexbox Layout for Left and Right Sections */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.left-section {
+    flex: 1;
+    padding: 10px;
+}
+
+.right-section {
+    flex: 2;
+    padding: 10px;
+}
+
+.img-edit-submit {
+    margin-bottom: 20px;
+}
+
+.fish-img-info-edit img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: unset;
+}
+
+.fish-edit-img-detail input[type="file"] {
+    margin-top: 10px;
+}
+
+.action-buttons button {
+    margin-right: 10px;
+}
+/* General Styling for the Form Container */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Left Section - Image Upload */
+.left-section {
+    flex: 1;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for Image Preview */
+.fish-img-info-edit img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: unset;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Styling for File Input */
+.fish-edit-img-detail input[type="file"] {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Right Section - Account Form */
+.right-section {
+    flex: 2;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h3#formTitle {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form Labels */
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Form Inputs */
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+/* Action Buttons */
+.action-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.action-buttons button:hover {
+    background-color: #45a049;
+}
+
+.action-buttons a {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.action-buttons a:hover {
+    background-color: #e53935;
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 200px; 
+    .form-container {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .content {
-        padding: 10px; 
-    }
-
-    #editAccountForm {
-        padding: 20px; 
-    }
-
-    #editAccountForm h3 {
-        font-size: 30px; 
-    }
-
-    #editAccountForm input,
-    #editAccountForm select {
-        font-size: 1.5rem; 
-    }
-
-    button {
-        font-size: 1.5rem; 
+    .left-section, .right-section {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }
+
+
+
+

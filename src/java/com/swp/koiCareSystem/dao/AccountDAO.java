@@ -908,15 +908,14 @@ public class AccountDAO {
                 + "LEFT JOIN AccountStatus s ON a.idStatus = s.idStatus "
                 + "WHERE a.AccID = ?";
         try {
-            conn = DatabaseConnectionManager.getConnection(); // Mở kết nối tới cơ sở dữ liệu
+            conn = DatabaseConnectionManager.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
 
-            // Kiểm tra nếu có bản ghi được tìm thấy
             if (rs != null && rs.next()) {
                 account = new Account();
-                account.setUserID(rs.getInt("AccID")); // Sử dụng tên cột
+                account.setUserID(rs.getInt("AccID"));
                 account.setEmail(rs.getString("Email"));
                 account.setKoiCareID(rs.getString("KoiCareID"));
                 account.setProfileImage(rs.getString("UserImage"));
@@ -950,7 +949,7 @@ public class AccountDAO {
                 e.printStackTrace();
             }
         }
-        return account; // Trả về null nếu không tìm thấy tài khoản
+        return account;
     }
 
     //UPDATE 
@@ -993,12 +992,378 @@ public class AccountDAO {
         return false;
     }
 
-    public static void main(String[] args) {
-        AccountDAO accountDAO = new AccountDAO();
-
-        int testAccountId = 1;
-
+//SEARCH==============================================================
+    //PHONE
+    public int countAccountByPhoneNumber(String phone) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Accounts WHERE [PhoneNumber] LIKE ? AND [isActive] = 1";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + phone + "%");
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
+
+    public ArrayList<Account> searchAccountByPhoneNumber(String phone, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Account> listA = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT a.*, asStatus.name AS StatusName "
+                        + "FROM Accounts a "
+                        + "JOIN AccountStatus asStatus ON a.idStatus = asStatus.idStatus "
+                        + "WHERE a.PhoneNumber LIKE ? AND a.isActive = 1 "
+                        + "ORDER BY a.FullName DESC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + phone + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("isActive"));
+
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName"));  // Retrieve StatusName from join
+                    account.setAccstatus(accStatus);
+
+                    listA.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listA;
+    }
+
+//NAME
+    public int countAccountByFullName(String fullName) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Accounts "
+                        + "WHERE [FullName] LIKE ? AND [isActive] = 1";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + fullName + "%");
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Account> searchAccountByFullName(String fullName, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Account> listA = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT a.*, asStatus.name AS StatusName "
+                        + "FROM Accounts a "
+                        + "JOIN AccountStatus asStatus ON a.idStatus = asStatus.idStatus "
+                        + "WHERE a.FullName LIKE ? AND a.isActive = 1 "
+                        + "ORDER BY a.FullName ASC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + fullName + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("isActive"));
+
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName")); // Retrieve StatusName from join
+                    account.setAccstatus(accStatus);
+
+                    listA.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listA;
+    }
+
+//Email
+    public int countAccountByEmail(String email) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Accounts "
+                        + "WHERE [Email] LIKE ? AND [isActive] = 1";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + email + "%");
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Account> searchAccountByEmail(String email, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Account> listA = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT a.*, asStatus.name AS StatusName "
+                        + "FROM Accounts a "
+                        + "JOIN AccountStatus asStatus ON a.idStatus = asStatus.idStatus "
+                        + "WHERE a.Email LIKE ? AND a.isActive = 1 "
+                        + "ORDER BY a.Email ASC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + email + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("isActive"));
+
+                    // Set AccountStatus information from the joined table
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName"));
+                    account.setAccstatus(accStatus);
+
+                    listA.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listA;
+    }
+
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
+//
+//        ArrayList<Account> accounts = accountDAO.searchAccountByEmail("user1@gmail.com", 1);
+//        if (accounts == null || accounts.size() != 1) {
+//            System.out.println("Test Failed: Expected 1 account for email 'user1@gmail.com', but got " + (accounts != null ? accounts.size() : 0));
+//        } else {
+//            Account account = accounts.get(0);
+//            if (account.getEmail() == null || !account.getEmail().equals("user1@gmail.com")) {
+//                System.out.println("Test Failed: Expected email 'user1@gmail.com', but got " + account.getEmail());
+//            } else {
+//                System.out.println("Test Passed: Found account with email 'user1@gmail.com'");
+//            }
+//        }
+//    }
+//    
+//    
+    
+   public static void main(String[] args) {
+        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
+    ArrayList<Account> accounts = accountDAO.searchAccountByPhoneNumber("12345678905", 1);
+
+    if (accounts == null || accounts.isEmpty()) {
+        System.out.println("Test Failed: No account found for phone number '12345678905'.");
+    } else {
+        boolean found = false;
+        for (Account account : accounts) {
+            if (account.getPhoneNumber().contains("12345678905")) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            System.out.println("Test Passed: Found account(s) with phone number containing '12345678905'.");
+        } else {
+            System.out.println("Test Failed: No account found with phone number containing '12345678905'.");
+        }
+    }
+}
+
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
+//        ArrayList<Account> accounts = accountDAO.searchAccountByFullName("Huy", 1);
+//
+//        if (accounts == null || accounts.isEmpty()) {
+//            System.out.println("Test Failed: No account found for full name 'Huy'.");
+//        } else {
+//            boolean found = false;
+//            for (Account account : accounts) {
+//                if (account.getFullName().contains("Huy")) {
+//                    found = true;
+//                    break;
+//                }
+//            }
+//            if (found) {
+//                System.out.println("Test Passed: Found account(s) with full name containing 'Huy'.");
+//            } else {
+//                System.out.println("Test Failed: No account found with full name containing 'Huy'.");
+//            }
+//        }
+//    }
+
 }
 //UPDATE INFORMATION
 //     public static void main(String[] args) {
@@ -1243,4 +1608,3 @@ public class AccountDAO {
 //        }
 //    }
 //================================================================
-

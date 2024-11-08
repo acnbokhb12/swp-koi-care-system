@@ -35,14 +35,20 @@
                             <button type="button" class="link_add-account">Add New Account</button>
                         </div>
 
-                        <form class="table-search-form row gx-1 align-items-center m-0 mb-4" method="get" action="AdminAccountController">
-                            <input type="text" class="search-order mr-3" placeholder="Search..." id="searchInput" name="searchInput" required>
-                            <select class="contain-btn-select-search mr-3" name="searchChoice" id="searchChoice">
-                                <option value="email" selected>Email</option>
-                                <option value="phone">Phone</option>
-                                <option value="fullname">Full Name</option>
-                            </select>
-                            <button class="btn-submit-search-order" type="submit">Search</button>
+                        <form class="table-search-form row gx-1 align-items-center m-0 mb-4" method="POST" action="AdminSearchAccountController">
+                            <div class="col-auto">
+                                <input type="text" class="search-account mr-3" placeholder="Search..." id="searchInput" name="searchInput" value="${param.searchInput}">
+                            </div>
+                            <div class="col-auto">
+                                <select class="contain-btn-select-search m-0 pl-5 pr-5" name="searchChoice" id="searchChoice">
+                                    <option value="name" ${param.searchChoice == 'name' ? 'selected' : ''}>Full Name</option>
+                                    <option value="phone" ${param.searchChoice == 'phone' ? 'selected' : ''}>Phone Number</option>
+                                    <option value="email" ${param.searchChoice == 'email' ? 'selected' : ''}>Email</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn-submit-search-order" type="submit">Search</button>
+                            </div>
                         </form>
 
                         <div class="table-container overflow-auto p-0 mb-3"> 
@@ -91,48 +97,81 @@
                                 </tbody>
                             </table>
                             <div class="footer">
-                                <ul class="pagination">
-                                    <!-- Nút Previous -->
+                                <ul class="pagination"> 
+                                    <c:choose>
+                                        <c:when test="${not empty searchChoice}">
+                                            <c:if test="${tag > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="AdminSearchAccountController?searchInput=${param.searchInput}&searchChoice=${param.searchChoice}&index=${tag - 1}">
+                                                        <i class="fa-solid fa-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
 
-                                    <!--                                    Thêm Pagging cho status nữa cái đó bà tham khảo tự làm-->
-                                    <c:if test="${tag > 1}">
-                                        <li class="page-item">
-                                            <a href="AdminAccountController?index=${tag-1}" class="page-link text-dark">
-                                                <i class="fa-solid fa-chevron-left"></i> Previous
-                                            </a>
-                                        </li>
-                                    </c:if>
+                                            <c:forEach begin="${tag - 1 < 1 ? 1 : tag - 1}" end="${tag + 1 > endPage ? endPage : tag + 1}" var="i">
+                                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                                    <a class="page-link ${tag == i ? 'active__page' : ''}" href="AdminSearchAccountController?searchInput=${param.searchInput}&searchChoice=${param.searchChoice}&index=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
 
-                                    <c:forEach var="i" begin="1" end="${endPage}" step="1">
-                                        <c:if test="${i <= 3 || i >= endPage - 2 || (i >= tag - 1 && i <= tag + 1)}">
-                                            <li class="page-item ${tag == i ? 'active' : ''}">
-                                                <a href="AdminAccountController?index=${i}" class="page-link text-dark">
-                                                    ${i}
-                                                </a>
-                                            </li>
-                                        </c:if>
+                                            <c:if test="${tag < endPage}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="AdminSearchAccountController?searchInput=${param.searchInput}&searchChoice=${param.searchChoice}&index=${tag + 1}">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </c:when>
+                                        <c:when test="${not empty TagStatusId}">
+                                            <c:if test="${tag > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="AdminAccountStatusController?status=${TagStatusId}&index=${tag - 1}">
+                                                        <i class="fa-solid fa-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
 
-                                        <c:if test="${i == 3 && tag > 4}">
-                                            <li class="page-item disabled">
-                                                <span class="page-link">...</span>
-                                            </li>
-                                        </c:if>
+                                            <c:forEach begin="${tag - 1 < 1 ? 1 : tag - 1}" end="${tag + 1 > endPage ? endPage : tag + 1}" var="i">
+                                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                                    <a class="page-link ${tag == i ? 'active__page' : ''}" href="AdminAccountStatusController?status=${TagStatusId}&index=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
 
-                                        <c:if test="${i == endPage - 2 && tag < endPage - 3}">
-                                            <li class="page-item disabled">
-                                                <span class="page-link">...</span>
-                                            </li>
-                                        </c:if>
-                                    </c:forEach>
+                                            <c:if test="${tag < endPage}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="AdminAccountStatusController?status=${TagStatusId}&index=${tag + 1}">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:if test="${tag > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="AdminAccountController?index=${tag - 1}">
+                                                        <i class="fa-solid fa-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
 
-                                    <!-- Nút Next -->
-                                    <c:if test="${tag < endPage}">
-                                        <li class="page-item">
-                                            <a href="AdminAccountController?index=${tag + 1}" class="page-link text-dark">
-                                                Next <i class="fa-solid fa-chevron-right"></i>
-                                            </a>
-                                        </li>
-                                    </c:if>
+                                            <c:set var="startPage" value="${tag - 1 < 1 ? 1 : tag - 1}" />
+                                            <c:set var="lastPage" value="${tag + 1 > endPage ? endPage : tag + 1}" />
+
+                                            <c:forEach begin="${startPage}" end="${lastPage}" var="i">
+                                                <li class="page-item ${tag == i ? 'active' : ''}">
+                                                    <a class="page-link ${tag == i ? 'active__page' : ''}" href="AdminAccountController?index=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+
+                                            <c:if test="${tag < endPage}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="AdminAccountController?index=${tag + 1}">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                         </div>
@@ -168,6 +207,10 @@
                                         <input type="password" name="password" placeholder="Enter password" required />
                                     </div>  
                                     <div class="col-md-6 add-item-detail">
+                                        <label>KoiCareID</label>
+                                        <input type="text" name="koiCareID" placeholder="Enter KoiCareID" required />
+                                    </div>  
+                                    <div class="col-md-6 add-item-detail">
                                         <label>Address:</label>
                                         <input type="text" name="address" placeholder="Enter address" required />
                                     </div> 
@@ -175,6 +218,7 @@
                                         <label>Phone Number:</label>
                                         <input type="text" name="phoneNumber" placeholder="Enter phone number" required />
                                     </div>
+
                                     <div class="col-md-6 add-item-detail">
                                         <label>Gender:</label>
                                         <select name="gender" required class="form-control">
@@ -186,62 +230,64 @@
                                     <div class="col-md-6 add-item-detail">
                                         <label>Role:</label>
                                         <select name="role" required class="form-control">
-                                            <option value="customer" selected>Customer</option>
-                                            <option value="manager">Manager</option>
-                                            <option value="admin">Admin</option>
+                                            <<option value="customer" ${account.userRole == 'customer' ? 'selected' : ''}>Customer</option>
+                                            <option value="manager" ${account.userRole == 'manager' ? 'selected' : ''}>Manager</option>
+                                            <option value="admin" ${account.userRole == 'admin' ? 'selected' : ''}>Admin</option>
                                         </select>
                                     </div>
+
                                 </div>
-                                <button type="submit" class="add-btn-utils blue-btn">Confirm</button>                    
                             </div>
+                            <button type="submit" class="add-btn-utils blue-btn">Confirm</button>                    
                         </div>
-                    </form> 
                 </div>
+                </form> 
             </div>
-                               
-            <style>
-                .content .table-container{
-                    border-radius: 0px;
-                    box-shadow: none;
-                    padding: 0;
-                }
-            </style>
-            <!-- Scripts -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $('#header').load('utils.jsp #header_admin', function () {
-                    $.getScript('./assets/js/utilsAdmin.js');
-                });
-                $('#sidebar_admin').load('utils.jsp #sidebar_admin', function () {
-                    $.getScript('./assets/js/utilsAdmin.js');
-                });
-                 
-
-                $(document).on('click', '.link_add-account', function () {
-                    $('.container_main-add').css('display', 'flex');
-                });
-
-                $(document).on('click', '.btn-close-add', function () {
-                    $('.container_main-add').css('display', 'none');
-                });
-
-                $('#imageInput').change(function () {
-                    const file = this.files[0];
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#imagePreview').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(file);
-                });
-
-                document.querySelectorAll('.delete-btn').forEach(button => {
-                    button.addEventListener('click', function (event) {
-                        if (!confirm('Are you sure you want to delete this account?')) {
-                            event.preventDefault();
-                        }
-                    });
-                });
-            </script>
         </div>
-    </body>
+
+        <style>
+            .content .table-container{
+                border-radius: 0px;
+                box-shadow: none;
+                padding: 0;
+            }
+        </style>
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $('#header').load('utils.jsp #header_admin', function () {
+                $.getScript('./assets/js/utilsAdmin.js');
+            });
+            $('#sidebar_admin').load('utils.jsp #sidebar_admin', function () {
+                $.getScript('./assets/js/utilsAdmin.js');
+            });
+
+
+            $(document).on('click', '.link_add-account', function () {
+                $('.container_main-add').css('display', 'flex');
+            });
+
+            $(document).on('click', '.btn-close-add', function () {
+                $('.container_main-add').css('display', 'none');
+            });
+
+            $('#imageInput').change(function () {
+                const file = this.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function (event) {
+                    if (!confirm('Are you sure you want to delete this account?')) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
 </html>
