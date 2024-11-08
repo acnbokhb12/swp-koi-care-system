@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -43,8 +44,8 @@ public class WaterParameterDAO {
                     desc.setWaterParameterDescID(rs.getInt("WaterParameterDescID"));
                     desc.setName(rs.getString("name"));
                     desc.setSymbol(rs.getString("symbol"));
-                    desc.setMinValue(rs.getDouble("minValue"));
-                    desc.setMaxValue(rs.getDouble("maxValue"));
+                    desc.setMinValue(rs.getFloat("minValue"));
+                    desc.setMaxValue(rs.getFloat("maxValue"));
                     desc.setUnit(rs.getString("unit"));
                     desc.setOptimalRange(rs.getString("optimalRange"));
                     desc.setDescription(rs.getString("description"));
@@ -125,7 +126,7 @@ public class WaterParameterDAO {
                     while (rs3.next()) {
                         int id = rs3.getInt("ID");
                         int waterParameterDescID = rs3.getInt("WaterParameterDescID");
-                        double value = rs3.getDouble("value");
+                        float value = rs3.getFloat("value");
 
                         // Step 5: Fetch Water Parameter Description
                         WaterParameterDescription waterDesc = null;
@@ -140,8 +141,8 @@ public class WaterParameterDAO {
                                     rs4.getInt("WaterParameterDescID"),
                                     rs4.getString("name"),
                                     rs4.getString("symbol"),
-                                    rs4.getDouble("minValue"),
-                                    rs4.getDouble("maxValue"),
+                                    rs4.getFloat("minValue"),
+                                    rs4.getFloat("maxValue"),
                                     rs4.getString("unit"),
                                     rs4.getString("optimalRange"),
                                     rs4.getString("description")
@@ -252,7 +253,7 @@ public class WaterParameterDAO {
                     while (rs3.next()) {
                         int id = rs3.getInt("ID");
                         int waterParameterDescID = rs3.getInt("WaterParameterDescID");
-                        double value = rs3.getDouble("value");
+                        float value = rs3.getFloat("value");
 
                         // Step 4: Fetch Water Parameter Description
                         WaterParameterDescription waterDesc = null;
@@ -267,8 +268,8 @@ public class WaterParameterDAO {
                                     rs4.getInt("WaterParameterDescID"),
                                     rs4.getString("name"),
                                     rs4.getString("symbol"),
-                                    rs4.getDouble("minValue"),
-                                    rs4.getDouble("maxValue"),
+                                    rs4.getFloat("minValue"),
+                                    rs4.getFloat("maxValue"),
                                     rs4.getString("unit"),
                                     rs4.getString("optimalRange"),
                                     rs4.getString("description")
@@ -326,77 +327,64 @@ public class WaterParameterDAO {
         }
         return waterParameter;
     }
-
-    public boolean addNewWaterParameter(WaterParameter waterParameter) {
+ 
+    public boolean createNewWaterParameter(WaterParameter waterParameter) {
         Connection cn = null;
-        PreparedStatement stmt1 = null;
-        PreparedStatement stmt2 = null;
-        ResultSet generatedKeys = null;
-        boolean result = false;
-
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int rowEffectV2 =0;
+        System.out.println(waterParameter);
         try {
-            cn = DatabaseConnectionManager.getConnection();
-            if (cn != null) {
-                // Step 1: Insert data into WaterParameter table
-                String sqlWaterParameter = "INSERT INTO dbo.WaterParameter "
-                        + "(AccID, PondID, MeasurementDate, Note, isActive) "
-                        + "VALUES (?, ?, ?, ?, ?)";
-                stmt1 = cn.prepareStatement(sqlWaterParameter, Statement.RETURN_GENERATED_KEYS);
-                stmt1.setInt(1, waterParameter.getAccID());
-                stmt1.setInt(2, waterParameter.getPondID());  
-                stmt1.setTimestamp(3, Timestamp.valueOf(waterParameter.getMeasurementDate()));
-                stmt1.setString(4, waterParameter.getNote());
-                stmt1.setInt(5, waterParameter.isIsActive() ? 1 : 0); // 1 for true, 0 for false
-
-                // Execute the insert and retrieve the generated WaterParameterID
-                int rowsAffected = stmt1.executeUpdate();
-                if (rowsAffected == 0) {
-                    return false; 
-// No rows inserted
-                }
-
-                generatedKeys = stmt1.getGeneratedKeys();
-                int waterParameterID = 0;
-                if (generatedKeys.next()) {
-                    waterParameterID = generatedKeys.getInt(1); // Get the generated WaterParameterID
-                }
-
-                // Step 2: Insert data into WaterParameterDetail table
-                String sqlWaterParameterDetail = "INSERT INTO dbo.WaterParameterDetail "
-                        + "(WaterParameterID, WaterParameterDescID, value) "
-                        + "VALUES (?, ?, ?)";
-                stmt2 = cn.prepareStatement(sqlWaterParameterDetail);
-
-                // Loop through all WaterParameterDetail objects from waterParameter
-                for (WaterParameterDetail detail : waterParameter.getWaterParameterDetails()) {
-                    stmt2.setInt(1, waterParameterID); // Set WaterParameterID
-                    stmt2.setInt(2, detail.getWaterParameterDescID()); // Set WaterParameterDescID
-                    if (detail.getValue() != null) {
-                        stmt2.setDouble(3, detail.getValue()); // Set value if it's not null
-                    } else {
-                        stmt2.setNull(3, Types.DOUBLE); // Set value to null if it's null
+                cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) { 
+                String sql = "insert into [dbo].[WaterParameter] ([AccID],[PondID],[MeasurementDate],[Note]) values (?,?, ?, ? )";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, waterParameter.getAccID());
+                pst.setInt(2, waterParameter.getPondID());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formatDateMeasure = waterParameter.getMeasurementDate().format(formatter);
+                pst.setString(3, formatDateMeasure);
+                pst.setString(4, waterParameter.getNote());
+                int rowEffect1 = pst.executeUpdate();
+                if (rowEffect1 > 0) {
+                    String sql2 = "select TOP 1 [WaterParameterID]\n"
+                            + "from WaterParameter order by [WaterParameterID] desc";
+                    PreparedStatement pst2 = cn.prepareStatement(sql2);
+                    ResultSet rs2 = pst2.executeQuery();
+                    if (rs2 != null && rs2.next()) {
+                        int WaterParameterId = rs2.getInt(1);
+                        cn.setAutoCommit(false);
+                        for(WaterParameterDetail wtdt : waterParameter.getWaterParameterDetails()){                          
+                            String sql3 = "INSERT INTO dbo.WaterParameterDetail \n"
+                                    + "(WaterParameterID, WaterParameterDescID, [value]) VALUES (?, ?, ?)";
+                            PreparedStatement pst3 = cn.prepareStatement(sql3);
+                            pst3.setInt(1, WaterParameterId);
+                            pst3.setInt(2, wtdt.getWaterParameterDescID());
+                            if(wtdt.getValue() != 0.0){
+                                pst3.setFloat(3, wtdt.getValue());                                
+                            }else{
+                                pst3.setNull(3, java.sql.Types.FLOAT);
+                            }
+                            rowEffectV2 = pst3.executeUpdate();
+                             pst3.close();
+                        }
                     }
-                    stmt2.addBatch(); // Add to batch
+                    cn.commit();
+                    if (rowEffectV2 > 0) {
+                        return true;
+                    }
                 }
 
-                // Execute batch insert
-                int[] rowsAffectedDetail = stmt2.executeBatch();
-                if (rowsAffectedDetail.length == waterParameter.getWaterParameterDetails().size()) {
-                    result = true; // Successfully inserted all details
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (generatedKeys != null) {
-                    generatedKeys.close();
+                if (rs != null) {
+                    rs.close();
                 }
-                if (stmt2 != null) {
-                    stmt2.close();
-                }
-                if (stmt1 != null) {
-                    stmt1.close();
+                if (pst != null) {
+                    pst.close();
                 }
                 if (cn != null) {
                     cn.close();
@@ -405,6 +393,14 @@ public class WaterParameterDAO {
                 e.printStackTrace();
             }
         }
-        return result;
+        return false;
+    }
+ 
+    public static void main(String[] args) {
+        WaterParameterDAO wpt = new WaterParameterDAO();
+        ArrayList<WaterParameterDescription> list = wpt.getAllWaterParameterDescriptions();
+        for (WaterParameterDescription item : list) {
+            System.out.println(item);
+        }
     }
 }

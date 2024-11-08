@@ -14,6 +14,8 @@ import com.swp.koiCareSystem.service.PondService;
 import com.swp.koiCareSystem.service.WaterParameterService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,8 +54,10 @@ public class WaterParametersManageController extends HttpServlet {
             ArrayList<Pond> allPonds = ps.getAllPondS(accID);
             ArrayList<WaterParameter> listParameters = wps.getWaterParametersByAccID(accID);
             ArrayList<WaterParameterDescription> listParametersDescription = wps.getAllWaterParameterDescriptions();
-
+             LocalDateTime now = LocalDateTime.now();
+              String formattedDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
             request.setAttribute("listPond", allPonds);
+            request.setAttribute("formattedDateTime", formattedDateTime);
             request.setAttribute("waterParameters", listParameters);
             request.setAttribute("waterDescription", listParametersDescription);
             request.getRequestDispatcher("waterParameter.jsp").forward(request, response);

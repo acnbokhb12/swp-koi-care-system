@@ -107,4 +107,9 @@ public class WaterParameter {
         return waterParameterDetails;
     }
 
+    @Override
+    public String toString() {
+        return "WaterParameter{" + "waterParameterId=" + waterParameterId + ", accID=" + accID + ", pondID=" + pondID + ", measurementDate=" + measurementDate + ", note=" + note + ", isActive=" + isActive + ", pond=" + pond + ", waterParameterDetails=" + waterParameterDetails + '}';
+    }
+
 }

@@ -8,6 +8,7 @@ package com.swp.koiCareSystem.controller;
 import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.WaterParameter;
+import com.swp.koiCareSystem.model.WaterParameterDescription;
 import com.swp.koiCareSystem.model.WaterParameterDetail;
 import com.swp.koiCareSystem.service.WaterParameterService;
 import java.io.IOException;
@@ -49,42 +50,54 @@ public class WaterParametersCreateNewController extends HttpServlet {
 
             int accID = (acc.getUserID());
             int pondID = Integer.parseInt(request.getParameter("pond"));
-            String datetime = request.getParameter("datetime");
-            String note = request.getParameter("note");
+            String datetime = request.getParameter("datetimeMeasure"); 
+            String note = request.getParameter("noteNew");
+            WaterParameterService wps = new WaterParameterService();
 
             WaterParameter waterpara = new WaterParameter();
             waterpara.setAccID(accID);
             waterpara.setPondID(pondID);
-            waterpara.setMeasurementDate(LocalDateTime.parse(datetime));
+            try {
+                waterpara.setMeasurementDate(LocalDateTime.parse(datetime));
+            } catch (Exception e) {
+                request.setAttribute("message", "Please choose date and time ");
+                request.setAttribute("toastMessage", "error");
+                request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
+                return;
+            }
+            System.out.println(LocalDateTime.parse(datetime));
             waterpara.setNote(note);
             waterpara.setIsActive(true);
-
+            
             ArrayList<WaterParameterDetail> details = new ArrayList<>();
-
-            String[] parameterNames = {"NO2", "O2", "NO3", "temperature", "PO4", "pH", "NH4", "KH", "GH", "CO2", "salt", "fedAmount", "outdoorTemp"};
-            for (int i = 0; i < parameterNames.length; i++) {
-                String paramValue = request.getParameter(parameterNames[i]);
-                if (paramValue != null && !paramValue.isEmpty()) {
-                    int waterParameterDescID = i + 1;
-                    double value = Double.parseDouble(paramValue);
-                    WaterParameterDetail detail = new WaterParameterDetail();
-                    detail.setWaterParameterDescID(waterParameterDescID);
-                    detail.setValue(value);
-                    details.add(detail);
+            ArrayList<WaterParameterDescription> listParametersDescription = wps.getAllWaterParameterDescriptions();
+             
+            for(WaterParameterDescription item : listParametersDescription ){ 
+                float value = (float) 0.0;
+                String paramValueChar = "waPara" + item.getWaterParameterDescID();
+                String paramValue = request.getParameter(paramValueChar);
+                if (paramValue != null && !paramValue.trim().isEmpty()) {
+                    value = Float.parseFloat(paramValue);
                 }
+                WaterParameterDetail detail = new WaterParameterDetail();
+                detail.setWaterParameterDescID(item.getWaterParameterDescID());
+                detail.setValue(value);
+                details.add(detail);
             }
+                
 
             waterpara.setWaterParameterDetails(details);
-            WaterParameterService wps = new WaterParameterService();
-            boolean result = wps.addNewWaterParameter(waterpara);
+            boolean result = wps.createNewWaterParameter(waterpara);
 
             if (result) {
-                //thanh cong
-                response.sendRedirect("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE);
+                request.setAttribute("message", "New WaterParemeter has been created");
+                request.setAttribute("toastMessage", "success");
             } else {
-                //that bai
-                response.sendRedirect("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE);
+                request.setAttribute("message", "An error occurred while creating WaterParemeter");
+                request.setAttribute("toastMessage", "error");
+            
             }
+                request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
         }
     }
 

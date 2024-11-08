@@ -14,8 +14,8 @@ public class WaterParameterDescription {
     private int waterParameterDescID;
     private String name;
     private String symbol;
-    private double minValue;
-    private double maxValue;
+    private float minValue;
+    private float maxValue;
     private String unit;
     private String optimalRange;
     private String description;
@@ -23,7 +23,7 @@ public class WaterParameterDescription {
     public WaterParameterDescription() {
     }
 
-    public WaterParameterDescription(int waterParameterDescID, String name, String symbol, double minValue, double maxValue, String unit, String optimalRange, String description) {
+    public WaterParameterDescription(int waterParameterDescID, String name, String symbol, float minValue, float maxValue, String unit, String optimalRange, String description) {
         this.waterParameterDescID = waterParameterDescID;
         this.name = name;
         this.symbol = symbol;
@@ -62,7 +62,7 @@ public class WaterParameterDescription {
         return minValue;
     }
 
-    public void setMinValue(double minValue) {
+    public void setMinValue(float minValue) {
         this.minValue = minValue;
     }
 
@@ -70,7 +70,7 @@ public class WaterParameterDescription {
         return maxValue;
     }
 
-    public void setMaxValue(double maxValue) {
+    public void setMaxValue(float maxValue) {
         this.maxValue = maxValue;
     }
 

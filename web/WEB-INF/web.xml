@@ -334,10 +334,6 @@
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersManageController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>WaterParametersInformationController</servlet-name>
-        <servlet-class>com.swp.koiCareSystem.controller.WaterParametersInformationController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersCreateNewController</servlet-class>
     </servlet>
@@ -616,10 +612,6 @@
     <servlet-mapping>
         <servlet-name>WaterParametersManageController</servlet-name>
         <url-pattern>/WaterParametersManageController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>WaterParametersInformationController</servlet-name>
-        <url-pattern>/WaterParametersInformationController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>WaterParametersCreateNewController</servlet-name>

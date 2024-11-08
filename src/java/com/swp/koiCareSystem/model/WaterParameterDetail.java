@@ -14,13 +14,13 @@ public class WaterParameterDetail {
     private int id;
     private int waterParameterID;
     private int waterParameterDescID;
-    private Double value;
+    private float value;
     private WaterParameterDescription waterDesc;
 
     public WaterParameterDetail() {
     }
 
-    public WaterParameterDetail(int id, int waterParameterID, int waterParameterDescID, double value, WaterParameterDescription waterDesc) {
+    public WaterParameterDetail(int id, int waterParameterID, int waterParameterDescID, float value, WaterParameterDescription waterDesc) {
         this.id = id;
         this.waterParameterID = waterParameterID;
         this.waterParameterDescID = waterParameterDescID;
@@ -52,11 +52,11 @@ public class WaterParameterDetail {
         this.waterParameterDescID = waterParameterDescID;
     }
 
-    public Double getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(float value) {
         this.value = value;
     }
 
@@ -68,4 +68,9 @@ public class WaterParameterDetail {
         this.waterDesc = waterDesc;
     }
 
+    @Override
+    public String toString() {
+        return "WaterParameterDetail{" + "id=" + id + ", waterParameterID=" + waterParameterID + ", waterParameterDescID=" + waterParameterDescID + ", value=" + value + ", waterDesc=" + waterDesc + '}';
+    }
+    
 }

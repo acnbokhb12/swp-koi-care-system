@@ -34,9 +34,8 @@ public class WaterParameterService {
     public WaterParameter getWaterParameterByID(int waterParameterID) {
         return wpd.getWaterParameterByID(waterParameterID);
     }
-
-    public boolean addNewWaterParameter(WaterParameter waterParameter) {
-        return wpd.addNewWaterParameter(waterParameter);
+    public boolean createNewWaterParameter(WaterParameter newWaterParameter){
+        return wpd.createNewWaterParameter(newWaterParameter);
     }
 }
 
