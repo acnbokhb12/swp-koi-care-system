@@ -195,8 +195,9 @@
                             </div>  
                             <button class="move-next btn-move-next-service" style="right: 1rem;">
                                 <i class="fa-solid fa-chevron-right"></i>
+     
                             </button>
-
+    
                         </div>
                     </div>
                 </div>
