@@ -139,11 +139,13 @@
             </div>
         </div>
     </div>
+     
     <script>
         $('#header').load('utils.jsp #header_admin', () => {
             $.getScript('./assets/js/utilsAdmin.js');
         });
         $('#sidebar_admin').load('utils.jsp  #sidebar_manager');
+         
     </script>
     <script>
         var chart = echarts.init(document.getElementById('chart_Orders_past'));

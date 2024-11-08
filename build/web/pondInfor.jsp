@@ -230,7 +230,9 @@
                     </div>
                 </div>
             </div>
-        </c:if>                              
+        </c:if>           
+        <div id="modal-logout-confirm"></div> 
+
         <!-- footer -->
         <div id="footer"></div>
         <script src="assets/js/notification.js"></script>
@@ -272,6 +274,9 @@
         });
         $('#footer').load('utils.jsp #footer__nav', () => {
             $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
         });
     </script> 
     <script src="./assets/js/utils.js"></script>

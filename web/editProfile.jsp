@@ -181,6 +181,7 @@
                 </div>
             </div>
         </div>
+         <div id="modal-logout-confirm"></div> 
         <!-- footer -->
         <div id="footer"></div>
     </body>
@@ -190,6 +191,9 @@
         });
         $('#footer').load('utils.jsp #footer__nav', () => {
             $.getScript('./assets/js/utilsCustomer.js');
+        });
+         $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
         });
     </script>
     <script src="./assets/js/validator.js"></script>

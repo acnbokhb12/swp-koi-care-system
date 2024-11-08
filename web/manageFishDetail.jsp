@@ -128,6 +128,8 @@
                 </div>
             </div>
         </div>
+                                                   
+
                                         <style>
                                             .fish-pond-form{
                                                 display: block;
@@ -138,6 +140,7 @@
                 $.getScript('./assets/js/utilsAdmin.js');
             });
             $('#sidebar_admin').load('utils.jsp #sidebar_manager');
+           
         </script>
     </body>
 </html> 

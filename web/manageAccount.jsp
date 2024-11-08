@@ -198,6 +198,7 @@
                     </form> 
                 </div>
             </div>
+                               
             <style>
                 .content .table-container{
                     border-radius: 0px;
@@ -214,6 +215,7 @@
                 $('#sidebar_admin').load('utils.jsp #sidebar_admin', function () {
                     $.getScript('./assets/js/utilsAdmin.js');
                 });
+                 
 
                 $(document).on('click', '.link_add-account', function () {
                     $('.container_main-add').css('display', 'flex');

@@ -239,16 +239,21 @@
                 </div>
             </div>
         </c:if>
+        <div id="modal-logout-confirm"></div> 
 
-        <script src="./assets/js/footer.js"></script>
+        <!-- footer -->
+        <div id="footer"></div>
     </body>
     <script>
-                            $('#header').load('utils.jsp #header__nav', () => {
-                                $.getScript('./assets/js/utilsCustomer.js');
-                            });
-                            $('#footer').load('utils.jsp #footer__nav', () => {
-                                $.getScript('./assets/js/utilsCustomer.js');
-                            });
+        $('#header').load('utils.jsp #header__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#footer').load('utils.jsp #footer__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
+        });
     </script>
     <script>
         const btnClose = document.querySelector(".btn-close-fish");
@@ -550,7 +555,7 @@
                 toast.style.display = 'none';
             }
         }
-        
+
         window.onload = function () {
             var toast = document.getElementById('toast');
             if (toast) {

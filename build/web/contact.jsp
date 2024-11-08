@@ -70,16 +70,19 @@
                     </div>
                 </div>
             </div>  
-        </div>  
+        </div> 
+        <div id="modal-logout-confirm"></div> 
+
         <div id="footer"></div>
         <script>
-            $(document).ready(function () {
-                $('#header').load('utils.jsp #header__nav', function () {
-                    $.getScript('./assets/js/utilsCustomer.js');
-                });
-                $('#footer').load('utils.jsp #footer__nav', function () {
-                    $.getScript('./assets/js/utilsCustomer.js');
-                });
+            $('#header').load('utils.jsp #header__nav', () => {
+                $.getScript('./assets/js/utilsCustomer.js');
+            });
+            $('#footer').load('utils.jsp #footer__nav', () => {
+                $.getScript('./assets/js/utilsCustomer.js');
+            });
+            $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+                $.getScript('./assets/js/utilsCustomer.js')
             });
         </script>
     </body>

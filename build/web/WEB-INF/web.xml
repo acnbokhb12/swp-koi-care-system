@@ -31,6 +31,11 @@
         <url-pattern>/manageProductUpdate.jsp</url-pattern>
         <url-pattern>/manageProfileAccount.jsp</url-pattern>
         <url-pattern>/manageUpdateAccount.jsp</url-pattern>
+        <url-pattern>/statistic.jsp</url-pattern>
+        <url-pattern>/saltCalculator.jsp</url-pattern>
+        <url-pattern>/foodCalculator.jsp</url-pattern>
+
+                
         <servlet-name>PasswordProfileController</servlet-name>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-name>ImageUploadSingleController</servlet-name>
@@ -85,6 +90,10 @@
         <servlet-name>ManagerOrderDetailsController</servlet-name>
         <servlet-name>ManagerOrderDeleteController</servlet-name>
         <servlet-name>ManagerChangeOrderStatusController</servlet-name>
+        <!-- START PLACE WaterParameter -->
+        <servlet-name>WaterParametersCreateNewController</servlet-name>
+        <servlet-name>WaterParametersManageController</servlet-name>
+
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>

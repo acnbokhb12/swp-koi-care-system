@@ -124,12 +124,14 @@
                 </div>
             </div>
         </div>
+        
 
         <script>
             $('#header').load('utils.jsp #header_admin', () => {
                 $.getScript('./assets/js/utilsAdmin.js');
             });
             $('#sidebar_admin').load('utils.jsp  #sidebar_manager');
+             
         </script>
     </body>
 </html>

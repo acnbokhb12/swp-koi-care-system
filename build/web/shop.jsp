@@ -81,11 +81,11 @@
                     <h1>Shop</h1> 
                     <div class="shop__ultities-sort">
                         <div class="shop__ultities-sort-dertail" style="width: 250px"> 
-                                <select name="" id="sortPrice" class="shop__ultities-sort-select-list" onchange="sortProductsByPrice()">
-                                    <option value="" selected>Default Sorting</option> 
-                                    <option value="asc">Sort by price: low to high</option>
-                                    <option value="desc">Sort by price: high to low</option>
-                                </select> 
+                            <select name="" id="sortPrice" class="shop__ultities-sort-select-list" onchange="sortProductsByPrice()">
+                                <option value="" selected>Default Sorting</option> 
+                                <option value="asc">Sort by price: low to high</option>
+                                <option value="desc">Sort by price: high to low</option>
+                            </select> 
                             <p><i class="fa-solid fa-chevron-down"></i></p>
                         </div>
                     </div>
@@ -159,41 +159,41 @@
                             <div class="pagincontainer"> 
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination"> 
-                                         
-                                            <c:if test="${cateID != null}">
-                                                <c:if test="${tag > 1}"> 
-                                                    <li class="page-item"><a class="page-link" href="ProductCateController?index=${tag-1}&cateID=${cateID}"><i class="fa-solid fa-chevron-left"></i></a></li>
-                                                </c:if>
-                                                <c:forEach begin="1" end="${endPage}" var="i">
-                                                    <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="ProductCateController?index=${i}&cateID=${cateID}">${i}</a></li>
+
+                                        <c:if test="${cateID != null}">
+                                            <c:if test="${tag > 1}"> 
+                                                <li class="page-item"><a class="page-link" href="ProductCateController?index=${tag-1}&cateID=${cateID}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                    </c:if>
+                                                    <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="ProductCateController?index=${i}&cateID=${cateID}">${i}</a></li>
                                                 </c:forEach> 
                                                 <c:if test="${tag < endPage }"> 
-                                                    <li class="page-item"><a class="page-link" href="ProductCateController?index=${tag+1}&cateID=${cateID}"><i class="fa-solid fa-chevron-right"></i></a></li>
-                                                </c:if> 
-                                            </c:if>
-                                            <c:if test="${shop != null}">        
-                                                <c:if test="${tag > 1}"> 
-                                                    <li class="page-item"><a class="page-link" href="ManageShopController?index=${tag-1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                <li class="page-item"><a class="page-link" href="ProductCateController?index=${tag+1}&cateID=${cateID}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                                    </c:if> 
                                                 </c:if>
-                                                <c:forEach begin="1" end="${endPage}" var="i">
-                                                    <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="ManageShopController?index=${i}">${i}</a></li>
+                                                <c:if test="${shop != null}">        
+                                                    <c:if test="${tag > 1}"> 
+                                                <li class="page-item"><a class="page-link" href="ManageShopController?index=${tag-1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                    </c:if>
+                                                    <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="ManageShopController?index=${i}">${i}</a></li>
                                                 </c:forEach> 
                                                 <c:if test="${tag < endPage }"> 
-                                                    <li class="page-item"><a class="page-link" href="ManageShopController?index=${tag+1}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                                <li class="page-item"><a class="page-link" href="ManageShopController?index=${tag+1}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                                    </c:if>
                                                 </c:if>
-                                            </c:if>
-                                            <c:if test="${OldSearch != null }">
-                                                <c:if test="${tag > 1}"> 
-                                                    <li class="page-item"><a class="page-link" href="SearchProductController?index=${tag-1}&productName=${OldSearch}"><i class="fa-solid fa-chevron-left"></i></a></li>
-                                                </c:if>        
-                                                <c:forEach begin="1" end="${endPage}" var="i">
-                                                    <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="SearchProductController?index=${i}&productName=${OldSearch}">${i}</a></li>
+                                                <c:if test="${OldSearch != null }">
+                                                    <c:if test="${tag > 1}"> 
+                                                <li class="page-item"><a class="page-link" href="SearchProductController?index=${tag-1}&productName=${OldSearch}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                                                    </c:if>        
+                                                    <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item"><a class="page-link ${tag == i ? "active__page" : ""}" href="SearchProductController?index=${i}&productName=${OldSearch}">${i}</a></li>
                                                 </c:forEach>
                                                 <c:if test="${tag < endPage }"> 
-                                                    <li class="page-item"><a class="page-link" href="SearchProductController?index=${tag+1}&productName=${OldSearch}"><i class="fa-solid fa-chevron-right"></i></a></li>
-                                                </c:if>    
-                                            </c:if>        
-                                           
+                                                <li class="page-item"><a class="page-link" href="SearchProductController?index=${tag+1}&productName=${OldSearch}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                                    </c:if>    
+                                                </c:if>        
+
                                     </ul>
                                 </nav>
                             </div>
@@ -202,32 +202,34 @@
                 </div>
             </div>
         </div>
- <!-- Toast -->
+        <!-- Toast -->
         <c:if test="${toastMessage != null}"> 
-        <div id="toast">  
-            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
-                <div class="toast__icon">
-                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
-                </div>
-                <div class="toast_body">
-                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
-                    <p class="toast__msg">${message}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
+            <div id="toast">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
                 </div>
             </div>
-        </div>
         </c:if>
+        <div id="modal-logout-confirm"></div> 
+
         <!-- footer -->
         <div id="footer"></div> 
         <style>
             .category-item--active{
-    background-color: var(--bs-orange);
-} 
-.category-item--active .category-item__link{
-    color: #fff;
-} 
+                background-color: var(--bs-orange);
+            } 
+            .category-item--active .category-item__link{
+                color: #fff;
+            } 
         </style>
     </body>
     <script>
@@ -237,8 +239,11 @@
         $('#footer').load('utils.jsp #footer__nav', () => {
             $.getScript('./assets/js/utilsCustomer.js');
         });
+        $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
+        });
     </script>
-        <script src="assets/js/notification.js"></script>
+    <script src="assets/js/notification.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 
@@ -260,45 +265,45 @@
         });
 
         // tien vnd
-         
+
 
     </script>
- <script>
-  // Lưu trữ thứ tự ban đầu của các sản phẩm
-let originalOrder = []; 
-  let productsContainer = document.querySelector(".row_product_list");
-  let products = Array.from(productsContainer.querySelectorAll(".product-item"));
+    <script>
+        // Lưu trữ thứ tự ban đầu của các sản phẩm
+        let originalOrder = [];
+        let productsContainer = document.querySelector(".row_product_list");
+        let products = Array.from(productsContainer.querySelectorAll(".product-item"));
 
-  // First Array
-  originalOrder = products.map(product => product);
- 
-
-function sortProductsByPrice() {
-  const sortOrder = document.getElementById("sortPrice").value;
-
-  let productsContainer = document.querySelector(".row_product_list");
-  let products = Array.from(productsContainer.querySelectorAll(".product-item"));
-
-  if (sortOrder === "") {
-    // Sắp xếp theo thứ tự ban đầu (default)
-    originalOrder.forEach(product => productsContainer.appendChild(product));
-  } else {
-    // Sắp xếp theo giá
-    products.sort((a, b) => {
-      let priceA = parseInt(a.querySelector(".shop__product-price").innerText.replace(/[₫,.]/g, ''));
-      let priceB = parseInt(b.querySelector(".shop__product-price").innerText.replace(/[₫,.]/g, ''));
-
-      if (sortOrder === "asc") {
-        return priceA - priceB;
-      } else {
-        return priceB - priceA;
-      }
-    });
-    products.forEach(product => productsContainer.appendChild(product));
-  }
-}
+        // First Array
+        originalOrder = products.map(product => product);
 
 
-</script>
+        function sortProductsByPrice() {
+            const sortOrder = document.getElementById("sortPrice").value;
+
+            let productsContainer = document.querySelector(".row_product_list");
+            let products = Array.from(productsContainer.querySelectorAll(".product-item"));
+
+            if (sortOrder === "") {
+                // Sắp xếp theo thứ tự ban đầu (default)
+                originalOrder.forEach(product => productsContainer.appendChild(product));
+            } else {
+                // Sắp xếp theo giá
+                products.sort((a, b) => {
+                    let priceA = parseInt(a.querySelector(".shop__product-price").innerText.replace(/[₫,.]/g, ''));
+                    let priceB = parseInt(b.querySelector(".shop__product-price").innerText.replace(/[₫,.]/g, ''));
+
+                    if (sortOrder === "asc") {
+                        return priceA - priceB;
+                    } else {
+                        return priceB - priceA;
+                    }
+                });
+                products.forEach(product => productsContainer.appendChild(product));
+            }
+        }
+
+
+    </script>
 
 </html>

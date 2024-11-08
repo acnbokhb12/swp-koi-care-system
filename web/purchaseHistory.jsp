@@ -51,13 +51,13 @@
                                     <h4 class="mb-0">Your Order</h4>
                                     <p>Check the status of recent orders, manage returns, and discover similar products.</p>
                                 </div>
-                                 
+
                                 <!-- mb-8 o day la nhung mon order trong 1 ngay cu the -->
                                 <c:forEach items="${listPurchaseHistory}" var="ord"> 
-                                    
+
                                     <div class="mb-8" style="margin-bottom: 10px;">
                                         <!-- text -->
-                                        
+
                                         <div class="row border-bottom mb-3 pb-3 d-lg-flex align-items-center justify-content-between">
                                             <div class="col-6 name-order-date d-flex align-items-center">
                                                 <h5 class="mb-0">Order ${ord.id}</h5>
@@ -66,7 +66,7 @@
                                                     ${formattedDate}
                                                 </span>
                                             </div>    
-                                             <div class="col-6 d-flex align-items-center justify-content-end "> 
+                                            <div class="col-6 d-flex align-items-center justify-content-end "> 
                                                 <h1 class="m-0">Status: </h1>
                                                 <h2 class="m-0 ml-2  ${ord.orderStatusId == 1 ? 'badge badge-secondary' : (ord.orderStatusId == 2 ? 'badge badge-warning"badge badge-warning' : 'badge badge-success') }" style="padding: 6px 10px; font-size: 1.6rem; ">${ord.orderS.orderStatusName}</h2>
                                             </div> 
@@ -124,7 +124,7 @@
                                             <div class="grand-total-order-detail">
                                                 <h1 class="grand-total-title">Grand total:</h1>
                                                 <h1 class="grand-total-price">
-                                                   <h2 id="subtotal-quantity-price-item"><fmt:formatNumber value="${TotalProduct}" pattern="#,###"/> đ </h2>
+                                                    <h2 id="subtotal-quantity-price-item"><fmt:formatNumber value="${TotalProduct}" pattern="#,###"/> đ </h2>
                                                 </h1>
                                             </div>
                                         </div>
@@ -136,22 +136,24 @@
                 </div>
             </div>
         </div>
-         <c:if test="${toastMessage != null}"> 
-        <div id="toast">  
-            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
-                <div class="toast__icon">
-                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
-                </div>
-                <div class="toast_body">
-                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
-                    <p class="toast__msg">${message}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
+        <c:if test="${toastMessage != null}"> 
+            <div id="toast">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
                 </div>
             </div>
-        </div>
         </c:if>
+        <div id="modal-logout-confirm"></div> 
+
         <!-- footer --> 
         <div id="footer"></div>
         <style> 
@@ -248,7 +250,7 @@
                 }
             }
         </style>
-            <script src="./assets/js/notification.js"></script>
+        <script src="./assets/js/notification.js"></script>
 
         <script>
             $('#header').load('utils.jsp #header__nav', () => {
@@ -256,6 +258,9 @@
             });
             $('#footer').load('utils.jsp #footer__nav', () => {
                 $.getScript('./assets/js/utilsCustomer.js');
+            });
+            $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+                $.getScript('./assets/js/utilsCustomer.js')
             });
         </script>
     </body>

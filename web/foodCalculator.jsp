@@ -163,7 +163,7 @@
             </div>
         </div> 
 
-
+        <div id="modal-logout-confirm"></div> 
         <!-- footer -->
         <div id="footer"></div>
         <script>
@@ -173,6 +173,9 @@
             $('#footer').load('utils.jsp #footer__nav', () => {
                 $.getScript('./assets/js/utilsCustomer.js')
             });
+            $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
+        });
         </script>
     </body>
 

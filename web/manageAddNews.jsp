@@ -98,6 +98,8 @@
             </div>
 
         </div>
+                                            
+                   
 
     </body>
     <script>
@@ -105,7 +107,7 @@
             $.getScript('./assets/js/utilsAdmin.js');
         });
         $('#sidebar_admin').load('utils.jsp  #sidebar_admin');
-
+        
 
 
         const imageInput = document.getElementById('imageInput');

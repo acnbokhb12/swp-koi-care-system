@@ -63,88 +63,88 @@
             </div>
         </div> 
         <!-- TABLE NEW -->
-      <div class="container__infor__fish">
-    <div class="infor__fish-detail">
-        <form action="FishCreateNewController" method="post" enctype="multipart/form-data" id="form_fill-news">  
-            <div class="row row-fish-detail">
-                <div class="col-4" style="padding: 0">
-                    <div class="img-edit-submit">
-                        <div class="fish-img-info-edit mb-4">
-                            <img id="imagePreview" src="https://plus.unsplash.com/premium_photo-1723672584731-52b5f1a67543?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a29pJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D" alt="Koi Pond"> 
+        <div class="container__infor__fish">
+            <div class="infor__fish-detail">
+                <form action="FishCreateNewController" method="post" enctype="multipart/form-data" id="form_fill-news">  
+                    <div class="row row-fish-detail">
+                        <div class="col-4" style="padding: 0">
+                            <div class="img-edit-submit">
+                                <div class="fish-img-info-edit mb-4">
+                                    <img id="imagePreview" src="https://plus.unsplash.com/premium_photo-1723672584731-52b5f1a67543?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a29pJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D" alt="Koi Pond"> 
+                                </div>
+                                <div class="fish-edit-img-detail"> 
+                                    <input id="imageInput" name="fileimg" type="file" accept="image/*" > 
+                                </div>
+                            </div>
                         </div>
-                        <div class="fish-edit-img-detail"> 
-                            <input id="imageInput" name="fileimg" type="file" accept="image/*" > 
+                        <div class="col-8 edit-info">
+                            <div class="text-right">
+                                <button class="btn-close-fish">
+                                    <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
+                                </button>
+                            </div>
+                            <h2>Add New Fish</h2> 
+                            <div class="row row-edit-info-detail">
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Fish Name </span>
+                                    <input type="text" name="fishName" placeholder="Enter fish name" required/>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Body Shape</span>
+                                    <select name="bodyShape" style="width: 100%;  border: 1px solid #000;">  
+                                        <option value="Slim" selected>Slim</option>
+                                        <option value="Fat">Fat</option>
+                                        <option value="Long">Long</option>
+                                        <option value="Short">Short</option>
+                                        <option value="Large">Large</option>
+                                        <option value="Small">Small</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Age <span style="color: red; font-weight:bold;">(year(s))</span></span>
+                                    <input type="number" name="age" step="0.1" min="0.1" max="1000" placeholder="Enter age" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Length <span style="color: red; font-weight:bold;">(cm)</span></span>
+                                    <input type="number" name="length" step="0.1" max="10000" placeholder="Enter length in cm" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Weight <span style="color: red; font-weight:bold;">(kg)</span></span>
+                                    <input type="number" name="weight" step="0.1" min="0.1" max="1000"  placeholder="Enter weight in kg" required />
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Gender</span>
+                                    <select name="gender" style="width: 100%; border: 1px solid #000;"> 
+                                        <option selected value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Description</span>
+                                    <input type="text" name="descriptionKoi" placeholder="Enter description" required/>
+                                </div>
+                                <div class="col-md-6 edit-item-detail">
+                                    <span>Pond</span>
+                                    <select name="pondkoi" style="width: 100%; border: 1px solid #000;">
+                                        <option value="0" selected>Unassigned</option>
+                                        <c:if test="${ListPond != null}">                                    
+                                            <c:forEach items="${ListPond}" var="pd">
+                                                <option value="${pd.pondID}">${pd.name}</option>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
+                                    Confirm
+                                </button>                    
+                            </div> 
                         </div>
                     </div>
-                </div>
-                <div class="col-8 edit-info">
-                    <div class="text-right">
-                        <button class="btn-close-fish">
-                            <i class="fa-solid fa-xmark close-navbar-icon-btn-fish"></i>
-                        </button>
-                    </div>
-                    <h2>Add New Fish</h2> 
-                    <div class="row row-edit-info-detail">
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Fish Name </span>
-                            <input type="text" name="fishName" placeholder="Enter fish name" required/>
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Body Shape</span>
-                            <select name="bodyShape" style="width: 100%;  border: 1px solid #000;">  
-                                <option value="Slim" selected>Slim</option>
-                                <option value="Fat">Fat</option>
-                                <option value="Long">Long</option>
-                                <option value="Short">Short</option>
-                                <option value="Large">Large</option>
-                                <option value="Small">Small</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Age <span style="color: red; font-weight:bold;">(year(s))</span></span>
-                            <input type="number" name="age" step="0.1" min="0.1" max="1000" placeholder="Enter age" required />
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Length <span style="color: red; font-weight:bold;">(cm)</span></span>
-                            <input type="number" name="length" step="0.1" max="10000" placeholder="Enter length in cm" required />
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Weight <span style="color: red; font-weight:bold;">(kg)</span></span>
-                            <input type="number" name="weight" step="0.1" min="0.1" max="1000"  placeholder="Enter weight in kg" required />
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Gender</span>
-                            <select name="gender" style="width: 100%; border: 1px solid #000;"> 
-                                <option selected value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Description</span>
-                            <input type="text" name="descriptionKoi" placeholder="Enter description" required/>
-                        </div>
-                        <div class="col-md-6 edit-item-detail">
-                            <span>Pond</span>
-                            <select name="pondkoi" style="width: 100%; border: 1px solid #000;">
-                                <option value="0" selected>Unassigned</option>
-                                <c:if test="${ListPond != null}">                                    
-                                    <c:forEach items="${ListPond}" var="pd">
-                                        <option value="${pd.pondID}">${pd.name}</option>
-                                    </c:forEach>
-                                </c:if>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button class="edit-btn blue-btn" type="submit" style="margin-top: 10px">
-                            Confirm
-                        </button>                    
-                    </div> 
-                </div>
+                </form>      
             </div>
-        </form>      
-    </div>
-</div>
+        </div>
 
         <!-- Modal Delete -->
         <div id="myModal" class="modal-confirm-delete" style="display: none;">
@@ -173,21 +173,22 @@
         </div>
         <!-- Toast -->
         <c:if test="${toastMessage != null}"> 
-        <div id="toast">  
-            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
-                <div class="toast__icon">
-                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
-                </div>
-                <div class="toast_body">
-                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
-                    <p class="toast__msg">${message}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
+            <div id="toast">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
                 </div>
             </div>
-        </div>
         </c:if>
+        <div id="modal-logout-confirm"></div> 
 
         <!-- footer -->
         <div id="footer"></div> 
@@ -195,7 +196,7 @@
             .link-delete-fish:hover{
                 cursor: pointer;
             }
-            
+
             .link__to-fish-detail:hover{
                 text-decoration: underline;
             }
@@ -207,7 +208,7 @@
             }
             .edit-item-detail select, .edit-item-detail input{
                 padding: 4px;
-               font-size: 1.4rem; 
+                font-size: 1.4rem; 
             }
             .edit-btn.blue-btn {
                 background-color: var(--bs-orange);
@@ -220,6 +221,9 @@
         });
         $('#footer').load('utils.jsp #footer__nav', () => {
             $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
         });
     </script>
     <script src="./assets/js/utils.js"></script> 
@@ -255,8 +259,8 @@
                 const pondID = $(this).data('pondid');
                 const fishName = $(this).data('fishname');
                 $('#fishIDToDelete').val(fishID);
-                $('#pondIDToCaculate').val(pondID); 
-                $('#fishNameDisplay').text(fishName); 
+                $('#pondIDToCaculate').val(pondID);
+                $('#fishNameDisplay').text(fishName);
                 $('#myModal').show();
             });
             $('.close-confirm-delete, .btn-cancel-delete').on('click', function () {

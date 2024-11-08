@@ -168,6 +168,8 @@
             </div>
         </div>
         </c:if>
+                <div id="modal-logout-confirm"></div> 
+
         <div id="footer"></div>
         <style>
             .link-delete-pond{
@@ -181,6 +183,9 @@
         });
         $('#footer').load('utils.jsp #footer__nav', () => {
             $.getScript('./assets/js/utilsCustomer.js');
+        });
+         $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
         });
     </script>
     <script>

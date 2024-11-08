@@ -309,7 +309,7 @@
                                                             <div class="welcome__acc-footer">
                                                                 <ul class="footer__link-acount-list-item">
                                                                     <li class="footer__link-acount-detail-item">
-                                                                        <a href="MainController?action=logout">
+                                                                        <a id="btn-logout" style="cursor: pointer;">
                                                                             <i class="fas fa-sign-out"></i> Log out
                                                                         </a>
                                                                     </li>
@@ -417,10 +417,25 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
             </div>
         </footer>
         <!-- End Customer -->
-
+        <div id="modal-logout-confirm_nav" class="modal_confirm-logout justify-content-center align-items-center"  >
+            <div class="modal_container_confirm-logout  ">
+                <div class="modal-content ">
+                    <div class="modal-header d-flex justify-content-between align-items-center">
+                        <h4 class="font-weight-bold m-0">Please confirm</h4>
+                        <button class="btn-close-logout"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure you want to LOGOUT?</h4>
+                    </div>
+                    <div class="modal-footer"> 
+                        <button class="btn-confirm-logout" type=""><a href="MainController?action=logout">CONFIRM</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>  
     </body>     
 </html>
