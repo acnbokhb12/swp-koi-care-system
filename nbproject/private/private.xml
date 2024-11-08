@@ -3,18 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/pond.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/shop.jsp</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/FishDeleteController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/CheckOutController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/AccountService.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/dao/OrderDAO.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/Order.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/model/OrderStatus.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/WEB-INF/web.xml</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/purchaseHistory.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/HomeController.java</file>
         </group>
     </open-files>
 </project-private>
