@@ -101,7 +101,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.SALT_CALCULATOR:
                     url = "SaltCalculatorController";
-                    break ;
+                    break;
                 // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";
@@ -165,6 +165,12 @@ public class MainController extends HttpServlet {
                 case IConstant.WATER_PARAMETERS_CREATE_NEW:
                     url = "WaterParametersCreateNewController";
                     break;
+                case IConstant.WATER_PARAMETERS_UPDATE:
+                    url = "WaterParametersUpdateInfoController";
+                    break;
+                case IConstant.WATER_PARAMETERS_DELETE:
+                    url = "WaterParametersDeleteController";
+                    break;
                 //START ACCOUNT AQUARIUM MANAGER --------------------------------------------------------------------------------- 
                 case IConstant.ACCOUNT_FISH_MANAGE:
                     url = "ManageAccountFishController";
@@ -205,7 +211,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
-                    break;  
+                    break;
                 // START PLACE CUSTOMER FORGET PASSWORD -------------------------------------------------------------                   
                 case IConstant.CUSTOMER_FORGET_PASSWORD:
                     url = "CustomerForgetPasswordController";
@@ -231,7 +237,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.ADMIN_DELETE_NEWS:
                     url = "AdminDeleteNewsByIdController";
-                    break; 
+                    break;
                 case IConstant.ADMIN_SEARCH_NEWS_CATE:
                     url = "AdminSearchNewsCateController";
                     break;
@@ -262,7 +268,7 @@ public class MainController extends HttpServlet {
                     url = "DashboarAdminController";
                     break;
                 case IConstant.DASHBOARD_MANAGER:
-                    url = "DashboardManagerController"; 
+                    url = "DashboardManagerController";
                     break;
                 // START PLACE ADMIN ACCOUNT -------------------------------------------------------- 
                 case IConstant.ADMIN_ACCOUNT:

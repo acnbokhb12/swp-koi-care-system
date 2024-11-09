@@ -9,6 +9,7 @@ import com.swp.koiCareSystem.dao.WaterParameterDAO;
 import com.swp.koiCareSystem.model.WaterParameter;
 import com.swp.koiCareSystem.model.WaterParameterDescription;
 import com.swp.koiCareSystem.model.WaterParameterDetail;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -34,8 +35,16 @@ public class WaterParameterService {
     public WaterParameter getWaterParameterByID(int waterParameterID) {
         return wpd.getWaterParameterByID(waterParameterID);
     }
-    public boolean createNewWaterParameter(WaterParameter newWaterParameter){
+
+    public boolean createNewWaterParameter(WaterParameter newWaterParameter) {
         return wpd.createNewWaterParameter(newWaterParameter);
     }
-}
 
+    public boolean updateWaterParameter(WaterParameter updatewaterParameter) {
+        return wpd.updateWaterParameter(updatewaterParameter);
+    }
+
+    public boolean isDateTimeExist(int pondID, LocalDateTime measurementDate) {
+        return wpd.isDateTimeExist(pondID, measurementDate);
+    }
+}

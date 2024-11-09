@@ -38,6 +38,8 @@ public class WaterParametersCreateNewController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -50,17 +52,26 @@ public class WaterParametersCreateNewController extends HttpServlet {
 
             int accID = (acc.getUserID());
             int pondID = Integer.parseInt(request.getParameter("pond"));
-            String datetime = request.getParameter("datetimeMeasure"); 
+            String datetime = request.getParameter("datetimeMeasure");
             String note = request.getParameter("noteNew");
             WaterParameterService wps = new WaterParameterService();
 
             WaterParameter waterpara = new WaterParameter();
             waterpara.setAccID(accID);
             waterpara.setPondID(pondID);
+
             try {
                 waterpara.setMeasurementDate(LocalDateTime.parse(datetime));
             } catch (Exception e) {
-                request.setAttribute("message", "Please choose date and time ");
+                request.setAttribute("message", "Please choose date and time.");
+                request.setAttribute("toastMessage", "error");
+                request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
+                return;
+            }
+
+            boolean isDateTimeExist = wps.isDateTimeExist(waterpara.getPondID(), waterpara.getMeasurementDate());
+            if (isDateTimeExist) {
+                request.setAttribute("message", "The date and time already exist for this pond.");
                 request.setAttribute("toastMessage", "error");
                 request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
                 return;
@@ -68,11 +79,11 @@ public class WaterParametersCreateNewController extends HttpServlet {
             System.out.println(LocalDateTime.parse(datetime));
             waterpara.setNote(note);
             waterpara.setIsActive(true);
-            
+
             ArrayList<WaterParameterDetail> details = new ArrayList<>();
             ArrayList<WaterParameterDescription> listParametersDescription = wps.getAllWaterParameterDescriptions();
-             
-            for(WaterParameterDescription item : listParametersDescription ){ 
+
+            for (WaterParameterDescription item : listParametersDescription) {
                 float value = (float) 0.0;
                 String paramValueChar = "waPara" + item.getWaterParameterDescID();
                 String paramValue = request.getParameter(paramValueChar);
@@ -84,7 +95,6 @@ public class WaterParametersCreateNewController extends HttpServlet {
                 detail.setValue(value);
                 details.add(detail);
             }
-                
 
             waterpara.setWaterParameterDetails(details);
             boolean result = wps.createNewWaterParameter(waterpara);
@@ -95,9 +105,9 @@ public class WaterParametersCreateNewController extends HttpServlet {
             } else {
                 request.setAttribute("message", "An error occurred while creating WaterParemeter");
                 request.setAttribute("toastMessage", "error");
-            
+
             }
-                request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
+            request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
         }
     }
 

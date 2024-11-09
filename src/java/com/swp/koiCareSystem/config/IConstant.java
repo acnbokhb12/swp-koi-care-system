@@ -59,6 +59,8 @@ public interface IConstant {
 // START POND ----------------------------------------------------------------------------------------------------------------------------------   
     public final String WATER_PARAMETERS_MANAGE = "waterparametersmanage";
     public final String WATER_PARAMETERS_CREATE_NEW = "waterparametercreatenew";
+    public final String WATER_PARAMETERS_UPDATE = "waterparameterupdate";
+    public final String WATER_PARAMETERS_DELETE = "waterparameterdelete";
 
     // START AQUARIUM MANAGER ---------------------------------------------------------------------------------------------------------------------------------------
     public static String ACCOUNT_FISH_MANAGE = "accountfishmanage";
@@ -126,7 +128,6 @@ public interface IConstant {
     public final String ADMIN_ACCOUNT_UPDATE_IMAGE = "adminAccountUpdateImage";
 
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
-
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
 
     public static final String GOOGLE_CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID");

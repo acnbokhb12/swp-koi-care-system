@@ -145,7 +145,7 @@
             <!--hash map co name co symbol value la nguyen doi ttuong description key cua hash map la cai nao the . text dua len khung-->
             <div class="container__infor__water-parameter container__infor__water-parameter-update">
                 <div class="infor__water-parameter-detail infor__water-parameter-detail-update">
-                    <form action="WaterParametersCreateNewController" method="post">
+                    <form action="WaterParametersUpdateInfoController" method="post">
                         <div class="place_btn-r-a">
                             <button type="button" class="btn btn-item-handle btn-close-modal"><i
                                     class="fas fa-times"></i></button>
@@ -153,7 +153,7 @@
                                     class="fa-solid fa-check"></i></button>
                         </div>
                         <div class="water-parameter-from row m-0">
-
+                            <input type="hidden" name="waterParameterId" id="waterParameterIdUpdate" /> 
                             <div class="item_input-detail  col-6 p-1">
                                 <label class="color-value" for="">Pond:</label>
                                 <select name="pond" class="pr-1" id="pondUpdate">
@@ -173,7 +173,7 @@
                             </div> 
                             <div class="input-note_desc col-12 p-1">
                                 <label for="">Note:</label>
-                                <textarea  name="" id="noteUpdate"></textarea>
+                                <textarea name="note" id="noteUpdate"></textarea>
                             </div>
                         </div>
                     </form>
@@ -234,8 +234,6 @@
                 </div>
             </div>
         </c:if>
-        <div id="modal-logout-confirm"></div> 
-
         <!-- footer -->
         <div id="footer"></div>
 
@@ -275,9 +273,7 @@
             $('#footer').load('utils.jsp #footer__nav', () => {
                 $.getScript('./assets/js/utilsCustomer.js');
             });
-            $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
-                $.getScript('./assets/js/utilsCustomer.js')
-            });
+
         </script>
         <script src="assets/js/notification.js"></script>
 
@@ -408,6 +404,7 @@
             for (const itemTableParameterOpen of waterParameterTables) {
                 itemTableParameterOpen.addEventListener('click', function () {
                     const idWaterParameter = this.getAttribute('data-table-wt-id');
+                    document.getElementById('waterParameterIdUpdate').value = idWaterParameter;
                     const dateMeasure = this.getAttribute('data-date-update');
                     const noteToUpdate = this.getAttribute('data-note-update');
                     const pondId = this.getAttribute('data-pond-id');
@@ -430,7 +427,8 @@
                         updateHtmlWater = `<div class="item_input-detail  col-6 p-1">
                                         <label for="">${detail.waterDesc.name}(${detail.waterDesc.symbol})</label>
                                         <div class="contain_input_a-infor">
-                                            <input class="input_value-parameter-update input_value-parameter" name="" data-param="${detail.waterDesc.waterParameterDescID}" type="number" step="0.1" min="0" value="${detail.value != 0.0 ? detail.value : '' }">
+                                            <input class="input_value-parameter-update input_value-parameter" name="waPara${detail.waterDesc.waterParameterDescID}" 
+                                                 data-param="${detail.waterDesc.waterParameterDescID}" type="number" step="0.1" min="0" value="${detail.value != 0.0 ? detail.value : '' }">
                                             <div class="signal-input-detail d-flex align-item   s-center">
                                                 <span class="d-block mr-1">${detail.value != 0.0 ? detail.waterDesc.unit : ''}</span>
                                                 <i data-optimal-range="${detail.waterDesc.optimalRange}" data-desc-parameter="${detail.waterDesc.description}" class="btn-show-infor fa-solid fa-circle-info m-auto"></i>

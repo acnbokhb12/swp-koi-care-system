@@ -91,7 +91,8 @@ public class WaterParameterDAO {
                 // Step 1: Fetch Water Parameters for the given Account ID
                 String sql1 = "SELECT WaterParameterID, PondID, MeasurementDate, Note, isActive "
                         + "FROM dbo.WaterParameter "
-                        + "WHERE AccID = ? AND isActive = 1";
+                        + "WHERE AccID = ? AND isActive = 1 "
+                        + "ORDER BY MeasurementDate DESC";
                 stmt1 = cn.prepareStatement(sql1);
                 stmt1.setInt(1, accID);
                 rs1 = stmt1.executeQuery();
@@ -327,16 +328,16 @@ public class WaterParameterDAO {
         }
         return waterParameter;
     }
- 
+
     public boolean createNewWaterParameter(WaterParameter waterParameter) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        int rowEffectV2 =0;
+        int rowEffectV2 = 0;
         System.out.println(waterParameter);
         try {
-                cn = DatabaseConnectionManager.getConnection();
-            if (cn != null) { 
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
                 String sql = "insert into [dbo].[WaterParameter] ([AccID],[PondID],[MeasurementDate],[Note]) values (?,?, ?, ? )";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, waterParameter.getAccID());
@@ -354,19 +355,19 @@ public class WaterParameterDAO {
                     if (rs2 != null && rs2.next()) {
                         int WaterParameterId = rs2.getInt(1);
                         cn.setAutoCommit(false);
-                        for(WaterParameterDetail wtdt : waterParameter.getWaterParameterDetails()){                          
+                        for (WaterParameterDetail wtdt : waterParameter.getWaterParameterDetails()) {
                             String sql3 = "INSERT INTO dbo.WaterParameterDetail \n"
                                     + "(WaterParameterID, WaterParameterDescID, [value]) VALUES (?, ?, ?)";
                             PreparedStatement pst3 = cn.prepareStatement(sql3);
                             pst3.setInt(1, WaterParameterId);
                             pst3.setInt(2, wtdt.getWaterParameterDescID());
-                            if(wtdt.getValue() != 0.0){
-                                pst3.setFloat(3, wtdt.getValue());                                
-                            }else{
+                            if (wtdt.getValue() != 0.0) {
+                                pst3.setFloat(3, wtdt.getValue());
+                            } else {
                                 pst3.setNull(3, java.sql.Types.FLOAT);
                             }
                             rowEffectV2 = pst3.executeUpdate();
-                             pst3.close();
+                            pst3.close();
                         }
                     }
                     cn.commit();
@@ -395,7 +396,153 @@ public class WaterParameterDAO {
         }
         return false;
     }
- 
+
+    public boolean updateWaterParameter(WaterParameter waterParameter) {
+        Connection cn = null;
+        PreparedStatement stmt1 = null;
+        PreparedStatement stmt2 = null;
+        PreparedStatement stmt3 = null;
+        boolean isUpdated = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                cn.setAutoCommit(false);
+
+                // Bước 1: Cập nhật bảng WaterParameter
+                String sql1 = "UPDATE dbo.WaterParameter SET PondID = ?, MeasurementDate = ?, Note = ? WHERE WaterParameterID = ?";
+                stmt1 = cn.prepareStatement(sql1);
+                stmt1.setInt(1, waterParameter.getPondID());
+                stmt1.setTimestamp(2, Timestamp.valueOf(waterParameter.getMeasurementDate()));
+                stmt1.setString(3, waterParameter.getNote());
+                stmt1.setInt(4, waterParameter.getWaterParameterId());
+
+                int rowsUpdated1 = stmt1.executeUpdate();
+
+                // Bước 2: Xóa các bản ghi cũ trong bảng WaterParameterDetail
+                String sqlDelete = "DELETE FROM dbo.WaterParameterDetail WHERE WaterParameterID = ?";
+                stmt2 = cn.prepareStatement(sqlDelete);
+                stmt2.setInt(1, waterParameter.getWaterParameterId());
+                stmt2.executeUpdate();
+
+                // Bước 3: Thêm các bản ghi mới vào bảng WaterParameterDetail
+                if (waterParameter.getWaterParameterDetails() != null && !waterParameter.getWaterParameterDetails().isEmpty()) {
+                    String sql3 = "INSERT INTO dbo.WaterParameterDetail (WaterParameterID, WaterParameterDescID, [value]) VALUES (?, ?, ?)";
+                    stmt3 = cn.prepareStatement(sql3);
+
+                    for (WaterParameterDetail detail : waterParameter.getWaterParameterDetails()) {
+                        stmt3.setInt(1, waterParameter.getWaterParameterId());
+                        stmt3.setInt(2, detail.getWaterParameterDescID());
+
+                        if (detail.getValue() != 0.0) {
+                            stmt3.setFloat(3, detail.getValue());
+                        } else {
+                            stmt3.setNull(3, java.sql.Types.FLOAT);
+                        }
+                        stmt3.addBatch(); 
+                    }
+                    stmt3.executeBatch(); 
+                }
+
+                cn.commit();
+                isUpdated = rowsUpdated1 > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                if (cn != null) {
+                    cn.rollback();
+                }
+            } catch (Exception rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+        } finally {
+            try {
+                if (stmt3 != null) {
+                    stmt3.close();
+                }
+                if (stmt2 != null) {
+                    stmt2.close();
+                }
+                if (stmt1 != null) {
+                    stmt1.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isUpdated;
+    }
+
+    public boolean deleteWaterParameter(int waterParameterId) {
+        Connection cn = null;
+        PreparedStatement stmt = null;
+        boolean isDelete = false;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            String sql = "UPDATE dbo.WaterParameter SET isActive = 0 WHERE WaterParameterID = ?";
+            stmt = cn.prepareStatement(sql);
+            stmt.setInt(1, waterParameterId);
+
+            int rowsAffected = stmt.executeUpdate();
+            isDelete = rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isDelete;
+    }
+
+    public boolean isDateTimeExist(int pondID, LocalDateTime measurementDate) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            String sql = "SELECT COUNT(*) FROM dbo.WaterParameter WHERE PondID = ? AND MeasurementDate = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, pondID);
+            pst.setTimestamp(2, Timestamp.valueOf(measurementDate));
+            rs = pst.executeQuery();
+
+            if (rs != null && rs.next()) {
+                return rs.getInt(1) > 0; 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         WaterParameterDAO wpt = new WaterParameterDAO();
         ArrayList<WaterParameterDescription> list = wpt.getAllWaterParameterDescriptions();

@@ -5,29 +5,20 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.dao.WaterParameterDAO;
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.model.Pond;
-import com.swp.koiCareSystem.model.WaterParameter;
-import com.swp.koiCareSystem.model.WaterParameterDescription;
-import com.swp.koiCareSystem.service.PondService;
-import com.swp.koiCareSystem.service.WaterParameterService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-public class WaterParametersManageController extends HttpServlet {
+public class WaterParametersDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,31 +34,39 @@ public class WaterParametersManageController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if (acc == null) {
-                response.sendRedirect("login.jsp");
+            String waterParameterIdStr = request.getParameter("id");
+
+            if (waterParameterIdStr != null && !waterParameterIdStr.trim().isEmpty()) {
+                try {
+                    int waterParameterId = Integer.parseInt(waterParameterIdStr);
+
+                    // Gọi DAO để xóa bản ghi
+                    WaterParameterDAO wpd = new WaterParameterDAO();
+                    boolean isDeleted = wpd.deleteWaterParameter(waterParameterId);
+
+                    if (isDeleted) {
+                        request.setAttribute("message", "Water Parameter deleted successfully.");
+                        request.setAttribute("toastMessage", "success");
+                    } else {
+                        request.setAttribute("message", "Failed to delete Water Parameter.");
+                        request.setAttribute("toastMessage", "error");
+                    }
+
+                } catch (NumberFormatException e) {
+                    request.setAttribute("message", "Invalid Water Parameter ID.");
+                    request.setAttribute("toastMessage", "error");
+                }
+            } else {
+                request.setAttribute("message", "No Water Parameter ID received.");
+                request.setAttribute("toastMessage", "error");
             }
-            int accID = acc.getUserID();
-            
-            PondService ps = new PondService();
-            WaterParameterService wps = new WaterParameterService();
-            
-            ArrayList<Pond> allPonds = ps.getAllPondS(accID);
-            ArrayList<WaterParameter> listParameters = wps.getWaterParametersByAccID(accID);
-            ArrayList<WaterParameterDescription> listParametersDescription = wps.getAllWaterParameterDescriptions();
-            LocalDateTime now = LocalDateTime.now();
-            String formattedDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-            
-            request.setAttribute("listPond", allPonds);
-            request.setAttribute("formattedDateTime", formattedDateTime);
-            request.setAttribute("waterParameters", listParameters);
-            request.setAttribute("waterDescription", listParametersDescription);
-            request.getRequestDispatcher("waterParameter.jsp").forward(request, response);
+
+            // Chuyển hướng lại trang quản lý
+            request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
