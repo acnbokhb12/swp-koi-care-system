@@ -151,6 +151,11 @@
     width: 3rem;
     height: 3rem;  
 }
+#deleteWaterParameterBtn {
+    display: block;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center;
+}
 .btn-close-modal>i{
     border-color: var(--bs-orange);
     color: var(--bs-orange);
@@ -206,10 +211,10 @@
     color: var(--bs-orange);
 }
 input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 /* Ẩn mũi tên tăng/giảm trên Firefox */
 input[type=number] {
@@ -285,7 +290,7 @@ input[type=number] {
     background-color: #fff;
     margin-top: 2rem;
     padding: 2rem 2rem;
-    
+
 }
 
 @media screen and (max-width:900px) {

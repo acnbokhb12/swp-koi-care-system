@@ -6,7 +6,7 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.config.IConstant;
-import com.swp.koiCareSystem.dao.WaterParameterDAO;
+import com.swp.koiCareSystem.service.WaterParameterService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,34 +34,18 @@ public class WaterParametersDeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String waterParameterIdStr = request.getParameter("id");
+            int waterParameterId = Integer.parseInt(request.getParameter("waterParameterId"));
 
-            if (waterParameterIdStr != null && !waterParameterIdStr.trim().isEmpty()) {
-                try {
-                    int waterParameterId = Integer.parseInt(waterParameterIdStr);
+            WaterParameterService wpd = new WaterParameterService();
+            boolean isDeleted = wpd.deleteWaterParameter(waterParameterId);
 
-                    // Gọi DAO để xóa bản ghi
-                    WaterParameterDAO wpd = new WaterParameterDAO();
-                    boolean isDeleted = wpd.deleteWaterParameter(waterParameterId);
-
-                    if (isDeleted) {
-                        request.setAttribute("message", "Water Parameter deleted successfully.");
-                        request.setAttribute("toastMessage", "success");
-                    } else {
-                        request.setAttribute("message", "Failed to delete Water Parameter.");
-                        request.setAttribute("toastMessage", "error");
-                    }
-
-                } catch (NumberFormatException e) {
-                    request.setAttribute("message", "Invalid Water Parameter ID.");
-                    request.setAttribute("toastMessage", "error");
-                }
+            if (isDeleted) {
+                request.setAttribute("message", "Water parameter record deleted successfully.");
+                request.setAttribute("toastMessage", "success");
             } else {
-                request.setAttribute("message", "No Water Parameter ID received.");
+                request.setAttribute("message", "Failed to delete water parameter record.");
                 request.setAttribute("toastMessage", "error");
             }
-
-            // Chuyển hướng lại trang quản lý
             request.getRequestDispatcher("MainController?action=" + IConstant.WATER_PARAMETERS_MANAGE).forward(request, response);
         }
     }

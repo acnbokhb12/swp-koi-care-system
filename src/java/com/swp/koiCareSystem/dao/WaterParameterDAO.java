@@ -409,7 +409,6 @@ public class WaterParameterDAO {
             if (cn != null) {
                 cn.setAutoCommit(false);
 
-                // Bước 1: Cập nhật bảng WaterParameter
                 String sql1 = "UPDATE dbo.WaterParameter SET PondID = ?, MeasurementDate = ?, Note = ? WHERE WaterParameterID = ?";
                 stmt1 = cn.prepareStatement(sql1);
                 stmt1.setInt(1, waterParameter.getPondID());
@@ -419,13 +418,11 @@ public class WaterParameterDAO {
 
                 int rowsUpdated1 = stmt1.executeUpdate();
 
-                // Bước 2: Xóa các bản ghi cũ trong bảng WaterParameterDetail
                 String sqlDelete = "DELETE FROM dbo.WaterParameterDetail WHERE WaterParameterID = ?";
                 stmt2 = cn.prepareStatement(sqlDelete);
                 stmt2.setInt(1, waterParameter.getWaterParameterId());
                 stmt2.executeUpdate();
 
-                // Bước 3: Thêm các bản ghi mới vào bảng WaterParameterDetail
                 if (waterParameter.getWaterParameterDetails() != null && !waterParameter.getWaterParameterDetails().isEmpty()) {
                     String sql3 = "INSERT INTO dbo.WaterParameterDetail (WaterParameterID, WaterParameterDescID, [value]) VALUES (?, ?, ?)";
                     stmt3 = cn.prepareStatement(sql3);
@@ -439,9 +436,8 @@ public class WaterParameterDAO {
                         } else {
                             stmt3.setNull(3, java.sql.Types.FLOAT);
                         }
-                        stmt3.addBatch(); 
+                        stmt3.executeUpdate(); 
                     }
-                    stmt3.executeBatch(); 
                 }
 
                 cn.commit();
@@ -514,14 +510,14 @@ public class WaterParameterDAO {
 
         try {
             cn = DatabaseConnectionManager.getConnection();
-            String sql = "SELECT COUNT(*) FROM dbo.WaterParameter WHERE PondID = ? AND MeasurementDate = ?";
+            String sql = "SELECT COUNT(*) FROM dbo.WaterParameter WHERE PondID = ? AND MeasurementDate = ? AND isActive = 1";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, pondID);
             pst.setTimestamp(2, Timestamp.valueOf(measurementDate));
             rs = pst.executeQuery();
 
             if (rs != null && rs.next()) {
-                return rs.getInt(1) > 0; 
+                return rs.getInt(1) > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

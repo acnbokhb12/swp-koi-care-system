@@ -97,7 +97,7 @@
             <!-- Modal Add more -->
             <div class="container__infor__water-parameter">
                 <div class="infor__water-parameter-detail">
-                    <form action="WaterParametersCreateNewController" method="post">
+                    <form action="MainController?action=waterparametercreatenew" method="post">
                         <div class="place_btn-r-a">
                             <button type="button" class="btn btn-item-handle btn-close-modal"><i
                                     class="fas fa-times"></i></button>
@@ -145,7 +145,7 @@
             <!--hash map co name co symbol value la nguyen doi ttuong description key cua hash map la cai nao the . text dua len khung-->
             <div class="container__infor__water-parameter container__infor__water-parameter-update">
                 <div class="infor__water-parameter-detail infor__water-parameter-detail-update">
-                    <form action="WaterParametersUpdateInfoController" method="post">
+                    <form action="MainController?action=waterparameterupdate" method="post">
                         <div class="place_btn-r-a">
                             <button type="button" class="btn btn-item-handle btn-close-modal"><i
                                     class="fas fa-times"></i></button>
@@ -177,329 +177,335 @@
                             </div>
                         </div>
                     </form>
-                    <div class="d-flex justify-content-center mt-3">
-                        <a href="deleteRecord?id=1" class="btn btn-item-handle btn-delete text-danger">
+                    <form action="MainController?action=waterparameterdelete" method="post">
+                        <input type="hidden" name="waterParameterId" id="waterParameterIdDelete" />
+                        <button type="submit" id="deleteWaterParameterBtn" class="btn btn-item-handle btn-delete text-danger" onclick="return confirmDelete();">
                             <i class="fa-solid fa-trash"></i> Delete
-                        </a>
-                    </div>
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <!-- Modal Inf -->
-            <div class="container__infor__description">
-                <div class="infor__description-detail">
-                    <div class="infor__description-water-parameter">
-                        <div class="infor__description-title mb-3">
-                            <h2>Information</h2>
-                        </div>
-                        <div class="infor__description-range mb-3">
-                            <h3>Optimal range:</h3>
-                            <h3 class="optimalRange"></h3>
-                        </div>
-                        <div class="infor__description-body mb-3">
-                            <p class="descriptionParameter"></p>
-                        </div>
-                        <div class="infor__description-footer text-right">
-                            <h4 class="bnt_okay-infor-suggest">OKAY</h4>
-                        </div>
+        <!-- Modal Inf -->
+        <div class="container__infor__description">
+            <div class="infor__description-detail">
+                <div class="infor__description-water-parameter">
+                    <div class="infor__description-title mb-3">
+                        <h2>Information</h2>
                     </div>
-                </div>
-            </div>
-
-            <div class="container__infor__water-parameter" id="form-container" style="display: none;">
-                <div class="infor__water-parameter-detail">
-
-
-                    <div class="d-flex justify-content-center mt-3">
-                        <a href="deleteRecord?id=1" class="btn btn-item-handle btn-delete">
-                            <i class="fa-solid fa-trash"></i> Delete
-                        </a>
+                    <div class="infor__description-range mb-3">
+                        <h3>Optimal range:</h3>
+                        <h3 class="optimalRange"></h3>
+                    </div>
+                    <div class="infor__description-body mb-3">
+                        <p class="descriptionParameter"></p>
+                    </div>
+                    <div class="infor__description-footer text-right">
+                        <h4 class="bnt_okay-infor-suggest">OKAY</h4>
                     </div>
                 </div>
             </div>
         </div>
-        <c:if test="${toastMessage != null}"> 
-            <div id="toast">  
-                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
-                    <div class="toast__icon">
-                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
-                    </div>
-                    <div class="toast_body">
-                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
-                        <p class="toast__msg">${message}</p>
-                    </div>
-                    <div class="toast__close">
-                        <i class="fas fa-times"></i>
-                    </div>
+
+    </div>
+    <c:if test="${toastMessage != null}"> 
+        <div id="toast">  
+            <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }">
+                <div class="toast__icon">
+                    <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                </div>
+                <div class="toast_body">
+                    <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fas fa-times"></i>
                 </div>
             </div>
-        </c:if>
-        <!-- footer -->
-        <div id="footer"></div>
+        </div>
+    </c:if>
+    <!-- footer -->
+    <div id="footer"></div>
 
-        <style>
-            .input_value:focus {
-                border-color: inherit;
-            }
+    <style>
+        .input_value:focus {
+            border-color: inherit;
+        }
+        .item_s{
+            justify-content: inherit;
+        }
+        .item_s:nth-child(even)  {
+            justify-content: flex-end;
+            /* display: flex; */
+            /* Đảm bảo .item_value là flex container */
+        }
+        /*            .item_s:nth-child(odd) .item_value {
+                        justify-content: flex-end;
+                        display: flex;
+                         Đảm bảo .item_value là flex container 
+                    }*/
+        @media screen and (max-width:576px) {
             .item_s{
-                justify-content: inherit;
+                justify-content: space-between;
             }
-            .item_s:nth-child(even)  {
-                justify-content: flex-end;
+            .item_s:nth-child(even) {
+                justify-content:space-between;
                 /* display: flex; */
-                /* Đảm bảo .item_value là flex container */
             }
-            /*            .item_s:nth-child(odd) .item_value {
-                            justify-content: flex-end;
-                            display: flex;
-                             Đảm bảo .item_value là flex container 
-                        }*/
-            @media screen and (max-width:576px) {
-                .item_s{
-                    justify-content: space-between;
-                }
-                .item_s:nth-child(even) {
-                    justify-content:space-between;
-                    /* display: flex; */
-                }
+        }
+    </style>
+
+
+    <script>
+        $('#header').load('utils.jsp #header__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+        $('#footer').load('utils.jsp #footer__nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js');
+        });
+
+    </script>
+    <script src="assets/js/notification.js"></script>
+
+    <script>
+
+        const containerModalAdd = document.querySelector('.container__infor__water-parameter');
+        const subModalAdd = document.querySelector('.infor__water-parameter-detail');
+        const btnCloseModalAdd = document.querySelector('.btn-close-modal');
+        const btnOpenAdd = document.querySelector('.btn_add-infor-parameter');
+        btnOpenAdd.addEventListener('click', (e) => {
+            containerModalAdd.classList.add('open');
+        })
+
+        btnCloseModalAdd.addEventListener('click', () => {
+            containerModalAdd.classList.remove('open');
+        })
+        containerModalAdd.addEventListener("click", () => {
+            containerModalAdd.classList.remove("open");
+        });
+        subModalAdd.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+        const containerModalSuggest = document.querySelector('.container__infor__description');
+        const subModalSuggest = document.querySelector('.infor__description-detail');
+        const inforSuggests = document.querySelectorAll('.signal-input-detail > i');
+        const closeBtnOkaySuggest = document.querySelector('.bnt_okay-infor-suggest');
+        const optimalRangeEle = document.querySelector('.optimalRange');
+        for (const openSuggest of inforSuggests) {
+            openSuggest.addEventListener('click', function () {
+                const optimalRange = this.getAttribute("data-optimal-range");
+                const descriptionParameter = this.getAttribute("data-desc-parameter");
+                optimalRangeEle.innerText = optimalRange;
+                document.querySelector('.descriptionParameter').innerText = descriptionParameter;
+
+                containerModalSuggest.classList.add('open');
+            });
+        }
+        closeBtnOkaySuggest.addEventListener('click', () => {
+            containerModalSuggest.classList.remove('open');
+        });
+        containerModalSuggest.addEventListener("click", () => {
+            containerModalSuggest.classList.remove('open');
+        });
+        subModalSuggest.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+    </script>
+    <script>
+        function setColor(input, color) {
+            input.style.color = color;
+            input.style.borderColor = color;
+            const label = input.closest('.item_input-detail').querySelector('label');
+            if (label) {
+                label.style.color = color;
             }
-        </style>
+            const span = input.closest('.contain_input_a-infor').querySelector('.signal-input-detail span');
+            const icon = input.closest('.contain_input_a-infor').querySelector('.signal-input-detail i');
+            if (span) {
+                span.style.color = color; // change unit        
+            }
+            if (icon) {
+                icon.style.color = color; // change infor        
+            }
 
+        }
+        function setColorV2(itemParent, color) {
+            // const elementDivColorChange =
+            itemParent.style.color = color;
+        }
 
-        <script>
-            $('#header').load('utils.jsp #header__nav', () => {
-                $.getScript('./assets/js/utilsCustomer.js');
-            });
-            $('#footer').load('utils.jsp #footer__nav', () => {
-                $.getScript('./assets/js/utilsCustomer.js');
-            });
+        function checkValue(value, range) {
+            const buffer = (range.max - range.min) * 0.1; // Giới hạn "gần tới" (10% của khoảng)
 
-        </script>
-        <script src="assets/js/notification.js"></script>
+            if (value >= range.min && value <= range.max) {
+                return '#048155'; // bs-green
+            } else if ((value >= range.min - buffer && value < range.min) || (value > range.max && value <= range.max + buffer)) {
+                return '#fd7e14'; // bs-orange
+            }
+            return '#f34747'; // bs-red
+        }
 
-        <script>
-
-            const containerModalAdd = document.querySelector('.container__infor__water-parameter');
-            const subModalAdd = document.querySelector('.infor__water-parameter-detail');
-            const btnCloseModalAdd = document.querySelector('.btn-close-modal');
-            const btnOpenAdd = document.querySelector('.btn_add-infor-parameter');
-            btnOpenAdd.addEventListener('click', (e) => {
-                containerModalAdd.classList.add('open');
+        const optimalRange = {
+        <c:forEach items="${waterDescription}" var="wtdesc">
+            ${wtdesc.waterParameterDescID}: {min: ${wtdesc.minValue}, max: ${wtdesc.maxValue}},
+        </c:forEach>
+        };
+        document.querySelectorAll('.input_value-parameter').forEach((input) => {
+            input.addEventListener('input', function () {
+                const param = this.getAttribute('data-param');
+                const value = parseFloat(this.value);
+                const range = optimalRange[param];
+                if (!this.value) {
+                    setColor(this, '#000');
+                } else if (range) {
+                    const color = checkValue(value, range); // value : la tu input nhap vao , range la so sanh 2 cai min max neu tra ra tu obj
+                    setColor(this, color);
+                }
             })
 
-            btnCloseModalAdd.addEventListener('click', () => {
-                containerModalAdd.classList.remove('open');
-            })
-            containerModalAdd.addEventListener("click", () => {
-                containerModalAdd.classList.remove("open");
-            });
-            subModalAdd.addEventListener("click", (e) => {
-                e.stopPropagation();
-            });
-            const containerModalSuggest = document.querySelector('.container__infor__description');
-            const subModalSuggest = document.querySelector('.infor__description-detail');
-            const inforSuggests = document.querySelectorAll('.signal-input-detail > i');
-            const closeBtnOkaySuggest = document.querySelector('.bnt_okay-infor-suggest');
-            const optimalRangeEle = document.querySelector('.optimalRange');
-            for (const openSuggest of inforSuggests) {
-                openSuggest.addEventListener('click', function () {
-                    const optimalRange = this.getAttribute("data-optimal-range");
-                    const descriptionParameter = this.getAttribute("data-desc-parameter");
-                    optimalRangeEle.innerText = optimalRange;
-                    document.querySelector('.descriptionParameter').innerText = descriptionParameter;
+        })
 
-                    containerModalSuggest.classList.add('open');
-                });
-            }
-            closeBtnOkaySuggest.addEventListener('click', () => {
-                containerModalSuggest.classList.remove('open');
-            });
-            containerModalSuggest.addEventListener("click", () => {
-                containerModalSuggest.classList.remove('open');
-            });
-            subModalSuggest.addEventListener("click", (e) => {
-                e.stopPropagation();
-            });
-        </script>
-        <script>
-            function setColor(input, color) {
-                input.style.color = color;
-                input.style.borderColor = color;
-                const label = input.closest('.item_input-detail').querySelector('label');
-                if (label) {
-                    label.style.color = color;
-                }
-                const span = input.closest('.contain_input_a-infor').querySelector('.signal-input-detail span');
-                const icon = input.closest('.contain_input_a-infor').querySelector('.signal-input-detail i');
-                if (span) {
-                    span.style.color = color; // change unit        
-                }
-                if (icon) {
-                    icon.style.color = color; // change infor        
-                }
+    </script>
+    <!-- Read value from list water parameter from div -->
+    <script>
+        const itemValueWaterParameter = document.querySelectorAll('.value_water-parameter');
+        itemValueWaterParameter.forEach((item) => {
+            if (item) {
+                const valueParameter = parseFloat(item.textContent.trim()); // Lấy giá trị số từ nội dung text của item
+                const parentItem = item.closest('.item_s');
 
-            }
-            function setColorV2(itemParent, color) {
-                // const elementDivColorChange =
-                itemParent.style.color = color;
-            }
-
-            function checkValue(value, range) {
-                const buffer = (range.max - range.min) * 0.1; // Giới hạn "gần tới" (10% của khoảng)
-
-                if (value >= range.min && value <= range.max) {
-                    return '#048155'; // bs-green
-                } else if ((value >= range.min - buffer && value < range.min) || (value > range.max && value <= range.max + buffer)) {
-                    return '#fd7e14'; // bs-orange
-                }
-                return '#f34747'; // bs-red
-            }
-
-            const optimalRange = {
-            <c:forEach items="${waterDescription}" var="wtdesc">
-                ${wtdesc.waterParameterDescID}: {min: ${wtdesc.minValue}, max: ${wtdesc.maxValue}},
-            </c:forEach>
-            };
-            document.querySelectorAll('.input_value-parameter').forEach((input) => {
-                input.addEventListener('input', function () {
-                    const param = this.getAttribute('data-param');
-                    const value = parseFloat(this.value);
+                if (isNaN(valueParameter)) {
+                    parentItem.style.color = '#000';
+                } else {
+                    const param = item.getAttribute('data-param');
                     const range = optimalRange[param];
-                    if (!this.value) {
-                        setColor(this, '#000');
-                    } else if (range) {
-                        const color = checkValue(value, range); // value : la tu input nhap vao , range la so sanh 2 cai min max neu tra ra tu obj
-                        setColor(this, color);
-                    }
-                })
+                    const colorv2 = checkValue(valueParameter, range);
+                    setColorV2(parentItem, colorv2);
 
-            })
-
-        </script>
-        <!-- Read value from list water parameter from div -->
-        <script>
-            const itemValueWaterParameter = document.querySelectorAll('.value_water-parameter');
-            itemValueWaterParameter.forEach((item) => {
-                if (item) {
-                    const valueParameter = parseFloat(item.textContent.trim()); // Lấy giá trị số từ nội dung text của item
-                    const parentItem = item.closest('.item_s');
-
-                    if (isNaN(valueParameter)) {
-                        parentItem.style.color = '#000';
-                    } else {
-                        const param = item.getAttribute('data-param');
-                        const range = optimalRange[param];
-                        const colorv2 = checkValue(valueParameter, range);
-                        setColorV2(parentItem, colorv2);
-
-                    }
                 }
-            })
+            }
+        })
 
-            const containerModalUpdate = document.querySelector('.container__infor__water-parameter-update');
-            const subModalUpdate = document.querySelector('.infor__water-parameter-detail-update');
-            const waterParameterTables = document.querySelectorAll('.water-parameter-item');
+        const containerModalUpdate = document.querySelector('.container__infor__water-parameter-update');
+        const subModalUpdate = document.querySelector('.infor__water-parameter-detail-update');
+        const waterParameterTables = document.querySelectorAll('.water-parameter-item');
 
-            const containerRowUpdate = document.querySelector('.row-input-update');
-            for (const itemTableParameterOpen of waterParameterTables) {
-                itemTableParameterOpen.addEventListener('click', function () {
-                    const idWaterParameter = this.getAttribute('data-table-wt-id');
-                    document.getElementById('waterParameterIdUpdate').value = idWaterParameter;
-                    const dateMeasure = this.getAttribute('data-date-update');
-                    const noteToUpdate = this.getAttribute('data-note-update');
-                    const pondId = this.getAttribute('data-pond-id');
-                    document.getElementById('datetimeUpdate').value = dateMeasure;
-                    document.getElementById('noteUpdate').value = noteToUpdate;
-                    const selectElement = document.getElementById('pondUpdate');
+        const containerRowUpdate = document.querySelector('.row-input-update');
+        for (const itemTableParameterOpen of waterParameterTables) {
+            itemTableParameterOpen.addEventListener('click', function () {
+                const idWaterParameter = this.getAttribute('data-table-wt-id');
+                document.getElementById('waterParameterIdUpdate').value = idWaterParameter;
+                const dateMeasure = this.getAttribute('data-date-update');
+                const noteToUpdate = this.getAttribute('data-note-update');
+                const pondId = this.getAttribute('data-pond-id');
+                document.getElementById('datetimeUpdate').value = dateMeasure;
+                document.getElementById('noteUpdate').value = noteToUpdate;
+                const selectElement = document.getElementById('pondUpdate');
 
 // Kiểm tra và chọn option tương ứng với pondId
-                    for (const option of selectElement.options) {
-                        if (option.value === pondId) {
-                            option.selected = true;
-                            break;
-                        }
+                for (const option of selectElement.options) {
+                    if (option.value === pondId) {
+                        option.selected = true;
+                        break;
                     }
-                    containerRowUpdate.innerHTML = '';
-                    let updateHtmlWater = '';
-            <c:forEach items="${waterParameters}" var="waterParameter">
-                    if (${waterParameter.waterParameterId} == idWaterParameter) {
-                <c:forEach items="${waterParameter.waterParameterDetails}" var="detail">
-                        updateHtmlWater = `<div class="item_input-detail  col-6 p-1">
-                                        <label for="">${detail.waterDesc.name}(${detail.waterDesc.symbol})</label>
-                                        <div class="contain_input_a-infor">
-                                            <input class="input_value-parameter-update input_value-parameter" name="waPara${detail.waterDesc.waterParameterDescID}" 
-                                                 data-param="${detail.waterDesc.waterParameterDescID}" type="number" step="0.1" min="0" value="${detail.value != 0.0 ? detail.value : '' }">
-                                            <div class="signal-input-detail d-flex align-item   s-center">
-                                                <span class="d-block mr-1">${detail.value != 0.0 ? detail.waterDesc.unit : ''}</span>
-                                                <i data-optimal-range="${detail.waterDesc.optimalRange}" data-desc-parameter="${detail.waterDesc.description}" class="btn-show-infor fa-solid fa-circle-info m-auto"></i>
-                                            </div>
+                }
+                containerRowUpdate.innerHTML = '';
+                let updateHtmlWater = '';
+        <c:forEach items="${waterParameters}" var="waterParameter">
+                if (${waterParameter.waterParameterId} == idWaterParameter) {
+            <c:forEach items="${waterParameter.waterParameterDetails}" var="detail">
+                    updateHtmlWater = `<div class="item_input-detail  col-6 p-1">
+                                    <label for="">${detail.waterDesc.name}(${detail.waterDesc.symbol})</label>
+                                    <div class="contain_input_a-infor">
+                                        <input class="input_value-parameter-update input_value-parameter" name="waPara${detail.waterDesc.waterParameterDescID}" 
+                                             data-param="${detail.waterDesc.waterParameterDescID}" type="number" step="0.1" min="0" value="${detail.value != 0.0 ? detail.value : '' }">
+                                        <div class="signal-input-detail d-flex align-item   s-center">
+                                            <span class="d-block mr-1">${detail.value != 0.0 ? detail.waterDesc.unit : ''}</span>
+                                            <i data-optimal-range="${detail.waterDesc.optimalRange}" data-desc-parameter="${detail.waterDesc.description}" class="btn-show-infor fa-solid fa-circle-info m-auto"></i>
                                         </div>
-                                    </div>`;
-                        containerRowUpdate.innerHTML += updateHtmlWater;
-                </c:forEach>
-                    }
-
-
+                                    </div>
+                                </div>`;
+                    containerRowUpdate.innerHTML += updateHtmlWater;
             </c:forEach>
-                    containerModalUpdate.classList.add('open');
-                    const abc = document.querySelectorAll('.input_value-parameter-update');
-                    console.log(abc);
-                    abc.forEach((input) => {
-                        const param = input.getAttribute('data-param');
-                        const value = parseFloat(input.value);
-                        const range = optimalRange[param];
+                }
 
-                        // Kiểm tra và áp dụng màu ngay lập tức cho giá trị sẵn có
-                        if (input.value && range) {
-                            const color = checkValue(value, range);
-                            setColor(input, color);
-                        } else {
-                            setColor(input, '#000');
-                        }
 
-                        input.addEventListener('input', function () {
-                            const param = this.getAttribute('data-param');
-                            console.log(param);
-                            const value = parseFloat(this.value);
-                            const range = optimalRange[param];
-                            if (!this.value) {
-                                setColor(this, '#000');
-                            } else if (range) {
-                                const color = checkValue(value, range); // value : la tu input nhap vao , range la so sanh 2 cai min max neu tra ra tu obj
-                                setColor(this, color);
-                            }
-                        })
+        </c:forEach>
+                containerModalUpdate.classList.add('open');
+                const abc = document.querySelectorAll('.input_value-parameter-update');
+                console.log(abc);
+                abc.forEach((input) => {
+                    const param = input.getAttribute('data-param');
+                    const value = parseFloat(input.value);
+                    const range = optimalRange[param];
 
-                    })
-                    const allIcons = containerRowUpdate.querySelectorAll('.btn-show-infor');
-                    for (const openSuggest of allIcons) {
-                        openSuggest.addEventListener('click', function () {
-                            const optimalRange = this.getAttribute("data-optimal-range");
-                            const descriptionParameter = this.getAttribute("data-desc-parameter");
-                            optimalRangeEle.innerText = optimalRange;
-                            document.querySelector('.descriptionParameter').innerText = descriptionParameter;
-
-                            containerModalSuggest.classList.add('open');
-                        });
+                    // Kiểm tra và áp dụng màu ngay lập tức cho giá trị sẵn có
+                    if (input.value && range) {
+                        const color = checkValue(value, range);
+                        setColor(input, color);
+                    } else {
+                        setColor(input, '#000');
                     }
 
+                    input.addEventListener('input', function () {
+                        const param = this.getAttribute('data-param');
+                        console.log(param);
+                        const value = parseFloat(this.value);
+                        const range = optimalRange[param];
+                        if (!this.value) {
+                            setColor(this, '#000');
+                        } else if (range) {
+                            const color = checkValue(value, range); // value : la tu input nhap vao , range la so sanh 2 cai min max neu tra ra tu obj
+                            setColor(this, color);
+                        }
+                    })
 
-                });
-            }
-            containerModalUpdate.addEventListener('click', () => {
-                containerModalUpdate.classList.remove('open');
-            })
-            subModalUpdate.addEventListener("click", (e) => {
-                e.stopPropagation();
+                })
+                const allIcons = containerRowUpdate.querySelectorAll('.btn-show-infor');
+                for (const openSuggest of allIcons) {
+                    openSuggest.addEventListener('click', function () {
+                        const optimalRange = this.getAttribute("data-optimal-range");
+                        const descriptionParameter = this.getAttribute("data-desc-parameter");
+                        optimalRangeEle.innerText = optimalRange;
+                        document.querySelector('.descriptionParameter').innerText = descriptionParameter;
+
+                        containerModalSuggest.classList.add('open');
+                    });
+                }
+
+
             });
+        }
+        containerModalUpdate.addEventListener('click', () => {
+            containerModalUpdate.classList.remove('open');
+        })
+        subModalUpdate.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
 
-            // Move this part outside of any event listener
+        // Move this part outside of any event listener
 
-        </script>
-        <script>
+    </script>
+    <script>
+        function confirmDelete() {
+            const WaterParameterDeleteId = document.getElementById('waterParameterIdDelete').value;
+            return confirm('Are you sure you want to delete this record?');
+        }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const waterParamItems = document.querySelectorAll('.water-parameter-item');
+            const waterParameterIdInput = document.getElementById('waterParameterIdDelete');
 
-        </script>
-    </body>
-
+            waterParamItems.forEach((item) => {
+                item.addEventListener('click', () => {
+                    const WaterParameterDeleteId = item.getAttribute('data-table-wt-id');
+                    if (WaterParameterDeleteId) {
+                        waterParameterIdInput.value = WaterParameterDeleteId;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 </html>

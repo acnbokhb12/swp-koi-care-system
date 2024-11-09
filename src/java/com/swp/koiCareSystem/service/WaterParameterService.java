@@ -47,4 +47,8 @@ public class WaterParameterService {
     public boolean isDateTimeExist(int pondID, LocalDateTime measurementDate) {
         return wpd.isDateTimeExist(pondID, measurementDate);
     }
+
+    public boolean deleteWaterParameter(int waterParameterId) {
+        return wpd.deleteWaterParameter(waterParameterId);
+    }
 }
