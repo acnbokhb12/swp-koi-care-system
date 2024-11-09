@@ -148,51 +148,83 @@
          
     </script>
     <script>
-        var chart = echarts.init(document.getElementById('chart_Orders_past'));
-        option = {
-  xAxis: {
-    type: 'category',
-    data: ['07/09', '08/09', '09/09', '10/09', '11/09', '12/09', '13/09'],
-    name: 'day'
-  },
-  yAxis: {
-    type: 'value' 
-  },
-  series: [
-    {
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line'
-    }
-  ]
-};
+         var chart = echarts.init(document.getElementById('chart_Orders_past'));
+        var option = {
+            title: {
 
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['salt']
+            },
+            xAxis: {
+                type: 'category',
+                data: ['20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26'],
+                axisLabel: {
+                    rotate: 30,
+                    fontSize: 10,
+                    fontWeight: 'bold',
+
+
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} %'
+                }
+            },
+            series: [
+                {
+                    name: 'salt',
+                    type: 'line',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                }
+            ]
+        };
         chart.setOption(option); 
     </script>
     <!-- Thy tien trong 5 months qua -->
     <script>
         var chart2 = echarts.init(document.getElementById('chart_month_collect'));
-        option = {
-  xAxis: {
-    type: 'category',
-    data: [  '08', '09', '10', '11', '12'],
-    name:'Month'
-  },
-  yAxis: {
-    type: 'value',
-    name: 'VND', 
-    nameTextStyle: {
-      padding: [0,42,10,0], // Khoảng cách giữa tên trục và trục
-      fontSize: 14
-    } 
-  },
-  series: [
-    {
-      data: [10000000,12000000,14000000,9000000,8000000],
-      type: 'line'
-    }
-  ]
-};
-        chart2.setOption(option);
+        var option2 = {
+            title: {
+
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['salt']
+            },
+            xAxis: {
+                type: 'category',
+                data: ['20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26'],
+                axisLabel: {
+                    rotate: 30,
+                    fontSize: 10,
+                    fontWeight: 'bold',
+
+
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} %'
+                }
+            },
+            series: [
+                {
+                    name: 'salt',
+                    type: 'line',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                }
+            ]
+        };
+        chart2.setOption(option2);
 
     </script>
 </body>

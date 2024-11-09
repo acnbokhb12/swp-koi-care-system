@@ -19,6 +19,7 @@ import java.sql.Types;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -327,16 +328,16 @@ public class WaterParameterDAO {
         }
         return waterParameter;
     }
- 
+
     public boolean createNewWaterParameter(WaterParameter waterParameter) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        int rowEffectV2 =0;
+        int rowEffectV2 = 0;
         System.out.println(waterParameter);
         try {
-                cn = DatabaseConnectionManager.getConnection();
-            if (cn != null) { 
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
                 String sql = "insert into [dbo].[WaterParameter] ([AccID],[PondID],[MeasurementDate],[Note]) values (?,?, ?, ? )";
                 pst = cn.prepareStatement(sql);
                 pst.setInt(1, waterParameter.getAccID());
@@ -354,19 +355,19 @@ public class WaterParameterDAO {
                     if (rs2 != null && rs2.next()) {
                         int WaterParameterId = rs2.getInt(1);
                         cn.setAutoCommit(false);
-                        for(WaterParameterDetail wtdt : waterParameter.getWaterParameterDetails()){                          
+                        for (WaterParameterDetail wtdt : waterParameter.getWaterParameterDetails()) {
                             String sql3 = "INSERT INTO dbo.WaterParameterDetail \n"
                                     + "(WaterParameterID, WaterParameterDescID, [value]) VALUES (?, ?, ?)";
                             PreparedStatement pst3 = cn.prepareStatement(sql3);
                             pst3.setInt(1, WaterParameterId);
                             pst3.setInt(2, wtdt.getWaterParameterDescID());
-                            if(wtdt.getValue() != 0.0){
-                                pst3.setFloat(3, wtdt.getValue());                                
-                            }else{
+                            if (wtdt.getValue() != 0.0) {
+                                pst3.setFloat(3, wtdt.getValue());
+                            } else {
                                 pst3.setNull(3, java.sql.Types.FLOAT);
                             }
                             rowEffectV2 = pst3.executeUpdate();
-                             pst3.close();
+                            pst3.close();
                         }
                     }
                     cn.commit();
@@ -395,11 +396,129 @@ public class WaterParameterDAO {
         }
         return false;
     }
- 
+
+    public ArrayList<WaterParameterDescription> getListWaterDeailToStaticticsByUnit(int accId, int pondId, String unit) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<WaterParameterDescription> listDateStatisticByUnit = new ArrayList<>();
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select * from WaterParameterDescription where unit = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, unit);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        WaterParameterDescription wtdesc = new WaterParameterDescription();
+                        int idWaterDesc = rs.getInt(1);
+                        wtdesc.setWaterParameterDescID(idWaterDesc);
+                        wtdesc.setName(rs.getString(2));
+                        wtdesc.setSymbol(rs.getString(3));
+                        wtdesc.setUnit(rs.getString(4));
+
+                        String sql2 = "SELECT value\n"
+                                + "from(\n"
+                                + "select TOP 10 wtdt.[value] ,wt.MeasurementDate  from WaterParameter wt inner join WaterParameterDetail wtdt on wt.WaterParameterID = wtdt.WaterParameterID \n"
+                                + "                                inner join WaterParameterDescription wtdesc on wtdt.WaterParameterDescID = wtdesc.WaterParameterDescID\n"
+                                + "where [AccID] = ? and [PondID] = ? and [isActive] = 1 and unit = ? and wtdt.WaterParameterDescID = ? order by wt.MeasurementDate desc\n"
+                                + ")AS RecentDates\n"
+                                + "ORDER BY MeasurementDate ASC;";
+                        PreparedStatement pst2 = cn.prepareStatement(sql2);
+                        pst2.setInt(1, accId);
+                        pst2.setInt(2, pondId);
+                        pst2.setString(3, unit);
+                        pst2.setInt(4, idWaterDesc);
+                        ResultSet rs2 = pst2.executeQuery();
+                        if (rs2 != null) {
+                            while (rs2.next()) {
+                                WaterParameterDetail wtdetail = new WaterParameterDetail();
+                                float value = rs2.getFloat(1);
+                                wtdetail.setValue(value);
+                                wtdesc.addValueWaterParameterDetail(wtdetail);
+                            }
+                        }
+                        listDateStatisticByUnit.add(wtdesc);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listDateStatisticByUnit;
+    }
+
+    public ArrayList<WaterParameter> getLatesDateToStatistics(int accId, int pondId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<WaterParameter> listgetLatesDateToStatistics = new ArrayList<>();
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT MeasurementDate \n"
+                        + "FROM (\n"
+                        + "    SELECT TOP 10 MeasurementDate  \n"
+                        + "    FROM WaterParameter \n"
+                        + "    WHERE [AccID] = ? AND [PondID] = ? AND [isActive] = 1 \n"
+                        + "    ORDER BY MeasurementDate DESC\n"
+                        + ") AS RecentDates\n"
+                        + "ORDER BY MeasurementDate ASC;";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, accId);
+                pst.setInt(2, pondId);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while(rs.next()){
+                        WaterParameter wt = new WaterParameter();
+                        LocalDateTime measurementDate = rs.getTimestamp("MeasurementDate").toLocalDateTime();
+                        wt.setMeasurementDate(measurementDate);
+                        listgetLatesDateToStatistics.add(wt);
+                    }
+
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listgetLatesDateToStatistics;
+    }
+
     public static void main(String[] args) {
         WaterParameterDAO wpt = new WaterParameterDAO();
-        ArrayList<WaterParameterDescription> list = wpt.getAllWaterParameterDescriptions();
-        for (WaterParameterDescription item : list) {
+        ArrayList<WaterParameterDescription> list = wpt.getListWaterDeailToStaticticsByUnit(5, 1, "mg/l");
+//        ArrayList<WaterParameter> list = wpt.getLatesDateToStatistics(5, 1);
+for (WaterParameterDescription item : list) {
             System.out.println(item);
         }
     }

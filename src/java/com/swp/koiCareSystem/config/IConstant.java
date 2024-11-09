@@ -125,6 +125,9 @@ public interface IConstant {
     public final String ADMIN_ACCOUNT_UPDATE_INFORMATION = "adminAccountUpdateInformation";
     public final String ADMIN_ACCOUNT_UPDATE_IMAGE = "adminAccountUpdateImage";
 
+// START STATISTIC
+    public final String STATISTIC = "statistics";
+    
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
 
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();

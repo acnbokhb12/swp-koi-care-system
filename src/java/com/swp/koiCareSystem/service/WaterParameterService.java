@@ -37,5 +37,11 @@ public class WaterParameterService {
     public boolean createNewWaterParameter(WaterParameter newWaterParameter){
         return wpd.createNewWaterParameter(newWaterParameter);
     }
+    public ArrayList<WaterParameterDescription> getListWaterDeailToStaticticsByUnit(int accId, int pondId, String unit){
+        return wpd.getListWaterDeailToStaticticsByUnit(accId, pondId, unit);
+    }
+    public ArrayList<WaterParameter> getLatesDateToStatistics(int accId, int pondId){
+        return wpd.getLatesDateToStatistics(accId, pondId);
+    }
 }
 

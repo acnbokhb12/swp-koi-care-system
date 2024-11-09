@@ -102,6 +102,10 @@ public class MainController extends HttpServlet {
                 case IConstant.SALT_CALCULATOR:
                     url = "SaltCalculatorController";
                     break ;
+                // START PLACE STATISTIC
+                case IConstant.STATISTIC :
+                    url="StatisticsController";
+                    break;
                 // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";

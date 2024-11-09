@@ -5,6 +5,8 @@
  */
 package com.swp.koiCareSystem.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ASUS
@@ -19,8 +21,10 @@ public class WaterParameterDescription {
     private String unit;
     private String optimalRange;
     private String description;
+    private ArrayList<WaterParameterDetail> listWaterParameterDetail;
 
     public WaterParameterDescription() {
+          this.listWaterParameterDetail = new ArrayList<>();
     }
 
     public WaterParameterDescription(int waterParameterDescID, String name, String symbol, float minValue, float maxValue, String unit, String optimalRange, String description) {
@@ -98,9 +102,20 @@ public class WaterParameterDescription {
         this.description = description;
     }
 
+    public ArrayList<WaterParameterDetail> getListWaterParameterDetail() {
+        return listWaterParameterDetail;
+    }
+
+    public void setListWaterParameterDetail(ArrayList<WaterParameterDetail> value) {
+        this.listWaterParameterDetail = value;
+    }
+    public void addValueWaterParameterDetail(WaterParameterDetail value){
+        this.listWaterParameterDetail.add(value);
+    }
+
     @Override
     public String toString() {
-        return "WaterParameterDescription{" + "waterParameterDescID=" + waterParameterDescID + ", name=" + name + ", symbol=" + symbol + ", minValue=" + minValue + ", maxValue=" + maxValue + ", unit=" + unit + ", optimalRange=" + optimalRange + ", description=" + description + '}';
-    }
+        return "WaterParameterDescription{" + "waterParameterDescID=" + waterParameterDescID + ", name=" + name + ", symbol=" + symbol + ", minValue=" + minValue + ", maxValue=" + maxValue + ", unit=" + unit + ", optimalRange=" + optimalRange + ", description=" + description + ", listWaterParameterDetail=" + listWaterParameterDetail + '}';
+    } 
 
 }

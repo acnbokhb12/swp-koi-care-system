@@ -284,7 +284,7 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="body__link-acount-detail-item">
-                                                                        <a href="statistics.jsp">
+                                                                        <a href="MainController?action=statistics">
                                                                             <i class="fa-solid fa-chart-simple"></i> Statistic
                                                                         </a>
                                                                     </li>
