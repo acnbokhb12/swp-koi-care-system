@@ -111,9 +111,12 @@ public interface IConstant {
     public final String MANAGER_ORDER_DELETE = "managerorderdelete";
     public final String MANAGER_ORDER_STATUS_CHANGE = "managerorderstatuschange";
 
-// START MANAGE DASHBOARD ADMIN - MANAGER
+// START MANAGE DASHBOARD ADMIN - MANAGER ----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public final String DASHBOARD_ADMIN = "dashboardAdmin";
     public final String DASHBOARD_MANAGER = "dashboardManager";
+    public final String ADMIN_MANAGE_CONTACT = "adminManageContact";
+    public final String ADMIN_CONTACT_DETAIL = "adminContactDetail";
+    public final String ADMIN_DELETE_ACC_CONTACT = "adminDeleteAccContact";
 
 //START ADMIN ACCOUNT ----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public final String ADMIN_ACCOUNT = "adminAccount";

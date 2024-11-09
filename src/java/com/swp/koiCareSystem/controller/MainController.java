@@ -289,6 +289,16 @@ public class MainController extends HttpServlet {
                 case IConstant.ADMIN_ACCOUNT_INFORMATION:
                     url = "AdminAccountInformationController";
                     break;
+                // START ADMIN MANAGE CONTACT --------------------------------------------------------    
+                case IConstant.ADMIN_MANAGE_CONTACT:
+                    url = "AdminManageContactController";
+                    break;
+                case IConstant.ADMIN_CONTACT_DETAIL:
+                    url = "AdminManageContactDetailController";
+                    break;
+                case IConstant.ADMIN_DELETE_ACC_CONTACT:
+                    url = "AdminDeleteAccContactController";
+                    break;
                 // DEFAULT IF ERROR ACTION --------------------------------------------------------               
                 default:
                     url = "home.jsp";

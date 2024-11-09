@@ -33,6 +33,7 @@
                         <li><a href="MainController?action=dashboardAdmin"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                         <li><a href="MainController?action=adminAccount"><i class="fas fa-users"></i> Account Management</a></li> 
                         <li><a href="MainController?action=adminNews"><i class="fa-solid fa-newspaper"></i>News Management</a></li>   
+                        <li><a href="MainController?action=adminManageContact"><i class="fa-solid fa-clipboard"></i>Contact Management</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,8 +54,8 @@
                     <div class="top-menu mr-3 ml-auto">
                         <ul class="navbar-nav align-items-center gap-1">
                             <li class="nav-item mobile-search-icon d-flex ">
-                                <a href="#" class="nav-link dark-mode-icon">
-                                    <i class="fa-regular fa-moon"></i>
+                                <a href="MainController?action=home" class="nav-link dark-mode-icon">
+                                    <i class="fa-solid fa-house"></i>
                                 </a>
                             </li>
                         </ul>
@@ -238,11 +239,19 @@
                                 <!-- task user -->
                                 <div class="contain__task-user">
                                     <div class="header__task-right">
-                                        <a href="#" class="header__link-task d-flex align-end">
-                                            <span class="header__link-task-icon"><i
-                                                    class="fa-regular fa-bell"></i></span>
-                                            <span class="text-label text-uppercase">Alerts</span> 
-                                        </a>
+                                        <c:if test="${sessionScope.userAccount.userRole == 'admin'}">
+                                            <a href="MainController?action=dashboardAdmin" class="header__link-task d-flex align-end">
+                                                <span class="header__link-task-icon"><i class="fa-solid fa-house"></i></span>
+                                                <span class="text-label text-uppercase">Dashboard</span> 
+                                            </a>
+                                        </c:if>
+
+                                        <c:if test="${sessionScope.userAccount.userRole == 'manager'}">
+                                            <a href="MainController?action=dashboardManager" class="header__link-task d-flex align-end">
+                                                <span class="header__link-task-icon"><i class="fa-solid fa-house"></i></span>
+                                                <span class="text-label text-uppercase">Dashboard</span> 
+                                            </a>
+                                        </c:if> 
                                         <a href="cart.jsp" class="header__link-task d-flex align-end">
                                             <span class="header__link-task-icon"><i
                                                     class="fa-solid fa-bag-shopping"></i></span>

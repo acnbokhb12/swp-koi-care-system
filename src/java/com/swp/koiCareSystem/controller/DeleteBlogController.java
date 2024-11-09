@@ -40,7 +40,7 @@ public class DeleteBlogController extends HttpServlet {
             BlogService bs = new BlogService();
             boolean isDeleted = bs.deleteBlogById(blogID);
             if (isDeleted) {
-                request.setAttribute("message", "Your Blog has been delete");
+                request.setAttribute("message", "Your Blog has been deleted");
                 request.setAttribute("toastMessage", "success");
             } else {
                 request.setAttribute("message", "An error occurred while deleting the blog.");
