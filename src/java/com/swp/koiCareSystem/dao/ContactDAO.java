@@ -129,11 +129,11 @@ public class ContactDAO {
         }
         return list;
     }
-    
-    public boolean adminDeleteAccContact(int ctID){
+
+    public boolean adminDeleteAccContact(int ctID) {
         Connection c = null;
         PreparedStatement ps = null;
-        
+
         try {
             c = DatabaseConnectionManager.getConnection();
             String sql = "DELETE FROM [dbo].[Contact] WHERE [ID] = ?";
@@ -158,16 +158,51 @@ public class ContactDAO {
         return false;
     }
 
+    public boolean addNewContact(Contact newContact) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try {
+            c = DatabaseConnectionManager.getConnection();
+            String sql = "insert into [dbo].[Contact] ([FirstName],[Email],[MessageContact])\n"
+                    + "values (?, ?, ?)";
+            ps = c.prepareStatement(sql);
+            ps.setString(1, newContact.getName());
+            ps.setString(2, newContact.getEmail());
+            ps.setString(3, newContact.getMessage());
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (c != null) {
+                    c.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
 
         ContactDAO dao = new ContactDAO();
         
+        Contact newContact = new Contact();
+        newContact.setName("Huy");
+        newContact.setEmail("huy@gmail.com");
+        newContact.setMessage("good");
+        boolean isCreated = dao.addNewContact(newContact);
+        
+        System.out.println(isCreated);
+
 //        int ctID = 1;
 //        boolean deleteAccContact = dao.adminDeleteAccContact(ctID);
 //        System.out.println("Delete successfully acc contact with id: " + deleteAccContact);
-
-        
-
 //        int count = dao.countContact();
 //        System.out.println(count);
 //        ArrayList<Contact> list = dao.getAllContact(1);

@@ -6,17 +6,18 @@
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/model/Contact.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/DeleteBlogController.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/BlogService.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/manageContact.jsp</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/CreateNewBlogController.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/blog.jsp</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/utils.jsp</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/BlogDAO.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/ContactDAO.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/dao/NewsDAO.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/AdminDeleteAccContactController.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/manageContactDetail.jsp</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/AddNewContactController.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/service/ContactService.java</file>
-            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/src/java/com/swp/koiCareSystem/controller/AdminManageContactController.java</file>
+            <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/contact.jsp</file>
             <file>file:/D:/FPTU/SWP391/BaiLamNhom/8-11/swp-koi-care-system/web/manageNews.jsp</file>
         </group>
     </open-files>

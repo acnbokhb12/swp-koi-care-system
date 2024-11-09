@@ -33,6 +33,10 @@ public class ContactService {
         return cdao.adminDeleteAccContact(ctid);
     }
     
+    public boolean addNewContact(Contact newContact){
+        return cdao.addNewContact(newContact);
+    }
+    
     public static void main(String[] args) {
         ContactService cs = new ContactService();
         

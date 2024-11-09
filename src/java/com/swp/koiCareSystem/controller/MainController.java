@@ -101,7 +101,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.SALT_CALCULATOR:
                     url = "SaltCalculatorController";
-                    break ;
+                    break;
                 // START PLACE FISH -------------------------------------------------------------  
                 case IConstant.FISH:
                     url = "FishController";
@@ -205,7 +205,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.PRODUCT_IMAGE_UPDATE:
                     url = "ManagerProductImageUpdateController";
-                    break;  
+                    break;
                 // START PLACE CUSTOMER FORGET PASSWORD -------------------------------------------------------------                   
                 case IConstant.CUSTOMER_FORGET_PASSWORD:
                     url = "CustomerForgetPasswordController";
@@ -231,7 +231,7 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.ADMIN_DELETE_NEWS:
                     url = "AdminDeleteNewsByIdController";
-                    break; 
+                    break;
                 case IConstant.ADMIN_SEARCH_NEWS_CATE:
                     url = "AdminSearchNewsCateController";
                     break;
@@ -262,7 +262,7 @@ public class MainController extends HttpServlet {
                     url = "DashboarAdminController";
                     break;
                 case IConstant.DASHBOARD_MANAGER:
-                    url = "DashboardManagerController"; 
+                    url = "DashboardManagerController";
                     break;
                 // START PLACE ADMIN ACCOUNT -------------------------------------------------------- 
                 case IConstant.ADMIN_ACCOUNT:
@@ -295,6 +295,10 @@ public class MainController extends HttpServlet {
                     break;
                 case IConstant.ADMIN_CONTACT_DETAIL:
                     url = "AdminManageContactDetailController";
+                    break;
+                // START ADD NEW CONTACT --------------------------------------------------------
+                case IConstant.ADD_NEW_CONTACT:
+                    url = "AddNewContactController";
                     break;
                 case IConstant.ADMIN_DELETE_ACC_CONTACT:
                     url = "AdminDeleteAccContactController";

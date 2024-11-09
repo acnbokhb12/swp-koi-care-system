@@ -127,6 +127,9 @@ public interface IConstant {
     public final String ADMIN_ACCOUNT_INFORMATION = "adminAccountInformation";
     public final String ADMIN_ACCOUNT_UPDATE_INFORMATION = "adminAccountUpdateInformation";
     public final String ADMIN_ACCOUNT_UPDATE_IMAGE = "adminAccountUpdateImage";
+    
+    // CONTACT -----------------------------------------------------------------------------------------------------------------------------------------------
+    public final String ADD_NEW_CONTACT = "addNewContact";
 
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
 
