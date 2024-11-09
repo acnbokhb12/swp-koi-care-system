@@ -225,6 +225,8 @@
             </div>
         </div>
     </c:if>
+    <div id="modal-logout-confirm"></div> 
+
     <!-- footer -->
     <div id="footer"></div>
 
@@ -264,7 +266,9 @@
         $('#footer').load('utils.jsp #footer__nav', () => {
             $.getScript('./assets/js/utilsCustomer.js');
         });
-
+        $('#modal-logout-confirm').load('utils.jsp #modal-logout-confirm_nav', () => {
+            $.getScript('./assets/js/utilsCustomer.js')
+        });
     </script>
     <script src="assets/js/notification.js"></script>
 
@@ -413,19 +417,19 @@
                 containerRowUpdate.innerHTML = '';
                 let updateHtmlWater = '';
         <c:forEach items="${waterParameters}" var="waterParameter">
-                if (${waterParameter.waterParameterId} == idWaterParameter) {
+                    if (${waterParameter.waterParameterId} == idWaterParameter) {
             <c:forEach items="${waterParameter.waterParameterDetails}" var="detail">
                     updateHtmlWater = `<div class="item_input-detail  col-6 p-1">
-                                    <label for="">${detail.waterDesc.name}(${detail.waterDesc.symbol})</label>
-                                    <div class="contain_input_a-infor">
-                                        <input class="input_value-parameter-update input_value-parameter" name="waPara${detail.waterDesc.waterParameterDescID}" 
-                                             data-param="${detail.waterDesc.waterParameterDescID}" type="number" step="0.1" min="0" value="${detail.value != 0.0 ? detail.value : '' }">
-                                        <div class="signal-input-detail d-flex align-item   s-center">
-                                            <span class="d-block mr-1">${detail.value != 0.0 ? detail.waterDesc.unit : ''}</span>
-                                            <i data-optimal-range="${detail.waterDesc.optimalRange}" data-desc-parameter="${detail.waterDesc.description}" class="btn-show-infor fa-solid fa-circle-info m-auto"></i>
-                                        </div>
+                                <label for="">${detail.waterDesc.name}(${detail.waterDesc.symbol})</label>
+                                <div class="contain_input_a-infor">
+                                    <input class="input_value-parameter-update input_value-parameter" name="waPara${detail.waterDesc.waterParameterDescID}" 
+                                         data-param="${detail.waterDesc.waterParameterDescID}" type="number" step="0.1" min="0" value="${detail.value != 0.0 ? detail.value : '' }">
+                                    <div class="signal-input-detail d-flex align-item   s-center">
+                                        <span class="d-block mr-1">${detail.value != 0.0 ? detail.waterDesc.unit : ''}</span>
+                                        <i data-optimal-range="${detail.waterDesc.optimalRange}" data-desc-parameter="${detail.waterDesc.description}" class="btn-show-infor fa-solid fa-circle-info m-auto"></i>
                                     </div>
-                                </div>`;
+                                </div>
+                            </div>`;
                     containerRowUpdate.innerHTML += updateHtmlWater;
             </c:forEach>
                 }
@@ -508,4 +512,5 @@
         });
     </script>
 </body>
+
 </html>

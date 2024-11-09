@@ -56,7 +56,7 @@ public interface IConstant {
     public final String POND_INFOR_UPDATE = "pondinformationupdate";
     public final String POND_IMAGE_UPDATE = "pondimageupdate";
 
-// START POND ----------------------------------------------------------------------------------------------------------------------------------   
+// START WATER PARAMETERS  ----------------------------------------------------------------------------------------------------------------------------------   
     public final String WATER_PARAMETERS_MANAGE = "waterparametersmanage";
     public final String WATER_PARAMETERS_CREATE_NEW = "waterparametercreatenew";
     public final String WATER_PARAMETERS_UPDATE = "waterparameterupdate";
