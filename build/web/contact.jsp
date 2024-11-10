@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : contact
     Created on : Oct 8, 2024, 1:07:30 PM
@@ -43,10 +44,10 @@
                                 <h2>Get In Touch</h2>
                                 <p>We are here to assist you with the care and management of your Koi pond. If you have any questions regarding our products and advice on Koi care techniques, please fill out the form below. Our team of experts will get back to you as soon as possible.</p>
                                 <div class="contain-form-contact">
-                                    <form action="" method="post">
+                                    <form action="MainController?action=addNewContact" method="post" enctype="multipart/form-data">
                                         <div class="item-contact">
                                             <label>First Name</label><br>
-                                            <input type="text" name="firstName" required>
+                                            <input type="text" name="name" required>
                                         </div>
                                         <div class="item-contact">
                                             <label>E-Mail</label><br>
@@ -72,7 +73,22 @@
             </div>  
         </div> 
         <div id="modal-logout-confirm"></div> 
-
+        <c:if test="${toastMessage != null}"> 
+            <div id="toast" style="z-index: 10">  
+                <div class="toast_main row ${toastMessage.equals('success') ? 'toast--success' : 'toast--error' }" style="display:flex">
+                    <div class="toast__icon">
+                        <i class="fa-solid ${toastMessage.equals('success') ? 'fa-circle-check' : 'fa-times-circle' }"></i>
+                    </div>
+                    <div class="toast_body">
+                        <h3 class="toast__title">${toastMessage.equals('success') ? 'Success' : 'Error' }</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <div id="footer"></div>
         <script>
             $('#header').load('utils.jsp #header__nav', () => {
@@ -86,4 +102,6 @@
             });
         </script>
     </body>
+    <script src="./assets/js/notification.js"></script>
+    <script src="./assets/js/utils.js"></script>
 </html>

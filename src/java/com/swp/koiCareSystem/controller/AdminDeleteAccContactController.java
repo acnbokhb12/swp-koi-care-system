@@ -5,21 +5,19 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.BlogService;
+import com.swp.koiCareSystem.service.ContactService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Khanh
  */
-public class DeleteBlogController extends HttpServlet {
+public class AdminDeleteAccContactController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,21 +32,18 @@ public class DeleteBlogController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */ 
-
-            int blogID = Integer.parseInt(request.getParameter("blogID"));
-            BlogService bs = new BlogService();
-            boolean isDeleted = bs.deleteBlogById(blogID);
+            /* TODO output your page here. You may use following sample code. */
+            int ctid = Integer.parseInt(request.getParameter("contactID"));
+            ContactService cs = new ContactService();
+            boolean isDeleted = cs.adminDeleteAccContact(ctid);
             if (isDeleted) {
-                request.setAttribute("message", "Your Blog has been deleted");
+                request.setAttribute("message", "Your Account Contact has been deleted");
                 request.setAttribute("toastMessage", "success");
             } else {
-                request.setAttribute("message", "An error occurred while deleting the blog.");
+                request.setAttribute("message", "An error occurred while deleting the account contact.");
                 request.setAttribute("toastMessage", "error");
             }
-
-            request.getRequestDispatcher("ManageBlogController").forward(request, response);
-
+            request.getRequestDispatcher("AdminManageContactController").forward(request, response);
         }
     }
 

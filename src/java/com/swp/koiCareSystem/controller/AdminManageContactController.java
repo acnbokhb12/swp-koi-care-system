@@ -6,9 +6,11 @@
 package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.model.Account;
-import com.swp.koiCareSystem.service.BlogService;
+import com.swp.koiCareSystem.model.Contact;
+import com.swp.koiCareSystem.service.ContactService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Khanh
  */
-public class DeleteBlogController extends HttpServlet {
+public class AdminManageContactController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,21 +36,37 @@ public class DeleteBlogController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */ 
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            Account acc = (Account) session.getAttribute("userAccount");
 
-            int blogID = Integer.parseInt(request.getParameter("blogID"));
-            BlogService bs = new BlogService();
-            boolean isDeleted = bs.deleteBlogById(blogID);
-            if (isDeleted) {
-                request.setAttribute("message", "Your Blog has been deleted");
-                request.setAttribute("toastMessage", "success");
-            } else {
-                request.setAttribute("message", "An error occurred while deleting the blog.");
-                request.setAttribute("toastMessage", "error");
+            if (acc != null && !acc.getUserRole().equalsIgnoreCase("admin")) {
+                response.sendRedirect("home.jsp");
+                return;
             }
-
-            request.getRequestDispatcher("ManageBlogController").forward(request, response);
-
+            
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1"; 
+            }
+            int index = Integer.parseInt(indexPage);
+            
+            
+            ContactService cs = new ContactService();
+            int count = cs.countContact(); 
+            
+            int endPage = count / 10;
+            if (count % 10 != 0) {
+                endPage++;
+            }
+            
+            ArrayList<Contact> list = cs.getAllContact(index);
+            
+            request.setAttribute("listContact", list);
+            request.setAttribute("tag", index);
+            request.setAttribute("endPage", endPage);
+            
+            request.getRequestDispatcher("manageContact.jsp").forward(request, response);
         }
     }
 

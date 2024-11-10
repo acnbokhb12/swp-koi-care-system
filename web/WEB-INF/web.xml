@@ -454,13 +454,29 @@
         <servlet-name>AdminUpdateAccountController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateAccountController</servlet-class>
     </servlet>
-    <servlet>
+    <servlet> 
         <servlet-name>WaterParametersUpdateInfoController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersUpdateInfoController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WaterParametersDeleteController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminManageContactController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminManageContactController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminManageContactDetailController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminManageContactDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteAccContactController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminDeleteAccContactController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewContactController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AddNewContactController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -833,6 +849,22 @@
     <servlet-mapping>
         <servlet-name>WaterParametersDeleteController</servlet-name>
         <url-pattern>/WaterParametersDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>        
+        <servlet-name>AdminManageContactController</servlet-name>
+        <url-pattern>/AdminManageContactController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminManageContactDetailController</servlet-name>
+        <url-pattern>/AdminManageContactDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteAccContactController</servlet-name>
+        <url-pattern>/AdminDeleteAccContactController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewContactController</servlet-name>
+        <url-pattern>/AddNewContactController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

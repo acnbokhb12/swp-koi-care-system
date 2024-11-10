@@ -43,7 +43,7 @@
                                         <span>${b.blogCategory.nameCategory}</span>
                                     </div>
 
-                                    <c:if test="${sessionScope.userAccount.userID == b.userID}">
+                                    <c:if test="${sessionScope.userAccount.userID == b.userID || sessionScope.userAccount.userRole == 'admin'}">
                                         <form action="MainController?action=deleteBlog&blogID=${b.blogID}" method="POST" style="display:inline;">
                                             <button type="button" class="btn btn-danger btn-sm delete-button" data-id="${b.blogID}" data-title="${b.title}" data-toggle="modal" data-target="#myModal">Delete</button>
                                         </form>

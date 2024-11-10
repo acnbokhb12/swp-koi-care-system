@@ -113,9 +113,12 @@ public interface IConstant {
     public final String MANAGER_ORDER_DELETE = "managerorderdelete";
     public final String MANAGER_ORDER_STATUS_CHANGE = "managerorderstatuschange";
 
-// START MANAGE DASHBOARD ADMIN - MANAGER
+// START MANAGE DASHBOARD ADMIN - MANAGER ----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public final String DASHBOARD_ADMIN = "dashboardAdmin";
     public final String DASHBOARD_MANAGER = "dashboardManager";
+    public final String ADMIN_MANAGE_CONTACT = "adminManageContact";
+    public final String ADMIN_CONTACT_DETAIL = "adminContactDetail";
+    public final String ADMIN_DELETE_ACC_CONTACT = "adminDeleteAccContact";
 
 //START ADMIN ACCOUNT ----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public final String ADMIN_ACCOUNT = "adminAccount";
@@ -126,6 +129,9 @@ public interface IConstant {
     public final String ADMIN_ACCOUNT_INFORMATION = "adminAccountInformation";
     public final String ADMIN_ACCOUNT_UPDATE_INFORMATION = "adminAccountUpdateInformation";
     public final String ADMIN_ACCOUNT_UPDATE_IMAGE = "adminAccountUpdateImage";
+    
+    // CONTACT -----------------------------------------------------------------------------------------------------------------------------------------------
+    public final String ADD_NEW_CONTACT = "addNewContact";
 
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
