@@ -86,11 +86,11 @@ public class ContactDAO {
         return 0;
     }
 
-    public ArrayList<Contact> getContactDetail(int contactID) {
+    public Contact getContactDetail(int contactID) {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+          Contact ct = null;
         ArrayList<Contact> list = new ArrayList<>();
 
         try {
@@ -100,16 +100,14 @@ public class ContactDAO {
             ps.setInt(1, contactID);
             rs = ps.executeQuery();
 
-            if (rs != null) {
-                while (rs.next()) {
-                    Contact ct = new Contact();
+            if (rs != null && rs.next()) { 
+                   ct = new Contact();
                     ct.setId(rs.getInt(1));
                     ct.setName(rs.getString(2));
                     ct.setEmail(rs.getString(3));
-                    ct.setMessage(rs.getString(4));
-                    list.add(ct);
+                    ct.setMessage(rs.getString(4)); 
                 }
-            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -127,7 +125,7 @@ public class ContactDAO {
                 e.printStackTrace();
             }
         }
-        return list;
+        return ct;
     }
 
     public boolean adminDeleteAccContact(int ctID) {

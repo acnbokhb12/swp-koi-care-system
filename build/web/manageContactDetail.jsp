@@ -40,20 +40,18 @@
                     <div class="content">
                         <div class="header d-flex ">  
                             <div>
-                                <a id="delete_news" class="btn-utils" href="#" style="background-color: rgb(235, 75, 75); border-color: rgb(235, 75, 75);">Delete Contact</a>
+                                <a id="delete_news" class="btn-utils" href="MainController?action=adminDeleteAccContact&contactID=${contactDetail.id}" style="background-color: rgb(235, 75, 75); border-color: rgb(235, 75, 75);">Delete Contact</a>
                             </div>
                         </div>
-                        <div class="container_desc-all-news">
-                            <c:forEach var="detail" items="${listContact}">
-                                <h1>${detail.name}</h1>
+                        <div class="container_desc-all-news"> 
+                                <h1>${contactDetail.name}</h1>
                                 <div class="desc_short-detail"> 
-                                    <h2 class="cate_news m-0">${detail.email}</h2>
+                                    <h2 class="cate_news m-0">${contactDetail.email}</h2>
                                 </div> 
                                 <div class="desc-all-infor" style="font-size: 1.6rem;">
                                     <!-- place de info -->
-                                    ${detail.message}
-                                </div>
-                            </c:forEach>
+                                    ${contactDetail.message}
+                                </div> 
                         </div>
                     </div>
                 </div>

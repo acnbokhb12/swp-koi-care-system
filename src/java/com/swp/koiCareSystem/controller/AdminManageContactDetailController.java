@@ -41,10 +41,9 @@ public class AdminManageContactDetailController extends HttpServlet {
                 int contactId = Integer.parseInt(contactID);
                 
                 ContactService cs = new ContactService();
-                ArrayList<Contact> listContact = cs.getContactDetail(contactId);
+                Contact contactDetail = cs.getContactDetail(contactId);
                 
-                request.setAttribute("listContact", listContact);
-                request.setAttribute("contactID", contactID);
+                request.setAttribute("contactDetail", contactDetail); 
                 request.getRequestDispatcher("manageContactDetail.jsp").forward(request, response);
             }
         }

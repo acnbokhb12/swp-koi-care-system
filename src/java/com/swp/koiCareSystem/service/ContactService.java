@@ -25,7 +25,7 @@ public class ContactService {
         return cdao.countContact();
     }
     
-    public ArrayList<Contact> getContactDetail(int contactID){
+    public Contact getContactDetail(int contactID){
         return cdao.getContactDetail(contactID);
     }
     
@@ -45,15 +45,6 @@ public class ContactService {
 //            System.out.println(ct);
 //        }
                 int testContactID = 1; // Adjust this ID based on a valid contact ID in your database
-        ArrayList<Contact> list = cs.getContactDetail(testContactID);
-
-        // Printing out the list for verification
-        if (list.isEmpty()) {
-            System.out.println("No contact found with ID: " + testContactID);
-        } else {
-            for (Contact contact : list) {
-                System.out.println(contact);
-            }
-        }
+         
     }
 }
