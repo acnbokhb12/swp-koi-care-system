@@ -538,6 +538,123 @@ public class WaterParameterDAO {
         }
         return false;
     }
+    
+    public ArrayList<WaterParameterDescription> getListWaterDeailToStaticticsByUnit(int accId, int pondId, String unit) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<WaterParameterDescription> listDateStatisticByUnit = new ArrayList<>();
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "select * from WaterParameterDescription where unit = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, unit);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        WaterParameterDescription wtdesc = new WaterParameterDescription();
+                        int idWaterDesc = rs.getInt(1);
+                        wtdesc.setWaterParameterDescID(idWaterDesc);
+                        wtdesc.setName(rs.getString(2));
+                        wtdesc.setSymbol(rs.getString(3));
+                        wtdesc.setUnit(rs.getString(4));
+
+                        String sql2 = "SELECT value\n"
+                                + "from(\n"
+                                + "select TOP 10 wtdt.[value] ,wt.MeasurementDate  from WaterParameter wt inner join WaterParameterDetail wtdt on wt.WaterParameterID = wtdt.WaterParameterID \n"
+                                + "                                inner join WaterParameterDescription wtdesc on wtdt.WaterParameterDescID = wtdesc.WaterParameterDescID\n"
+                                + "where [AccID] = ? and [PondID] = ? and [isActive] = 1 and unit = ? and wtdt.WaterParameterDescID = ? order by wt.MeasurementDate desc\n"
+                                + ")AS RecentDates\n"
+                                + "ORDER BY MeasurementDate ASC;";
+                        PreparedStatement pst2 = cn.prepareStatement(sql2);
+                        pst2.setInt(1, accId);
+                        pst2.setInt(2, pondId);
+                        pst2.setString(3, unit);
+                        pst2.setInt(4, idWaterDesc);
+                        ResultSet rs2 = pst2.executeQuery();
+                        if (rs2 != null) {
+                            while (rs2.next()) {
+                                WaterParameterDetail wtdetail = new WaterParameterDetail();
+                                float value = rs2.getFloat(1);
+                                wtdetail.setValue(value);
+                                wtdesc.addValueWaterParameterDetail(wtdetail);
+                            }
+                        }
+                        listDateStatisticByUnit.add(wtdesc);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listDateStatisticByUnit;
+    }
+
+    public ArrayList<WaterParameter> getLatesDateToStatistics(int accId, int pondId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<WaterParameter> listgetLatesDateToStatistics = new ArrayList<>();
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT MeasurementDate \n"
+                        + "FROM (\n"
+                        + "    SELECT TOP 10 MeasurementDate  \n"
+                        + "    FROM WaterParameter \n"
+                        + "    WHERE [AccID] = ? AND [PondID] = ? AND [isActive] = 1 \n"
+                        + "    ORDER BY MeasurementDate DESC\n"
+                        + ") AS RecentDates\n"
+                        + "ORDER BY MeasurementDate ASC;";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, accId);
+                pst.setInt(2, pondId);
+                rs = pst.executeQuery();
+                if (rs != null) {
+                    while(rs.next()){
+                        WaterParameter wt = new WaterParameter();
+                        LocalDateTime measurementDate = rs.getTimestamp("MeasurementDate").toLocalDateTime();
+                        wt.setMeasurementDate(measurementDate);
+                        listgetLatesDateToStatistics.add(wt);
+                    }
+
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listgetLatesDateToStatistics;
+    }
 
     public static void main(String[] args) {
         WaterParameterDAO wpt = new WaterParameterDAO();

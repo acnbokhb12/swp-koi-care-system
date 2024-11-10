@@ -133,6 +133,9 @@ public interface IConstant {
     // CONTACT -----------------------------------------------------------------------------------------------------------------------------------------------
     public final String ADD_NEW_CONTACT = "addNewContact";
 
+// START STATISTIC
+    public final String STATISTIC = "statistics";
+    
     // GOOGLE & CLOUDINARY -----------------------------------------------------------------------------------------------------------------------------------------------
     Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
 

@@ -478,6 +478,14 @@
         <servlet-name>AddNewContactController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AddNewContactController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StatisticsController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.StatisticsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatisticsSearchPondByIdController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.StatisticsSearchPondByIdController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -865,6 +873,14 @@
     <servlet-mapping>
         <servlet-name>AddNewContactController</servlet-name>
         <url-pattern>/AddNewContactController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>    
+        <servlet-name>StatisticsController</servlet-name>
+        <url-pattern>/StatisticsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatisticsSearchPondByIdController</servlet-name>
+        <url-pattern>/StatisticsSearchPondByIdController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

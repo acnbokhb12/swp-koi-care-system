@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +41,18 @@
     <div class="container main_statistics">
         <div class="tilte-water">
             <h1>Statistics</h1>
+            <div class="contain-form-choose-pond">
+                <form action="StatisticsSearchPondByIdController" method="post">
+                    <select class="contain-select-choose-pond" name="pondId">
+                        <c:forEach items="${listMyPond}" var="pond"> 
+                            <option value="${pond.pondID}" ${tagPondId != null && tagPondId == pond.pondID ? 'selected' : ''}>${pond.name}</option>  
+                        </c:forEach>
+                    </select>
+                    <button class="btn-confirm_pond">Confirm</button>
+                </form>
+            </div>
         </div>
+        
         <div class="container_statistics-water">
             <div class="row">
                 <div class="col-md-6 mb-5 ">
@@ -50,18 +64,37 @@
                     <div id="chart-temperature" style="width: 100%; height: 380px;"></div>
                 </div>
                 <div class="col-md-6 mb-5 ">
-                    <h2>pH & kH & gH</h2>
-                    <div id="chart-ph" style="width: 100%; height: 380px;"></div>
+                    <h2> kH & gH</h2>
+                    <div id="chart-dh" style="width: 100%; height: 380px;"></div>
                 </div>
                 <div class="col-md-6 mb-5 ">
                     <h2>Temperature & OutdoorTemp</h2>
                     <div id="chart_mgl" style="width: 100%; height: 380px;"></div>
                 </div>
+                <div class="col-md-6 mb-5 ">
+                    <h2>pH</h2>
+                    <div id="chart_pH" style="width: 100%; height: 380px;"></div>
+                </div>
+                <div class="col-md-6 mb-5 ">
+                    <h2>Amount fed</h2>
+                    <div id="chart_Amount_fed" style="width: 100%; height: 380px;"></div>
+                </div>
             </div>
         </div>
     </div> 
                 <div id="modal-logout-confirm"></div> 
-
+                <style>
+                    .btn-confirm_pond,
+                    .contain-select-choose-pond{
+                        font-size: 1.6rem;
+                        padding: 0.4rem 1.2rem;
+                        font-weight: 500;
+                    }
+                    .btn-confirm_pond{
+                        border: none; 
+                        background-color: var(--bs-orange);
+                    }
+                </style>
     <!-- footer -->
     <div id="footer"></div>
     <script>
@@ -86,11 +119,23 @@
                 trigger: 'axis'
             },
             legend: {
-                data: ['salt']
+                data: [
+                     <c:forEach items="${listStatisticsWithUnitPercent}" var="percent" varStatus="status">         
+                    '${percent.name}'
+                        <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>
+                ]
             },
             xAxis: {
                 type: 'category',
-                data: ['20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26'],
+                data: [
+                    <c:forEach items="${listDateStatistics}" var="dateStatistics" varStatus="status">
+                            <c:set var="orderDate" value="${dateStatistics.measurementDate}" />
+                           <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                           <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                            '${formattedDate} ${formattedTime}' <c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                ],
                 axisLabel: {
                     rotate: 30,
                     fontSize: 10,
@@ -106,11 +151,17 @@
                 }
             },
             series: [
-                {
-                    name: 'salt',
-                    type: 'line',
-                    data: [120, 132, 101, 134, 90, 230, 210]
-                }
+                <c:forEach items="${listStatisticsWithUnitPercent}" var="percent" varStatus="status">
+        {
+            name: '${percent.name}',
+            type: 'line',
+            data: [
+               <c:forEach items="${percent.listWaterParameterDetail}" var="valuepercent" varStatus="status">
+                        ${valuepercent.value} <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>   
+            ]
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
             ]
         };
         chart.setOption(option);
@@ -127,11 +178,23 @@
                 trigger: 'axis'
             },
             legend: {
-                data: ['Temperature', 'Outdoor temp']
+                data: [
+                    <c:forEach items="${listStatisticsWithUnitTemp}" var="temperature" varStatus="status">         
+                    '${temperature.name}'
+                        <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>
+                ]
             },
             xAxis: {
                 type: 'category',
-                data: ['20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26'],
+                data: [
+                    <c:forEach items="${listDateStatistics}" var="dateStatistics" varStatus="status">
+                            <c:set var="orderDate" value="${dateStatistics.measurementDate}" />
+                           <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                           <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                            '${formattedDate} ${formattedTime}' <c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                ],
                 axisLabel: {
                     rotate: 30, // Xoay nhãn trục x 45 độ
                     fontSize: 10, // Tùy chỉnh kích thước chữ nếu cần
@@ -146,25 +209,26 @@
                 }
             },
             series: [
-                {
-                    name: 'Temperature',
-                    type: 'line',
-                    data: [120, 132, 101, 134, 90, 230, 210]
-                },
-                {
-                    name: 'Outdoor temp',
-                    type: 'line',
-                    data: [220, 182, 191, 234, 290, 330, 310]
-                }
+                 <c:forEach items="${listStatisticsWithUnitTemp}" var="temperature" varStatus="status">
+        {
+            name: '${temperature.name}',
+            type: 'line',
+            data: [
+               <c:forEach items="${temperature.listWaterParameterDetail}" var="valueTemp" varStatus="status">
+                        ${valueTemp.value} <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>   
+            ]
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
             ]
         };
         charttemp.setOption(option);
 
 
     </script>
-    <!-- ph -->
+    <!-- chart-dh -->
     <script>
-        var myChartph = echarts.init(document.getElementById('chart-ph'));
+        var myChartph = echarts.init(document.getElementById('chart-dh'));
 
         var option1 = {
             title: {
@@ -174,11 +238,23 @@
                 trigger: 'axis'
             },
             legend: {
-                data: ['pH', 'kH', 'gH']
+                data: [
+                    <c:forEach items="${listStatisticsWithUnitDH}" var="dh" varStatus="status"> 
+                    '${dh.name}'
+                    <c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+                ]
             },
             xAxis: {
                 type: 'category',
-                data: ['20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26'],
+                data: [
+                      <c:forEach items="${listDateStatistics}" var="dateStatistics" varStatus="status">
+                            <c:set var="orderDate" value="${dateStatistics.measurementDate}" />
+                           <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                           <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                            '${formattedDate} ${formattedTime}' <c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                ],
                 axisLabel: {
                     rotate: 30,
                     fontSize: 10,
@@ -186,24 +262,23 @@
                 }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} °dH'
+                }
             },
             series: [
-                {
-                    name: 'pH',
-                    type: 'line',
-                    data: [120, 132, 101, 134, 90, 230, 210]
-                },
-                {
-                    name: 'kH',
-                    type: 'line',
-                    data: [220, 182, 191, 234, 290, 330, 310]
-                },
-                {
-                    name: 'gH',
-                    type: 'line',
-                    data: [150, 232, 201, 154, 190, 330, 410]
-                }
+                <c:forEach items="${listStatisticsWithUnitDH}" var="dh" varStatus="status">
+        {
+            name: '${dh.name}',
+            type: 'line',
+            data: [
+               <c:forEach items="${dh.listWaterParameterDetail}" var="valuedh" varStatus="status">
+                        ${valuedh.value} <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>   
+            ]
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
             ]
         };
 
@@ -221,11 +296,25 @@
                 trigger: 'axis'
             },
             legend: {
-                data: ['NH4', 'NO2', 'PO4', 'NO3', 'O2', 'Ammount fed', 'Co2']
+                data: [
+            <c:forEach items="${listStatisticsWithUnitMgl}" var="mgl" varStatus="status">
+                            
+                    '${mgl.name}'
+                    <c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+                ]
             },
             xAxis: {
                 type: 'category',
-                data: ['20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26', '20/10/2024 13:26'],
+                data: [
+                        <c:forEach items="${listDateStatistics}" var="dateStatistics" varStatus="status">
+                            <c:set var="orderDate" value="${dateStatistics.measurementDate}" />
+                           <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                           <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                            '${formattedDate} ${formattedTime}' <c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                   
+              ],
                 axisLabel: {
                     rotate: 30,
                     fontSize: 10,
@@ -233,44 +322,144 @@
                 }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} mg/l'
+                }
             },
             series: [
-                {
-                    name: 'NH4',
-                    type: 'line',
-                    data: [120, 132, 101, 134, 90, 230, 210]
-                },
-                {
-                    name: 'NO2',
-                    type: 'line',
-                    data: [220, 182, 191, 234, 290, 330, 310]
-                },
-                {
-                    name: 'PO4',
-                    type: 'line',
-                    data: [150, 232, 201, 154, 190, 330, 410]
-                },
-                {
-                    name: 'NO3',
-                    type: 'line',
-                    data: [320, 332, 301, 334, 390, 330, 320]
-                },
-                {
-                    name: 'O2',
-                    type: 'line',
-                    data: [820, 932, 901, 934, 1290, 1330, 1320]
-                },
-                {
-                    name: 'Ammount fed',
-                    type: 'line',
-                    data: [620, 732, 701, 734, 1090, 1130, 1120]
-                },
-                {
-                    name: 'Co2',
-                    type: 'line',
-                    data: [720, 832, 801, 834, 1190, 1230, 1220]
+              <c:forEach items="${listStatisticsWithUnitMgl}" var="mgl" varStatus="status">
+        {
+            name: '${mgl.name}',
+            type: 'line',
+            data: [
+               <c:forEach items="${mgl.listWaterParameterDetail}" var="mgl" varStatus="status">
+                        ${mgl.value} <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>   
+            ]
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+            ]
+        };
+
+        myChart.setOption(option1);
+
+    </script>
+    
+     <script>
+        var myChart = echarts.init(document.getElementById('chart_pH'));
+
+        var option1 = {
+            title: {
+
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: [
+            <c:forEach items="${listStatisticsWithUnitEmpty}" var="mgl" varStatus="status">
+                            
+                    '${mgl.name}'
+                    <c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+                ]
+            },
+            xAxis: {
+                type: 'category',
+                data: [
+                        <c:forEach items="${listDateStatistics}" var="dateStatistics" varStatus="status">
+                            <c:set var="orderDate" value="${dateStatistics.measurementDate}" />
+                           <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                           <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                            '${formattedDate} ${formattedTime}' <c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                   
+              ],
+                axisLabel: {
+                    rotate: 30,
+                    fontSize: 10,
+                    fontWeight: 'bold'
                 }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} mg/l'
+                }
+            },
+            series: [
+              <c:forEach items="${listStatisticsWithUnitEmpty}" var="mgl" varStatus="status">
+        {
+            name: '${mgl.name}',
+            type: 'line',
+            data: [
+               <c:forEach items="${mgl.listWaterParameterDetail}" var="mgl" varStatus="status">
+                        ${mgl.value} <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>   
+            ]
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+            ]
+        };
+
+        myChart.setOption(option1);
+
+    </script>
+    <script>
+        var myChart = echarts.init(document.getElementById('chart_Amount_fed'));
+
+        var option1 = {
+            title: {
+
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: [
+            <c:forEach items="${listStatisticsWithUnitGram}" var="mgl" varStatus="status">
+                            
+                    '${mgl.name}'
+                    <c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+                ]
+            },
+            xAxis: {
+                type: 'category',
+                data: [
+                        <c:forEach items="${listDateStatistics}" var="dateStatistics" varStatus="status">
+                            <c:set var="orderDate" value="${dateStatistics.measurementDate}" />
+                           <c:set var="formattedDate" value="${fn:substring(orderDate, 0, 10)}" />
+                           <c:set var="formattedTime" value="${fn:substring(orderDate, 11, 19)}" />
+                            '${formattedDate} ${formattedTime}' <c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                   
+              ],
+                axisLabel: {
+                    rotate: 30,
+                    fontSize: 10,
+                    fontWeight: 'bold'
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} g'
+                }
+            },
+            series: [
+              <c:forEach items="${listStatisticsWithUnitGram}" var="mgl" varStatus="status">
+        {
+            name: '${mgl.name}',
+            type: 'line',
+            data: [
+               <c:forEach items="${mgl.listWaterParameterDetail}" var="mgl" varStatus="status">
+                        ${mgl.value} <c:if test="${!status.last}">,</c:if>
+                    </c:forEach>   
+            ]
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
             ]
         };
 
