@@ -44,9 +44,11 @@
         <url-pattern>/foodCalculator.jsp</url-pattern>
         <url-pattern>/dashboardAdmin.jsp</url-pattern>
         <url-pattern>/dashboarManager.jsp</url-pattern>
+        <!-- START PLACE PROFILE --> 
         <servlet-name>PasswordProfileController</servlet-name>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-name>ImageUploadSingleController</servlet-name>
+        <!-- START PLACE BLOG CRD -->   
         <servlet-name>CreateNewBlogController</servlet-name>
         <servlet-name>DeleteBlogController</servlet-name>
         <!-- START PLACE FISH -->
@@ -101,6 +103,14 @@
         <!-- START PLACE WaterParameter -->
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <servlet-name>WaterParametersManageController</servlet-name>
+        <servlet-name>WaterParametersDeleteController</servlet-name>
+        <servlet-name>WaterParametersUpdateInfoController</servlet-name> 
+        <!-- START PLACE CALCULATOR -->
+        <servlet-name>FoodCalculatorController</servlet-name> 
+        <servlet-name>FoodCalculatorDetailController</servlet-name> 
+        <servlet-name>SaltCalculatorController</servlet-name> 
+        <servlet-name>SaltCalculatorDetailController</servlet-name> 
+
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -910,7 +920,7 @@
     <servlet-mapping>
         <servlet-name>StatisticsSearchPondByIdController</servlet-name>
         <url-pattern>/StatisticsSearchPondByIdController</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> 
     <session-config>
         <session-timeout>
             30
