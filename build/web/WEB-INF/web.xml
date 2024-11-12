@@ -12,6 +12,10 @@
         <filter-name>CartNotEmptyFilter</filter-name>
         <filter-class>com.swp.koiCareSystem.filter.CartNotEmptyFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.swp.koiCareSystem.filter.ManagerFilter</filter-class>
+    </filter> 
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/cart.jsp</url-pattern>
@@ -33,9 +37,9 @@
         <url-pattern>/manageNewsDetailAdmin.jsp</url-pattern>
         <url-pattern>/manageOrder.jsp</url-pattern>
         <url-pattern>/manageOrderDetail.jsp</url-pattern>
-        <url-pattern>/manageProduct.jsp</url-pattern>
-        <url-pattern>/manageProduct.jsp</url-pattern>
+        <url-pattern>/manageProduct.jsp</url-pattern> 
         <url-pattern>/manageProductDetails.jsp</url-pattern>
+         <url-pattern>/manageAquariumDetails.jsp</url-pattern>
         <url-pattern>/manageProductUpdate.jsp</url-pattern>
         <url-pattern>/manageProfileAccount.jsp</url-pattern>
         <url-pattern>/manageUpdateAccount.jsp</url-pattern>
@@ -125,6 +129,21 @@
         
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher> 
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <url-pattern>/dashboardManager.jsp</url-pattern>
+        <url-pattern>/manageOrder.jsp</url-pattern>
+        <url-pattern>/manageOrderDetail.jsp</url-pattern>
+        <url-pattern>/manageProduct.jsp</url-pattern> 
+        <url-pattern>/manageProductDetails.jsp</url-pattern>
+        <url-pattern>/manageAquariumDetails.jsp</url-pattern>
+        <url-pattern>/manageFish.jsp</url-pattern>
+        <url-pattern>/manageFishDetail.jsp</url-pattern>
+        <url-pattern>/manageFishUser.jsp</url-pattern> 
+         
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>CartNotEmptyFilter</filter-name>
@@ -920,7 +939,7 @@
     <servlet-mapping>
         <servlet-name>StatisticsSearchPondByIdController</servlet-name>
         <url-pattern>/StatisticsSearchPondByIdController</url-pattern>
-    </servlet-mapping> 
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

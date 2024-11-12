@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.service.FishService;
 import java.io.IOException;
@@ -35,7 +36,13 @@ public class ManageFishController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int accID = Integer.parseInt(request.getParameter("acid"));
+            int accID = 1;
+            try {
+                 accID = Integer.parseInt(request.getParameter("acid"));                
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action="+IConstant.ACCOUNT_FISH_MANAGE);
+                return;
+            }
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";

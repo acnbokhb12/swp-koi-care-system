@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com.swp.koiCareSystem.controller;
-
+ 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
 import com.swp.koiCareSystem.service.FishService;
@@ -14,7 +15,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse; 
 
 /**
  *
@@ -28,14 +29,21 @@ public class ManageFishDetailController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletException if a servlet-specific error  occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int fdid = Integer.parseInt(request.getParameter("fdid"));
+            
+            int fdid = 1;
+            try {
+              fdid = Integer.parseInt(request.getParameter("fdid"));              
+            } catch (NumberFormatException e) {
+                request.getRequestDispatcher("MainController?action="+IConstant.ACCOUNT_FISH_MANAGE).forward(request, response);
+                return;
+            }
             
             FishService fins = new FishService();
             Fish fdetail = fins.getFishDetailByIDS(fdid);
