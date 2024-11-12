@@ -543,31 +543,26 @@ public class AccountDAO {
                 pst.setString(1, img);
                 pst.setInt(2, acid);
 
-                int rowAffect = pst.executeUpdate();
-                if (rowAffect > 0) {
-                    return true;
-                }
+   
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-
                 if (pst != null) {
                     pst.close();
                 }
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return false;
     }
-
     public boolean updatePasswordWithEmail(String newPassword, String email) {
         Connection conn = null;
         PreparedStatement pst = null;
@@ -1067,7 +1062,7 @@ public class AccountDAO {
 
                     AccountStatus accStatus = new AccountStatus();
                     accStatus.setStatusID(rs.getInt("idStatus"));
-                    accStatus.setStatusName(rs.getString("StatusName"));  // Retrieve StatusName from join
+                    accStatus.setStatusName(rs.getString("StatusName"));  
                     account.setAccstatus(accStatus);
 
                     listA.add(account);
@@ -1171,7 +1166,7 @@ public class AccountDAO {
 
                     AccountStatus accStatus = new AccountStatus();
                     accStatus.setStatusID(rs.getInt("idStatus"));
-                    accStatus.setStatusName(rs.getString("StatusName")); // Retrieve StatusName from join
+                    accStatus.setStatusName(rs.getString("StatusName")); 
                     account.setAccstatus(accStatus);
 
                     listA.add(account);
@@ -1273,7 +1268,6 @@ public class AccountDAO {
                     account.setGender(rs.getString("Gender"));
                     account.setAccountStatus(rs.getInt("isActive"));
 
-                    // Set AccountStatus information from the joined table
                     AccountStatus accStatus = new AccountStatus();
                     accStatus.setStatusID(rs.getInt("idStatus"));
                     accStatus.setStatusName(rs.getString("StatusName"));
@@ -1302,309 +1296,23 @@ public class AccountDAO {
         return listA;
     }
 
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//
-//        ArrayList<Account> accounts = accountDAO.searchAccountByEmail("user1@gmail.com", 1);
-//        if (accounts == null || accounts.size() != 1) {
-//            System.out.println("Test Failed: Expected 1 account for email 'user1@gmail.com', but got " + (accounts != null ? accounts.size() : 0));
-//        } else {
-//            Account account = accounts.get(0);
-//            if (account.getEmail() == null || !account.getEmail().equals("user1@gmail.com")) {
-//                System.out.println("Test Failed: Expected email 'user1@gmail.com', but got " + account.getEmail());
-//            } else {
-//                System.out.println("Test Passed: Found account with email 'user1@gmail.com'");
-//            }
-//        }
-//    }
-//    
-//    
-    
-   public static void main(String[] args) {
-        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-    ArrayList<Account> accounts = accountDAO.searchAccountByPhoneNumber("12345678905", 1);
+    public static void main(String[] args) {
+        AccountDAO test = new AccountDAO();
+        test.testUpdateImgByAccountID();
+    }
 
-    if (accounts == null || accounts.isEmpty()) {
-        System.out.println("Test Failed: No account found for phone number '12345678905'.");
-    } else {
-        boolean found = false;
-        for (Account account : accounts) {
-            if (account.getPhoneNumber().contains("12345678905")) {
-                found = true;
-                break;
-            }
-        }
-        if (found) {
-            System.out.println("Test Passed: Found account(s) with phone number containing '12345678905'.");
+    public void testUpdateImgByAccountID() {
+        AccountDAO accountDAO = new AccountDAO();
+
+        int testAccountId = 10; 
+        String newImagePath = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQBCQMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAACAwEEBQAGB//EADcQAAICAQMDAgQEBQIHAQAAAAECAAMRBBIhBTFBE1EUImFxMkKBkQYjUqGxFcEzYmOy0eHwFv/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EAB8RAQEBAQADAQEAAwAAAAAAAAABEQIDEiExEyJBUf/aAAwDAQACEQMRAD8AYROxJSqyzeUQkVjc5HgZxn+8kCdeuIAGTiSQcEAZz3kkEcgZmh1RaPVp+H2kfD17iv8AVjn9YrTULOn2PSLtN/PG3c6Jy9fvle+Pr2lJTky+uVsV1JVlOVZTgg+4jNdtu09OtIxc7tXZwPmKgHdx5IP7wlPGaRB2ws5kSiRiGMY4HMjGYSjEFQwVAjM5KsQkaMq+YmQoOzAnIMGWdoK5mjqum119B0WuqJNr2MtgJ4xuYD/ti08ZyLC2zqyM4yIzEBgQISjBhYk4xEqRxbAiSYxhmBtjkTboMwlk7eYW2BA2yCvMZOgCiIJjCMjcAcZxnEEiOJpeMTvEIiRtlIB5kGaXRq9FZrDX1F9lTI21s4Afxn6SgygMQDuAPceYaZWJ2IzEjEZEsOZGIwg5nbYyPqvsoW9UC4ur2Nn2yD/tFDiNKgwTWPEzU5Ed9xRSQo3Nx2Hv++J2MdpKllBAJAYYOD3HtOGIAlwTzLFtTf6KxwSvxQwQM4+Q7s+35IOzPbnMfn0em6yxmO21VoVBnltyvk/YKf3+8SpGKczswiPbH6QSJoWYNSMRiFc8yse/EkGBxeWsPjEkr6TESslrAYzOLs3JPaTimjoTm5CyeooPKZxu+k97qOm6P4NtPttdEqTbpkf5lK7mHI5Gcnk954Lpuss0xLad/TtIwGxyB9Jc0l11NjPXbYlw53qeT9/eZdbrXmfCdVq1tdVq0lWnRBjamdx+58zgRtzJsRrLGdzudyWJ9yYwUgHJ7e0NE5V6iWc+0e/iWW0yKiuh+XHJxFOu7GO0n32tP52QnGZO2PWvicqBnAJ2jIBPtL9md4J2Y5gMDniXb6DVY1ZKnacZXkH7SvshKV5JAnbY7bBIlIw+zWA9ITQKhDDUG1nz34Ix/eUCBGsIG0kjEE0KqXbagLN4CjOZbHSOonB+BvAPYlCBLFrNoE+G05CX7Q2ouH4gf6QfGPOJRutstXY9tjqOwZiYanE6nQarTYN+nsVT5xkfuOJWwPcfvLWlvu04YUXWVE/0NgH9Je36fU6L4q/StZqFsFb+k+wkEfK2McnuP0EejGMRIxLeu0y6bW30IxZa22qx7kRG2PSworIxG4nbY9GIknEhQTLdfw50FoKj4gWqUOPy4OR/iQeKTc8CQQ0eFk7YAqnO8bgdufmx3x5xL2u0razKaG6mxEO5NPWjK23tk5ABPbPJlXZkxqoVKsrbSpyCPBitXIyrqHrI3o4DDIJGM+8Qw+uZ6azX61mVhaDg9iox9v18xCJoL7h8RpFrAbJNVhA/UHPH2xHOx6vOkcdj+8HtNrruir096NplU0Mn/EQHaxz9zjxxmZLKJUuliBzDJJEWODGqY6IamUAYD9Y6rVuHHfB95VdzjGeJ1SNZjBkXFytyixXQn80fkb9gIzM7TI1fJaOZSTlSczK/reX41tMgf+WSNsbdp0UBUEwqWeuwnc37za02oygyMmYdc2XY6Oe51MoLUFa8xNSln4Eu27bACTGaMVpbvbBFalwP6iBkCVOvmI6k1W1VRrO0j5gcEe0quOTLd7l3ZmOSxyTKzzTjWfdJIgupH4gQftGbZY6lqvjrxd6fpgIq4+01lYVnMOZY6Wm7qWlH/VEAqDLvTBXp92usU2Ch1CpnGWOeSfYAfviFqMZ1+TY5P5mJP15/9wNvv28zVv6da92/TI1tDnKOvIx7H2groq9MTZrivy/hpRwWc+xx2EJRZ9UNPpbtQ+KK3c/8o4/ea3TVGhF1IdG1VlTFjW24UhRkc9i2f2lW3UXXqE3enUfw11jA/bzGekdFo3LgpfcNiLjkL3Y48Z4A/WK05GUQWO48k+ZG2OIggSiwvbI2xpHEjEYKAhDvOxOxJ0kwgIGP0z5lvT6S23Q3a1QDVSQHOcZzx/uIaMVsYhjGOTA3f4lZ2LPgnAED/F30w3YyEQo/fiFpmoahttjesHGF8bcHJ++cfvGYzzJXAowRnW0ManQrYq+cjv8AcTK6lpF0ty+m5eqytXrZl2k57jHPY5HfxNbbHaQNtZLmB06I7shUEAYJOPMJcP115NuDCUyHGDg9xAzibbrM78XEv9Pr4PEzazlpbRiPzESOl8/9aLDiMTtKa3ba/eMr1O76TGy43lmrOwAgt+plumxfy9pmNfk8NmWKrApIU8GKz4rZq6HJbvG5xgxenqa22utCNzMAM/WW9cyvq7igwu9sDH1kzD72KxMWRmNxBImkY0qSeRiHiO1mkOkdFZgSyB+PY+JSFTbGUXWUMzVNt3DDcZBH2gmR5gWLQ6lqd3zOHTGDURhGH1Ag7enuS4bUU571hQ4/Q5H95XIzBIiw1r4tKFI0SMmeGusYF/sMcAf3lSxmdiXJYnuT3kSYy0BEGGZGI5SoCJ22E3Ag7oJKMgQyRO3D6CAcB9JraPU0p/D/AFDSu+262xGVfcZHb9pk7h7yc5iCGryODKOspIbOCfrmaKkE8Gc6qwwRmOUKOiretwyYKHuDNQcyk1ZrcFe3tLleSBJta8wW2EpKMCoz4Iz3HkSV5jFQ+BJtXJrB6joDV/MRxZU7MFYfTHBH0yJknK8T1+q05ZLEavclmCB7MOx/yP1mQ+grDEMefbMvnyRHXjusuk5PEtitmGf2jToUXlGwZ3pWof6vrHe5TnFhTnau3ye8GsN7ybWIblcS3pqgxAAOTFevWHOfa/CwMDd5EWtxrbPmPvD7yirKjowb5hDn/I+pjc6b1BVvpa5Ds3Dfjviamp3nU2mwguzFsjsQeQR9J5bS3enYCwyvkT01Gpo1tCony3U1k7ByCmffvkZkWZfh7s+g7yMQ+8ggwlKwGIV91t7K1rlyFCgnwPaQQZB4EpGAIkYml07R16mjU+qAH+UUEn8xycf2lc6LUCprTRYEHdiMARaPVVPEExpEtdJNCa9G1O30wG/EOM44lFjOxIAjWGWJHYniDiCQYnQsQfbPmBUthmDtjcTtsNJneqPeRrBbpzWLAB6iCxRnPB7f4lQMD4jNRqbL0pSwqRSmxMDnGcysAqtT83zDAMuMWAyszD3G2OrLHA3GLAs6VT6rtZatfys2W8kDt+stJg+e8pI6o3zNG+umflMRxdRAcnEdgeOJn16td2C2MS7VbubB4+viS0lMAxJDsD/y+0NhX6aMLQWJIZMcrBySPkEixpLhian+Yr4G5fBmD1BLatS25WDAkYM0nv2thkzD1Fmn1tmbEWuxxjev9XuYT4r9/WVSHtAIl5aWHftI6fpLKmLqcq3cGarhBWvy4mPk8v3HV4vFs+sk6JLG+Yd5a0GmKDbgMM8E95ZVVBz4hq+wjbxI68lrWeLmXRNpaNjblxYRwZianSFBkqSfebtjBsOeTDvZSmQPHtJ48l5HfjnceNuGxuRj6TtFrbdJqkupbYynjHn6GX+r0IbM1fi5yJiPkHiehxZ1y8vyc3np7tNYvUtB8QUVbEs2tgAcYzFE5mZ/DLj4fVV3WGtbdm1iMj5Scj+4m1TpPXsKUajTsAMkmwDA+xmeZV7sVysbpAw1CCulbmIwEddwOf8A7vH2dN1lYYmhmRed68gj3HvKq2YOVYhsY4MW0WR6FtXRoqUQCvT3Mu4+moNYPbnHJmR1dxa1NvxCWu6/zArEgEefpmUX+YAHsOwnEdvfEIAMYPPvj7QjIlamu+8EiHgwDjmEqbAHiO1Y04ZBpWYrsBbcOd3n9IomD3AHtK1OOxOx9Z2J2DDT9XmQ0kHmKzzCBmjI1W2whZ3xnMSWxOW3Gc8wNzl25Edpz6Y55zE+sD3Et6as6jS6uytvm09a2FAM5UsFJ/TOYqB1tWxwFyZbW41JtAmdTYzuFAGB3MthQ74T95FaQxtcwJwD/wCIek19XItswTKl1TZKhhxKjqVPMMlVLXoCaHbCtyR3BlK1ME/zMDwJnLay/hMIalgcsMmT61ftGjRrzp+K85zzL3xwvrJsPPiYa6oZyV5jVsW0d8e4mXXim7jfjzdSY0auoKrbXx9DLB1Able3tMO1OPk5nVs1DbsmF8Uqp5ev9vQ2WbKg3f6DxI0+pd6ySwHgTIp1vzHIJJjRrQiFlUZHiZ/zX/WVa1aVmlxghyCd31nn7UG7bLV+sexmJ4B8SvU67ic5xOnxy8xyeTqdU7RFwzVBvxDgQdXW6Ntu9uBL+lurNW7aN4+kHXsNVy2FPvHv1NnxZ/hLV6yzrGlqR7bVr3fyzcQNu05Azx5ml1bS/C6xlpfeUb+x955PQai7Q9Sqv0zhbqmypPP0IP0xPeC1epdG+Id6LNZUc2CoBdqk+R/vDpPLLUtgbodZQWL6mdmfmx7QTAYSYZl7Veu/oEmrJ2lu+IIix3klsdoqcNxx3jq9Qlej1NBTLW7QrccYJzKiktzJKjPaKDooiQI0rBIA7SkxAk8ycYGZGT7QDx+ZIMEGSGHn7cTdgnJ8SMnnM9Z0/oNdnRaqtbSmm1Ootb0r7iEYHjaNpOWBORxM7rHR9P0lTS/Ua7taSN1FSHCfdj/iL2n4eVhbuYauVztJGRg48j2lj4TNeVHMVVpnLEN48w08TVZs5luq/ZKb1BPzGNoZS4Vxwe0nrMXzPo7LXNhYeYt7SVwZb1VBVdyAkY5z4mZYPMXN0+peR74QbiVSeYSviaWJlWM5EKpivOYn1BjmElmTjxIaRa3EfNv78xT2E9zmER8oMrH8cUFqzW+3mNFsoG7bxB+Ih6afvi3e4bJHH2ldG2xL3Zi/U5lyZGV6X11TV9s4j11PrJhhjHMyxZG1v8phgnS8zpw6Lhvczf8A4U6nXXqf9N1FanT6xwGY8YbxzPIVF2sx495bUcbRg5857RWKle31Olu01hrtqdTn5TjIYRLVWkZ9KwqexCHmYmk6/wBU0lIqq1lqoOw3Zx+8L/8AR9VLZPULx+sz9KfvG+Ol65iN2mNaEZNlrBQB9cngxeo6Xr6VZ7KCa1GS6sCMfpPJanV33MfVvscscksxOZa6L1a7pd5tUepUVKvUxOGB7/aV6XE+0bSYUDceJA1CFiAGKj8x4lvqi0DR6LU16ZqbL0LmgvnaPBz9Zn1vYwGVXGe2O0yaDsv4+RSYdTBkBPDeRCAhYxFowM6SZECeFDQweMytvkGw+J1Od7Vv4p+F6f0+gImt1CUH1L7WO5N2RtUjkHHmZnW+q6LqFlF+mouqvCbLfUYMGx2Oe5P3E82bjjk8wPVbMXqfs1m1LHAB2icdWQMe3n3malpI5hljDD1e+JD9xLFGoqRlcjJXxMgPg+YYtMV5051jS1uvfUtwoRfYSoXPmI9TmQXjnMn4d6t/TCeZ2YnfO3xp0/MlXAPJlffxANkWK9mkLgUwDFtb9JSW7EM2gww/ZNr+0QbCDzDJibOe0aKMWSN8VnEAvzGS2tnEbW8oq8dU2TANCs7vpGM+wYlM2hPMj1ge8StOaw54JjanyM5zKgJYxynHaBLO7PeEuR5lY2ACLbUY8w/Q9z0v+JNHatFXWNNU21PS9cAkgeOPpLh6exo+J0LprNNyd9XdfuO+Z83Gp578eeJZ0HVdTorFs0t71OpyMNxM749VPJj265NfqYOz+rHEtUaC66kXs9VFJ7WXNtB+08wv8b9VDA2WV2Jt2mpqxsb7iZ3Uv4i1nUbTbe4zjACjAUewHgSP5VX9I9V1S3TaSnevUNNe+cenSSW+8yv9Xr9n/YTy9mrZu5JgfFH3Mv8Amm9lZkzp01ZgPeR5kToEYO4jfE6dEYD3nAyZ0DQTOzJnQAc8zpM6AQTxFMTOnQAdxkqxz3nTowYScRbEzp0QAxiieZ06VAkEyzpz2kToUlkKD3kBQJ06SYh2k5M6dAAsY4lR3Oe8mdHCpYY+8MsQO86dHSQXb3kBj7zp0A4sfeRkzp0A/9k=";
+        boolean result = accountDAO.updateImgByAccountID(testAccountId, newImagePath);
+
+        if (result) {
+            System.out.println("Test passed: Image updated successfully.");
         } else {
-            System.out.println("Test Failed: No account found with phone number containing '12345678905'.");
+            System.out.println("Test failed: Image update was unsuccessful.");
         }
     }
-}
-
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//        ArrayList<Account> accounts = accountDAO.searchAccountByFullName("Huy", 1);
-//
-//        if (accounts == null || accounts.isEmpty()) {
-//            System.out.println("Test Failed: No account found for full name 'Huy'.");
-//        } else {
-//            boolean found = false;
-//            for (Account account : accounts) {
-//                if (account.getFullName().contains("Huy")) {
-//                    found = true;
-//                    break;
-//                }
-//            }
-//            if (found) {
-//                System.out.println("Test Passed: Found account(s) with full name containing 'Huy'.");
-//            } else {
-//                System.out.println("Test Failed: No account found with full name containing 'Huy'.");
-//            }
-//        }
-//    }
 
 }
-//UPDATE INFORMATION
-//     public static void main(String[] args) {
-//
-//        Account account = new Account();
-//        account.setEmail("test@example.com");
-//        account.setPassword("newPassword123");
-//        account.setFullName("John Doe");
-//        account.setPhoneNumber("0123456789");
-//        account.setUserRole("Customer");
-//        account.setAddress("123 Main St");
-//        account.setGender("Male");
-//        account.setUserID(31); // ID của tài khoản bạn muốn cập nhật
-//
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//
-//        // Gọi phương thức cập nhật thông tin tài khoản
-//        boolean isUpdated = accountDAO.updateInformationAccount(account); // Sửa từ AccountDAO.updateInformationAccount(account) thành accountDAO.updateInformationAccount(account)
-//
-//        // In ra kết quả kiểm tra
-//        if (isUpdated) {
-//            System.out.println("Account information updated successfully.");
-//        } else {
-//            System.out.println("Failed to update account information.");
-//        }
-//    }
-//}
-// Get STATUS
-//    public static void main(String[] args) {
-//
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//
-//        ArrayList<AccountStatus> statuses = accountDAO.getAllAccountStatuses(); // Gọi phương thức lấy trạng thái
-//        System.out.println("All Account Statuses:");
-//
-//        // Kiểm tra và in thông tin từng trạng thái
-//        if (statuses.isEmpty()) {
-//            System.out.println("No account statuses found.");
-//        } else {
-//            for (AccountStatus status : statuses) {
-//                System.out.println("Status ID: " + status.getStatusID());
-//                System.out.println("Status Name: " + status.getStatusName());
-//                System.out.println("------------------------------");
-//            }
-//        }
-//    }  
-// Search Status
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//        int statusID = 1; // Giả sử bạn có một trạng thái nào đó, có thể thay đổi
-//        int index = 1; // Chỉ số trang để lấy tài khoản, có thể thay đổi
-//
-//        ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, index); // Gọi phương thức tìm kiếm
-//        System.out.println("Accounts with status ID " + statusID + ":");
-//
-//        // Kiểm tra và in thông tin từng tài khoản
-//        if (accounts.isEmpty()) {
-//            System.out.println("No accounts found.");
-//        } else {
-//            for (Account account : accounts) {
-//                System.out.println("Account ID: " + account.getUserID());
-//                System.out.println("Email: " + account.getEmail());
-//                System.out.println("Koi Care ID: " + account.getKoiCareID());
-//                System.out.println("Full Name: " + account.getFullName());
-//                System.out.println("Phone Number: " + account.getPhoneNumber());
-//                System.out.println("User Role: " + account.getUserRole());
-//                System.out.println("Address: " + account.getAddress());
-//                System.out.println("Gender: " + account.getGender());
-//                System.out.println("Status ID: " + account.getAccstatus().getStatusID());
-//                System.out.println("Status Name: " + account.getAccstatus().getStatusName());
-//                System.out.println("------------------------------");
-//            }
-//        }
-//    }
-//    
-//COUNT STATUS
-//    public static void main(String[] args) {
-//
-//        AccountDAO accountDAO = new AccountDAO();
-//        int statusID = 1;
-//        int count = accountDAO.countAccountsByStatus(statusID); 
-//        System.out.println("Total accounts count with status ID " + statusID + ": " + count); 
-//
-//        // Nếu cần, có thể kiểm tra thêm các tài khoản này
-//        // ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, 1); // Lấy danh sách tài khoản theo trạng thái
-//        // for (Account account : accounts) {
-//        //     System.out.println(account); // In thông tin từng tài khoản
-//        // }
-//    }
-//DELETE
-//
-//    public static void main(String[] args) {
-//
-//        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
-//
-//        // Thực hiện xóa tài khoản
-//        AccountDAO accountDAO = new AccountDAO();
-//
-//        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
-//
-//        // Kiểm tra xem tài khoản có bị xóa không
-//        if (result) {
-//            System.out.println("Account successfully deleted.");
-//        } else {
-//            System.out.println("Failed to delete account.");
-//        }
-//    }
-// INFORMTION BY ID
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO();
-//        Account accountInfo = accountDAO.getAccountInformationByID(10); 
-//
-//        if (accountInfo != null) {
-//            System.out.println("Account ID: " + accountInfo.getUserID());
-//            System.out.println("Email: " + accountInfo.getEmail());
-//            System.out.println("Koi Care ID: " + accountInfo.getKoiCareID());
-//            System.out.println("Full Name: " + accountInfo.getFullName());
-//            System.out.println("Phone Number: " + accountInfo.getPhoneNumber());
-//            System.out.println("User Role: " + accountInfo.getUserRole());
-//            System.out.println("Address: " + accountInfo.getAddress());
-//            System.out.println("Gender: " + accountInfo.getGender());
-//            System.out.println("Status ID: " + accountInfo.getAccountStatus());
-//        } else {
-//            System.out.println("No account found with the given ID.");
-//        }
-//    }
-//}
-// CREATE 
-//    public static void main(String[] args) {
-//        AccountDAO accountDao = new AccountDAO(); 
-//        Account account = new Account();
-//
-//        account.setEmail("test1123@example.com");
-//        account.setKoiCareID("KC12345");
-//        account.setProfileImage("image_url");
-//        account.setPassword("securepassword");
-//        account.setFullName("Test User");
-//        account.setPhoneNumber("0123456789");
-//        account.setUserRole("Customer");
-//        account.setAddress("123 Test St");
-//        account.setGender("Male");
-//        account.setAccountStatus(1);
-//
-//        boolean result = accountDao.createNewAccount(account);
-//        if (result) {
-//            System.out.println("Account created successfully.");
-//        } else {
-//            System.out.println("Failed to create account.");
-//        }
-//    }
-//
-//}
-//
-//    public static void main(String[] args) {
-//        AccountDAO acd = new AccountDAO();
-//
-//        int accountID = 5; // Giả sử bạn muốn kiểm tra với AccID = 1
-//
-//        // Kiểm tra số lượng trạng thái tài khoản
-//        int count = acd.countAccountsStatusToAdmin(accountID);
-//        System.out.println("Total Account Statuses for Account ID " + accountID + ": " + count);
-//
-//        // Kiểm tra danh sách trạng thái tài khoản với trang chỉ định
-//        int index = 1; // Ví dụ, lấy trang đầu tiên
-//        ArrayList<AccountStatus> statusList = acd.getAccountsStatusToAdmin(accountID, index);
-//
-//        System.out.println("Account Statuses for Account ID " + accountID + " (Page " + index + "):");
-//        for (AccountStatus status : statusList) {
-//            System.out.println("Status ID: " + status.getStatusID() + ", Status Name: " + status.getStatusName());
-//        }
-//    }
-//}
-//    public static void main(String[] args) {
-//        AccountDAO acd = new AccountDAO();
-////        boolean c = acd.isKoiCareIDExist("rikawa1");
-////        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
-//        Account acc = new Account();
-//        acc.setFullName("Khánh");
-//        acc.setPhoneNumber("0908765567");
-//        acc.setAddress("12 đường cây keo");
-//        acc.setGender("Men");
-////                acc.setKoiCareID("21212");
-//        acc.setUserID(9);
-//        boolean c = acd.updateAccount(acc);
-//        System.out.println(c);
-//    }
-//========================================================================
-//TEST CREATE
-//    public static void main(String[] args) {
-//        // Thiết lập đối tượng Account mới
-//        Account newAccount = new Account();
-//        newAccount.setEmail("test@example.com");
-//        newAccount.setKoiCareID("Koi123");
-//        newAccount.setProfileImage("image.png");
-//        newAccount.setPassword("password");
-//        newAccount.setFullName("Full Name");
-//        newAccount.setPhoneNumber("123456789");
-//        newAccount.setUserRole("User");
-//        newAccount.setAddress("123 Street");
-//        newAccount.setGender("Male");
-//        newAccount.setAccountStatus(1); // Giả sử idStatus là kiểu int
-//
-//        // Tạo đối tượng AccountDAO để gọi phương thức createNewAccount
-//        AccountDAO accountDAO = new AccountDAO();
-//
-//        // Gọi phương thức tạo tài khoản mới và lưu kết quả
-//        boolean isCreated = accountDAO.createNewAccount(newAccount);
-//
-//        // Kiểm tra và in ra kết quả
-//        if (isCreated) {
-//            System.out.println("New account created successfully.");
-//        } else {
-//            System.out.println("Failed to create new account.");
-//        }
-//    }
-//================================================================
-// TEST : GELL LIST ACCOUNT
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
-//        // Test retrieving all accounts from the database
-//        ArrayList<Account> accounts = accountDAO.getAllAccounts();
-//
-//        // Loop through the result and print each account's details
-//        for (Account account : accounts) {
-//            System.out.println(account);
-//        }
-//    }
-// COUNT  ACCOUNT
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
-//        int count = accountDAO.countAllAccounts();
-//        System.out.println(count);
-//
-//    }
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); 
-//        List<Account> accl = accountDAO.getAccounts(2);
-//        for (Account a : accl) {
-//
-//            System.out.println(a);
-//
-//        }
-//    }
-//================================================================

@@ -43,7 +43,7 @@
                                     <img id="accountImagePreview" src="${account.profileImage}" alt="${account.fullName}" style="max-height: 200px; object-fit: unset;" />
                                 </div>
                                 <div class="fish-edit-img-detail">
-                                    <form action="MainController?action=adminAccountUpdateImage" method="POST"  class="form-edit-img-account" enctype="multipart/form-data" onsubmit="return confirmSubmit('Are you sure you want to update product image');">>
+                                    <form action="MainController?action=adminAccountUpdateImage" method="POST"  class="form-edit-img-account" enctype="multipart/form-data" onsubmit="return confirmSubmit('Are you sure you want to update account image?');">>
                                         <input type="hidden" name="accountId" value="${account.userID}">
                                         <input id="imageInput" name="fileimg" type="file" accept="image/*" required>
                                         <!-- Image Preview -->

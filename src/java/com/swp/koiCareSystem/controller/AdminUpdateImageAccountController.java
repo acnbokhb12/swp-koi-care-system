@@ -40,35 +40,34 @@ public class AdminUpdateImageAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-        // Lấy productId và filePart từ request
-        int accountId = Integer.parseInt(request.getParameter("accid"));
-        Part filePart = request.getPart("fileimg"); // Tệp ảnh từ form
-        String tempDir = getServletContext().getRealPath("/") + "uploads"; // Thư mục tạm để lưu ảnh
-
-        // Khởi tạo dịch vụ tải ảnh
-        ImageUploadService imgs = new ImageUploadService();
-        String imageUrl = "";
+        int accid = Integer.parseInt(request.getParameter("accountId"));
+            Part filePart = request.getPart("fileimg");
+            String tempDir = getServletContext().getRealPath("/") + "uploads";
+            
+            ImageUploadService imgs = new ImageUploadService();
+            String imageUrl = "";
         try {
-            // Tải ảnh lên và nhận URL
             imageUrl = imgs.uploadImage(filePart, tempDir);
             System.out.println(imageUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Cập nhật thông tin tài khoản
-       AccountService accountDAO = new AccountService();
-        boolean isUpdated = accountDAO.upDateImgAccountById(accountId, imageUrl);
+            AccountService accs = new AccountService();
+            boolean isUpdated = accs.upDateImgAccountById(accid, imageUrl);
 
         String url = "";
         if (isUpdated) {
-            url = "MainController?action=" + IConstant.ADMIN_ACCOUNT_UPDATE_IMAGE + "&accountId=" + accountId;
+            request.getRequestDispatcher("AdminAccountController").forward(request, response);
+
         } else {
-            url = "MainController?action=" + IConstant.ADMIN_ACCOUNT_UPDATE_INFORMATION + "&accountId=" + accountId;
+            request.getRequestDispatcher("404page.jsp").forward(request, response);
+
         }
-        request.getRequestDispatcher(url).forward(request, response);
+
+        }
     }
-}
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

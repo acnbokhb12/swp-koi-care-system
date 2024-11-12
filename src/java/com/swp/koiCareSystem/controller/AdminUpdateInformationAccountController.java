@@ -31,34 +31,38 @@ public class AdminUpdateInformationAccountController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("userAccount");
-            if (acc == null) {
-                response.sendRedirect("home.jsp");
-                return;
-            }
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    try (PrintWriter out = response.getWriter()) {
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("userAccount");
+        if (acc == null) {
+            response.sendRedirect("home.jsp");
+            return;
+        }
 
-            String accid = request.getParameter("accid");
-            if (accid == null) {
-                accid = "1";
-            }
-            int id = Integer.parseInt(accid);
+        String accid = request.getParameter("accid");
+        int id;
 
-            AccountService accs = new AccountService();
-            Account accountToUpdate = accs.getAccountInformationByID(id);
-            request.setAttribute("account", accountToUpdate);
-
-            request.getRequestDispatcher("manageUpdateAccount.jsp").forward(request, response);
+        try {
+            id = Integer.parseInt(accid);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            response.sendRedirect("errorPage.jsp");
+            response.sendRedirect("AdminAccountController"); 
+            return;
         }
+
+        AccountService accs = new AccountService();
+        Account accountToUpdate = accs.getAccountInformationByID(id);
+
+        request.setAttribute("account", accountToUpdate);
+        request.getRequestDispatcher("manageUpdateAccount.jsp").forward(request, response);
+    } catch (IOException | ServletException e) {
+        e.printStackTrace();
+        response.sendRedirect("errorPage.jsp"); 
     }
+}
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

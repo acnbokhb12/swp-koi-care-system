@@ -56,8 +56,8 @@ public class AdminUpdateAccountController extends HttpServlet {
             account.setUserRole(accountRole);
             account.setKoiCareID(koiCareID);
 
-            AccountService accountService = new AccountService();
-            boolean isUpdated = accountService.updateInformationAccounts(account);
+            AccountService accs = new AccountService();
+            boolean isUpdated = accs.updateInformationAccounts(account);
 
             String url = "";
             if (isUpdated) {

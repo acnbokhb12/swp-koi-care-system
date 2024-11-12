@@ -177,12 +177,6 @@ public class AccountService {
         return acd.searchAccountsByStatus(statusID, index);
     }
 
-// CREATE NEW ACCOUNT
-   public boolean createNewAccountToAdmin(Account account) {
-    String hashedPassword = hashPassword(account.getPassword());
-    account.setPassword(hashedPassword);  
-    return acd.createNewAccount(account);
-}
 
 
     // DELETE
@@ -200,7 +194,7 @@ public class AccountService {
         return acd.updateInformationAccount(account);
     }
 
-    //SEARCH
+
     
     //PHONE
     public int countAcccountByPhoneNumber(String phoneNumber) {
@@ -229,6 +223,13 @@ public class AccountService {
         return acd.countAccountByEmail(email);
 
     }
+    // CREATE NEW ACCOUNT HASHPASSWORD
+   public boolean createNewAccountToAdmin(Account account) {
+    String hashedPassword = hashPassword(account.getPassword());
+    account.setPassword(hashedPassword);  
+    return acd.createNewAccount(account);
+}
+
 
     static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();

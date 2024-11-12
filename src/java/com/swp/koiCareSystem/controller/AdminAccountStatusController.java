@@ -45,8 +45,8 @@ public class AdminAccountStatusController extends HttpServlet {
             if (acc == null || acc.getUserRole().equalsIgnoreCase("user")) {
                 request.getRequestDispatcher("HomeController").forward(request, response);
                 return;
-            } else if (acc == null && acc.getUserRole().equalsIgnoreCase("admin")) {
-                request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
+            } else if (acc == null && acc.getUserRole().equalsIgnoreCase("manager")) {
+                request.getRequestDispatcher("dashboardManager.jsp").forward(request, response);
                 return;
             }
 
