@@ -49,7 +49,7 @@ public class AdminAccountInformationController extends HttpServlet {
                 id = Integer.parseInt(accountId);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                response.sendRedirect("AdminAccountController"); 
+                request.getRequestDispatcher("AdminAccountController").forward(request, response); 
                 return;
             }
 

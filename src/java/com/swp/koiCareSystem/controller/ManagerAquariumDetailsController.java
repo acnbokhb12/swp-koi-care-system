@@ -41,13 +41,8 @@ public class ManagerAquariumDetailsController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             int accID;
-            try {
                 accID = Integer.parseInt(request.getParameter("acid"));
-            } catch (NumberFormatException e) {
-                request.setAttribute("errorMessage", "ID phải là một số nguyên.");
-                request.getRequestDispatcher("errorPage.jsp").forward(request, response);
-                return;
-            }
+            
                 FishService fs = new FishService();
                 PondService ps = new PondService();
 
