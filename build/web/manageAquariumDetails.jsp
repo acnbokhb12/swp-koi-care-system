@@ -20,8 +20,7 @@ Author     : PC
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="./assets/css/base.css">
-        <link rel="stylesheet" href="./assets/css/navHeader-Footer.css">
-        <link rel="stylesheet" href="./assets/css/adminAquarium.css">
+        <link rel="stylesheet" href="./assets/css/navHeader-Footer.css"> 
     </head>
     <body>
         <div class="container_admin">
@@ -40,10 +39,10 @@ Author     : PC
                             <div class="fish-container">
                                 <h3>Fish Information</h3>
                                 <div class="form-group image-container">
-                                    <img src="https://plus.unsplash.com/premium_photo-1723672584731-52b5f1a67543?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a29pJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D" alt="Image Fish" class="img-fluid fish-image" />
+                                    <img src="https://plus.unsplash.com/premium_photo-1723672584731-52b5f1a67543?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a29pJTIwZmlzaHxlbnwwfHwwfHx8MA%3D%3D" alt="Image Fish" class="img-fluid fish-image" style="min-height: 290px"  />
                                 </div>
                                 <div class="summary">
-                                    <h4>Total Fishs: <span>${fishCount}</span></h4>
+                                    <h4>Total Fishs: <span class="text-danger">${fishCount} Fish(s)</span> </h4>
                                 </div>
                                 <h4 class="note">Management of Koi Fish Information</h4>
                                 <button type="button" class="btn btn-primary" onclick="location.href = 'ManageFishController?acid=${acid}'">Manage List Fish</button>
@@ -53,10 +52,10 @@ Author     : PC
                             <div class="pond-container">
                                 <h3>Pond Information</h3>
                                 <div class="form-group image-container">
-                                    <img src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Image Pond" class="img-fluid pond-image" />
+                                    <img src="https://www.thesprucepets.com/thmb/tucFN5e5O9-vbhr0jhbeL8zkFLY=/3572x0/filters:no_upscale():strip_icc()/GettyImages-1148621267-fbe7fcc9e0eb41078b0ee63bc3edc2b3.jpg" alt="Image Pond" class="img-fluid pond-image" style="min-height: 290px" />
                                 </div>
                                 <div class="summary">
-                                    <h4>Total Ponds: <span>${pondCount}</span></h4>
+                                    <h4 >Total Ponds: <span class="text-danger" >${pondCount} Pond(s)</span> </h4>
                                 </div>
                                 <h4 class="note">Management of Koi Pond Information</h4>
                                 <button type="button" class="btn btn-secondary" onclick="location.href = 'ManagerPondController?acid=${acid}'">Manage List Pond</button>
@@ -197,7 +196,7 @@ Author     : PC
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             }
             .fish-container h3 {
-                font-size: 3rem;
+                font-size: 2rem;
                 color: #333;
                 margin-bottom: 15px;
                 border-bottom: 2px solid #ddd;
@@ -237,7 +236,7 @@ Author     : PC
 
 
             .pond-container h3 {
-                font-size: 3rem;
+                font-size: 2rem;
                 color: #333;
                 margin-bottom: 15px;
                 border-bottom: 2px solid #ddd;
@@ -265,13 +264,9 @@ Author     : PC
                     margin-bottom: 20px;
                 }
             }
-            /*Đơn vị thông số*/
-            span{
-                font-size: 2rem;
-                color: red;
-            }
+            
             h4{
-                font-size: 2rem;    
+                font-size: 1.8rem;    
             }
             .sub_span-highlight{
                 color: red;

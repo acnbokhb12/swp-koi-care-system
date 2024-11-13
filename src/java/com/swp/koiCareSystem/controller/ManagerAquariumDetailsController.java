@@ -5,6 +5,7 @@
  */
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Fish;
 import com.swp.koiCareSystem.model.Pond;
@@ -38,10 +39,16 @@ public class ManagerAquariumDetailsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {  
+            int accID = 1;
+            try {
+                 accID = Integer.parseInt(request.getParameter("acid"));                
+            } catch (NumberFormatException e) {
+                response.sendRedirect("MainController?action="+IConstant.ACCOUNT_FISH_MANAGE);
+                return;
+            }
+            
 
-            int accID;
-                accID = Integer.parseInt(request.getParameter("acid"));
             
                 FishService fs = new FishService();
                 PondService ps = new PondService();

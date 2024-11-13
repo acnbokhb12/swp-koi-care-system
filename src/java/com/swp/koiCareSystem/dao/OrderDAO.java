@@ -6,6 +6,7 @@
 package com.swp.koiCareSystem.dao;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
+import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
@@ -929,6 +930,308 @@ public class OrderDAO {
         }
         return listPurchaseHistory;
     }
+    public float countTotalAmountOrder() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        float totalAmount = 0;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT SUM(TotalAmount) FROM Orders WHERE OrderStatusID = 3 AND isActive = 1";
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    totalAmount = rs.getFloat(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return totalAmount;
+    }
+    public int countTotalCustomersOrder() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int totalCustomers = 0;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(DISTINCT AccID) FROM Orders WHERE OrderStatusID = 3 AND isActive = 1";
+                pst = cn.prepareStatement(sql);
+
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    totalCustomers = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return totalCustomers;
+    }
+    public OrderItem getMostOrderedProductWithDetails() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        OrderItem mostOrderedItem = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT TOP 1 ProductID, COUNT(OrderID) AS OrderCount "
+                        + "FROM OrderItem "
+                        + "GROUP BY ProductID "
+                        + "ORDER BY OrderCount DESC;";
+
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    int mostOrderedProductID = rs.getInt("ProductID");
+
+                    ProductDAO pd = new ProductDAO();
+         Product mostOrderedProduct = pd.getProductById(mostOrderedProductID);
+
+                    mostOrderedItem = new OrderItem();
+                    mostOrderedItem.setProduct(mostOrderedProduct);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng kết nối và các tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return mostOrderedItem;
+    }
+    
+    public int countOrdersForProduct(int productId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int orderCount = 0;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(OrderID) AS OrderCount "
+                        + "FROM OrderItem "
+                        + "WHERE ProductID = ?";
+
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, productId);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    orderCount = rs.getInt("OrderCount");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return orderCount;
+    }
+    public Account getTopSpender() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int AccID = 0;
+        Account topSpender = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT TOP 1 AccID "
+                        + "FROM Orders "
+                        + "WHERE OrderStatusID = 3 AND isActive = 1 "
+                        + "GROUP BY AccID "
+                        + "ORDER BY SUM(TotalAmount) DESC";
+
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    AccID = rs.getInt("AccID");
+                    AccountDAO ad = new AccountDAO();
+                    topSpender = ad.getAccountInformationByID(AccID);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    
+                rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return topSpender;
+    }
+public ArrayList<Order> getAmountPast5Month() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Order> listOrder = new ArrayList<>();
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT OrderDate, TotalAmount "
+                        + "FROM [dbo].[Orders] "
+                        + "WHERE OrderDate >= DATEADD(MONTH, -5, GETDATE()) "
+                        + "AND isActive = 1 "
+                        + "ORDER BY OrderDate ASC";
+
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    LocalDateTime orderDate = rs.getTimestamp("OrderDate").toLocalDateTime();
+                    float totalAmount = rs.getFloat("TotalAmount");
+
+                    Order order = new Order();
+                    order.setOrderDate(orderDate);
+                    order.setTotal(totalAmount);
+
+                    listOrder.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listOrder;
+    }
+
+public ArrayList<Order> getAmountPast7Days() {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Order> listOrder = new ArrayList<>();
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT OrderDate, TotalAmount "
+                        + "FROM [dbo].[Orders] "
+                        + "WHERE OrderDate >= DATEADD(DAY, -7, GETDATE()) " 
+                        + "AND isActive = 1 "
+                        + "ORDER BY OrderDate ASC";
+
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    LocalDateTime orderDate = rs.getTimestamp("OrderDate").toLocalDateTime();
+                    float totalAmount = rs.getFloat("TotalAmount");
+
+                    Order order = new Order();
+                    order.setOrderDate(orderDate);
+                    order.setTotal(totalAmount);
+         listOrder.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listOrder;
+    }      
+
+                    
+                    
     public static void main(String[] args) {
         OrderDAO ordao = new OrderDAO();
         ArrayList<Order> list = ordao.getPurchaseHistoryByAccId(5);

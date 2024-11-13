@@ -4,6 +4,18 @@
         <filter-name>LoginFilter</filter-name>
         <filter-class>com.swp.koiCareSystem.filter.LoginFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>LoggedInFilter</filter-name>
+        <filter-class>com.swp.koiCareSystem.filter.LoggedInFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>CartNotEmptyFilter</filter-name>
+        <filter-class>com.swp.koiCareSystem.filter.CartNotEmptyFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.swp.koiCareSystem.filter.ManagerFilter</filter-class>
+    </filter> 
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/cart.jsp</url-pattern>
@@ -25,18 +37,22 @@
         <url-pattern>/manageNewsDetailAdmin.jsp</url-pattern>
         <url-pattern>/manageOrder.jsp</url-pattern>
         <url-pattern>/manageOrderDetail.jsp</url-pattern>
-        <url-pattern>/manageProduct.jsp</url-pattern>
-        <url-pattern>/manageProduct.jsp</url-pattern>
+        <url-pattern>/manageProduct.jsp</url-pattern> 
         <url-pattern>/manageProductDetails.jsp</url-pattern>
+         <url-pattern>/manageAquariumDetails.jsp</url-pattern>
         <url-pattern>/manageProductUpdate.jsp</url-pattern>
         <url-pattern>/manageProfileAccount.jsp</url-pattern>
         <url-pattern>/manageUpdateAccount.jsp</url-pattern>
         <url-pattern>/statistic.jsp</url-pattern>
         <url-pattern>/saltCalculator.jsp</url-pattern>
         <url-pattern>/foodCalculator.jsp</url-pattern>
+        <url-pattern>/dashboardAdmin.jsp</url-pattern>
+        <url-pattern>/dashboarManager.jsp</url-pattern>
+        <!-- START PLACE PROFILE --> 
         <servlet-name>PasswordProfileController</servlet-name>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-name>ImageUploadSingleController</servlet-name>
+        <!-- START PLACE BLOG CRD -->   
         <servlet-name>CreateNewBlogController</servlet-name>
         <servlet-name>DeleteBlogController</servlet-name>
         <!-- START PLACE FISH -->
@@ -91,6 +107,48 @@
         <!-- START PLACE WaterParameter -->
         <servlet-name>WaterParametersCreateNewController</servlet-name>
         <servlet-name>WaterParametersManageController</servlet-name>
+        <servlet-name>WaterParametersDeleteController</servlet-name>
+        <servlet-name>WaterParametersUpdateInfoController</servlet-name> 
+        <!-- START PLACE CALCULATOR -->
+        <servlet-name>FoodCalculatorController</servlet-name> 
+        <servlet-name>FoodCalculatorDetailController</servlet-name> 
+        <servlet-name>SaltCalculatorController</servlet-name> 
+        <servlet-name>SaltCalculatorDetailController</servlet-name> 
+
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>  
+        <filter-name>LoggedInFilter</filter-name>
+        <url-pattern>/login.jsp</url-pattern>
+        <url-pattern>/register.jsp</url-pattern> 
+        <servlet-name>LoginController</servlet-name>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <servlet-name>CreateAccountWithGoogleController</servlet-name>
+        <servlet-name>RegisterController</servlet-name>
+        
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher> 
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <url-pattern>/dashboardManager.jsp</url-pattern>
+        <url-pattern>/manageOrder.jsp</url-pattern>
+        <url-pattern>/manageOrderDetail.jsp</url-pattern>
+        <url-pattern>/manageProduct.jsp</url-pattern> 
+        <url-pattern>/manageProductDetails.jsp</url-pattern>
+        <url-pattern>/manageAquariumDetails.jsp</url-pattern>
+        <url-pattern>/manageFish.jsp</url-pattern>
+        <url-pattern>/manageFishDetail.jsp</url-pattern>
+        <url-pattern>/manageFishUser.jsp</url-pattern> 
+         
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CartNotEmptyFilter</filter-name>
+        <url-pattern>/checkout.jsp</url-pattern>
+        <servlet-name>CheckOutController</servlet-name> 
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -454,7 +512,7 @@
         <servlet-name>AdminUpdateAccountController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.AdminUpdateAccountController</servlet-class>
     </servlet>
-    <servlet> 
+    <servlet>
         <servlet-name>WaterParametersUpdateInfoController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.WaterParametersUpdateInfoController</servlet-class>
     </servlet>
@@ -862,7 +920,7 @@
         <servlet-name>WaterParametersDeleteController</servlet-name>
         <url-pattern>/WaterParametersDeleteController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>        
+    <servlet-mapping>
         <servlet-name>AdminManageContactController</servlet-name>
         <url-pattern>/AdminManageContactController</url-pattern>
     </servlet-mapping>
@@ -878,7 +936,7 @@
         <servlet-name>AddNewContactController</servlet-name>
         <url-pattern>/AddNewContactController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>StatisticsController</servlet-name>
         <url-pattern>/StatisticsController</url-pattern>
     </servlet-mapping>

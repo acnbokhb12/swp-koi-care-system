@@ -7,6 +7,7 @@ package com.swp.koiCareSystem.service;
 
 import com.swp.koiCareSystem.config.DatabaseConnectionManager;
 import com.swp.koiCareSystem.dao.OrderDAO;
+import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.Order;
 import com.swp.koiCareSystem.model.OrderItem;
 import com.swp.koiCareSystem.model.OrderStatus;
@@ -136,6 +137,32 @@ public class OrderService {
     public ArrayList<Order> getPurchaseHistoryByAccID(int accId){
         return  od.getPurchaseHistoryByAccId(accId);
     }
-        
+    public float countTotalAmountOrder() {
+        return od.countTotalAmountOrder();
+    }
+
+    public int countTotalCustomersOrder() {
+        return od.countTotalCustomersOrder();
+    }
+
+    public OrderItem getMostOrderedProductWithDetails() {
+        return od.getMostOrderedProductWithDetails();
+    }
+
+    public int countOrdersForProduct(int productId) {
+        return od.countOrdersForProduct(productId);
+    }
+
+    public Account getTopSpender() {
+        return od.getTopSpender();
+    }
+
+    public ArrayList<Order> getAmountPast5Month() {
+        return od.getAmountPast5Month();
+    }
+
+    public ArrayList<Order> getAmountPast7Days() {
+        return od.getAmountPast7Days();
+    }    
     
 }

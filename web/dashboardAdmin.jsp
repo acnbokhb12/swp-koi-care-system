@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,10 +43,10 @@
                             <div class="app-card ">
                                 <div class="app-card-body">
                                     <h4 class="title-overview stats-type ">
-                                        Total Users
+                                        ${totalUsers}
                                     </h4>
                                     <div class="desc-detail-overview stats-figure">
-                                        86
+                                        ${accountCount}
                                     </div>
                                 </div>
 
@@ -55,10 +56,10 @@
                             <div class="app-card ">
                                 <div class="app-card-body">
                                     <h4 class="title-overview stats-type ">
-                                        Total View News
+                                        ${totalNews}
                                     </h4>
                                     <div class="desc-detail-overview stats-figure">
-                                        40
+                                        ${countNews}
                                     </div>
                                 </div>
 
@@ -68,10 +69,10 @@
                             <div class="app-card ">
                                 <div class="app-card-body">
                                     <h4 class="title-overview stats-type ">
-                                        Views 5 News
+                                        ${totalContact}
                                     </h4>
                                     <div class="desc-detail-overview stats-figure">
-                                        100
+                                        ${countContact}
                                     </div>
                                 </div>
 
@@ -81,29 +82,17 @@
                             <div class="app-card ">
                                 <div class="app-card-body">
                                     <h4 class="title-overview stats-type ">
-                                        Total sales
+                                        ${totalOrder}
                                     </h4>
                                     <div class="desc-detail-overview stats-figure">
-                                        12000000
+                                        ${countOrder}
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div class="chart-container ">
-                        <div class="row">
-                            <div class="col-lg-5 item_chart-detail">
-                                <h1>Views of the 5 Most Recent News Articles</h1>
-
-                                <div id="chart_user_status" style="width: 100%; height: 400px;"></div>
-                            </div>
-                            <div class="col-lg-7 item_chart-detail">
-                                <h1>Views of the 5 Most Recent News Articles</h1>
-                                <div id="chart_view_news" style="width: 100%; height: 400px;"></div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -117,109 +106,7 @@
         $('#sidebar_admin').load('utils.jsp  #sidebar_admin');
        
     </script>
-    <script>
-        var chart = echarts.init(document.getElementById('chart_view_news'));
-
-        option = {
-            title: {
-                text: '',
-
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            
-    legend: {
-      itemWidth: 50,  
-      itemHeight: 12,    
-      textStyle: {
-        fontSize: 16, // Tăng kích thước chữ
-        fontWeight: 'bold' // Làm đậm chữ nếu muốn
-      } 
-    },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: ['1', '2', '3', '4', '5'],
-                    axisTick: {
-                        alignWithLabel: true
-                    }
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: '{value} Views'
-                    }
-                }
-            ],
-            series: [
-                {
-                    name: 'Quantity',
-                    type: 'bar',
-                    barWidth: '60%',
-                    data: [100, 52, 200, 334, 390]
-                    // ,
-                    // itemStyle:{
-                    //   color : function(param){
-                    //     return '#000';
-                    //   }
-                    // }
-                }
-            ]
-        };
-
-        chart.setOption(option); 
-    </script>
-    <script>
-        var chart2 = echarts.init(document.getElementById('chart_user_status'));
-
-        option = {
-            title: {
-                text: '',
-                subtext: '',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left'
-            },
-            series: [
-                {
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: '50%',
-                    data: [
-                        { value: 1048, name: 'Active' },
-                        { value: 735, name: 'Deactive' },
-                        { value: 580, name: 'Suspend' } 
-                    ],
-                    emphasis: {
-                        itemStyle: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                }
-            ]
-        };    
-
-        chart2.setOption(option); 
-    </script>
+    
 </body>
 
 </html>

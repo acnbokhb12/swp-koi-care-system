@@ -8,11 +8,13 @@
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/assets/css/adminUser.css</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/AdminUpdateInformationAccountController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/utils.jsp</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/DashboarAdminController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/ManagerAquariumDetailsController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/config/IConstant.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/DashboardManagerController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/AdminAccountInformationController.java</file>
-            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/AdminUpdateAccountController.java</file>
+            <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/controller/MainController.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/src/java/com/swp/koiCareSystem/service/AccountService.java</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/manageAccount.jsp</file>
             <file>file:/D:/f_code/Project_Swp_Fall_2024/com.swp.koiCareSystem/web/WEB-INF/web.xml</file>

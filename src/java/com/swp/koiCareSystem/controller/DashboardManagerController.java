@@ -6,8 +6,15 @@
 
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.model.Order;
+import com.swp.koiCareSystem.model.OrderItem;
+import com.swp.koiCareSystem.model.Product;
+import com.swp.koiCareSystem.service.OrderService;
+import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +38,43 @@ public class DashboardManagerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            OrderService os = new OrderService();
+            ProductService ps = new ProductService();
+
+            int totalCustomers = os.countTotalCustomersOrder();
+            int totalOrders = os.countOrders();
+            int totalProduct = ps.countAllProduct();
+            double totalAmount = os.countTotalAmountOrder();
+
+            OrderItem mostOrderedItem = os.getMostOrderedProductWithDetails();
+            ArrayList<Order> listOrder5Month = os.getAmountPast5Month();
+            ArrayList<Order> listOrder7Days = os.getAmountPast7Days();
+
+            request.setAttribute("totalAmount", totalAmount);
+            request.setAttribute("totalCustomers", totalCustomers);
+            request.setAttribute("totalOrders", totalOrders);
+            request.setAttribute("totalProduct", totalProduct);
+            request.setAttribute("orders5M", listOrder5Month);
+            request.setAttribute("orders7D", listOrder7Days);
+            
+            
+            if (mostOrderedItem != null && mostOrderedItem.getProduct() != null) {
+                Product mostOrderedProduct = mostOrderedItem.getProduct();
+
+                int orderCount = os.countOrdersForProduct(mostOrderedProduct.getProductID());
+                request.setAttribute("bestProduct", mostOrderedProduct);
+                request.setAttribute("orderCount", orderCount);
+            } else {
+                request.setAttribute("bestProduct", null);
+                request.setAttribute("orderCount", 0);
+            }
+            Account topSpender = os.getTopSpender();
+            if (topSpender != null) {
+                request.setAttribute("topSpender", topSpender);
+            } else {
+                request.setAttribute("topSpender", null);
+            }
+
             request.getRequestDispatcher("dashboardManager.jsp").forward(request, response);
         }
     } 

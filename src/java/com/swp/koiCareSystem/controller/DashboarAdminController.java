@@ -6,6 +6,11 @@
 
 package com.swp.koiCareSystem.controller;
 
+import com.swp.koiCareSystem.service.AccountService;
+import com.swp.koiCareSystem.service.ContactService;
+import com.swp.koiCareSystem.service.NewsService;
+import com.swp.koiCareSystem.service.OrderService;
+import com.swp.koiCareSystem.service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,6 +36,35 @@ public class DashboarAdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            AccountService as = new AccountService();
+            int countAcc = as.countAllAccountS();
+            String totalUsers = "Total Customers";
+
+            NewsService ns = new NewsService();
+            int countNews = ns.countAllNews();
+            String totalNews = "Total News";
+
+            ContactService cs = new ContactService();
+            int countContact = cs.countContact();
+            String totalContact = "Total Contacts";
+
+            OrderService os = new OrderService();
+            int countOrder = os.countOrders();
+            String totalOrder = "Total Orders";
+            
+            ProductService ps = new ProductService();
+            
+
+            request.setAttribute("totalUsers", totalUsers);
+            request.setAttribute("accountCount", countAcc);
+            request.setAttribute("countNews", countNews);
+            request.setAttribute("totalNews", totalNews);
+            request.setAttribute("countContact", countContact);
+            request.setAttribute("totalContact", totalContact);
+            request.setAttribute("countOrder", countOrder);
+            request.setAttribute("totalOrder", totalOrder);
+            
+
             request.getRequestDispatcher("dashboardAdmin.jsp").forward(request, response);
         }
     } 
