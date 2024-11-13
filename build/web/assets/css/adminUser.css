@@ -39,8 +39,7 @@
 }
 /* Search */
 .row-user-main{
-    align-items: center; 
-    margin-bottom: 2.4rem;
+    align-items: center;  
 }
 .search-order{
     height:3.2rem;
@@ -492,11 +491,7 @@
     margin-bottom: 20px;
     width: 100%;
 }
-
-.search-account, .contain-btn-select-search, .btn-submit-search-order {
-    flex: 1;
-    min-width: 0;
-}
+ 
 
 .search-account {
     padding: 8px 12px;
@@ -526,20 +521,7 @@
     outline: none;
 }
 
-.btn-submit-search-order {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-submit-search-order:hover {
-    background-color: #0056b3;
-}
+ 
 
 @media (max-width: 768px) {
     .table-search-form {
@@ -547,7 +529,5 @@
         align-items: stretch;
     }
 
-    .search-account, .contain-btn-select-search, .btn-submit-search-order {
-        width: 100%;
-    }
+ 
 }

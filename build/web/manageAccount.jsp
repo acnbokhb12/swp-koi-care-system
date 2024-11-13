@@ -31,12 +31,13 @@
                 <div class="right-navbar-admin-manage"> 
                     <div class="content">
                         <div class="header d-flex">
-                            <h1>Account List</h1>  
+                            <h1>Account List </h1>  
                             <button type="button" class="link_add-account">Add New Account</button>
                         </div>
 
                         <form class="table-search-form row gx-1 align-items-center m-0 mb-4" method="POST" action="AdminSearchAccountController">
                             <div class="col-auto">
+                                 
                                 <input type="text" class="search-account mr-3" placeholder="Search..." id="searchInput" name="searchInput" value="${param.searchInput}">
                             </div>
                             <div class="col-auto">
@@ -56,13 +57,13 @@
                                 <a class="link-processing col-3 ${statusIdTag == null ? 'active' : ''}" href="MainController?action=adminAccount">All</a>
                                 <c:forEach var="statusId" items="${listAccS}">
                                     <a class="link-processing col-3 ${statusIdTag ==  statusId.statusID ? 'active' : ''}" href="MainController?action=adminAccountStatus&status=${statusId.statusID}">
-                                        ${statusId.statusName}
+                                        ${statusId.statusName} 
                                     </a>
                                 </c:forEach>
                             </div>  
                         </div> 
 
-                        <div class="table-container">
+                                <div class="table-container" style="overflow: auto;">
                             <table id="accountTable" class="table">
                                 <thead>
                                     <tr>
@@ -187,7 +188,7 @@
                                     <div class="img-info-add">
                                         <img id="imagePreview" src="https://i.pinimg.com/564x/bc/43/98/bc439871417621836a0eeea768d60944.jpg" alt="account_image" class="account-image">
                                     </div>
-                                    <input id="imageInput" type="file" name="fileimg" accept="image/*" required>
+                                    <input id="imageInput" type="file" name="fileimg" accept="image/*" >
                                 </div>
                             </div>
                             <div class="col-8 edit-info">
@@ -212,16 +213,16 @@
                                     </div>  
                                     <div class="col-md-6 add-item-detail">
                                         <label>Address:</label>
-                                        <input type="text" name="address" placeholder="Enter address" required />
+                                        <input type="text" name="address" placeholder="Enter address"  />
                                     </div> 
                                     <div class="col-md-6 add-item-detail">
                                         <label>Phone Number:</label>
-                                        <input type="text" name="phoneNumber" placeholder="Enter phone number" required />
+                                        <input type="text" name="phoneNumber" placeholder="Enter phone number"  />
                                     </div>
 
                                     <div class="col-md-6 add-item-detail">
                                         <label>Gender:</label>
-                                        <select name="gender" required class="form-control">
+                                        <select name="gender" required class="w-100 " style="padding: 0.8rem">
                                             <option value="Man" selected>Man</option>
                                             <option value="Woman">Woman</option>
                                             <option value="Other">Other</option>
@@ -229,7 +230,7 @@
                                     </div>
                                     <div class="col-md-6 add-item-detail">
                                         <label>Role:</label>
-                                        <select name="role" required class="form-control">
+                                        <select name="role" required class=" w-100" style="padding: 0.8rem">
                                             <<option value="customer" ${account.userRole == 'customer' ? 'selected' : ''}>Customer</option>
                                             <option value="manager" ${account.userRole == 'manager' ? 'selected' : ''}>Manager</option>
                                             <option value="admin" ${account.userRole == 'admin' ? 'selected' : ''}>Admin</option>

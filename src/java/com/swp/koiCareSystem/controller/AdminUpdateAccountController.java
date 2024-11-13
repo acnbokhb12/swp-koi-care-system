@@ -35,6 +35,7 @@ public class AdminUpdateAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             /* TODO output your page here. You may use following sample code. */
             String accid = request.getParameter("accountId");
             String accountEmail = request.getParameter("accountEmail");
@@ -43,9 +44,7 @@ public class AdminUpdateAccountController extends HttpServlet {
             String accountGender = request.getParameter("accountGender");
             String accountPhone = request.getParameter("accountPhone");
             String accountRole = request.getParameter("accountRole");
-            String koiCareID = request.getParameter("koiCareID");
-            String password = request.getParameter("password");
-
+            String koiCareID = request.getParameter("koiCareID"); 
             Account account = new Account();
             account.setUserID(Integer.parseInt(accid));
             account.setEmail(accountEmail);

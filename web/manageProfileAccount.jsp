@@ -30,7 +30,7 @@
 
                 <div class="right-navbar-admin-manage">
                     <div class="content" style="padding: 20px;">
-                        <div class="header_ac-detail d-flex justify-content-between align-items-center">
+                        <div class="header_ac-detail d-flex justify-content-between align-items-center mb-4">
                             <h1>Account Detail</h1>  
                             <div>
                                 <a href="AdminUpdateInformationAccountController?accid=${account.userID}" class="link_update-account">Update Account</a>

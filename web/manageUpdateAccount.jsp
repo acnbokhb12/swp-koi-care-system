@@ -43,23 +43,23 @@
                                     <img id="accountImagePreview" src="${account.profileImage}" alt="${account.fullName}" style="max-height: 200px; object-fit: unset;" />
                                 </div>
                                 <div class="fish-edit-img-detail">
-                                    <form action="MainController?action=adminAccountUpdateImage" method="POST"  class="form-edit-img-account" enctype="multipart/form-data" onsubmit="return confirmSubmit('Are you sure you want to update account image?');">>
+                                    <form action="MainController?action=adminAccountUpdateImage" method="POST"  class="form-edit-img-account" enctype="multipart/form-data" onsubmit="return confirmSubmit('Are you sure you want to update account image?');">
                                         <input type="hidden" name="accountId" value="${account.userID}">
                                         <input id="imageInput" name="fileimg" type="file" accept="image/*" required>
                                         <!-- Image Preview -->
                                         <img id="imagePreview" class="mb-4" style="display: none; width: 100px; height: auto; margin-top: 10px;" />
-                                        <button type="submit">Submit</button>
+                                        <button type="submit btn btn-save p-4">Submit</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Right Section for Account Update Form -->
-                        <div class="right-section">
+                        <div class="right-section update-input-account">
                             <h3 id="formTitle">Edit Account</h3>
 
                             <!-- Account Update Form -->
-                            <form id="accountForm" action="MainController?action=adminAccountUpdate" method="POST">
+                            <form id="accountForm" action="AdminUpdateAccountController" method="POST">
                                 <label for="accountId">Account ID:</label>
                                 <input type="text" id="accountId" name="accountId" value="${account.userID}" readonly><br>
 
@@ -110,7 +110,7 @@
 
         // Preview the image before uploading for Account Image
         const accountImageInput = document.getElementById('imageInput');
-        const accountImagePreview = document.getElementById('imagePreview');
+        const accountImagePreview = document.getElementById('accountImagePreview');
 
         accountImageInput.addEventListener('change', function () {
             const file = this.files[0];

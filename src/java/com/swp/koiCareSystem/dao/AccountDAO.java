@@ -956,15 +956,15 @@ public class AccountDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Accounts SET Email = ?, Password = ?, FullName = ?, PhoneNumber = ?, UserRole = ?, Address = ?, Gender = ? WHERE AccID = ?";
+                String sql = "UPDATE Accounts SET Email = ?,  FullName = ?, PhoneNumber = ?, UserRole = ?, Address = ?, Gender = ?, KoiCareID =? WHERE AccID = ?";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, account.getEmail());
-                ps.setString(2, account.getPassword());
-                ps.setString(3, account.getFullName());
-                ps.setString(4, account.getPhoneNumber());
-                ps.setString(5, account.getUserRole());
-                ps.setString(6, account.getAddress());
-                ps.setString(7, account.getGender());
+                ps.setString(1, account.getEmail()); 
+                ps.setString(2, account.getFullName());
+                ps.setString(3, account.getPhoneNumber());
+                ps.setString(4, account.getUserRole());
+                ps.setString(5, account.getAddress());
+                ps.setString(6, account.getGender());
+                ps.setString(7, account.getKoiCareID());
                 ps.setInt(8, account.getUserID());
 
                 int rowsAffected = ps.executeUpdate();
@@ -1305,10 +1305,18 @@ public class AccountDAO {
         AccountDAO accountDAO = new AccountDAO();
 
         int testAccountId = 10; 
-        String newImagePath = "data:image/jpeg;base64,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";
-        boolean result = accountDAO.updateImgByAccountID(testAccountId, newImagePath);
-
-        if (result) {
+     
+        Account account = new Account();
+            account.setUserID(9);
+            account.setEmail("ddd");
+            account.setFullName("ddd");
+            account.setAddress("dd");
+            account.setGender("dd");
+            account.setPhoneNumber("0123");
+            account.setUserRole("Customer");
+            account.setKoiCareID("ddd");
+         boolean a = accountDAO.updateInformationAccount(account);
+        if (a) {
             System.out.println("Test passed: Image updated successfully.");
         } else {
             System.out.println("Test failed: Image update was unsuccessful.");

@@ -91,7 +91,7 @@ public class AdminAccountStatusController extends HttpServlet {
             request.setAttribute("listAccS", listStatus);
             request.setAttribute("tag", index);
             request.setAttribute("endPage", endPage);
-            request.setAttribute("TagStatusId", statusId);
+            request.setAttribute("statusIdTag", statusId);
 
             request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
         }
