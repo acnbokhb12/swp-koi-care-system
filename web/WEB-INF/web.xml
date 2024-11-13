@@ -485,6 +485,10 @@
     <servlet>
         <servlet-name>StatisticsSearchPondByIdController</servlet-name>
         <servlet-class>com.swp.koiCareSystem.controller.StatisticsSearchPondByIdController</servlet-class>
+    </servlet>    
+    <servlet>
+        <servlet-name>AdminSearchAccountController</servlet-name>
+        <servlet-class>com.swp.koiCareSystem.controller.AdminSearchAccountController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -881,6 +885,10 @@
     <servlet-mapping>
         <servlet-name>StatisticsSearchPondByIdController</servlet-name>
         <url-pattern>/StatisticsSearchPondByIdController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSearchAccountController</servlet-name>
+        <url-pattern>/AdminSearchAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

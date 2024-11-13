@@ -21,7 +21,7 @@
                 <div class="sidebar">
                     <div class="img-header">
                         <div class="contain__img-desc">
-                            <a href="#" class="img-page-admin_link">
+                            <a href="MainController?action=dashboardAdmin" class="img-page-admin_link">
                                 <img src="./assets/img/logo/logoSignin-removebg-preview.png" alt="picture page"> 
                             </a>
                             <div class="desc-img-admin">
@@ -105,7 +105,7 @@
                 <div class="sidebar">
                     <div class="img-header">
                         <div class="contain__img-desc">
-                            <a href="#" class="img-page-admin_link">
+                            <a href="MainController?action=dashboardManager" class="img-page-admin_link">
                                 <img src="./assets/img/logo/logoSignin-removebg-preview.png" alt="picture page"> 
                             </a>
                             <div class="desc-img-admin">
@@ -114,8 +114,7 @@
                         </div> 
                     </div>
                     <ul class="menu">
-                        <li><a href="MainController?action=dashboardManager"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                        <li><a href="manageCategory.jsp"><i class="fa-solid fa-tags"></i> Category Manager</a></li>
+                        <li><a href="MainController?action=dashboardManager"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> 
                         <li><a href="MainController?action=productmanage"><i class="fa-solid fa-warehouse"></i> Product Manager</a></li> 
                         <li><a href="MainController?action=managerordermanage"><i class="fa-solid fa-cart-shopping"></i> Order Manager</a></li>  
                         <li><a href="MainController?action=accountfishmanage"><i class="fa-solid fa-fish"></i>Aquarium Management</a></li>   

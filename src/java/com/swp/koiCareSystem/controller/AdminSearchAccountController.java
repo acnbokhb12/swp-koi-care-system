@@ -5,7 +5,6 @@
  */
 package com.swp.koiCareSystem.controller;
 
-import com.swp.koiCareSystem.config.IConstant;
 import com.swp.koiCareSystem.model.Account;
 import com.swp.koiCareSystem.model.AccountStatus;
 import com.swp.koiCareSystem.service.AccountService;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PC
  */
-public class AdminAccountStatusController extends HttpServlet {
+public class AdminSearchAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,67 +36,90 @@ public class AdminAccountStatusController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("userAccount");
 
-            // Kiểm tra quyền truy cập
-            if (acc == null || acc.getUserRole().equalsIgnoreCase("user")) {
-                request.getRequestDispatcher("HomeController").forward(request, response);
-                return;
-            } else if (acc == null && acc.getUserRole().equalsIgnoreCase("manager")) {
-                request.getRequestDispatcher("dashboardManager.jsp").forward(request, response);
-                return;
-            }
-
-            String statusId = request.getParameter("status");
-            int status = 1; 
-            if (statusId != null && !statusId.isEmpty()) {
-                try {
-                    status = Integer.parseInt(statusId); 
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                    status = 0; 
+            if (acc != null && acc.getUserRole() != null) {
+                if (acc.getUserRole().equalsIgnoreCase("customer")) {
+                    request.getRequestDispatcher("HomeController").forward(request, response);
+                    return;
+                } else if (acc.getUserRole().equalsIgnoreCase("manager")) {
+                    request.getRequestDispatcher("dashboardManager.jsp").forward(request, response);
+                    return;
                 }
             }
 
+            String searchInput = request.getParameter("searchInput");
+            String searchChoice = request.getParameter("searchChoice");
             String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
-            }
+
+            AccountService acd = new AccountService();
 
             int index = 1;
-            try {
-                index = Integer.parseInt(indexPage);
-                if (index <= 0) {
-                    index = 1;
+            if (indexPage != null) {
+                try {
+                    index = Integer.parseInt(indexPage);
+                    if (index <= 0) {
+                        response.sendRedirect("AdminSearchAccountController?searchInput=" + searchInput + "&searchChoice=" + searchChoice + "&index=1");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("AdminSearchAccountController?searchInput=" + searchInput + "&searchChoice=" + searchChoice + "&index=1");
+                    return;
                 }
-            } catch (NumberFormatException e) {
-                index = 1; 
             }
 
-            AccountService accountService = new AccountService();
+            if (searchInput != null) {
+                searchInput = searchInput.trim();
+                searchInput = searchInput.replaceAll(" +", " ");  
+            }
 
-            int count = accountService.countAllAccountsStatusToAdminS(status);
+            ArrayList<Account> ListResults = new ArrayList<>();
+            int count = 0;
+
+            // Search logic
+            if (searchInput.isEmpty()) {
+                count = acd.countAllAccountS();
+                ListResults = acd.getAllAccountsToAdminS(index);
+            } else if (searchChoice != null) {
+                switch (searchChoice) {
+                    case "phone":
+                        count = acd.countAcccountByPhoneNumber(searchInput);
+                        ListResults = acd.searchAccountByPhoneNumber(searchInput, index);
+                        break;
+                    case "name":
+                        count = acd.countAcccountByFullName(searchInput);
+                        ListResults = acd.searchAccountByFullName(searchInput, index);
+                        break;
+                    case "email":
+                        count = acd.countAcccountByEmail(searchInput);
+                        ListResults = acd.searchAccountByEmail(searchInput, index);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             int endPage = count / 10;
             if (count % 10 != 0) {
                 endPage++;
             }
+            ArrayList<AccountStatus> listStatus = acd.getAllAccountsStatusToAdminS();
 
-            ArrayList<AccountStatus> listStatus = accountService.getAllAccountsStatusToAdminS();
-            ArrayList<Account> listAccountSearchStatus = accountService.searchAccountByStatus(status, index);
-
-            request.setAttribute("listAcc", listAccountSearchStatus);
+            request.setAttribute("listAcc", ListResults); 
             request.setAttribute("listAccS", listStatus);
-            request.setAttribute("tag", index);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("statusIdTag", statusId);
+
+            request.setAttribute("tag", index);  
+            request.setAttribute("endPage", endPage);  
+            request.setAttribute("searchInput", searchInput);  
+            request.setAttribute("searchChoice", searchChoice);  
 
             request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

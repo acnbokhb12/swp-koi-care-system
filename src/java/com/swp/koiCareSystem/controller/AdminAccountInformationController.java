@@ -43,7 +43,15 @@ public class AdminAccountInformationController extends HttpServlet {
             }
 
             String accountId = request.getParameter("accid");
-            int id = Integer.parseInt(accountId);
+            int id;
+
+            try {
+                id = Integer.parseInt(accountId);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                request.getRequestDispatcher("AdminAccountController").forward(request, response); 
+                return;
+            }
 
             AccountService accountService = new AccountService();
 

@@ -39,65 +39,71 @@ public class ManagerAquariumDetailsController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int accID = Integer.parseInt(request.getParameter("acid"));
+
+            int accID;
+                accID = Integer.parseInt(request.getParameter("acid"));
             
-            FishService fs = new FishService();
-            PondService ps = new PondService();
-            
-            int fishCount = fs.countAllFishByIdS(accID);
-            request.setAttribute("fishCount", fishCount);
+                FishService fs = new FishService();
+                PondService ps = new PondService();
 
-            int pondCount = ps.countAllPondsByIdS(accID);
-            request.setAttribute("pondCount", pondCount);
+                int fishCount = fs.countAllFishByIdS(accID);
+                request.setAttribute("fishCount", fishCount);
 
-            ArrayList<Fish> listFish = fs.getAllFishS(accID);
-            ArrayList<Pond> listPonds = ps.getAllPondS(accID);
+                int pondCount = ps.countAllPondsByIdS(accID);
+                request.setAttribute("pondCount", pondCount);
 
-            request.setAttribute("acid", accID);
-            request.setAttribute("listFish", listFish);
-            request.setAttribute("listPond", listPonds);
+                ArrayList<Fish> listFish = fs.getAllFishS(accID);
+                ArrayList<Pond> listPonds = ps.getAllPondS(accID);
 
-            request.getRequestDispatcher("manageAquariumDetails.jsp").forward(request, response);
+                request.setAttribute("acid", accID);
+                request.setAttribute("listFish", listFish);
+                request.setAttribute("listPond", listPonds);
+
+                request.getRequestDispatcher("manageAquariumDetails.jsp").forward(request, response);
+            }
         }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

@@ -7,6 +7,7 @@ package com.swp.koiCareSystem.controller;
 
 import com.swp.koiCareSystem.dao.AccountDAO;
 import com.swp.koiCareSystem.model.Account;
+import com.swp.koiCareSystem.service.AccountService;
 import com.swp.koiCareSystem.service.ImageUploadService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,7 +42,7 @@ public class AdminCreateNewAccountController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Part filePart = request.getPart("fileimg");
             String tempDir = getServletContext().getRealPath("/") + "uploads";
-           
+
             ImageUploadService imgs = new ImageUploadService();
             String imageUrl = "";
 
@@ -63,8 +64,9 @@ public class AdminCreateNewAccountController extends HttpServlet {
             String address = request.getParameter("address");
             String phoneNumber = request.getParameter("phoneNumber");
             String gender = request.getParameter("gender");
-            int accountStatus = 1;
+            String koiCareID = request.getParameter("koiCareID");
 
+            int accountStatus = 1;
             // Tạo đối tượng Account
             Account account = new Account();
             account.setEmail(email);
@@ -75,11 +77,12 @@ public class AdminCreateNewAccountController extends HttpServlet {
             account.setAddress(address);
             account.setPhoneNumber(phoneNumber);
             account.setGender(gender);
+            account.setKoiCareID(koiCareID);
             account.setAccountStatus(accountStatus);
 
             // Sử dụng DAO để tạo tài khoản
-            AccountDAO accountDAO = new AccountDAO();
-            boolean result = accountDAO.createNewAccount(account);
+            AccountService accs = new AccountService();
+            boolean result = accs.createNewAccountToAdmin(account);
 
             if (result) {
                 request.setAttribute("message", "New Account has been created");

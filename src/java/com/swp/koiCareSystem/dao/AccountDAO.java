@@ -543,31 +543,26 @@ public class AccountDAO {
                 pst.setString(1, img);
                 pst.setInt(2, acid);
 
-                int rowAffect = pst.executeUpdate();
-                if (rowAffect > 0) {
-                    return true;
-                }
+   
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-
                 if (pst != null) {
                     pst.close();
                 }
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return false;
     }
-
     public boolean updatePasswordWithEmail(String newPassword, String email) {
         Connection conn = null;
         PreparedStatement pst = null;
@@ -908,15 +903,14 @@ public class AccountDAO {
                 + "LEFT JOIN AccountStatus s ON a.idStatus = s.idStatus "
                 + "WHERE a.AccID = ?";
         try {
-            conn = DatabaseConnectionManager.getConnection(); // Mở kết nối tới cơ sở dữ liệu
+            conn = DatabaseConnectionManager.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
 
-            // Kiểm tra nếu có bản ghi được tìm thấy
             if (rs != null && rs.next()) {
                 account = new Account();
-                account.setUserID(rs.getInt("AccID")); // Sử dụng tên cột
+                account.setUserID(rs.getInt("AccID"));
                 account.setEmail(rs.getString("Email"));
                 account.setKoiCareID(rs.getString("KoiCareID"));
                 account.setProfileImage(rs.getString("UserImage"));
@@ -950,7 +944,7 @@ public class AccountDAO {
                 e.printStackTrace();
             }
         }
-        return account; // Trả về null nếu không tìm thấy tài khoản
+        return account;
     }
 
     //UPDATE 
@@ -962,15 +956,15 @@ public class AccountDAO {
         try {
             conn = DatabaseConnectionManager.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Accounts SET Email = ?, Password = ?, FullName = ?, PhoneNumber = ?, UserRole = ?, Address = ?, Gender = ? WHERE AccID = ?";
+                String sql = "UPDATE Accounts SET Email = ?,  FullName = ?, PhoneNumber = ?, UserRole = ?, Address = ?, Gender = ?, KoiCareID =? WHERE AccID = ?";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, account.getEmail());
-                ps.setString(2, account.getPassword());
-                ps.setString(3, account.getFullName());
-                ps.setString(4, account.getPhoneNumber());
-                ps.setString(5, account.getUserRole());
-                ps.setString(6, account.getAddress());
-                ps.setString(7, account.getGender());
+                ps.setString(1, account.getEmail()); 
+                ps.setString(2, account.getFullName());
+                ps.setString(3, account.getPhoneNumber());
+                ps.setString(4, account.getUserRole());
+                ps.setString(5, account.getAddress());
+                ps.setString(6, account.getGender());
+                ps.setString(7, account.getKoiCareID());
                 ps.setInt(8, account.getUserID());
 
                 int rowsAffected = ps.executeUpdate();
@@ -993,254 +987,340 @@ public class AccountDAO {
         return false;
     }
 
+//SEARCH==============================================================
+    //PHONE
+    public int countAccountByPhoneNumber(String phone) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Accounts WHERE [PhoneNumber] LIKE ? AND [isActive] = 1";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + phone + "%");
+                rs = pst.executeQuery();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Account> searchAccountByPhoneNumber(String phone, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Account> listA = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT a.*, asStatus.name AS StatusName "
+                        + "FROM Accounts a "
+                        + "JOIN AccountStatus asStatus ON a.idStatus = asStatus.idStatus "
+                        + "WHERE a.PhoneNumber LIKE ? AND a.isActive = 1 "
+                        + "ORDER BY a.FullName DESC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + phone + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("isActive"));
+
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName"));  
+                    account.setAccstatus(accStatus);
+
+                    listA.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listA;
+    }
+
+//NAME
+    public int countAccountByFullName(String fullName) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Accounts "
+                        + "WHERE [FullName] LIKE ? AND [isActive] = 1";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + fullName + "%");
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Account> searchAccountByFullName(String fullName, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Account> listA = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT a.*, asStatus.name AS StatusName "
+                        + "FROM Accounts a "
+                        + "JOIN AccountStatus asStatus ON a.idStatus = asStatus.idStatus "
+                        + "WHERE a.FullName LIKE ? AND a.isActive = 1 "
+                        + "ORDER BY a.FullName ASC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + fullName + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("isActive"));
+
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName")); 
+                    account.setAccstatus(accStatus);
+
+                    listA.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listA;
+    }
+
+//Email
+    public int countAccountByEmail(String email) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) FROM Accounts "
+                        + "WHERE [Email] LIKE ? AND [isActive] = 1";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + email + "%");
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Account> searchAccountByEmail(String email, int index) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<Account> listA = new ArrayList<>();
+        int distance = (index - 1) * 10;
+
+        try {
+            cn = DatabaseConnectionManager.getConnection();
+            if (cn != null) {
+                String sql = "SELECT a.*, asStatus.name AS StatusName "
+                        + "FROM Accounts a "
+                        + "JOIN AccountStatus asStatus ON a.idStatus = asStatus.idStatus "
+                        + "WHERE a.Email LIKE ? AND a.isActive = 1 "
+                        + "ORDER BY a.Email ASC "
+                        + "OFFSET ? ROWS FETCH NEXT 10 ROWS ONLY;";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + email + "%");
+                pst.setInt(2, distance);
+                rs = pst.executeQuery();
+
+                while (rs.next()) {
+                    Account account = new Account();
+                    account.setUserID(rs.getInt("AccID"));
+                    account.setEmail(rs.getString("Email"));
+                    account.setKoiCareID(rs.getString("KoiCareID"));
+                    account.setProfileImage(rs.getString("UserImage"));
+                    account.setPassword(rs.getString("Password"));
+                    account.setFullName(rs.getString("FullName"));
+                    account.setPhoneNumber(rs.getString("PhoneNumber"));
+                    account.setUserRole(rs.getString("UserRole"));
+                    account.setAddress(rs.getString("Address"));
+                    account.setGender(rs.getString("Gender"));
+                    account.setAccountStatus(rs.getInt("isActive"));
+
+                    AccountStatus accStatus = new AccountStatus();
+                    accStatus.setStatusID(rs.getInt("idStatus"));
+                    accStatus.setStatusName(rs.getString("StatusName"));
+                    account.setAccstatus(accStatus);
+
+                    listA.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listA;
+    }
+
     public static void main(String[] args) {
+        AccountDAO test = new AccountDAO();
+        test.testUpdateImgByAccountID();
+    }
+
+    public void testUpdateImgByAccountID() {
         AccountDAO accountDAO = new AccountDAO();
 
-        int testAccountId = 1;
-
+        int testAccountId = 10; 
+     
+        Account account = new Account();
+            account.setUserID(9);
+            account.setEmail("ddd");
+            account.setFullName("ddd");
+            account.setAddress("dd");
+            account.setGender("dd");
+            account.setPhoneNumber("0123");
+            account.setUserRole("Customer");
+            account.setKoiCareID("ddd");
+         boolean a = accountDAO.updateInformationAccount(account);
+        if (a) {
+            System.out.println("Test passed: Image updated successfully.");
+        } else {
+            System.out.println("Test failed: Image update was unsuccessful.");
+        }
     }
-}
-//UPDATE INFORMATION
-//     public static void main(String[] args) {
-//
-//        Account account = new Account();
-//        account.setEmail("test@example.com");
-//        account.setPassword("newPassword123");
-//        account.setFullName("John Doe");
-//        account.setPhoneNumber("0123456789");
-//        account.setUserRole("Customer");
-//        account.setAddress("123 Main St");
-//        account.setGender("Male");
-//        account.setUserID(31); // ID của tài khoản bạn muốn cập nhật
-//
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//
-//        // Gọi phương thức cập nhật thông tin tài khoản
-//        boolean isUpdated = accountDAO.updateInformationAccount(account); // Sửa từ AccountDAO.updateInformationAccount(account) thành accountDAO.updateInformationAccount(account)
-//
-//        // In ra kết quả kiểm tra
-//        if (isUpdated) {
-//            System.out.println("Account information updated successfully.");
-//        } else {
-//            System.out.println("Failed to update account information.");
-//        }
-//    }
-//}
-// Get STATUS
-//    public static void main(String[] args) {
-//
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//
-//        ArrayList<AccountStatus> statuses = accountDAO.getAllAccountStatuses(); // Gọi phương thức lấy trạng thái
-//        System.out.println("All Account Statuses:");
-//
-//        // Kiểm tra và in thông tin từng trạng thái
-//        if (statuses.isEmpty()) {
-//            System.out.println("No account statuses found.");
-//        } else {
-//            for (AccountStatus status : statuses) {
-//                System.out.println("Status ID: " + status.getStatusID());
-//                System.out.println("Status Name: " + status.getStatusName());
-//                System.out.println("------------------------------");
-//            }
-//        }
-//    }  
-// Search Status
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Khởi tạo DAO
-//        int statusID = 1; // Giả sử bạn có một trạng thái nào đó, có thể thay đổi
-//        int index = 1; // Chỉ số trang để lấy tài khoản, có thể thay đổi
-//
-//        ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, index); // Gọi phương thức tìm kiếm
-//        System.out.println("Accounts with status ID " + statusID + ":");
-//
-//        // Kiểm tra và in thông tin từng tài khoản
-//        if (accounts.isEmpty()) {
-//            System.out.println("No accounts found.");
-//        } else {
-//            for (Account account : accounts) {
-//                System.out.println("Account ID: " + account.getUserID());
-//                System.out.println("Email: " + account.getEmail());
-//                System.out.println("Koi Care ID: " + account.getKoiCareID());
-//                System.out.println("Full Name: " + account.getFullName());
-//                System.out.println("Phone Number: " + account.getPhoneNumber());
-//                System.out.println("User Role: " + account.getUserRole());
-//                System.out.println("Address: " + account.getAddress());
-//                System.out.println("Gender: " + account.getGender());
-//                System.out.println("Status ID: " + account.getAccstatus().getStatusID());
-//                System.out.println("Status Name: " + account.getAccstatus().getStatusName());
-//                System.out.println("------------------------------");
-//            }
-//        }
-//    }
-//    
-//COUNT STATUS
-//    public static void main(String[] args) {
-//
-//        AccountDAO accountDAO = new AccountDAO();
-//        int statusID = 1;
-//        int count = accountDAO.countAccountsByStatus(statusID); 
-//        System.out.println("Total accounts count with status ID " + statusID + ": " + count); 
-//
-//        // Nếu cần, có thể kiểm tra thêm các tài khoản này
-//        // ArrayList<Account> accounts = accountDAO.searchAccountsByStatus(statusID, 1); // Lấy danh sách tài khoản theo trạng thái
-//        // for (Account account : accounts) {
-//        //     System.out.println(account); // In thông tin từng tài khoản
-//        // }
-//    }
-//DELETE
-//
-//    public static void main(String[] args) {
-//
-//        int accountIDToDelete = 26; // Thay đổi tùy theo ID của tài khoản trong cơ sở dữ liệu
-//
-//        // Thực hiện xóa tài khoản
-//        AccountDAO accountDAO = new AccountDAO();
-//
-//        boolean result = accountDAO.deleteAccountByID(accountIDToDelete);
-//
-//        // Kiểm tra xem tài khoản có bị xóa không
-//        if (result) {
-//            System.out.println("Account successfully deleted.");
-//        } else {
-//            System.out.println("Failed to delete account.");
-//        }
-//    }
-// INFORMTION BY ID
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO();
-//        Account accountInfo = accountDAO.getAccountInformationByID(10); 
-//
-//        if (accountInfo != null) {
-//            System.out.println("Account ID: " + accountInfo.getUserID());
-//            System.out.println("Email: " + accountInfo.getEmail());
-//            System.out.println("Koi Care ID: " + accountInfo.getKoiCareID());
-//            System.out.println("Full Name: " + accountInfo.getFullName());
-//            System.out.println("Phone Number: " + accountInfo.getPhoneNumber());
-//            System.out.println("User Role: " + accountInfo.getUserRole());
-//            System.out.println("Address: " + accountInfo.getAddress());
-//            System.out.println("Gender: " + accountInfo.getGender());
-//            System.out.println("Status ID: " + accountInfo.getAccountStatus());
-//        } else {
-//            System.out.println("No account found with the given ID.");
-//        }
-//    }
-//}
-// CREATE 
-//    public static void main(String[] args) {
-//        AccountDAO accountDao = new AccountDAO(); 
-//        Account account = new Account();
-//
-//        account.setEmail("test1123@example.com");
-//        account.setKoiCareID("KC12345");
-//        account.setProfileImage("image_url");
-//        account.setPassword("securepassword");
-//        account.setFullName("Test User");
-//        account.setPhoneNumber("0123456789");
-//        account.setUserRole("Customer");
-//        account.setAddress("123 Test St");
-//        account.setGender("Male");
-//        account.setAccountStatus(1);
-//
-//        boolean result = accountDao.createNewAccount(account);
-//        if (result) {
-//            System.out.println("Account created successfully.");
-//        } else {
-//            System.out.println("Failed to create account.");
-//        }
-//    }
-//
-//}
-//
-//    public static void main(String[] args) {
-//        AccountDAO acd = new AccountDAO();
-//
-//        int accountID = 5; // Giả sử bạn muốn kiểm tra với AccID = 1
-//
-//        // Kiểm tra số lượng trạng thái tài khoản
-//        int count = acd.countAccountsStatusToAdmin(accountID);
-//        System.out.println("Total Account Statuses for Account ID " + accountID + ": " + count);
-//
-//        // Kiểm tra danh sách trạng thái tài khoản với trang chỉ định
-//        int index = 1; // Ví dụ, lấy trang đầu tiên
-//        ArrayList<AccountStatus> statusList = acd.getAccountsStatusToAdmin(accountID, index);
-//
-//        System.out.println("Account Statuses for Account ID " + accountID + " (Page " + index + "):");
-//        for (AccountStatus status : statusList) {
-//            System.out.println("Status ID: " + status.getStatusID() + ", Status Name: " + status.getStatusName());
-//        }
-//    }
-//}
-//    public static void main(String[] args) {
-//        AccountDAO acd = new AccountDAO();
-////        boolean c = acd.isKoiCareIDExist("rikawa1");
-////        Account c = acd.getAccountByEmail("acnbokhb@gmail.com");
-//        Account acc = new Account();
-//        acc.setFullName("Khánh");
-//        acc.setPhoneNumber("0908765567");
-//        acc.setAddress("12 đường cây keo");
-//        acc.setGender("Men");
-////                acc.setKoiCareID("21212");
-//        acc.setUserID(9);
-//        boolean c = acd.updateAccount(acc);
-//        System.out.println(c);
-//    }
-//========================================================================
-//TEST CREATE
-//    public static void main(String[] args) {
-//        // Thiết lập đối tượng Account mới
-//        Account newAccount = new Account();
-//        newAccount.setEmail("test@example.com");
-//        newAccount.setKoiCareID("Koi123");
-//        newAccount.setProfileImage("image.png");
-//        newAccount.setPassword("password");
-//        newAccount.setFullName("Full Name");
-//        newAccount.setPhoneNumber("123456789");
-//        newAccount.setUserRole("User");
-//        newAccount.setAddress("123 Street");
-//        newAccount.setGender("Male");
-//        newAccount.setAccountStatus(1); // Giả sử idStatus là kiểu int
-//
-//        // Tạo đối tượng AccountDAO để gọi phương thức createNewAccount
-//        AccountDAO accountDAO = new AccountDAO();
-//
-//        // Gọi phương thức tạo tài khoản mới và lưu kết quả
-//        boolean isCreated = accountDAO.createNewAccount(newAccount);
-//
-//        // Kiểm tra và in ra kết quả
-//        if (isCreated) {
-//            System.out.println("New account created successfully.");
-//        } else {
-//            System.out.println("Failed to create new account.");
-//        }
-//    }
-//================================================================
-// TEST : GELL LIST ACCOUNT
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
-//        // Test retrieving all accounts from the database
-//        ArrayList<Account> accounts = accountDAO.getAllAccounts();
-//
-//        // Loop through the result and print each account's details
-//        for (Account account : accounts) {
-//            System.out.println(account);
-//        }
-//    }
-// COUNT  ACCOUNT
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); // Initialize the DAO
-//        int count = accountDAO.countAllAccounts();
-//        System.out.println(count);
-//
-//    }
-//    public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO(); 
-//        List<Account> accl = accountDAO.getAccounts(2);
-//        for (Account a : accl) {
-//
-//            System.out.println(a);
-//
-//        }
-//    }
-//================================================================
 
+}

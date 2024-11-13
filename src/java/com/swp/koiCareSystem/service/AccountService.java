@@ -117,13 +117,6 @@ public class AccountService {
         account.setPassword(hashPassword(account.getPassword()));
         account.setUserRole("customer");
         account.setAccountStatus(1);
-        ImageUploadService imgUs = new ImageUploadService();
-        String linkAvatar = imgUs.uploadImageFromUrl(account.getProfileImage());
-        if(linkAvatar==null){
-            return false;
-        }else{
-            account.setProfileImage(linkAvatar);
-        }
         return acd.registerWithGoogleAcc(account);
 
     }
@@ -184,17 +177,14 @@ public class AccountService {
         return acd.searchAccountsByStatus(statusID, index);
     }
 
-// CREATE NEW ACCOUNT
-    public boolean createNewAccountToAdmin(Account account) {
-        return acd.createNewAccount(account);
-    }
+
 
     // DELETE
     public boolean deleteAccountToAdmin(int accID) {
         return acd.deleteAccountByID(accID);
     }
-    //INFORMATION
 
+    //INFORMATION
     public Account getAccountInformationByID(int id) {
         return acd.getAccountInformationByID(id);
     }
@@ -204,10 +194,46 @@ public class AccountService {
         return acd.updateInformationAccount(account);
     }
 
+
+    
+    //PHONE
+    public int countAcccountByPhoneNumber(String phoneNumber) {
+        return acd.countAccountByPhoneNumber(phoneNumber);
+
+    }
+
+    public ArrayList<Account> searchAccountByPhoneNumber(String phoneNumber, int index) {
+        return acd.searchAccountByPhoneNumber(phoneNumber, index);
+    }
+//NAME
+    public int countAcccountByFullName(String fullName) {
+        return acd.countAccountByFullName(fullName);
+
+    }
+
+    public ArrayList<Account> searchAccountByFullName(String fullName, int index) {
+        return acd.searchAccountByFullName(fullName, index);
+    }
+//Email
+    public ArrayList<Account> searchAccountByEmail(String email, int index) {
+        return acd.searchAccountByEmail(email, index);
+    }
+
+    public int countAcccountByEmail(String email) {
+        return acd.countAccountByEmail(email);
+
+    }
+    // CREATE NEW ACCOUNT HASHPASSWORD
+   public boolean createNewAccountToAdmin(Account account) {
+    String hashedPassword = hashPassword(account.getPassword());
+    account.setPassword(hashedPassword);  
+    return acd.createNewAccount(account);
+}
+
+
     static void main(String[] args) throws Exception {
         AccountService acs = new AccountService();
-//        Account acc = acs.checkLogin("rikawa", "123456");
-        String acc = acs.hashPassword("jinsu@123");
+        Account acc = acs.checkLogin("rikawa", "123456");
         System.out.println(acc);
     }
 
