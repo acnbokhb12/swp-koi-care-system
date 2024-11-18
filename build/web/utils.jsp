@@ -79,7 +79,7 @@
                                 <div class="modal-more-info">
                                     <ul class="modal-more-info-list">
                                         <li class="modal-more-info-items">
-                                            <a href="#">Profile</a>
+                                            <a href="profilePage.jsp">Profile</a>
                                         </li>
                                         <li class="modal-more-info-items">
                                             <a href="MainController?action=logout">Log out</a>
@@ -184,7 +184,7 @@
                     <div class="container__iner-se">
                         <div class="row row__iner-se">
                             <!-- Logo -->
-                            <a href="home.html" class="col-lg-2 link_logo-home">
+                            <a href="MainController?action=home" class="col-lg-2 link_logo-home">
                                 <img src="./assets/img/logo/Logo_Koi_Care.png" alt="Logo_System">
                             </a>
                             <!-- button for responsive -->
@@ -320,13 +320,7 @@
                                                                         <a id="btn-logout" style="cursor: pointer;">
                                                                             <i class="fas fa-sign-out"></i> Log out
                                                                         </a>
-                                                                    </li>
-
-                                                                    <li class="footer__link-acount-detail-item">
-                                                                        <a href="#">
-                                                                            <i class="fa-regular fa-circle-question"></i> Support
-                                                                        </a>
-                                                                    </li>
+                                                                    </li> 
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -349,7 +343,7 @@
                     <div class="container">
                         <div class="container__footer-desc-area row">
                             <div class="footer-desc-item col-sm-6 col-lg-4">
-                                <a href="#" class="footer-desc-item-img">
+                                <a href="MainController?action=home" class="footer-desc-item-img">
                                     <img src="./assets/img/logo/Logo_Koi_Care.png" alt="">
                                 </a>
                                 <p class="desc-footer-infor">
@@ -381,10 +375,10 @@
                             </div>
                             <div class="footer-desc-item col-sm-6 col-lg-2">
                                 <h2>Menu</h2>
-                                <a href="" class="link__footer-nav">Home</a>
-                                <a href="" class="link__footer-nav">About</a>
-                                <a href="" class="link__footer-nav">Shop</a>
-                                <a href="" class="link__footer-nav">Contact</a>
+                                <a href="MainController?action=home" class="link__footer-nav">Home</a>
+                                <a href="about.jsp" class="link__footer-nav">About</a>
+                                <a href="MainController?action=shop" class="link__footer-nav">Shop</a>
+                                <a href="contact.jsp" class="link__footer-nav">Contact</a>
                             </div>
                             <div class="footer-desc-item col-sm-6 col-lg-3">
                                 <h2>Intagram feed</h2>

@@ -117,6 +117,9 @@ public class AccountService {
         account.setPassword(hashPassword(account.getPassword()));
         account.setUserRole("customer");
         account.setAccountStatus(1);
+        ImageUploadService isv = new ImageUploadService();
+        String imgUpload = isv.uploadImageFromUrl(account.getProfileImage());
+        account.setProfileImage(imgUpload);
         return acd.registerWithGoogleAcc(account);
 
     }

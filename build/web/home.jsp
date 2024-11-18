@@ -80,7 +80,7 @@
             <!-- content - news -->
             <section id="lead__to_discover" class="content__latest-news">
                 <div class="content__latest-news-title text-center">
-                    <h1 class="text-capitalize">The latest blogs</h1>
+                    <h1 class="text-capitalize">The latest news</h1>
                     <p>
                     <p>Explore the latest insights, tips, and expert advice on maintaining a healthy Koi pond system right
                         at home</p>
@@ -162,10 +162,9 @@
             <section class="container__intro-service-web">
                 <div class="container__intro-service-main">
                     <div class="intro__service-header">
-                        <h1 class="text-center text-capitalize">Professional Koi Care Services at Home</h1>
-                        <p class="text-center">We provide comprehensive Koi pond care services, including water quality
-                            checks, pond cleaning, fish health monitoring, and filtration system maintenance. Our team of
-                            experts is ready to ensure a healthy and thriving environment for your Koi right at your home.
+                        <h1 class="text-center text-capitalize">Discover Our Latest Products for Koi Fish </h1>
+                        <p class="text-center"> 
+                            Explore our newest selection of high-quality products designed to support the health, beauty, and vitality of your Koi fish. From premium food options to advanced pond care solutions, find everything you need to enhance your Koi-keeping experience.
                         </p>
                     </div>
                     <div class="cont ainer">

@@ -34,7 +34,7 @@
                 <div class="container-infor-contact">
                     <!-- Image -->
                     <div class="img-contact-intro">
-                        <img src="https://podbaranem.com/wp-content/uploads/2017/05/IMG_2724.jpg" alt="">
+                        <img src="https://japan-avenue.com/cdn/shop/articles/koi-fish-meaning-min_1200x1200_crop_center.webp?v=1693134758" alt="">
                     </div>
                     <!-- Description -->
                     <div class="contact-detail-dest">
